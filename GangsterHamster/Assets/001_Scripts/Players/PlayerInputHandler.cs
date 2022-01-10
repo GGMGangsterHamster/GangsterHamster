@@ -23,6 +23,7 @@ public class PlayerInputHandler : MonoSingleton<PlayerInputHandler>
         _inputDictionary.Add(KeyCode.S, new MoveBackword(_playerMove));
         _inputDictionary.Add(KeyCode.A, new MoveLeft(_playerMove));
         _inputDictionary.Add(KeyCode.D, new MoveRight(_playerMove));
+        _inputDictionary.Add(KeyCode.Space, new Jump(_playerMove));
     }
 
     private void Update()
@@ -38,6 +39,9 @@ public class PlayerInputHandler : MonoSingleton<PlayerInputHandler>
         }
         if (Input.GetKey(KeyCode.D)) {
             _inputDictionary[KeyCode.D].Execute();
+        }
+        if(Input.GetKeyDown(KeyCode.Space)) {
+            _inputDictionary[KeyCode.Space].Execute();
         }
     }
 }

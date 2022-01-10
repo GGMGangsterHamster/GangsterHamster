@@ -63,4 +63,20 @@ namespace Commands.Movement.Movements
             _moveable.MoveRight();
         }
     }
+
+    public class Jump : Command
+    {
+        IJumpable _jumpable;
+
+        public Jump(IJumpable jumpable)
+        {
+            _jumpable = jumpable;
+        }
+
+        public override void Execute()
+        {
+            _jumpable.Jump();
+        }
+        
+    }
 }

@@ -23,7 +23,7 @@ namespace Log
         /// </summary>
         /// <param name="log">남길 로그</param>
         /// <param name="logLevel">심각도</param>
-        async static public void Log(string log, LogLevel logLevel = LogLevel.Normal)
+        static public void Log(string log, LogLevel logLevel = LogLevel.Normal)
         {
 
             if (!Directory.Exists(_dir)) { // 폴더가 없다면 만듬
@@ -34,14 +34,14 @@ namespace Log
                 File.Create(_filePath);
             }
 
-            await Write(TemplateGenerator(log, logLevel), logLevel);
+            Write(TemplateGenerator(log, logLevel), logLevel);
         }
 
         #region 내부 함수
-        async static private Task Write(string log, LogLevel logLevel)
+        static private void Write(string log, LogLevel logLevel)
         {
             using (StreamWriter logFile = new StreamWriter(_filePath, append: true)) {
-                await logFile.WriteLineAsync(log);
+                logFile.Write(log);
             }
 
             switch (logLevel)
