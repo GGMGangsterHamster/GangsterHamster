@@ -5,9 +5,9 @@ using UnityEngine;
 public class LoggerTest : MonoBehaviour
 {
     private void Start() {
-        Logger.Logger.Log("Nothing special");
-        Logger.Logger.Log("Just a warning.", Logger.LogLevel.Warning);
-        Logger.Logger.Log("errr...", Logger.LogLevel.Error);
-        Logger.Logger.Log("no", Logger.LogLevel.Fatal);
+        Log.Debug.Log("Nothing special");
+        Log.Debug.Log("Just a warning.", Log.LogLevel.Warning);
+        Log.Debug.Log("errr...", Log.LogLevel.Error);
+        Log.Debug.Log("no", Log.LogLevel.Fatal);
     }
 }

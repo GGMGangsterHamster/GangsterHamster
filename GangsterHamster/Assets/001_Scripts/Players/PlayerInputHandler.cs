@@ -16,7 +16,7 @@ public class PlayerInputHandler : MonoSingleton<PlayerInputHandler>
     {
         _playerMove = FindObjectOfType<PlayerMovement>();
         if(_playerMove == null) {
-            Logger.Logger.Log("PlayerInputHandler > _playerMove is null", Logger.LogLevel.Fatal);
+            Log.Debug.Log("PlayerInputHandler > _playerMove is null", Log.LogLevel.Fatal);
         }
 
         _inputDictionary.Add(KeyCode.W, new MoveFoward(_playerMove));

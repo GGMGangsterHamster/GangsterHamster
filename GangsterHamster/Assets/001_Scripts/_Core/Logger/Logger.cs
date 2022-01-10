@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Logger
+namespace Log
 {
     public enum LogLevel : byte
     {
@@ -12,7 +12,7 @@ namespace Logger
         Fatal
     }
 
-    static public class Logger
+    static public class Debug
     {
         static private string _dir = Path.Combine(Directory.GetCurrentDirectory(), "Assets", "000_Log"); // 로그 폴더 위치
         static private string _date = DateTime.Today.ToString().Split(' ')[0].Replace('/', '_'); // 로그 파일 생성일

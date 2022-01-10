@@ -12,11 +12,10 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
                 if(objs.Length > 0) {
                     _instance = objs[0];
                     if (objs.Length > 1) {
-                        // err
+                        Log.Debug.Log($"{_instance.GetType()} Found more than one.", Log.LogLevel.Error);
                     }
-                    DontDestroyOnLoad(_instance.gameObject);
                 } else {
-                    // err
+                    Log.Debug.Log($"{_instance.GetType()} Does not exist.", Log.LogLevel.Fatal);
                 }
 
             }
