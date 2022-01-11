@@ -63,7 +63,8 @@ namespace Commands.Movement
 
         private void Move(Vector3 dir)
         {
-            transform.Translate(dir * speed * Time.deltaTime);
+            // Space.World 추가하는 거 수정함!
+            transform.Translate(dir * speed * Time.deltaTime, Space.World);
             OnMove(dir);
         }
 
