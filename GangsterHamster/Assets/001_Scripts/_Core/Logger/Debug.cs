@@ -2,6 +2,9 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
+
+// FIXME: 파일 생성 후 로그 작성 시 Sharing violation
+
 namespace Log
 {
     public enum LogLevel : byte
@@ -60,7 +63,7 @@ namespace Log
 
         static private string TemplateGenerator(string log, LogLevel logLevel)
         {
-            return $"[{DateTime.Now.ToString().Replace('/','.')}] [{logLevel}]\t {log}";
+            return $"[{DateTime.Now.ToString().Replace('/','.')}] [{logLevel}]\t {log}\r\n";
         }
 
         #endregion // 내부 함수
