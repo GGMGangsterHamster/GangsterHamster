@@ -10,7 +10,7 @@ namespace Interactable.Object
         public void Collision(GameObject collision, Action callback = null)
         {
             if(collision.CompareTag("WEAPON")) {
-                // Collision with weapon
+                transform.SetParent(collision.transform);
             }
             else {
                 // something else
