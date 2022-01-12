@@ -77,6 +77,18 @@ namespace Commands.Movement.Movements
         {
             _jumpable.Jump();
         }
-        
+    }
+
+    public class MouseRightInput : Command
+    {
+        IMouseInputable _mouseInputable;
+        public MouseRightInput(IMouseInputable mouseInputable)
+        {
+            _mouseInputable = mouseInputable;
+        }
+        public override void Execute()
+        {
+            _mouseInputable.MouseRightDown();
+        }
     }
 }
