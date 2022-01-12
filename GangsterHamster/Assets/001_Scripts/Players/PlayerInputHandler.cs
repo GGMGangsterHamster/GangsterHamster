@@ -43,5 +43,9 @@ public class PlayerInputHandler : MonoSingleton<PlayerInputHandler>
         if(Input.GetKeyDown(KeyCode.Space)) {
             _inputDictionary[KeyCode.Space].Execute();
         }
+
+        float x = Input.GetAxis("Mouse X");
+        float y = -Input.GetAxis("Mouse Y");
+        _playerMove.transform.eulerAngles += new Vector3(y, x, 0);
     }
 }
