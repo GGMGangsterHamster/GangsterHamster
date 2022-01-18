@@ -6,8 +6,8 @@ using System;
 /// <typeparam name="T"></typeparam>
 abstract public class Singleton<T> where T : class, ISingletonObject
 {
-    private T _instance = null;
-    public T Instance {
+    static private T _instance = null;
+    static public T Instance {
         get {
             if (_instance == null) {
                 _instance = Activator.CreateInstance<T>();

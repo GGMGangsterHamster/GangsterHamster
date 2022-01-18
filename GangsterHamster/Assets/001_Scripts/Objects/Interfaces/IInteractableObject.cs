@@ -1,6 +1,6 @@
 using System;
 
-namespace Interactable.Object
+namespace Objects.Interactable
 {
     /// <summary>
     /// 상호 작용 가능한 오브젝트가 구현해야 함

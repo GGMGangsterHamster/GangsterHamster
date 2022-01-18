@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Interactable.Object
+namespace Objects.Interactable
 {
     public class ObjectB : MonoBehaviour, IInteractableObject
     {
