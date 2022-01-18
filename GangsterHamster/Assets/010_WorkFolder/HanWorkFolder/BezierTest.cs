@@ -15,6 +15,9 @@ public class BezierTest : MonoBehaviour
             Debug.Log("Arrived");
         }, () => {
             Debug.Log("Returned");
+            CameraMovementManager.Instance.LinearMove(2.0f, new Vector3(0.0f, 0.0f, -10.0f), new Vector3(0.0f, 2.0f, -10.0f), this, null, () => {
+                Debug.Log("Arrived");
+            });
         });
     }
 }
