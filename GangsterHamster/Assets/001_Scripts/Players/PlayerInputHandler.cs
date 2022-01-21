@@ -10,7 +10,11 @@ public class PlayerInputHandler : MonoSingleton<PlayerInputHandler>
     private Dictionary<KeyCode, Command> _inputDictionary = new Dictionary<KeyCode, Command>();
     private PlayerMovement _playerMove = null;
 
-    // TODO : Keymaps
+    private MouseX mouseX;
+    private MouseY mouseY;
+
+
+    // TODO: Keymaps
 
     private void Start()
     {
@@ -24,6 +28,9 @@ public class PlayerInputHandler : MonoSingleton<PlayerInputHandler>
         _inputDictionary.Add(KeyCode.A, new MoveLeft(_playerMove));
         _inputDictionary.Add(KeyCode.D, new MoveRight(_playerMove));
         _inputDictionary.Add(KeyCode.Space, new Jump(_playerMove));
+
+        mouseX = new MouseX(_playerMove);
+        mouseY = new MouseY(_playerMove);
     }
 
     private void Update()
@@ -44,8 +51,7 @@ public class PlayerInputHandler : MonoSingleton<PlayerInputHandler>
             _inputDictionary[KeyCode.Space].Execute();
         }
 
-        float x = Input.GetAxis("Mouse X");
-        float y = -Input.GetAxis("Mouse Y");
-        _playerMove.transform.eulerAngles += new Vector3(y, x, 0);
+        mouseX.Execute();
+        mouseY.Execute();
     }
 }

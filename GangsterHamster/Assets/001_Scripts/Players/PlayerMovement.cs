@@ -8,8 +8,10 @@ namespace Commands.Movement
     /// 기본적인 움직임을 구현한 클레스
     /// </summary>
     [RequireComponent(typeof(Rigidbody))]
-    public class PlayerMovement : MonoBehaviour, IMoveable, IJumpable
+    public class PlayerMovement : MonoBehaviour, IMoveable, IJumpable, IMouseDeltaRecvable
     {
+        public Transform camTrm = null;
+
         private Rigidbody rigid;
 
         /// <summary>
@@ -31,6 +33,7 @@ namespace Commands.Movement
             OnMove += (dir) => { };
             OnJump += () => { };
             rigid = GetComponent<Rigidbody>();
+            camTrm = Camera.main.transform;
         }
 
         public void MoveFoward()
@@ -68,5 +71,15 @@ namespace Commands.Movement
             OnMove(dir);
         }
 
+        public void OnMouseX(float x)
+        {
+            camTrm.localEulerAngles += new Vector3(0, x, 0);
+            transform.eulerAngles += new Vector3(0, x, 0);
+        }
+
+        public void OnMouseY(float y)
+        {
+            camTrm.eulerAngles += new Vector3(-y, 0, 0);
+        }
     }
 }
