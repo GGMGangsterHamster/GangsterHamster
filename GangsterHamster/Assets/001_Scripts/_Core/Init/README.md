@@ -8,7 +8,8 @@
 ## 사용법
 
 - OpenRC Init Script 를 생성
-- Action 을 추가
+- ExampleOpenRCInitScript.cs 를 기반으로 스크립트를 작성
+- OpenRC Init Script 에 작성한 스크립트를 추가
 - OpenRC::initScripts 에 추가
 
 * * *
