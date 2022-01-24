@@ -17,12 +17,12 @@
 ### 함수들 (OpenRC)
 
 ```cs
-int Add(InitScript initScript)
+int Add(InitScript initScript);
 // initScript 를 initScript._RunLevel 에 실행되게 함
 ```
 
 ```cs
-int Del(InitScript initScript)
+int Del(InitScript initScript);
 // initScript 를 initScript._RunLevel 실행에서 제외함
 ```
 
@@ -40,23 +40,14 @@ OnSceneUnLoad         // Scene 이 언로드 되었을 시 호출됨
 ### InitScript
 
 ```cs
-RunLevel _RunLevel
+RunLevel _RunLevel;
 // 실행될 레벨
 ```
 ```cs
-string _Name
+string _Name;
 // InitScript 의 이름
 ```
 ```cs
-UnityEvent<MonoBehaviour> Depend
-// Start 가 호출되기 전 호출됨
-```
-```cs
-UnityEvent<object> Start
-// object: 필요한 경우 전달됨
-// 지정된 RunLevel 에 호출됨
-```
-```cs
-UnityEvent Stop
-// OpenRC 종료 시 호출 (OnDestroy)
+MonoScript script;
+// 작성한 스크립트
 ```
