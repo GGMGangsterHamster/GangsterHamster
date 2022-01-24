@@ -1,14 +1,14 @@
-using System;
-using System.IO;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // SceneManager.sceneLoaded
 
 namespace OpenRC
 {
     public class OpenRC : MonoSingleton<OpenRC>
     {
-        [Header("Add InitScript ScriptableObject")]
+        [Header("Add InitScript ScriptableObject Here.", order = 0)]
+        [Space(-10, order = 1)]
+        [Header("   ## Execution order not guaranteed ##", order = 2)]
         public List<InitScript> initScripts = new List<InitScript>();
 
 
@@ -16,28 +16,38 @@ namespace OpenRC
         {
             DontDestroyOnLoad(this.gameObject);
 
-            initScripts.FindAll(e => e._RunLevel == RunLevel.OnGameStart).ForEach(x => {
-                x.Depend.Invoke(this);
-                x.Start.Invoke();
-            });
+            FindAndExecute(RunLevel.OnGameStart);
+
+            SceneManager.sceneLoaded += (scene, mode) => {
+                FindAndExecute(RunLevel.OnSceneLoad, scene.name);
+            }; // SceneManager.sceneLoaded
+
+            SceneManager.sceneUnloaded += (scene) => {
+                FindAndExecute(RunLevel.OnSceneUnLoad, scene.name);
+            }; // SceneManager.sceneUnloaded
         }
 
         private void OnDestroy()
         {
+            FindAndExecute(RunLevel.OnGameExit);
+
             initScripts.ForEach(x => {
                 x.Stop.Invoke();
             });
         }
 
         /// <summary>
-        /// 이벤트를 발생시킵니다.
+        /// runLevel 에 등록된 InitScript 를 찾은 다음 argument 를 메개변수로 호출함
         /// </summary>
-        public void SetFlag(RunLevel flag)
+        private void FindAndExecute(RunLevel runLevel, object argument = null)
         {
-            initScripts.FindAll(e => e._RunLevel == flag).ForEach(x => {
-                x.Depend.Invoke(this);
-                x.Start.Invoke();
-            });
+            var list = initScripts.FindAll(e => e._RunLevel == runLevel);
+            int i = list.Count - 1;
+            
+            while(i >= 0) {
+                list[i].Depend.Invoke(this);
+                list[i].Start.Invoke(argument);
+            }
         }
 
         /// <summary>

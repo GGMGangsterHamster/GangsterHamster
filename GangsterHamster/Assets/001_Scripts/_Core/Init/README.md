@@ -1,6 +1,7 @@
 # OpenRC
 
-리눅스의 init 시스템을 참고해 만든 유니티 init 시스템
+리눅스의 init 시스템을 참고해 만든 유니티 init 시스템<br/>
+<b>실행 순서 보장되지 않음</b>
 
 * * *
 
@@ -27,10 +28,10 @@ int Del(InitScript initScript)
 ### Enum (RunLevel)
 
 ```cs
-OnGameStart   // OpenRC 가 생성되었을 시 호출됨
-OnGameExit    // OpenRC 가 Destroy 될때 호출됨
-OnSceneLoad   // Scene 이 로드되었을 시 호출됨    (미구현)
-OnSceneUnLoad // Scene 이 언로드 되었을 시 호출됨 (미구현)
+OnGameStart           // OpenRC 가 생성되었을 시 호출됨
+OnGameExit            // OpenRC 가 Destroy 될때 호출됨
+OnSceneLoad           // Scene 이 로드되었을 시 호출됨
+OnSceneUnLoad         // Scene 이 언로드 되었을 시 호출됨
 ```
 
 * * *
@@ -50,7 +51,8 @@ UnityEvent<MonoBehaviour> Depend
 // Start 가 호출되기 전 호출됨
 ```
 ```cs
-UnityEvent Start
+UnityEvent<object> Start
+// object: 필요한 경우 전달됨
 // 지정된 RunLevel 에 호출됨
 ```
 ```cs

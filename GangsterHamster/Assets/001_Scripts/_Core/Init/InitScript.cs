@@ -26,7 +26,7 @@ namespace OpenRC
         /// <summary>
         /// 지정된 RunLevel 에 호출
         /// </summary>
-        public UnityEvent Start;
+        public UnityEvent<object> Start;
 
         /// <summary>
         /// 종료 시 호출
