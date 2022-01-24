@@ -60,10 +60,6 @@ public class FirstWeaponSkill : MonoBehaviour
                 {
                     objsParent.GetChild(i).GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 }
-                //else if(childTrm.CompareTag("B_Obj"))
-                //{
-                //  몰루
-                //}
 
                 childTrm.parent = null;
 
@@ -147,10 +143,6 @@ public class FirstWeaponSkill : MonoBehaviour
                     {
                         objsParent.GetChild(i).GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                     }
-                    //else if(childTrm.CompareTag("B_Obj"))
-                    //{
-                    //  몰루
-                    //}
 
                     childTrm.parent = null;
 
@@ -171,6 +163,11 @@ public class FirstWeaponSkill : MonoBehaviour
         _col.isTrigger = false;
     }
 
+    /// <summary>
+    /// dir로 계속해서 나아가는 코루틴
+    /// </summary>
+    /// <param name="dir"> 방향 </param>
+    /// <returns></returns>
     IEnumerator ShotCo(Vector3 dir)
     {
         transform.parent = null;
@@ -183,6 +180,14 @@ public class FirstWeaponSkill : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 플레이어 방향으로 무기를 이동시키는 코루틴
+    /// waitFollowTime 만큼 계속해서 누르고 있으면 이후에는 멈추지 않고 플레이어를 따라감
+    /// </summary>
+    /// <param name="distTrm"> 무기가 가야하는 목적지의 Trm </param>
+    /// <param name="rightHandTrm"> 플레이어 오른손 위치의 Trm </param>
+    /// <param name="waitFollowTime"> 몇초 동안 우클릭을 눌러야 하는지 </param>
+    /// <returns></returns>
     IEnumerator MoveToDistCo(Transform distTrm, Transform rightHandTrm, float waitFollowTime)
     {
         Vector3 dir = (distTrm.position - transform.position).normalized;
