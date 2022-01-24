@@ -79,16 +79,47 @@ namespace Commands.Movement.Movements
         }
     }
 
-    public class MouseRightInput : Command
+    public class MouseRight : Command
     {
-        IMouseInputable _mouseInputable;
-        public MouseRightInput(IMouseInputable mouseInputable)
+        IWeaponable _weaponable;
+
+        public MouseRight(IWeaponable weaponable)
         {
-            _mouseInputable = mouseInputable;
+            _weaponable = weaponable;
+        }
+
+        public override void Execute()
+        {
+            _weaponable.MouseRight();
+        }
+    }
+
+    public class MouseLeft : Command
+    {
+        IWeaponable _weaponable;
+
+        public MouseLeft(IWeaponable weaponable)
+        {
+            _weaponable = weaponable;
+        }
+
+        public override void Execute()
+        {
+            _weaponable.MouseLeft();
+        }
+    }
+
+    public class ResetKey : Command
+    {
+        IWeaponable _weaponable;
+
+        public ResetKey(IWeaponable weaponable)
+        {
+            _weaponable = weaponable;
         }
         public override void Execute()
         {
-            _mouseInputable.MouseRightDown();
+            _weaponable.R();
         }
     }
 
