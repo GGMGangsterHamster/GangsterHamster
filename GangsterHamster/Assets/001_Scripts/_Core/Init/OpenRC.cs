@@ -16,6 +16,8 @@ namespace OpenRC
         {
             DontDestroyOnLoad(this.gameObject);
 
+            initScripts.ForEach(x => x.Init());
+
             FindAndExecute(RunLevel.OnGameStart);
 
             SceneManager.sceneLoaded += (scene, mode) => {
@@ -32,7 +34,7 @@ namespace OpenRC
             FindAndExecute(RunLevel.OnGameExit);
 
             initScripts.ForEach(x => {
-                x.Stop.Invoke();
+                x.Stop();
             });
         }
 
@@ -42,11 +44,11 @@ namespace OpenRC
         private void FindAndExecute(RunLevel runLevel, object argument = null)
         {
             var list = initScripts.FindAll(e => e._RunLevel == runLevel);
-            int i = list.Count - 1;
+            int i = list.Count;
             
-            while(i >= 0) {
-                list[i].Depend.Invoke(this);
-                list[i].Start.Invoke(argument);
+            while(--i >= 0) {
+                list[i].Depend(this);
+                list[i].Call(argument);
             }
         }
 
