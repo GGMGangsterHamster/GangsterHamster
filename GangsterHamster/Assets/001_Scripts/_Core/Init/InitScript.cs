@@ -24,7 +24,7 @@ namespace OpenRC
         public UnityEvent<MonoBehaviour> Depend;
 
         /// <summary>
-        /// 지정된 시작 시 호출
+        /// 지정된 RunLevel 에 호출
         /// </summary>
         public UnityEvent Start;
 
