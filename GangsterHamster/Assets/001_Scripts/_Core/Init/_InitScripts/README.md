@@ -38,22 +38,22 @@ OnSceneUnLoad // Scene 이 언로드 되었을 시 호출됨 (미구현)
 ### InitScript
 
 ```cs
-public RunLevel _RunLevel
+RunLevel _RunLevel
 // 실행될 레벨
 ```
 ```cs
-public string _Name
+string _Name
 // InitScript 의 이름
 ```
 ```cs
-public UnityEvent<MonoBehaviour> Depend
+UnityEvent<MonoBehaviour> Depend
 // Start 가 호출되기 전 호출됨
 ```
 ```cs
-public UnityEvent Start
+UnityEvent Start
 // 지정된 RunLevel 에 호출됨
 ```
 ```cs
-public UnityEvent Stop
+UnityEvent Stop
 // OpenRC 종료 시 호출 (OnDestroy)
 ```
