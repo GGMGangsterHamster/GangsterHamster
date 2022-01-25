@@ -96,6 +96,7 @@ public class FirstWeaponSkill : MonoBehaviour
 
         if (transform.parent == null)
         {
+            Debug.Log("test");
             if(collision.transform.TryGetComponent(out IInteractableObject outII))
             {
                 StopAllCoroutines();
@@ -121,6 +122,9 @@ public class FirstWeaponSkill : MonoBehaviour
                     _myRigid.useGravity = true;
                     transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 }
+            }else if(collision.transform.CompareTag("PLAYER"))
+            {
+                ComeBack(GameObject.Find("RightHand").transform);
             }
         }
     }

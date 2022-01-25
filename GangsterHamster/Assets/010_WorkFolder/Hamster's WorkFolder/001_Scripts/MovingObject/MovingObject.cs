@@ -10,7 +10,7 @@ public class MovingObject : MonoBehaviour
 
     public bool isSleep = false;
 
-    private List<Vector3> globalDestination = new List<Vector3>();
+    public List<Vector3> globalDestination = new List<Vector3>();
 
     private bool ismoving;
 
@@ -26,9 +26,11 @@ public class MovingObject : MonoBehaviour
             localDestinationList[i - 1] = temp;
         }
 
-        for (int i = 0; i < localDestinationList.Count; i++)
+        globalDestination.Add(transform.position);
+
+        for (int i = 1; i < localDestinationList.Count; i++)
         {
-            globalDestination.Add(localDestinationList[i] + transform.position);
+            globalDestination.Add(localDestinationList[i] + globalDestination[i - 1]);
         }
     }
 
@@ -45,7 +47,6 @@ public class MovingObject : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(Vector3.Distance(transform.position, globalDestination[curdest]));
         if(isSleep)
         {
             StopAllCoroutines();
