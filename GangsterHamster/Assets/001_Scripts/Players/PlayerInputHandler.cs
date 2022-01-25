@@ -1,88 +1,115 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using Commands;
-using Commands.Movement;
-using Commands.Movement.Movements;
 using Commands.Weapon;
+using Commands.Movement.Movements;
 
-public class PlayerInputHandler : MonoSingleton<PlayerInputHandler>
+namespace Player.Movement
 {
-    private Dictionary<KeyCode, Command> _inputDictionary = new Dictionary<KeyCode, Command>();
-    private PlayerMovement _playerMove = null;
-    private WeaponManagement _weapon = null;
 
-    private MouseX mouseX;
-    private MouseY mouseY;
-
-
-    // TODO: Keymaps
-
-    private void Start()
+    public class PlayerInputHandler : MonoSingleton<PlayerInputHandler>
     {
-        // Å×½ºÆ® ¿ë ¾Æ¹«¶§³ª Áö¿öµµ ´ï
-        #region
-        Cursor.visible = false;
-        #endregion
+        private Dictionary<KeyCode, Command> _inputDictionary = new Dictionary<KeyCode, Command>();
+        private PlayerMovement _playerMove = null;
+        private WeaponManagement _weapon = null;
+
+        private MouseX _mouseX;
+        private MouseY _mouseY;
 
 
-        _playerMove = FindObjectOfType<PlayerMovement>();
-        _weapon = FindObjectOfType<WeaponManagement>();
+        // TODO: Keymaps
 
-        if (_playerMove == null) {
-            Log.Debug.Log("PlayerInputHandler > _playerMove is null", Log.LogLevel.Fatal);
-        }
-
-        _inputDictionary.Add(KeyCode.W, new MoveFoward(_playerMove));
-        _inputDictionary.Add(KeyCode.S, new MoveBackword(_playerMove));
-        _inputDictionary.Add(KeyCode.A, new MoveLeft(_playerMove));
-        _inputDictionary.Add(KeyCode.D, new MoveRight(_playerMove));
-        _inputDictionary.Add(KeyCode.Space, new Jump(_playerMove));
-
-        _inputDictionary.Add(KeyCode.Mouse0, new MouseLeft(_weapon));
-        _inputDictionary.Add(KeyCode.Mouse1, new MouseRight(_weapon));
-        _inputDictionary.Add(KeyCode.R, new ResetKey(_weapon));
-
-        mouseX = new MouseX(_playerMove);
-        mouseY = new MouseY(_playerMove);
-    }
-
-    private void Update()
-    {
-        if(Input.GetKey(KeyCode.W)) {
-            _inputDictionary[KeyCode.W].Execute();
-        }
-        if (Input.GetKey(KeyCode.S)) {
-            _inputDictionary[KeyCode.S].Execute();
-        }
-        if (Input.GetKey(KeyCode.A)) {
-            _inputDictionary[KeyCode.A].Execute();
-        }
-        if (Input.GetKey(KeyCode.D)) {
-            _inputDictionary[KeyCode.D].Execute();
-        }
-        if(Input.GetKeyDown(KeyCode.Space)) {
-            _inputDictionary[KeyCode.Space].Execute();
-        }
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        private void Start()
         {
-            _inputDictionary[KeyCode.Mouse0].Execute();
+            // ï¿½×½ï¿½Æ® ï¿½ï¿½ ï¿½Æ¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+            #region
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            #endregion
+
+
+            _playerMove = FindObjectOfType<PlayerMovement>();
+            _weapon = FindObjectOfType<WeaponManagement>();
+
+            if (_playerMove == null)
+            {
+                Log.Debug.Log("PlayerInputHandler > _playerMove is null", Log.LogLevel.Fatal);
+            }
+
+            _inputDictionary.Add(KeyCode.W, new MoveFoward(_playerMove));
+            _inputDictionary.Add(KeyCode.S, new MoveBackword(_playerMove));
+            _inputDictionary.Add(KeyCode.A, new MoveLeft(_playerMove));
+            _inputDictionary.Add(KeyCode.D, new MoveRight(_playerMove));
+            _inputDictionary.Add(KeyCode.Space, new Jump(_playerMove));
+            _inputDictionary.Add(KeyCode.LeftControl, new Crouch(_playerMove));
+            _inputDictionary.Add(KeyCode.LeftShift, new Dash(_playerMove));
+
+            _inputDictionary.Add(KeyCode.Mouse0, new MouseLeft(_weapon));
+            _inputDictionary.Add(KeyCode.Mouse1, new MouseRight(_weapon));
+            _inputDictionary.Add(KeyCode.R, new ResetKey(_weapon));
+
+            _mouseX = new MouseX(_playerMove);
+            _mouseY = new MouseY(_playerMove);
         }
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+
+        private void Update()
         {
-            _inputDictionary[KeyCode.Mouse1].Execute();
+            #region Movement
+            if (Input.GetKey(KeyCode.W))
+            {
+                _inputDictionary[KeyCode.W].Execute();
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                _inputDictionary[KeyCode.S].Execute();
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                _inputDictionary[KeyCode.A].Execute();
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                _inputDictionary[KeyCode.D].Execute();
+            }
+            #endregion // Movement
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                _inputDictionary[KeyCode.Space].Execute();
+            }
+            if(Input.GetKeyDown(KeyCode.LeftControl))
+            {
+                _inputDictionary[KeyCode.LeftControl].Execute();
+            }
+            if(Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                _inputDictionary[KeyCode.LeftShift].Execute();
+            }
+            if(Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                _inputDictionary[KeyCode.LeftShift].Execute();
+            }
+
+            #region Weapon
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                _inputDictionary[KeyCode.Mouse0].Execute();
+            }
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                _inputDictionary[KeyCode.Mouse1].Execute();
+            }
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                _inputDictionary[KeyCode.R].Execute();
+            }
+            #endregion // Weapon
+
+
+            _mouseX.Execute();
+            _mouseY.Execute();
         }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            _inputDictionary[KeyCode.R].Execute();
-        }
-
-
-        //float x = Input.GetAxis("Mouse X");
-        //float y = -Input.GetAxis("Mouse Y");
-        //_playerMove.transform.eulerAngles += new Vector3(y, x, 0);
-
-        mouseX.Execute();
-        mouseY.Execute();
     }
 }

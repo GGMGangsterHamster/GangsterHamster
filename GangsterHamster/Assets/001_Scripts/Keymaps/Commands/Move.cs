@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Commands.Movement.Movements
 {
+    #region Movement
     public class MoveFoward : Command
     {
         IMoveable _moveable;
@@ -64,6 +65,23 @@ namespace Commands.Movement.Movements
         }
     }
 
+    public class Dash : Command
+    {
+        IMoveable _moveable;
+
+        public Dash(IMoveable moveable)
+        {
+            _moveable = moveable;
+        }
+
+        public override void Execute()
+        {
+            _moveable.Dash();
+        }
+    }
+
+    #endregion // Movement
+
     public class Jump : Command
     {
         IJumpable _jumpable;
@@ -79,6 +97,22 @@ namespace Commands.Movement.Movements
         }
     }
 
+    public class Crouch : Command
+    {
+        ICrouchable _crouchable;
+
+        public Crouch(ICrouchable crouchable)
+        {
+            _crouchable = crouchable;
+        }
+
+        public override void Execute()
+        {
+            _crouchable.Crouch();
+        }
+    }
+    
+    #region Weapon
     public class MouseRight : Command
     {
         IWeaponable _weaponable;
@@ -122,7 +156,9 @@ namespace Commands.Movement.Movements
             _weaponable.R();
         }
     }
+    #endregion // Weapon
 
+    #region MouseDelta
     public class MouseX : Command
     {
         IMouseDeltaRecvable _mouseDelta;
@@ -156,4 +192,6 @@ namespace Commands.Movement.Movements
 
         }
     }
+    #endregion // MouseDelta
+
 }
