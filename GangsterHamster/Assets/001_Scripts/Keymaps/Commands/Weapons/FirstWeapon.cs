@@ -35,7 +35,7 @@ namespace Commands.Weapon
         /// </summary>
         public override void Right()
         {
-            _skill.MoveToDestination(_playerObj.transform, _rightHandTrm, 1.5f);
+            _skill.MoveToDestination(_mainCamera.transform, _rightHandTrm, 1.5f);
         }
 
         /// <summary>
