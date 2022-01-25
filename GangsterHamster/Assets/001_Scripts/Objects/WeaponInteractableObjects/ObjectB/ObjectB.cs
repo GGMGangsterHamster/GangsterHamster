@@ -12,9 +12,20 @@ namespace Objects.Interactable
             callback?.Invoke();
         }
 
+        public virtual void Initialize(Action callback = null)
+        {
+            callback?.Invoke();
+        }
+
+        public virtual void Release()
+        {
+
+        }
+
         public virtual void Interact(Action callback = null)
         {
             callback?.Invoke();
         }
+
     }
 }
