@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 32594926}
   - component: {fileID: 32594925}
   - component: {fileID: 32594928}
+  - component: {fileID: 32594929}
   m_Layer: 0
   m_Name: Player
   m_TagString: PLAYER_BASE
@@ -155,6 +156,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 129713261}
+  - {fileID: 1844289162}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -214,6 +216,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.45, y: 1.8, z: 0.08}
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!114 &32594929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32594923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420a2912aca71131986450cc0c72b66d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &71401576
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,7 +242,7 @@ GameObject:
   - component: {fileID: 71401577}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: GROUND
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -994,3 +1008,46 @@ MonoBehaviour:
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
   m_AreaLightEmissiveMeshLayer: -1
+--- !u!1 &1844289161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1844289162}
+  - component: {fileID: 1844289163}
+  m_Layer: 0
+  m_Name: GroundCallback
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1844289162
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844289161}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 32594924}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1844289163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844289161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5d7d29d7d1e364f9b6ab9c384c2f099, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
