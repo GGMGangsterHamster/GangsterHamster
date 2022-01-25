@@ -1,36 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Objects.Interactable;
 
 public class FirstWeaponSkill : MonoBehaviour
 {
     [SerializeField]
     private float shotSpeed = 5;
 
-    private Rigidbody _rigid;
+    private Rigidbody _myRigid; // 무기의 Rigidbody
+    private Collider _myCol; // 무기의 Collider
+    private Transform objsParent; // 무기에게 붙은 AtypeObj들의 부모 오브젝트
 
-    private Collider _col;
-
-    private Transform objsParent;
+    private List<IInteractableObject> objList;
 
     private void Start()
     {
-        _rigid = GetComponent<Rigidbody>();
-        _col = GetComponent<Collider>();
+        _myRigid = GetComponent<Rigidbody>();
+        _myCol = GetComponent<Collider>();
 
         objsParent = transform.GetChild(0);
-    }
-
-    private void Update()
-    {
-        if(transform.parent != null)
-        {
-            transform.localPosition = Vector3.zero;
-        }
+        objList = new List<IInteractableObject>();
     }
 
     /// <summary>
     /// 1번 항목에 대한 함수
+    /// 오른손에 무기가 있을 때
     /// 좌클릭 시 무기가 특정 obj에 닿을 때까지 날아감
     /// </summary>
     public void Shot(Vector3 dir)
@@ -43,6 +38,7 @@ public class FirstWeaponSkill : MonoBehaviour
 
     /// <summary>
     /// 2번 항목에 대한 함수
+    /// 오른손에 무기가 있지 않을 때
     /// R키를 누를 시 무기가 바로 회수 됨
     /// </summary>
     /// <param name="rightHandTrm"> 플레이어 오른손의 위치를 받아오기 위한 Trm </param>
@@ -50,26 +46,12 @@ public class FirstWeaponSkill : MonoBehaviour
     {
         if(transform.parent == null)
         {
-            for (int i = 0; i < objsParent.childCount; i++)
-            {
-                Transform childTrm = objsParent.GetChild(i);
-                // 무기가 가지고 있던 오브젝트들을 다 떼어낸다
-
-                // 나중에 이 코드 바꿀꺼임 더러운 코드
-                if (childTrm.CompareTag("A_Obj"))
-                {
-                    objsParent.GetChild(i).GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                }
-
-                childTrm.parent = null;
-
-                i--;
-            }
-            
-            _rigid.useGravity = false;
-            _rigid.velocity = Vector3.zero;
+            ClearList();
 
             StopAllCoroutines();
+
+            _myRigid.useGravity = false;
+            _myRigid.velocity = Vector3.zero;
 
             transform.parent = rightHandTrm;
             transform.localPosition = Vector3.zero;
@@ -78,6 +60,7 @@ public class FirstWeaponSkill : MonoBehaviour
 
     /// <summary>
     /// 3, 4번 항목에 대한 함수
+    /// 오른손에 무기가 있지 않을 때
     /// 우클릭을 누를 시 무기가 플레이어 쪽으로 오게 됨
     /// </summary>
     /// <param name="distTrm"> 플레이어의 Trm </param>
@@ -86,7 +69,7 @@ public class FirstWeaponSkill : MonoBehaviour
     {
         if(transform.parent == null)
         {
-            _rigid.useGravity = false;
+            _myRigid.useGravity = false;
 
             StopAllCoroutines();
 
@@ -96,6 +79,7 @@ public class FirstWeaponSkill : MonoBehaviour
 
     /// <summary>
     /// 5번 항목에 대한 함수 
+    /// 오른손에 무기가 있지 않을 때
     /// A, B 타입의 오브젝트에 충돌시 정해진 이벤트 발생
     /// </summary>
     /// <param name="collision"></param>
@@ -110,57 +94,40 @@ public class FirstWeaponSkill : MonoBehaviour
             }
         }
 
-        // 만약 오른손에 무기가 있을 경우는 패스
         if (transform.parent == null)
         {
-            if (collision.gameObject.CompareTag("A_Obj"))
+            if(collision.transform.TryGetComponent(out IInteractableObject outII))
             {
                 StopAllCoroutines();
 
-                _rigid.useGravity = false;
-                _rigid.velocity = Vector3.zero;
+                outII.Collision(objsParent.gameObject);
 
-                _col.isTrigger = true;
+                _myRigid.velocity = Vector3.zero;
 
-                collision.transform.parent = objsParent;
-
-                transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-                collision.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-
-                // 무기가 붙는다!
-            }
-            else if (collision.gameObject.CompareTag("B_Obj"))
-            {
-                StopAllCoroutines();
-
-                for (int i = 0; i < objsParent.childCount; i++)
+                if((outII as ObjectA) != null) // Type이 A일 경우
                 {
-                    Transform childTrm = objsParent.GetChild(i);
-                    // 무기가 가지고 있던 오브젝트들을 다 떼어낸다
+                    _myRigid.useGravity = false;
+                    _myCol.isTrigger = true;
 
-                    // 나중에 이 코드 바꿀꺼임 더러운 코드
-                    if (childTrm.CompareTag("A_Obj"))
-                    {
-                        objsParent.GetChild(i).GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                    }
+                    transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                    collision.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
-                    childTrm.parent = null;
-
-                    i--;
+                    objList.Add(outII);
                 }
+                else if((outII as ObjectB) != null) // Type이 B일 경우
+                {
+                    ClearList();
 
-                _rigid.useGravity = true;
-                _rigid.velocity = Vector3.zero;
-
-                transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-                // 무기가 떨어진다!
+                    _myRigid.useGravity = true;
+                    transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+                }
             }
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        _col.isTrigger = false;
+        _myCol.isTrigger = false;
     }
 
     /// <summary>
@@ -230,5 +197,18 @@ public class FirstWeaponSkill : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    /// <summary>
+    /// objList를 초기화
+    /// </summary>
+    private void ClearList()
+    {
+        foreach(IInteractableObject obj in objList)
+        {
+            obj.Release();
+        }
+
+        objList.Clear();
     }
 }

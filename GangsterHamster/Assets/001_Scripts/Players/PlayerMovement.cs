@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Commands.Movement
+using Player.Status;
+using Commands.Movement;
+using Player.Utils;
+
+namespace Player.Movement
 {
     /// <summary>
     /// 기본적인 움직임을 구현한 클레스
     /// </summary>
     [RequireComponent(typeof(Rigidbody))]
-    public class PlayerMovement : MonoBehaviour, IMoveable, IJumpable, IMouseDeltaRecvable
+    public class PlayerMovement : MonoBehaviour, IMoveable, IJumpable, IMouseDeltaRecvable, ICrouchable
     {
         public Transform camTrm = null;
 
@@ -36,6 +40,8 @@ namespace Commands.Movement
             camTrm = Camera.main.transform;
         }
 
+        #region Movement
+
         public void MoveFoward()
         {
             Move(transform.forward);
@@ -56,20 +62,29 @@ namespace Commands.Movement
             Move(transform.right);
         }
 
-        public void Jump()
+        public void Dash()
         {
-            Log.Debug.Log("Have to fix PlayerMovement::Jump()", Log.LogLevel.Normal);
-            rigid.velocity = Vector3.zero;
+            if(PlayerStatus.Instance.IsCrouching) {
+                Log.Debug.Log("웅크린 상태 중 Dash 명령.");
+                PlayerUtils.Instance.SetStanded();
+            }
 
-            rigid.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            PlayerStatus.Instance.IsRunning = !PlayerStatus.Instance.IsRunning;
+            PlayerValues.Instance.speed = PlayerStatus.Instance.IsRunning ? PlayerValues.DashSpeed : PlayerValues.WalkingSpeed;
         }
 
         private void Move(Vector3 dir)
         {
+            if(!PlayerStatus.Instance.Moveable) return;
+
             // Space.World 추가하는 거 수정함!
-            transform.Translate(dir * speed * Time.deltaTime, Space.World);
+            transform.Translate(dir * PlayerValues.Instance.speed * Time.deltaTime, Space.World);
             OnMove(dir);
         }
+
+        #endregion // Movement
+
+        #region Mouse delta
 
         public void OnMouseX(float x)
         {
@@ -80,6 +95,44 @@ namespace Commands.Movement
         public void OnMouseY(float y)
         {
             camTrm.eulerAngles += new Vector3(-y, 0, 0);
+        }
+
+        #endregion
+
+        #region Jump
+
+        public void Jump()
+        {
+            if(!PlayerStatus.Instance.OnGround || !PlayerStatus.Instance.Jumpable) return;
+
+            if(PlayerStatus.Instance.IsCrouching) {
+                Log.Debug.Log("웅크린 상태 중 Jump 명령.");
+                PlayerUtils.Instance.SetStanded();
+                return;
+            }
+
+            Log.Debug.Log("Have to fix PlayerMovement::Jump()", Log.LogLevel.Normal);
+            rigid.velocity = Vector3.zero;
+
+            rigid.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+        }
+
+        public void OnGround()
+        {
+            PlayerStatus.Instance.OnGround = true;
+            PlayerStatus.Instance.Jumpable = true;
+        }
+
+        #endregion // Jump
+
+        public void Crouch()
+        {
+            if(!PlayerStatus.Instance.IsCrouching) {
+                PlayerUtils.Instance.SetCrouched();
+            }
+            else {
+                PlayerUtils.Instance.SetStanded();
+            }
         }
     }
 }
