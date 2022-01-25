@@ -88,13 +88,12 @@ namespace Player.Movement
 
         public void OnMouseX(float x)
         {
-            // camTrm.eulerAngles    += new Vector3(0, x, 0);
-            transform.eulerAngles += new Vector3(0, x, 0);
+            transform.rotation *= Quaternion.Euler(0.0f, x * PlayerValues.Instance.mouseSpeed, 0.0f);
         }
 
         public void OnMouseY(float y)
-        {
-            camTrm.eulerAngles += new Vector3(-y, 0, 0);
+        {   
+            camTrm.rotation *= Quaternion.Euler(-y * PlayerValues.Instance.mouseSpeed, 0.0f, 0.0f);
         }
 
         #endregion
