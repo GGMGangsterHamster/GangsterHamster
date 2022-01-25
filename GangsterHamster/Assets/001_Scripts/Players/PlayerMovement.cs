@@ -88,7 +88,7 @@ namespace Player.Movement
 
         public void OnMouseX(float x)
         {
-            camTrm.eulerAngles    += new Vector3(0, x, 0);
+            // camTrm.eulerAngles    += new Vector3(0, x, 0);
             transform.eulerAngles += new Vector3(0, x, 0);
         }
 

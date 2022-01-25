@@ -18,7 +18,13 @@ namespace Objects.Init
 
         public void Start(object param)
         {
-            if(param.ToString().CompareTo("HanTestScene") == 0) {
+            if(
+                #if UNITY_EDITOR
+                param.ToString().CompareTo("HanTestScene") == 0 || 
+                #endif
+                param.ToString().CompareTo("Stage") == 0
+                )
+            {
                 AttachCameraToObject.Instance.SetAttachPosition(playerTrm);
             }
         }

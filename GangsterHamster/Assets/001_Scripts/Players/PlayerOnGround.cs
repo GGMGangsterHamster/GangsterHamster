@@ -11,13 +11,11 @@ namespace Player.Movement
     {
         public void ExitGround()
         {
-            Debug.Log("땅바이바이");
             PlayerStatus.Instance.OnGround = false;
         }
 
         public void OnGround()
         {
-            Debug.Log("땅하이하이");
             PlayerStatus.Instance.OnGround = true;
         }
     }

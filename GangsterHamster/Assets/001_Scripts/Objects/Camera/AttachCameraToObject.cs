@@ -26,6 +26,8 @@ namespace Objects.Camera
         {
             _isAttached = true;
             _attachPos = pos;
+            transform.SetParent(pos);
+            transform.localPosition = Vector3.zero;
         }
 
         /// <summary>
@@ -34,15 +36,7 @@ namespace Objects.Camera
         public void FreeCamera()
         {
             _isAttached = false;
+            transform.SetParent(null);
         }
-
-        private void Update()
-        {
-            if(IsAttached) {
-                transform.position = _attachPos.position;
-            }
-        }
-
-
     }
 }
