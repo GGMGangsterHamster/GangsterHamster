@@ -30,7 +30,7 @@ public class CameraRotation : MonoBehaviour
             mouseX,
             0));
 
-        cameraObj.transform.position = playerTrm.position;
+        cameraObj.transform.position = playerTrm.position + new Vector3(0, playerTrm.localScale.y, 0);
 
         playerTrm.rotation = Quaternion.Euler(new Vector3(
             0,
