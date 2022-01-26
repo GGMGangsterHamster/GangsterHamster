@@ -424,7 +424,7 @@ GameObject:
   - component: {fileID: 216207694}
   m_Layer: 0
   m_Name: Player
-  m_TagString: PLAYER
+  m_TagString: PLAYER_BASE
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -442,8 +442,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camTrm: {fileID: 1376989875}
-  speed: 5
-  jumpForce: 3
 --- !u!54 &216207691
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2841,8 +2839,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1836242782}
-  m_Father: {fileID: 1948726703}
-  m_RootOrder: 2
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1376989876
 MonoBehaviour:
@@ -3152,8 +3150,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camTrm: {fileID: 0}
-  speed: 1
-  jumpForce: 3
 --- !u!65 &1395790038
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3643,12 +3639,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948726702}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.1, y: 0, z: 16.7}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 216207693}
   - {fileID: 1140312063}
-  - {fileID: 1376989875}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
