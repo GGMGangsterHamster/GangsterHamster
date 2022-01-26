@@ -2,9 +2,12 @@ namespace Player
 {
     public class PlayerValues : Singleton<PlayerValues>, ISingletonObject
     {
-        public const float WalkingSpeed = 1.3f;
-        public const float DashSpeed = 2.0f;
-        public const float CrouchSpeed = 0.8f;
+        // public const float WalkingSpeed = 1.3f;
+        // public const float DashSpeed = 2.0f;
+        // public const float CrouchSpeed = 0.8f;
+        public const float WalkingSpeed = 2.2f;
+        public const float DashSpeed = 5.0f;
+        public const float CrouchSpeed = 1.2f;
 
         public const float PlayerHeight = 1.8f;
         public const float PlayerCrouchHeight = 1.0f;

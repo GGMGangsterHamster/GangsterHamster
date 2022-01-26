@@ -36,9 +36,7 @@ namespace Objects.Interactable
         {
             if (other.CompareTag("PLAYER_BASE")) {
                 FloatingUIManager.Instance.KeyHelper(KeyCode.E, "를 눌러 문을 여세요.", GameManager.Instance.FindClosestPosition(_uiPositions));
-                InteractionManager.Instance.SetInteraction(() => {
-                    Interact();
-                });
+                InteractionManager.Instance.SetInteraction(Open);
             }
         }
 
@@ -46,10 +44,13 @@ namespace Objects.Interactable
         {
                 if (other.CompareTag("PLAYER_BASE")) {
                 FloatingUIManager.Instance.DisableUI();
-                InteractionManager.Instance.UnSetInteraction(() => {
-                    Interact();
-                });
+                InteractionManager.Instance.UnSetInteraction(Open);
             }
+        }
+
+        private void Open()
+        {
+            Interact();
         }
 
         public void Initialize(Action callback = null) { }
