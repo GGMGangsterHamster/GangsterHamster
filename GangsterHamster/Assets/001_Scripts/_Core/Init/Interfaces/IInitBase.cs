@@ -14,7 +14,7 @@ namespace OpenRC
         /// <summary>
         /// 지정된 RunLevel 에 호출
         /// </summary>
-        public void Start(object param);
+        public void Call(object param);
 
         /// <summary>
         /// 종료 시 호출

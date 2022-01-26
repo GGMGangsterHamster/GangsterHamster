@@ -24,7 +24,13 @@ namespace Objects.Utils
             if(other.gameObject.CompareTag(GROUND)) {
                 callback.OnGround();
             }
+        }
 
+        private void OnCollisionStay(Collision other)
+        {
+            if(other.gameObject.CompareTag(GROUND)) {
+                callback.OnGround();
+            }
         }
 
         private void OnCollisionExit(Collision other)
