@@ -29,8 +29,6 @@ namespace Player.Movement
         /// </summary>
         public event System.Action OnJump;
 
-        [SerializeField] private float speed = 1.0f;
-        [SerializeField] private float jumpForce = 3.0f;
 
         private void Awake()
         {
@@ -91,9 +89,13 @@ namespace Player.Movement
             transform.rotation *= Quaternion.Euler(0.0f, x * PlayerValues.Instance.mouseSpeed, 0.0f);
         }
 
+        float rotY = 0.0f;
         public void OnMouseY(float y)
-        {   
-            camTrm.rotation *= Quaternion.Euler(-y * PlayerValues.Instance.mouseSpeed, 0.0f, 0.0f);
+        {
+            rotY += -y * PlayerValues.Instance.mouseSpeed;
+            rotY = Mathf.Clamp(rotY, -90f, 90f);
+
+            camTrm.transform.localRotation = Quaternion.Euler(rotY, 0.0f, 0.0f);
         }
 
         #endregion
@@ -113,7 +115,7 @@ namespace Player.Movement
             Log.Debug.Log("Have to fix PlayerMovement::Jump()", Log.LogLevel.Normal);
             rigid.velocity = Vector3.zero;
 
-            rigid.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            rigid.AddForce(transform.up * PlayerValues.JumpForce, ForceMode.Impulse);
         }
 
         public void OnGround()
