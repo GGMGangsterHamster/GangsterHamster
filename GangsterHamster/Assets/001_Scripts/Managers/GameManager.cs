@@ -3,6 +3,15 @@ using UnityEngine;
 public class GameManager : MonoSingleton<GameManager>
 {
     public GameObject player;
+    private Rigidbody _playerRigid;
+    public Rigidbody PlayerRigid {
+        get {
+            if(_playerRigid == null) {
+                _playerRigid = player.GetComponent<Rigidbody>();
+            }
+            return _playerRigid;
+        }
+    }
 
 
     /// <summary>
