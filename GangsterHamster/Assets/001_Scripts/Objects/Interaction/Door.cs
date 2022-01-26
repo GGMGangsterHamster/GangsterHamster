@@ -15,12 +15,14 @@ namespace Objects.Interactable
 
         /// <summary>
         /// 문을 엽니다<br/>
-        /// 알아서 Release 해 주니 호출할 필요 없음
+        /// 알아서 Release 해 주니 호출할 필요 없음<br/>
+        /// Callback 이 null 이 아니라면 문이 자동으로 닫히지 않음
         /// </summary>
         public void Interact(Action callback = null)
         {
             _doorObject.SetActive(false);
-            Invoke(nameof(Release), _defaultDoorStayOpenDuration); // 오 이런
+            if(callback == null)
+                Invoke(nameof(Release), _defaultDoorStayOpenDuration); // 오 이런
             FloatingUIManager.Instance.DisableUI();
             
 
@@ -42,7 +44,7 @@ namespace Objects.Interactable
 
         private void OnTriggerExit(Collider other)
         {
-                if (other.CompareTag("PLAYER_BASE")) {
+            if (other.CompareTag("PLAYER_BASE")) {
                 FloatingUIManager.Instance.DisableUI();
                 InteractionManager.Instance.UnSetInteraction(Open);
             }
