@@ -20,7 +20,7 @@ namespace Objects.Init
         /// <summary>
         /// 지정된 RunLevel 에 호출
         /// </summary>
-        public void Start(object param)
+        public void Call(object param)
         {
             
         }
