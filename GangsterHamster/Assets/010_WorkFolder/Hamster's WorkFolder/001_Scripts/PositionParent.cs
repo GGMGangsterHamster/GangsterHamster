@@ -12,5 +12,10 @@ public class PositionParent : MonoBehaviour
     void Update()
     {
         transform.position = parentObj.transform.position;
+
+        if (transform.childCount >= 1)
+        {
+            transform.GetChild(0).transform.localPosition = Vector3.zero;
+        }
     }
 }

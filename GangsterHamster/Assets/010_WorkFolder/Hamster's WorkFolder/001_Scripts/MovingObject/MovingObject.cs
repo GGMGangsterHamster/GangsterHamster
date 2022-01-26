@@ -67,10 +67,19 @@ public class MovingObject : MonoBehaviour
     /// <summary>
     /// 한번만 끝을 찍고 멈추는 함수
     /// </summary>
-    public void StartDontRepeatMove()
+    /// <param name="dir"> 방향 - true는 앞으로 false는 뒤로 </param>
+    public void StartDontRepeatMove(bool dir)
     {
         StopAllCoroutines();
-        StartCoroutine(NextDestination(false));
+        Debug.Log("뭔가 돌아간다!");
+        if(dir)
+        {
+            StartCoroutine(NextDestination(false));
+        }
+        else
+        {
+            StartCoroutine(PrevDestination(false));
+        }
     }
     /// <summary>
     /// 멈추는 함수
