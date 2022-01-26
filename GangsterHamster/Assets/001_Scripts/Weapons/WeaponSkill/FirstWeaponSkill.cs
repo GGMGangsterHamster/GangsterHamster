@@ -23,6 +23,11 @@ public class FirstWeaponSkill : MonoBehaviour
         objList = new List<IInteractableObject>();
     }
 
+    private void Update()
+    {
+
+    }
+
     /// <summary>
     /// 1번 항목에 대한 함수
     /// 오른손에 무기가 있을 때
