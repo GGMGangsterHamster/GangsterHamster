@@ -5,6 +5,7 @@ using UnityEngine;
 using Commands;
 using Commands.Weapon;
 using Commands.Movement.Movements;
+using Commands.Interaction;
 
 namespace Player.Movement
 {
@@ -45,6 +46,7 @@ namespace Player.Movement
             _inputDictionary.Add(KeyCode.Space, new Jump(_playerMove));
             _inputDictionary.Add(KeyCode.LeftControl, new Crouch(_playerMove));
             _inputDictionary.Add(KeyCode.LeftShift, new Dash(_playerMove));
+            _inputDictionary.Add(KeyCode.E, new Interact());
 
             _inputDictionary.Add(KeyCode.Mouse0, new MouseLeft(_weapon));
             _inputDictionary.Add(KeyCode.Mouse1, new MouseRight(_weapon));
@@ -90,6 +92,11 @@ namespace Player.Movement
             if(Input.GetKeyUp(KeyCode.LeftShift))
             {
                 _inputDictionary[KeyCode.LeftShift].Execute();
+            }
+
+            if(Input.GetKeyDown(KeyCode.E))
+            {
+                _inputDictionary[KeyCode.E].Execute();
             }
 
             #region Weapon

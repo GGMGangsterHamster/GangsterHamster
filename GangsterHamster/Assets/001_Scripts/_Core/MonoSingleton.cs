@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
+abstract public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 {
     static private T _instance = null;
     static public T Instance {
