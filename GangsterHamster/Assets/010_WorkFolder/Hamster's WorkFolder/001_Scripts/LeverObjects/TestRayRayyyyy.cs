@@ -13,7 +13,6 @@ public class TestRayRayyyyy : MonoBehaviour
             {
                 if (hit.collider.TryGetComponent<Lever>(out Lever lever))
                 {
-                    Debug.Log("asdfkasldfjadsf");
                     lever.Click();
                 }
             }

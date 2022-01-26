@@ -12,7 +12,7 @@ public class MovingObject : MonoBehaviour
     public bool playOnAwake = false;
 
     private List<Vector3> globalDestination = new List<Vector3>();
-    private int curdest = 0;
+    public int curdest = 0;
 
     private void Awake()
     { 
@@ -71,8 +71,8 @@ public class MovingObject : MonoBehaviour
     public void StartDontRepeatMove(bool dir)
     {
         StopAllCoroutines();
-        Debug.Log("뭔가 돌아간다!");
-        if(dir)
+
+        if (dir)
         {
             StartCoroutine(NextDestination(false));
         }
@@ -108,10 +108,11 @@ public class MovingObject : MonoBehaviour
     IEnumerator NextDestination(bool repeat = true, bool onceRepeat = false)
     {
         Vector3 dir = (globalDestination[curdest] - transform.position).normalized;
+        float dist = Vector3.Distance(transform.position, globalDestination[curdest]);
 
-        while(true)
+        while (true)
         {
-            transform.position += dir * Time.deltaTime * moveSpeed;
+            transform.position += dir * Time.deltaTime * (dist / moveSpeed);
 
             // 목적지와 거리가 0.2이하로 될때까지 계속 반복해서 나아감
             if (Vector3.Distance(transform.position, globalDestination[curdest]) <= 0.2f)
@@ -123,10 +124,9 @@ public class MovingObject : MonoBehaviour
             yield return null;
         }
 
-
-        if(curdest == globalDestination.Count - 1)
+        if (curdest == globalDestination.Count - 1)
         {
-            if(repeat)
+            if (repeat)
             {
                 curdest--;
                 StartCoroutine(PrevDestination(onceRepeat ? false : true));
@@ -150,11 +150,12 @@ public class MovingObject : MonoBehaviour
     IEnumerator PrevDestination(bool repeat = true, bool onceRepeat = false)
     {
         Vector3 dir = (globalDestination[curdest] - transform.position).normalized;
+        float dist = Vector3.Distance(transform.position, globalDestination[curdest]);
 
         // 목적지와 거리가 0.2이하로 될때까지 계속 반복해서 나아감
         while (true)
         {
-            transform.position += dir * Time.deltaTime * moveSpeed;
+            transform.position += dir * Time.deltaTime * (dist / moveSpeed);
 
             if (Vector3.Distance(transform.position, globalDestination[curdest]) <= 0.2f) 
             {
