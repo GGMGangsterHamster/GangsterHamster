@@ -6,12 +6,24 @@ public class Lever : MonoBehaviour
 {
     public List<MovingObject> mObjList = new List<MovingObject>();
 
+    public Color OnColor;
+    public Color OffColor;
+
+    private Material _myMat;
+
+    private void Awake()
+    {
+        _myMat = GetComponent<MeshRenderer>().material;
+        _myMat.color = OffColor;
+    }
+
     private enum OnOff
     {
         On,
         Off
     }
 
+    [SerializeField]
     private OnOff status = OnOff.Off;
 
     public void Click()
@@ -43,10 +55,12 @@ public class Lever : MonoBehaviour
         if(status == OnOff.Off)
         {
             status = OnOff.On;
+            _myMat.color = OnColor;
         }
         else
         {
             status += 1;
+            _myMat.color = OffColor;
         }
     }
 }

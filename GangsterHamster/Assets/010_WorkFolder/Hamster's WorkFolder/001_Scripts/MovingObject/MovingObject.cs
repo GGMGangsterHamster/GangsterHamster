@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Objects.Interactable;
 
 // Stop 함수
 // Start 함수
@@ -14,8 +15,10 @@ public class MovingObject : MonoBehaviour
     private List<Vector3> globalDestination = new List<Vector3>();
     public int curdest = 0;
 
+    private List<Transform> colObjs = new List<Transform>();
+
     private void Awake()
-    { 
+    {
         // 무조건 자신의 위치를 처음에 넣음
         localDestinationList.Add(Vector3.zero);
 
@@ -114,8 +117,13 @@ public class MovingObject : MonoBehaviour
         {
             transform.position += dir * Time.deltaTime * (dist / moveSpeed);
 
+            for(int i = 0; i < colObjs.Count; i++)
+            {
+                colObjs[i].position += dir * Time.deltaTime * (dist / moveSpeed);
+            }
+
             // 목적지와 거리가 0.2이하로 될때까지 계속 반복해서 나아감
-            if (Vector3.Distance(transform.position, globalDestination[curdest]) <= 0.2f)
+            if (Vector3.Distance(transform.position, globalDestination[curdest]) <= 0.05f)
             {
                 transform.position = globalDestination[curdest];
                 break;
@@ -157,8 +165,14 @@ public class MovingObject : MonoBehaviour
         {
             transform.position += dir * Time.deltaTime * (dist / moveSpeed);
 
-            if (Vector3.Distance(transform.position, globalDestination[curdest]) <= 0.2f) 
+            for (int i = 0; i < colObjs.Count; i++)
             {
+                colObjs[i].position += dir * Time.deltaTime * (dist / moveSpeed);
+            }
+
+            if (Vector3.Distance(transform.position, globalDestination[curdest]) <= 0.05f)
+            {
+                transform.position = globalDestination[curdest];
                 break;
             }
 
@@ -177,6 +191,30 @@ public class MovingObject : MonoBehaviour
         {
             curdest--;
             StartCoroutine(PrevDestination(repeat));
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.TryGetComponent<ObjectA>(out ObjectA objA) || collision.transform.CompareTag("PLAYER_BASE"))
+        {
+            foreach (Transform t in colObjs)
+            {
+                if (t == collision.transform)
+                {
+                    return;
+                }
+            }
+
+            colObjs.Add(collision.transform);
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.TryGetComponent<ObjectA>(out ObjectA objA) || collision.transform.CompareTag("PLAYER_BASE"))
+        {
+            colObjs.Remove(collision.transform);
         }
     }
 }

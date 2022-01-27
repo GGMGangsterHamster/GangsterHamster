@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestRayRayyyyy : MonoBehaviour
+public class TestLeverRay : MonoBehaviour
 {
     public LayerMask whatIsInteraction;
     private void Update()
