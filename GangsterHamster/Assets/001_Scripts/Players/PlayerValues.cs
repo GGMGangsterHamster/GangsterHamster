@@ -12,7 +12,7 @@ namespace Player
         public const float PlayerHeight = 1.8f;
         public const float PlayerCrouchHeight = 1.0f;
 
-        public const float JumpForce = 5.3f;
+        public const float JumpForce = 5.4f;
 
 
         #region 미리 탐구한 플레이어 변수들

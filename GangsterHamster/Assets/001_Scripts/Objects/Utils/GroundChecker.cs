@@ -18,26 +18,20 @@ namespace Objects.Utils
             }
         }
 
-
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerStay(Collider other)
         {
             if(other.gameObject.CompareTag(GROUND)) {
                 callback.OnGround();
             }
         }
 
-        private void OnCollisionStay(Collision other)
-        {
-            if(other.gameObject.CompareTag(GROUND)) {
-                callback.OnGround();
-            }
-        }
-
-        private void OnCollisionExit(Collision other)
+        private void OnTriggerExit(Collider other)
         {
             if(other.gameObject.CompareTag(GROUND)) {
                 callback.ExitGround();
             }
         }
+
+        // TODO: 아레쪽으로 Ray
     }
 }
