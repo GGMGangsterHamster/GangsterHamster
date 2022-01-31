@@ -1486,7 +1486,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2021232804}
   - component: {fileID: 2021232805}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FloorCollider
   m_TagString: GROUND
   m_Icon: {fileID: 0}
@@ -1518,8 +1518,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 100, y: 1, z: 50}
-  m_Center: {x: -30, y: -0.5, z: 15}
+  m_Size: {x: 100, y: 2, z: 50}
+  m_Center: {x: -30, y: -1, z: 15}
 --- !u!1 &2025211061
 GameObject:
   m_ObjectHideFlags: 0
@@ -1850,14 +1850,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1684257188, guid: 37e7e73d7b61c8a10bb3c8bc927e9f6b, type: 3}
-      propertyPath: m_Size.x
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1684257188, guid: 37e7e73d7b61c8a10bb3c8bc927e9f6b, type: 3}
-      propertyPath: m_Size.z
-      value: 0.01
-      objectReference: {fileID: 0}
     - target: {fileID: 3557282036768349801, guid: 37e7e73d7b61c8a10bb3c8bc927e9f6b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1866,6 +1858,10 @@ PrefabInstance:
       propertyPath: camTrm
       value: 
       objectReference: {fileID: 1094847364}
+    - target: {fileID: 3557282036768349805, guid: 37e7e73d7b61c8a10bb3c8bc927e9f6b, type: 3}
+      propertyPath: _groundDistance
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3557282036768349807, guid: 37e7e73d7b61c8a10bb3c8bc927e9f6b, type: 3}
       propertyPath: m_RootOrder
       value: 8
