@@ -25,7 +25,7 @@ namespace Obejcts.Trigger
 
             if(this.ID == -1)
             {
-                Log.Debug.Log($"TriggerObject > 등록되지 않은 트리거 {gameObject.name}", Log.LogLevel.Error);
+                Logger.Log($"TriggerObject > 등록되지 않은 트리거 {gameObject.name}", LogLevel.Error);
                 return;
             }
 

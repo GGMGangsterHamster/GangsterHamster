@@ -36,7 +36,7 @@ namespace Player.Movement
 
             if (_playerMove == null)
             {
-                Log.Debug.Log("PlayerInputHandler > _playerMove is null", Log.LogLevel.Fatal);
+                Logger.Log("PlayerInputHandler > _playerMove is null", LogLevel.Fatal);
             }
 
             _inputDictionary.Add(KeyCode.W, new MoveFoward(_playerMove));

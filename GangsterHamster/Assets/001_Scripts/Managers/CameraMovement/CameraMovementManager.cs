@@ -103,7 +103,7 @@ namespace Objects.Movement.Camera
         {
             if(_isMoving) 
             {
-                Log.Debug.Log("카메라 이미 이동중", Log.LogLevel.Warning);
+                Logger.Log("카메라 이미 이동중", LogLevel.Warning);
                 return false;
             }
 

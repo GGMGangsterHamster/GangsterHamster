@@ -24,7 +24,7 @@ namespace Obejcts.Trigger
         {
             if(_triggerDictionary.ContainsValue(trigger))
             {
-                Log.Debug.Log("TriggerManager > Trigger 중복 등록. 의도된 것이라면 suppressDuplicateWarning 을 true 로 전달하세요.", Log.LogLevel.Warning);
+                Logger.Log("TriggerManager > Trigger 중복 등록. 의도된 것이라면 suppressDuplicateWarning 을 true 로 전달하세요.", LogLevel.Warning);
             }
 
             trigger.ID = _triggerDictionary.Count;
@@ -184,7 +184,7 @@ namespace Obejcts.Trigger
         {
             if(!_triggerDictionary.ContainsKey(id)) 
             {
-                Log.Debug.Log($"TriggerManager > 존재하지 않는 트리거 ID{id}", Log.LogLevel.Fatal);
+                Logger.Log($"TriggerManager > 존재하지 않는 트리거 ID{id}", LogLevel.Fatal);
                 return false;
             }
 

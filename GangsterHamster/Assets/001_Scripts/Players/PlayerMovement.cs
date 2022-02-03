@@ -65,7 +65,7 @@ namespace Player.Movement
         public void Dash()
         {
             if(PlayerStatus.Instance.IsCrouching) {
-                Log.Debug.Log("웅크린 상태 중 Dash 명령.");
+                Logger.Log("웅크린 상태 중 Dash 명령.");
                 PlayerUtils.Instance.SetStanded();
             }
 
@@ -109,7 +109,7 @@ namespace Player.Movement
             if(!GroundChecker.Instance.CheckGround(this.transform, _groundDistance) || !PlayerStatus.Instance.Jumpable) return;
 
             if(PlayerStatus.Instance.IsCrouching) {
-                Log.Debug.Log("웅크린 상태 중 Jump 명령.");
+                Logger.Log("웅크린 상태 중 Jump 명령.");
                 PlayerUtils.Instance.SetStanded();
                 return;
             }

@@ -58,12 +58,12 @@ namespace OpenRC
         public int Add(InitScript initScript)
         {
             if(initScripts.Contains(initScript)) {
-                Log.Debug.Log($"OpenRC > {initScript._Name} is already added to RunLevel {initScripts.Find(x => x == initScript)._RunLevel}", Log.LogLevel.Error);
+                Logger.Log($"OpenRC > {initScript._Name} is already added to RunLevel {initScripts.Find(x => x == initScript)._RunLevel}", LogLevel.Error);
                 return 1;
             }
 
             initScripts.Add(initScript);
-            Log.Debug.Log($"OpenRC > Added {initScript._Name} to RunLevel {initScript._RunLevel}");
+            Logger.Log($"OpenRC > Added {initScript._Name} to RunLevel {initScript._RunLevel}");
             return 0;
         }
 
@@ -73,12 +73,12 @@ namespace OpenRC
         public int Del(InitScript initScript)
         {
             if (!initScripts.Contains(initScript)) {
-                Log.Debug.Log($"OpenRC > Cannot find {initScript._Name} at Runlevel {initScript._RunLevel}", Log.LogLevel.Error);
+                Logger.Log($"OpenRC > Cannot find {initScript._Name} at Runlevel {initScript._RunLevel}", LogLevel.Error);
                 return 1;
             }
 
             initScripts.Remove(initScript);
-            Log.Debug.Log($"OpenRC > Removed {initScript._Name} at RunLevel {initScript._RunLevel}");
+            Logger.Log($"OpenRC > Removed {initScript._Name} at RunLevel {initScript._RunLevel}");
             return 0;
         }
     }
