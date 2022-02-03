@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Obejcts.Trigger
+namespace Objects.Trigger
 {
     /// <summary>
     /// 트리거 관리 클래스

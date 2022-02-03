@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Obejcts.Trigger
+namespace Objects.Trigger
 {
     /// <summary>
     /// 트리거 오브젝트

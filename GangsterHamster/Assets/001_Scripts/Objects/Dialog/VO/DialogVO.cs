@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Objects.UI.VO
+namespace Objects.UI.Dialog.VO
 {
     [Serializable]
     public class DialogVO

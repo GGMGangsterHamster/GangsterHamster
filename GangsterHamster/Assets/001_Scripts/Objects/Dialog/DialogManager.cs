@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using Objects.UI.VO;
+using Objects.UI.Dialog.VO;
 
 // 다이얼로그 구조
 /*
@@ -32,7 +32,7 @@ using Objects.UI.VO;
 
 
 
-namespace Objects.UI
+namespace Objects.UI.Dialog
 {
     public class DialogManager : MonoSingleton<DialogManager>
     {
