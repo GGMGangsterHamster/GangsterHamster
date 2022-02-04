@@ -12,7 +12,8 @@ namespace Player.Movement
 
     public class PlayerInputHandler : MonoSingleton<PlayerInputHandler>
     {
-        private Dictionary<KeyCode, Command> _inputDictionary = new Dictionary<KeyCode, Command>();
+        private Dictionary<KeyCode, Command> _toggleInputDictionary = new Dictionary<KeyCode, Command>();
+        private Dictionary<KeyCode, Command> _pushInputDictionary = new Dictionary<KeyCode, Command>();
         private PlayerMovement _playerMove = null;
         private WeaponManagement _weapon = null;
 
@@ -20,7 +21,8 @@ namespace Player.Movement
         private MouseY _mouseY;
 
 
-        // TODO: Keymaps
+        // 특수한 입력이 필요한 키들
+        Dash _dash;
 
         private void Start()
         {
@@ -39,81 +41,42 @@ namespace Player.Movement
                 Logger.Log("PlayerInputHandler > _playerMove is null", LogLevel.Fatal);
             }
 
-            _inputDictionary.Add(KeyCode.W, new MoveFoward(_playerMove));
-            _inputDictionary.Add(KeyCode.S, new MoveBackword(_playerMove));
-            _inputDictionary.Add(KeyCode.A, new MoveLeft(_playerMove));
-            _inputDictionary.Add(KeyCode.D, new MoveRight(_playerMove));
-            _inputDictionary.Add(KeyCode.Space, new Jump(_playerMove));
-            _inputDictionary.Add(KeyCode.LeftControl, new Crouch(_playerMove));
-            _inputDictionary.Add(KeyCode.LeftShift, new Dash(_playerMove));
-            _inputDictionary.Add(KeyCode.E, new Interact());
+            _pushInputDictionary.Add(KeyCode.W, new MoveFoward(_playerMove));
+            _pushInputDictionary.Add(KeyCode.S, new MoveBackword(_playerMove));
+            _pushInputDictionary.Add(KeyCode.A, new MoveLeft(_playerMove));
+            _pushInputDictionary.Add(KeyCode.D, new MoveRight(_playerMove));
+            _toggleInputDictionary.Add(KeyCode.Space, new Jump(_playerMove));
+            _toggleInputDictionary.Add(KeyCode.LeftControl, new Crouch(_playerMove));
+            _toggleInputDictionary.Add(KeyCode.E, new Interact());
 
-            _inputDictionary.Add(KeyCode.Mouse0, new MouseLeft(_weapon));
-            _inputDictionary.Add(KeyCode.Mouse1, new MouseRight(_weapon));
-            _inputDictionary.Add(KeyCode.R, new ResetKey(_weapon));
+            _toggleInputDictionary.Add(KeyCode.Mouse0, new MouseLeft(_weapon));
+            _toggleInputDictionary.Add(KeyCode.Mouse1, new MouseRight(_weapon));
+            _toggleInputDictionary.Add(KeyCode.R, new ResetKey(_weapon));
 
             _mouseX = new MouseX(_playerMove);
             _mouseY = new MouseY(_playerMove);
+            _dash = new Dash(_playerMove);
         }
 
         private void Update()
         {
-            #region Movement
-            if (Input.GetKey(KeyCode.W))
-            {
-                _inputDictionary[KeyCode.W].Execute();
+            foreach(KeyCode key in _pushInputDictionary.Keys) { // GetKey();
+                if(Input.GetKey(key))
+                    _pushInputDictionary[key].Execute();
             }
-            if (Input.GetKey(KeyCode.S))
-            {
-                _inputDictionary[KeyCode.S].Execute();
-            }
-            if (Input.GetKey(KeyCode.A))
-            {
-                _inputDictionary[KeyCode.A].Execute();
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                _inputDictionary[KeyCode.D].Execute();
-            }
-            #endregion // Movement
 
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                _inputDictionary[KeyCode.Space].Execute();
+            foreach (KeyCode key in _toggleInputDictionary.Keys) { // GetKeyDown();
+                if (Input.GetKeyDown(key))
+                    _toggleInputDictionary[key].Execute();
             }
-            if(Input.GetKeyDown(KeyCode.LeftControl))
-            {
-                _inputDictionary[KeyCode.LeftControl].Execute();
-            }
+
+            #region Shift (dash)
             if(Input.GetKeyDown(KeyCode.LeftShift))
-            {
-                _inputDictionary[KeyCode.LeftShift].Execute();
-            }
+                _dash.Execute();
+            
             if(Input.GetKeyUp(KeyCode.LeftShift))
-            {
-                _inputDictionary[KeyCode.LeftShift].Execute();
-            }
-
-            if(Input.GetKeyDown(KeyCode.E))
-            {
-                _inputDictionary[KeyCode.E].Execute();
-            }
-
-            #region Weapon
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                _inputDictionary[KeyCode.Mouse0].Execute();
-            }
-            if (Input.GetKeyDown(KeyCode.Mouse1))
-            {
-                _inputDictionary[KeyCode.Mouse1].Execute();
-            }
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                _inputDictionary[KeyCode.R].Execute();
-            }
-            #endregion // Weapon
-
+                _dash.Execute();
+            #endregion // Shift (dash)
 
             _mouseX.Execute();
             _mouseY.Execute();

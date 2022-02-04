@@ -40,7 +40,7 @@ namespace Objects.UI.Dialog
 
         // 현재 다이얼로그 정보
         private int _currentDialogID = -1;
-        private int _currentDialogIndex = -1;
+        private int _currentDialogIndex = 0;
         public int CurrentDialogID => _currentDialogID;
         public int CurrentDialogIndex => _currentDialogIndex;
 
@@ -67,18 +67,16 @@ namespace Objects.UI.Dialog
                 Logger.Log($"DialogManager > 이미 다이얼로그 id:{CurrentDialogID} 를 실행 중.");
             }
 
-            _currentDialog = _dialog.dialogs.Find(e => e.id == id);
+            _currentDialog = _dialog.dialogs.Find(e => e.id == id); // id 에 해당하는 다이얼로그 탐색
 
             if(_currentDialog == null) { // null 체크
-                Logger.Log($"DialogManager > 요청한 id:{id} 를 찾을 수 없습니다.");
+                Logger.Log($"DialogManager > 요청한 id:{id} 를 찾을 수 없습니다.", LogLevel.Error);
                 return;
             }
 
             _currentDialogID = id;
-            _currentDialogIndex = 0;
 
-            _dialogUI.Show(_currentDialog.dialog[id].message, null);
-            // _dialogUI.Show(_currentDialog.dialog[id], _currentDialog.dialog[id].iconID);
+            _dialogUI.Show(_currentDialog.dialog[_currentDialogIndex].message, null);
         }
 
         /// <summary>
@@ -90,7 +88,8 @@ namespace Objects.UI.Dialog
                 Close();
             }
             else {
-                Show(++_currentDialogIndex);
+                ++_currentDialogIndex;
+                Show();
             }
         }
         
@@ -100,6 +99,7 @@ namespace Objects.UI.Dialog
         public void Close()
         {
             _currentDialogID = -1;
+            _currentDialogIndex = 0;
             _dialogUI.Close();
         }
 
