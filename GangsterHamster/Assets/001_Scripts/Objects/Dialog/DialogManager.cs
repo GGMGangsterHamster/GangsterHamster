@@ -63,18 +63,20 @@ namespace Objects.UI.Dialog
         /// <param name="id">띄울 다이얼로그 아이디</param>
         public void Show(int id = -1)
         {
-            if(CurrentDialogID != -1) {
-                Logger.Log($"DialogManager > 이미 다이얼로그 id:{CurrentDialogID} 를 실행 중.");
+            if(CurrentDialogID != -1) { // Next() 에서 호출
+                Logger.Log($"DialogManager > 다이얼로그 id:{CurrentDialogID} 가 이미 실행 중. _currentDialogIndex:{_currentDialogIndex}");
+            }
+            else { // 다이얼로그 처음 요청
+                _currentDialog = _dialog.dialogs.Find(e => e.id == id); // id 에 해당하는 다이얼로그 탐색
+                _currentDialogID = id;
             }
 
-            _currentDialog = _dialog.dialogs.Find(e => e.id == id); // id 에 해당하는 다이얼로그 탐색
 
             if(_currentDialog == null) { // null 체크
                 Logger.Log($"DialogManager > 요청한 id:{id} 를 찾을 수 없습니다.", LogLevel.Error);
                 return;
             }
 
-            _currentDialogID = id;
 
             _dialogUI.Show(_currentDialog.dialog[_currentDialogIndex].message, null);
         }
@@ -84,6 +86,8 @@ namespace Objects.UI.Dialog
         /// </summary>
         public void Next()
         {
+            if(CurrentDialogID == -1) return;
+
             if(_currentDialog.dialog.Count <= _currentDialogIndex + 1) {
                 Close();
             }

@@ -12,7 +12,7 @@ namespace Player.Movement
 
     public class PlayerInputHandler : MonoSingleton<PlayerInputHandler>
     {
-        private Dictionary<KeyCode, Command> _toggleInputDictionary = new Dictionary<KeyCode, Command>();
+        private Dictionary<KeyCode, Command> _oneshotInputDictionary = new Dictionary<KeyCode, Command>();
         private Dictionary<KeyCode, Command> _pushInputDictionary = new Dictionary<KeyCode, Command>();
         private PlayerMovement _playerMove = null;
         private WeaponManagement _weapon = null;
@@ -45,13 +45,15 @@ namespace Player.Movement
             _pushInputDictionary.Add(KeyCode.S, new MoveBackword(_playerMove));
             _pushInputDictionary.Add(KeyCode.A, new MoveLeft(_playerMove));
             _pushInputDictionary.Add(KeyCode.D, new MoveRight(_playerMove));
-            _toggleInputDictionary.Add(KeyCode.Space, new Jump(_playerMove));
-            _toggleInputDictionary.Add(KeyCode.LeftControl, new Crouch(_playerMove));
-            _toggleInputDictionary.Add(KeyCode.E, new Interact());
 
-            _toggleInputDictionary.Add(KeyCode.Mouse0, new MouseLeft(_weapon));
-            _toggleInputDictionary.Add(KeyCode.Mouse1, new MouseRight(_weapon));
-            _toggleInputDictionary.Add(KeyCode.R, new ResetKey(_weapon));
+            _oneshotInputDictionary.Add(KeyCode.Space, new Jump(_playerMove));
+            _oneshotInputDictionary.Add(KeyCode.LeftControl, new Crouch(_playerMove));
+            _oneshotInputDictionary.Add(KeyCode.Mouse0, new MouseLeft(_weapon));
+            _oneshotInputDictionary.Add(KeyCode.Mouse1, new MouseRight(_weapon));
+            _oneshotInputDictionary.Add(KeyCode.R, new ResetKey(_weapon));
+
+            _oneshotInputDictionary.Add(KeyCode.E, new Interact());
+            _oneshotInputDictionary.Add(KeyCode.Return, new NextDialog());
 
             _mouseX = new MouseX(_playerMove);
             _mouseY = new MouseY(_playerMove);
@@ -65,9 +67,9 @@ namespace Player.Movement
                     _pushInputDictionary[key].Execute();
             }
 
-            foreach (KeyCode key in _toggleInputDictionary.Keys) { // GetKeyDown();
+            foreach (KeyCode key in _oneshotInputDictionary.Keys) { // GetKeyDown();
                 if (Input.GetKeyDown(key))
-                    _toggleInputDictionary[key].Execute();
+                    _oneshotInputDictionary[key].Execute();
             }
 
             #region Shift (dash)

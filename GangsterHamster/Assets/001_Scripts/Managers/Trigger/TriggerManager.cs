@@ -28,6 +28,7 @@ namespace Objects.Trigger
             }
 
             trigger.ID = _triggerDictionary.Count;
+            trigger.Activated = true;
 
             _triggerDictionary.Add(trigger.ID, trigger);
         }
@@ -41,6 +42,7 @@ namespace Objects.Trigger
             if(!TriggerAssigned(trigger.ID)) return;
 
             _triggerDictionary.Remove(trigger.ID);
+            trigger.Activated = false;
         }
         /// <summary>
         /// 트리거를 등록 해제합니다.
