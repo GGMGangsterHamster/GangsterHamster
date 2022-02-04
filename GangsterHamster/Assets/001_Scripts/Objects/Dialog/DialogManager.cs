@@ -1,4 +1,4 @@
-using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Objects.UI.Dialog.VO;
@@ -37,6 +37,8 @@ namespace Objects.UI.Dialog
     public class DialogManager : MonoSingleton<DialogManager>
     {
         [SerializeField] private DialogUI _dialogUI;
+
+        [SerializeField] private List<UnityEngine.Events.UnityEvent> _customCallbackList = new List<UnityEngine.Events.UnityEvent>();
 
         // 현재 다이얼로그 정보
         private int _currentDialogID = -1;
@@ -77,8 +79,20 @@ namespace Objects.UI.Dialog
                 return;
             }
 
+            InnerDialogVO dialog = _currentDialog.dialog[_currentDialogIndex]; // 캐싱 (안하면 코드 길이가 초큼)
 
-            _dialogUI.Show(_currentDialog.dialog[_currentDialogIndex].message, null);
+            _dialogUI.Show(dialog.message, null);
+
+            #region Callback
+            if(dialog.customCallbackID == -1) return;
+            
+            if(_customCallbackList.Count <= dialog.customCallbackID) {
+                Logger.Log("DialogManager > 요청한 customCallbackID:{dialog.customCallbackID} 를 찾을 수 없습니다.", LogLevel.Error);
+                return;
+            }
+
+            _customCallbackList[dialog.customCallbackID].Invoke();
+            #endregion // Callback
         }
 
         /// <summary>
