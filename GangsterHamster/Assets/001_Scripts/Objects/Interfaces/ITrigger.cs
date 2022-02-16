@@ -1,6 +1,6 @@
 using System;
 
-namespace Obejcts.Trigger
+namespace Objects.Trigger
 {
     /// <summary>
     /// 트리거 관리 용

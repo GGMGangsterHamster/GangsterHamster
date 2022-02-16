@@ -27,5 +27,6 @@ namespace Player
 
         public float speed = WalkingSpeed;
         public float mouseSpeed = 2.0f;
+        // public float currentHeight = 1.8f;
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 using Player.Status;
 using Commands.Movement;
 using Player.Utils;
+using Objects.Utils;
 
 namespace Player.Movement
 {
@@ -15,6 +16,7 @@ namespace Player.Movement
     public class PlayerMovement : MonoBehaviour, IMoveable, IJumpable, IMouseDeltaRecvable, ICrouchable
     {
         public Transform camTrm = null;
+        [SerializeField] private float _groundDistance;
 
         private Rigidbody rigid;
 
@@ -63,7 +65,7 @@ namespace Player.Movement
         public void Dash()
         {
             if(PlayerStatus.Instance.IsCrouching) {
-                Log.Debug.Log("웅크린 상태 중 Dash 명령.");
+                Logger.Log("웅크린 상태 중 Dash 명령.");
                 PlayerUtils.Instance.SetStanded();
             }
 
@@ -104,15 +106,15 @@ namespace Player.Movement
 
         public void Jump()
         {
-            if(!PlayerStatus.Instance.OnGround || !PlayerStatus.Instance.Jumpable) return;
+            if(!GroundChecker.Instance.CheckGround(this.transform, _groundDistance) || !PlayerStatus.Instance.Jumpable) return;
 
             if(PlayerStatus.Instance.IsCrouching) {
-                Log.Debug.Log("웅크린 상태 중 Jump 명령.");
+                Logger.Log("웅크린 상태 중 Jump 명령.");
                 PlayerUtils.Instance.SetStanded();
                 return;
             }
 
-            Log.Debug.Log("Have to fix PlayerMovement::Jump()", Log.LogLevel.Normal);
+            // Log.Debug.Log("Have to fix PlayerMovement::Jump()", Log.LogLevel.Normal);
             rigid.velocity = Vector3.zero;
 
             rigid.AddForce(transform.up * PlayerValues.JumpForce, ForceMode.Impulse);

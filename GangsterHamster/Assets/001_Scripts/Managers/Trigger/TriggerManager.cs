@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Obejcts.Trigger
+namespace Objects.Trigger
 {
     /// <summary>
     /// 트리거 관리 클래스
@@ -24,10 +24,11 @@ namespace Obejcts.Trigger
         {
             if(_triggerDictionary.ContainsValue(trigger))
             {
-                Log.Debug.Log("TriggerManager > Trigger 중복 등록. 의도된 것이라면 suppressDuplicateWarning 을 true 로 전달하세요.", Log.LogLevel.Warning);
+                Logger.Log("TriggerManager > Trigger 중복 등록. 의도된 것이라면 suppressDuplicateWarning 을 true 로 전달하세요.", LogLevel.Warning);
             }
 
             trigger.ID = _triggerDictionary.Count;
+            trigger.Activated = true;
 
             _triggerDictionary.Add(trigger.ID, trigger);
         }
@@ -41,6 +42,7 @@ namespace Obejcts.Trigger
             if(!TriggerAssigned(trigger.ID)) return;
 
             _triggerDictionary.Remove(trigger.ID);
+            trigger.Activated = false;
         }
         /// <summary>
         /// 트리거를 등록 해제합니다.
@@ -184,7 +186,7 @@ namespace Obejcts.Trigger
         {
             if(!_triggerDictionary.ContainsKey(id)) 
             {
-                Log.Debug.Log($"TriggerManager > 존재하지 않는 트리거 ID{id}", Log.LogLevel.Fatal);
+                Logger.Log($"TriggerManager > 존재하지 않는 트리거 ID{id}", LogLevel.Fatal);
                 return false;
             }
 

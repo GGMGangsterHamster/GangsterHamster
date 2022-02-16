@@ -12,7 +12,13 @@ public class FirstWeaponSkill : MonoBehaviour
     private Collider _myCol; // 무기의 Collider
     private Transform objsParent; // 무기에게 붙은 AtypeObj들의 부모 오브젝트
 
+    private Transform playerTrm; // 플레이어의 Trm
+
     private List<IInteractableObject> objList;
+
+    private Vector3 moveVec = Vector3.zero; // 지금 무기가 움직이고 있는 방향
+
+    private float comeBackTime = 0f; // 돌아올때 누적되는 시간
 
     private void Start()
     {
@@ -21,11 +27,8 @@ public class FirstWeaponSkill : MonoBehaviour
 
         objsParent = transform.GetChild(0);
         objList = new List<IInteractableObject>();
-    }
 
-    private void Update()
-    {
-
+        playerTrm = GameObject.Find("Player").transform;
     }
 
     /// <summary>
@@ -60,6 +63,8 @@ public class FirstWeaponSkill : MonoBehaviour
 
             transform.parent = rightHandTrm;
             transform.localPosition = Vector3.zero;
+
+            comeBackTime = 0f;
         }
     }
 
@@ -75,6 +80,7 @@ public class FirstWeaponSkill : MonoBehaviour
         if(transform.parent == null)
         {
             _myRigid.useGravity = false;
+            _myRigid.velocity = Vector2.zero;
 
             StopAllCoroutines();
 
@@ -101,16 +107,15 @@ public class FirstWeaponSkill : MonoBehaviour
 
         if (transform.parent == null)
         {
-            if(collision.transform.TryGetComponent(out IInteractableObject outII))
+            if (collision.transform.TryGetComponent(out IInteractableObject outII)) // 만약 TypeObj이라면
             {
                 StopAllCoroutines();
 
                 outII.Collision(objsParent.gameObject);
 
-                _myRigid.velocity = Vector3.zero;
-
-                if((outII as ObjectA) != null) // Type이 A일 경우
+                if ((outII as ObjectA) != null) // Type이 A일 경우 무기의 중력을 없애고 움직임을 얼린다
                 {
+                    _myRigid.velocity = Vector3.zero;
                     _myRigid.useGravity = false;
                     _myCol.isTrigger = true;
 
@@ -119,16 +124,17 @@ public class FirstWeaponSkill : MonoBehaviour
 
                     objList.Add(outII);
                 }
-                else if((outII as ObjectB) != null) // Type이 B일 경우
+                else if ((outII as ObjectB) != null) // Type이 B일 경우 붙어있던 모든 오브젝트를 떼어내고 중력을 활성화하며 움직임도 활성화 한다
                 {
                     ClearList();
 
+                    _myRigid.velocity = moveVec / shotSpeed;
                     _myRigid.useGravity = true;
                     transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 }
             }
-            else if(collision.transform.CompareTag("PLAYER_BASE"))
-            {
+            else if (collision.transform.CompareTag("PLAYER_BASE")) // 플레이어라면 오른손에 무기가 돌아오게 한다
+            { 
                 ComeBack(GameObject.Find("RightHand").transform);
             }
         }
@@ -150,7 +156,9 @@ public class FirstWeaponSkill : MonoBehaviour
 
         while(true)
         {
-            transform.position += dir * Time.deltaTime * shotSpeed;
+            moveVec = dir * shotSpeed;
+            
+            transform.position += moveVec * Time.deltaTime;
 
             yield return null;
         }
@@ -171,11 +179,16 @@ public class FirstWeaponSkill : MonoBehaviour
         bool isFollow = false;
         bool endFollowCheck = false;
 
+        Collider[] cols;
+
         while(true)
         {
-            if(!endFollowCheck)
+            comeBackTime += Time.deltaTime;
+            moveVec = dir * shotSpeed;
+
+            if (!endFollowCheck)
             {
-                if (Input.GetKey(KeyCode.Mouse1))
+                if (Input.GetKey(KeyCode.Mouse1)) // 1.5초동안 우클릭을 누르고 있다면 플레이어를 지속적으로 따라감
                 {
                     waitFollowTime -= Time.deltaTime;
 
@@ -185,7 +198,7 @@ public class FirstWeaponSkill : MonoBehaviour
                         endFollowCheck = true;
                     }
                 }
-                else
+                else if(Input.GetKeyUp(KeyCode.Mouse1)) // 중간에 우클릭을 떼어버리면 가던 방향으로 계속 간다
                 {
                     endFollowCheck = true;
                 }
@@ -198,8 +211,30 @@ public class FirstWeaponSkill : MonoBehaviour
 
             transform.position += dir * Time.deltaTime * shotSpeed;
 
-            if(Vector3.Distance(distTrm.position, transform.position) <= 1f)
+            cols = Physics.OverlapSphere(transform.position + dir * Time.deltaTime * shotSpeed, transform.localScale.x * 0.5f);
+
+            for (int i = 0; i < cols.Length; i++)
             {
+                if (cols[i].TryGetComponent(out IInteractableObject outII))
+                {
+                    if ((outII as ObjectB) != null) // Type이 B일 경우
+                    {
+                        comeBackTime = 0f;
+                        transform.position -= dir * Time.deltaTime * shotSpeed;
+                        yield break;
+                    }
+                }
+            }
+
+            if (Vector3.Distance(distTrm.position, transform.position) <= 0.5f) // 플레이어와 거리가 1 이하라면 오른손으로 돌아오게 한다
+            {
+                Debug.Log(objsParent.childCount);
+                if (objsParent.childCount > 0)
+                {
+                    playerTrm.GetComponent<Rigidbody>().velocity = moveVec * comeBackTime;
+                }
+
+                comeBackTime = 0f;
                 ComeBack(rightHandTrm);
                 yield break;
             }

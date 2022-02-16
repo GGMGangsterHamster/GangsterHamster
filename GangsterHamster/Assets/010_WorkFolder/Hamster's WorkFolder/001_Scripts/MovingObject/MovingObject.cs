@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Objects.Interactable;
 
-// Stop 함수
-// Start 함수
+// Stop ???
+// Start ???
 
 public class MovingObject : MonoBehaviour
 {
@@ -19,7 +19,7 @@ public class MovingObject : MonoBehaviour
 
     private void Awake()
     {
-        // 무조건 자신의 위치를 처음에 넣음
+        // ?????? ????? ????? ????? ????
         localDestinationList.Add(Vector3.zero);
 
         for (int i = localDestinationList.Count - 1; i > 0; i--)
@@ -29,7 +29,7 @@ public class MovingObject : MonoBehaviour
             localDestinationList[i - 1] = temp;
         }
 
-        // local을 global로 바꾸는 작업
+        // local?? global?? ???? ???
         globalDestination.Add(transform.position);
 
         for (int i = 1; i < localDestinationList.Count; i++)
@@ -42,7 +42,7 @@ public class MovingObject : MonoBehaviour
     {
         if(localDestinationList == null)
         {
-            Log.Debug.Log("MovingObject의 목적지가 없습니다!!", Log.LogLevel.Fatal);
+            Logger.Log("MovingObject?? ???????? ???????!!", LogLevel.Fatal);
         }
 
         if(playOnAwake)
@@ -52,7 +52,7 @@ public class MovingObject : MonoBehaviour
     }
 
     /// <summary>
-    /// 계속 반복해서 움직이는 함수
+    /// ??? ?????? ??????? ???
     /// </summary>
     public void StartRepeatMove()
     {
@@ -60,7 +60,7 @@ public class MovingObject : MonoBehaviour
         StartCoroutine(NextDestination(true));
     }
     /// <summary>
-    /// 한번만 왕복하고 멈추는 함수
+    /// ????? ?????? ????? ???
     /// </summary>
     public void StartOnceRepeatMove()
     {
@@ -68,9 +68,9 @@ public class MovingObject : MonoBehaviour
         StartCoroutine(NextDestination(false, true));
     }
     /// <summary>
-    /// 한번만 끝을 찍고 멈추는 함수
+    /// ????? ???? ??? ????? ???
     /// </summary>
-    /// <param name="dir"> 방향 - true는 앞으로 false는 뒤로 </param>
+    /// <param name="dir"> ???? - true?? ?????? false?? ??? </param>
     public void StartDontRepeatMove(bool dir)
     {
         StopAllCoroutines();
@@ -85,14 +85,14 @@ public class MovingObject : MonoBehaviour
         }
     }
     /// <summary>
-    /// 멈추는 함수
+    /// ????? ???
     /// </summary>
     public void Stop()
     {
         StopAllCoroutines();
     }
     /// <summary>
-    /// 처음 자리로 돌아오게 하는 함수
+    /// ??? ????? ??????? ??? ???
     /// </summary>
     public void Comeback()
     {
@@ -101,12 +101,12 @@ public class MovingObject : MonoBehaviour
     }
 
     /// <summary>
-    /// 다음 Destination으로 이동하는 코루틴
-    /// Destination에 도달하면 다음 목적지를 찾거나
-    /// 멈추는 일을 한다
+    /// ???? Destination???? ?????? ????
+    /// Destination?? ??????? ???? ???????? ????
+    /// ????? ???? ???
     /// </summary>
-    /// <param name="repeat"> True일 경우 계속 반복한다 </param>
-    /// <param name="onceRepeat"> True일 경우 한번만 반복한다 </param>
+    /// <param name="repeat"> True?? ??? ??? ?????? </param>
+    /// <param name="onceRepeat"> True?? ??? ????? ?????? </param>
     /// <returns></returns>
     IEnumerator NextDestination(bool repeat = true, bool onceRepeat = false)
     {
@@ -122,7 +122,7 @@ public class MovingObject : MonoBehaviour
                 colObjs[i].position += dir * Time.deltaTime * (dist / moveSpeed);
             }
 
-            // 목적지와 거리가 0.2이하로 될때까지 계속 반복해서 나아감
+            // ???????? ????? 0.2????? ??????? ??? ?????? ?????
             if (Vector3.Distance(transform.position, globalDestination[curdest]) <= 0.05f)
             {
                 transform.position = globalDestination[curdest];
@@ -148,19 +148,19 @@ public class MovingObject : MonoBehaviour
     }
 
     /// <summary>
-    /// 이전 Destination으로 이동하는 코루틴
-    /// Destination에 도달하면 그 다음의 목적지를 찾거나
-    /// 멈추는 등의 행동을 한다
+    /// ???? Destination???? ?????? ????
+    /// Destination?? ??????? ?? ?????? ???????? ????
+    /// ????? ???? ???? ???
     /// </summary>
-    /// <param name="repeat"> True일 경우 계속 반복 </param>
-    /// <param name="onceRepeat"> True일 경우 한번만 반복 </param>
+    /// <param name="repeat"> True?? ??? ??? ??? </param>
+    /// <param name="onceRepeat"> True?? ??? ????? ??? </param>
     /// <returns></returns>
     IEnumerator PrevDestination(bool repeat = true, bool onceRepeat = false)
     {
         Vector3 dir = (globalDestination[curdest] - transform.position).normalized;
         float dist = Vector3.Distance(transform.position, globalDestination[curdest]);
 
-        // 목적지와 거리가 0.2이하로 될때까지 계속 반복해서 나아감
+        // ???????? ????? 0.2????? ??????? ??? ?????? ?????
         while (true)
         {
             transform.position += dir * Time.deltaTime * (dist / moveSpeed);
