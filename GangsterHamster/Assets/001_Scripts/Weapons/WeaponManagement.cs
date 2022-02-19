@@ -16,14 +16,15 @@ namespace Commands.Weapon
         // out º¯¼ö
         private WeaponCommand outwc;
 
-        [SerializeField]
-        private FirstWeaponSkill _firstWeaponSkill;
+        [SerializeField] private FirstWeaponSkill _firstWeaponSkill;
+        [SerializeField] private SecondWeaponSkill _secondWeaponSkill;
 
         private void Awake()
         {
             curWeaponNumber = 1;
 
             _weaponDict.Add(1, new FirstWeapon(gameObject, _firstWeaponSkill));
+            _weaponDict.Add(2, new SecondWeapon(gameObject, _secondWeaponSkill));
         }
         public void MouseLeft()
         {
