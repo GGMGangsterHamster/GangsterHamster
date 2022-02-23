@@ -9,7 +9,7 @@ namespace Commands.Weapon
         /// <summary>
         /// 현재 어떤 무기를 들고 있나
         /// </summary>
-        private static int curWeaponNumber;
+        public static int curWeaponNumber;
 
         private Dictionary<int, WeaponCommand> _weaponDict = new Dictionary<int, WeaponCommand>();
 
@@ -21,7 +21,7 @@ namespace Commands.Weapon
 
         private void Awake()
         {
-            curWeaponNumber = 1;
+            curWeaponNumber = 2;
 
             _weaponDict.Add(1, new FirstWeapon(gameObject, _firstWeaponSkill));
             _weaponDict.Add(2, new SecondWeapon(gameObject, _secondWeaponSkill));

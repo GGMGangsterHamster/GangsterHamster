@@ -26,7 +26,7 @@ namespace Commands.Weapon
         /// </summary>
         public override void Left()
         {
-
+            _skill.Shot(_mainCamera.transform.forward);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Commands.Weapon
         /// </summary>
         public override void Right()
         {
-
+            _skill.ScaleUp();
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Commands.Weapon
         /// </summary>
         public override void Reset()
         {
-
+            _skill.ComeBack(_rightHandTrm);
         }
     }
 }
