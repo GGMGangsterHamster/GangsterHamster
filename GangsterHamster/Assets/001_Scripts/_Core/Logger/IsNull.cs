@@ -14,11 +14,8 @@ static class NULL
         #if UNITY_EDITOR
 
         if(obj == null) {
-            if(whenNullAction != null) {
-                whenNullAction();
-            } else {
-                Logger.Log($"Type: {obj.GetType()} is null.", LogLevel.Error);
-            }
+            Logger.Log($"Type: {obj.GetType()} is null.", LogLevel.Error);
+            whenNullAction?.Invoke();
         } else {
             whenNotNullAction?.Invoke();
         }
