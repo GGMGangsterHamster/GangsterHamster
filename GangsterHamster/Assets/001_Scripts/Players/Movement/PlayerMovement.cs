@@ -16,6 +16,8 @@ namespace Player.Movement
     public class PlayerMovement : MonoBehaviour, IMoveable, IJumpable, IMouseDeltaRecvable, ICrouchable
     {
         public Transform camTrm = null;
+        
+        [Header("바닥과 플레이어 거리")]
         [SerializeField] private float _groundDistance;
 
         private Rigidbody rigid;
@@ -44,22 +46,26 @@ namespace Player.Movement
 
         public void MoveFoward()
         {
-            Move(transform.forward);
+            if (!PlayerStatus.Instance.Moveable) return;
+            PlayerMoveDelta.Instance.AddYDelta(PlayerValues.Instance.speed);
         }
 
         public void MoveBackword()
         {
-            Move(-transform.forward);
+            if (!PlayerStatus.Instance.Moveable) return;
+            PlayerMoveDelta.Instance.AddYDelta(-PlayerValues.Instance.speed);
         }
 
         public void MoveLeft()
         {
-            Move(-transform.right);
+            if (!PlayerStatus.Instance.Moveable) return;
+            PlayerMoveDelta.Instance.AddXDelta(-PlayerValues.Instance.speed);
         }
 
         public void MoveRight()
         {
-            Move(transform.right);
+            if (!PlayerStatus.Instance.Moveable) return;
+            PlayerMoveDelta.Instance.AddXDelta(PlayerValues.Instance.speed);
         }
 
         public void Dash()
@@ -73,14 +79,13 @@ namespace Player.Movement
             PlayerValues.Instance.speed = PlayerStatus.Instance.IsRunning ? PlayerValues.DashSpeed : PlayerValues.WalkingSpeed;
         }
 
-        private void Move(Vector3 dir)
-        {
-            if(!PlayerStatus.Instance.Moveable) return;
-
-            // Space.World 추가하는 거 수정함!
-            transform.Translate(dir * PlayerValues.Instance.speed * Time.deltaTime, Space.World);
-            OnMove(dir);
-        }
+        // private void Move(Vector3 dir)
+        // {
+        // if(!PlayerStatus.Instance.Moveable) return;
+        //     // Space.World 추가하는 거 수정함!
+        //     transform.Translate(dir * PlayerValues.Instance.speed * Time.deltaTime, Space.World);
+        //     OnMove(dir);
+        // }
 
         #endregion // Movement
 
