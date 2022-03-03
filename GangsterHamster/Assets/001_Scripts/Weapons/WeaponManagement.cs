@@ -21,7 +21,7 @@ namespace Commands.Weapon
 
         private void Awake()
         {
-            curWeaponNumber = 2;
+            curWeaponNumber = 1;
 
             _weaponDict.Add(1, new FirstWeapon(gameObject, _firstWeaponSkill));
             _weaponDict.Add(2, new SecondWeapon(gameObject, _secondWeaponSkill));
