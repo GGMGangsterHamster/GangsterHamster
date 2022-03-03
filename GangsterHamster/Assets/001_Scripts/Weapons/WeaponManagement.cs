@@ -9,21 +9,22 @@ namespace Commands.Weapon
         /// <summary>
         /// 현재 어떤 무기를 들고 있나
         /// </summary>
-        private static int curWeaponNumber;
+        public static int curWeaponNumber;
 
         private Dictionary<int, WeaponCommand> _weaponDict = new Dictionary<int, WeaponCommand>();
 
         // out 변수
         private WeaponCommand outwc;
 
-        [SerializeField]
-        private FirstWeaponSkill _firstWeaponSkill;
+        [SerializeField] private FirstWeaponSkill _firstWeaponSkill;
+        [SerializeField] private SecondWeaponSkill _secondWeaponSkill;
 
         private void Awake()
         {
             curWeaponNumber = 1;
 
             _weaponDict.Add(1, new FirstWeapon(gameObject, _firstWeaponSkill));
+            _weaponDict.Add(2, new SecondWeapon(gameObject, _secondWeaponSkill));
         }
         public void MouseLeft()
         {

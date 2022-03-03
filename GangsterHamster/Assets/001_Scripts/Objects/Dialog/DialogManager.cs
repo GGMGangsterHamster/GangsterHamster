@@ -30,8 +30,6 @@ using Objects.UI.Dialog.VO;
 }
 */
 
-
-
 namespace Objects.UI.Dialog
 {
     public class DialogManager : MonoSingleton<DialogManager>

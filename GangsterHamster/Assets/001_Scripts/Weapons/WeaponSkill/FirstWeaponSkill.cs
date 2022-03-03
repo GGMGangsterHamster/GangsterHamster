@@ -14,7 +14,7 @@ public class FirstWeaponSkill : MonoBehaviour
 
     private Transform playerTrm; // 플레이어의 Trm
 
-    private List<IInteractableObject> objList;
+    private List<IInteractableObject> objList; // 무기에 붙어있는 오브젝트들을 모아놓은 리스트
 
     private Vector3 moveVec = Vector3.zero; // 지금 무기가 움직이고 있는 방향
 
