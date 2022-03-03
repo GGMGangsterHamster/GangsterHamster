@@ -6,13 +6,16 @@ using UnityEngine;
 namespace Objects.Init
 {
 
-    public class ExampleOpenRCInitScript : IInitBase
+    public class ExampleOpenRCInitScript : InitBase
     {
+        public override string Name => "Example OpenRC Script";
+        public override RunLevel RunLevel => RunLevel.OnGameStart;
+
         /// <summary>
         /// 의존성 해결<br/>
         /// 지정된 시작 호출 전 호출됨
         /// </summary>
-        public void Depend(MonoBehaviour mono)
+        public override void Depend(MonoBehaviour mono)
         {
 
         }
@@ -20,7 +23,7 @@ namespace Objects.Init
         /// <summary>
         /// 지정된 RunLevel 에 호출
         /// </summary>
-        public void Call(object param)
+        public override void Call(object param)
         {
             
         }
@@ -28,7 +31,7 @@ namespace Objects.Init
         /// <summary>
         /// 종료 시 호출
         /// </summary>
-        public void Stop()
+        public override void Stop()
         {
             
         }

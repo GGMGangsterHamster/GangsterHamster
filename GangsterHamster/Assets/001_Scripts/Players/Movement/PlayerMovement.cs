@@ -15,11 +15,12 @@ namespace Player.Movement
     [RequireComponent(typeof(Rigidbody))]
     public class PlayerMovement : MonoBehaviour, IMoveable, IJumpable, IMouseDeltaRecvable, ICrouchable
     {
-        public Transform camTrm = null;
         
         [Header("바닥과 플레이어 거리")]
         [SerializeField] private float _groundDistance;
 
+
+        private Transform camTrm = null;
         private Rigidbody rigid;
 
         /// <summary>
@@ -78,14 +79,6 @@ namespace Player.Movement
             PlayerStatus.Instance.IsRunning = !PlayerStatus.Instance.IsRunning;
             PlayerValues.Instance.speed = PlayerStatus.Instance.IsRunning ? PlayerValues.DashSpeed : PlayerValues.WalkingSpeed;
         }
-
-        // private void Move(Vector3 dir)
-        // {
-        // if(!PlayerStatus.Instance.Moveable) return;
-        //     // Space.World 추가하는 거 수정함!
-        //     transform.Translate(dir * PlayerValues.Instance.speed * Time.deltaTime, Space.World);
-        //     OnMove(dir);
-        // }
 
         #endregion // Movement
 
