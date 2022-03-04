@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Objects.Interactable;
 
-public class FirstWeaponSkill : MonoBehaviour
+public class FirstWeaponSkill : WeaponSkill
 {
     [SerializeField]
     private float shotSpeed = 5;
@@ -79,6 +79,22 @@ public class FirstWeaponSkill : MonoBehaviour
     {
         if(transform.parent == null)
         {
+            Collider[] cols;
+            Vector3 dir = (distTrm.position - transform.position).normalized;
+
+            cols = Physics.OverlapSphere(transform.position + dir * Time.deltaTime * shotSpeed, transform.localScale.x * 0.5f);
+
+            for (int i = 0; i < cols.Length; i++)
+            {
+                if (cols[i].TryGetComponent(out IInteractableObject outII))
+                {
+                    if ((outII as ObjectB) != null) // Type이 B일 경우
+                    {
+                        return;
+                    }
+                }
+            }
+
             _myRigid.useGravity = false;
             _myRigid.velocity = Vector2.zero;
 
@@ -179,8 +195,6 @@ public class FirstWeaponSkill : MonoBehaviour
         bool isFollow = false;
         bool endFollowCheck = false;
 
-        Collider[] cols;
-
         while(true)
         {
             comeBackTime += Time.deltaTime;
@@ -211,29 +225,14 @@ public class FirstWeaponSkill : MonoBehaviour
 
             transform.position += dir * Time.deltaTime * shotSpeed;
 
-            cols = Physics.OverlapSphere(transform.position + dir * Time.deltaTime * shotSpeed, transform.localScale.x * 0.5f);
-
-            for (int i = 0; i < cols.Length; i++)
-            {
-                if (cols[i].TryGetComponent(out IInteractableObject outII))
-                {
-                    if ((outII as ObjectB) != null) // Type이 B일 경우
-                    {
-                        comeBackTime = 0f;
-                        transform.position -= dir * Time.deltaTime * shotSpeed;
-                        yield break;
-                    }
-                }
-            }
-
-            if (Vector3.Distance(distTrm.position, transform.position) <= 0.5f) // 플레이어와 거리가 1 이하라면 오른손으로 돌아오게 한다
+            if (Vector3.Distance(distTrm.position, transform.position) <= 1f) // 플레이어와 거리가 1 이하라면 오른손으로 돌아오게 한다
             {
                 Debug.Log(objsParent.childCount);
                 if (objsParent.childCount > 0)
                 {
                     playerTrm.GetComponent<Rigidbody>().velocity = moveVec * comeBackTime;
                 }
-
+                
                 comeBackTime = 0f;
                 ComeBack(rightHandTrm);
                 yield break;

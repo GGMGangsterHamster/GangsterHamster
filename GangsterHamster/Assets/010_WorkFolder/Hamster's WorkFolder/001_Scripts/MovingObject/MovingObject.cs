@@ -6,7 +6,7 @@ using Objects.Interactable;
 // Stop ???
 // Start ???
 
-public class MovingObject : MonoBehaviour
+public class MovingObject : MonoBehaviour, IActivateObject
 {
     public List<Vector3> localDestinationList = new List<Vector3>();
     public float moveSpeed = 2f;
@@ -51,55 +51,19 @@ public class MovingObject : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// ??? ?????? ??????? ???
-    /// </summary>
-    public void StartRepeatMove()
-    {
-        StopAllCoroutines();
-        StartCoroutine(NextDestination(true));
-    }
-    /// <summary>
-    /// ????? ?????? ????? ???
-    /// </summary>
-    public void StartOnceRepeatMove()
-    {
-        StopAllCoroutines();
-        StartCoroutine(NextDestination(false, true));
-    }
-    /// <summary>
-    /// ????? ???? ??? ????? ???
-    /// </summary>
-    /// <param name="dir"> ???? - true?? ?????? false?? ??? </param>
-    public void StartDontRepeatMove(bool dir)
+    public void On()
     {
         StopAllCoroutines();
 
-        if (dir)
-        {
-            StartCoroutine(NextDestination(false));
-        }
-        else
-        {
-            StartCoroutine(PrevDestination(false));
-        }
-    }
-    /// <summary>
-    /// ????? ???
-    /// </summary>
-    public void Stop()
-    {
-        StopAllCoroutines();
-    }
-    /// <summary>
-    /// ??? ????? ??????? ??? ???
-    /// </summary>
-    public void Comeback()
-    {
-        StopAllCoroutines();
-        PrevDestination(false);
+        StartCoroutine(NextDestination(false));
     }
 
+    public void Off()
+    {
+        StopAllCoroutines();
+
+        StartCoroutine(PrevDestination(false));
+    }
     /// <summary>
     /// ???? Destination???? ?????? ????
     /// Destination?? ??????? ???? ???????? ????

@@ -24,7 +24,7 @@ namespace Commands.Weapon
 
         private void Awake()
         {
-            curWeaponNumber = -1;
+            curWeaponNumber = 1;
 
             _weaponDict.Add(1, new FirstWeapon(gameObject, _firstWeaponSkill));
             _weaponDict.Add(2, new SecondWeapon(gameObject, _secondWeaponSkill));
@@ -72,8 +72,6 @@ namespace Commands.Weapon
                     }
                 }
             }
-
-            Debug.Log(curWeaponNumber);
         }
 
         public void MouseLeft()

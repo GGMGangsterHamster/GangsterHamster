@@ -9,7 +9,7 @@ namespace Objects.Interactable
 {
     public class OnOffButton : MonoBehaviour, IInteractableObject
     {
-        public List<MovingObject> mObjList = new List<MovingObject>(); // On Off 할때 반응해야하는 오브젝트 리스트
+        public List<GameObject> mObjList = new List<GameObject>(); // On Off 할때 반응해야하는 오브젝트 리스트
         public Transform[] _uiPositions = new Transform[1];
 
         public Color OnColor;
@@ -56,12 +56,12 @@ namespace Objects.Interactable
 
         public virtual void On()
         {
-            mObjList.ForEach(x => x.StartDontRepeatMove(true));
+            mObjList.ForEach(x => x.GetComponent<IActivateObject>().On());
         }
 
         public virtual void Off()
         {
-            mObjList.ForEach(x => x.StartDontRepeatMove(false));
+            mObjList.ForEach(x => x.GetComponent<IActivateObject>().Off());
         }
 
         private void NextStatus()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SecondWeaponSkill : MonoBehaviour
+public class SecondWeaponSkill : WeaponSkill
 {
     enum ScaleEnum
     {
