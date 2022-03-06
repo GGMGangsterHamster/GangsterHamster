@@ -12,8 +12,8 @@ namespace Player.Movement
 
     public class PlayerInputHandler : MonoSingleton<PlayerInputHandler>
     {
-        private Dictionary<KeyCode, Command> _keydownInputDictionary = new Dictionary<KeyCode, Command>(); // 키 다운 입력
-        private Dictionary<KeyCode, Command> _movementInputDictionary = new Dictionary<KeyCode, Command>(); // 이동 키 입력 (FixedUpdate)
+        private Dictionary<KeyCode, Command> _keydownInputDictionary = new Dictionary<KeyCode, Command>(); // 키 다운
+        private Dictionary<KeyCode, Command> _movementInputDictionary = new Dictionary<KeyCode, Command>(); // 이동 키 (FixedUpdate)
 
         private PlayerMovement _playerMove = null;
         private WeaponManagement _weapon = null;
@@ -42,28 +42,28 @@ namespace Player.Movement
             NULL.Check(_weapon, () => {
                 this.enabled = false;
             });
-            #region GetKey();
-            _movementInputDictionary.Add(KeyCode.W, new MoveFoward(_playerMove));
-            _movementInputDictionary.Add(KeyCode.S, new MoveBackword(_playerMove));
-            _movementInputDictionary.Add(KeyCode.A, new MoveLeft(_playerMove));
-            _movementInputDictionary.Add(KeyCode.D, new MoveRight(_playerMove));
-            #endregion // GetKey();
+            #region 이동
+            _movementInputDictionary.Add(KeyCode.W, new MoveFoward(_playerMove));   // 앞쪽
+            _movementInputDictionary.Add(KeyCode.S, new MoveBackword(_playerMove)); // 뒤쪽
+            _movementInputDictionary.Add(KeyCode.A, new MoveLeft(_playerMove));     // 옆쪽
+            _movementInputDictionary.Add(KeyCode.D, new MoveRight(_playerMove));    // 오른쪽
+            #endregion // 이동
 
             #region GetKeyDown();
-            _keydownInputDictionary.Add(KeyCode.Space, new Jump(_playerMove));
-            _keydownInputDictionary.Add(KeyCode.LeftControl, new Crouch(_playerMove));
-            _keydownInputDictionary.Add(KeyCode.Mouse0, new MouseLeft(_weapon));
-            _keydownInputDictionary.Add(KeyCode.Mouse1, new MouseRight(_weapon));
-            _keydownInputDictionary.Add(KeyCode.R, new ResetKey(_weapon));
+            _keydownInputDictionary.Add(KeyCode.Space, new Jump(_playerMove));          // 점프
+            _keydownInputDictionary.Add(KeyCode.LeftControl, new Crouch(_playerMove));  // 웅크리기
+            _keydownInputDictionary.Add(KeyCode.Mouse0, new MouseLeft(_weapon));        // 마우스 왼쪽
+            _keydownInputDictionary.Add(KeyCode.Mouse1, new MouseRight(_weapon));       // 마우스 오른쪽
+            _keydownInputDictionary.Add(KeyCode.R, new ResetKey(_weapon));              // 무기 리셋
 
-            _keydownInputDictionary.Add(KeyCode.E, new Interact());
-            _keydownInputDictionary.Add(KeyCode.Return, new NextDialog());
+            _keydownInputDictionary.Add(KeyCode.E, new Interact());         // 상호작용
+            _keydownInputDictionary.Add(KeyCode.Return, new NextDialog());  // 다음 다이얼로그
             #endregion // GetKeyDown();
 
             #region Special inputs
-            _mouseX = new MouseX(_playerMove);
-            _mouseY = new MouseY(_playerMove);
-            _dash = new Dash(_playerMove);
+            _mouseX = new MouseX(_playerMove);  // 마우스 X
+            _mouseY = new MouseY(_playerMove);  // 마우스 Y
+            _dash = new Dash(_playerMove);      // 대쉬 (Shift)
             #endregion // Special inputs
         }
 
@@ -97,9 +97,6 @@ namespace Player.Movement
             dir.y = 0;
             GameManager.Instance.player.transform.Translate(dir * Time.deltaTime);
             #endregion // Move
-
-
-
 
             _mouseX.Execute();
             _mouseY.Execute();

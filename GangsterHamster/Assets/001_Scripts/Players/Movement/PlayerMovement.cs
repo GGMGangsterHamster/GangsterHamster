@@ -114,10 +114,8 @@ namespace Player.Movement
             }
 
             // Log.Debug.Log("Have to fix PlayerMovement::Jump()", Log.LogLevel.Normal);
-            rigid.velocity = new Vector3(0, 
-                                         Mathf.Sqrt(Mathf.Abs(-2.0f * GravityManager.Instance.GetGlobalGravityForce() * PlayerValues.JumpHeight)), 
-                                         0);
-            
+            rigid.velocity = new Vector3(0, Mathf.Sqrt(2.0f * 9.8f * PlayerValues.JumpHeight), 0);
+
         }
 
         public void OnGround()
