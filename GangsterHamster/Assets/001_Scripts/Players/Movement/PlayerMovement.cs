@@ -6,6 +6,7 @@ using Player.Status;
 using Commands.Movement;
 using Player.Utils;
 using Objects.Utils;
+using Gravity.Object.Management;
 
 namespace Player.Movement
 {
@@ -113,9 +114,10 @@ namespace Player.Movement
             }
 
             // Log.Debug.Log("Have to fix PlayerMovement::Jump()", Log.LogLevel.Normal);
-            rigid.velocity = Vector3.zero;
-
-            rigid.AddForce(transform.up * PlayerValues.JumpForce, ForceMode.Impulse);
+            rigid.velocity = new Vector3(0, 
+                                         Mathf.Sqrt(Mathf.Abs(-2.0f * GravityManager.Instance.GetGlobalGravityForce() * PlayerValues.JumpHeight)), 
+                                         0);
+            
         }
 
         public void OnGround()

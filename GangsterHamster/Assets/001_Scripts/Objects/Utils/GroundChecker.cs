@@ -21,7 +21,6 @@ namespace Objects.Utils
             // }
 
             _targetLayer = LayerMask.GetMask(GROUND);
-            Debug.Log(_targetLayer);
         }
 
         // private void Update()

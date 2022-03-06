@@ -28,11 +28,13 @@ namespace OpenRC
 
             FindAndExecute(RunLevel.OnGameStart);
 
-            SceneManager.sceneLoaded += (scene, mode) => {
+            SceneManager.sceneLoaded += (scene, mode) =>
+            {
                 FindAndExecute(RunLevel.OnSceneLoad, scene.name);
             }; // SceneManager.sceneLoaded
 
-            SceneManager.sceneUnloaded += (scene) => {
+            SceneManager.sceneUnloaded += (scene) =>
+            {
                 FindAndExecute(RunLevel.OnSceneUnLoad, scene.name);
             }; // SceneManager.sceneUnloaded
         }
@@ -41,7 +43,8 @@ namespace OpenRC
         {
             FindAndExecute(RunLevel.OnGameExit);
 
-            initScripts.ForEach(x => {
+            initScripts.ForEach(x =>
+            {
                 x.Stop();
             });
         }
@@ -53,8 +56,9 @@ namespace OpenRC
         {
             var list = initScripts.FindAll(e => e.RunLevel == runLevel);
             int i = list.Count;
-            
-            while(--i >= 0) {
+
+            while (--i >= 0)
+            {
                 list[i].Depend(this);
                 list[i].Call(argument);
             }
@@ -65,7 +69,8 @@ namespace OpenRC
         /// </summary>
         public int Add(InitBase initScript)
         {
-            if(initScripts.Contains(initScript)) {
+            if (initScripts.Contains(initScript))
+            {
                 Logger.Log($"OpenRC > {initScript.Name} is already added to RunLevel {initScripts.Find(x => x == initScript).RunLevel}", LogLevel.Error);
                 return 1;
             }
@@ -80,7 +85,8 @@ namespace OpenRC
         /// </summary>
         public int Del(InitBase initScript)
         {
-            if (!initScripts.Contains(initScript)) {
+            if (!initScripts.Contains(initScript))
+            {
                 Logger.Log($"OpenRC > Cannot find {initScript.Name} at Runlevel {initScript.RunLevel}", LogLevel.Error);
                 return 1;
             }
