@@ -247,7 +247,7 @@ public class FirstWeaponSkill : WeaponSkill
     /// </summary>
     private void ClearList()
     {
-        foreach(IInteractableObject obj in objList)
+        foreach(Interactable obj in objList)
         {
             obj.Release();
         }
