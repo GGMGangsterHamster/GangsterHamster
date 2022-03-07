@@ -11,11 +11,6 @@ public class NormalObjA : ObjectA
         callback?.Invoke();
     }
 
-    public override void Initialize(Action callback = null)
-    {
-        base.Initialize(callback);
-    }
-
     public override void Release()
     {
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;

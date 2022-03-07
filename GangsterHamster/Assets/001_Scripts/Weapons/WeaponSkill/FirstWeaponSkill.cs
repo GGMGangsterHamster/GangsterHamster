@@ -14,7 +14,7 @@ public class FirstWeaponSkill : WeaponSkill
 
     private Transform playerTrm; // 플레이어의 Trm
 
-    private List<IInteractableObject> objList; // 무기에 붙어있는 오브젝트들을 모아놓은 리스트
+    private List<Interactable> objList; // 무기에 붙어있는 오브젝트들을 모아놓은 리스트
 
     private Vector3 moveVec = Vector3.zero; // 지금 무기가 움직이고 있는 방향
 
@@ -26,7 +26,7 @@ public class FirstWeaponSkill : WeaponSkill
         _myCol = GetComponent<Collider>();
 
         objsParent = transform.GetChild(0);
-        objList = new List<IInteractableObject>();
+        objList = new List<Interactable>();
 
         playerTrm = GameObject.Find("Player").transform;
     }
@@ -123,7 +123,7 @@ public class FirstWeaponSkill : WeaponSkill
 
         if (transform.parent == null)
         {
-            if (collision.transform.TryGetComponent(out IInteractableObject outII)) // 만약 TypeObj이라면
+            if (collision.transform.TryGetComponent(out Interactable outII)) // 만약 TypeObj이라면
             {
                 StopAllCoroutines();
 

@@ -12,10 +12,17 @@ namespace OpenRC
         [Header("   ## Execution order not guaranteed ##", order = 2)]
         public List<InitBase> initScripts = new List<InitBase>();
 
+        // private List<GameObject> dummyInstanceList = new List<GameObject>(); // 초기화 스크립트 용
+
 
         private void Awake()
         {
             DontDestroyOnLoad(this.gameObject);
+
+            // Object obj = Resources.Load("_InitScripts/Camera/AttachCameraToPlayer");
+
+
+
 
             // InitBase a = Resources.Load<InitBase>("_InitScripts/Camera/AttachCameraToPlayer");
             // Debug.Log(a == null);

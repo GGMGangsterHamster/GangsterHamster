@@ -5,24 +5,19 @@ using UnityEngine;
 
 namespace Objects.Interactable
 {
-    public class ObjectB : MonoBehaviour, IInteractableObject
+    public class ObjectB : Interactable
     {
-        public void Collision(GameObject collision, Action callback = null)
+        public override void Collision(GameObject collision, Action callback = null)
         {
             callback?.Invoke();
         }
 
-        public virtual void Initialize(Action callback = null)
-        {
-            callback?.Invoke();
-        }
-
-        public virtual void Release()
+        public override void Release()
         {
 
         }
 
-        public virtual void Interact(Action callback = null)
+        public override void Interact(Action callback = null)
         {
             callback?.Invoke();
         }

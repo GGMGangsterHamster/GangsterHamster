@@ -11,11 +11,6 @@ public class NormalObjB : ObjectB
         callback?.Invoke();
     }
 
-    public override void Initialize(Action callback = null)
-    {
-
-    }
-
     public override void Release()
     {
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;

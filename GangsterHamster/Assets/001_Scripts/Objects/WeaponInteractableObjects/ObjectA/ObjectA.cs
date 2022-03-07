@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace Objects.Interactable
 {
-    public class ObjectA : MonoBehaviour, IInteractableObject
+    public class ObjectA : Interactable
     {
-        public void Collision(GameObject collision, Action callback = null)
+        public override void Collision(GameObject collision, Action callback = null)
         {
             if(collision.CompareTag("WEAPON")) {
                 transform.SetParent(collision.transform);
@@ -18,17 +18,13 @@ namespace Objects.Interactable
 
             callback?.Invoke();
         }
-        public virtual void Initialize(Action callback = null)
-        {
-            callback?.Invoke();
-        }
 
-        public virtual void Release()
+        public override void Release()
         {
 
         }
 
-        public virtual void Interact(Action callback = null)
+        public override void Interact(Action callback = null)
         {
             
 

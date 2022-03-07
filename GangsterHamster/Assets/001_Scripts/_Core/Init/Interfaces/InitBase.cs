@@ -1,10 +1,10 @@
 using System;
-using System.Collections.Generic;
+using UnityEngine;
 
 namespace OpenRC
 {
     [Serializable]
-    abstract public class InitBase : UnityEngine.Component
+    abstract public class InitBase : MonoBehaviour
     {
         abstract public string Name { get; }
         abstract public RunLevel RunLevel { get; }
@@ -13,7 +13,7 @@ namespace OpenRC
         /// 의존성 해결<br/>
         /// 지정된 시작 호출 전 호출됨
         /// </summary>
-        abstract public void Depend(UnityEngine.MonoBehaviour mono);
+        abstract public void Depend(MonoBehaviour mono);
 
         /// <summary>
         /// 지정된 RunLevel 에 호출

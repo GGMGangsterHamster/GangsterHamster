@@ -2,21 +2,17 @@ namespace Player
 {
     public class PlayerValues : Singleton<PlayerValues>, ISingletonObject
     {
-        // public const float WalkingSpeed = 1.3f;
-        // public const float DashSpeed = 2.0f;
-        // public const float CrouchSpeed = 0.8f;
+        #region 속도
         public const float WalkingSpeed = 2.2f;
         public const float DashSpeed = 5.0f;
         public const float CrouchSpeed = 1.2f;
+        #endregion // 속도
 
+        #region 높이 (길이)
         public const float PlayerHeight = 1.8f;
         public const float PlayerCrouchHeight = 1.0f;
 
         public const float JumpHeight = 0.7f;
-        public const float InteractionMaxDistance = 1.0f;
-
-
-        #region 미리 탐구한 플레이어 변수들
 
         public const float PlayerYPos = 0.9f;
         public const float PlayerYScale = 1.8f;
@@ -26,8 +22,11 @@ namespace Player
 
         #endregion
 
+
+        public const float InteractionMaxDistance = 1.0f;
+
+        
         public float speed = WalkingSpeed;
         public float mouseSpeed = 2.0f;
-        // public float currentHeight = 1.8f;
     }
 }
