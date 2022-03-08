@@ -100,26 +100,18 @@ namespace Objects.Interactable
             }
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("PLAYER_BASE"))
-            {
-                FloatingUIManager.Instance.KeyHelper(KeyCode.E, "를 눌러 버튼을 활성화 시키세요.", GameManager.Instance.FindClosestPosition(_uiPositions));
-                InteractionManager.Instance.SetInteraction(this);
-            }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.CompareTag("PLAYER_BASE"))
-            {
-                FloatingUIManager.Instance.DisableUI();
-                InteractionManager.Instance.UnSetInteraction(this);
-            }
-        }
-
         public override void Interact(Action callback = null) { }
         public override void Release() => Click();
         public override void Collision(GameObject collision, Action callback = null) { }
+
+        public override void Focus(Action callback = null)
+        {
+            FloatingUIManager.Instance.KeyHelper(KeyCode.E, "를 눌러 버튼을 활성화 시키세요.", GameManager.Instance.FindClosestPosition(_uiPositions));
+        }
+
+        public override void DeFocus(Action callback = null)
+        {
+            FloatingUIManager.Instance.DisableUI();
+        }
     }
 }

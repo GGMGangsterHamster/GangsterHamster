@@ -22,5 +22,7 @@ namespace Objects.Interactable
             callback?.Invoke();
         }
 
+        public override void Focus(Action callback = null) { }
+        public override void DeFocus(Action callback = null) { }
     }
 }

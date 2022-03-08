@@ -29,6 +29,14 @@ namespace Objects.Interactable.Management
         }
 
         /// <summary>
+        /// 상호작용 불가능한 상태로 변경합니다.
+        /// </summary>
+        public void ClearInteraction()
+        {
+            CurrentActiveInteraction = null;
+        }
+
+        /// <summary>
         /// 상호작용 합니다.
         /// </summary>
         public void Interact()

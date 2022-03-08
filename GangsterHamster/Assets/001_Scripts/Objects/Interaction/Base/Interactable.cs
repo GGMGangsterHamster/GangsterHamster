@@ -15,6 +15,16 @@ namespace Objects.Interactable
         abstract public void Interact(Action callback = null);
 
         /// <summary>
+        /// 포커스 상태일 때
+        /// </summary>
+        abstract public void Focus(Action callback = null);
+
+        /// <summary>
+        /// 포커스 상태 벗어날 때
+        /// </summary>
+        abstract public void DeFocus(Action callback = null);
+
+        /// <summary>
         /// 사용하고 난 후 호출해야함
         /// </summary>
         abstract public void Release();

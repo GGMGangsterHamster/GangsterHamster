@@ -29,33 +29,21 @@ namespace Objects.Interactable
             callback?.Invoke();
         }
 
-        public override void Release() // 문을 닫음
+         public override void Release() // 문을 닫음
         {
             _doorObject.SetActive(true);
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("PLAYER_BASE")) {
-                FloatingUIManager.Instance.KeyHelper(KeyCode.E, "를 눌러 문을 여세요.", GameManager.Instance.FindClosestPosition(_uiPositions));
-                InteractionManager.Instance.SetInteraction(this);
-            }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.CompareTag("PLAYER_BASE")) {
-                FloatingUIManager.Instance.DisableUI();
-                InteractionManager.Instance.UnSetInteraction(this);
-            }
-        }
-
-        private void Open()
-        {
-            Interact();
-        }
-
-        public void Initialize(Action callback = null) { }
         public override void Collision(GameObject collision, Action callback = null) { }
+
+        public override void Focus(Action callback = null)
+        {
+            FloatingUIManager.Instance.DisableUI();
+        }
+
+        public override void DeFocus(Action callback = null)
+        {
+            FloatingUIManager.Instance.KeyHelper(KeyCode.E, "를 눌러 문을 여세요.", GameManager.Instance.FindClosestPosition(_uiPositions));
+        }
     }
 }
