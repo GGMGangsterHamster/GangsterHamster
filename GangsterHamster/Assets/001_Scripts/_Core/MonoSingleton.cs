@@ -1,5 +1,5 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 abstract public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
@@ -15,7 +15,7 @@ abstract public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
                         Logger.Log($"{_instance.GetType()} Found more than one.", LogLevel.Error);
                     }
                 } else {
-                    Logger.Log($"{_instance.GetType()} Does not exist.", LogLevel.Fatal);
+                    Logger.Log($"FIXME: \"NAME\" Does not exist.", LogLevel.Fatal);
                 }
 
             }
