@@ -40,9 +40,14 @@ public class FirstWeaponSkill : WeaponSkill
     {
         if(transform.parent != null)
         {
-            StartCoroutine(ShotCo(dir));
+            if(lastFireTime + delay <= Time.time) {
+                StartCoroutine(ShotCo(dir));
+                lastFireTime = Time.time;
+            }
         }
     }
+    float lastFireTime = float.MinValue;
+    public float delay = 0.5f;
 
     /// <summary>
     /// 2번 항목에 대한 함수
