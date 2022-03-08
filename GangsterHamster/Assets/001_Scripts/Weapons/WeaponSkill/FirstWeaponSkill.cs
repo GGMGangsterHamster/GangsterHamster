@@ -40,7 +40,17 @@ public class FirstWeaponSkill : WeaponSkill
     {
         if(transform.parent != null)
         {
-            if(lastFireTime + delay <= Time.time) {
+            if (lastFireTime + delay <= Time.time) {
+                Collider[] cols = Physics.OverlapBox(playerTrm.position + (playerTrm.forward / 2), playerTrm.GetComponent<BoxCollider>().size + new Vector3(0, 0, 0.3f), playerTrm.rotation); // 플레이어의 바로 앞을 검사해서 뭔가 있는지 확인
+
+                for (int i = 0; i < cols.Length; i++)
+                {
+                    if (cols[i].TryGetComponent(out Interactable outII)) // 만약 상호작용 되는 오브젝트가 앞에 있었으면 리턴
+                    {
+                        return;
+                    }
+                }
+
                 StartCoroutine(ShotCo(dir));
                 lastFireTime = Time.time;
             }
@@ -87,11 +97,11 @@ public class FirstWeaponSkill : WeaponSkill
             Collider[] cols;
             Vector3 dir = (distTrm.position - transform.position).normalized;
 
-            cols = Physics.OverlapSphere(transform.position + dir * Time.deltaTime * shotSpeed, transform.localScale.x * 0.5f);
+            cols = Physics.OverlapSphere(transform.position + dir * Time.deltaTime * shotSpeed, transform.localScale.x * 0.45f);
 
             for (int i = 0; i < cols.Length; i++)
             {
-                if (cols[i].TryGetComponent(out IInteractableObject outII))
+                if (cols[i].TryGetComponent(out Interactable outII))
                 {
                     if ((outII as ObjectB) != null) // Type이 B일 경우
                     {

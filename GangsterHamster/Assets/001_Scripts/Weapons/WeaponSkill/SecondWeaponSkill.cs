@@ -64,7 +64,7 @@ public class SecondWeaponSkill : WeaponSkill
     /// <param name="rightHandTrm"> 플레이어 오른손의 위치를 받아오기 위한 Trm </param>
     public void ComeBack(Transform rightHandTrm)
     {
-        if(curScaleEnum == ScaleEnum.LevelOne && isEnd)
+        if(isEnd)
         {
             if (transform.parent == null)
             {
@@ -75,6 +75,8 @@ public class SecondWeaponSkill : WeaponSkill
 
                 transform.parent = rightHandTrm;
                 transform.localPosition = Vector3.zero;
+
+                curScaleEnum = ScaleEnum.LevelOne;
 
                 isEnd = true;
             }
