@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using Commands.Weapon;
 
 public class SecondWeaponSkill : WeaponSkill
 {
@@ -20,6 +21,8 @@ public class SecondWeaponSkill : WeaponSkill
 
     [SerializeField]
     private Image chargeBarImg;
+
+    private WeaponManagement wm;
 
     private Rigidbody _myRigid; // 무기의 Rigidbody
 
@@ -42,6 +45,8 @@ public class SecondWeaponSkill : WeaponSkill
         scaleDict.Add(ScaleEnum.LevelTwo, 1f);
         scaleDict.Add(ScaleEnum.LevelThree, 2f);
         scaleDict.Add(ScaleEnum.LevelFour, 4f);
+
+        wm = GameObject.Find("Player").GetComponent<WeaponManagement>();
     }
 
     /// <summary>
@@ -71,12 +76,13 @@ public class SecondWeaponSkill : WeaponSkill
     {
         if(isEnd)
         {
-            if (transform.parent == null)
+            if (transform.parent != wm.transform)
             {
                 StopAllCoroutines();
 
                 _myRigid.useGravity = false;
                 _myRigid.velocity = Vector3.zero;
+                _myRigid.constraints = RigidbodyConstraints.None;
 
                 transform.parent = rightHandTrm;
                 transform.localPosition = Vector3.zero;
@@ -278,4 +284,19 @@ public class SecondWeaponSkill : WeaponSkill
 
         isEnd = true;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.transform.CompareTag("PLAYER_BASE")) // 플레이어라면 오른손에 무기가 돌아오게 한다
+        {
+            if (wm.lastWeaponNumber == 1)
+            {
+                wm.SetMaxWeaponNumber(2);
+            }
+
+            ComeBack(GameObject.Find("RightHand").transform);
+        }
+    }
 }
+
+// -- 긴 코드 --

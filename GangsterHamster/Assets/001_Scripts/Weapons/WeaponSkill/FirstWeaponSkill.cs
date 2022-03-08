@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Objects.Interactable;
+using Commands.Weapon;
 
 public class FirstWeaponSkill : WeaponSkill
 {
     [SerializeField]
     private float shotSpeed = 5;
+
+    private WeaponManagement wm;
 
     private Rigidbody _myRigid; // 무기의 Rigidbody
     private Collider _myCol; // 무기의 Collider
@@ -29,6 +32,8 @@ public class FirstWeaponSkill : WeaponSkill
         objList = new List<Interactable>();
 
         playerTrm = GameObject.Find("Player").transform;
+
+        wm = playerTrm.GetComponent<WeaponManagement>();
     }
 
     /// <summary>
@@ -166,6 +171,11 @@ public class FirstWeaponSkill : WeaponSkill
             }
             else if (collision.transform.CompareTag("PLAYER_BASE")) // 플레이어라면 오른손에 무기가 돌아오게 한다
             { 
+                if(wm.lastWeaponNumber == 0)
+                {
+                    wm.SetMaxWeaponNumber(1);
+                }
+
                 ComeBack(GameObject.Find("RightHand").transform);
             }
         }
