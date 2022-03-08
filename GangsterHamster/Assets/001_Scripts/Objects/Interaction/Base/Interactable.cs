@@ -9,6 +9,11 @@ namespace Objects.Interactable
     abstract public class Interactable : MonoBehaviour
     {
         /// <summary>
+        /// 플레이어가 직접 상호작용 할 수 있는지
+        /// </summary>
+        public bool canInteractByPlayer = false;
+
+        /// <summary>
         /// 상호 작용 용도로 호출되어야 함
         /// </summary>
         /// <param name="callback">callback (if needed)</param>

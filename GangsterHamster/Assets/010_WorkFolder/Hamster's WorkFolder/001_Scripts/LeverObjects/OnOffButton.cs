@@ -99,11 +99,7 @@ namespace Objects.Interactable
                 yield return null;
             }
         }
-
-        public override void Interact(Action callback = null) { }
-        public override void Release() => Click();
-        public override void Collision(GameObject collision, Action callback = null) { }
-
+        
         public override void Focus(Action callback = null)
         {
             FloatingUIManager.Instance.KeyHelper(KeyCode.E, "를 눌러 버튼을 활성화 시키세요.", GameManager.Instance.FindClosestPosition(_uiPositions));
@@ -113,5 +109,10 @@ namespace Objects.Interactable
         {
             FloatingUIManager.Instance.DisableUI();
         }
+
+        public override void Interact(Action callback = null) => Click();
+        public override void Release() { }
+        public override void Collision(GameObject collision, Action callback = null) { }
+
     }
 }

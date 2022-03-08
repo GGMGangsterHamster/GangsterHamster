@@ -12,25 +12,28 @@ namespace Objects.Interactable
         private void FixedUpdate()
         {
             Interactable target = FireRay();
-            if(target != null) { // 상호작용 가능한 오브젝트 인 경우
-                if (target == _currentInteractable) // 같은 오브젝트면 실행할 필요 없음
-                    return;
-                    
-                // 예전 오브젝트 선택 해제
-                _currentInteractable?.DeFocus();
-                InteractionManager.Instance.UnSetInteraction(_currentInteractable);
 
-                // 새 오브젝트 선택
-                _currentInteractable = target;
-                _currentInteractable.Focus();
-                InteractionManager.Instance.SetInteraction(_currentInteractable);
-                
-
-            } else { // 상호작용 가능한 오브젝트 없음
+            if(target == null) { // 상호작용 가능한 오브젝트 없음
                 InteractionManager.Instance.ClearInteraction();
                 _currentInteractable?.DeFocus();
                 _currentInteractable = null;
+                return;
             }
+
+            // 상호작용 가능한 오브젝트 인 경우
+            if (target == _currentInteractable) // 같은 오브젝트면 실행할 필요 없음
+                return;
+            
+            // 예전 오브젝트 선택 해제
+            if(_currentInteractable != null) {
+                _currentInteractable.DeFocus();
+                InteractionManager.Instance.UnSetInteraction(_currentInteractable);
+            }
+
+            // 새 오브젝트 선택
+            _currentInteractable = target;
+            _currentInteractable.Focus();
+            InteractionManager.Instance.SetInteraction(_currentInteractable);
         }
 
         /// <summary>

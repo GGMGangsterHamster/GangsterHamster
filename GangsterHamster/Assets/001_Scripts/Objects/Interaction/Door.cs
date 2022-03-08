@@ -38,12 +38,13 @@ namespace Objects.Interactable
 
         public override void Focus(Action callback = null)
         {
-            FloatingUIManager.Instance.DisableUI();
+            if(!_doorObject.activeSelf) return;
+            FloatingUIManager.Instance.KeyHelper(KeyCode.E, "를 눌러 문을 여세요.", GameManager.Instance.FindClosestPosition(_uiPositions));
         }
 
         public override void DeFocus(Action callback = null)
         {
-            FloatingUIManager.Instance.KeyHelper(KeyCode.E, "를 눌러 문을 여세요.", GameManager.Instance.FindClosestPosition(_uiPositions));
+            FloatingUIManager.Instance.DisableUI();
         }
     }
 }
