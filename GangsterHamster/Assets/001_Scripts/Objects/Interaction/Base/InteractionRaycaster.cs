@@ -13,15 +13,15 @@ namespace Objects.Interactable
         {
             Interactable target = FireRay();
 
-            if(target == null) { // 상호작용 가능한 오브젝트 없음
+            if(target == null || !target.canInteractByPlayer) { // 상호작용 가능한 오브젝트 없음
                 InteractionManager.Instance.ClearInteraction();
                 _currentInteractable?.DeFocus();
                 _currentInteractable = null;
                 return;
             }
 
-            // 상호작용 가능한 오브젝트 인 경우
-            if (target == _currentInteractable) // 같은 오브젝트면 실행할 필요 없음
+            // 같은 오브젝트인 경우
+            if (target == _currentInteractable)
                 return;
             
             // 예전 오브젝트 선택 해제
