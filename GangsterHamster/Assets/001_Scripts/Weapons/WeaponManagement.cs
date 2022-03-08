@@ -23,6 +23,8 @@ namespace Commands.Weapon
         private const int firstWeaponNumber = 1;
         public int lastWeaponNumber = 0; // 추후에 무기를 얻으면 얻을수록 늘어난다
 
+        private Transform rightHandTrm;
+
         private void Awake()
         {
             curWeaponNumber = 0;
@@ -34,6 +36,8 @@ namespace Commands.Weapon
 
             _weaponDict.Add(1, new FirstWeapon(gameObject, _firstWeaponSkill));
             _weaponDict.Add(2, new SecondWeapon(gameObject, _secondWeaponSkill));
+
+            rightHandTrm = GameObject.Find("RightHand").transform;
         }
 
         private void Update()
@@ -126,9 +130,21 @@ namespace Commands.Weapon
             {
                 case 1:
                     _weaponDict[1].Reset();
+                    _firstWeaponSkill.gameObject.SetActive(true);
+
+                    if(_secondWeaponSkill.transform.parent == rightHandTrm)
+                    {
+                        _secondWeaponSkill.gameObject.SetActive(false);
+                    }
                     break;
                 case 2:
                     _weaponDict[2].Reset();
+                    _secondWeaponSkill.gameObject.SetActive(true);
+
+                    if (_firstWeaponSkill.transform.parent == rightHandTrm)
+                    {
+                        _firstWeaponSkill.gameObject.SetActive(false);
+                    }
                     break;
                 case 3:
                     _weaponDict[3].Reset();

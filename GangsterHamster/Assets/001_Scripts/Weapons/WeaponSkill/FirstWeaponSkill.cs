@@ -252,7 +252,6 @@ public class FirstWeaponSkill : WeaponSkill
 
             if (Vector3.Distance(distTrm.position, transform.position) <= 1f) // 플레이어와 거리가 1 이하라면 오른손으로 돌아오게 한다
             {
-                Debug.Log(objsParent.childCount);
                 if (objsParent.childCount > 0)
                 {
                     playerTrm.GetComponent<Rigidbody>().velocity = moveVec * comeBackTime;
