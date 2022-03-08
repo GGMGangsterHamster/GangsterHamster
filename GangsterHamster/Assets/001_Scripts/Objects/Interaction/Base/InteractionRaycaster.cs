@@ -1,11 +1,20 @@
 using UnityEngine;
 using Player;
+using Objects.Interactable.Management;
 
-namespace Objects.Interaction
+namespace Objects.Interactable
 {
     public class InteractionRaycaster : MonoSingleton<InteractionRaycaster>
     {
         
+        private void FixedUpdate()
+        {
+            Interactable interactable = null;
+            if(FireRay()?.TryGetComponent<Interactable>(out interactable) == true) { // 오 이런
+                InteractionManager.Instance.SetInteraction(interactable);
+            }
+        }
+
         /// <summary>
         /// 카메라 중심에서 Ray 를 발사함
         /// </summary>

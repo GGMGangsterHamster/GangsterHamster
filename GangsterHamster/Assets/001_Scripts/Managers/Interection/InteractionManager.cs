@@ -8,24 +8,22 @@ namespace Objects.Interactable.Management
         /// <summary>
         /// 현제 상호작용이 가능한 오브젝트
         /// </summary>
-        private Action CurrentActiveInteraction;
+        private Interactable CurrentActiveInteraction;
 
         /// <summary>
         /// 상호작용 할 수 있게 합니다.
         /// </summary>
-        /// <param name="action">상호작용 시 호출됨</param>
-        public void SetInteraction(Action action)
+        public void SetInteraction(Interactable interactable)
         {
-            CurrentActiveInteraction = action;
+            CurrentActiveInteraction = interactable;
         }
 
         /// <summary>
-        /// 상호용 할 수 없게 합니다.
+        /// 상호작용 할 수 없게 합니다.
         /// </summary>
-        /// <param name="action">상호작용 시 호출된다고 넣었던 거</param>
-        public void UnSetInteraction(Action action)
+        public void UnSetInteraction(Interactable interactable)
         {
-            if(CurrentActiveInteraction == action) {
+            if(CurrentActiveInteraction == interactable) {
                 CurrentActiveInteraction = null;
             }
         }
@@ -35,7 +33,7 @@ namespace Objects.Interactable.Management
         /// </summary>
         public void Interact()
         {
-            CurrentActiveInteraction?.Invoke();
+            CurrentActiveInteraction?.Interact();
         }
         
     }

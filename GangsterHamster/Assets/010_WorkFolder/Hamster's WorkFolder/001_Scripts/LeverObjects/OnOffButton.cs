@@ -7,7 +7,7 @@ using System;
 
 namespace Objects.Interactable
 {
-    public class OnOffButton : MonoBehaviour, IInteractableObject
+    public class OnOffButton : Interactable
     {
         public List<GameObject> mObjList = new List<GameObject>(); // On Off 할때 반응해야하는 오브젝트 리스트
         public Transform[] _uiPositions = new Transform[1];
@@ -105,7 +105,7 @@ namespace Objects.Interactable
             if (other.CompareTag("PLAYER_BASE"))
             {
                 FloatingUIManager.Instance.KeyHelper(KeyCode.E, "를 눌러 버튼을 활성화 시키세요.", GameManager.Instance.FindClosestPosition(_uiPositions));
-                InteractionManager.Instance.SetInteraction(Click);
+                InteractionManager.Instance.SetInteraction(this);
             }
         }
 
@@ -114,13 +114,12 @@ namespace Objects.Interactable
             if (other.CompareTag("PLAYER_BASE"))
             {
                 FloatingUIManager.Instance.DisableUI();
-                InteractionManager.Instance.UnSetInteraction(Click);
+                InteractionManager.Instance.UnSetInteraction(this);
             }
         }
 
-        public void Interact(Action callback = null) { }
-        public void Initialize(Action callback = null) { }
-        public void Release() { }
-        public void Collision(GameObject collision, Action callback = null) { }
+        public override void Interact(Action callback = null) { }
+        public override void Release() => Click();
+        public override void Collision(GameObject collision, Action callback = null) { }
     }
 }

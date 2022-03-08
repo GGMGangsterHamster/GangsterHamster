@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
 
+
 namespace Objects.Interactable
 {
     /// <summary>
     /// 상호 작용 가능한 오브젝트가 구현해야 함
     /// </summary>
+    [Obsolete]
     public interface IInteractableObject
     {
         /// <summary>

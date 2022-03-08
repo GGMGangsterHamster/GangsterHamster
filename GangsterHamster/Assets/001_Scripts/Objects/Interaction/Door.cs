@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Objects.Interactable
 {
 
-    public class Door : MonoBehaviour, IInteractableObject
+    public class Door : Interactable
     {
         [SerializeField] private GameObject _doorObject;
         [SerializeField] private float _defaultDoorStayOpenDuration = 3.0f;
@@ -18,7 +18,7 @@ namespace Objects.Interactable
         /// 알아서 Release 해 주니 호출할 필요 없음<br/>
         /// Callback 이 null 이 아니라면 문이 자동으로 닫히지 않음
         /// </summary>
-        public void Interact(Action callback = null)
+        public override void Interact(Action callback = null)
         {
             _doorObject.SetActive(false);
             if(callback == null)
@@ -29,7 +29,7 @@ namespace Objects.Interactable
             callback?.Invoke();
         }
 
-        public void Release() // 문을 닫음
+        public override void Release() // 문을 닫음
         {
             _doorObject.SetActive(true);
         }
@@ -38,7 +38,7 @@ namespace Objects.Interactable
         {
             if (other.CompareTag("PLAYER_BASE")) {
                 FloatingUIManager.Instance.KeyHelper(KeyCode.E, "를 눌러 문을 여세요.", GameManager.Instance.FindClosestPosition(_uiPositions));
-                InteractionManager.Instance.SetInteraction(Open);
+                InteractionManager.Instance.SetInteraction(this);
             }
         }
 
@@ -46,7 +46,7 @@ namespace Objects.Interactable
         {
             if (other.CompareTag("PLAYER_BASE")) {
                 FloatingUIManager.Instance.DisableUI();
-                InteractionManager.Instance.UnSetInteraction(Open);
+                InteractionManager.Instance.UnSetInteraction(this);
             }
         }
 
@@ -56,6 +56,6 @@ namespace Objects.Interactable
         }
 
         public void Initialize(Action callback = null) { }
-        public void Collision(GameObject collision, Action callback = null) { }
+        public override void Collision(GameObject collision, Action callback = null) { }
     }
 }
