@@ -1,7 +1,9 @@
+using Objects.Interactable;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class SecondWeaponSkill : WeaponSkill
 {
@@ -24,6 +26,7 @@ public class SecondWeaponSkill : WeaponSkill
     private Dictionary<ScaleEnum, float> scaleDict = new Dictionary<ScaleEnum, float>();
 
     private ScaleEnum curScaleEnum = ScaleEnum.LevelOne;
+    private ScaleEnum beforeScaleEnum = ScaleEnum.LevelOne;
 
     private IEnumerator shotingCoroutine;
 
@@ -53,6 +56,8 @@ public class SecondWeaponSkill : WeaponSkill
             shotingCoroutine = ShotCo(dir);
 
             StartCoroutine(shotingCoroutine);
+
+            
         }
     }
 
@@ -78,35 +83,48 @@ public class SecondWeaponSkill : WeaponSkill
 
                 curScaleEnum = ScaleEnum.LevelOne;
 
+                curPushTime = 0f;
+                chargeBarImg.transform.localScale = new Vector3(curPushTime, 1, 1);
+                transform.localScale = Vector3.one * scaleDict[curScaleEnum];
+
                 isEnd = true;
             }
         }
     }
 
+    /// <summary>
+    /// 우클릭시 실행되는 함수
+    /// 크기가 커진다
+    /// </summary>
     public void ScaleUp()
     {
         if (isEnd)
         {
-            isEnd = false;
-
-            if (curScaleEnum == ScaleEnum.LevelFour)
+            if (transform.parent == null)
             {
-                curScaleEnum = ScaleEnum.LevelOne;
+                SetScale(curScaleEnum);
             }
-            else
-            {
-                curScaleEnum++;
-            }
-
-            SetScale(curScaleEnum);
         }
     }
 
     private void SetScale(ScaleEnum scaleEnum)
     {
+        isEnd = false;
+
+        beforeScaleEnum = curScaleEnum;
+
+        if (curScaleEnum == ScaleEnum.LevelFour)
+        {
+            curScaleEnum = ScaleEnum.LevelOne;
+        }
+        else
+        {
+            curScaleEnum++;
+        }
+
+
         _myRigid.useGravity = true;
 
-        Debug.Log(scaleEnum);
         StartCoroutine(SetScaleCo(scaleEnum));
     }
 
@@ -139,8 +157,10 @@ public class SecondWeaponSkill : WeaponSkill
             StopCoroutine(shotingCoroutine);
         }
 
+        float beforeCurPushTime = curPushTime;
+
         // 누르고 있는 시간 체크용 반복문
-        while(true)
+        while (true)
         {
             if(curPushTime >= 1.5f)
             {
@@ -200,13 +220,41 @@ public class SecondWeaponSkill : WeaponSkill
 
         float scaleDistance = scaleDict[scaleEnum] - transform.localScale.x;
 
-        bool test = scaleDistance >= 0 ? true : false;
+        bool comparator = scaleDistance >= 0 ? true : false; // 큰지 작은지 확인하는 bool 변수
 
-        while (true)
+        // 주변에 상호작용 할 수 있는 오브젝트가 가까이 있는지 확인해주는 코드 => 코드가 좀 많이 더러움...
+        #region
+        Collider[] cols = Physics.OverlapBox(new Vector3(transform.position.x, transform.position.y + scaleDict[curScaleEnum] + 0.05f, transform.position.z)
+                                            , Vector3.one * scaleDict[curScaleEnum] / 2
+                                            , transform.rotation);
+
+        List<Collider> colList = cols.ToList();
+
+        for (int i = 0; i < colList.Count; i++)
+        {
+            if (colList[i].transform == transform) continue;
+
+            if (colList[i].TryGetComponent(out Interactable outII)) // 만약 상호작용 되는 오브젝트가 주변에 있다면 리턴
+            {
+                isEnd = true;
+                chargeBarImg.transform.localScale = new Vector3(beforeCurPushTime, 1, 1);
+                curPushTime = beforeCurPushTime;
+                curScaleEnum = beforeScaleEnum;
+                yield break;
+            }
+            else
+            {
+                colList.RemoveAt(i);
+                i--;
+            }
+        }
+        #endregion
+
+        while (true) // 서서히 정해진 크기까지 작아지거나 커지는 반복문
         {
             transform.localScale += Vector3.one * Time.deltaTime * scaleDistance / 0.5f;
 
-            if (test)
+            if (comparator)
             {
                 if(transform.localScale.x >= scaleDict[scaleEnum])
                 {
