@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Objects.Interactable;
+using Gravity.Object.Management;
 
 public class ThirdWeaponSkill : WeaponSkill
 {
@@ -14,14 +15,18 @@ public class ThirdWeaponSkill : WeaponSkill
     private WeaponManagement wm;
     private IEnumerator shotingCoroutine;
     private Rigidbody _myRigid;
+    private Transform playerTrm; // 플레이어의 Trm
 
     private Collision col = null;
+
+    private bool isChangedGravity = false;
 
     private void Start()
     {
         _myRigid = GetComponent<Rigidbody>();
 
-        wm = GameObject.Find("Player").transform.GetComponent<WeaponManagement>();
+        playerTrm = GameObject.Find("Player").transform;
+        wm = playerTrm.GetComponent<WeaponManagement>();
     }
 
     /// <summary>
@@ -49,6 +54,9 @@ public class ThirdWeaponSkill : WeaponSkill
 
             transform.parent = rightHandTrm;
             transform.localPosition = Vector3.zero;
+            isChangedGravity = false;
+            GravityManager.Instance.ChangeGlobalGravityDirection(Vector3.down);
+            playerTrm.rotation = Quaternion.Euler(0, playerTrm.rotation.y, 0);
         }
     }
 
@@ -66,12 +74,23 @@ public class ThirdWeaponSkill : WeaponSkill
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.transform.TryGetComponent(out Interactable I) && transform.parent != wm.transform)
+        if(collision.transform.TryGetComponent(out Interactable I) && transform.parent != wm.transform && !isChangedGravity)
         {
             // 부딪힌 그 오브젝트의 면에서 수직 방향으로 중력을 바꾼다 
             // 만약 이미 바꿔져 있는 상태라면 그냥 아무것도 안하고 넘긴다.
             col = collision;
-            //collision.contacts[0].
+            Vector3 normal = collision.contacts[0].normal;
+            float angle = Vector3.Angle(playerTrm.up, collision.contacts[0].normal);
+
+            GravityManager.Instance.ChangeGlobalGravityDirection(-normal);
+            playerTrm.rotation = Quaternion.Euler(new Vector3(normal.z != 0 ? normal.z > 0 ? angle : -angle : 0
+                                                            , 0
+                                                            , normal.x != 0 ? normal.z > 0 ? -angle : angle : 0
+            ));
+            Debug.Log(Vector3.Angle(playerTrm.up, collision.contacts[0].normal));
+            Debug.Log(collision.contacts[0].normal);
+
+            isChangedGravity = true;
         }
     }
 
