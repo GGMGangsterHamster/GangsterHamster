@@ -15,6 +15,7 @@ public class ThirdWeaponSkill : WeaponSkill
     private WeaponManagement wm;
     private IEnumerator shotingCoroutine;
     private Rigidbody _myRigid;
+    private Collider _myCol;
     private Transform playerTrm; // 플레이어의 Trm
 
     private Collision col = null;
@@ -24,6 +25,7 @@ public class ThirdWeaponSkill : WeaponSkill
     private void Start()
     {
         _myRigid = GetComponent<Rigidbody>();
+        _myCol = GetComponent<Collider>();
 
         playerTrm = GameObject.Find("Player").transform;
         wm = playerTrm.GetComponent<WeaponManagement>();
@@ -51,19 +53,21 @@ public class ThirdWeaponSkill : WeaponSkill
             _myRigid.useGravity = false;
             _myRigid.velocity = Vector3.zero;
             _myRigid.constraints = RigidbodyConstraints.None;
+            _myCol.isTrigger = true;
 
             transform.parent = rightHandTrm;
             transform.localPosition = Vector3.zero;
             isChangedGravity = false;
             GravityManager.Instance.ChangeGlobalGravityDirection(Vector3.down);
             playerTrm.rotation = Quaternion.Euler(0, playerTrm.rotation.y, 0);
-            //playerTrm.GetComponent<rigid>
+            playerTrm.GetComponent<Rigidbody>().velocity = Vector3.zero;
         }
     }
 
     IEnumerator ShotCo(Vector3 dir)
     {
         transform.parent = null;
+        _myCol.isTrigger = false;
 
         while (true)
         {
@@ -77,6 +81,8 @@ public class ThirdWeaponSkill : WeaponSkill
     {
         if(collision.transform.TryGetComponent(out Interactable I) && transform.parent != wm.transform && !isChangedGravity)
         {
+            Debug.Log("변환");
+            isChangedGravity = true;
             // 부딪힌 그 오브젝트의 면에서 수직 방향으로 중력을 바꾼다 
             // 만약 이미 바꿔져 있는 상태라면 그냥 아무것도 안하고 넘긴다.
             col = collision;
@@ -88,10 +94,12 @@ public class ThirdWeaponSkill : WeaponSkill
                                                             , 0
                                                             , normal.x != 0 ? normal.z > 0 ? -angle : angle : 0
             ));
-            Debug.Log(Vector3.Angle(playerTrm.up, collision.contacts[0].normal));
-            Debug.Log(collision.contacts[0].normal);
+            // 여기서 무기를 멈추게 해야 함
+            _myRigid.velocity = Vector3.zero;
+            _myRigid.useGravity = false;
+            transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            collision.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
-            isChangedGravity = true;
         }
     }
 
