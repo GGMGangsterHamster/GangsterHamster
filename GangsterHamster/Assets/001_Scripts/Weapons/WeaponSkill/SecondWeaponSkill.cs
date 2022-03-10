@@ -20,6 +20,9 @@ public class SecondWeaponSkill : WeaponSkill
     private float shotSpeed = 5;
 
     [SerializeField]
+    private float sizeUpSpeed = 0.1f;
+
+    [SerializeField]
     private Image chargeBarImg;
 
     private WeaponManagement wm;
@@ -256,7 +259,7 @@ public class SecondWeaponSkill : WeaponSkill
 
         while (true) // 서서히 정해진 크기까지 작아지거나 커지는 반복문
         {
-            transform.localScale += Vector3.one * Time.deltaTime * scaleDistance / 0.5f;
+            transform.localScale += Vector3.one * Time.deltaTime * scaleDistance / sizeUpSpeed;
 
             if (comparator)
             {

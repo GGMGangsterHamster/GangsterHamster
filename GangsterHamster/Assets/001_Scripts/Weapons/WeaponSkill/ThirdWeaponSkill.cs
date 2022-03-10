@@ -57,6 +57,7 @@ public class ThirdWeaponSkill : WeaponSkill
             isChangedGravity = false;
             GravityManager.Instance.ChangeGlobalGravityDirection(Vector3.down);
             playerTrm.rotation = Quaternion.Euler(0, playerTrm.rotation.y, 0);
+            //playerTrm.GetComponent<rigid>
         }
     }
 
