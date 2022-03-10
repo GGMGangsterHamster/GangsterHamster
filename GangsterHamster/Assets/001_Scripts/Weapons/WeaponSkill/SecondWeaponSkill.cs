@@ -35,6 +35,7 @@ public class SecondWeaponSkill : WeaponSkill
     private ScaleEnum beforeScaleEnum = ScaleEnum.LevelOne;
 
     private IEnumerator shotingCoroutine;
+    private IEnumerator rotationCoroutine;
 
     private float curPushTime = 0.0f;
 
@@ -77,13 +78,15 @@ public class SecondWeaponSkill : WeaponSkill
     {
         if(isEnd)
         {
-            if (transform.parent != wm.transform)
+            if (transform.parent == null)
             {
                 StopAllCoroutines();
 
                 _myRigid.useGravity = false;
                 _myRigid.velocity = Vector3.zero;
                 _myRigid.constraints = RigidbodyConstraints.None;
+                rotationCoroutine = RotationCo();
+                StartCoroutine(rotationCoroutine);
 
                 transform.parent = rightHandTrm;
                 transform.localPosition = Vector3.zero;
@@ -143,10 +146,25 @@ public class SecondWeaponSkill : WeaponSkill
     IEnumerator ShotCo(Vector3 dir)
     {
         transform.parent = null;
+        StopCoroutine(rotationCoroutine);
 
         while (true)
         {
             transform.position += dir * shotSpeed * Time.deltaTime;
+
+            yield return null;
+        }
+    }
+
+    IEnumerator RotationCo()
+    {
+        while(true)
+        {
+            Debug.Log(_myRigid.angularVelocity);
+            if(_myRigid.angularVelocity.x <= 4)
+            {
+                _myRigid.AddTorque(Vector3.one * Time.deltaTime);
+            }
 
             yield return null;
         }
