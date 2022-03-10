@@ -23,6 +23,9 @@ public class SecondWeaponSkill : WeaponSkill
     private float sizeUpSpeed = 0.1f;
 
     [SerializeField]
+    private float idleRotationMaxSpeed = 4f;
+
+    [SerializeField]
     private Image chargeBarImg;
 
     private WeaponManagement wm;
@@ -160,8 +163,7 @@ public class SecondWeaponSkill : WeaponSkill
     {
         while(true)
         {
-            Debug.Log(_myRigid.angularVelocity);
-            if(_myRigid.angularVelocity.x <= 4)
+            if(_myRigid.angularVelocity.x <= idleRotationMaxSpeed)
             {
                 _myRigid.AddTorque(Vector3.one * Time.deltaTime);
             }
