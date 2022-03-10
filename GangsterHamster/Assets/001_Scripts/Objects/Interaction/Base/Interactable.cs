@@ -9,10 +9,25 @@ namespace Objects.Interactable
     abstract public class Interactable : MonoBehaviour
     {
         /// <summary>
+        /// 플레이어가 직접 상호작용 할 수 있는지
+        /// </summary>
+        public bool canInteractByPlayer = false;
+
+        /// <summary>
         /// 상호 작용 용도로 호출되어야 함
         /// </summary>
         /// <param name="callback">callback (if needed)</param>
         abstract public void Interact(Action callback = null);
+
+        /// <summary>
+        /// 포커스 상태일 때
+        /// </summary>
+        abstract public void Focus(Action callback = null);
+
+        /// <summary>
+        /// 포커스 상태 벗어날 때
+        /// </summary>
+        abstract public void DeFocus(Action callback = null);
 
         /// <summary>
         /// 사용하고 난 후 호출해야함

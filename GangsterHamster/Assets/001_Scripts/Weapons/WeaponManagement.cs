@@ -10,7 +10,7 @@ namespace Commands.Weapon
         /// 현재 어떤 무기를 들고 있나
         /// </summary>
         public static int curWeaponNumber;
-        public int _curWeaponNum = 2;
+        public bool isDeveloper;
 
         private Dictionary<int, WeaponCommand> _weaponDict = new Dictionary<int, WeaponCommand>();
 
@@ -21,14 +21,23 @@ namespace Commands.Weapon
         [SerializeField] private SecondWeaponSkill _secondWeaponSkill;
 
         private const int firstWeaponNumber = 1;
-        private int lastWeaponNumber = 0; // 추후에 무기를 얻으면 얻을수록 늘어난다
+        public int lastWeaponNumber = 0; // 추후에 무기를 얻으면 얻을수록 늘어난다
+
+        private Transform rightHandTrm;
 
         private void Awake()
         {
-            curWeaponNumber = _curWeaponNum;
+            curWeaponNumber = 0;
+
+            if(isDeveloper)
+            {
+                lastWeaponNumber = 2;
+            }
 
             _weaponDict.Add(1, new FirstWeapon(gameObject, _firstWeaponSkill));
             _weaponDict.Add(2, new SecondWeapon(gameObject, _secondWeaponSkill));
+
+            rightHandTrm = GameObject.Find("RightHand").transform;
         }
 
         private void Update()
@@ -40,6 +49,7 @@ namespace Commands.Weapon
                     if(lastWeaponNumber >= 1)
                     {
                         curWeaponNumber = 1;
+                        SetActiveWeapons(1);
                     }
                 }
                 else if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -47,6 +57,7 @@ namespace Commands.Weapon
                     if(lastWeaponNumber >= 2)
                     {
                         curWeaponNumber = 2;
+                        SetActiveWeapons(2);
                     }
                 }
 
@@ -60,6 +71,7 @@ namespace Commands.Weapon
                     {
                         curWeaponNumber = firstWeaponNumber;
                     }
+                    SetActiveWeapons(curWeaponNumber);
                 }
                 else if (Input.mouseScrollDelta.y < 0) // 스크롤을 아래로 굴렸을 때
                 {
@@ -71,6 +83,7 @@ namespace Commands.Weapon
                     {
                         curWeaponNumber = lastWeaponNumber;
                     }
+                    SetActiveWeapons(curWeaponNumber);
                 }
             }
         }
@@ -102,6 +115,40 @@ namespace Commands.Weapon
             if (_weaponDict.TryGetValue(curWeaponNumber, out outwc))
             {
                 outwc.Reset();
+            }
+        }
+
+        public void SetMaxWeaponNumber(int maxNumber)
+        {
+            lastWeaponNumber = maxNumber;
+            curWeaponNumber = maxNumber;
+        }
+
+        private void SetActiveWeapons(int weaponNumber)
+        {
+            switch(weaponNumber)
+            {
+                case 1:
+                    _weaponDict[1].Reset();
+                    _firstWeaponSkill.gameObject.SetActive(true);
+
+                    if(_secondWeaponSkill.transform.parent == rightHandTrm)
+                    {
+                        _secondWeaponSkill.gameObject.SetActive(false);
+                    }
+                    break;
+                case 2:
+                    _weaponDict[2].Reset();
+                    _secondWeaponSkill.gameObject.SetActive(true);
+
+                    if (_firstWeaponSkill.transform.parent == rightHandTrm)
+                    {
+                        _firstWeaponSkill.gameObject.SetActive(false);
+                    }
+                    break;
+                case 3:
+                    _weaponDict[3].Reset();
+                    break;
             }
         }
     }
