@@ -61,8 +61,6 @@ public class SecondWeaponSkill : WeaponSkill
             shotingCoroutine = ShotCo(dir);
 
             StartCoroutine(shotingCoroutine);
-
-            
         }
     }
 
@@ -287,12 +285,9 @@ public class SecondWeaponSkill : WeaponSkill
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.CompareTag("PLAYER_BASE")) // 플레이어라면 오른손에 무기가 돌아오게 한다
+        if (collision.transform.CompareTag("PLAYER_BASE") && wm.lastWeaponNumber == 1) // 플레이어라면 오른손에 무기가 돌아오게 한다
         {
-            if (wm.lastWeaponNumber == 1)
-            {
-                wm.SetMaxWeaponNumber(2);
-            }
+            wm.SetMaxWeaponNumber(2);
 
             ComeBack(GameObject.Find("RightHand").transform);
         }
