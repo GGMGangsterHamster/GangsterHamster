@@ -72,7 +72,17 @@ namespace Gravity.Object.Management
         /// <param name="direction">중력 작용 방향</param>
         public void ChangeGlobalGravityDirection(Vector3 direction)
         {
-            this.globalGravity.direction = direction;
+            this.globalGravity.direction = direction.normalized;
+        }
+
+        /// <summary>
+        /// 전역 중력의 작용 방향을 바꿉니다.
+        /// </summary>
+        /// <param name="angle">중력 작용 각도</param>
+        public void ChangeGlobalGravityDirection(float angle)
+        {
+            Debug.Log(Quaternion.AngleAxis(angle, Vector3.one).eulerAngles.normalized);
+            this.globalGravity.direction = Quaternion.AngleAxis(angle, Vector3.one).eulerAngles.normalized;
         }
 
         /// <summary>

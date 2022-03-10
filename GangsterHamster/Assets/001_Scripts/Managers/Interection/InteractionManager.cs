@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Objects.Interactable.Management
 {
-    public class InteractionManager : MonoSingleton<InteractionManager>
+    public class InteractionManager : Singleton<InteractionManager>, ISingletonObject
     {
         /// <summary>
         /// 현제 상호작용이 가능한 오브젝트
