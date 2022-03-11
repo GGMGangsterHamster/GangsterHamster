@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Objects.Interactable;
 using Gravity.Object.Management;
+using Player.Movement;
 
 public class ThirdWeaponSkill : WeaponSkill
 {
@@ -17,6 +18,7 @@ public class ThirdWeaponSkill : WeaponSkill
     private Rigidbody _myRigid;
     private Collider _myCol;
     private Transform playerTrm; // 플레이어의 Trm
+    private Transform cameraTrm;
 
     private Collision col = null;
 
@@ -28,13 +30,12 @@ public class ThirdWeaponSkill : WeaponSkill
         _myCol = GetComponent<Collider>();
 
         playerTrm = GameObject.Find("Player").transform;
+        cameraTrm = Camera.main.transform;
         wm = playerTrm.GetComponent<WeaponManagement>();
     }
 
     /// <summary>
-    /// 1번 항목에 대한 함수
-    /// 오른손에 무기가 있을 때
-    /// 좌클릭 시 무기가 특정 obj에 닿을 때까지 날아감
+    /// 좌클릭시 계속 계속 날아간다
     /// </summary>
     public void Shot(Vector3 dir)
     {
@@ -44,11 +45,18 @@ public class ThirdWeaponSkill : WeaponSkill
         }
     }
 
+    /// <summary>
+    /// R키 클릭시 무기가 돌아옴에 동시에 중력이 원래대로 돌아온다.
+    /// </summary>
+    /// <param name="rightHandTrm"></param>
     public void Comeback(Transform rightHandTrm)
     {
         if (transform.parent == null)
         {
             StopAllCoroutines();
+
+            float beforeAngle = playerTrm.rotation.eulerAngles.x == 0 ? playerTrm.rotation.eulerAngles.y : -playerTrm.rotation.eulerAngles.x;
+            Vector3 beforeCameraForward = cameraTrm.forward;
 
             _myRigid.useGravity = false;
             _myRigid.velocity = Vector3.zero;
@@ -59,11 +67,19 @@ public class ThirdWeaponSkill : WeaponSkill
             transform.localPosition = Vector3.zero;
             isChangedGravity = false;
             GravityManager.Instance.ChangeGlobalGravityDirection(Vector3.down);
-            playerTrm.rotation = Quaternion.Euler(0, playerTrm.rotation.y, 0);
-            playerTrm.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            playerTrm.rotation = Quaternion.Euler(0, beforeAngle, 0);
+
+            Debug.Log("각도 : " + Vector3.Angle(Vector3.right, beforeCameraForward));
+            Debug.Log("방향 벡터 : " + beforeCameraForward);
+            PlayerInputHandler.Instance.SetMouseYValue(-Vector3.Angle(Vector3.right, new Vector3(1, beforeCameraForward.y, 0).normalized));
         }
     }
 
+    /// <summary>
+    /// 계속해서 앞으로 나아가게 하는 코루틴
+    /// </summary>
+    /// <param name="dir">나아가는 방향</param>
+    /// <returns></returns>
     IEnumerator ShotCo(Vector3 dir)
     {
         transform.parent = null;
@@ -77,11 +93,14 @@ public class ThirdWeaponSkill : WeaponSkill
         }
     }
 
+    /// <summary>
+    /// 무언가에 부딪히면 그 오브젝트의 수직벡터의 반대로 중력이 바뀌게 된다. 그리고 무기는 정지한다.
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.transform.TryGetComponent(out Interactable I) && transform.parent != wm.transform && !isChangedGravity)
         {
-            Debug.Log("변환");
             isChangedGravity = true;
             // 부딪힌 그 오브젝트의 면에서 수직 방향으로 중력을 바꾼다 
             // 만약 이미 바꿔져 있는 상태라면 그냥 아무것도 안하고 넘긴다.
@@ -90,22 +109,14 @@ public class ThirdWeaponSkill : WeaponSkill
             float angle = Vector3.Angle(playerTrm.up, collision.contacts[0].normal);
 
             GravityManager.Instance.ChangeGlobalGravityDirection(-normal);
-            playerTrm.rotation = Quaternion.Euler(new Vector3(normal.z != 0 ? normal.z > 0 ? angle : -angle : 0
+            playerTrm.rotation = Quaternion.Euler(new Vector3(normal.z != 0 ? normal.z > 0 ? angle : -angle : normal.y != 0 ? normal.y > 0 ? 0 : angle * 2 : 0
                                                             , 0
                                                             , normal.x != 0 ? normal.z > 0 ? -angle : angle : 0
             ));
             // 여기서 무기를 멈추게 해야 함
             _myRigid.velocity = Vector3.zero;
             _myRigid.useGravity = false;
-            transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-            collision.transform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-
+            _myRigid.constraints = RigidbodyConstraints.FreezeAll;
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(col.contacts[0].point, col.contacts[0].normal);
     }
 }

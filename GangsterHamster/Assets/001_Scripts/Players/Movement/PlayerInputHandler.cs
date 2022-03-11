@@ -101,5 +101,10 @@ namespace Player.Movement
             _mouseX.Execute();
             _mouseY.Execute();
         }
+
+        public void SetMouseYValue(float value)
+        {
+            _playerMove.SetMouseRotYValue(value < 90 ? value < -90 ? value + 180 : value : value - 180);
+        }
     }
 }

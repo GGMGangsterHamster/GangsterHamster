@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Objects.Interactable;
 using Commands.Weapon;
+using static Define;
 
 public class FirstWeaponSkill : WeaponSkill
 {
@@ -14,8 +15,6 @@ public class FirstWeaponSkill : WeaponSkill
     private Rigidbody _myRigid; // 무기의 Rigidbody
     private Collider _myCol; // 무기의 Collider
     private Transform objsParent; // 무기에게 붙은 AtypeObj들의 부모 오브젝트
-
-    private Transform playerTrm; // 플레이어의 Trm
 
     private List<Interactable> objList; // 무기에 붙어있는 오브젝트들을 모아놓은 리스트
 
@@ -31,9 +30,7 @@ public class FirstWeaponSkill : WeaponSkill
         objsParent = transform.GetChild(0);
         objList = new List<Interactable>();
 
-        playerTrm = GameObject.Find("Player").transform;
-
-        wm = playerTrm.GetComponent<WeaponManagement>();
+        wm = PlayerTrm.GetComponent<WeaponManagement>();
     }
 
     /// <summary>
@@ -43,10 +40,14 @@ public class FirstWeaponSkill : WeaponSkill
     /// </summary>
     public void Shot(Vector3 dir)
     {
-        if(transform.parent != null)
+        if(transform.parent == RightHandTrm)
         {
             if (lastFireTime + delay <= Time.time) {
-                Collider[] cols = Physics.OverlapBox(playerTrm.position + (playerTrm.forward / 2), playerTrm.GetComponent<BoxCollider>().size + new Vector3(0, 0, 0.3f), playerTrm.rotation); // 플레이어의 바로 앞을 검사해서 뭔가 있는지 확인
+                Vector3 boxSize = PlayerTrm.GetComponent<BoxCollider>().size;
+
+                Collider[] cols = Physics.OverlapBox(PlayerTrm.position + (PlayerTrm.forward / 2) + new Vector3(0, boxSize.y / 2, 0),
+                                                     boxSize + new Vector3(0, -1f, 0.3f), 
+                                                     PlayerTrm.rotation); // 플레이어의 바로 앞을 검사해서 뭔가 있는지 확인
 
                 for (int i = 0; i < cols.Length; i++)
                 {
@@ -72,7 +73,7 @@ public class FirstWeaponSkill : WeaponSkill
     /// <param name="rightHandTrm"> 플레이어 오른손의 위치를 받아오기 위한 Trm </param>
     public void ComeBack(Transform rightHandTrm)
     {
-        if(transform.parent == null)
+        if(transform.parent != RightHandTrm)
         {
             ClearList();
 
@@ -141,7 +142,7 @@ public class FirstWeaponSkill : WeaponSkill
             }
         }
 
-        if (transform.parent == null)
+        if (transform.parent != RightHandTrm)
         {
             if (collision.transform.TryGetComponent(out Interactable outII)) // 만약 TypeObj이라면
             {
@@ -254,7 +255,7 @@ public class FirstWeaponSkill : WeaponSkill
             {
                 if (objsParent.childCount > 0)
                 {
-                    playerTrm.GetComponent<Rigidbody>().velocity = moveVec * comeBackTime;
+                    PlayerTrm.GetComponent<Rigidbody>().velocity = moveVec * comeBackTime;
                 }
                 
                 comeBackTime = 0f;
@@ -278,4 +279,8 @@ public class FirstWeaponSkill : WeaponSkill
 
         objList.Clear();
     }
+
+#if UNITY_EDITOR
+
+#endif
 }

@@ -5,10 +5,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using Commands.Weapon;
+using static Define;
 
 public class SecondWeaponSkill : WeaponSkill
 {
-    enum ScaleEnum
+    enum ScaleEnum // 무기가 커지는 단계를 나타내는 enum
     {
         LevelOne,
         LevelTwo,
@@ -31,6 +32,7 @@ public class SecondWeaponSkill : WeaponSkill
     private WeaponManagement wm;
 
     private Rigidbody _myRigid; // 무기의 Rigidbody
+
 
     private Dictionary<ScaleEnum, float> scaleDict = new Dictionary<ScaleEnum, float>();
 
@@ -81,7 +83,7 @@ public class SecondWeaponSkill : WeaponSkill
     {
         if(isEnd)
         {
-            if (transform.parent == null)
+            if (transform.parent != RightHandTrm)
             {
                 StopAllCoroutines();
 
@@ -113,7 +115,7 @@ public class SecondWeaponSkill : WeaponSkill
     {
         if (isEnd)
         {
-            if (transform.parent == null)
+            if (transform.parent != RightHandTrm)
             {
                 SetScale(curScaleEnum);
             }

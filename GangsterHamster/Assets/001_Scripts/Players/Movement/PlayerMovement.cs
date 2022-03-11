@@ -99,6 +99,11 @@ namespace Player.Movement
             camTrm.transform.localRotation = Quaternion.Euler(rotY, 0.0f, 0.0f);
         }
 
+        public void SetMouseRotYValue(float y)
+        {
+            rotY = y;
+        }
+
         #endregion
 
         #region Jump

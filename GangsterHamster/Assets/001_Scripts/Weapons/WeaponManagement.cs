@@ -138,12 +138,15 @@ namespace Commands.Weapon
 
         private void SetActiveWeapons(int weaponNumber)
         {
+            Debug.Log("weaponNumber : " + weaponNumber);
+
             switch(weaponNumber)
             {
                 case 1:
                     _weaponDict[1].Reset();
                     _firstWeaponSkill.gameObject.SetActive(true);
 
+                    Debug.Log(_secondWeaponSkill.transform.parent);
                     if(_secondWeaponSkill.transform.parent == rightHandTrm)
                     {
                         _secondWeaponSkill.gameObject.SetActive(false);
