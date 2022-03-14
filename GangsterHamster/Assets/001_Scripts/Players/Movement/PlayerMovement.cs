@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 using Player.Status;
 using Commands.Movement;
@@ -91,19 +92,13 @@ namespace Player.Movement
         }
 
         float rotY = 0.0f;
-        public void OnMouseY(float y)
+        public void OnMouseY(float y, bool includingMouseSpeed = true)
         {
-            rotY += -y * PlayerValues.Instance.mouseSpeed;
+            rotY += -y * (includingMouseSpeed ? PlayerValues.Instance.mouseSpeed : 1);
             rotY = Mathf.Clamp(rotY, -90f, 90f);
 
             camTrm.transform.localRotation = Quaternion.Euler(rotY, 0.0f, 0.0f);
         }
-
-        public void SetMouseRotYValue(float y)
-        {
-            rotY = y;
-        }
-
         #endregion
 
         #region Jump
