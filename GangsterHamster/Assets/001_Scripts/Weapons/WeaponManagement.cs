@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 namespace Commands.Weapon
 {
@@ -39,7 +40,7 @@ namespace Commands.Weapon
             _weaponDict.Add(2, new SecondWeapon(gameObject, _secondWeaponSkill));
             _weaponDict.Add(3, new ThirdWeapon(gameObject, _thirdWeaponSkill));
 
-            rightHandTrm = GameObject.Find("RightHand").transform;
+            rightHandTrm = Define.RightHandTrm;
         }
 
         private void Update()
@@ -138,8 +139,6 @@ namespace Commands.Weapon
 
         private void SetActiveWeapons(int weaponNumber)
         {
-            Debug.Log("weaponNumber : " + weaponNumber);
-
             switch(weaponNumber)
             {
                 case 1:

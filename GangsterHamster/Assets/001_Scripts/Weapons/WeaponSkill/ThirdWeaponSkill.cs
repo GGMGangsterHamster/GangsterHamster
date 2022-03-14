@@ -5,6 +5,7 @@ using UnityEngine;
 using Objects.Interactable;
 using Gravity.Object.Management;
 using Player.Movement;
+using static Define;
 
 public class ThirdWeaponSkill : WeaponSkill
 {
@@ -14,13 +15,10 @@ public class ThirdWeaponSkill : WeaponSkill
     private float shotSpeed = 5;
 
     private WeaponManagement wm;
-    private IEnumerator shotingCoroutine;
     private Rigidbody _myRigid;
     private Collider _myCol;
     private Transform playerTrm; // 플레이어의 Trm
-    private Transform cameraTrm;
-
-    private Collision col = null;
+    private PlayerMovement _movement;
 
     private bool isChangedGravity = false;
 
@@ -29,9 +27,9 @@ public class ThirdWeaponSkill : WeaponSkill
         _myRigid = GetComponent<Rigidbody>();
         _myCol = GetComponent<Collider>();
 
-        playerTrm = GameObject.Find("Player").transform;
-        cameraTrm = Camera.main.transform;
+        playerTrm = Define.PlayerTrm;
         wm = playerTrm.GetComponent<WeaponManagement>();
+        _movement = playerTrm.GetComponent<PlayerMovement>();
     }
 
     /// <summary>
@@ -56,7 +54,6 @@ public class ThirdWeaponSkill : WeaponSkill
             StopAllCoroutines();
 
             float beforeAngle = playerTrm.rotation.eulerAngles.x == 0 ? playerTrm.rotation.eulerAngles.y : -playerTrm.rotation.eulerAngles.x;
-            Vector3 beforeCameraForward = cameraTrm.forward;
 
             _myRigid.useGravity = false;
             _myRigid.velocity = Vector3.zero;
@@ -68,10 +65,6 @@ public class ThirdWeaponSkill : WeaponSkill
             isChangedGravity = false;
             GravityManager.Instance.ChangeGlobalGravityDirection(Vector3.down);
             playerTrm.rotation = Quaternion.Euler(0, beforeAngle, 0);
-
-            Debug.Log("각도 : " + Vector3.Angle(Vector3.right, beforeCameraForward));
-            Debug.Log("방향 벡터 : " + beforeCameraForward);
-            PlayerInputHandler.Instance.SetMouseYValue(-Vector3.Angle(Vector3.right, new Vector3(1, beforeCameraForward.y, 0).normalized));
         }
     }
 
@@ -104,7 +97,6 @@ public class ThirdWeaponSkill : WeaponSkill
             isChangedGravity = true;
             // 부딪힌 그 오브젝트의 면에서 수직 방향으로 중력을 바꾼다 
             // 만약 이미 바꿔져 있는 상태라면 그냥 아무것도 안하고 넘긴다.
-            col = collision;
             Vector3 normal = collision.contacts[0].normal;
             float angle = Vector3.Angle(playerTrm.up, collision.contacts[0].normal);
 

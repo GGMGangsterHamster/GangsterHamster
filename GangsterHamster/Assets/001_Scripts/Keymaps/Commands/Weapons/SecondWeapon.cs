@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 namespace Commands.Weapon
 {
@@ -17,7 +18,7 @@ namespace Commands.Weapon
             _skill = skill;
             _mainCamera = Camera.main;
 
-            _rightHandTrm = GameObject.Find("RightHand").transform;
+            _rightHandTrm = Define.RightHandTrm;
         }
 
         /// <summary>
