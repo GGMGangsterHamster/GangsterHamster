@@ -64,7 +64,7 @@ public class ThirdWeaponSkill : WeaponSkill
             transform.localPosition = Vector3.zero;
             isChangedGravity = false;
             GravityManager.Instance.ChangeGlobalGravityDirection(Vector3.down);
-            playerTrm.rotation = Quaternion.Euler(0, beforeAngle, 0);
+            playerTrm.rotation = Quaternion.Euler(new Vector3(0, beforeAngle, 0));
         }
     }
 
