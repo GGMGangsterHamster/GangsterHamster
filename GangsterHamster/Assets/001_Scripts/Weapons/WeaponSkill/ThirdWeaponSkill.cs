@@ -6,6 +6,7 @@ using Objects.Interactable;
 using Gravity.Object.Management;
 using Player.Movement;
 using static Define;
+using Player.Mouse;
 
 public class ThirdWeaponSkill : WeaponSkill
 {
@@ -20,7 +21,7 @@ public class ThirdWeaponSkill : WeaponSkill
     private Rigidbody _myRigid;
     private Collider _myCol;
     private Transform playerTrm; // 플레이어의 Trm
-    private PlayerMovement _movement;
+    private MouseMovement _movement;
     private Vector3 normalVec = Vector3.zero;
 
     private Vector3 beforeCamPos = Vector3.zero;
@@ -39,7 +40,7 @@ public class ThirdWeaponSkill : WeaponSkill
 
         playerTrm = Define.PlayerTrm;
         wm = playerTrm.GetComponent<WeaponManagement>();
-        _movement = playerTrm.GetComponent<PlayerMovement>();
+        _movement = playerTrm.GetComponent<MouseMovement>();
     }
 
     /// <summary>
