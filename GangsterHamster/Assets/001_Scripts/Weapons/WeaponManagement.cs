@@ -22,7 +22,9 @@ namespace Commands.Weapon
         [SerializeField] private SecondWeaponSkill _secondWeaponSkill;
         [SerializeField] private ThirdWeaponSkill _thirdWeaponSkill;
 
-        //[SerializeField] private bool _
+        [SerializeField] private bool _isUsedFirstWeapon = false;
+        [SerializeField] private bool _isUsedSecondWeaopn = false;
+        [SerializeField] private bool _isUsedThirdWeapon = false;
 
         private const int firstWeaponNumber = 1;
         public int lastWeaponNumber = 0; // 추후에 무기를 얻으면 얻을수록 늘어난다
@@ -36,18 +38,27 @@ namespace Commands.Weapon
             if(isDeveloper)
             {
                 lastWeaponNumber = 3;
+                _isUsedFirstWeapon = true;
+                _isUsedSecondWeaopn = true;
+                _isUsedThirdWeapon = true;
             }
 
+            _weaponDict.Add(-1, new FirstWeapon(null, null)); // 더미용
             _weaponDict.Add(1, new FirstWeapon(gameObject, _firstWeaponSkill));
             _weaponDict.Add(2, new SecondWeapon(gameObject, _secondWeaponSkill));
             _weaponDict.Add(3, new ThirdWeapon(gameObject, _thirdWeaponSkill));
+
+            _weaponDict[-1].isActive = false;
+            _weaponDict[1].isActive = _isUsedFirstWeapon;
+            _weaponDict[2].isActive = _isUsedSecondWeaopn;
+            _weaponDict[3].isActive = _isUsedThirdWeapon;
 
             rightHandTrm = Define.RightHandTrm;
         }
 
         private void Update()
         {
-            if(curWeaponNumber != -1 && lastWeaponNumber != 0)
+            if(lastWeaponNumber != 0)
             {
                 if (Input.GetKeyDown(KeyCode.Alpha1))
                 {
@@ -70,6 +81,28 @@ namespace Commands.Weapon
                 {
                     ChangeWeaponNumberByScroll(-1);
                 }
+            }
+
+            if(_weaponDict[1].isActive != _isUsedFirstWeapon)
+            {
+                _weaponDict[1].isActive = _isUsedFirstWeapon;
+
+                curWeaponNumber = -1;
+                SetActiveWeapons(-1);
+            }
+            else if (_weaponDict[2].isActive != _isUsedSecondWeaopn)
+            {
+                _weaponDict[2].isActive = _isUsedSecondWeaopn;
+
+                curWeaponNumber = -1;
+                SetActiveWeapons(-1);
+            }
+            else if (_weaponDict[3].isActive != _isUsedThirdWeapon)
+            {
+                _weaponDict[3].isActive = _isUsedThirdWeapon;
+
+                curWeaponNumber = -1;
+                SetActiveWeapons(-1);
             }
         }
 
@@ -115,7 +148,7 @@ namespace Commands.Weapon
         /// <param name="weaponNumber">바꿀 무기의 Number</param>
         private void ChangeWeaponNumberByKey(int weaponNumber)
         {
-            if (lastWeaponNumber >= weaponNumber)
+            if (lastWeaponNumber >= weaponNumber && _weaponDict[weaponNumber].isActive)
             {
                 curWeaponNumber = weaponNumber;
                 SetActiveWeapons(weaponNumber);
@@ -128,6 +161,8 @@ namespace Commands.Weapon
         /// <param name="addNumber"></param>
         private void ChangeWeaponNumberByScroll(int addNumber)
         {
+            int beforeNumber = addNumber;
+
             if (_weaponDict.TryGetValue(curWeaponNumber + addNumber, out WeaponCommand wc))
             {
                 curWeaponNumber += addNumber;
@@ -136,6 +171,13 @@ namespace Commands.Weapon
             {
                 curWeaponNumber = addNumber > 0 ? firstWeaponNumber : lastWeaponNumber;
             }
+
+            if (!_weaponDict[curWeaponNumber + addNumber].isActive)
+            {
+                curWeaponNumber = beforeNumber;
+                return;
+            }
+
             SetActiveWeapons(curWeaponNumber);
         }
 
@@ -143,6 +185,11 @@ namespace Commands.Weapon
         {
             switch(weaponNumber)
             {
+                case -1:
+                    _firstWeaponSkill.gameObject.SetActive(false);
+                    _secondWeaponSkill.gameObject.SetActive(false);
+                    _thirdWeaponSkill.gameObject.SetActive(false);
+                    break;
                 case 1:
                     _weaponDict[1].Reset();
                     _firstWeaponSkill.gameObject.SetActive(true);
@@ -184,6 +231,11 @@ namespace Commands.Weapon
                     }
                     break;
             }
+        }
+
+        public void SetActiveWeapon(int inWeaponNumber, bool isActive)
+        {
+            _weaponDict[inWeaponNumber].isActive = isActive;
         }
     }
 }
