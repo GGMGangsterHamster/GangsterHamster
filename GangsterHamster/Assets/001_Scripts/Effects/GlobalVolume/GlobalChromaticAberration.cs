@@ -31,6 +31,17 @@ namespace Effects.Global
             }
         }
 
+        /// <summary>
+        /// 값을 설정합니다.
+        /// </summary>
+        /// <param name="value">값 (0 ~ 1)</param>
+        public void Set(float value) {
+            _chromaticAberration.intensity.value = value;
+        }
+
+        /// <summary>
+        /// 값을 duration 동안 startValue 에서 endValue 까지 증가시킵니다.
+        /// </summary>
         public void Increase(float startValue, float endValue, float duration, Action callback = null) {
 
             if(_increaseCoroutine != null) { // 이미 재생중인 경우
@@ -52,6 +63,9 @@ namespace Effects.Global
             }, callback);
         }
 
+        /// <summary>
+        /// 값을 duration 동안 startValue 에서 endValue 까지 감소시킵니다.
+        /// </summary>
         public void Decrease(float startValue, float endValue, float duration, Action callback = null) {
 
             if (_decreaseCoroutine != null) { // 이미 재생중인 경우
@@ -71,6 +85,13 @@ namespace Effects.Global
             }, () => {
                 return _chromaticAberration.intensity.value <= endValue;
             }, callback);
+        }
+
+        /// <summary>
+        /// Global 로 사용되는 ChromaticAberration 을 반환합니다.
+        /// </summary>
+        public ChromaticAberration GetChromaticAberration() {
+            return _chromaticAberration;
         }
     }
 }
