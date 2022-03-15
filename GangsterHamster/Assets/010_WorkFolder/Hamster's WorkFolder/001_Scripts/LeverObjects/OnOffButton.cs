@@ -4,6 +4,7 @@ using Objects.UI.Management;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Objects.Callback;
 
 namespace Objects.Interactable
 {
@@ -57,6 +58,7 @@ namespace Objects.Interactable
         public virtual void On()
         {
             mObjList.ForEach(x => x.GetComponent<IActivateObject>().On());
+            ExecuteCallback.Call(transform, null);
         }
 
         public virtual void Off()
