@@ -30,5 +30,9 @@ namespace Player.Mouse
             camTrm.transform.localRotation = Quaternion.Euler(rotY, 0.0f, 0.0f);
         }
         #endregion
+
+        public void SetMouseX(float x) {
+            // transform.rotation
+        }
     }
 }

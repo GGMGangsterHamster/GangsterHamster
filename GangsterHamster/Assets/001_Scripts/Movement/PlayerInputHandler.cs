@@ -25,8 +25,7 @@ namespace Player.Movement
 
         // 특수한 입력이 필요한 키들
         private Dash _dash;
-        private MouseX _mouseX;
-        private MouseY _mouseY;
+
 
         private void Start()
         {
@@ -36,17 +35,16 @@ namespace Player.Movement
             #endregion
 
             _playerMove = FindObjectOfType<PlayerMovement>();
-            _mouseMove = FindObjectOfType<MouseMovement>();
             _weapon = FindObjectOfType<WeaponManagement>();
 
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             NULL.Check(_playerMove, () => {
                 this.enabled = false;
             });
             NULL.Check(_weapon, () => {
                 this.enabled = false;
             });
-            #endif
+#endif
 
             #region 이동
             _movementInputDictionary.Add(KeyCode.W, new MoveFoward(_playerMove));   // 앞쪽
@@ -67,8 +65,6 @@ namespace Player.Movement
             #endregion // GetKeyDown();
 
             #region Special inputs
-            _mouseX = new MouseX(_mouseMove);  // 마우스 X
-            _mouseY = new MouseY(_mouseMove);  // 마우스 Y
             _dash = new Dash(_playerMove);      // 대쉬 (Shift)
             #endregion // Special inputs
         }
@@ -97,11 +93,6 @@ namespace Player.Movement
             if(Input.GetKeyUp(KeyCode.LeftShift))
                 _dash.Execute();
             #endregion // Shift (dash)
-
-            
-
-            _mouseX.Execute();
-            _mouseY.Execute();
         }
     }
 }

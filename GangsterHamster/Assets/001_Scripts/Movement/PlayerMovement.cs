@@ -70,6 +70,8 @@ namespace Player.Movement
 
         public void Dash()
         {
+            Logger.Log("PlayerMovement (Line: 73): Up 과 Down 이번트 따로 만들어야 함", LogLevel.Warning);
+
             if(PlayerStatus.Instance.IsCrouching) {
                 Logger.Log("웅크린 상태 중 Dash 명령.");
                 PlayerUtils.Instance.SetStanded();
