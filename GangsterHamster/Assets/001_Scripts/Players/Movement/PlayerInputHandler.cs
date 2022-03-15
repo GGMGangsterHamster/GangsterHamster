@@ -27,8 +27,6 @@ namespace Player.Movement
 
         private void Start()
         {
-            // �׽�Ʈ �� �ƹ����� ������ ��
-            //결국 우엽이 잘못이네
             #region
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -37,12 +35,15 @@ namespace Player.Movement
             _playerMove = FindObjectOfType<PlayerMovement>();
             _weapon = FindObjectOfType<WeaponManagement>();
 
+            #if UNITY_EDITOR
             NULL.Check(_playerMove, () => {
                 this.enabled = false;
             });
             NULL.Check(_weapon, () => {
                 this.enabled = false;
             });
+            #endif
+
             #region 이동
             _movementInputDictionary.Add(KeyCode.W, new MoveFoward(_playerMove));   // 앞쪽
             _movementInputDictionary.Add(KeyCode.S, new MoveBackword(_playerMove)); // 뒤쪽
@@ -83,7 +84,7 @@ namespace Player.Movement
 
             Rigidbody rigid = GameManager.Instance.PlayerRigid;
 
-            rigid.velocity = new Vector3(dir.x, rigid.velocity.y, dir.z);
+            rigid.velocity = new Vector3(dir.x + rigid.velocity.x, rigid.velocity.y, dir.z + rigid.velocity.z);
             #endregion // Move
         }
          
