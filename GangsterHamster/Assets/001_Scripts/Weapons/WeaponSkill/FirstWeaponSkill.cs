@@ -10,6 +10,9 @@ public class FirstWeaponSkill : WeaponSkill
     [SerializeField]
     private float shotSpeed = 5;
 
+    [SerializeField]
+    private float knockbackSize = 1.7f;
+
     private WeaponManagement wm;
 
     private Rigidbody _myRigid; // 무기의 Rigidbody
@@ -251,7 +254,7 @@ public class FirstWeaponSkill : WeaponSkill
 
             transform.position += dir * Time.deltaTime * shotSpeed;
 
-            if (Vector3.Distance(distTrm.position, transform.position) <= 1f) // 플레이어와 거리가 1 이하라면 오른손으로 돌아오게 한다
+            if (Vector3.Distance(distTrm.position, transform.position) <= knockbackSize) // 플레이어와 거리가 1 이하라면 오른손으로 돌아오게 한다
             {
                 if (objsParent.childCount > 0)
                 {

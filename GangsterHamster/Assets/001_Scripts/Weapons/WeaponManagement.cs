@@ -145,7 +145,6 @@ namespace Commands.Weapon
                     _weaponDict[1].Reset();
                     _firstWeaponSkill.gameObject.SetActive(true);
 
-                    Debug.Log(_secondWeaponSkill.transform.parent);
                     if(_secondWeaponSkill.transform.parent == rightHandTrm)
                     {
                         _secondWeaponSkill.gameObject.SetActive(false);

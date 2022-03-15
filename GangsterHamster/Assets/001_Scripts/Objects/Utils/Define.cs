@@ -31,4 +31,17 @@ public static class Define
             return _rightHandTrm;
         }
     }
+
+    private static Transform _mainCamTrm;
+    public static Transform MainCamTrm
+    {
+        get
+        {
+            if(_mainCamTrm == null)
+            {
+                _mainCamTrm = Camera.main.transform;
+            }
+            return _mainCamTrm;
+        }
+    }
 }
