@@ -128,5 +128,12 @@ namespace Player.Movement
                 PlayerUtils.Instance.SetStanded();
             }
         }
+
+        private void Update() {
+            Vector3 delta = PlayerMoveDelta.Instance.GetDelta();
+            delta.z = delta.y;
+            delta.y = 0.0f;
+            transform.Translate(delta * Time.deltaTime);
+        }
     }
 }

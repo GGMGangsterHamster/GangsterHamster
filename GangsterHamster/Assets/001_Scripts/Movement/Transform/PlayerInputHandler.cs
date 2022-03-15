@@ -93,6 +93,8 @@ namespace Player.Movement
             if(Input.GetKeyUp(KeyCode.LeftShift))
                 _dash.Execute();
             #endregion // Shift (dash)
+
+            
         }
     }
 }
