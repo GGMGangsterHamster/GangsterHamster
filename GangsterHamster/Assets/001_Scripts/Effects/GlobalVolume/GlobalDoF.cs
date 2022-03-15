@@ -6,21 +6,8 @@ using UnityEngine.Rendering.HighDefinition;
 
 namespace Effects.Global
 {
-    public class GlobalChromaticAberration : Effects<GlobalChromaticAberration, ChromaticAberration>
+    public class GlobalDoF : Effects<GlobalDoF, DepthOfField>
     {
-
-        // 코루틴 저장 용
-        private Coroutine _decreaseCoroutine = null;
-        private Coroutine _increaseCoroutine = null;
-
-        /// <summary>
-        /// 값을 설정합니다.
-        /// </summary>
-        /// <param name="value">값 (0 ~ 1)</param>
-        public void Set(float value) {
-            _globalVolume.intensity.value = value;
-        }
-
         /// <summary>
         /// 효과를 높혀 나갑니다.
         /// </summary>
@@ -32,10 +19,10 @@ namespace Effects.Global
             float step = (endValue - startValue) / duration;
 
             Tween(() => {
-                _globalVolume.intensity.value = startValue;
+                _volume.weight = startValue;
             }, () => {
-                _globalVolume.intensity.value += step * Time.deltaTime;
-            }, () => _globalVolume.intensity.value >= endValue, callback);
+                _volume.weight += step * Time.deltaTime;
+            }, () => _volume.weight >= endValue, callback);
         }
 
         /// <summary>
@@ -49,12 +36,11 @@ namespace Effects.Global
             float step = (endValue - startValue) / duration;
 
             Tween(() => {
-                _globalVolume.intensity.value = startValue;
+                _volume.weight = startValue;
             }, () => {
-                _globalVolume.intensity.value += step * Time.deltaTime;
-            }, () => _globalVolume.intensity.value <= endValue, callback);
+                _volume.weight += step * Time.deltaTime;
+            }, () => _volume.weight <= endValue, callback);
         }
-
 
     }
 }
