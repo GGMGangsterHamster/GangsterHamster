@@ -15,14 +15,12 @@ namespace Player.Movement
     /// 기본적인 움직임을 구현한 클레스
     /// </summary>
     [RequireComponent(typeof(Rigidbody))]
-    public class PlayerMovement : MonoBehaviour, IMoveable, IJumpable, IMouseDeltaRecvable, ICrouchable
+    public class PlayerMovement : MonoBehaviour, IMoveable, IJumpable, ICrouchable
     {
         
         [Header("바닥과 플레이어 거리")]
         [SerializeField] private float _groundDistance;
 
-
-        private Transform camTrm = null;
         private Rigidbody rigid;
 
         /// <summary>
@@ -42,7 +40,6 @@ namespace Player.Movement
             OnMove += (dir) => { };
             OnJump += () => { };
             rigid = GetComponent<Rigidbody>();
-            camTrm = Camera.main.transform;
         }
 
         #region Movement
@@ -84,25 +81,7 @@ namespace Player.Movement
 
         #endregion // Movement
 
-        #region Mouse delta
-
-        public void OnMouseX(float x)
-        {
-            // 4원수는 교환 법칙이 성립되지 않는대요
-            // 4원수 * 곱하고자 하는 수 = local
-            // 곱하고자 하는 수 * 4원수 = world
-            transform.rotation = transform.rotation * Quaternion.Euler(0.0f, x * PlayerValues.Instance.mouseSpeed, 0.0f);
-        }
-
-        float rotY = 0.0f;
-        public void OnMouseY(float y, bool includingMouseSpeed = true)
-        {
-            rotY += -y * (includingMouseSpeed ? PlayerValues.Instance.mouseSpeed : 1);
-            rotY = Mathf.Clamp(rotY, -90f, 90f);
-
-            camTrm.transform.localRotation = Quaternion.Euler(rotY, 0.0f, 0.0f);
-        }
-        #endregion
+        
 
         #region Jump
 

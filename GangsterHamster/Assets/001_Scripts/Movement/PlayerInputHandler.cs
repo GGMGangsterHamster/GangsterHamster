@@ -6,6 +6,8 @@ using Commands;
 using Commands.Weapon;
 using Commands.Movement.Movements;
 using Commands.Interaction;
+using Commands.Movement.Mouse;
+using Player.Mouse;
 
 namespace Player.Movement
 {
@@ -16,6 +18,7 @@ namespace Player.Movement
         private Dictionary<KeyCode, Command> _movementInputDictionary = new Dictionary<KeyCode, Command>(); // 이동 키 (FixedUpdate)
 
         private PlayerMovement _playerMove = null;
+        private MouseMovement _mouseMove = null;
         private WeaponManagement _weapon = null;
 
 
@@ -33,6 +36,7 @@ namespace Player.Movement
             #endregion
 
             _playerMove = FindObjectOfType<PlayerMovement>();
+            _mouseMove = FindObjectOfType<MouseMovement>();
             _weapon = FindObjectOfType<WeaponManagement>();
 
             #if UNITY_EDITOR
@@ -63,8 +67,8 @@ namespace Player.Movement
             #endregion // GetKeyDown();
 
             #region Special inputs
-            _mouseX = new MouseX(_playerMove);  // 마우스 X
-            _mouseY = new MouseY(_playerMove);  // 마우스 Y
+            _mouseX = new MouseX(_mouseMove);  // 마우스 X
+            _mouseY = new MouseY(_mouseMove);  // 마우스 Y
             _dash = new Dash(_playerMove);      // 대쉬 (Shift)
             #endregion // Special inputs
         }
@@ -77,15 +81,6 @@ namespace Player.Movement
                     _movementInputDictionary[key].Execute();
             }
 
-            #region Move
-            Vector3 dir = PlayerMoveDelta.Instance.GetDelta();
-            dir.z = dir.y;
-            dir.y = 0;
-
-            Rigidbody rigid = GameManager.Instance.PlayerRigid;
-
-            rigid.velocity = new Vector3(dir.x + rigid.velocity.x, rigid.velocity.y, dir.z + rigid.velocity.z);
-            #endregion // Move
         }
          
         private void Update()
