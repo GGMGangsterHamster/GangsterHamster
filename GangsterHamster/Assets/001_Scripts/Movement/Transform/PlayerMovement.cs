@@ -97,7 +97,6 @@ namespace Player.Movement
                 return;
             }
 
-            // Log.Debug.Log("Have to fix PlayerMovement::Jump()", Log.LogLevel.Normal);
             Vector3 force = new Vector3(1.0f, Mathf.Sqrt(2.0f * 9.8f * PlayerValues.JumpHeight), 1.0f); // TODO: Cache?
             Vector3 gravityDir = GravityManager.Instance.GetGlobalGravityDirection();
 

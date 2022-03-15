@@ -10,10 +10,7 @@ namespace Objects.Callback
         /// <param name="transform">자신의 transform</param>
         /// <param name="param">매개 변수</param>
         public static void Call(Transform transform, object param = null) {
-            ICallbackable[] callbackables = transform.GetComponentsInChildren<ICallbackable>();
-            for (int i = 0; i < callbackables.Length; ++i) {
-                callbackables[i].Invoke(param);
-            }
+            transform.GetComponentInChildren<ICallbackable>()?.Invoke(param);
         }
     }
 }

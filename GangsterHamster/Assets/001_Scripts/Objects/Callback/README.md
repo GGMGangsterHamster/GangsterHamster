@@ -17,7 +17,7 @@
 ### 유틸 구조
 ```cs
 public static class ExecuteCallback {
-    // 자식 Callback 호출 기능
+    // 자식 Callback 호출 기능 (하나만 호출함)
     public static void Call(Transform transform, object param = null);
 }
 ```
