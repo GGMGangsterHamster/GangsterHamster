@@ -15,19 +15,21 @@ public class ThirdWeaponSkill : WeaponSkill
     [SerializeField]
     private float shotSpeed = 5;
     [SerializeField]
-    private Transform CamPosTrm;
+    private Transform camPosTrm;
+    [SerializeField]
+    private Transform camParent;
+    [SerializeField]
+    private Transform tempCameraParent;
+
+    [SerializeField]
+    private float gravityCameraMoveSpeed = 1f;
 
     private WeaponManagement wm;
     private Rigidbody _myRigid;
     private Collider _myCol;
+    private MeshRenderer _myRenderer;
     private Transform playerTrm; // 플레이어의 Trm
-    private MouseMovement _movement;
     private Vector3 normalVec = Vector3.zero;
-
-    private Vector3 beforeCamPos = Vector3.zero;
-    private Vector3 beforeCamRot = Vector3.zero;
-    private float afterCamRotY = 0f;
-    private float gravityLerpSpeed = 0f;
     private float timer = 0f;
 
     private bool isChangedGravity = false;
@@ -37,10 +39,10 @@ public class ThirdWeaponSkill : WeaponSkill
     {
         _myRigid = GetComponent<Rigidbody>();
         _myCol = GetComponent<Collider>();
+        _myRenderer = GetComponent<MeshRenderer>();
 
         playerTrm = Define.PlayerTrm;
         wm = playerTrm.GetComponent<WeaponManagement>();
-        _movement = playerTrm.GetComponent<MouseMovement>();
     }
 
     /// <summary>
@@ -73,7 +75,7 @@ public class ThirdWeaponSkill : WeaponSkill
             transform.localPosition = Vector3.zero;
             isChangedGravity = false;
 
-            ChangeGravity();
+            ResetGravity();
         }
     }
 
@@ -118,49 +120,65 @@ public class ThirdWeaponSkill : WeaponSkill
             _myRigid.velocity = Vector3.zero;
             _myRigid.useGravity = false;
             _myRigid.constraints = RigidbodyConstraints.FreezeAll;
+
         }
     }
 
-    private void ChangeGravity()
+    private void SetGravity(Vector3 gravityDir)
     {
-        beforeCamPos = MainCamTrm.position;
-        beforeCamRot = MainCamTrm.rotation.eulerAngles;
 
+    }
+
+    private void ResetGravity()
+    {
+        if (normalVec == Vector3.zero || normalVec == Vector3.down) return;
+
+        normalVec = Vector3.zero;
+
+        TransformCheckPointManagement.Instance.SetCheckpoint("BeforeCheckpoint", PlayerTrm);
         GravityManager.Instance.ChangeGlobalGravityDirection(Vector3.down);
 
-        MainCamTrm.parent = null;
-
-        afterCamRotY = MainCamTrm.rotation.eulerAngles.x;
-
+        MainCamTrm.parent = tempCameraParent;
+        MainCamTrm.rotation = TransformCheckPointManagement.Instance.GetCheckPoint("BeforeCheckpoint").rotation;
         isMoveAfterPos = true;
         timer = 0;
 
-        gravityLerpSpeed = Vector3.Distance(beforeCamPos, CamPosTrm.position);
-
         float beforeAngle = playerTrm.rotation.eulerAngles.x == 0 ? playerTrm.rotation.eulerAngles.y : -playerTrm.rotation.eulerAngles.x;
         playerTrm.rotation = Quaternion.Euler(new Vector3(0, beforeAngle, 0));
+
+        TransformCheckPointManagement.Instance.SetCheckpoint("AfterCheckpoint", PlayerTrm);
+        _myRenderer.enabled = false;
     }
 
     private void Update()
     {
-        Debug.Log("Before : " + (MainCamTrm.rotation.eulerAngles.x >= 270 ? (MainCamTrm.rotation.eulerAngles.x - 360) : MainCamTrm.rotation.eulerAngles.x));
         if (isMoveAfterPos)
         {
-            timer += Time.deltaTime;
-            Debug.Log("After : " + afterCamRotY);
+            timer += Time.deltaTime * gravityCameraMoveSpeed;
 
-            MainCamTrm.position = Vector3.Lerp(beforeCamPos, CamPosTrm.position, timer);
+            MainCamTrm.position = Vector3.Lerp(TransformCheckPointManagement.Instance.GetCheckPoint("BeforeCheckpoint").position, 
+                                               camPosTrm.position, 
+                                               timer);
+
+            Quaternion beforeCamRot = TransformCheckPointManagement.Instance.GetCheckPoint("BeforeCheckpoint").rotation;
+            TransformCheckPointManagement.Instance.SetCheckpoint("AfterCheckpoint", PlayerTrm);
+            Quaternion afterCamRot = TransformCheckPointManagement.Instance.GetCheckPoint("AfterCheckpoint").rotation;
+
             // 투 두 : 지금 대입이 아니라 - 연산을 하고 있기때문에 우앱이가 Set함수를 만들어주면 그거를 사용할거임
-            _movement.OnMouseY(-Mathf.Lerp((beforeCamRot.x >= 270 ? (beforeCamRot.x - 360) : beforeCamRot.x), afterCamRotY, timer));
+            //_movement.SetMouseY(-Mathf.Lerp(beforeCamRotY, 
+            //                                afterCamRotY, 
+            //                                timer));
+
+            tempCameraParent.rotation = Quaternion.Lerp(beforeCamRot, afterCamRot, timer);
 
             if(timer >= 1f)
             {
-                MainCamTrm.parent = CamPosTrm;
+                MainCamTrm.parent = camParent;
                 MainCamTrm.localPosition = Vector3.zero;
-                _movement.OnMouseY(afterCamRotY);
 
                 isMoveAfterPos = false;
                 timer = 0;
+                _myRenderer.enabled = true;
             }
         }
     }

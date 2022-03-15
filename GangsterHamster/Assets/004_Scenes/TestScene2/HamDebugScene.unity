@@ -1171,7 +1171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f55a6d4648f50b42a54e26595522284, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 0}
 --- !u!114 &866772263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1372,6 +1371,7 @@ Transform:
   - {fileID: 1591943943}
   - {fileID: 2025211062}
   - {fileID: 835826337}
+  - {fileID: 2124867314}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1890,6 +1890,11 @@ Transform:
   m_Father: {fileID: 1122813105}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1643938530 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2977820580567367455, guid: e34166b4435591933a2999c701cbaa18, type: 3}
+  m_PrefabInstance: {fileID: 500951125}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1713701643 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6149447447466826009, guid: b64d04506f854704f932784cfae35e57, type: 3}
@@ -2243,6 +2248,62 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2124867313
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2124867314}
+  - component: {fileID: 2124867316}
+  - component: {fileID: 2124867315}
+  m_Layer: 0
+  m_Name: MouseManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2124867314
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124867313}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1122813105}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2124867315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124867313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac5701a9d0e20c1eb155a64ba43c0f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2124867316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124867313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13899e1da3b78920b9bb036207e13177, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2144660493
 GameObject:
   m_ObjectHideFlags: 0
@@ -2386,6 +2447,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3557282036623537484, guid: 37e7e73d7b61c8a10bb3c8bc927e9f6b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3557282036768349801, guid: 37e7e73d7b61c8a10bb3c8bc927e9f6b, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2669,6 +2734,18 @@ PrefabInstance:
     - target: {fileID: 4481787102592299107, guid: 4cb21bf317623b147a890b70d98ae1ea, type: 3}
       propertyPath: CamPosTrm
       value: 
+      objectReference: {fileID: 1643938530}
+    - target: {fileID: 4481787102592299107, guid: 4cb21bf317623b147a890b70d98ae1ea, type: 3}
+      propertyPath: camParent
+      value: 
+      objectReference: {fileID: 1643938530}
+    - target: {fileID: 4481787102592299107, guid: 4cb21bf317623b147a890b70d98ae1ea, type: 3}
+      propertyPath: camPosTrm
+      value: 
       objectReference: {fileID: 1304152026}
+    - target: {fileID: 4481787102592299107, guid: 4cb21bf317623b147a890b70d98ae1ea, type: 3}
+      propertyPath: gravityCameraMoveSpeed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cb21bf317623b147a890b70d98ae1ea, type: 3}
