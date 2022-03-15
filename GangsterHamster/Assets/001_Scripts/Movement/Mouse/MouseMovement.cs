@@ -7,9 +7,11 @@ namespace Player.Mouse
     {
 
         private Transform camTrm = null;
+        private Transform playerTrm = null;
 
-        private void Awake() {
+        private void Start() {
             camTrm = Camera.main.transform;
+            playerTrm = GameManager.Instance.player.transform;
         }
 
         #region Mouse delta
@@ -18,7 +20,7 @@ namespace Player.Mouse
             // 4원수는 교환 법칙이 성립되지 않는대요
             // 4원수 * 곱하고자 하는 수 = local
             // 곱하고자 하는 수 * 4원수 = world
-            transform.rotation = transform.rotation * Quaternion.Euler(0.0f, x * PlayerValues.Instance.mouseSpeed, 0.0f);
+            playerTrm.rotation = playerTrm.rotation * Quaternion.Euler(0.0f, x * PlayerValues.Instance.mouseSpeed, 0.0f);
         }
 
         float rotY = 0.0f;
