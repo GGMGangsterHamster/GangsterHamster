@@ -22,6 +22,8 @@ namespace Commands.Weapon
         [SerializeField] private SecondWeaponSkill _secondWeaponSkill;
         [SerializeField] private ThirdWeaponSkill _thirdWeaponSkill;
 
+        //[SerializeField] private bool _
+
         private const int firstWeaponNumber = 1;
         public int lastWeaponNumber = 0; // 추후에 무기를 얻으면 얻을수록 늘어난다
 

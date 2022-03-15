@@ -28,6 +28,7 @@ namespace Player.Movement
         private void Start()
         {
             // �׽�Ʈ �� �ƹ����� ������ ��
+            //결국 우엽이 잘못이네
             #region
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -74,8 +75,18 @@ namespace Player.Movement
                 if (Input.GetKey(key))
                     _movementInputDictionary[key].Execute();
             }
-        }
 
+            #region Move
+            Vector3 dir = PlayerMoveDelta.Instance.GetDelta();
+            dir.z = dir.y;
+            dir.y = 0;
+
+            Rigidbody rigid = GameManager.Instance.PlayerRigid;
+
+            rigid.velocity = new Vector3(dir.x, rigid.velocity.y, dir.z);
+            #endregion // Move
+        }
+         
         private void Update()
         {
             foreach (KeyCode key in _keydownInputDictionary.Keys) { // GetKeyDown();
@@ -91,12 +102,7 @@ namespace Player.Movement
                 _dash.Execute();
             #endregion // Shift (dash)
 
-            #region Move
-            Vector3 dir = PlayerMoveDelta.Instance.GetDelta();
-            dir.z = dir.y;
-            dir.y = 0;
-            GameManager.Instance.player.transform.Translate(dir * Time.deltaTime);
-            #endregion // Move
+            
 
             _mouseX.Execute();
             _mouseY.Execute();

@@ -149,6 +149,7 @@ public class ThirdWeaponSkill : WeaponSkill
             Debug.Log("After : " + afterCamRotY);
 
             MainCamTrm.position = Vector3.Lerp(beforeCamPos, CamPosTrm.position, timer);
+            // 투 두 : 지금 대입이 아니라 - 연산을 하고 있기때문에 우앱이가 Set함수를 만들어주면 그거를 사용할거임
             _movement.OnMouseY(-Mathf.Lerp((beforeCamRot.x >= 270 ? (beforeCamRot.x - 360) : beforeCamRot.x), afterCamRotY, timer));
 
             if(timer >= 1f)
