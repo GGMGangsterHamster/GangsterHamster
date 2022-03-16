@@ -52,6 +52,22 @@ public class ThirdWeaponSkill : WeaponSkill
     {
         if (transform.parent != null)
         {
+            // 1번 무기의 Shot 함수를 조금 뜯어와서 수정한 뒤 사용
+            Vector3 boxSize = PlayerTrm.GetComponent<BoxCollider>().size;
+
+            Collider[] cols = Physics.OverlapBox(PlayerTrm.position,
+                                                 boxSize + new Vector3(0, -0.5f, 2f),
+                                                 PlayerTrm.rotation); // 플레이어의 바로 앞을 검사해서 뭔가 있는지 확인
+
+            for (int i = 0; i < cols.Length; i++)
+            {
+                if (cols[i].TryGetComponent(out Interactable outII)) // 만약 상호작용 되는 오브젝트가 앞에 있었으면 리턴
+                {
+                    // 뭔가에 막힌다 그럼 여기로 옴
+                    return;
+                }
+            }
+
             StartCoroutine(ShotCo(dir));
         }
     }
@@ -117,6 +133,27 @@ public class ThirdWeaponSkill : WeaponSkill
             playerTrm.rotation = Quaternion.LookRotation(-normalVec);
             playerTrm.rotation = Quaternion.LookRotation(playerTrm.up);
 
+            if(normalVec.x != 0)
+            {
+                playerTrm.rotation = Quaternion.Euler(new Vector3(playerTrm.rotation.eulerAngles.x,
+                                                  playerTrm.rotation.eulerAngles.y,
+                                                  normalVec.x < 0 ? 90 : 270));
+            }
+            else if(normalVec.y != 0)
+            {
+                playerTrm.rotation = Quaternion.Euler(new Vector3(playerTrm.rotation.eulerAngles.x,
+                                  playerTrm.rotation.eulerAngles.y,
+                                  180));
+            }
+            else if(normalVec.z != 0)
+            {
+                playerTrm.rotation = Quaternion.Euler(new Vector3(playerTrm.rotation.eulerAngles.x,
+                                                                  playerTrm.rotation.eulerAngles.y,
+                                                                  normalVec.z < 0 ? 0 : 180));
+            }
+
+            Debug.Log(normalVec + " : " + playerTrm.rotation.eulerAngles.z);
+
             // 여기서 무기를 멈추게 해야 함
             _myRigid.velocity = Vector3.zero;
             _myRigid.useGravity = false;
@@ -141,8 +178,11 @@ public class ThirdWeaponSkill : WeaponSkill
 
     private void ResetGravity()
     {
-        if (normalVec == Vector3.zero || normalVec == Vector3.down) return;
-
+        if (normalVec == Vector3.zero || normalVec == Vector3.up) return;
+        else if(normalVec == Vector3.down)
+        {
+            playerTrm.position += new Vector3(0, -1.8f, 0);
+        }
         normalVec = Vector3.zero;
 
         TransformCheckPointManagement.Instance.SetCheckpoint("BeforeCheckpoint", PlayerTrm);
@@ -156,6 +196,7 @@ public class ThirdWeaponSkill : WeaponSkill
         playerTrm.rotation = Quaternion.Euler(new Vector3(0, beforeAngle, 0));
 
         TransformCheckPointManagement.Instance.SetCheckpoint("AfterCheckpoint", PlayerTrm);
+        TransformCheckPointManagement.Instance.GetCheckPoint("AfterCheckpoint").position += playerTrm.up * 1.8f;
         _myRenderer.enabled = false;
     }
 
