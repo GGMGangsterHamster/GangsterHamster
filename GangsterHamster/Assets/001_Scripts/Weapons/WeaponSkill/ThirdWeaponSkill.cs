@@ -19,7 +19,7 @@ public class ThirdWeaponSkill : WeaponSkill
     [SerializeField]
     private Transform camParent;
     [SerializeField]
-    private Transform tempCameraParent;
+    private Transform cameraParent;
 
     [SerializeField]
     private float gravityCameraMoveSpeed = 1f;
@@ -105,28 +105,38 @@ public class ThirdWeaponSkill : WeaponSkill
     {
         if(collision.transform.TryGetComponent(out Interactable I) && transform.parent != wm.transform && !isChangedGravity)
         {
+            TransformCheckPointManagement.Instance.SetCheckpoint("BeforeCheckpoint", PlayerTrm);
+
+            TransformCheckPointManagement.Instance.GetCheckPoint("BeforeCheckpoint").position += new Vector3(0, 1.8f, 0);
             isChangedGravity = true;
             // 부딪힌 그 오브젝트의 면에서 수직 방향으로 중력을 바꾼다 
             // 만약 이미 바꿔져 있는 상태라면 그냥 아무것도 안하고 넘긴다.
             normalVec = collision.contacts[0].normal;
-            float angle = Vector3.Angle(playerTrm.up, collision.contacts[0].normal);
 
-            GravityManager.Instance.ChangeGlobalGravityDirection(-normalVec);
-            playerTrm.rotation = Quaternion.Euler(new Vector3(normalVec.z != 0 ? normalVec.z > 0 ? angle : -angle : normalVec.y != 0 ? normalVec.y > 0 ? 0 : angle * 2 : 0
-                                                            , 0
-                                                            , normalVec.x != 0 ? normalVec.z > 0 ? -angle : angle : 0
-            ));
+            // 위를 바라보게
+            playerTrm.rotation = Quaternion.LookRotation(-normalVec);
+            playerTrm.rotation = Quaternion.LookRotation(playerTrm.up);
+
             // 여기서 무기를 멈추게 해야 함
             _myRigid.velocity = Vector3.zero;
             _myRigid.useGravity = false;
             _myRigid.constraints = RigidbodyConstraints.FreezeAll;
 
+            SetGravity(normalVec);
         }
     }
 
-    private void SetGravity(Vector3 gravityDir)
+    private void SetGravity(Vector3 gravityNormalDir)
     {
+        GravityManager.Instance.ChangeGlobalGravityDirection(-gravityNormalDir);
 
+        MainCamTrm.parent = cameraParent;
+        isMoveAfterPos = true;
+        timer = 0;
+
+        TransformCheckPointManagement.Instance.SetCheckpoint("AfterCheckpoint", PlayerTrm);
+
+        _myRenderer.enabled = false;
     }
 
     private void ResetGravity()
@@ -138,8 +148,7 @@ public class ThirdWeaponSkill : WeaponSkill
         TransformCheckPointManagement.Instance.SetCheckpoint("BeforeCheckpoint", PlayerTrm);
         GravityManager.Instance.ChangeGlobalGravityDirection(Vector3.down);
 
-        MainCamTrm.parent = tempCameraParent;
-        MainCamTrm.rotation = TransformCheckPointManagement.Instance.GetCheckPoint("BeforeCheckpoint").rotation;
+        MainCamTrm.parent = cameraParent;
         isMoveAfterPos = true;
         timer = 0;
 
@@ -162,6 +171,7 @@ public class ThirdWeaponSkill : WeaponSkill
 
             Quaternion beforeCamRot = TransformCheckPointManagement.Instance.GetCheckPoint("BeforeCheckpoint").rotation;
             TransformCheckPointManagement.Instance.SetCheckpoint("AfterCheckpoint", PlayerTrm);
+
             Quaternion afterCamRot = TransformCheckPointManagement.Instance.GetCheckPoint("AfterCheckpoint").rotation;
 
             // 투 두 : 지금 대입이 아니라 - 연산을 하고 있기때문에 우앱이가 Set함수를 만들어주면 그거를 사용할거임
@@ -169,7 +179,7 @@ public class ThirdWeaponSkill : WeaponSkill
             //                                afterCamRotY, 
             //                                timer));
 
-            tempCameraParent.rotation = Quaternion.Lerp(beforeCamRot, afterCamRot, timer);
+            cameraParent.rotation = Quaternion.Lerp(beforeCamRot, afterCamRot, timer);
 
             if(timer >= 1f)
             {

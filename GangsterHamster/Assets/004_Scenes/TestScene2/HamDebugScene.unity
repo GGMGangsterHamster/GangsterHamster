@@ -1095,6 +1095,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 835826337}
+  - component: {fileID: 835826338}
   m_Layer: 0
   m_Name: '## Managers ##'
   m_TagString: Untagged
@@ -1116,6 +1117,19 @@ Transform:
   m_Father: {fileID: 1122813105}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &835826338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835826336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b5d4013d7c018f48a0b42ae3abb50c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkpointPrefab: {fileID: 5553566732696751839, guid: 3d99ee8e0f082144b95f9379d2ba09fa, type: 3}
 --- !u!1 &866660239 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9042635209490786819, guid: b64d04506f854704f932784cfae35e57, type: 3}
@@ -1900,6 +1914,36 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6149447447466826009, guid: b64d04506f854704f932784cfae35e57, type: 3}
   m_PrefabInstance: {fileID: 1497607160}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1792731858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1792731859}
+  m_Layer: 0
+  m_Name: CameraParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1792731859
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792731858}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.516, y: 4.101, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1823014187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2743,6 +2787,14 @@ PrefabInstance:
       propertyPath: camPosTrm
       value: 
       objectReference: {fileID: 1304152026}
+    - target: {fileID: 4481787102592299107, guid: 4cb21bf317623b147a890b70d98ae1ea, type: 3}
+      propertyPath: cameraParent
+      value: 
+      objectReference: {fileID: 1792731859}
+    - target: {fileID: 4481787102592299107, guid: 4cb21bf317623b147a890b70d98ae1ea, type: 3}
+      propertyPath: tempCameraParent
+      value: 
+      objectReference: {fileID: 1792731859}
     - target: {fileID: 4481787102592299107, guid: 4cb21bf317623b147a890b70d98ae1ea, type: 3}
       propertyPath: gravityCameraMoveSpeed
       value: 1
