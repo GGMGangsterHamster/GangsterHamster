@@ -55,8 +55,8 @@ public class ThirdWeaponSkill : WeaponSkill
             // 1번 무기의 Shot 함수를 조금 뜯어와서 수정한 뒤 사용
             Vector3 boxSize = PlayerTrm.GetComponent<BoxCollider>().size;
 
-            Collider[] cols = Physics.OverlapBox(PlayerTrm.position,
-                                                 boxSize + new Vector3(0, -0.5f, 2f),
+            Collider[] cols = Physics.OverlapBox(PlayerTrm.position + new Vector3(0, boxSize.y / 2, 0),
+                                                 boxSize + new Vector3(0, -1.5f, 1f),
                                                  PlayerTrm.rotation); // 플레이어의 바로 앞을 검사해서 뭔가 있는지 확인
 
             for (int i = 0; i < cols.Length; i++)
@@ -105,6 +105,8 @@ public class ThirdWeaponSkill : WeaponSkill
         transform.parent = null;
         _myCol.isTrigger = false;
 
+        transform.position = PlayerTrm.position + PlayerTrm.forward + new Vector3(0, 1.8f, 0);
+
         while (true)
         {
             transform.position += dir * shotSpeed * Time.deltaTime;
@@ -121,13 +123,15 @@ public class ThirdWeaponSkill : WeaponSkill
     {
         if(collision.transform.TryGetComponent(out Interactable I) && transform.parent != wm.transform && !isChangedGravity)
         {
+            normalVec = collision.contacts[0].normal;
+            if (normalVec == Vector3.up) return;
+
             TransformCheckPointManagement.Instance.SetCheckpoint("BeforeCheckpoint", PlayerTrm);
 
             TransformCheckPointManagement.Instance.GetCheckPoint("BeforeCheckpoint").position += new Vector3(0, 1.8f, 0);
             isChangedGravity = true;
             // 부딪힌 그 오브젝트의 면에서 수직 방향으로 중력을 바꾼다 
             // 만약 이미 바꿔져 있는 상태라면 그냥 아무것도 안하고 넘긴다.
-            normalVec = collision.contacts[0].normal;
 
             // 위를 바라보게
             playerTrm.rotation = Quaternion.LookRotation(-normalVec);
@@ -152,7 +156,7 @@ public class ThirdWeaponSkill : WeaponSkill
                                                                   normalVec.z < 0 ? 0 : 180));
             }
 
-            Debug.Log(normalVec + " : " + playerTrm.rotation.eulerAngles.z);
+            Debug.Log(normalVec);
 
             // 여기서 무기를 멈추게 해야 함
             _myRigid.velocity = Vector3.zero;
@@ -167,13 +171,12 @@ public class ThirdWeaponSkill : WeaponSkill
     {
         GravityManager.Instance.ChangeGlobalGravityDirection(-gravityNormalDir);
 
-        MainCamTrm.parent = cameraParent;
-        isMoveAfterPos = true;
-        timer = 0;
 
         TransformCheckPointManagement.Instance.SetCheckpoint("AfterCheckpoint", PlayerTrm);
 
         _myRenderer.enabled = false;
+
+        StartCoroutine(CameraRotationAndMoveCoroutine());
     }
 
     private void ResetGravity()
@@ -188,26 +191,27 @@ public class ThirdWeaponSkill : WeaponSkill
         TransformCheckPointManagement.Instance.SetCheckpoint("BeforeCheckpoint", PlayerTrm);
         GravityManager.Instance.ChangeGlobalGravityDirection(Vector3.down);
 
-        MainCamTrm.parent = cameraParent;
-        isMoveAfterPos = true;
-        timer = 0;
-
         float beforeAngle = playerTrm.rotation.eulerAngles.x == 0 ? playerTrm.rotation.eulerAngles.y : -playerTrm.rotation.eulerAngles.x;
         playerTrm.rotation = Quaternion.Euler(new Vector3(0, beforeAngle, 0));
 
         TransformCheckPointManagement.Instance.SetCheckpoint("AfterCheckpoint", PlayerTrm);
         TransformCheckPointManagement.Instance.GetCheckPoint("AfterCheckpoint").position += playerTrm.up * 1.8f;
         _myRenderer.enabled = false;
+
+        StartCoroutine(CameraRotationAndMoveCoroutine());
     }
 
-    private void Update()
+    IEnumerator CameraRotationAndMoveCoroutine()
     {
-        if (isMoveAfterPos)
+        MainCamTrm.parent = cameraParent;
+        timer = 0f;
+
+        while (true)
         {
             timer += Time.deltaTime * gravityCameraMoveSpeed;
 
-            MainCamTrm.position = Vector3.Lerp(TransformCheckPointManagement.Instance.GetCheckPoint("BeforeCheckpoint").position, 
-                                               camPosTrm.position, 
+            MainCamTrm.position = Vector3.Lerp(TransformCheckPointManagement.Instance.GetCheckPoint("BeforeCheckpoint").position,
+                                               camPosTrm.position,
                                                timer);
 
             Quaternion beforeCamRot = TransformCheckPointManagement.Instance.GetCheckPoint("BeforeCheckpoint").rotation;
@@ -222,7 +226,7 @@ public class ThirdWeaponSkill : WeaponSkill
 
             cameraParent.rotation = Quaternion.Lerp(beforeCamRot, afterCamRot, timer);
 
-            if(timer >= 1f)
+            if (timer >= 1f)
             {
                 MainCamTrm.parent = camParent;
                 MainCamTrm.localPosition = Vector3.zero;
@@ -230,7 +234,11 @@ public class ThirdWeaponSkill : WeaponSkill
                 isMoveAfterPos = false;
                 timer = 0;
                 _myRenderer.enabled = true;
+
+                yield break;
             }
+
+            yield return null;
         }
     }
 }

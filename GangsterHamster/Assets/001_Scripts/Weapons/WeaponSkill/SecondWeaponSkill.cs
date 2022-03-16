@@ -32,6 +32,7 @@ public class SecondWeaponSkill : WeaponSkill
     private WeaponManagement wm;
 
     private Rigidbody _myRigid; // ¹«±âÀÇ Rigidbody
+    private Collider _myCol;
 
 
     private Dictionary<ScaleEnum, float> scaleDict = new Dictionary<ScaleEnum, float>();
@@ -49,6 +50,7 @@ public class SecondWeaponSkill : WeaponSkill
     private void Start()
     {
         _myRigid = GetComponent<Rigidbody>();
+        _myCol = GetComponent<Collider>();
 
         scaleDict.Add(ScaleEnum.LevelOne, 0.5f);
         scaleDict.Add(ScaleEnum.LevelTwo, 1f);
@@ -90,6 +92,8 @@ public class SecondWeaponSkill : WeaponSkill
                 _myRigid.useGravity = false;
                 _myRigid.velocity = Vector3.zero;
                 _myRigid.constraints = RigidbodyConstraints.None;
+                _myCol.isTrigger = true;
+
                 rotationCoroutine = RotationCo();
                 StartCoroutine(rotationCoroutine);
 
@@ -151,7 +155,10 @@ public class SecondWeaponSkill : WeaponSkill
     IEnumerator ShotCo(Vector3 dir)
     {
         transform.parent = null;
+        _myCol.isTrigger = false;
         StopCoroutine(rotationCoroutine);
+
+        transform.position = PlayerTrm.position + PlayerTrm.forward + new Vector3(0, 1.8f, 0);
 
         while (true)
         {

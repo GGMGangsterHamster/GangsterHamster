@@ -199,7 +199,9 @@ public class FirstWeaponSkill : WeaponSkill
     {
         transform.parent = null;
 
-        while(true)
+        transform.position = PlayerTrm.position + PlayerTrm.forward + new Vector3(0, 1.8f, 0);
+
+        while (true)
         {
             moveVec = dir * shotSpeed;
             
