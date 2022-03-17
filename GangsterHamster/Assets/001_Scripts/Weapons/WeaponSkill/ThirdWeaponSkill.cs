@@ -27,6 +27,7 @@ public class ThirdWeaponSkill : WeaponSkill
     private Rigidbody _myRigid;
     private Collider _myCol;
     private MeshRenderer _myRenderer;
+    private WeaponManagement wm;
     private Vector3 normalVec = Vector3.zero;
     private float timer = 0f;
 
@@ -40,6 +41,8 @@ public class ThirdWeaponSkill : WeaponSkill
         _myRigid = GetComponent<Rigidbody>();
         _myCol = GetComponent<Collider>();
         _myRenderer = GetComponent<MeshRenderer>();
+
+        wm = PlayerBaseTrm.GetComponent<WeaponManagement>();
     }
 
     /// <summary>
@@ -63,7 +66,7 @@ public class ThirdWeaponSkill : WeaponSkill
     /// <summary>
     /// R키 클릭시 무기가 돌아옴에 동시에 중력이 원래대로 돌아온다.
     /// </summary>
-    public void Comeback()
+    public void ComeBack()
     {
         if (transform.parent != RightHandTrm)
         {
@@ -137,6 +140,12 @@ public class ThirdWeaponSkill : WeaponSkill
             _myRigid.useGravity = false;
             _myRigid.constraints = RigidbodyConstraints.FreezeAll;
             isReadyedChangedGravity = true;
+        }
+        else if (collision.transform.CompareTag("PLAYER_BASE") && wm.lastWeaponNumber == 2) // 플레이어라면 오른손에 무기가 돌아오게 한다
+        {
+            wm.SetMaxWeaponNumber(3);
+
+            ComeBack();
         }
     }
 
