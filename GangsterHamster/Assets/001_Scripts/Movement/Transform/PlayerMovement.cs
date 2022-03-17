@@ -11,128 +11,137 @@ using Gravity.Object.Management;
 
 namespace Player.Movement
 {
-    /// <summary>
-    /// 기본적인 움직임을 구현한 클레스
-    /// </summary>
-    [RequireComponent(typeof(Rigidbody))]
-    public class PlayerMovement : MonoBehaviour, IMoveable, IJumpable, ICrouchable
-    {
-        
-        [Header("바닥과 플레이어 거리")]
-        [SerializeField] private float _groundDistance;
+   /// <summary>
+   /// 기본적인 움직임을 구현한 클레스
+   /// </summary>
+   [RequireComponent(typeof(Rigidbody))]
+   public class PlayerMovement : MonoBehaviour, IMoveable, IJumpable, ICrouchable
+   {
 
-        private Rigidbody rigid;
+      [Header("바닥과 플레이어 거리")]
+      [SerializeField] private float _groundDistance;
 
-        /// <summary>
-        /// 이동 시 호출됨. Vector3 = direction<br/>
-        /// 입력 키 누르는 동안 계속 호출됨
-        /// </summary>
-        public event System.Action<Vector3> OnMove;
+      private Rigidbody rigid;
 
-        /// <summary>
-        /// 점프 시 호출됨
-        /// </summary>
-        public event System.Action OnJump;
+      /// <summary>
+      /// 이동 시 호출됨. Vector3 = direction<br/>
+      /// 입력 키 누르는 동안 계속 호출됨
+      /// </summary>
+      public event System.Action<Vector3> OnMove;
+
+      /// <summary>
+      /// 점프 시 호출됨
+      /// </summary>
+      public event System.Action OnJump;
 
 
-        private void Awake()
-        {
-            OnMove += (dir) => { };
-            OnJump += () => { };
-            rigid = GetComponent<Rigidbody>();
-        }
+      private void Awake()
+      {
+         OnMove += (dir) => { };
+         OnJump += () => { };
+         rigid = GetComponent<Rigidbody>();
+      }
 
-        #region Movement
+      #region Movement
 
-        public void MoveFoward()
-        {
-            if (!PlayerStatus.Instance.Moveable) return;
-            PlayerMoveDelta.Instance.AddYDelta(PlayerValues.Instance.speed);
-        }
+      public void MoveFoward()
+      {
+         if (!PlayerStatus.Instance.Moveable) return;
+         PlayerMoveDelta.Instance.AddYDelta(PlayerValues.Instance.speed);
+      }
 
-        public void MoveBackword()
-        {
-            if (!PlayerStatus.Instance.Moveable) return;
-            PlayerMoveDelta.Instance.AddYDelta(-PlayerValues.Instance.speed);
-        }
+      public void MoveBackword()
+      {
+         if (!PlayerStatus.Instance.Moveable) return;
+         PlayerMoveDelta.Instance.AddYDelta(-PlayerValues.Instance.speed);
+      }
 
-        public void MoveLeft()
-        {
-            if (!PlayerStatus.Instance.Moveable) return;
-            PlayerMoveDelta.Instance.AddXDelta(-PlayerValues.Instance.speed);
-        }
+      public void MoveLeft()
+      {
+         if (!PlayerStatus.Instance.Moveable) return;
+         PlayerMoveDelta.Instance.AddXDelta(-PlayerValues.Instance.speed);
+      }
 
-        public void MoveRight()
-        {
-            if (!PlayerStatus.Instance.Moveable) return;
-            PlayerMoveDelta.Instance.AddXDelta(PlayerValues.Instance.speed);
-        }
+      public void MoveRight()
+      {
+         if (!PlayerStatus.Instance.Moveable) return;
+         PlayerMoveDelta.Instance.AddXDelta(PlayerValues.Instance.speed);
+      }
 
-        public void Dash()
-        {
-            Logger.Log("PlayerMovement (Line: 73): Up 과 Down 이번트 따로 만들어야 함", LogLevel.Warning);
+      public void DashStart()
+      {
+         if (PlayerStatus.Instance.IsCrouching)
+         {
+            Logger.Log("웅크린 상태 중 Dash 명령.");
+            PlayerUtils.Instance.SetStanded();
+         }
 
-            if(PlayerStatus.Instance.IsCrouching) {
-                Logger.Log("웅크린 상태 중 Dash 명령.");
-                PlayerUtils.Instance.SetStanded();
-            }
+         PlayerStatus.Instance.IsRunning = true;
+         PlayerValues.Instance.speed = PlayerValues.DashSpeed;
+      }
 
-            PlayerStatus.Instance.IsRunning = !PlayerStatus.Instance.IsRunning;
-            PlayerValues.Instance.speed = PlayerStatus.Instance.IsRunning ? PlayerValues.DashSpeed : PlayerValues.WalkingSpeed;
-        }
+      public void DashStop()
+      {
+         PlayerStatus.Instance.IsRunning = false;
+         PlayerValues.Instance.speed = PlayerValues.WalkingSpeed;
+      }
 
-        #endregion // Movement
+      #endregion // Movement
 
-        
 
-        #region Jump
 
-        public void Jump()
-        {
-            if(!GroundChecker.Instance.CheckGround(this.transform, _groundDistance) || !PlayerStatus.Instance.Jumpable) return;
+      #region Jump
 
-            if(PlayerStatus.Instance.IsCrouching) {
-                Logger.Log("웅크린 상태 중 Jump 명령.");
-                PlayerUtils.Instance.SetStanded();
-                return;
-            }
+      public void Jump()
+      {
+         if (!GroundChecker.Instance.CheckGround(this.transform, _groundDistance) || !PlayerStatus.Instance.Jumpable) return;
 
-            Vector3 force = new Vector3(1.0f, Mathf.Sqrt(2.0f * 9.8f * PlayerValues.JumpHeight), 1.0f); // TODO: Cache?
-            Vector3 gravityDir = GravityManager.Instance.GetGlobalGravityDirection();
+         if (PlayerStatus.Instance.IsCrouching)
+         {
+            Logger.Log("웅크린 상태 중 Jump 명령.");
+            PlayerUtils.Instance.SetStanded();
+            return;
+         }
 
-            force.x *= gravityDir.x;
-            force.y *= gravityDir.y;
-            force.z *= gravityDir.z;
+         Vector3 force = new Vector3(1.0f, Mathf.Sqrt(2.0f * 9.8f * PlayerValues.JumpHeight), 1.0f); // TODO: Cache?
+         Vector3 gravityDir = GravityManager.Instance.GetGlobalGravityDirection();
 
-            Debug.Log(-force);
+         force.x *= gravityDir.x;
+         force.y *= gravityDir.y;
+         force.z *= gravityDir.z;
 
-            rigid.velocity = -force;
+         Debug.Log(-force);
 
-        }
+         rigid.velocity = -force;
 
-        public void OnGround()
-        {
-            PlayerStatus.Instance.OnGround = true;
-            PlayerStatus.Instance.Jumpable = true;
-        }
+      }
 
-        #endregion // Jump
+      public void OnGround()
+      {
+         PlayerStatus.Instance.OnGround = true;
+         PlayerStatus.Instance.Jumpable = true;
+      }
 
-        public void Crouch()
-        {
-            if(!PlayerStatus.Instance.IsCrouching) {
-                PlayerUtils.Instance.SetCrouched();
-            }
-            else {
-                PlayerUtils.Instance.SetStanded();
-            }
-        }
+      #endregion // Jump
 
-        private void Update() {
-            Vector3 delta = PlayerMoveDelta.Instance.GetDelta();
-            delta.z = delta.y;
-            delta.y = 0.0f;
-            transform.Translate(delta * Time.deltaTime);
-        }
-    }
+      public void Crouch()
+      {
+         if (!PlayerStatus.Instance.IsCrouching)
+         {
+            PlayerUtils.Instance.SetCrouched();
+         }
+         else
+         {
+            PlayerUtils.Instance.SetStanded();
+         }
+      }
+
+      private void Update()
+      {
+         Vector3 delta = PlayerMoveDelta.Instance.GetDelta();
+         delta.z = delta.y;
+         delta.y = 0.0f;
+         transform.Translate(delta * Time.deltaTime);
+      }
+   }
 }

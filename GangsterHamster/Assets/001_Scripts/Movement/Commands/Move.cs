@@ -4,157 +4,172 @@ using UnityEngine;
 
 namespace Commands.Movement.Movements
 {
-    #region Movement
-    public class MoveFoward : Command
-    {
-        IMoveable _moveable;
+   #region Movement
+   public class MoveFoward : Command
+   {
+      IMoveable _moveable;
 
-        public MoveFoward(IMoveable moveable)
-        {
-            _moveable = moveable;
-        }
+      public MoveFoward(IMoveable moveable)
+      {
+         _moveable = moveable;
+      }
 
-        public override void Execute()
-        {
-            _moveable.MoveFoward();
-        }
-    }
+      public override void Execute()
+      {
+         _moveable.MoveFoward();
+      }
+   }
 
-    public class MoveBackword : Command
-    {
-        IMoveable _moveable;
+   public class MoveBackword : Command
+   {
+      IMoveable _moveable;
 
-        public MoveBackword(IMoveable moveable)
-        {
-            _moveable = moveable;
-        }
+      public MoveBackword(IMoveable moveable)
+      {
+         _moveable = moveable;
+      }
 
-        public override void Execute()
-        {
-            _moveable.MoveBackword();
-        }
-    }
+      public override void Execute()
+      {
+         _moveable.MoveBackword();
+      }
+   }
 
-    public class MoveLeft : Command
-    {
-        IMoveable _moveable;
+   public class MoveLeft : Command
+   {
+      IMoveable _moveable;
 
-        public MoveLeft(IMoveable moveable)
-        {
-            _moveable = moveable;
-        }
+      public MoveLeft(IMoveable moveable)
+      {
+         _moveable = moveable;
+      }
 
-        public override void Execute()
-        {
-            _moveable.MoveLeft();
-        }
-    }
+      public override void Execute()
+      {
+         _moveable.MoveLeft();
+      }
+   }
 
-    public class MoveRight : Command
-    {
-        IMoveable _moveable;
+   public class MoveRight : Command
+   {
+      IMoveable _moveable;
 
-        public MoveRight(IMoveable moveable)
-        {
-            _moveable = moveable;
-        }
+      public MoveRight(IMoveable moveable)
+      {
+         _moveable = moveable;
+      }
 
-        public override void Execute()
-        {
-            _moveable.MoveRight();
-        }
-    }
+      public override void Execute()
+      {
+         _moveable.MoveRight();
+      }
+   }
 
-    public class Dash : Command
-    {
-        IMoveable _moveable;
+   public class DashStart : Command
+   {
+      IMoveable _moveable;
 
-        public Dash(IMoveable moveable)
-        {
-            _moveable = moveable;
-        }
+      public DashStart(IMoveable moveable)
+      {
+         _moveable = moveable;
+      }
 
-        public override void Execute()
-        {
-            _moveable.Dash();
-        }
-    }
+      public override void Execute()
+      {
+         _moveable.DashStart();
+      }
+   }
 
-    #endregion // Movement
+   public class DashStop : Command
+   {
+      IMoveable _moveable;
 
-    public class Jump : Command
-    {
-        IJumpable _jumpable;
+      public DashStop(IMoveable moveable)
+      {
+         _moveable = moveable;
+      }
 
-        public Jump(IJumpable jumpable)
-        {
-            _jumpable = jumpable;
-        }
+      public override void Execute()
+      {
+         _moveable.DashStop();
+      }
+   }
 
-        public override void Execute()
-        {
-            _jumpable.Jump();
-        }
-    }
+   #endregion // Movement
 
-    public class Crouch : Command
-    {
-        ICrouchable _crouchable;
+   public class Jump : Command
+   {
+      IJumpable _jumpable;
 
-        public Crouch(ICrouchable crouchable)
-        {
-            _crouchable = crouchable;
-        }
+      public Jump(IJumpable jumpable)
+      {
+         _jumpable = jumpable;
+      }
 
-        public override void Execute()
-        {
-            _crouchable.Crouch();
-        }
-    }
-    
-    #region Weapon
-    public class MouseRight : Command
-    {
-        IWeaponable _weaponable;
+      public override void Execute()
+      {
+         _jumpable.Jump();
+      }
+   }
 
-        public MouseRight(IWeaponable weaponable)
-        {
-            _weaponable = weaponable;
-        }
+   public class Crouch : Command
+   {
+      ICrouchable _crouchable;
 
-        public override void Execute()
-        {
-            _weaponable.MouseRight();
-        }
-    }
+      public Crouch(ICrouchable crouchable)
+      {
+         _crouchable = crouchable;
+      }
 
-    public class MouseLeft : Command
-    {
-        IWeaponable _weaponable;
+      public override void Execute()
+      {
+         _crouchable.Crouch();
+      }
+   }
 
-        public MouseLeft(IWeaponable weaponable)
-        {
-            _weaponable = weaponable;
-        }
+   #region Weapon
+   public class MouseRight : Command
+   {
+      IWeaponable _weaponable;
 
-        public override void Execute()
-        {
-            _weaponable.MouseLeft();
-        }
-    }
+      public MouseRight(IWeaponable weaponable)
+      {
+         _weaponable = weaponable;
+      }
 
-    public class ResetKey : Command
-    {
-        IWeaponable _weaponable;
+      public override void Execute()
+      {
+         _weaponable.MouseRight();
+      }
+   }
 
-        public ResetKey(IWeaponable weaponable)
-        {
-            _weaponable = weaponable;
-        }
-        public override void Execute()
-        {
-            _weaponable.R();
-        }
-    }
-    #endregion // Weapon
+   public class MouseLeft : Command
+   {
+      IWeaponable _weaponable;
+
+      public MouseLeft(IWeaponable weaponable)
+      {
+         _weaponable = weaponable;
+      }
+
+      public override void Execute()
+      {
+         _weaponable.MouseLeft();
+      }
+   }
+
+   public class ResetKey : Command
+   {
+      IWeaponable _weaponable;
+
+      public ResetKey(IWeaponable weaponable)
+      {
+         _weaponable = weaponable;
+      }
+      public override void Execute()
+      {
+         _weaponable.R();
+      }
+   }
+   #endregion // Weapon
 }
