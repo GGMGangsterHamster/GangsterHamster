@@ -34,7 +34,6 @@ public class SecondWeaponSkill : WeaponSkill
     private Rigidbody _myRigid; // ¹«±âÀÇ Rigidbody
     private Collider _myCol;
 
-
     private Dictionary<ScaleEnum, float> scaleDict = new Dictionary<ScaleEnum, float>();
 
     private ScaleEnum curScaleEnum = ScaleEnum.LevelOne;
@@ -69,9 +68,12 @@ public class SecondWeaponSkill : WeaponSkill
     {
         if (transform.parent != null)
         {
-            shotingCoroutine = ShotCo(dir);
+            if (IntegratedWeaponSkill.Instance.CheckForward(PlayerTrm.forward))
+            {
+                shotingCoroutine = ShotCo(dir);
 
-            StartCoroutine(shotingCoroutine);
+                StartCoroutine(shotingCoroutine);
+            }
         }
     }
 
@@ -158,7 +160,7 @@ public class SecondWeaponSkill : WeaponSkill
         _myCol.isTrigger = false;
         StopCoroutine(rotationCoroutine);
 
-        transform.position = PlayerTrm.position + PlayerTrm.forward + new Vector3(0, 1.8f, 0);
+        transform.position = PlayerTrm.position + (PlayerTrm.forward / 3) + PlayerTrm.up * 1.5f;
 
         while (true)
         {

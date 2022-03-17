@@ -52,23 +52,10 @@ public class ThirdWeaponSkill : WeaponSkill
     {
         if (transform.parent != null)
         {
-            // 1번 무기의 Shot 함수를 조금 뜯어와서 수정한 뒤 사용
-            Vector3 boxSize = PlayerTrm.GetComponent<BoxCollider>().size;
-
-            Collider[] cols = Physics.OverlapBox(PlayerTrm.position + new Vector3(0, boxSize.y / 2, 0),
-                                                 boxSize + new Vector3(0, -1.5f, 1f),
-                                                 PlayerTrm.rotation); // 플레이어의 바로 앞을 검사해서 뭔가 있는지 확인
-
-            for (int i = 0; i < cols.Length; i++)
+            if (IntegratedWeaponSkill.Instance.CheckForward())
             {
-                if (cols[i].TryGetComponent(out Interactable outII)) // 만약 상호작용 되는 오브젝트가 앞에 있었으면 리턴
-                {
-                    // 뭔가에 막힌다 그럼 여기로 옴
-                    return;
-                }
+                StartCoroutine(ShotCo(dir));
             }
-
-            StartCoroutine(ShotCo(dir));
         }
     }
 
@@ -105,7 +92,9 @@ public class ThirdWeaponSkill : WeaponSkill
         transform.parent = null;
         _myCol.isTrigger = false;
 
-        transform.position = PlayerTrm.position + PlayerTrm.forward + new Vector3(0, 1.8f, 0);
+        transform.position = PlayerTrm.position + (PlayerTrm.forward / 3) + PlayerTrm.up * 1.5f;
+
+        
 
         while (true)
         {
