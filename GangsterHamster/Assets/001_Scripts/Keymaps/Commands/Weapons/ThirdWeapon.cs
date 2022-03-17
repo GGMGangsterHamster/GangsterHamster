@@ -34,7 +34,7 @@ namespace Commands.Weapon
         /// </summary>
         public override void Reset()
         {
-            _skill.Comeback();
+            _skill.ComeBack();
         }
     }
 }

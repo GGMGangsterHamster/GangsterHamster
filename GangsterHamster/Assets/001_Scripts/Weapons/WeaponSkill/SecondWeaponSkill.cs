@@ -17,33 +17,26 @@ public class SecondWeaponSkill : WeaponSkill
         LevelFour,
     }
 
-    [SerializeField]
-    private float shotSpeed = 5;
+    [SerializeField] private float shotSpeed = 5;
+    [SerializeField] private float sizeUpSpeed = 0.1f;
+    [SerializeField] private float idleRotationMaxSpeed = 4f;
+    [SerializeField] private float rightClickPower = 20f;
 
-    [SerializeField]
-    private float sizeUpSpeed = 0.1f;
-
-    [SerializeField]
-    private float idleRotationMaxSpeed = 4f;
-
-    [SerializeField]
-    private Image chargeBarImg;
+    [SerializeField] private Image chargeBarImg;
 
     private WeaponManagement wm;
-
     private Rigidbody _myRigid; // 무기의 Rigidbody
     private Collider _myCol;
 
     private Dictionary<ScaleEnum, float> scaleDict = new Dictionary<ScaleEnum, float>();
-
     private ScaleEnum curScaleEnum = ScaleEnum.LevelOne;
     private ScaleEnum beforeScaleEnum = ScaleEnum.LevelOne;
-
     private IEnumerator shotingCoroutine;
     private IEnumerator rotationCoroutine;
+    private Vector3 _colNormalVec; 
+
 
     private float curPushTime = 0.0f;
-
     private bool isEnd = true;
 
     private void Start()
@@ -72,7 +65,7 @@ public class SecondWeaponSkill : WeaponSkill
             {
                 shotingCoroutine = ShotCo(dir);
 
-                _myRigid.constraints = RigidbodyConstraints.None;
+                _myRigid.constraints = RigidbodyConstraints.FreezePosition;
 
                 StartCoroutine(shotingCoroutine);
             }
@@ -193,7 +186,14 @@ public class SecondWeaponSkill : WeaponSkill
         if(shotingCoroutine != null)
         {
             StopCoroutine(shotingCoroutine);
+
+            shotingCoroutine = null;
+
+            _myRigid.useGravity = true;
+            _myRigid.constraints = RigidbodyConstraints.None;
+            _myRigid.velocity = _colNormalVec * rightClickPower;
         }
+
 
         float beforeCurPushTime = curPushTime;
 
@@ -317,6 +317,19 @@ public class SecondWeaponSkill : WeaponSkill
 
     private void OnCollisionEnter(Collision collision)
     {
+        if(collision.transform.TryGetComponent(out ObjectB outII))
+        {
+            if(shotingCoroutine != null)
+            {
+                StopCoroutine(shotingCoroutine);
+            }
+
+            _myRigid.velocity = Vector3.zero;
+            _myRigid.useGravity = false;
+            _myRigid.constraints = RigidbodyConstraints.FreezeAll;
+
+            _colNormalVec = collision.contacts[0].normal;
+        }
         if (collision.transform.CompareTag("PLAYER_BASE") && wm.lastWeaponNumber == 1) // 플레이어라면 오른손에 무기가 돌아오게 한다
         {
             wm.SetMaxWeaponNumber(2);
