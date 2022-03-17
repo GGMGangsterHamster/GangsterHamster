@@ -17,7 +17,8 @@ namespace Effects.Global
         /// 값을 설정합니다.
         /// </summary>
         /// <param name="value">값 (0 ~ 1)</param>
-        public void Set(float value) {
+        public void Set(float value)
+        {
             _globalVolume.intensity.value = value;
         }
 
@@ -31,9 +32,11 @@ namespace Effects.Global
         {
             float step = (endValue - startValue) / duration;
 
-            Tween(() => {
+            Tween(() =>
+            {
                 _globalVolume.intensity.value = startValue;
-            }, () => {
+            }, () =>
+            {
                 _globalVolume.intensity.value += step * Time.deltaTime;
             }, () => _globalVolume.intensity.value >= endValue, callback);
         }
@@ -48,9 +51,11 @@ namespace Effects.Global
         {
             float step = (endValue - startValue) / duration;
 
-            Tween(() => {
+            Tween(() =>
+            {
                 _globalVolume.intensity.value = startValue;
-            }, () => {
+            }, () =>
+            {
                 _globalVolume.intensity.value += step * Time.deltaTime;
             }, () => _globalVolume.intensity.value <= endValue, callback);
         }
