@@ -18,8 +18,8 @@ namespace Player.Utils
         /// </summary>
         public void SetCrouched()
         {
-            PlayerStatus.Instance.IsCrouching = true;
-            PlayerValues.Instance.speed = PlayerValues.CrouchSpeed;
+            PlayerStatus.IsCrouching = true;
+            PlayerValues.speed = PlayerValues.CrouchSpeed;
             _playerTrm.localScale = new Vector3(_playerTrm.localScale.x, PlayerValues.PlayerCrouchYScale, _playerTrm.localScale.z);
             _playerTrm.localPosition = new Vector3(0.0f, PlayerValues.PlayerCrouchYPos, 0.0f);
             GameManager.Instance.player.GetComponent<BoxCollider>().size = new Vector3(0.45f, 1.0f, 0.08f);
@@ -31,8 +31,8 @@ namespace Player.Utils
         /// </summary>
         public void SetStanded()
         {
-            PlayerStatus.Instance.IsCrouching = false;
-            PlayerValues.Instance.speed = PlayerValues.WalkingSpeed;
+            PlayerStatus.IsCrouching = false;
+            PlayerValues.speed = PlayerValues.WalkingSpeed;
             _playerTrm.localScale = new Vector3(_playerTrm.localScale.x, PlayerValues.PlayerYScale, _playerTrm.localScale.z);
             _playerTrm.localPosition = new Vector3(0.0f, PlayerValues.PlayerYPos, 0.0f);
             GameManager.Instance.player.GetComponent<BoxCollider>().size = new Vector3(0.45f, 1.8f, 0.08f);

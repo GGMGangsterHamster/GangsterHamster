@@ -32,31 +32,31 @@ namespace Player.Movement
 
       public void MoveFoward()
       {
-         if (!PlayerStatus.Instance.Moveable) return;
-         PlayerMoveDelta.Instance.AddYDelta(PlayerValues.Instance.speed);
+         if (!PlayerStatus.Moveable) return;
+         PlayerMoveDelta.Instance.AddYDelta(PlayerValues.speed);
       }
 
       public void MoveBackword()
       {
-         if (!PlayerStatus.Instance.Moveable) return;
-         PlayerMoveDelta.Instance.AddYDelta(-PlayerValues.Instance.speed);
+         if (!PlayerStatus.Moveable) return;
+         PlayerMoveDelta.Instance.AddYDelta(-PlayerValues.speed);
       }
 
       public void MoveLeft()
       {
-         if (!PlayerStatus.Instance.Moveable) return;
-         PlayerMoveDelta.Instance.AddXDelta(-PlayerValues.Instance.speed);
+         if (!PlayerStatus.Moveable) return;
+         PlayerMoveDelta.Instance.AddXDelta(-PlayerValues.speed);
       }
 
       public void MoveRight()
       {
-         if (!PlayerStatus.Instance.Moveable) return;
-         PlayerMoveDelta.Instance.AddXDelta(PlayerValues.Instance.speed);
+         if (!PlayerStatus.Moveable) return;
+         PlayerMoveDelta.Instance.AddXDelta(PlayerValues.speed);
       }
 
       public void DashStart()
       {
-         if (PlayerStatus.Instance.IsCrouching)
+         if (PlayerStatus.IsCrouching)
          {
             Logger.Log("웅크린 상태 중 Dash 명령.");
             PlayerUtils.Instance.SetStanded();
@@ -64,16 +64,16 @@ namespace Player.Movement
          }
 
 
-         PlayerStatus.Instance.IsRunning = true;
-         PlayerValues.Instance.speed = PlayerValues.DashSpeed;
+         PlayerStatus.IsRunning = true;
+         PlayerValues.speed = PlayerValues.DashSpeed;
          
          Debug.Log("start");
       }
 
       public void DashStop()
       {
-         PlayerStatus.Instance.IsRunning = false;
-         PlayerValues.Instance.speed = PlayerValues.WalkingSpeed;
+         PlayerStatus.IsRunning = false;
+         PlayerValues.speed = PlayerValues.WalkingSpeed;
 
          Debug.Log("end");
       }
@@ -86,9 +86,9 @@ namespace Player.Movement
 
       public void Jump()
       {
-         if (!GroundChecker.Instance.CheckGround(this.transform, _groundDistance) || !PlayerStatus.Instance.Jumpable) return;
+         if (!GroundChecker.Instance.CheckGround(this.transform, _groundDistance) || !PlayerStatus.Jumpable) return;
 
-         if (PlayerStatus.Instance.IsCrouching)
+         if (PlayerStatus.IsCrouching)
          {
             Logger.Log("웅크린 상태 중 Jump 명령.");
             PlayerUtils.Instance.SetStanded();
@@ -110,15 +110,15 @@ namespace Player.Movement
 
       public void OnGround()
       {
-         PlayerStatus.Instance.OnGround = true;
-         PlayerStatus.Instance.Jumpable = true;
+         PlayerStatus.OnGround = true;
+         PlayerStatus.Jumpable = true;
       }
 
       #endregion // Jump
 
       public void Crouch()
       {
-         if (!PlayerStatus.Instance.IsCrouching)
+         if (!PlayerStatus.IsCrouching)
          {
             PlayerUtils.Instance.SetCrouched();
          }

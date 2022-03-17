@@ -11,12 +11,12 @@ namespace Player.Movement
     {
         public void ExitGround()
         {
-            PlayerStatus.Instance.OnGround = false;
+            PlayerStatus.OnGround = false;
         }
 
         public void OnGround()
         {
-            PlayerStatus.Instance.OnGround = true;
+            PlayerStatus.OnGround = true;
         }
     }
 
