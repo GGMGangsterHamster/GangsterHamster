@@ -1,6 +1,6 @@
 namespace Player
 {
-    public class PlayerValues : Singleton<PlayerValues>, ISingletonObject
+    static public class PlayerValues
     {
         #region 속도
         public const float WalkingSpeed = 2.2f;
@@ -26,7 +26,7 @@ namespace Player
         public const float InteractionMaxDistance = 1.0f;
 
         
-        public float speed = WalkingSpeed;
-        public float mouseSpeed = 2.0f;
+        static public float speed = WalkingSpeed;
+        static public float mouseSpeed = 2.0f;
     }
 }
