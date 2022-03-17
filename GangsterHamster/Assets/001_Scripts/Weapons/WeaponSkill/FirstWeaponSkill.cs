@@ -11,7 +11,7 @@ public class FirstWeaponSkill : WeaponSkill
     private float shotSpeed = 5;
 
     [SerializeField]
-    private float knockbackSize = 1.7f;
+    private float knockbackDistance = 1.7f;
 
     private WeaponManagement wm;
 
@@ -43,30 +43,14 @@ public class FirstWeaponSkill : WeaponSkill
     /// </summary>
     public void Shot(Vector3 dir)
     {
-        if(transform.parent == RightHandTrm)
+        if (transform.parent == RightHandTrm)
         {
-            if (lastFireTime + delay <= Time.time) {
-                Vector3 boxSize = PlayerTrm.GetComponent<BoxCollider>().size;
-
-                Collider[] cols = Physics.OverlapBox(PlayerTrm.position + (PlayerTrm.forward / 2) + new Vector3(0, boxSize.y / 2, 0),
-                                                     boxSize + new Vector3(0, -1f, 0.3f), 
-                                                     PlayerTrm.rotation); // 플레이어의 바로 앞을 검사해서 뭔가 있는지 확인
-
-                for (int i = 0; i < cols.Length; i++)
-                {
-                    if (cols[i].TryGetComponent(out Interactable outII)) // 만약 상호작용 되는 오브젝트가 앞에 있었으면 리턴
-                    {
-                        return;
-                    }
-                }
-
+            if (IntegratedWeaponSkill.Instance.CheckForward(PlayerTrm.forward))
+            {
                 StartCoroutine(ShotCo(dir));
-                lastFireTime = Time.time;
             }
         }
     }
-    float lastFireTime = float.MinValue;
-    public float delay = 0.5f;
 
     /// <summary>
     /// 2번 항목에 대한 함수
@@ -199,7 +183,7 @@ public class FirstWeaponSkill : WeaponSkill
     {
         transform.parent = null;
 
-        transform.position = PlayerTrm.position + PlayerTrm.forward + new Vector3(0, 1.8f, 0);
+        transform.position = PlayerTrm.position + (PlayerTrm.forward / 3) + PlayerTrm.up * 1.5f;
 
         while (true)
         {
@@ -256,7 +240,7 @@ public class FirstWeaponSkill : WeaponSkill
 
             transform.position += dir * Time.deltaTime * shotSpeed;
 
-            if (Vector3.Distance(distTrm.position, transform.position) <= knockbackSize) // 플레이어와 거리가 1 이하라면 오른손으로 돌아오게 한다
+            if (Vector3.Distance(distTrm.position, transform.position) <= knockbackDistance) // 플레이어와 거리가 1 이하라면 오른손으로 돌아오게 한다
             {
                 if (objsParent.childCount > 0)
                 {
@@ -284,8 +268,4 @@ public class FirstWeaponSkill : WeaponSkill
 
         objList.Clear();
     }
-
-#if UNITY_EDITOR
-
-#endif
 }
