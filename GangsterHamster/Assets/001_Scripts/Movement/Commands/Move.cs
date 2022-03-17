@@ -65,36 +65,6 @@ namespace Commands.Movement.Movements
       }
    }
 
-   public class DashStart : Command
-   {
-      IMoveable _moveable;
-
-      public DashStart(IMoveable moveable)
-      {
-         _moveable = moveable;
-      }
-
-      public override void Execute()
-      {
-         _moveable.DashStart();
-      }
-   }
-
-   public class DashStop : Command
-   {
-      IMoveable _moveable;
-
-      public DashStop(IMoveable moveable)
-      {
-         _moveable = moveable;
-      }
-
-      public override void Execute()
-      {
-         _moveable.DashStop();
-      }
-   }
-
    #endregion // Movement
 
    public class Jump : Command
@@ -128,35 +98,7 @@ namespace Commands.Movement.Movements
    }
 
    #region Weapon
-   public class MouseRight : Command
-   {
-      IWeaponable _weaponable;
-
-      public MouseRight(IWeaponable weaponable)
-      {
-         _weaponable = weaponable;
-      }
-
-      public override void Execute()
-      {
-         _weaponable.MouseRight();
-      }
-   }
-
-   public class MouseLeft : Command
-   {
-      IWeaponable _weaponable;
-
-      public MouseLeft(IWeaponable weaponable)
-      {
-         _weaponable = weaponable;
-      }
-
-      public override void Execute()
-      {
-         _weaponable.MouseLeft();
-      }
-   }
+   
 
    public class ResetKey : Command
    {
