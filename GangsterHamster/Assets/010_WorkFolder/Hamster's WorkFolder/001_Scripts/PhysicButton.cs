@@ -19,7 +19,7 @@ public class PhysicButton : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.TryGetComponent(out IInteractableObject a) 
+        if(collision.gameObject.TryGetComponent(out Interactable a) 
         || collision.gameObject.TryGetComponent(out WeaponSkill w))
         {
             // 여기서 연결되어 있는 오브젝트들을 활성화 시키면 됨

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Objects.Interactable
 {
-    public class DoorTrigger : MonoBehaviour, IInteractableObject
+    public class DoorTrigger : Interactable
     {
         [SerializeField] private Door doorToInteract;
         [SerializeField] private bool _isOpen = false;
@@ -17,7 +17,7 @@ namespace Objects.Interactable
         /// <summary>
         /// 무기와 충돌했을 시 호출
         /// </summary>
-        public void Collision(GameObject collision, Action callback = null)
+        public override void Collision(GameObject collision, Action callback = null)
         {
             if(collision.CompareTag("WEAPON")) {
                 Interact();
@@ -25,7 +25,7 @@ namespace Objects.Interactable
         }
 
 
-        public void Interact(Action callback = null)
+        public override void Interact(Action callback = null)
         {
             switch(_isOpen)
             {
@@ -35,6 +35,14 @@ namespace Objects.Interactable
         }
 
         public void Initialize(Action callback = null) { }
-        public void Release() { }
-    }
+        public override void Release() { }
+
+      public override void Focus(Action callback = null)
+      {
+      }
+
+      public override void DeFocus(Action callback = null)
+      {
+      }
+   }
 }
