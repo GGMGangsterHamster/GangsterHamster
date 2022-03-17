@@ -4,6 +4,20 @@ using UnityEngine;
 
 public static class Define
 {
+    private static Transform _playerBaseTrm;
+    public static Transform PlayerBaseTrm
+    {
+        get
+        {
+            if(_playerBaseTrm == null)
+            {
+                _playerBaseTrm = GameObject.FindGameObjectWithTag("PLAYER_BASE").transform;
+            }
+
+            return _playerBaseTrm;
+        }
+    }
+
     private static Transform _playerTrm;
     public static Transform PlayerTrm
     {
@@ -11,7 +25,7 @@ public static class Define
         {
             if(_playerTrm == null)
             {
-                _playerTrm = GameObject.FindGameObjectWithTag("PLAYER_BASE").transform;
+                _playerTrm = GameObject.FindGameObjectWithTag("PLAYER").transform;
             }
 
             return _playerTrm;

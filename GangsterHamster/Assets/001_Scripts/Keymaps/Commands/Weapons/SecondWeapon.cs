@@ -7,18 +7,10 @@ namespace Commands.Weapon
 {
     public class SecondWeapon : WeaponCommand
     {
-        GameObject _playerObj;
         SecondWeaponSkill _skill;
-        Camera _mainCamera;
-
-        Transform _rightHandTrm;
-        public SecondWeapon(GameObject playerObj, SecondWeaponSkill skill)
+        public SecondWeapon(SecondWeaponSkill skill)
         {
-            _playerObj = playerObj;
             _skill = skill;
-            _mainCamera = Camera.main;
-
-            _rightHandTrm = Define.RightHandTrm;
         }
 
         /// <summary>
@@ -27,7 +19,7 @@ namespace Commands.Weapon
         /// </summary>
         public override void Left()
         {
-            _skill.Shot(_mainCamera.transform.forward);
+            _skill.Shot(MainCamTrm.forward);
         }
 
         /// <summary>
@@ -45,7 +37,7 @@ namespace Commands.Weapon
         /// </summary>
         public override void Reset()
         {
-            _skill.ComeBack(_rightHandTrm);
+            _skill.ComeBack();
         }
     }
 }

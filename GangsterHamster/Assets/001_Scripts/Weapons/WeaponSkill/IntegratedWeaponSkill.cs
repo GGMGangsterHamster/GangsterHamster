@@ -7,18 +7,22 @@ using static Define;
 
 public class IntegratedWeaponSkill : Singleton<IntegratedWeaponSkill>, ISingletonObject
 {
-    // 플레이어 앞에 무언가 상호작용 가능한 오브젝트가 있다면 false, 없으면 true 리턴
+    /// <summary>
+    /// 플레이어 앞에 무언가 상호작용 가능한 오브젝트가 있다면 false, 없으면 true 리턴
+    /// </summary>
+    /// <param name="boxCenterOffset">체크할 위치를 offset 시키는 값</param>
+    /// <returns></returns>
     public bool CheckForward(Vector3 boxCenterOffset = new Vector3())
     {
-        Vector3 boxSize = PlayerTrm.GetComponent<BoxCollider>().size;
+        Vector3 boxSize = PlayerBaseTrm.GetComponent<BoxCollider>().size;
 
-        Collider[] cols = Physics.OverlapBox(PlayerTrm.position + PlayerTrm.up * 1.2f + boxCenterOffset,
+        Collider[] cols = Physics.OverlapBox(PlayerBaseTrm.position + PlayerBaseTrm.up * 1.2f + boxCenterOffset,
                                              boxSize + new Vector3(0, -1.5f, 1f),
-                                             PlayerTrm.rotation); // 플레이어의 바로 앞을 검사해서 뭔가 있는지 확인
+                                             PlayerBaseTrm.rotation); // 플레이어의 바로 앞을 검사해서 뭔가 있는지 확인
 
         for (int i = 0; i < cols.Length; i++)
         {
-            if(cols[i].TryGetComponent(out WeaponSkill skill) || cols[i].transform == PlayerTrm || cols[i].isTrigger)
+            if(cols[i].TryGetComponent(out WeaponSkill skill) || cols[i].transform == PlayerBaseTrm || cols[i].isTrigger)
             {
                 continue;
             }

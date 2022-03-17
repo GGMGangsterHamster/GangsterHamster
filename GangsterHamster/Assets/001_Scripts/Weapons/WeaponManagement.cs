@@ -43,10 +43,10 @@ namespace Commands.Weapon
                 _isUsedThirdWeapon = true;
             }
 
-            _weaponDict.Add(-1, new FirstWeapon(null, null)); // 더미용
-            _weaponDict.Add(1, new FirstWeapon(gameObject, _firstWeaponSkill));
-            _weaponDict.Add(2, new SecondWeapon(gameObject, _secondWeaponSkill));
-            _weaponDict.Add(3, new ThirdWeapon(gameObject, _thirdWeaponSkill));
+            _weaponDict.Add(-1, new FirstWeapon(null)); // 더미용
+            _weaponDict.Add(1, new FirstWeapon(_firstWeaponSkill));
+            _weaponDict.Add(2, new SecondWeapon(_secondWeaponSkill));
+            _weaponDict.Add(3, new ThirdWeapon(_thirdWeaponSkill));
 
             _weaponDict[-1].isActive = false;
             _weaponDict[1].isActive = _isUsedFirstWeapon;

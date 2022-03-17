@@ -56,7 +56,7 @@ public class SecondWeaponSkill : WeaponSkill
         scaleDict.Add(ScaleEnum.LevelThree, 2f);
         scaleDict.Add(ScaleEnum.LevelFour, 4f);
 
-        wm = GameObject.Find("Player").GetComponent<WeaponManagement>();
+        wm = PlayerBaseTrm.GetComponent<WeaponManagement>();
     }
 
     /// <summary>
@@ -68,9 +68,11 @@ public class SecondWeaponSkill : WeaponSkill
     {
         if (transform.parent != null)
         {
-            if (IntegratedWeaponSkill.Instance.CheckForward(PlayerTrm.forward))
+            if (IntegratedWeaponSkill.Instance.CheckForward(PlayerBaseTrm.forward))
             {
                 shotingCoroutine = ShotCo(dir);
+
+                _myRigid.constraints = RigidbodyConstraints.None;
 
                 StartCoroutine(shotingCoroutine);
             }
@@ -82,8 +84,7 @@ public class SecondWeaponSkill : WeaponSkill
     /// 오른손에 무기가 있지 않을 때
     /// R키를 누를 시 무기가 바로 회수 됨
     /// </summary>
-    /// <param name="rightHandTrm"> 플레이어 오른손의 위치를 받아오기 위한 Trm </param>
-    public void ComeBack(Transform rightHandTrm)
+    public void ComeBack()
     {
         if(isEnd)
         {
@@ -93,13 +94,13 @@ public class SecondWeaponSkill : WeaponSkill
 
                 _myRigid.useGravity = false;
                 _myRigid.velocity = Vector3.zero;
-                _myRigid.constraints = RigidbodyConstraints.None;
-                _myCol.isTrigger = true;
+                _myRigid.constraints = RigidbodyConstraints.FreezePosition;
+                //_myCol.isTrigger = true;
 
                 rotationCoroutine = RotationCo();
                 StartCoroutine(rotationCoroutine);
 
-                transform.parent = rightHandTrm;
+                transform.parent = RightHandTrm;
                 transform.localPosition = Vector3.zero;
 
                 curScaleEnum = ScaleEnum.LevelOne;
@@ -152,7 +153,6 @@ public class SecondWeaponSkill : WeaponSkill
     /// <summary>
     /// dir로 계속해서 나아가는 코루틴
     /// </summary>
-    /// <param name="dir"> 방향 </param>
     /// <returns></returns>
     IEnumerator ShotCo(Vector3 dir)
     {
@@ -160,7 +160,7 @@ public class SecondWeaponSkill : WeaponSkill
         _myCol.isTrigger = false;
         StopCoroutine(rotationCoroutine);
 
-        transform.position = PlayerTrm.position + (PlayerTrm.forward / 3) + PlayerTrm.up * 1.5f;
+        transform.position = PlayerBaseTrm.position + (PlayerBaseTrm.forward / 3) + PlayerBaseTrm.up * PlayerTrm.localScale.y;
 
         while (true)
         {
@@ -261,7 +261,6 @@ public class SecondWeaponSkill : WeaponSkill
         bool comparator = scaleDistance >= 0 ? true : false; // 큰지 작은지 확인하는 bool 변수
 
         // 주변에 상호작용 할 수 있는 오브젝트가 가까이 있는지 확인해주는 코드 => 코드가 좀 많이 더러움...
-        #region
         Collider[] cols = Physics.OverlapBox(new Vector3(transform.position.x, transform.position.y + scaleDict[curScaleEnum] + 0.05f, transform.position.z)
                                             , Vector3.one * scaleDict[curScaleEnum] / 2
                                             , transform.rotation);
@@ -286,7 +285,6 @@ public class SecondWeaponSkill : WeaponSkill
                 i--;
             }
         }
-        #endregion
 
         while (true) // 서서히 정해진 크기까지 작아지거나 커지는 반복문
         {
@@ -323,7 +321,7 @@ public class SecondWeaponSkill : WeaponSkill
         {
             wm.SetMaxWeaponNumber(2);
 
-            ComeBack(GameObject.Find("RightHand").transform);
+            ComeBack();
         }
     }
 }

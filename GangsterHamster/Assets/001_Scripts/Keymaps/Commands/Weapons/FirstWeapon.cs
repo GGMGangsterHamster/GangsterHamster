@@ -1,23 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Define;
 
 namespace Commands.Weapon
 {
     public class FirstWeapon : WeaponCommand
     {
-        GameObject _playerObj;
         FirstWeaponSkill _skill;
-        Camera _mainCamera;
-
-        Transform _rightHandTrm;
-        public FirstWeapon(GameObject playerObj, FirstWeaponSkill skill)
+        public FirstWeapon(FirstWeaponSkill skill)
         {
-            _playerObj = playerObj;
             _skill = skill;
-            _mainCamera = Camera.main;
-
-            _rightHandTrm = GameObject.Find("RightHand").transform;
         }
 
         /// <summary>
@@ -26,7 +19,7 @@ namespace Commands.Weapon
         /// </summary>
         public override void Left()
         {
-            _skill.Shot(_mainCamera.transform.forward);
+            _skill.Shot(MainCamTrm.forward);
         }
 
         /// <summary>
@@ -35,7 +28,7 @@ namespace Commands.Weapon
         /// </summary>
         public override void Right()
         {
-            _skill.MoveToDestination(_mainCamera.transform, _rightHandTrm, 1.5f);
+            _skill.MoveToDestination();
         }
 
         /// <summary>
@@ -44,7 +37,7 @@ namespace Commands.Weapon
         /// </summary>
         public override void Reset()
         {
-            _skill.ComeBack(_rightHandTrm);
+            _skill.ComeBack();
         }
     }
 }
