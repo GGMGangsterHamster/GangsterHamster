@@ -140,6 +140,8 @@ namespace Commands.Weapon
         {
             lastWeaponNumber = maxNumber;
             curWeaponNumber = maxNumber;
+
+            ChangeWeaponNumberByKey(lastWeaponNumber);
         }
 
         /// <summary>
