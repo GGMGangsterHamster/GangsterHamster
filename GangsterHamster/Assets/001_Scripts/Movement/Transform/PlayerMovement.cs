@@ -74,16 +74,22 @@ namespace Player.Movement
          {
             Logger.Log("웅크린 상태 중 Dash 명령.");
             PlayerUtils.Instance.SetStanded();
+            return;
          }
+
 
          PlayerStatus.Instance.IsRunning = true;
          PlayerValues.Instance.speed = PlayerValues.DashSpeed;
+         
+         Debug.Log("start");
       }
 
       public void DashStop()
       {
          PlayerStatus.Instance.IsRunning = false;
          PlayerValues.Instance.speed = PlayerValues.WalkingSpeed;
+
+         Debug.Log("end");
       }
 
       #endregion // Movement

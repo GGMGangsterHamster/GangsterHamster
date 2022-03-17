@@ -120,7 +120,7 @@ namespace Player.Movement
 
          foreach (KeyCode key in _keyUpInputDictionary.Keys)
          {
-            if (Input.GetKeyDown(key))
+            if (Input.GetKeyUp(key))
                _keyUpInputDictionary[key].Execute();
          }
 
