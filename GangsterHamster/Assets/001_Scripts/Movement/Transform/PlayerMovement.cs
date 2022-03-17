@@ -23,22 +23,8 @@ namespace Player.Movement
 
       private Rigidbody rigid;
 
-      /// <summary>
-      /// 이동 시 호출됨. Vector3 = direction<br/>
-      /// 입력 키 누르는 동안 계속 호출됨
-      /// </summary>
-      public event System.Action<Vector3> OnMove;
-
-      /// <summary>
-      /// 점프 시 호출됨
-      /// </summary>
-      public event System.Action OnJump;
-
-
       private void Awake()
       {
-         OnMove += (dir) => { };
-         OnJump += () => { };
          rigid = GetComponent<Rigidbody>();
       }
 

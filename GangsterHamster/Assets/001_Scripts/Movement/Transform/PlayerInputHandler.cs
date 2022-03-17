@@ -21,7 +21,6 @@ namespace Player.Movement
       private Dictionary<KeyCode, Command> _movementInputDictionary; // 이동 키 (FixedUpdate)
 
       private PlayerMovement _playerMove = null;
-      private MouseMovement _mouseMove = null;
       private WeaponManagement _weapon = null;
 
 

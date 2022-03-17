@@ -9,10 +9,6 @@ namespace Effects.Global
     public class GlobalChromaticAberration : Effects<GlobalChromaticAberration, ChromaticAberration>
     {
 
-        // 코루틴 저장 용
-        private Coroutine _decreaseCoroutine = null;
-        private Coroutine _increaseCoroutine = null;
-
         /// <summary>
         /// 값을 설정합니다.
         /// </summary>
