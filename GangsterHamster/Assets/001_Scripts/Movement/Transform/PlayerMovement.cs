@@ -15,7 +15,10 @@ namespace Player.Movement
    /// 기본적인 움직임을 구현한 클레스
    /// </summary>
    [RequireComponent(typeof(Rigidbody))]
-   public class PlayerMovement : MonoBehaviour, IMoveable, IJumpable, ICrouchable
+   public class PlayerMovement : MonoBehaviour,
+                                 IMoveable,
+                                 IJumpable,
+                                 ICrouchable
    {
 
       [Header("바닥과 플레이어 거리")]
