@@ -193,10 +193,10 @@ namespace Commands.Weapon
                     _thirdWeaponSkill.gameObject.SetActive(false);
                     break;
                 case 1:
-                    _weaponDict[1].Reset();
                     _firstWeaponSkill.gameObject.SetActive(true);
+                    _weaponDict[1].Reset();
 
-                    if(_secondWeaponSkill.transform.parent == rightHandTrm)
+                    if (_secondWeaponSkill.transform.parent == rightHandTrm)
                     {
                         _secondWeaponSkill.gameObject.SetActive(false);
                     }
@@ -207,8 +207,8 @@ namespace Commands.Weapon
 
                     break;
                 case 2:
-                    _weaponDict[2].Reset();
                     _secondWeaponSkill.gameObject.SetActive(true);
+                    _weaponDict[2].Reset();
 
                     if (_firstWeaponSkill.transform.parent == rightHandTrm)
                     {
@@ -220,10 +220,10 @@ namespace Commands.Weapon
                     }
                     break;
                 case 3:
-                    _weaponDict[3].Reset();
                     _thirdWeaponSkill.gameObject.SetActive(true);
+                    _weaponDict[3].Reset();
 
-                    if(_firstWeaponSkill.transform.parent == rightHandTrm)
+                    if (_firstWeaponSkill.transform.parent == rightHandTrm)
                     {
                         _firstWeaponSkill.gameObject.SetActive(false);
                     }

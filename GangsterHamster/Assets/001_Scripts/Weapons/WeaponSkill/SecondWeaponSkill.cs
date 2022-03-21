@@ -97,10 +97,10 @@ public class SecondWeaponSkill : WeaponSkill
                 transform.localPosition = Vector3.zero;
 
                 curScaleEnum = ScaleEnum.LevelOne;
-
+                    
                 curPushTime = 0f;
                 chargeBarImg.transform.localScale = new Vector3(curPushTime, 1, 1);
-                transform.localScale = Vector3.one * scaleDict[curScaleEnum];
+                transform.localScale = Vector3.one * scaleDict[ScaleEnum.LevelOne];
 
                 isEnd = true;
             }
@@ -141,6 +141,16 @@ public class SecondWeaponSkill : WeaponSkill
         _myRigid.useGravity = true;
 
         StartCoroutine(SetScaleCo(scaleEnum));
+    }
+
+    public void StopShotingMove()
+    {
+        if (shotingCoroutine != null)
+        {
+            StopCoroutine(shotingCoroutine);
+
+            shotingCoroutine = null;
+        }
     }
 
     /// <summary>
@@ -185,9 +195,7 @@ public class SecondWeaponSkill : WeaponSkill
     {
         if(shotingCoroutine != null)
         {
-            StopCoroutine(shotingCoroutine);
-
-            shotingCoroutine = null;
+            StopShotingMove();
 
             _myRigid.useGravity = true;
             _myRigid.constraints = RigidbodyConstraints.None;
@@ -319,10 +327,7 @@ public class SecondWeaponSkill : WeaponSkill
     {
         if(collision.transform.TryGetComponent(out ObjectB outII))
         {
-            if(shotingCoroutine != null)
-            {
-                StopCoroutine(shotingCoroutine);
-            }
+            StopShotingMove();
 
             _myRigid.velocity = Vector3.zero;
             _myRigid.useGravity = false;

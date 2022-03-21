@@ -111,7 +111,14 @@ public class FirstWeaponSkill : WeaponSkill
                 {
                     clingObj = outII;
 
-                    ObjectACollision(collision);
+                    if(outII as WeaponObjA)
+                    {
+                        (outII as WeaponObjA).FirstWeaponCollision();
+                    }
+                    else
+                    {
+                        ObjectACollision(collision);
+                    }
                 }
                 else if ((outII as ObjectB) != null)
                 {

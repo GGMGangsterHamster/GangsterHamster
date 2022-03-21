@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4027382209618270528}
   - component: {fileID: 3037707260378247032}
   - component: {fileID: 4725529536207472906}
-  - component: {fileID: 4428558889788395192}
+  - component: {fileID: 7386121782015444204}
   m_Layer: 7
   m_Name: SecondWeaponObj
   m_TagString: Untagged
@@ -127,8 +127,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotSpeed: 5
+  sizeUpSpeed: 0.1
+  idleRotationMaxSpeed: 4
+  rightClickPower: 20
   chargeBarImg: {fileID: 0}
---- !u!114 &4428558889788395192
+--- !u!114 &7386121782015444204
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,6 +140,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6404201132970226297}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f1a555e31636174abf54e0bd91810e8, type: 3}
+  m_Script: {fileID: 11500000, guid: 8972aea4c63793a46b0817dd560ac97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canInteractByPlayer: 0
