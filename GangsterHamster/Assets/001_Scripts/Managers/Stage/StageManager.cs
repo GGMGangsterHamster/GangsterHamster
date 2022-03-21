@@ -7,11 +7,29 @@ using UnityEngine;
 
 namespace Utils.Stage
 {
+   public enum Stage
+   {
+      STAGE_0_1,
+      STAGE_0_2,
+      STAGE_T1,
+      STAGE_1_1,
+      STAGE_1_2,
+      END_OF_ENUM
+   }
+
+
    public class StageManager : Singleton<StageManager>, ISingletonObject
    {
-      private const string STAGE_PATH = "Stages/";                               // 스테이지 경로 (Resources 폴더 쪽)
-      private readonly Dictionary<string, GameObject> _stageDictionary;          // 스테이지 오브젝트
+      public Action OnStageReset; // 스테이지 리셋 시 호출
+
+      private const string STAGE_PATH = "Stages/"; // 스테이지 경로 (Resources 폴더 쪽)
+
+
+      private readonly Dictionary<string, GameObject> _stageDictionary;       // 스테이지 오브젝트
       private readonly Dictionary<string, Vector3>    _stageBaseDictionary;   // 스테이지 기준점 죄표
+
+
+
 
       #region Init
 
@@ -31,12 +49,7 @@ namespace Utils.Stage
          {
             string key = stages[i].name.Split(' ')[1]; // stage "0-1", stage "T1"
 
-            Contains<GameObject>(key, _stageDictionary, () => {
-               Logger.Log($"StageManager > Duplicate stage name. Name:{key}",
-                        LogLevel.Fatal);
-            }, () => {
-               _stageDictionary.Add(key, stages[i]);
-            });
+            CheckAndAddToDictionary(_stageDictionary, key, stages[i]);
 
          }
       }
@@ -45,7 +58,7 @@ namespace Utils.Stage
          StageBase[] stageBases =
                   UnityEngine.Object.FindObjectsOfType<StageBase>();
          
-         if(stageBases.Length != _stageDictionary.Count)
+         if (stageBases.Length != _stageDictionary.Count) // 스테이지 수와 스테이지 베이스 수가 다른 경우
          {
             Logger.Log("StageManager > stage base object count mismatch" +
                       $"Expected {_stageDictionary.Count}" + 
@@ -54,15 +67,13 @@ namespace Utils.Stage
             return;
          }
 
-         for (int i = 0; i < stageBases.Length; ++i) 
+         for (int i = 0; i < stageBases.Length; ++i) // Dictionary 에 저장
          {
             string key = stageBases[i].name.Split(' ')[1]; // base 0-1, base T1
-            Contains<Vector3>(key, _stageBaseDictionary, () => {
-               Logger.Log($"StageManager > Duplicate base name. Name:{key}",
-                        LogLevel.Fatal);
-            }, () => {
-               _stageBaseDictionary.Add(key, stageBases[i].transform.position);
-            });
+
+            CheckAndAddToDictionary(_stageBaseDictionary,
+                                    key,
+                                    stageBases[i].transform.position);
          }
 
 
@@ -77,7 +88,7 @@ namespace Utils.Stage
       /// <returns>null when there is no key named like handled key<returns>
       public GameObject GetStage(string key)
       {
-         if(!Contains<GameObject>(key, _stageDictionary))
+         if(!Contains.In<GameObject>(key, _stageDictionary))
          {
             return null;
          }
@@ -93,51 +104,30 @@ namespace Utils.Stage
       /// <param name="key">리셋할 스테이지</param>
       public void ResetStage(string key)
       {
-         Contains<GameObject>(key, _stageDictionary, () => {
+         Contains.In<GameObject>(key, _stageDictionary, () => {
 
          });
       }
 
-      // 요약:
-      //    dictionary 에 key 가 존재하는지 확인합니다.
-      //
-      // 반환:
-      //    존재하지 않거나 오류가 발생한 경우 false
-      private bool Contains<TValue>(string key,
-                                    object dictionary, // fuck it
-                                    Action onExists = null,
-                                    Action onNull = null)
+      private void CheckAndAddToDictionary<TValue>(object dictionary, string key, TValue value)
       {
-         if (onNull == null)
+         if (!(dictionary is Dictionary<string, TValue>))
          {
-            onNull += () =>
-            {
-               Logger.Log($"StageManager > Stage: {key} does not exist",
-                        LogLevel.Fatal);
-            };
+            Logger.Log("StageManager > Type mismatch", LogLevel.Fatal);
+            return;
          }
 
-         bool result;
+         var dict = dictionary as Dictionary<string, TValue>;
 
-         if(dictionary is Dictionary<string, TValue>)
+
+         Contains.In<TValue>(key, dict, () =>
          {
-            var dict = dictionary as Dictionary<string, TValue>;
-            result = dict.ContainsKey(key);
-         }
-         else
-         {
-            Logger.Log("StageManager > type mismatch: dictionary",
+            Logger.Log($"StageManager > Duplicate base name. Name:{key}",
                      LogLevel.Fatal);
-            return false;
-         }
-
-         if (result)
-            onExists?.Invoke();
-         else
-            onNull();
-
-         return result;
-
+         }, () =>
+         {
+            dict.Add(key, value);
+         });
       }
    }
 }
