@@ -36,28 +36,24 @@ namespace Player.Movement
       public void MoveFoward()
       {
          if (!PlayerStatus.Moveable) return;
-         PlayerStatus.IsMoving = true;
          PlayerMoveDelta.Instance.AddYDelta(PlayerValues.speed);
       }
 
       public void MoveBackword()
       {
          if (!PlayerStatus.Moveable) return;
-         PlayerStatus.IsMoving = true;
          PlayerMoveDelta.Instance.AddYDelta(-PlayerValues.speed);
       }
 
       public void MoveLeft()
       {
          if (!PlayerStatus.Moveable) return;
-         PlayerStatus.IsMoving = true;
          PlayerMoveDelta.Instance.AddXDelta(-PlayerValues.speed);
       }
 
       public void MoveRight()
       {
          if (!PlayerStatus.Moveable) return;
-         PlayerStatus.IsMoving = true;
          PlayerMoveDelta.Instance.AddXDelta(PlayerValues.speed);
       }
 
@@ -138,6 +134,9 @@ namespace Player.Movement
          delta.z = delta.y;
          delta.y = 0.0f;
          transform.Translate(delta * Time.deltaTime);
+
+         if(delta == Vector3.zero)
+            PlayerStatus.IsMoving = false;
       }
    }
 }

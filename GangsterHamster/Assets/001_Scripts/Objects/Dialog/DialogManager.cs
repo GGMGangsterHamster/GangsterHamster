@@ -32,7 +32,7 @@ using Objects.UI.Dialog.VO;
 
 namespace Objects.UI.Dialog
 {
-    public class DialogManager : MonoSingleton<DialogManager>
+    public class DialogManager : MonoSingleton<DialogManager>, DestroyOnLoad
     {
         [SerializeField] private DialogUI _dialogUI;
 
@@ -48,7 +48,7 @@ namespace Objects.UI.Dialog
         private DialogDataVO _currentDialog; // 현재 다이얼로그
 
 
-        private void Awake()
+        private new void Awake()
         {
             string dialogJson = (Resources.Load("Dialog") as TextAsset).text;
             if(dialogJson == null) Logger.Log("DialogManager > 다이얼로그를 찾을 수 없습니다.", LogLevel.Fatal);

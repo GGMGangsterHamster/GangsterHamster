@@ -34,7 +34,7 @@ namespace Animation.Camera
          {
             yield return new WaitUntil(() => PlayerStatus.IsMoving);
 
-            while (time <= next)
+            while (time <= next && PlayerStatus.HeadBob)
             {
                time += Time.deltaTime * PlayerValues.headBobFrequency;
 
@@ -57,7 +57,7 @@ namespace Animation.Camera
       private void ShakeViewpointCorrection()
       {
          if(!PlayerStatus.CameraShakeCorrection) return;
-         
+
          Vector3 target = transform.position;
          target.z += focusZDepth;
          Quaternion.LookRotation(target,

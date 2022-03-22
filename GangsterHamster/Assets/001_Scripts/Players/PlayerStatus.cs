@@ -20,6 +20,7 @@ namespace Player.Status
       static public bool Crouchable { get; set; } = true;
       static public bool Runable { get; set; } = true;
       static public bool CameraShakeCorrection { get; set; } = true;
+      static public bool HeadBob { get; set; } = true;
    }
 
 }

@@ -6,15 +6,32 @@ namespace Player.Utils
 {
    public class PlayerUtils : Singleton<PlayerUtils>, ISingletonObject
    {
-      private Transform _playerTrm;
-      private CapsuleCollider _collider;
-
-
-
-      public PlayerUtils()
+      private Transform _playerTrm = null;
+      private Transform PlayerTrm
       {
-         _playerTrm = GameObject.FindGameObjectWithTag("PLAYER").transform;
-         _collider = GameManager.Instance.Player.GetComponent<CapsuleCollider>();
+         get
+         {
+            if(_playerTrm == null)
+            {
+               _playerTrm = GameObject.FindGameObjectWithTag("PLAYER").transform;
+            }
+            
+            return _playerTrm;
+         }
+      }
+
+      private CapsuleCollider _collider = null;
+      private CapsuleCollider Collider
+      {
+         get
+         {
+            if(_collider == null)
+            {
+               _collider = GameManager.Instance.Player.GetComponent<CapsuleCollider>();
+            }
+
+            return _collider;
+         }
       }
 
       /// <summary>
@@ -25,16 +42,16 @@ namespace Player.Utils
          PlayerStatus.IsCrouching = true;
          PlayerValues.speed = PlayerValues.CrouchSpeed;
 
-         _playerTrm.localScale = new Vector3(_playerTrm.localScale.x,
+         PlayerTrm.localScale = new Vector3(PlayerTrm.localScale.x,
                                              PlayerValues.PlayerCrouchYScale,
-                                             _playerTrm.localScale.z);
+                                             PlayerTrm.localScale.z);
 
-         _playerTrm.localPosition = new Vector3(0.0f,
+         PlayerTrm.localPosition = new Vector3(0.0f,
                                                 PlayerValues.PlayerCrouchYPos,
                                                 0.0f);
 
-         _collider.height = 1.0f;
-         _collider.center = new Vector3(0.0f, 0.5f, 0.0f);
+         Collider.height = 1.0f;
+         Collider.center = new Vector3(0.0f, 0.5f, 0.0f);
 
          SetWalking();
       }
@@ -47,16 +64,16 @@ namespace Player.Utils
          PlayerStatus.IsCrouching = false;
          PlayerValues.speed = PlayerValues.WalkingSpeed;
 
-         _playerTrm.localScale = new Vector3(_playerTrm.localScale.x,
+         PlayerTrm.localScale = new Vector3(PlayerTrm.localScale.x,
                                              PlayerValues.PlayerYScale,
-                                             _playerTrm.localScale.z);
+                                             PlayerTrm.localScale.z);
 
-         _playerTrm.localPosition = new Vector3(0.0f,
+         PlayerTrm.localPosition = new Vector3(0.0f,
                                                 PlayerValues.PlayerYPos,
                                                 0.0f);
 
-         _collider.height = 1.8f;
-         _collider.center = new Vector3(0.0f, 0.9f, 0.0f);
+         Collider.height = 1.8f;
+         Collider.center = new Vector3(0.0f, 0.9f, 0.0f);
       }
 
       public void SetRunning()

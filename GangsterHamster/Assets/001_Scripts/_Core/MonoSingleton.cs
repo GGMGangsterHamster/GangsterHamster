@@ -18,9 +18,6 @@ abstract public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
             if (objs.Length > 0)
             {
                _instance = objs[0];
-               _instance.name = typeof(T).ToString();
-
-               DontDestroyOnLoad(_instance.gameObject);
             }
             else // 없으면 새로 만듬
             { 
@@ -31,9 +28,12 @@ abstract public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
                obj.AddComponent<T>();
 
                _instance = obj.GetComponent<T>();
-               DontDestroyOnLoad(_instance.gameObject);
+
             }
-            
+
+            _instance.name = typeof(T).ToString();
+            if(_instance.GetComponent<DestroyOnLoad>() == null)
+               DontDestroyOnLoad(_instance);
          }
          return _instance;
       }
@@ -45,16 +45,21 @@ abstract public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
 
       if (arr.Length > 1)
       {
-         Logger.Log($"{_instance.GetType()} Found more than one.",
+         Logger.Log($"{typeof(T)} Found more than one.",
                   LogLevel.Error);
 
          for (int i = 0; i < arr.Length; ++i)
          {
             if (arr[i].name != typeof(T).ToString())
-               Destroy(arr[i]);
+               Destroy(arr[i].gameObject);
          }
 
          GC.Collect();
       }
+   }
+
+   protected virtual void Awake()
+   {
+      CheckDuplicate();
    }
 }

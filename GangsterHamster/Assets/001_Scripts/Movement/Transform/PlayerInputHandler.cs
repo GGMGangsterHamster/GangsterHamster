@@ -12,7 +12,6 @@ using Player.Status;
 
 namespace Player.Movement
 {
-
    public class PlayerInputHandler : MonoSingleton<PlayerInputHandler>
    {
       private Dictionary<KeyCode, Command> _keyDownInputDictionary;  // 키 다운
@@ -22,66 +21,77 @@ namespace Player.Movement
       private Dictionary<KeyCode, Command> _movementInputDictionary; // 이동 키 (FixedUpdate)
 
       private PlayerMovement _playerMove = null;
+      private PlayerMovement PlayerMove
+      {
+         get
+         {
+            if (_playerMove == null)
+            {
+               _playerMove = FindObjectOfType<PlayerMovement>();
+
+            }
+            return _playerMove;
+         }
+      }
+
       private WeaponManagement _weapon = null;
+      private WeaponManagement Weapon
+      {
+         get
+         {
+            if (_weapon == null)
+            {
+               _weapon = FindObjectOfType<WeaponManagement>();
+
+            }
+            return _weapon;
+         }   
+      }
 
 
       private void Start()
       {
-         #region
+         #region // Cursor lock
          Cursor.visible = false;
          Cursor.lockState = CursorLockMode.Locked;
          #endregion
 
-         _playerMove = FindObjectOfType<PlayerMovement>();
-         _weapon = FindObjectOfType<WeaponManagement>();
-
-         _keyDownInputDictionary = new Dictionary<KeyCode, Command>();
-         _keyUpInputDictionary = new Dictionary<KeyCode, Command>();
+         _keyDownInputDictionary  = new Dictionary<KeyCode, Command>();
+         _keyUpInputDictionary    = new Dictionary<KeyCode, Command>();
          _movementInputDictionary = new Dictionary<KeyCode, Command>();
-
-#if UNITY_EDITOR
-         NULL.Check(_playerMove, () =>
-         {
-            this.enabled = false;
-         });
-         NULL.Check(_weapon, () =>
-         {
-            this.enabled = false;
-         });
-#endif
 
          #region 이동
          _movementInputDictionary.Add(KeyCode.W,
-                new MoveFoward(_playerMove));   // 앞쪽
+                new MoveFoward(PlayerMove));   // 앞쪽
 
          _movementInputDictionary.Add(KeyCode.S,
-                new MoveBackword(_playerMove)); // 뒤쪽
+                new MoveBackword(PlayerMove)); // 뒤쪽
 
          _movementInputDictionary.Add(KeyCode.A,
-                new MoveLeft(_playerMove));     // 옆쪽
+                new MoveLeft(PlayerMove));     // 옆쪽
 
          _movementInputDictionary.Add(KeyCode.D,
-                new MoveRight(_playerMove));    // 오른쪽
+                new MoveRight(PlayerMove));    // 오른쪽
          #endregion // 이동
 
          #region GetKeyDown();
          _keyDownInputDictionary.Add(KeyCode.Space,
-                new Jump(_playerMove));             // 점프
+                new Jump(PlayerMove));             // 점프
 
          _keyDownInputDictionary.Add(KeyCode.LeftControl,
-                new Crouch(_playerMove));           // 웅크리기
+                new Crouch(PlayerMove));           // 웅크리기
 
          _keyDownInputDictionary.Add(KeyCode.LeftShift,
-                new DashStart(_playerMove));         // 대쉬 시작
+                new DashStart(PlayerMove));         // 대쉬 시작
 
          _keyDownInputDictionary.Add(KeyCode.Mouse0,
-                new MouseLeft(_weapon));            // 마우스 왼쪽
+                new MouseLeft(Weapon));            // 마우스 왼쪽
 
          _keyDownInputDictionary.Add(KeyCode.Mouse1,
-                new MouseRight(_weapon));           // 마우스 오른쪽
+                new MouseRight(Weapon));           // 마우스 오른쪽
 
          _keyDownInputDictionary.Add(KeyCode.R,
-                new ResetKey(_weapon));             // 무기 리셋
+                new ResetKey(Weapon));             // 무기 리셋
 
          _keyDownInputDictionary.Add(KeyCode.E,
                 new Interact());                    // 상호작용
@@ -93,7 +103,7 @@ namespace Player.Movement
          #region GetKeyUp();
 
          _keyUpInputDictionary.Add(KeyCode.LeftShift,
-                new DashStop(_playerMove));         // 대쉬 중지
+                new DashStop(PlayerMove));         // 대쉬 중지
 
          #endregion // GetKeyDown();
       }
@@ -104,13 +114,12 @@ namespace Player.Movement
 
          // GetKey(); for movement
 
-         PlayerStatus.IsMoving = false;
          foreach (KeyCode key in _movementInputDictionary.Keys)
          {
             if (Input.GetKey(key))
             {
-               _movementInputDictionary[key].Execute();
                PlayerStatus.IsMoving = true;
+               _movementInputDictionary[key].Execute();
             }
          }
 

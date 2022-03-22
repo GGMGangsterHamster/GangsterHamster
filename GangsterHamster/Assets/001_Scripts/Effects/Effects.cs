@@ -9,9 +9,10 @@ namespace Effects
    /// <summary>
    /// Volume 을 사용하는 효과가 상속받는 클레스
    /// </summary>
-   abstract public class Effects<T, GlobalVolume> : MonoSingleton<T>
-           where T : MonoBehaviour
-           where GlobalVolume : VolumeComponentWithQuality
+   abstract public class Effects<T, GlobalVolume> : MonoSingleton<T>,
+            DestroyOnLoad
+            where T : MonoBehaviour
+            where GlobalVolume : VolumeComponentWithQuality
    {
       protected Volume _volume;
       protected GlobalVolume _globalVolume;
@@ -19,9 +20,8 @@ namespace Effects
       // 코루틴 저장 용
       private Coroutine _coroutine = null;
 
-      private void Awake()
+      protected new void Awake()
       {
-
          _volume = GetComponent<Volume>();
 
 #if UNITY_EDITOR
