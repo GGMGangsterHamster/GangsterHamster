@@ -8,6 +8,7 @@ using Commands.Movement.Movements;
 using Commands.Interaction;
 using Commands.Movement.Mouse;
 using Player.Mouse;
+using Player.Status;
 
 namespace Player.Movement
 {
@@ -49,7 +50,7 @@ namespace Player.Movement
          });
 #endif
 
-#region 이동
+         #region 이동
          _movementInputDictionary.Add(KeyCode.W,
                 new MoveFoward(_playerMove));   // 앞쪽
 
@@ -87,24 +88,30 @@ namespace Player.Movement
 
          _keyDownInputDictionary.Add(KeyCode.Return,
                 new NextDialog());                  // 다음 다이얼로그
-#endregion // GetKeyDown();
+         #endregion // GetKeyDown();
 
-#region GetKeyUp();
+         #region GetKeyUp();
 
          _keyUpInputDictionary.Add(KeyCode.LeftShift,
                 new DashStop(_playerMove));         // 대쉬 중지
 
-#endregion // GetKeyDown();
+         #endregion // GetKeyDown();
       }
 
       private void FixedUpdate()
       {
          PlayerMoveDelta.Instance.ResetDelta();
 
+         // GetKey(); for movement
+
+         PlayerStatus.IsMoving = false;
          foreach (KeyCode key in _movementInputDictionary.Keys)
-         { // GetKey(); for movement
+         {
             if (Input.GetKey(key))
+            {
                _movementInputDictionary[key].Execute();
+               PlayerStatus.IsMoving = true;
+            }
          }
 
       }

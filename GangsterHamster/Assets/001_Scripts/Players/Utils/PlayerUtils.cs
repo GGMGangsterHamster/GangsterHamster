@@ -25,11 +25,18 @@ namespace Player.Utils
          PlayerStatus.IsCrouching = true;
          PlayerValues.speed = PlayerValues.CrouchSpeed;
 
-         _playerTrm.localScale = new Vector3(_playerTrm.localScale.x, PlayerValues.PlayerCrouchYScale, _playerTrm.localScale.z);
-         _playerTrm.localPosition = new Vector3(0.0f, PlayerValues.PlayerCrouchYPos, 0.0f);
+         _playerTrm.localScale = new Vector3(_playerTrm.localScale.x,
+                                             PlayerValues.PlayerCrouchYScale,
+                                             _playerTrm.localScale.z);
+
+         _playerTrm.localPosition = new Vector3(0.0f,
+                                                PlayerValues.PlayerCrouchYPos,
+                                                0.0f);
 
          _collider.height = 1.0f;
          _collider.center = new Vector3(0.0f, 0.5f, 0.0f);
+
+         SetWalking();
       }
 
       /// <summary>
@@ -40,11 +47,32 @@ namespace Player.Utils
          PlayerStatus.IsCrouching = false;
          PlayerValues.speed = PlayerValues.WalkingSpeed;
 
-         _playerTrm.localScale = new Vector3(_playerTrm.localScale.x, PlayerValues.PlayerYScale, _playerTrm.localScale.z);
-         _playerTrm.localPosition = new Vector3(0.0f, PlayerValues.PlayerYPos, 0.0f);
+         _playerTrm.localScale = new Vector3(_playerTrm.localScale.x,
+                                             PlayerValues.PlayerYScale,
+                                             _playerTrm.localScale.z);
+
+         _playerTrm.localPosition = new Vector3(0.0f,
+                                                PlayerValues.PlayerYPos,
+                                                0.0f);
 
          _collider.height = 1.8f;
          _collider.center = new Vector3(0.0f, 0.9f, 0.0f);
+      }
+
+      public void SetRunning()
+      {
+         PlayerStatus.IsRunning = true;
+         PlayerValues.speed = PlayerValues.DashSpeed;
+         PlayerValues.headBobAmplitude = PlayerValues.RunHeadBobAmplitude;
+         PlayerValues.headBobFrequency = PlayerValues.RunHeadBobFrequency;
+      }
+
+      public void SetWalking()
+      {
+         PlayerStatus.IsRunning = false;
+         PlayerValues.speed = PlayerValues.WalkingSpeed;
+         PlayerValues.headBobAmplitude = PlayerValues.WalkHeadBobAmplitude;
+         PlayerValues.headBobFrequency = PlayerValues.WalkHeadBobFrequency;
       }
 
 

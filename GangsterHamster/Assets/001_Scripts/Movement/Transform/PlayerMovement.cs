@@ -36,24 +36,28 @@ namespace Player.Movement
       public void MoveFoward()
       {
          if (!PlayerStatus.Moveable) return;
+         PlayerStatus.IsMoving = true;
          PlayerMoveDelta.Instance.AddYDelta(PlayerValues.speed);
       }
 
       public void MoveBackword()
       {
          if (!PlayerStatus.Moveable) return;
+         PlayerStatus.IsMoving = true;
          PlayerMoveDelta.Instance.AddYDelta(-PlayerValues.speed);
       }
 
       public void MoveLeft()
       {
          if (!PlayerStatus.Moveable) return;
+         PlayerStatus.IsMoving = true;
          PlayerMoveDelta.Instance.AddXDelta(-PlayerValues.speed);
       }
 
       public void MoveRight()
       {
          if (!PlayerStatus.Moveable) return;
+         PlayerStatus.IsMoving = true;
          PlayerMoveDelta.Instance.AddXDelta(PlayerValues.speed);
       }
 
@@ -61,24 +65,18 @@ namespace Player.Movement
       {
          if (PlayerStatus.IsCrouching)
          {
-            Logger.Log("웅크린 상태 중 Dash 명령.");
             PlayerUtils.Instance.SetStanded();
             return;
          }
 
-
-         PlayerStatus.IsRunning = true;
-         PlayerValues.speed = PlayerValues.DashSpeed;
-         
-         Debug.Log("start");
+         PlayerUtils.Instance.SetRunning();
       }
 
       public void DashStop()
       {
-         PlayerStatus.IsRunning = false;
-         PlayerValues.speed = PlayerValues.WalkingSpeed;
+         if(PlayerStatus.IsCrouching) return;
 
-         Debug.Log("end");
+         PlayerUtils.Instance.SetWalking();
       }
 
       #endregion // Movement
@@ -109,10 +107,13 @@ namespace Player.Movement
 
          rigid.velocity = -force;
 
+         PlayerStatus.IsJumping = true;
+
       }
 
       public void OnGround()
       {
+         PlayerStatus.IsJumping = false;
          PlayerStatus.OnGround = true;
          PlayerStatus.Jumpable = true;
       }
