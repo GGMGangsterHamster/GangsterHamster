@@ -10,7 +10,7 @@ namespace Tween
         /// Tween 합니다.
         /// </summary>
         /// <param name="step">단계</param>
-        /// <param name="compare">비교</param>
+        /// <param name="compare">비교 (true 가 될 때 까지 실행)</param>
         /// <param name="callback">완료 시 호출</param>
         public static Coroutine To(MonoBehaviour mono, Action step, Func<bool> compare, Action callback = null) {
             return mono.StartCoroutine(Interpolate(step, compare, callback));

@@ -11,7 +11,10 @@ namespace Objects.Callback
       /// <param name="param">매개 변수</param>
       public static void Call(Transform transform, object param = null)
       {
-         transform.GetComponentInChildren<ICallbackable>()?.Invoke(param);
+         for (int i = 0; i < transform.childCount; ++i)
+         {
+            transform.GetChild(i).GetComponent<ICallbackable>()?.Invoke(param);
+         }
       }
    }
 }

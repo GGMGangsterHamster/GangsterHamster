@@ -31,6 +31,7 @@ namespace Gravity.Object.Management
 
       private void Start()
       {
+         CheckDuplicate();
          InitDictionary();
 
          StageManager.Instance.AddLoadedEvent((a, b) => {

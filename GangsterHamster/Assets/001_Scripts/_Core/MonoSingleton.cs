@@ -11,21 +11,9 @@ abstract public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
       {
          if (_instance == null)
          {
+            CheckDuplicate();
+            
             T[] objs = FindObjectsOfType<T>();
-
-            if (objs.Length > 1)
-            {
-               Logger.Log($"{_instance.GetType()} Found more than one.",
-                        LogLevel.Error);
-
-               for (int i = 0; i < objs.Length; ++i)
-               {
-                  if(objs[i].name != typeof(T).ToString())
-                     Destroy(objs[i]);
-               }
-               
-               GC.Collect();
-            }
 
             if (objs.Length > 0)
             {
@@ -48,6 +36,25 @@ abstract public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
             
          }
          return _instance;
+      }
+   }
+
+   static protected void CheckDuplicate()
+   {
+      T[] arr = FindObjectsOfType<T>();
+
+      if (arr.Length > 1)
+      {
+         Logger.Log($"{_instance.GetType()} Found more than one.",
+                  LogLevel.Error);
+
+         for (int i = 0; i < arr.Length; ++i)
+         {
+            if (arr[i].name != typeof(T).ToString())
+               Destroy(arr[i]);
+         }
+
+         GC.Collect();
       }
    }
 }
