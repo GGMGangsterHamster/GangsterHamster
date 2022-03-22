@@ -12,20 +12,25 @@ abstract public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
          if (_instance == null)
          {
             T[] objs = FindObjectsOfType<T>();
+
+            if (objs.Length > 1)
+            {
+               Logger.Log($"{_instance.GetType()} Found more than one.",
+                        LogLevel.Error);
+
+               for (int i = 0; i < objs.Length; ++i)
+               {
+                  if(objs[i].name != typeof(T).ToString())
+                     Destroy(objs[i]);
+               }
+               
+               GC.Collect();
+            }
+
             if (objs.Length > 0)
             {
                _instance = objs[0];
-               if (objs.Length > 1)
-               {
-                  Logger.Log($"{_instance.GetType()} Found more than one.",
-                           LogLevel.Error);
-                  for (int i = 1; i < objs.Length; ++i) // 중복 오브젝트 삭제
-                  {
-                     Destroy(objs[i]);
-                  }
-                  GC.Collect();
-
-               }
+               _instance.name = typeof(T).ToString();
 
                DontDestroyOnLoad(_instance.gameObject);
             }
