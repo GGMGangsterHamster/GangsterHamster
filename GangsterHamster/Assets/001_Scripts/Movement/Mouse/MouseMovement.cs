@@ -11,7 +11,7 @@ namespace Player.Mouse
 
         private void Start() {
             camTrm = Camera.main.transform;
-            playerTrm = GameManager.Instance.player.transform;
+            playerTrm = GameManager.Instance.Player.transform;
         }
 
         #region Mouse delta
