@@ -5,58 +5,41 @@ using UnityEngine;
 
 namespace Objects.Utils
 {
-    public class GroundChecker : Singleton<GroundChecker>, ISingletonObject
-    {
-        const string GROUND = "GROUND";
-        // private IGroundCallbackObject _callback;
-        // [SerializeField] private float _groundDistance = 0.05f;
+   public class GroundChecker : MonoSingleton<GroundChecker>, DestroyOnLoad
+   {
+      const string GROUND = "GROUND";
 
-        private int _targetLayer;
+      [Header("바닥과 플레이어 거리")]
+      [SerializeField] private float _groundDistance;
 
-        public GroundChecker()
-        {
-            // _callback = GetComponentInChildren<IGroundCallbackObject>();
-            // if(_callback == null) {
-            //     Log.Debug.Log($"GroundChecker > {gameObject.name} 의 자식 오브젝트에서 IGroundCallbackObejct 을 찾을 수 없습니다.", Log.LogLevel.Fatal);
-            // }
+      private IGroundCallbackObject _callback;
 
-            _targetLayer = LayerMask.GetMask(GROUND);
-        }
+      private int _targetLayer;
 
-        // private void Update()
-        // {
-        //     RaycastHit hit;
-        //     if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hit, _groundDistance, _targetLayer)) {
-        //         _callback.OnGround();
-        //     }
-        //     else {
-        //         _callback.ExitGround();
-        //         Debug.LogWarning("A");
-        //     }
-        // }
+      private new void Awake()
+      {
+         _targetLayer = LayerMask.GetMask(GROUND);
+         _callback = GetComponentInChildren<IGroundCallbackObject>();
+      }
 
-        public bool CheckGround(Transform transform, float groundDistance)
-        {
-            Vector3 pos = transform.position;
-            pos.y += 0.05f;
-            bool res = Physics.Raycast(pos, transform.TransformDirection(Vector3.down), out RaycastHit hit, groundDistance, _targetLayer);
-            return res;
-        }
+      public bool CheckGround()
+      {
+         Vector3 pos = transform.position;
+         pos.y += 0.05f;
+         bool res = Physics.Raycast(pos, transform.TransformDirection(Vector3.down), out RaycastHit hit, _groundDistance, _targetLayer);
 
-        // private void OnTriggerStay(Collider other)
-        // {
-        //     if(other.gameObject.CompareTag(GROUND)) {
-        //         _callback.OnGround();
-        //     }
-        // }
+         switch(res)
+         {
+            case true:  _callback?.ExitGround();   break;
+            case false: _callback?.OnGround();     break;
+         }
 
-        // private void OnTriggerExit(Collider other)
-        // {
-        //     if(other.gameObject.CompareTag(GROUND)) {
-        //         _callback.ExitGround();
-        //     }
-        // }
+         return res;
+      }
 
-        // TODO: 아레쪽으로 Ray
-    }
+      private void Update()
+      {
+         CheckGround();
+      }
+   }
 }

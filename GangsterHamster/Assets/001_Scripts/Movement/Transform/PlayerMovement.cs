@@ -21,14 +21,16 @@ namespace Player.Movement
                                  ICrouchable
    {
 
-      [Header("바닥과 플레이어 거리")]
-      [SerializeField] private float _groundDistance;
-
       private Rigidbody rigid;
+
+      public System.Action OnJump;
+      public System.Action OnLanded;
 
       private void Awake()
       {
          rigid = GetComponent<Rigidbody>();
+         OnJump += () => { };
+         OnLanded += () => { };
       }
 
       #region Movement
@@ -70,7 +72,7 @@ namespace Player.Movement
 
       public void DashStop()
       {
-         if(PlayerStatus.IsCrouching) return;
+         if (PlayerStatus.IsCrouching) return;
 
          PlayerUtils.Instance.SetWalking();
       }
@@ -83,7 +85,7 @@ namespace Player.Movement
 
       public void Jump()
       {
-         if (!GroundChecker.Instance.CheckGround(this.transform, _groundDistance) || !PlayerStatus.Jumpable) return;
+         if (!GroundChecker.Instance.CheckGround() || !PlayerStatus.Jumpable) return;
 
          if (PlayerStatus.IsCrouching)
          {
@@ -99,19 +101,13 @@ namespace Player.Movement
          force.y *= gravityDir.y;
          force.z *= gravityDir.z;
 
-         Debug.Log(-force);
-
          rigid.velocity = -force;
 
+         PlayerStatus.CameraShakeCorrection = false;
+         PlayerStatus.HeadBob = false;
          PlayerStatus.IsJumping = true;
 
-      }
-
-      public void OnGround()
-      {
-         PlayerStatus.IsJumping = false;
-         PlayerStatus.OnGround = true;
-         PlayerStatus.Jumpable = true;
+         OnJump();
       }
 
       #endregion // Jump
@@ -135,8 +131,10 @@ namespace Player.Movement
          delta.y = 0.0f;
          transform.Translate(delta * Time.deltaTime);
 
-         if(delta == Vector3.zero)
+         if (delta == Vector3.zero)
             PlayerStatus.IsMoving = false;
       }
+
+      public void OnGround() { }
    }
 }

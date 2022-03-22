@@ -7,17 +7,21 @@ using UnityEngine;
 namespace Player.Movement
 {
 
-    public class PlayerOnGround : MonoBehaviour, IGroundCallbackObject
-    {
-        public void ExitGround()
-        {
-            PlayerStatus.OnGround = false;
-        }
+   public class PlayerOnGround : MonoBehaviour, IGroundCallbackObject
+   {
+      public void ExitGround()
+      {
+         PlayerStatus.OnGround = false;
+      }
 
-        public void OnGround()
-        {
-            PlayerStatus.OnGround = true;
-        }
-    }
+      public void OnGround()
+      {
+         PlayerStatus.IsJumping = false;
+         PlayerStatus.OnGround = true;
+         PlayerStatus.Jumpable = true;
+         PlayerStatus.CameraShakeCorrection = true;
+         PlayerStatus.HeadBob = true;
+      }
+   }
 
 }
