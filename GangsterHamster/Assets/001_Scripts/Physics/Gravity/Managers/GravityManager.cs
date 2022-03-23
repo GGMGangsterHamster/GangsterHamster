@@ -31,8 +31,9 @@ namespace Gravity.Object.Management
 
       private void Start()
       {
-         CheckDuplicate();
          InitDictionary();
+         DontDestroyOnLoad(this.gameObject);
+         this.gameObject.name = typeof(GravityManager).ToString();
 
          StageManager.Instance.AddLoadedEvent((a, b) => {
             InitDictionary();
