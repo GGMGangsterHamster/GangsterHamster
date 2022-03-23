@@ -22,6 +22,7 @@ namespace Player.Movement
    {
 
       private Rigidbody rigid;
+      private GroundChecker groundChecker;
 
       public System.Action OnJump;
       public System.Action OnLanded;
@@ -29,6 +30,7 @@ namespace Player.Movement
       private void Awake()
       {
          rigid = GetComponent<Rigidbody>();
+         groundChecker = GetComponentInChildren<GroundChecker>();
          OnJump += () => { };
          OnLanded += () => { };
       }
@@ -85,7 +87,7 @@ namespace Player.Movement
 
       public void Jump()
       {
-         if (!GroundChecker.Instance.CheckGround() || !PlayerStatus.Jumpable) return;
+         if (!groundChecker.CheckGround() || !PlayerStatus.Jumpable) return;
 
          if (PlayerStatus.IsCrouching)
          {

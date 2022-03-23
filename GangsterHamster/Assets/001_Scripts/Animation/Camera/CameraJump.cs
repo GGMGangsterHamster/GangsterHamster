@@ -2,6 +2,7 @@ using UnityEngine;
 using Tween;
 using Player.Movement;
 using System.Collections;
+using Player.Status;
 
 namespace Animation.Camera
 {  
@@ -17,16 +18,19 @@ namespace Animation.Camera
       [SerializeField] private float _preJumpDepth = 0.1f;
 
       private Coroutine jump;
-      private Coroutine land; 
+      private Coroutine land;
 
       private void Start()
       {
          PlayerMovement playerMove = FindObjectOfType<PlayerMovement>();
 
-         playerMove.OnJump += () => {
+         playerMove.OnJump += () => { // FIXME: 이동과 같이 사용하면 에니메이션 나오지 않음
+
+            PlayerStatus.HeadBob = false; // 걷기 모션 비활성화
 
             if (jump != null) // TODO: 확인해봐야함
                ValueTween.Stop(this, jump);
+
 
             this.transform.localPosition = DEFAULT_POSITION;
             float step = Mathf.PI / _preJumpDuration;
@@ -40,8 +44,6 @@ namespace Animation.Camera
                this.transform.localPosition = delta;
 
                time += step * Time.deltaTime;
-               Debug.Log(time);
-
 
             }, () => {
                return time >= DOUBLE_PI;

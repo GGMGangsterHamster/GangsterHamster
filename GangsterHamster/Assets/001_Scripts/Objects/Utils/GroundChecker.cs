@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Objects.Utils
 {
-   public class GroundChecker : MonoSingleton<GroundChecker>, DestroyOnLoad
+   public class GroundChecker : MonoBehaviour
    {
       const string GROUND = "GROUND";
 
@@ -16,7 +16,7 @@ namespace Objects.Utils
 
       private int _targetLayer;
 
-      private new void Awake()
+      private void Awake()
       {
          _targetLayer = LayerMask.GetMask(GROUND);
          _callback = GetComponentInChildren<IGroundCallbackObject>();

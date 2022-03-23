@@ -32,20 +32,31 @@ namespace Animation.Camera
       {
          while (true)
          {
-            yield return new WaitUntil(() => PlayerStatus.IsMoving);
+            yield return new WaitUntil(() => PlayerStatus.IsMoving && PlayerStatus.HeadBob);
 
-            while (time <= next && PlayerStatus.HeadBob)
+            while (time <= next)
             {
+               if(!PlayerStatus.HeadBob) // 강제로 종료해야 하는 경우가 있더라구요
+               {
+                  transform.localPosition = Vector3.zero;
+                  time = 0.0f;
+                  next = STEP;
+                  break;
+               }
+
+
                time += Time.deltaTime * PlayerValues.headBobFrequency;
 
                float x = Mathf.Sin(time / 2.0f) * PlayerValues.headBobAmplitude;
                float y = Mathf.Cos(time) * PlayerValues.headBobAmplitude;
 
                transform.localPosition = new Vector3(x, y, 0.0f);
+
                yield return null;
             }
 
             next = time + STEP;
+
 
             yield return null;
          }
