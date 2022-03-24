@@ -12,7 +12,13 @@ namespace Objects.Interactable
       [SerializeField] private GameObject _doorObject;
       [SerializeField] private float _defaultDoorStayOpenDuration = 3.0f;
       [SerializeField] private Transform[] _uiPositions = new Transform[2];
-      [SerializeField] private BoxCollider _collider = null;
+      
+      private BoxCollider _collider = null;
+
+      private void Awake()
+      {
+         _collider = GetComponent<BoxCollider>();
+      }
 
 
       /// <summary>
@@ -30,7 +36,7 @@ namespace Objects.Interactable
 
          _collider.enabled = false;
          ExecuteCallback.Call(this.transform);
-         
+
          callback?.Invoke();
          _doorObject.SetActive(false);
       }
