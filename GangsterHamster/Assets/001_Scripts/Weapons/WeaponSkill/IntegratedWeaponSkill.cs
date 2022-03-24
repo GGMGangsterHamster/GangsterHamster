@@ -14,7 +14,7 @@ public class IntegratedWeaponSkill : Singleton<IntegratedWeaponSkill>, ISingleto
     /// <returns></returns>
     public bool CheckForward(Vector3 boxCenterOffset = new Vector3())
     {
-        Vector3 boxSize = PlayerBaseTrm.GetComponent<BoxCollider>().size;
+        Vector3 boxSize = new Vector3(PlayerBaseTrm.GetComponent<CapsuleCollider>().radius, PlayerBaseTrm.GetComponent<CapsuleCollider>().height, PlayerBaseTrm.GetComponent<CapsuleCollider>().radius);
 
         Collider[] cols = Physics.OverlapBox(PlayerBaseTrm.position + PlayerBaseTrm.up * 1.2f + boxCenterOffset,
                                              boxSize + new Vector3(0, -1.5f, 1f),
