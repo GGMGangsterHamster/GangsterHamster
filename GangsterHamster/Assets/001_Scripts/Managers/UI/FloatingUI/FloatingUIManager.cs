@@ -19,12 +19,7 @@ namespace Objects.UI.Management
             }
             
 #if UNITY_EDITOR
-            NULL.Check(_floatingUI, () => {
-               Debug.Log("NULL");
-               this.enabled = false;
-            }, () => {
-               Debug.Log("NOTNULL");
-            });
+            NULL.Check(_floatingUI);
 #endif
 
             return _floatingUI;

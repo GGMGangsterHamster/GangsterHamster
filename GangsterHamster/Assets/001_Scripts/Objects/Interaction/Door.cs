@@ -12,6 +12,7 @@ namespace Objects.Interactable
       [SerializeField] private GameObject _doorObject;
       [SerializeField] private float _defaultDoorStayOpenDuration = 3.0f;
       [SerializeField] private Transform[] _uiPositions = new Transform[2];
+      [SerializeField] private BoxCollider _collider = null;
 
 
       /// <summary>
@@ -21,19 +22,22 @@ namespace Objects.Interactable
       /// </summary>
       public override void Interact(Action callback = null)
       {
-         _doorObject.SetActive(false);
          if (callback == null)
             Invoke(nameof(Release), _defaultDoorStayOpenDuration); // 오 이런
 
          FloatingUIManager.Instance.DisableUI();
 
 
-         callback?.Invoke();
+         _collider.enabled = false;
          ExecuteCallback.Call(this.transform);
+         
+         callback?.Invoke();
+         _doorObject.SetActive(false);
       }
 
       public override void Release() // 문을 닫음
       {
+         _collider.enabled = true;
          _doorObject.SetActive(true);
       }
 

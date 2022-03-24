@@ -10,6 +10,7 @@ namespace Objects.Callback
 
       public void Invoke(object param)
       {
+         Debug.Log("Load");
          StageManager.Instance.Load(target);
          Destroy(this.gameObject);
       }
