@@ -39,7 +39,7 @@ public class FirstWeaponSkill : WeaponSkill
     {
         if (transform.parent == RightHandTrm)
         {
-            if (IntegratedWeaponSkill.Instance.CheckForward(PlayerBaseTrm.forward))
+            if (IntegratedWeaponSkill.Instance.CheckForward(PlayerBaseTrm.forward / 4))
             {
                 StartCoroutine(ShotCo(dir));
             }
@@ -149,7 +149,7 @@ public class FirstWeaponSkill : WeaponSkill
     IEnumerator ShotCo(Vector3 dir)
     {
         transform.parent = null;
-        transform.position = PlayerBaseTrm.position + (PlayerBaseTrm.forward / 3) + PlayerBaseTrm.up * PlayerTrm.localScale.y;
+        transform.position = PlayerBaseTrm.position + (PlayerBaseTrm.forward / 2) + PlayerBaseTrm.up * PlayerTrm.localScale.y;
 
         while (true)
         {            

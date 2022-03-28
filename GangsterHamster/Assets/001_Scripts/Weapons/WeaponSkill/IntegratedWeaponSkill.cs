@@ -14,10 +14,8 @@ public class IntegratedWeaponSkill : Singleton<IntegratedWeaponSkill>, ISingleto
     /// <returns></returns>
     public bool CheckForward(Vector3 boxCenterOffset = new Vector3())
     {
-        Vector3 boxSize = new Vector3(PlayerBaseTrm.GetComponent<CapsuleCollider>().radius, PlayerBaseTrm.GetComponent<CapsuleCollider>().height, PlayerBaseTrm.GetComponent<CapsuleCollider>().radius);
-
         Collider[] cols = Physics.OverlapBox(PlayerBaseTrm.position + PlayerBaseTrm.up * 1.2f + boxCenterOffset,
-                                             boxSize + new Vector3(0, -1.5f, 1f),
+                                             new Vector3(0.5f, 0.3f, 0.65f),
                                              PlayerBaseTrm.rotation); // 플레이어의 바로 앞을 검사해서 뭔가 있는지 확인
 
         for (int i = 0; i < cols.Length; i++)
