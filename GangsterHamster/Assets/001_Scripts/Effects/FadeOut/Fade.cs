@@ -20,7 +20,7 @@ namespace Objects.Callback
       {
          cvs.alpha = defaultAlpha;
 
-         if(targetAlpha <= 0.0f)
+         if (targetAlpha <= 0.0f)
          {
             targetAlpha = -1.0f;
          }
@@ -28,7 +28,7 @@ namespace Objects.Callback
 
       private void Start()
       {
-         if(activeWhenStart)
+         if (activeWhenStart)
          {
             Invoke(null);
          }
