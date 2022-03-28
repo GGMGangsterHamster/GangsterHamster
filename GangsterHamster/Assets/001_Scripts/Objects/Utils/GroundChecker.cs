@@ -9,9 +9,6 @@ namespace Objects.Utils
    {
       const string GROUND = "GROUND";
 
-      [Header("바닥과 플레이어 거리")]
-      [SerializeField] private float _groundDistance;
-
       private IGroundCallbackObject _callback;
 
       private int _targetLayer;
@@ -20,26 +17,38 @@ namespace Objects.Utils
       {
          _targetLayer = LayerMask.GetMask(GROUND);
          _callback = GetComponentInChildren<IGroundCallbackObject>();
+
+         Debug.Log(_targetLayer);
       }
 
-      public bool CheckGround()
+      private void OnTriggerEnter(Collider other)
       {
-         Vector3 pos = transform.position;
-         pos.y += 0.05f;
-         bool res = Physics.Raycast(pos, transform.TransformDirection(Vector3.down), out RaycastHit hit, _groundDistance, _targetLayer);
-
-         switch(res)
+         if ((1 << other.gameObject.layer) == _targetLayer)
          {
-            case true:  _callback?.ExitGround();   break;
-            case false: _callback?.OnGround();     break;
+            _callback?.OnGround();
          }
-
-         return res;
       }
 
-      private void Update()
+      private void OnTriggerStay(Collider other)
       {
-         CheckGround();
+         if ((1 << other.gameObject.layer) == _targetLayer)
+         {
+            Debug.Log("stay");
+            _callback?.OnGround();
+         }
       }
+
+      private void OnTriggerExit(Collider other)
+      {
+         if ((1 << other.gameObject.layer) == _targetLayer)
+         {
+            _callback?.ExitGround();
+         }
+      }
+
+      // private void Update()
+      // {
+      //    CheckGround();
+      // }
    }
 }

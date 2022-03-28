@@ -12,7 +12,7 @@ namespace Player
       public const float PlayerHeight = 1.8f;
       public const float PlayerCrouchHeight = 1.0f;
 
-      public const float JumpHeight = 0.7f;
+      public const float JumpHeight = 1.1f;
 
       public const float PlayerYPos = 0.9f;
       public const float PlayerYScale = 1.8f;

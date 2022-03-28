@@ -12,6 +12,7 @@ namespace Player.Movement
       public void ExitGround()
       {
          PlayerStatus.OnGround = false;
+         PlayerStatus.HeadBob = false;
       }
 
       public void OnGround()

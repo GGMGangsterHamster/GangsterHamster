@@ -66,7 +66,6 @@ namespace Player.Movement
          if (PlayerStatus.IsCrouching)
          {
             PlayerUtils.Instance.SetStanded();
-            return;
          }
 
          PlayerUtils.Instance.SetRunning();
@@ -87,7 +86,7 @@ namespace Player.Movement
 
       public void Jump()
       {
-         if (!groundChecker.CheckGround() || !PlayerStatus.Jumpable) return;
+         if (!PlayerStatus.Jumpable) return;
 
          if (PlayerStatus.IsCrouching)
          {
