@@ -17,8 +17,6 @@ namespace Objects.Utils
       {
          _targetLayer = LayerMask.GetMask(GROUND);
          _callback = GetComponentInChildren<IGroundCallbackObject>();
-
-         Debug.Log(_targetLayer);
       }
 
       private void OnTriggerEnter(Collider other)
@@ -29,14 +27,13 @@ namespace Objects.Utils
          }
       }
 
-      private void OnTriggerStay(Collider other)
-      {
-         if ((1 << other.gameObject.layer) == _targetLayer)
-         {
-            Debug.Log("stay");
-            _callback?.OnGround();
-         }
-      }
+      // private void OnTriggerStay(Collider other)
+      // {
+      //    if ((1 << other.gameObject.layer) == _targetLayer)
+      //    {
+      //       _callback?.OnGround();
+      //    }
+      // }
 
       private void OnTriggerExit(Collider other)
       {
