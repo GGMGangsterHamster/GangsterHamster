@@ -6,12 +6,12 @@ namespace Objects.Interactable
 {
    public class Treadmill : CollisionInteractable
    {
-      public Vector2 direction;
+      public Vector3 direction;
 
       protected override void OnCollision(GameObject other)
       {
          DeltaMoveable delta = other.GetComponent<DeltaMoveable>();
-         delta.AddDelta(other.transform.TransformDirection(direction));
+         delta.AddRawDelta(direction);
       }
    }
 }

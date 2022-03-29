@@ -36,7 +36,7 @@ namespace Player.Movement
          OnJump += () => { };
          OnLanded += () => { };
 
-         _delta = new DeltaMoveable(Vector2.zero);
+         _delta = gameObject.AddComponent<DeltaMoveable>();
       }
 
       #region Movement
@@ -139,12 +139,7 @@ namespace Player.Movement
 
       private void FixedUpdate()
       {
-         Vector3 delta = _delta.GetDelta();
-
-         delta.z = delta.y;
-         delta.y = 0.0f;
-         
-         delta = transform.TransformDirection(delta) * Time.deltaTime;
+         Vector3 delta = _delta.Calculate();
 
          rigid.MovePosition(transform.position + delta);
       }

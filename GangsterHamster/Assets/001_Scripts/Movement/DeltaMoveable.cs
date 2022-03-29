@@ -2,16 +2,28 @@ using UnityEngine;
 
 namespace Movement.Delta
 {
-   public class DeltaMoveable
+   public class DeltaMoveable : MonoBehaviour
    {
       private Vector2 _delta;
+      private Vector3 _rawDelta;
 
       public DeltaMoveable(Vector2 initalDelta)
       {
          _delta = initalDelta;
+         _rawDelta = Vector3.zero;
       }
 
       #region Set
+
+      public void SetRawDelta(Vector3 rawDelta)
+      {
+         _rawDelta = rawDelta;
+      }
+
+      public void AddRawDelta(Vector3 rawDelta)
+      {
+         _rawDelta += rawDelta;
+      }
 
       /// <summary>
       /// Delta 를 설정합니다.
@@ -109,6 +121,22 @@ namespace Movement.Delta
       public Vector2 GetDelta()
       {
          return _delta;
+      }
+
+      /// <summary>
+      /// 이 스크립트가 부착된 오브젝트의 회전에 따른 delta 를 계산해 반환합니다.
+      /// </summary>
+      public Vector3 Calculate()
+      {
+         Vector3 delta = _delta;
+         delta.z = delta.y;
+         delta.y = 0.0f;
+
+         Vector3 finalDelta =
+            (transform.TransformDirection(delta) + _rawDelta) * Time.deltaTime;
+            
+         _rawDelta = Vector3.zero;
+         return finalDelta;
       }
    }
 }

@@ -5,7 +5,7 @@ namespace Objects.Interactable
    
    abstract public class CollisionInteractable : MonoBehaviour
    {
-      private void OnCollisionEnter(Collision other)
+      private void OnCollisionStay(Collision other)
       {
          OnCollision(other.gameObject);
       }
