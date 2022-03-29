@@ -45,13 +45,14 @@ namespace Objects.Callback
             cvs.alpha += step * Time.deltaTime;
             ++counter;
          }, () => {
-            return cvs.alpha == targetAlpha;
+            if(targetAlpha == -1)
+               return cvs.alpha == 0;
+            else
+               return cvs.alpha == targetAlpha;
          }, () => {
             cvs.alpha = targetAlpha;
             ExecuteCallback.Call(this.transform);
          });
-
-         Debug.Log(counter);
       }
    }
 }
