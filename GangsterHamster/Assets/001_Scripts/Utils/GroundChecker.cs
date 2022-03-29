@@ -17,6 +17,9 @@ namespace Objects.Utils
       {
          _targetLayer = LayerMask.GetMask(GROUND);
          _callback = GetComponentInChildren<IGroundCallbackObject>();
+
+         Logger.Log("GroundChecker > OnTriggerStay 비활성화 해야 함",
+                  LogLevel.Warning);
       }
 
       private void OnTriggerEnter(Collider other)
@@ -27,13 +30,13 @@ namespace Objects.Utils
          }
       }
 
-      // private void OnTriggerStay(Collider other)
-      // {
-      //    if ((1 << other.gameObject.layer) == _targetLayer)
-      //    {
-      //       _callback?.OnGround();
-      //    }
-      // }
+      private void OnTriggerStay(Collider other)
+      {
+         if ((1 << other.gameObject.layer) == _targetLayer)
+         {
+            _callback?.OnGround();
+         }
+      }
 
       private void OnTriggerExit(Collider other)
       {

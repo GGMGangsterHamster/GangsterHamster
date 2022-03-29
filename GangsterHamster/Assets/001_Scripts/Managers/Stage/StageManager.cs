@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Objects.Checkpoint;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -14,10 +16,33 @@ namespace Stage.Management
    public class StageManager : Singleton<StageManager>, ISingletonObject
    {
       public StageNames CurrentStage { get; private set; }
+      private string activatedCheckpointName = "";
 
       public StageManager()
       {
-         CurrentStage = StageNames.NONE;
+         CurrentStage = StageNames.Stage_1_1;
+
+         AddLoadedEvent((s, l) => { // 체크포인트 등록
+            LoadCheckpoint();
+         });
+      }
+
+      private void LoadCheckpoint()
+      {
+         Debug.Log(activatedCheckpointName + " name");
+
+         if (activatedCheckpointName != "")
+         {
+            GameObject checkpoint =
+                     GameObject.Find(activatedCheckpointName);
+
+            if(checkpoint == null) return; // 채크포인트를 찾을 수 없는 경우
+
+            GameManager.Instance.Player.transform.position =
+                     checkpoint.transform.position;
+
+            activatedCheckpointName = "";
+         }
       }
 
       public void Load(StageNames target)
@@ -38,6 +63,11 @@ namespace Stage.Management
             SceneManager.LoadScene(CurrentStage.ToString());
             GC.Collect();
          }
+      }
+
+      public void ActivateCheckpoint(string name)
+      {
+         activatedCheckpointName = name;
       }
 
       public void AddLoadedEvent(UnityAction<Scene, LoadSceneMode> action)

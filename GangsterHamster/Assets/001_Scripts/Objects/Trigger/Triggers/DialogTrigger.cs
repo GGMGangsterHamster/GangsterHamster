@@ -5,7 +5,7 @@ namespace Objects.Trigger
 {
     public class DialogTrigger : TriggerObject
     {
-        [SerializeField] private string targetTag = "PLAYER";
+        [SerializeField] private string targetTag = "PLAYER_BASE";
         [SerializeField] private int dialogID = -1;
 
         protected override void Awake()
