@@ -10,6 +10,7 @@ public class StaticUIManager : MonoSingleton<StaticUIManager>
         NewGame,
         ChooseChapter,
         InGame,
+        Option,
         Pause,
     }
 
@@ -18,6 +19,7 @@ public class StaticUIManager : MonoSingleton<StaticUIManager>
     [SerializeField] private Transform _newGameUI;
     [SerializeField] private Transform _chooseChapterUI;
     [SerializeField] private Transform _inGameUI;
+    [SerializeField] private Transform _optionUI;
     [SerializeField] private Transform _pauseUI;
 
     private Dictionary<UIEnum, Transform> _uiDict = new Dictionary<UIEnum, Transform>();
@@ -29,6 +31,7 @@ public class StaticUIManager : MonoSingleton<StaticUIManager>
         _uiDict.Add(UIEnum.NewGame, _newGameUI);
         _uiDict.Add(UIEnum.ChooseChapter, _chooseChapterUI);
         _uiDict.Add(UIEnum.InGame, _inGameUI);
+        _uiDict.Add(UIEnum.Option, _optionUI);
         _uiDict.Add(UIEnum.Pause, _pauseUI);
     }
 
