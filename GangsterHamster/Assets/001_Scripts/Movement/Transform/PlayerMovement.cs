@@ -20,7 +20,6 @@ namespace Player.Movement
                                  IJumpable,
                                  ICrouchable
    {
-
       private Rigidbody rigid;
       private GroundChecker groundChecker;
 
@@ -128,15 +127,16 @@ namespace Player.Movement
          }
       }
 
-      private void Update()
+      private void FixedUpdate()
       {
          Vector3 delta = PlayerMoveDelta.Instance.GetDelta();
+
          delta.z = delta.y;
          delta.y = 0.0f;
-         transform.Translate(delta * Time.deltaTime);
+         
+         delta = transform.TransformDirection(delta) * Time.deltaTime;
 
-         if (delta == Vector3.zero)
-            PlayerStatus.IsMoving = false;
+         rigid.MovePosition(transform.position + delta);
       }
 
       public void OnGround() { }

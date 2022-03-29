@@ -114,6 +114,8 @@ namespace Player.Movement
 
          // GetKey(); for movement
 
+         PlayerStatus.IsMoving = false;
+
          foreach (KeyCode key in _movementInputDictionary.Keys)
          {
             if (Input.GetKey(key))
