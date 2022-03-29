@@ -1,14 +1,14 @@
 using UnityEngine;
 
-namespace Player.Movement
+namespace Movement.Delta
 {
-   class PlayerMoveDelta : Singleton<PlayerMoveDelta>, ISingletonObject
+   public class DeltaMoveable
    {
       private Vector2 _delta;
 
-      public PlayerMoveDelta()
+      public DeltaMoveable(Vector2 initalDelta)
       {
-         _delta = new Vector2(0.0f, 0.0f);
+         _delta = initalDelta;
       }
 
       #region Set
@@ -30,6 +30,7 @@ namespace Player.Movement
          _delta.y = y;
       }
 
+
       /// <summary>
       /// Delta 의 x 를 설정합니다.
       /// </summary>
@@ -46,7 +47,7 @@ namespace Player.Movement
          _delta.y = y;
       }
 
-      #endregion // Set
+#endregion // Set
 
       #region Add
 
@@ -108,14 +109,6 @@ namespace Player.Movement
       public Vector2 GetDelta()
       {
          return _delta;
-      }
-      
-      /// <summary>
-      /// Transform 의 회전에 따른 Delta 를 가져옵니다.
-      /// </summary>
-      public Vector3 GetRotationBasedDelta(Transform target)
-      {
-         return _delta * target.right;
       }
    }
 }

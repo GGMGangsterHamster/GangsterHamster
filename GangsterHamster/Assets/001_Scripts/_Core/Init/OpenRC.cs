@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement; // SceneManager.sceneLoaded
 
 namespace OpenRC
 {
-   public class OpenRC : MonoSingleton<OpenRC>
+   public class OpenRC : MonoSingleton<OpenRC> // 계속 살아 있어야 함
    {
       [Header("Add InitScript ScriptableObject Here.", order = 0)]
       [Space(-10, order = 1)]

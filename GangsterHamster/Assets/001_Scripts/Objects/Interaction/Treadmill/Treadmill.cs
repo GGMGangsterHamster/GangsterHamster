@@ -1,9 +1,17 @@
+using System;
+using Movement.Delta;
 using UnityEngine;
 
 namespace Objects.Interactable
 {
-   public class Treadmill : MonoBehaviour
+   public class Treadmill : CollisionInteractable
    {
+      public Vector2 direction;
 
+      protected override void OnCollision(GameObject other)
+      {
+         DeltaMoveable delta = other.GetComponent<DeltaMoveable>();
+         delta.AddDelta(other.transform.TransformDirection(direction));
+      }
    }
 }

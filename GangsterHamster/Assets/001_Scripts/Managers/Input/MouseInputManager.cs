@@ -1,9 +1,10 @@
+using UnityEngine;
 using Commands.Movement.Mouse;
 using Player.Mouse;
 
 namespace Player.Movement
 {
-    public class MouseInputManager : MonoSingleton<MouseInputManager>
+    public class MouseInputManager : MonoBehaviour
     {
         private MouseX _mouseX;
         private MouseY _mouseY;

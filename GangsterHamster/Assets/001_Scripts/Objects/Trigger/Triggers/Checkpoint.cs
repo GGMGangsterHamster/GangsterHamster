@@ -6,9 +6,8 @@ namespace Objects.Checkpoint
 {   
    public class Checkpoint : TriggerObject
    {
-      protected override void Awake()
+      private void Awake()
       {
-         base.Awake();
 
          OnTrigger += (obj) =>
          {

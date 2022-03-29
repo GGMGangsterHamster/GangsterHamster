@@ -9,10 +9,11 @@ using Commands.Interaction;
 using Commands.Movement.Mouse;
 using Player.Mouse;
 using Player.Status;
+using Movement.Delta;
 
 namespace Player.Movement
 {
-   public class PlayerInputHandler : MonoSingleton<PlayerInputHandler>
+   public class PlayerInputHandler : MonoBehaviour
    {
       private Dictionary<KeyCode, Command> _keyDownInputDictionary;  // 키 다운
 
@@ -28,7 +29,6 @@ namespace Player.Movement
             if (_playerMove == null)
             {
                _playerMove = FindObjectOfType<PlayerMovement>();
-
             }
             return _playerMove;
          }
@@ -42,12 +42,10 @@ namespace Player.Movement
             if (_weapon == null)
             {
                _weapon = FindObjectOfType<WeaponManagement>();
-
             }
             return _weapon;
          }   
       }
-
 
       private void Start()
       {
@@ -110,9 +108,8 @@ namespace Player.Movement
 
       private void FixedUpdate()
       {
-         PlayerMoveDelta.Instance.ResetDelta();
-
          // GetKey(); for movement
+         PlayerMove.ResetDelta();
 
          PlayerStatus.IsMoving = false;
 

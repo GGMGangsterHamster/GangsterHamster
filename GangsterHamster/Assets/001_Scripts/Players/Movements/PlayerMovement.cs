@@ -8,6 +8,7 @@ using Commands.Movement;
 using Player.Utils;
 using Objects.Utils;
 using Gravity.Object.Management;
+using Movement.Delta;
 
 namespace Player.Movement
 {
@@ -23,8 +24,10 @@ namespace Player.Movement
       private Rigidbody rigid;
       private GroundChecker groundChecker;
 
-      public System.Action OnJump;
-      public System.Action OnLanded;
+      public event System.Action OnJump;
+      public event System.Action OnLanded;
+
+      private DeltaMoveable _delta;
 
       private void Awake()
       {
@@ -32,32 +35,39 @@ namespace Player.Movement
          groundChecker = GetComponentInChildren<GroundChecker>();
          OnJump += () => { };
          OnLanded += () => { };
+
+         _delta = new DeltaMoveable(Vector2.zero);
       }
 
       #region Movement
 
+      public void ResetDelta()
+      {
+         _delta.ResetDelta();
+      }
+
       public void MoveFoward()
       {
          if (!PlayerStatus.Moveable) return;
-         PlayerMoveDelta.Instance.AddYDelta(PlayerValues.speed);
+         _delta.AddYDelta(PlayerValues.speed);
       }
 
       public void MoveBackword()
       {
          if (!PlayerStatus.Moveable) return;
-         PlayerMoveDelta.Instance.AddYDelta(-PlayerValues.speed);
+         _delta.AddYDelta(-PlayerValues.speed);
       }
 
       public void MoveLeft()
       {
          if (!PlayerStatus.Moveable) return;
-         PlayerMoveDelta.Instance.AddXDelta(-PlayerValues.speed);
+         _delta.AddXDelta(-PlayerValues.speed);
       }
 
       public void MoveRight()
       {
          if (!PlayerStatus.Moveable) return;
-         PlayerMoveDelta.Instance.AddXDelta(PlayerValues.speed);
+         _delta.AddXDelta(PlayerValues.speed);
       }
 
       public void DashStart()
@@ -129,7 +139,7 @@ namespace Player.Movement
 
       private void FixedUpdate()
       {
-         Vector3 delta = PlayerMoveDelta.Instance.GetDelta();
+         Vector3 delta = _delta.GetDelta();
 
          delta.z = delta.y;
          delta.y = 0.0f;

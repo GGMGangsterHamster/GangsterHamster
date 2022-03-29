@@ -10,10 +10,8 @@ namespace Objects.Trigger
    {
       const string PLAYER = "PLAYER_BASE";
 
-      protected override void Awake()
+      private void Awake()
       {
-         base.Awake();
-
          OnTrigger += (other) =>
          {
             if(other.CompareTag(PLAYER))

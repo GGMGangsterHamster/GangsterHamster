@@ -4,7 +4,7 @@ using Objects.Interactable.Management;
 
 namespace Objects.Interactable
 {
-   public class InteractionRaycaster : MonoSingleton<InteractionRaycaster>
+   public class InteractionRaycaster : MonoBehaviour
    {
       Interactable _currentInteractable = null;
 
