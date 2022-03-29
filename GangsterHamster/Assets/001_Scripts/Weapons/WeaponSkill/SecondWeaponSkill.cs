@@ -173,6 +173,11 @@ public class SecondWeaponSkill : WeaponSkill
         }
     }
 
+    /// <summary>
+    /// 계속 반복해서 Vector3(1,1,1) 의 각도로 돌리게 하는 코루틴
+    /// 멈추는건 알아서 다른 코드에서 해줌
+    /// </summary>
+    /// <returns></returns>
     IEnumerator RotationCo()
     {
         while(true)

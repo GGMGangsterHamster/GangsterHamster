@@ -129,6 +129,14 @@ public class ThirdWeaponSkill : WeaponSkill
     {
         if(collision.transform.TryGetComponent(out Interactable I) && transform.parent != RightHandTrm && !isReadyedChangedGravity)
         {
+            if(!collision.gameObject.TryGetComponent(out BoxCollider boxCol))
+            {
+                // "현재 위치는 무기를 설치하기 좋은 형태가 아닙니다.";
+                Debug.Log("현재 위치는 무기를 설치하기 좋은 형태가 아닙니다.");
+                ComeBack();
+                return;
+            }
+
             normalVec = collision.contacts[0].normal;
 
             if (shotingCoroutine != null)
