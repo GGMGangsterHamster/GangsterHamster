@@ -13,6 +13,9 @@ namespace Player.Movement
       {
          PlayerStatus.OnGround = false;
          PlayerStatus.HeadBob = false;
+         PlayerStatus.Jumpable = false;
+         PlayerStatus.IsJumping = true;
+         PlayerStatus.CameraShakeCorrection = false;
       }
 
       public void OnGround()

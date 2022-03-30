@@ -9,9 +9,8 @@ namespace Objects.Trigger
       [SerializeField] private string targetTag = "PLAYER_BASE";
       public GameObject cvs = null;
 
-      protected override void Awake()
+      private void Awake()
       {
-         base.Awake();
          OnTrigger += (obj) =>
          {
             Foo(obj);
