@@ -32,8 +32,6 @@ abstract public class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
             }
 
             _instance.name = typeof(T).ToString();
-            if(_instance.GetComponent<DestroyOnLoad>() == null)
-               DontDestroyOnLoad(_instance);
          }
          return _instance;
       }
