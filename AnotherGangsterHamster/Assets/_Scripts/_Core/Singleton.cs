@@ -3,8 +3,7 @@ using System;
 /// <summary>
 /// Mono 상속받지 않은 클래스용 Singleton
 /// </summary>
-/// <typeparam name="T"></typeparam>
-abstract public class Singleton<T> where T : class, ISingletonObject
+abstract public class Singleton<T>
 {
     static private T _instance = null;
     static public T Instance {
