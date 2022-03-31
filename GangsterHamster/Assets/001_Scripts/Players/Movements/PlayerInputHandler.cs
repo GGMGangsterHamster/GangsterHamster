@@ -49,11 +49,11 @@ namespace Player.Movement
 
       private void Start()
       {
-         #region // Cursor lock
-         Cursor.visible = false;
-         Cursor.lockState = CursorLockMode.Locked;
-         #endregion
-
+         //#region // Cursor lock
+         //Cursor.visible = false;
+         //Cursor.lockState = CursorLockMode.Confined;
+         //#endregion
+         
          _keyDownInputDictionary  = new Dictionary<KeyCode, Command>();
          _keyUpInputDictionary    = new Dictionary<KeyCode, Command>();
          _movementInputDictionary = new Dictionary<KeyCode, Command>();
