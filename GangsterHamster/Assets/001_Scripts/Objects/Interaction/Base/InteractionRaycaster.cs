@@ -52,7 +52,7 @@ namespace Objects.Interactable
          {
             target = hit.transform;
          }
-
+         
          return target?.GetComponent<Interactable>();
       }
 

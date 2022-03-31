@@ -41,6 +41,7 @@ public class SecondWeaponSkill : WeaponSkill
 
     private void Start()
     {
+        
         _myRigid = GetComponent<Rigidbody>();
         _myCol = GetComponent<Collider>();
 

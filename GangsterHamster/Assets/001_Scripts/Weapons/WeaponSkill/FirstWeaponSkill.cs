@@ -25,6 +25,7 @@ public class FirstWeaponSkill : WeaponSkill
 
     private void Start()
     {
+        
         _myRigid = GetComponent<Rigidbody>();
         _myCol = GetComponent<Collider>();
         wm = PlayerBaseTrm.GetComponent<WeaponManagement>();

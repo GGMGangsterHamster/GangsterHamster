@@ -33,6 +33,11 @@ public class StaticUIManager : MonoSingleton<StaticUIManager>
         _uiDict.Add(UIEnum.InGame, _inGameUI);
         _uiDict.Add(UIEnum.Option, _optionUI);
         _uiDict.Add(UIEnum.Pause, _pauseUI);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        _inGameUI.gameObject.SetActive(true);
     }
 
     // Esc 누르면 Pause 되도록 만들기 (InGame 에서만)
@@ -42,11 +47,17 @@ public class StaticUIManager : MonoSingleton<StaticUIManager>
         {
             if (_pauseStack.Count == 0)
             {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.Confined;
+                OpenPanel(UIEnum.Pause);
                 // InGame이라면 PauseUI 시키기?
             }
             else
             {
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
                 ClosePanel();
+                _inGameUI.gameObject.SetActive(true);
             }
         }
     }
@@ -65,6 +76,7 @@ public class StaticUIManager : MonoSingleton<StaticUIManager>
         }
         else
         {
+            _inGameUI.gameObject.SetActive(false);
             // 여기 Pause 걸어놓기?
         }
 
@@ -84,6 +96,7 @@ public class StaticUIManager : MonoSingleton<StaticUIManager>
             }
             else
             {
+                _inGameUI.gameObject.SetActive(true);
                 // 여기 DePause 하기?
             }
         }

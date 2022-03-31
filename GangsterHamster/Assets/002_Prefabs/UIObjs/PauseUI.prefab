@@ -696,12 +696,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3799244716775074142}
-  m_Father: {fileID: 3799244716008192095}
-  m_RootOrder: 1
+  m_Father: {fileID: 8615924699334081384}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -10, y: -10}
+  m_AnchoredPosition: {x: 540, y: 390}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &3799244715986123472
@@ -797,6 +797,7 @@ GameObject:
   - component: {fileID: 3799244716008192095}
   - component: {fileID: 3799244716008192093}
   - component: {fileID: 3799244716008192094}
+  - component: {fileID: 7385199626770506618}
   m_Layer: 5
   m_Name: PauseUI
   m_TagString: Untagged
@@ -816,7 +817,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3799244716125646821}
-  - {fileID: 3799244715986123475}
   - {fileID: 3799244716916462988}
   - {fileID: 3799244716772145780}
   - {fileID: 8615924699334081384}
@@ -866,6 +866,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7385199626770506618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3799244716008192080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aa6008019278db4690b250740364698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameSoundScrollbar: {fileID: 3799244716420148419}
+  _gameSensitivityScrollbar: {fileID: 9214957432357194108}
+  _fullScreenModeBtn: {fileID: 4815167147527413137}
+  _windowScreenModeBtn: {fileID: 5758914740547042337}
+  _1920x1080ResolutionBtn: {fileID: 6134037030690866945}
+  _2560x1080ResolutionBtn: {fileID: 3090824476967944746}
+  _goTitleBtn: {fileID: 6383892482372940711}
+  _gameRestartBtn: {fileID: 4904472521565151368}
+  _disabledBtn: {fileID: 3799244715986123474}
 --- !u!1 &3799244716125646822
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,7 +979,7 @@ GameObject:
   - component: {fileID: 3799244716420148418}
   - component: {fileID: 3799244716420148419}
   m_Layer: 5
-  m_Name: Scrollbar
+  m_Name: GameSoundScrollbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1066,7 +1087,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 3799244717605643530}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.2
+  m_Size: 0.02
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1138,7 +1159,7 @@ RectTransform:
   - {fileID: 6039874690367564634}
   - {fileID: 1095270683905393950}
   m_Father: {fileID: 3799244716008192095}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1334,7 +1355,7 @@ RectTransform:
   - {fileID: 3799244715918525711}
   - {fileID: 3799244716420148420}
   m_Father: {fileID: 3799244716008192095}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1375,8 +1396,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -45, y: 0}
-  m_SizeDelta: {x: -70.12002, y: 30}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 20, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3799244717605643528
 CanvasRenderer:
@@ -1450,8 +1471,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -45, y: 0}
-  m_SizeDelta: {x: -70.12002, y: 30}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 20, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4196967786738915792
 CanvasRenderer:
@@ -1867,7 +1888,7 @@ GameObject:
   - component: {fileID: 318967825093016140}
   - component: {fileID: 9214957432357194108}
   m_Layer: 5
-  m_Name: Scrollbar
+  m_Name: GameSensitivityScrollbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1975,7 +1996,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 8979310434037360865}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.2
+  m_Size: 0.02
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2450,8 +2471,9 @@ RectTransform:
   - {fileID: 2852891691857189288}
   - {fileID: 1046366140874409431}
   - {fileID: 289884216484710379}
+  - {fileID: 3799244715986123475}
   m_Father: {fileID: 3799244716008192095}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
