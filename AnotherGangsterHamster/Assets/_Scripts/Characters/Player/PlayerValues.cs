@@ -1,4 +1,4 @@
-namespace Chararcters.Player
+namespace Characters.Player
 {
    /// <summary>
    /// 플레이어의 수치가 적혀 있는 구조체

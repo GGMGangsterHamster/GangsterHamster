@@ -10,35 +10,43 @@ namespace Characters.Player.Move
    {
       IMoveable _moveable;
 
-      public MoveForward(IMoveable moveable) => _moveable = moveable;
+      public MoveForward(IMoveable moveable)
+               => _moveable = moveable;
 
-      public override void Execute() => _moveable.MoveForward();
+      public override void Execute() 
+               => _moveable.MoveForward();
    }
 
    public class MoveBackward : Command
    {
       IMoveable _moveable;
 
-      public MoveBackward(IMoveable moveable) => _moveable = moveable;
+      public MoveBackward(IMoveable moveable)
+               => _moveable = moveable;
 
-      public override void Execute() => _moveable.MoveBackward();
+      public override void Execute()
+               => _moveable.MoveBackward();
    }
 
    public class MoveLeft : Command
    {
       IMoveable _moveable;
 
-      public MoveLeft(IMoveable moveable) => _moveable = moveable;
+      public MoveLeft(IMoveable moveable)
+               => _moveable = moveable;
 
-      public override void Execute() => _moveable.MoveLeft();
+      public override void Execute()
+               => _moveable.MoveLeft();
    }
 
    public class MoveRight : Command
    {
       IMoveable _moveable;
 
-      public MoveRight(IMoveable moveable) => _moveable = moveable;
+      public MoveRight(IMoveable moveable)
+               => _moveable = moveable;
 
-      public override void Execute() => _moveable.MoveRight();
+      public override void Execute()
+               => _moveable.MoveRight();
    }
 }

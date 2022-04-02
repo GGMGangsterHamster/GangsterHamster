@@ -1,19 +1,19 @@
-using Chararcters.Player;
+using Characters.Player;
 using UnityEngine;
 
 namespace Characters.Player.Move
 {
    [RequireComponent(typeof(Rigidbody),
-                     typeof(PlayerMoveDelta))]
-   public class PlayerMovement : MonoBehaviour, IMoveable
+                     typeof(MoveDelta))]
+   public class Movement : MonoBehaviour, IMoveable
    {
-      private PlayerMoveDelta _delta;
+      private MoveDelta _delta;
       private Rigidbody _rigid;
 
       private void Awake()
       {
          _rigid = GetComponent<Rigidbody>();
-         _delta = GetComponent<PlayerMoveDelta>();
+         _delta = GetComponent<MoveDelta>();
       }
 
       public void MoveBackward()

@@ -8,12 +8,12 @@ namespace Characters.Player.Move
       public int Right;
 
       public MovementVO(int Forward, int Backward,
-                        int Left, int Right)
+                        int Left,    int Right)
       {
-         this.Forward = Forward;
-         this.Backward = Backward;
-         this.Left = Left;
-         this.Right = Right;
+         this.Forward   = Forward;
+         this.Backward  = Backward;
+         this.Left      = Left;
+         this.Right     = Right;
       }
    }
 }

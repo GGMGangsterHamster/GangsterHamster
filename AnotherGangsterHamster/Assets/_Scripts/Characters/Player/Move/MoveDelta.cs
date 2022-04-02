@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Characters.Player.Move
 {
-   public class PlayerMoveDelta : MonoBehaviour
+   public class MoveDelta : MonoBehaviour
    {
       private Vector3 _delta;
       private Vector3 _rawDelta;
@@ -13,10 +13,10 @@ namespace Characters.Player.Move
          _rawDelta = Vector3.zero;
       }
 
-      public void SetRawDelta(Vector3 rawDelta) => _rawDelta = rawDelta;
+      public void SetRawDelta(Vector3 rawDelta) => _rawDelta  = rawDelta;
       public void AddRawDelta(Vector3 rawDelta) => _rawDelta += rawDelta;
 
-      public void SetDelta(Vector3 delta) => _delta = delta;
+      public void SetDelta(Vector3 delta) => _delta  = delta;
       public void AddDelta(Vector3 delta) => _delta += delta;
 
       public void AddXDelta(float x) => _delta.x += x;
