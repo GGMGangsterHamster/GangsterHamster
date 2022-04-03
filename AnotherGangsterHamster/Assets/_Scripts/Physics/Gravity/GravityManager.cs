@@ -67,5 +67,10 @@ namespace Physics.Gravity
       {
          _instance._globalGravity._force = force;
       }
+
+      static public Vector3 GetGlobalGravityDirection()
+      {
+         return _instance._globalGravity._direction;
+      }
    }
 }

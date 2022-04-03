@@ -1,4 +1,3 @@
-using Characters.Player;
 using UnityEngine;
 
 namespace Characters.Player.Move
@@ -18,21 +17,25 @@ namespace Characters.Player.Move
 
       public void MoveBackward()
       {
+         if(!PlayerStatus.Moveable) return;
          _delta.AddZDelta(-PlayerValues.Speed);
       }
 
       public void MoveForward()
       {
+         if(!PlayerStatus.Moveable) return;
          _delta.AddZDelta(PlayerValues.Speed);
       }
 
       public void MoveLeft()
       {
+         if(!PlayerStatus.Moveable) return;
          _delta.AddXDelta(-PlayerValues.Speed);
       }
 
       public void MoveRight()
       {
+         if(!PlayerStatus.Moveable) return;
          _delta.AddXDelta(PlayerValues.Speed);
       }
 
