@@ -13,7 +13,7 @@ namespace Characters.Player.Move
       public MoveForward(IMoveable moveable)
                => _moveable = moveable;
 
-      public override void Execute() 
+      public override void Execute(object param = null) 
                => _moveable.MoveForward();
    }
 
@@ -24,7 +24,7 @@ namespace Characters.Player.Move
       public MoveBackward(IMoveable moveable)
                => _moveable = moveable;
 
-      public override void Execute()
+      public override void Execute(object param = null)
                => _moveable.MoveBackward();
    }
 
@@ -35,7 +35,7 @@ namespace Characters.Player.Move
       public MoveLeft(IMoveable moveable)
                => _moveable = moveable;
 
-      public override void Execute()
+      public override void Execute(object param = null)
                => _moveable.MoveLeft();
    }
 
@@ -46,7 +46,7 @@ namespace Characters.Player.Move
       public MoveRight(IMoveable moveable)
                => _moveable = moveable;
 
-      public override void Execute()
+      public override void Execute(object param = null)
                => _moveable.MoveRight();
    }
 }

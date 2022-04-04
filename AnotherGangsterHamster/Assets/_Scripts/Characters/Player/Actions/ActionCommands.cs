@@ -8,7 +8,7 @@ namespace Characters.Player.Actions
 
       public CrouchStart(IActionable actionable)
                => _actionable = actionable;
-      public override void Execute()
+      public override void Execute(object param = null)
                => _actionable.CrouchStart();
       
    }
@@ -19,7 +19,7 @@ namespace Characters.Player.Actions
 
       public CrouchEnd(IActionable actionable)
                => _actionable = actionable;
-      public override void Execute()
+      public override void Execute(object param = null)
                => _actionable.CrouchEnd();
 
    }
@@ -30,7 +30,7 @@ namespace Characters.Player.Actions
 
       public DashStart(IActionable actionable)
                => _actionable = actionable;
-      public override void Execute()
+      public override void Execute(object param = null)
                => _actionable.DashStart();
 
    }
@@ -41,7 +41,7 @@ namespace Characters.Player.Actions
 
       public DashEnd(IActionable actionable)
                => _actionable = actionable;
-      public override void Execute()
+      public override void Execute(object param = null)
                => _actionable.DashEnd();
 
    }
@@ -52,7 +52,7 @@ namespace Characters.Player.Actions
 
       public Jump(IActionable actionable)
                => _actionable = actionable;
-      public override void Execute()
+      public override void Execute(object param = null)
                => _actionable.Jump();
 
    }
