@@ -12,10 +12,12 @@ namespace UI.PanelScripts
 
         public void ActivationActions()
         {
+
         }
 
         public void DeActivationActions()
         {
+
         }
 
         public void InitActions()
