@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OptionAction : MonoBehaviour, IUIAction
+public class PauseUIAction : MonoBehaviour, IUIAction
 {
     [Header("각자의 기능이 있는 UI들")]
     [SerializeField] private Button _fullScreenModeButton;
     [SerializeField] private Button _windowScreenModeButton;
     [SerializeField] private Button _1920x1080ResolutionButton;
     [SerializeField] private Button _2560x1080ResolutionButton;
+    [SerializeField] private Button _goTitleButton;
+    [SerializeField] private Button _gameRestartButton;
 
     [SerializeField] private Scrollbar _soundScrollbar;
     [SerializeField] private Scrollbar _sensitivityScrollbar;
@@ -45,6 +47,16 @@ public class OptionAction : MonoBehaviour, IUIAction
         _2560x1080ResolutionButton.onClick.AddListener(() =>
         {
             // 2560x1080 해상도로 전환
+        });
+
+        _goTitleButton.onClick.AddListener(() =>
+        {
+            // 현재 UI 비활성화 시키고 "Title UI"로 변환
+        });
+
+        _gameRestartButton.onClick.AddListener(() =>
+        {
+            // 현재의 스테이지를 재시작
         });
     }
 }

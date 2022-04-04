@@ -4,8 +4,19 @@ using UnityEngine;
 
 public class InGameAction : MonoBehaviour, IUIAction
 {
-    public void Actions()
+
+    public void ActivationActions()
     {
-        // 뭔가 초기화 하고 싶으면 여기서 해주기
+
+    }
+
+    public void DeActivationActions()
+    {
+
+    }
+
+    public void InitActions()
+    {
+
     }
 }

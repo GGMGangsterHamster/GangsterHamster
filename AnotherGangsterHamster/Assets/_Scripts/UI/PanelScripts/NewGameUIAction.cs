@@ -9,7 +9,17 @@ public class NewGameUIAction : MonoBehaviour, IUIAction
     [SerializeField] private Button _disableButton;
     [SerializeField] private Button _acceptButton;
 
-    public void Actions()
+    public void ActivationActions()
+    {
+
+    }
+
+    public void DeActivationActions()
+    {
+
+    }
+
+    public void InitActions()
     {
         _disableButton.onClick.AddListener(() =>
         {

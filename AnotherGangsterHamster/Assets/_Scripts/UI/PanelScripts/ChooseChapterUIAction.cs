@@ -9,7 +9,15 @@ public class ChooseChapterUIAction : MonoBehaviour, IUIAction
     [SerializeField] private Button _disableButton;
     [SerializeField] private List<Button> _stageButtons;
 
-    public void Actions()
+    public void ActivationActions()
+    {
+    }
+
+    public void DeActivationActions()
+    {
+    }
+
+    public void InitActions()
     {
         _disableButton.onClick.AddListener(() =>
         {

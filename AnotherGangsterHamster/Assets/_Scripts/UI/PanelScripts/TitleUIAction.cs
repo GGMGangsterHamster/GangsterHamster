@@ -12,7 +12,17 @@ public class TitleUIAction : MonoBehaviour, IUIAction
     [SerializeField] private Button _optionButton;
     [SerializeField] private Button _exitButton;
 
-    public void Actions()
+    public void ActivationActions()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void DeActivationActions()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void InitActions()
     {
         _continueButton.onClick.AddListener(() =>
         {
