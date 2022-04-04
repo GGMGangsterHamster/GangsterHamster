@@ -11,6 +11,7 @@ static partial class Utils
    public static T JsonToVO<T>(string path) where T : class
    {
       string json = Resources.Load<TextAsset>(path).text;
+      Logger.Log($"Loaded JSON ${typeof(T)}.\r\n{json}");
       return JsonUtility.FromJson<T>(json);
    }
 }

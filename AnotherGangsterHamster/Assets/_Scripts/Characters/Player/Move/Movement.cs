@@ -39,7 +39,7 @@ namespace Characters.Player.Move
          _delta.AddXDelta(PlayerValues.Speed);
       }
 
-      private void FixedUpdate()
+      private void FixedUpdate() // TOOD: 루트모션 넣으면 바꿔야 함
       {
          _rigid.MovePosition(transform.position +
                              _delta.Calculate(transform));

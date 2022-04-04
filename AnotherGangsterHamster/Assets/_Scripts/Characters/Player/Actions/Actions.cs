@@ -8,6 +8,35 @@ namespace Characters.Player.Actions
    {
       private Rigidbody _rigid;
 
+      private Transform _playerTrm = null;
+      private Transform PlayerTrm 
+      {
+         get
+         {
+            if (_playerTrm == null)
+            {
+               _playerTrm = GameObject.FindWithTag("PLAYER").transform;
+            }
+
+            return _playerTrm;
+         }
+      }
+
+      private CapsuleCollider _collider = null;
+      private CapsuleCollider Collider
+      {
+         get
+         {
+            if (_collider == null)
+            {
+               _collider = GameObject.FindWithTag("PLAYER_BASE")
+                                     .GetComponent<CapsuleCollider>();
+            }
+
+            return _collider;
+         }
+      }
+
       Vector3 _jumpForce;
 
       private void Awake() {
@@ -20,29 +49,58 @@ namespace Characters.Player.Actions
          _rigid = GetComponent<Rigidbody>();
       }
 
-      public void CrouchEnd()
-      {
-         throw new System.NotImplementedException();
-      }
-
       public void CrouchStart()
       {
-         throw new System.NotImplementedException();
+         Vector3 targetScale  = PlayerTrm.localScale;
+         Vector3 targetPos    = PlayerTrm.localPosition;
+
+         PlayerStatus.IsCrouching   = true;
+         PlayerValues.Speed         = PlayerValues.CrouchSpeed;
+
+         targetScale.y  = PlayerValues.PlayerCrouchYScale;
+         targetPos.y    = PlayerValues.PlayerCrouchYPos;
+
+         Collider.height         = PlayerValues.PlayerCrouchHeight;
+         Collider.center         = new Vector3(0.0f, Collider.height / 2.0f, 0.0f);
+         PlayerTrm.localScale    = targetScale;
+         PlayerTrm.localPosition = targetPos;
       }
+
+      public void CrouchEnd()
+      {
+         Vector3 targetScale  = PlayerTrm.localScale;
+         Vector3 targetPos    = PlayerTrm.localPosition;
+
+         PlayerStatus.IsCrouching   = false;
+         PlayerValues.Speed         = PlayerValues.WalkingSpeed;
+
+         targetScale.y  = PlayerValues.PlayerStandingYScale;
+         targetPos.y    = PlayerValues.PlayerStandingYPos;
+
+         Collider.height         = PlayerValues.PlayerStandingHeight;
+         Collider.center         = new Vector3(0.0f, Collider.height / 2.0f, 0.0f);
+         PlayerTrm.localScale    = targetScale;
+         PlayerTrm.localPosition = targetPos;
+      }
+
 
       public void DashStart()
       {
-         if(!PlayerStatus.OnGround) return;
-         if(PlayerStatus.IsCrouching)
-         {
+         if (!PlayerStatus.OnGround) return;
 
-         }
+         if (PlayerStatus.IsCrouching)
+            CrouchEnd();
          
+         PlayerStatus.IsRunning = true;
+         PlayerValues.Speed = PlayerValues.DashSpeed;
       }
 
       public void DashEnd()
       {
-      
+         if (PlayerStatus.IsCrouching) return;
+
+         PlayerStatus.IsRunning = false;
+         PlayerValues.Speed = PlayerValues.WalkingSpeed;
       }
 
 

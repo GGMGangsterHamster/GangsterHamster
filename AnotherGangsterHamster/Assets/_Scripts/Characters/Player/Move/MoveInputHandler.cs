@@ -4,6 +4,7 @@ using _Core.Commands;
 
 namespace Characters.Player.Move
 {
+   [RequireComponent(typeof(Movement))]
    public class MoveInputHandler : MonoBehaviour
    {
       public string _path = "KeyCodes/Movements";
@@ -52,9 +53,7 @@ namespace Characters.Player.Move
          foreach(KeyCode key in _moveCommands.Keys)
          {
             if(Input.GetKey(key))
-            {
                _moveCommands[key].Execute();
-            }
          }
       }
    }

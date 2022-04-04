@@ -5,13 +5,40 @@ namespace Characters.Player
    /// </summary>
    static public class PlayerValues
    {
-      public const float WalkingSpeed = 2.2f;
-      public const float DashSpeed = 5.0f;
-      public const float CrouchSpeed = 1.2f;
+
+
+#region 이동 속도
+      public const float WalkingSpeed  = 2.2f;
+      public const float DashSpeed     = 5.0f;
+      public const float CrouchSpeed   = 1.2f;
+#endregion // 이동 속도
       
+
+#region Transform::Y scale
       public const float JumpHeight = 1.1f;
+      // 플레이어 베이스 안에 있는 네모난 정사각형 (임시)
+      public const float PlayerStandingYScale   = 1.8f;
+      public const float PlayerCrouchYScale     = 1.0f;
+
+#endregion // Transform::Y scale
+
+
+#region Transform::Y position
+      // 플레이어 베이스 안에 있는 네모난 정사각형 (임시)
+      public const float PlayerStandingYPos  = 0.9f;
+      public const float PlayerCrouchYPos    = 0.5f;
+
+#endregion // Transform::Y position
+
+
+#region Player Height
+      public const float PlayerStandingHeight        = 1.8f;
+      public const float PlayerCrouchHeight  = 1.0f;
+#endregion // Player Height
+
 
       public const float InteractionMaxDistance = 1.0f;
+
 
       static private float _speed = WalkingSpeed;
       static public float Speed
