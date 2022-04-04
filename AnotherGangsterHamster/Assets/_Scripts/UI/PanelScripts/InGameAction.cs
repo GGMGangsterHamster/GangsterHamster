@@ -1,22 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class InGameAction : MonoBehaviour, IUIAction
+namespace UI.PanelScripts
 {
-
-    public void ActivationActions()
+    public class InGameAction : MonoBehaviour, IUIAction
     {
 
-    }
+        public void ActivationActions()
+        {
 
-    public void DeActivationActions()
-    {
+        }
 
-    }
+        public void DeActivationActions()
+        {
 
-    public void InitActions()
-    {
+        }
 
+        public void InitActions()
+        {
+
+        }
     }
 }
