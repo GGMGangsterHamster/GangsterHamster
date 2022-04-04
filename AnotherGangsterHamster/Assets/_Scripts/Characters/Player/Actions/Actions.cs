@@ -109,6 +109,7 @@ namespace Characters.Player.Actions
          if(!PlayerStatus.Jumpable) return;
          if(PlayerStatus.IsCrouching)
          {
+            CrouchEnd();
             return;
          }
 
