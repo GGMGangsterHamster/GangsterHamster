@@ -8,7 +8,7 @@ namespace _Core.Initialize
    public class OpenRC : MonoBehaviour
    {
       [Header("Add InitScript here.")]
-      public InitBase[] _initScripts = new InitBase[0];
+      public InitBase[] _initScripts;
 
 
       private void Awake()
@@ -41,7 +41,7 @@ namespace _Core.Initialize
       {
          for (int i = 0; i < _initScripts.Length; ++i)
          {
-            if(_initScripts[i]._runLevel == runLevel)
+            if(_initScripts[i].RunLevel == runLevel)
                _initScripts[i].Call();
          }
       }

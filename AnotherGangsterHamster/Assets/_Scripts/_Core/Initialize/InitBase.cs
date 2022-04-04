@@ -4,7 +4,7 @@ namespace _Core.Initialize
 {
    abstract public class InitBase : MonoBehaviour
    {
-      public RunLevel _runLevel;
+      abstract public RunLevel RunLevel { get; }
 
       /// <summary>
       /// RunLevel 에 호출됨

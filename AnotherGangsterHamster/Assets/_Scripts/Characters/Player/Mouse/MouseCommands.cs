@@ -11,7 +11,7 @@ namespace Characters.Player.Mouse
                => _mouseDeltaRecvable = mouseDeltaRecvable;
 
       public override void Execute(object param = null)
-               => _mouseDeltaRecvable.OnMouseX(Input.GetAxis("Mouse Y"));
+               => _mouseDeltaRecvable.OnMouseX(Input.GetAxis("Mouse X"));
    }
 
    public class MouseY : Command
@@ -22,6 +22,6 @@ namespace Characters.Player.Mouse
                => _mouseDeltaRecvable = mouseDeltaRecvable;
 
       public override void Execute(object param = null)
-               => _mouseDeltaRecvable.OnMouseY(Input.GetAxis("Mouse X"));
+               => _mouseDeltaRecvable.OnMouseY(Input.GetAxis("Mouse Y"));
    }
 }
