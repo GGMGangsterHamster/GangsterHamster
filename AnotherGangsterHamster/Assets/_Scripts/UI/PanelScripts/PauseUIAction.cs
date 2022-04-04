@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace UI.PanelScripts
 {
-    public class PauseUIAction : MonoBehaviour, IUIAction
+    public class PauseUIAction : UIAction
     {
         [Header("각자의 기능이 있는 UI들")]
         [SerializeField] private Button _fullScreenModeButton;
@@ -17,19 +17,21 @@ namespace UI.PanelScripts
         [SerializeField] private Scrollbar _soundScrollbar;
         [SerializeField] private Scrollbar _sensitivityScrollbar;
 
-        public void ActivationActions()
+        public override void ActivationActions()
         {
             // _soundScrollbar.value 를 지금 사운드 설정에 따라서 초기화 시켜주고 변환되는 값을 적용 시켜주기도 해야 함
             // _sensitivityScrollbar.value 를 지금 민감도 설정에 따라서 초기화 시켜주고 변환되는 값을 적용 시켜주기도 해야 함
         }
 
-        public void DeActivationActions()
+        public override void DeActivationActions()
         {
 
         }
 
-        public void InitActions()
+        public override void InitActions()
         {
+            panelId = 6;
+
             _fullScreenModeButton.onClick.AddListener(() =>
             {
                 // 전체화면으로 변환

@@ -1,0 +1,16 @@
+using UnityEngine;
+
+namespace UI.PanelScripts
+{
+    public abstract class UIAction : MonoBehaviour, IUIAction
+    {
+        public abstract void ActivationActions();
+
+        public abstract void DeActivationActions();
+
+        public abstract void InitActions();
+        
+        public int panelId;
+    }
+
+}

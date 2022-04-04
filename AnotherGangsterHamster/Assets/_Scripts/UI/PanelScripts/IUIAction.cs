@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace UI.PanelScripts
 {
     interface IUIAction

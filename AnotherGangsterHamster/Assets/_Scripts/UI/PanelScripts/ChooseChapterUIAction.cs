@@ -4,24 +4,26 @@ using UnityEngine.UI;
 
 namespace UI.PanelScripts
 {
-    public class ChooseChapterUIAction : MonoBehaviour, IUIAction
+    public class ChooseChapterUIAction : UIAction
     {
         [Header("각자의 기능이 있는 UI들")]
         [SerializeField] private Button _disableButton;
         [SerializeField] private Transform _stageButtonParent;
 
-        public void ActivationActions()
+        public override void ActivationActions()
         {
 
         }
 
-        public void DeActivationActions()
+        public override void DeActivationActions()
         {
 
         }
 
-        public void InitActions()
+        public override void InitActions()
         {
+            panelId = 3;
+
             _disableButton.onClick.AddListener(() =>
             {
                 // 활성화 된 현재 패널을 비활성화시킨다.

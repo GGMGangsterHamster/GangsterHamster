@@ -3,24 +3,26 @@ using UnityEngine.UI;
 
 namespace UI.PanelScripts
 {
-    public class NewGameUIAction : MonoBehaviour, IUIAction
+    public class NewGameUIAction : UIAction
     {
         [Header("각자의 기능이 있는 UI들")]
         [SerializeField] private Button _disableButton;
         [SerializeField] private Button _acceptButton;
 
-        public void ActivationActions()
+        public override void ActivationActions()
         {
 
         }
 
-        public void DeActivationActions()
+        public override void DeActivationActions()
         {
 
         }
 
-        public void InitActions()
+        public override void InitActions()
         {
+            panelId = 2;
+
             _disableButton.onClick.AddListener(() =>
             {
                 // 현재 활성화 되어 있는 패널 비활성화

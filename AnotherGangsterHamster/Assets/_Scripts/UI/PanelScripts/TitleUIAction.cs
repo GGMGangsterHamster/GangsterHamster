@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace UI.PanelScripts
 {
-    public class TitleUIAction : MonoBehaviour, IUIAction
+    public class TitleUIAction : UIAction
     {
         [Header("각자의 기능이 있는 UI들")]
         [SerializeField] private Button _continueButton;
@@ -13,18 +13,20 @@ namespace UI.PanelScripts
         [SerializeField] private Button _optionButton;
         [SerializeField] private Button _exitButton;
 
-        public void ActivationActions()
+        public override void ActivationActions()
         {
 
         }
 
-        public void DeActivationActions()
+        public override void DeActivationActions()
         {
 
         }
 
-        public void InitActions()
+        public override void InitActions()
         {
+            panelId = 1;
+
             _continueButton.onClick.AddListener(() =>
             {
                 // 만약 첫 실행이 아니라면

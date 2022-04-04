@@ -2,22 +2,22 @@ using UnityEngine;
 
 namespace UI.PanelScripts
 {
-    public class InGameAction : MonoBehaviour, IUIAction
+    public class InGameAction : UIAction
     {
 
-        public void ActivationActions()
+        public override void ActivationActions()
         {
 
         }
 
-        public void DeActivationActions()
+        public override void DeActivationActions()
         {
 
         }
 
-        public void InitActions()
+        public override void InitActions()
         {
-
+            panelId = 5;
         }
     }
 }
