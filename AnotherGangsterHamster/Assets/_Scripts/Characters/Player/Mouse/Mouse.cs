@@ -47,7 +47,8 @@ namespace Characters.Player.Mouse
 
       public void OnMouseY(float y, bool includingMouseSpeed = true)
       {
-         rotY += -y * (includingMouseSpeed ? PlayerValues.MouseSpeed : 1);
+         // 마우스 감도 사용할 지
+         rotY += -y * (includingMouseSpeed ? PlayerValues.MouseSpeed : 1.0f);
          rotY = Mathf.Clamp(rotY, -90f, 90f);
 
          CamTrm.localRotation = Quaternion.Euler(rotY, 0.0f, 0.0f);

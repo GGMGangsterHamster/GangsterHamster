@@ -2,10 +2,13 @@ using UnityEngine;
 
 namespace Characters.Player.Move
 {
+   /// <summary>
+   /// 플레이어가 이동할 방향을 연산함
+   /// </summary>
    public class MoveDelta : MonoBehaviour
    {
-      private Vector3 _delta;
-      private Vector3 _rawDelta;
+      private Vector3 _delta;    // 플레이어 바라보는 방향에 따라 연산됨
+      private Vector3 _rawDelta; // 플레이어 바라보는 방향과 상관 없이 World 로 연산
 
       private void Awake()
       {

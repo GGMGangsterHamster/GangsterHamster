@@ -1,11 +1,10 @@
 namespace Characters.Player
 {
    /// <summary>
-   /// 플레이어의 수치가 적혀 있는 구조체
+   /// 플레이어의 수치가 적혀 있는 클레스
    /// </summary>
    static public class PlayerValues
    {
-
 
 #region 이동 속도
       public const float WalkingSpeed  = 2.2f;
@@ -32,7 +31,7 @@ namespace Characters.Player
 
 
 #region Player Height
-      public const float PlayerStandingHeight        = 1.8f;
+      public const float PlayerStandingHeight = 1.8f;
       public const float PlayerCrouchHeight  = 1.0f;
 #endregion // Player Height
 

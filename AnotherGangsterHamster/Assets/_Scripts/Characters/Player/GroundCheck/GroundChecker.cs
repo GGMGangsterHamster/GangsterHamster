@@ -10,7 +10,6 @@ namespace Characters.Player.GroundCheck
       const string GROUND = "GROUND";
 
       private IGroundCallback _callback = null;
-      private int _targetLayer;
 
       private void Awake()
       {
@@ -20,25 +19,19 @@ namespace Characters.Player.GroundCheck
       private void OnTriggerEnter(Collider other)
       {
          if (other.CompareTag(GROUND))
-         {
             _callback?.OnGround();
-         }
       }
 
       private void OnTriggerStay(Collider other)
       {
          if (other.CompareTag(GROUND))
-         {
             _callback?.OnGround();
-         }
       }
 
       private void OnTriggerExit(Collider other)
       {
          if (other.CompareTag(GROUND))
-         {
             _callback?.ExitGround();
-         }
       }
    }
 }

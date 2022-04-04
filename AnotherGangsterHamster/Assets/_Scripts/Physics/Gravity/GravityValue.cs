@@ -7,9 +7,8 @@ namespace Physics.Gravity
    /// </summary>
    public class GravityValue
    {
-      public Vector3 _direction;
-
-      public float _force;
+      public Vector3 _direction; // 중력 방향
+      public float   _force;     // 중력 세기
 
       public GravityValue(Vector3 direction, float force = 9.8f)
       {

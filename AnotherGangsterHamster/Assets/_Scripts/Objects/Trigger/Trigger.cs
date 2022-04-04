@@ -8,8 +8,6 @@ namespace Objects.Trigger
    /// </summary>
    abstract public class Trigger : MonoBehaviour
    {
-      public bool Activated { get; set; } = false;
-
       protected virtual void OnTriggerEnter(Collider other)
       {
          OnTrigger(other.gameObject);

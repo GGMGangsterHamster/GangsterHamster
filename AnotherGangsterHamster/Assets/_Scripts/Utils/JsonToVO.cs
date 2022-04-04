@@ -11,7 +11,11 @@ static partial class Utils
    public static T JsonToVO<T>(string path) where T : class
    {
       string json = Resources.Load<TextAsset>(path).text;
+
+#if UNITY_EDITOR
       Logger.Log($"Loaded JSON ${typeof(T)}.\r\n{json}");
+#endif
+
       return JsonUtility.FromJson<T>(json);
    }
 }

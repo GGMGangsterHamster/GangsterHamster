@@ -14,9 +14,7 @@ namespace Characters.Player.Actions
          get
          {
             if (_playerTrm == null)
-            {
                _playerTrm = GameObject.FindWithTag("PLAYER").transform;
-            }
 
             return _playerTrm;
          }
@@ -88,6 +86,7 @@ namespace Characters.Player.Actions
       {
          if (!PlayerStatus.OnGround) return;
 
+         // 웅크리고 있는 경우 새움
          if (PlayerStatus.IsCrouching)
             CrouchEnd();
          
@@ -107,15 +106,18 @@ namespace Characters.Player.Actions
       public void Jump()
       {
          if(!PlayerStatus.Jumpable) return;
+
+         // 웅크리고 있는 경우 새우기만 함
          if(PlayerStatus.IsCrouching)
          {
             CrouchEnd();
             return;
          }
 
-         Vector3 force = _jumpForce;
+         Vector3 force      = _jumpForce;
          Vector3 gravityDir = GravityManager.GetGlobalGravityDirection();
 
+         // 중력 방향에 맞게
          force.x *= gravityDir.x;
          force.y *= gravityDir.y;
          force.z *= gravityDir.z;

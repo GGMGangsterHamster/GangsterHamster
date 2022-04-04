@@ -10,11 +10,11 @@ namespace Physics.Gravity
    {
       public bool AffectedByGlobalGravity { get; set; } = true;
 
-      private Rigidbody rigid;
+      private Rigidbody _rigid;
 
       private void Awake()
       {
-         rigid = GetComponent<Rigidbody>();
+         _rigid = GetComponent<Rigidbody>();
       }
 
       /// <summary>
@@ -24,7 +24,7 @@ namespace Physics.Gravity
       /// <param name="amount">가할 양</param>
       public virtual void Gravity(Vector3 dir, float amount)
       {
-         rigid.AddForce(dir.normalized * amount, ForceMode.Force);
+         _rigid.AddForce(dir.normalized * amount, ForceMode.Force);
       }
 
       /// <summary>
@@ -33,7 +33,7 @@ namespace Physics.Gravity
       /// <param name="gravity">중력 인스턴스</param>
       public virtual void Gravity (GravityValue gravity)
       {
-         rigid.AddForce(gravity._direction.normalized * gravity._force,
+         _rigid.AddForce(gravity._direction.normalized * gravity._force,
                         ForceMode.Force);
       }
    }

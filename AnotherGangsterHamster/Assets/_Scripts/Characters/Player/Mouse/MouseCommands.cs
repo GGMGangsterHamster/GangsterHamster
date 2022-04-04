@@ -1,6 +1,8 @@
 using _Core.Commands;
 using UnityEngine;
 
+// 마우스 커멘드 패턴
+
 namespace Characters.Player.Mouse
 {
    public class MouseX : Command

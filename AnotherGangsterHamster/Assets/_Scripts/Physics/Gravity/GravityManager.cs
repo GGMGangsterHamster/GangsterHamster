@@ -5,25 +5,24 @@ namespace Physics.Gravity
 {
    public class GravityManager : MonoBehaviour
    {
-      static private GravityManager _instance;
+      static private GravityManager _instance; // static 함수 용
 
-      private WaitForEndOfFrame _wait;
-      private GravityValue _globalGravity;
+      private GravityValue             _globalGravity;   // 전역 중력
+      private GravityAffectedObject[]  _affectedObjects; // 중력 영향 받는 오브젝트들
 
-      private GravityAffectedObject[] _affectedObjects;
-
-      private bool _stop = true;
-      public bool Stop
+      // 중력 연산 여부
+#region bool Stop
+      private  bool _stop = true;
+      public   bool Stop
       {
          get => _stop;
          set => _stop = value;
       }
+#endregion // bool Stop
 
       private void Awake()
       {
-         _instance = this;
-
-         _wait = new WaitForEndOfFrame();
+         _instance      = this;
          _globalGravity = new GravityValue(Vector3.down);
 
          InitGravityAffectedObjects();
@@ -38,6 +37,7 @@ namespace Physics.Gravity
          foreach(GravityAffectedObject obj in _affectedObjects)
          {
             if(!obj.AffectedByGlobalGravity) continue;
+
             obj.Gravity(_globalGravity);
          }
 

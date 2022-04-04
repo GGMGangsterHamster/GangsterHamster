@@ -23,9 +23,7 @@ namespace Stage.Management
          get 
          {
             if (_playerTrm == null)
-            {
                _playerTrm = GameObject.FindWithTag("PLAYER_BASE").transform;
-            }
 
             return _playerTrm;
          }
