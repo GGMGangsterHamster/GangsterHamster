@@ -67,6 +67,16 @@ namespace UI.PanelScripts
             {
                 UIManager.Instance.DeActivationPanel(panelId);
             });
+
+            _soundScrollbar.onValueChanged.AddListener(value =>
+            {
+
+            });
+
+            _sensitivityScrollbar.onValueChanged.AddListener(value =>
+            {
+
+            });
         }
 
         public override void UpdateActions()
