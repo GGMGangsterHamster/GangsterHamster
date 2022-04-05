@@ -19,7 +19,7 @@ namespace Objects.StageObjects
       public bool EventIsToggle { get; set; } = true;
 
       [field: SerializeField]
-      public bool InitalActiveStatus { get; set; }
+      public bool InitalActiveStatus { get; set; } = false;
       private bool _activated = false;
 
       private void Awake()
