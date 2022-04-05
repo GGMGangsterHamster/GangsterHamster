@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.IO;
 
 static partial class Utils
 {
@@ -10,7 +11,8 @@ static partial class Utils
    /// <returns>Json 이 들어간 vo</returns>
    public static T JsonToVO<T>(string path) where T : class
    {
-      string json = Resources.Load<TextAsset>(path).text;
+      path = Path.Combine(Directory.GetCurrentDirectory(), path);
+      string json = File.ReadAllText(path);
 
 #if UNITY_EDITOR
       Logger.Log($"Loaded JSON ${typeof(T)}.\r\n{json}");

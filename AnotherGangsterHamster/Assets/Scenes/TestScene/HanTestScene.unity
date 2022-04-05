@@ -416,12 +416,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 926035686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39c171ada5c699c15a01bfa1b89ce5ed, type: 3}
+  m_Script: {fileID: 11500000, guid: c4f5ef5b754e6f6b693d0df792dd0988, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canInteractByPlayer: 1
   _door: {fileID: 926035686}
-  _doorHeldOpenDuration: 3
 --- !u!65 &926035688
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -937,7 +935,7 @@ MonoBehaviour:
   OnActive:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 926035687}
         m_TargetAssemblyTypeName: Objects.StageObjects.TriggerDoor, Assembly-CSharp
         m_MethodName: Active
         m_Mode: 0
@@ -952,7 +950,7 @@ MonoBehaviour:
   OnDeactive:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 926035687}
         m_TargetAssemblyTypeName: Objects.StageObjects.TriggerDoor, Assembly-CSharp
         m_MethodName: Deactive
         m_Mode: 0
@@ -1033,7 +1031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85e91657644f82bee86f6181f66441a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _path: KeyCodes/Movements
+  _path: KeyCodes/Movements.json
 --- !u!114 &1853836787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1070,7 +1068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d79665138e530d0ed92d141d17f4615f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _path: KeyCodes/Actions
+  _path: KeyCodes/Actions.json
 --- !u!114 &1853836790
 MonoBehaviour:
   m_ObjectHideFlags: 0

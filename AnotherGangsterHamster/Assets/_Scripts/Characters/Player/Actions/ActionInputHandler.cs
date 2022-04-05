@@ -8,7 +8,7 @@ namespace Characters.Player.Actions
    [RequireComponent(typeof(Actions))]
    public class ActionInputHandler : MonoBehaviour
    {
-      public string _path = "KeyCodes/Actions";
+      public string _path = "KeyCodes/Actions.json";
 
       private Dictionary<KeyCode, Command> _actionDownCommands;
       private Dictionary<KeyCode, Command> _actionUpCommands;
