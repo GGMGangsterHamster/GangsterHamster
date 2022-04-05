@@ -6,11 +6,8 @@ namespace Objects.StageObjects
 {
    public class CollisionInteractableObject : MonoBehaviour
    {
-      [Header("충돌 이벤트 발생 허용할 테그들")]
-      [SerializeField]
-      private List<string> _targetTags
-               = new List<string>();
-      public List<CollisionCallback> _callbacks = new List<CollisionCallback>();
+      public List<CollisionCallback> _callbacks
+               = new List<CollisionCallback>();
 
       // 토글 방식 이벤트인지
       [field: SerializeField]
@@ -44,21 +41,23 @@ namespace Objects.StageObjects
       /// <param name="other">충돌한 GameObject</param>
       public void CollisionEnterEvent(GameObject other)
       {
-         if (_targetTags.Find(x => x == other.tag) != null)
+         CollisionCallback callback =
+                  _callbacks.Find(x => x.key == other.tag);
+         if (callback != null)
          {
             if (!EventIsToggle)
             {
                _activated = true;
-            //    OnActiveEvents[other.tag]?.Invoke(other);
+               callback.OnActive?.Invoke(other);
                return;
             }
 
             _activated = !_activated;
 
-            // if (_activated)
-            //    OnActiveEvents[other.tag]?.Invoke(other);
-            // else
-            //    OnDeActiveEvents[other.tag]?.Invoke(other);
+            if (_activated)
+               callback.OnActive?.Invoke(other);
+            else
+               callback.OnDeactive?.Invoke(other);
          }
       }
 
@@ -68,10 +67,13 @@ namespace Objects.StageObjects
       /// <param name="other">충돌한 GameObject</param>
       public void CollisionExitEvent(GameObject other)
       {
-         if (_targetTags.Find(x => x == other.tag) != null)
+         CollisionCallback callback =
+                  _callbacks.Find(x => x.key == other.tag);
+
+         if (callback != null)
          {
             _activated = false;
-            // OnDeActiveEvents[other.tag]?.Invoke(other);
+            callback.OnDeactive?.Invoke(other);
          }
       }
    }

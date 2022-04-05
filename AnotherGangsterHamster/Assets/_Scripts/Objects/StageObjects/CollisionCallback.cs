@@ -8,6 +8,7 @@ namespace Objects.StageObjects
    public class CollisionCallback
    {
       public string key;
-      public UnityEvent<GameObject> callback;
+      public UnityEvent<GameObject> OnActive;
+      public UnityEvent<GameObject> OnDeactive;
    }
 }
