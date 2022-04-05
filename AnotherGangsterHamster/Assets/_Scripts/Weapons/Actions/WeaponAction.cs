@@ -10,6 +10,8 @@ namespace Weapons.Actions
     {
         public WeaponEnum _weaponEnum; // 상속받은 무기의 종류
 
+        public bool possibleUse = false; // 사용이 가능한가
+
         // 기본적인 함수들
         public virtual void ShotWeapon()
         {

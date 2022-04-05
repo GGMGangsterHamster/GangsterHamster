@@ -62,7 +62,10 @@ namespace Weapons.Actions
             }
             else
             {
-                _curWeapon = weaponEnum;
+                if(_weaponActions[weaponEnum].possibleUse)
+                {
+                    _curWeapon = weaponEnum;
+                }
             }
         }
 
