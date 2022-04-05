@@ -1,11 +1,13 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Objects.Trigger
 {
-   public class WallButton : MonoBehaviour
+   public class CollisionInteractableObject : MonoBehaviour
    {
-      private const string WEAPON = "WEAPON";
+      [SerializeField] private List<string> _targetTags
+               = new List<string>();
 
       public UnityEvent OnActive;
       public UnityEvent OnDeactive;
@@ -22,7 +24,7 @@ namespace Objects.Trigger
 
       public void CollisionEvent(GameObject other)
       {
-         if (other.CompareTag(WEAPON))
+         if (_targetTags.Find(x => x == other.tag) != null)
          {
             _activated = !_activated;
 
