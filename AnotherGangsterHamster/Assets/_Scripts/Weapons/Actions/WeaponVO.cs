@@ -9,7 +9,7 @@ namespace Weapons.Actions
         public int ChangeToGrand;
         public int ChangeToGravito;
 
-        public WeaponVO(int Shot, int Activate, int Reset, 
+        public WeaponVO(int Shot, int Activate, int Reset,
                         int ChangeToInercio, int ChangeToGrand, int ChangeToGravito)
         {
             this.Shot = Shot;
@@ -18,5 +18,6 @@ namespace Weapons.Actions
             this.ChangeToInercio = ChangeToInercio;
             this.ChangeToGrand = ChangeToGrand;
             this.ChangeToGravito = ChangeToGravito;
+        }
     }
 }
