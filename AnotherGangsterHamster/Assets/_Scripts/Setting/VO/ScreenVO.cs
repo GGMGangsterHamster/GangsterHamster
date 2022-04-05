@@ -5,13 +5,13 @@ namespace Setting.VO
     {
         public bool isFullScreen;
         public int width;
-        public int heigth;
+        public int height;
 
-        public ScreenVO(bool isFullScreen, int width, int heigth)
+        public ScreenVO(bool isFullScreen, int width, int height)
         {
             this.isFullScreen = isFullScreen;
             this.width = width;
-            this.heigth = heigth;
+            this.height = height;
         }
     }
 

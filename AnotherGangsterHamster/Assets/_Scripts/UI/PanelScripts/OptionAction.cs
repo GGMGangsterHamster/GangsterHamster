@@ -7,8 +7,8 @@ namespace UI.PanelScripts
 {
     public class OptionAction : UIAction
     {
-        public string soundPath = "SettingValue/Sound";
-        public string sensitivityPath = "SettingValue/Sensitivity";
+        private string _soundPath = "SettingValue/Sound.json";
+        private string _sensitivityPath = "SettingValue/Sensitivity.json";
 
         [Header("각자의 기능이 있는 UI들")]
         [SerializeField] private Button _fullScreenModeButton;
@@ -23,8 +23,8 @@ namespace UI.PanelScripts
         public override void ActivationActions()
         {
             // 여기서 스크롤바들의 값을 초기화 시켜줌
-            SoundVO soundVO = Utils.JsonToVO<SoundVO>(soundPath);
-            SensitivityVO sensitivityVO = Utils.JsonToVO<SensitivityVO>(sensitivityPath);
+            SoundVO soundVO = Utils.JsonToVO<SoundVO>(_soundPath);
+            SensitivityVO sensitivityVO = Utils.JsonToVO<SensitivityVO>(_sensitivityPath);
 
             _soundScrollbar.value = soundVO.master;
             _sensitivityScrollbar.value = sensitivityVO.sensitivity;
@@ -36,8 +36,8 @@ namespace UI.PanelScripts
             SoundVO soundVO = new SoundVO(_soundScrollbar.value);
             SensitivityVO sensitivityVO = new SensitivityVO(_sensitivityScrollbar.value);
 
-            Utils.VOToJson(soundPath, soundVO);
-            Utils.VOToJson(sensitivityPath, sensitivityVO);
+            Utils.VOToJson(_soundPath, soundVO);
+            Utils.VOToJson(_sensitivityPath, sensitivityVO);
         }
 
         public override void InitActions()

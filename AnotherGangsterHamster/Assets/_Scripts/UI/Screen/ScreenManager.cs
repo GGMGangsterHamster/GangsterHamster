@@ -1,3 +1,4 @@
+using Setting.VO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,10 @@ using UnityEngine.UI;
 
 namespace UI.Screen
 {
-    public class ScreenManager : Singleton<ScreenManager>
+    public class ScreenManager : MonoSingleton<ScreenManager>
     {
+        private string _screenPath = "SettingValue/Screen.json";
+
         private CanvasScaler _gamePlayCanvas;
         
         private CanvasScaler GamePlayCanvasScaler
@@ -22,23 +25,29 @@ namespace UI.Screen
             }
         }
 
-        private bool _isFullScreen = true;
+        private bool _isFullScreen;
 
         private int _width = 1920;
         private int _height = 1080;
+
+        private void Awake()
+        {
+            
+        }
 
         public void SetFullScreen()
         {
             _isFullScreen = true;
 
-            UnityEngine.Screen.SetResolution(_width, _height, _isFullScreen);
+            SaveScreenSetting();
         }
 
         public void SetWindowScreen()
         {
+            
             _isFullScreen = false;
 
-            UnityEngine.Screen.SetResolution(_width, _height, _isFullScreen);
+            SaveScreenSetting();
         }
 
         public void SetResolution(int width, int height)
@@ -46,8 +55,26 @@ namespace UI.Screen
             _width = width;
             _height = height;
 
-            UnityEngine.Screen.SetResolution(_width, _height, _isFullScreen);
             GamePlayCanvasScaler.referenceResolution = new Vector2(_width, _height);
+            SaveScreenSetting();
+        }
+
+        private void SaveScreenSetting()
+        {
+            UnityEngine.Screen.SetResolution(_width, _height, _isFullScreen);
+            ScreenVO vo = new ScreenVO(_isFullScreen, _width, _height);
+            Utils.VOToJson(_screenPath, vo);
+        }
+
+        private void LoadScreenSetting()
+        {
+            ScreenVO vo = Utils.JsonToVO<ScreenVO>(_screenPath);
+
+            _isFullScreen = vo.isFullScreen;
+            _width = vo.width;
+            _height = vo.height;
+
+            UnityEngine.Screen.SetResolution(_width, _height, _isFullScreen);
         }
     }
 }
