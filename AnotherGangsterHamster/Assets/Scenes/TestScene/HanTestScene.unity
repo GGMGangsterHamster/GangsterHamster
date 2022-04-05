@@ -176,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 355585996}
   - component: {fileID: 355585997}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Callback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,7 +316,7 @@ GameObject:
   - component: {fileID: 393652664}
   - component: {fileID: 393652667}
   - component: {fileID: 393652666}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: PLAYER
   m_Icon: {fileID: 0}
@@ -335,6 +335,7 @@ Transform:
   m_LocalScale: {x: 0.45, y: 1.8, z: 0.08}
   m_Children:
   - {fileID: 1135906681}
+  - {fileID: 2134956824}
   m_Father: {fileID: 1853836785}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -505,7 +506,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1135906681}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CAM_LOCK
   m_TagString: PLAYER_CAMERA_LOCK
   m_Icon: {fileID: 0}
@@ -682,7 +683,7 @@ GameObject:
   - component: {fileID: 1598179306}
   - component: {fileID: 1598179308}
   - component: {fileID: 1598179307}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -912,7 +913,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1692542474}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -3.5}
+  m_LocalPosition: {x: 0, y: 2, z: -3.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -982,7 +983,7 @@ GameObject:
   - component: {fileID: 1853836786}
   - component: {fileID: 1853836793}
   - component: {fileID: 1853836792}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerBase
   m_TagString: PLAYER_BASE
   m_Icon: {fileID: 0}
@@ -1216,6 +1217,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2134956823
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2134956824}
+  m_Layer: 6
+  m_Name: Top
+  m_TagString: PLAYER_TOP
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2134956824
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134956823}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 393652664}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &8020785358979084868
 PrefabInstance:
