@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Objects.Trigger
+namespace Objects.StageObjects
 {
    public class CollisionInteractableObject : MonoBehaviour
    {
