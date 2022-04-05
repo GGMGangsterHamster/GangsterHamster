@@ -18,10 +18,10 @@ namespace Characters.Player.GroundCheck
 
       private void OnTriggerEnter(Collider other)
       {
-         if (_tags.Find(x => other.CompareTag(x)) != null) // TODO: List=>find
+         if (_tags.Find(x => other.CompareTag(x)) != null)
             _callback?.OnGround();
       }
-      
+
       private void OnTriggerExit(Collider other)
       {
          if (_tags.Find(x => other.CompareTag(x)) != null)

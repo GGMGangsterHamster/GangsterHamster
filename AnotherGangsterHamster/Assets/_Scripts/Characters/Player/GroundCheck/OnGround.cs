@@ -28,6 +28,8 @@ namespace Characters.Player.GroundCheck
          PlayerStatus.OnGround   = false;
          PlayerStatus.IsJumping  = true;
          PlayerStatus.Jumpable   = false;
+
+         Collider.material.frictionCombine = PhysicMaterialCombine.Minimum;
       }
 
       /// <summary>
