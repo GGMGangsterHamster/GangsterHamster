@@ -19,5 +19,13 @@ namespace UI.PanelScripts
         {
             panelId = 5;
         }
+
+        public override void UpdateActions()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                UIManager.Instance.ActivationPanel(UIPanels.Pause);
+            }
+        }
     }
 }

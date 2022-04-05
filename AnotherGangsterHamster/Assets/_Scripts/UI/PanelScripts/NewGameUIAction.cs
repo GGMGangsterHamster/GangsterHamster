@@ -25,13 +25,21 @@ namespace UI.PanelScripts
 
             _disableButton.onClick.AddListener(() =>
             {
-                // 현재 활성화 되어 있는 패널 비활성화
+                UIManager.Instance.DeActivationPanel(panelId);
             });
 
             _acceptButton.onClick.AddListener(() =>
             {
                 // 기존의 저장 데이터 모두 삭제, 게임을 처음부터 재시작 후 "In Game UI"를 활성화
             });
+        }
+
+        public override void UpdateActions()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                UIManager.Instance.DeActivationPanel(panelId);
+            }
         }
     }
 }

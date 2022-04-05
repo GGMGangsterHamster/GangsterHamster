@@ -26,7 +26,7 @@ namespace UI.PanelScripts
 
             _disableButton.onClick.AddListener(() =>
             {
-                // 활성화 된 현재 패널을 비활성화시킨다.
+                UIManager.Instance.DeActivationPanel(panelId);
             });
 
             for(int i = 0; i < _stageButtonParent.childCount; i++)
@@ -37,6 +37,14 @@ namespace UI.PanelScripts
                 {
                     // 버튼에 저장 된 스테이지 로딩 (아직 클리어 하지 못한 스테이지는 블러 처리)
                 });
+            }
+        }
+
+        public override void UpdateActions()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                UIManager.Instance.DeActivationPanel(panelId);
             }
         }
     }

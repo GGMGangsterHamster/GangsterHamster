@@ -29,29 +29,39 @@ namespace UI.PanelScripts
 
             _continueButton.onClick.AddListener(() =>
             {
-                // 만약 첫 실행이 아니라면
+                // 만약 첫 실행이 아니라면 => 이 조건 처리를 다른게 해줘야함 근데 그 다른게 뭘까
                 // 저장되어 있는 데이터를 불러오고 "In Game UI"를 활성화 시킨다
             });
 
             _newGameButton.onClick.AddListener(() =>
             {
-                // "New Game UI"를 활성화 시킨다
+                UIManager.Instance.ActivationPanel(UIPanels.NewGame);
             });
 
             _chooseChapterButton.onClick.AddListener(() =>
             {
-                // "Choose Chapter UI"를 활성화 시킨다
+                UIManager.Instance.ActivationPanel(UIPanels.ChooseChapter);
             });
 
             _optionButton.onClick.AddListener(() =>
             {
-                // "Option UI"를 활성화 시킨다
+                UIManager.Instance.ActivationPanel(UIPanels.Option);
             });
 
             _exitButton.onClick.AddListener(() =>
             {
-                // 게임을 종료시킨다
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#else
+                Application.Quit();
+#endif
             });
+        }
+
+        public override void UpdateActions()
+        {
+            // 타이틀에선 체크 할 것 없음 
+            // 추후 추가 할수도
         }
     }
 
