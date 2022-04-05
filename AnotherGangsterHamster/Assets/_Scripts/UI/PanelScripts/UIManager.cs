@@ -31,20 +31,18 @@ namespace UI.PanelScripts
                 _uiDict[panelEnum] = ui;
                 _uiDict[panelEnum].InitActions();
             }
-
-            foreach(UIAction ac in _uiDict.Values)
-            {
-                Debug.Log(ac.name);
-            }
         }
 
         private void Update()
         {
+            // panelId가 가장 큰거부터 for문 돌려서 활성화 되어있으면
+            // UpdateActions 함수 호출함
             for(int i = _uiDict.Count; i >= 1; i--)
             {
                 if(_uiDict[(UIPanels)i].gameObject.activeSelf)
                 {
                     _uiDict[(UIPanels)i].UpdateActions();
+                    break;
                 }
             }
         }
@@ -78,8 +76,5 @@ namespace UI.PanelScripts
 
             _uiDict[(UIPanels)panelId].gameObject.SetActive(false);
         }
-
-        // UI 패널 모아서 인터페이스의 함수 호출 해주기
-        // 그 이외에는 알아서 잘하기
     }
 }

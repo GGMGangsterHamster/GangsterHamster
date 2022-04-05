@@ -1,3 +1,4 @@
+using Setting.VO;
 using UI.Screen;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +7,9 @@ namespace UI.PanelScripts
 {
     public class OptionAction : UIAction
     {
+        public string resourcesSoundPath;
+        public string resourcesSensitivityPath;
+
         [Header("각자의 기능이 있는 UI들")]
         [SerializeField] private Button _fullScreenModeButton;
         [SerializeField] private Button _windowScreenModeButton;
@@ -18,13 +22,25 @@ namespace UI.PanelScripts
 
         public override void ActivationActions()
         {
-            // _soundScrollbar.value 를 지금 사운드 설정에 따라서 초기화 시켜주고 변환되는 값을 적용 시켜주기도 해야 함
-            // _sensitivityScrollbar.value 를 지금 민감도 설정에 따라서 초기화 시켜주고 변환되는 값을 적용 시켜주기도 해야 함
+            // 여기서 스크롤바들의 값을 초기화 시켜줌
+            //_soundScrollbar.value = Utils.JsonToVO<SoundVO>(resourcesSoundPath).master;
+            //_sensitivityScrollbar.value = Utils.JsonToVO<SensitivityVO>(resourcesSensitivityPath).sensitivity;
         }
 
         public override void DeActivationActions()
         {
+//            SoundVO soundVo = new SoundVO(_soundScrollbar.value);
+//            SensitivityVO senVo = new SensitivityVO(_sensitivityScrollbar.value);
 
+//            Debug.Log(soundVo.master);
+//            Debug.Log(senVo.sensitivity);
+//#if UNITY_EDITOR
+//            Utils.VOToJson(Application.dataPath + "/Resources/" + resourcesSoundPath + ".json", soundVo);
+//            Utils.VOToJson(Application.dataPath + "/Resources/" + resourcesSensitivityPath + ".json", senVo);
+//#else
+//            //Utils.VOToJson(Application.persistentDataPath + "/Resources/" + resourcesSoundPath + ".json", soundVo);
+//            //Utils.VOToJson(Application.persistentDataPath + "/Resources/" + resourcesSensitivityPath + ".json", senVo);
+//#endif
         }
 
         public override void InitActions()
@@ -54,6 +70,18 @@ namespace UI.PanelScripts
             _disableButton.onClick.AddListener(() =>
             {
                 UIManager.Instance.DeActivationPanel(panelId);
+            });
+
+            _soundScrollbar.onValueChanged.AddListener(value =>
+            {
+                // 바뀌는 값들을 어딘가에 저장하고
+                // 그 값으로 다른 설정들을 적용한다
+            });
+
+            _sensitivityScrollbar.onValueChanged.AddListener(value =>
+            {
+                // 바뀌는 값들을 어딘가에 저장하고
+                // 그 값으로 다른 설정들을 적용한다
             });
         }
 
