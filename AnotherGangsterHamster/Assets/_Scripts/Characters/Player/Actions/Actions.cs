@@ -1,3 +1,4 @@
+using Objects.Interaction;
 using Physics.Gravity;
 using UnityEngine;
 
@@ -125,6 +126,12 @@ namespace Characters.Player.Actions
          _rigid.velocity = -force;
 
          PlayerStatus.IsJumping = true;
+      }
+
+      public void Interact()
+      {
+         Logger.Log("상호작용 의존성 이슈", LogLevel.Warning);
+         InteractionManager.Instance.Interact();
       }
    }
 }

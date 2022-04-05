@@ -1,7 +1,6 @@
 using UnityEngine;
-using System;
 
-namespace Characters.Player.Interaction
+namespace Objects.Interaction
 {
    abstract public class Interactable : MonoBehaviour
    {
