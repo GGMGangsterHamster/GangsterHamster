@@ -30,9 +30,10 @@ namespace UI.Screen
         private int _width = 1920;
         private int _height = 1080;
 
-        private void Awake()
+        private new void Awake()
         {
-            
+            base.Awake();
+            LoadScreenSetting();
         }
 
         public void SetFullScreen()
