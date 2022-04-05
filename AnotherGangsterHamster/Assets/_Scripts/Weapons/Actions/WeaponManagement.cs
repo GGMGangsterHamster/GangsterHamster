@@ -24,25 +24,26 @@ namespace Weapons.Actions
 
             // 자식 오브젝트가 순서대로 배치되어 있다는 전제하에 만들어진 코드
             WeaponAction[] childWeaponActions = transform.GetComponentsInChildren<WeaponAction>();
+
             foreach (WeaponAction weaponAction in childWeaponActions)
             {
                 _weaponActions.Add(weaponAction._weaponEnum, weaponAction);
             }
         }
 
-        public void CurrentWeaponShot()
+        public void FireCurrentWeapon()
         {
             if(_curWeapon != WeaponEnum.None)
             {
-                _weaponActions[_curWeapon].ShotWeapon();
+                _weaponActions[_curWeapon].FireWeapon();
             }
         }
 
-        public void ActivateCurrentWeapon()
+        public void UseCurrentWeapon()
         {
             if (_curWeapon != WeaponEnum.None)
             {
-                _weaponActions[_curWeapon].ActivateWeapon();
+                _weaponActions[_curWeapon].UseWeapon();
             }
         }
 

@@ -13,12 +13,12 @@ namespace Weapons.Actions
         public bool possibleUse = false; // 사용이 가능한가
 
         // 기본적인 함수들
-        public virtual void ShotWeapon()
+        public virtual void FireWeapon()
         {
             // 1. 좌클릭으로 무기 발사
         }
 
-        public virtual void ActivateWeapon()
+        public virtual void UseWeapon()
         {
             // 2. 우클릭으로 능력 발동
         }

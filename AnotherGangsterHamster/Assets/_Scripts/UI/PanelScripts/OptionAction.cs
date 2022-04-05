@@ -23,6 +23,7 @@ namespace UI.PanelScripts
         public override void ActivationActions()
         {
             // 여기서 스크롤바들의 값을 초기화 시켜줌
+            Utils.VOToJson
             //_soundScrollbar.value = Utils.JsonToVO<SoundVO>(resourcesSoundPath).master;
             //_sensitivityScrollbar.value = Utils.JsonToVO<SensitivityVO>(resourcesSensitivityPath).sensitivity;
         }

@@ -11,14 +11,11 @@ static partial class Utils
     /// <param name="vo">파일에 입력할 vo</param>
     public static void VOToJson<T>(string path, T vo) where T : class
     {
+        path = Path.Combine(Directory.GetCurrentDirectory(), path);
+
         string json = JsonUtility.ToJson(vo);
 
-        FileStream fs = new FileStream(path, FileMode.Create);
-
-        StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.Unicode);
-
-        sw.Write(json);
-        sw.Close();
+        File.WriteAllText(path, json);
     }
 }
 
