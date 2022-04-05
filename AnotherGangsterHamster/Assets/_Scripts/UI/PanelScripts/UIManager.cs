@@ -19,16 +19,16 @@ namespace UI.PanelScripts
         [SerializeField] private Transform _uiPanelParent;
 
         // UIAction을 상속받고 있는 클래스들을 _uiDict에 모아서 관리한다
-        private Dictionary<UIPanels, IUIAction> _uiDict = new Dictionary<UIPanels, IUIAction>();
+        private Dictionary<UIPanels, UIAction> _uiDict = new Dictionary<UIPanels, UIAction>();
 
         private void Start()
         {
             for(int i = 0; i < _uiPanelParent.childCount; i++)
             {
-                IUIAction iui = _uiPanelParent.GetChild(i).GetComponent<IUIAction>();
-                UIPanels panelEnum = (UIPanels)(((UIAction)iui).panelId);
+                UIAction ui = _uiPanelParent.GetChild(i).GetComponent<UIAction>();
+                UIPanels panelEnum = (UIPanels)ui.panelId;
                 
-                _uiDict[panelEnum] = iui;
+                _uiDict[panelEnum] = ui;
                 _uiDict[panelEnum].InitActions();
             }
 
@@ -38,19 +38,30 @@ namespace UI.PanelScripts
             }
         }
 
+        private void Update()
+        {
+            for(int i = _uiDict.Count; i >= 1; i--)
+            {
+                if(_uiDict[(UIPanels)i].gameObject.activeSelf)
+                {
+                    _uiDict[(UIPanels)i].UpdateActions();
+                }
+            }
+        }
+
         // 해당하는 패널 활성화
         public void ActivationPanel(UIPanels panelEnum)
         {
             _uiDict[panelEnum].ActivationActions();
 
-            ((UIAction)_uiDict[panelEnum]).gameObject.SetActive(true);
+            _uiDict[panelEnum].gameObject.SetActive(true);
         }
 
         public void ActivationPanel(int panelId)
         {
             _uiDict[(UIPanels)panelId].ActivationActions();
 
-            ((UIAction)_uiDict[(UIPanels)panelId]).gameObject.SetActive(true);
+            _uiDict[(UIPanels)panelId].gameObject.SetActive(true);
         }
 
         // 해당하는 패널 비활성화
@@ -58,14 +69,14 @@ namespace UI.PanelScripts
         {
             _uiDict[panelEnum].DeActivationActions();
 
-            ((UIAction)_uiDict[panelEnum]).gameObject.SetActive(false);
+            _uiDict[panelEnum].gameObject.SetActive(false);
         }
 
         public void DeActivationPanel(int panelId)
         {
             _uiDict[(UIPanels)panelId].DeActivationActions();
 
-            ((UIAction)_uiDict[(UIPanels)panelId]).gameObject.SetActive(false);
+            _uiDict[(UIPanels)panelId].gameObject.SetActive(false);
         }
 
         // UI 패널 모아서 인터페이스의 함수 호출 해주기

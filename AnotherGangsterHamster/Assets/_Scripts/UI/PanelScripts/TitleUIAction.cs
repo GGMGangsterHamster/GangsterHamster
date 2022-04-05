@@ -57,6 +57,12 @@ namespace UI.PanelScripts
 #endif
             });
         }
+
+        public override void UpdateActions()
+        {
+            // 타이틀에선 체크 할 것 없음 
+            // 추후 추가 할수도
+        }
     }
 
 }

@@ -9,6 +9,8 @@ namespace UI.PanelScripts
         public abstract void DeActivationActions();
 
         public abstract void InitActions();
+
+        public abstract void UpdateActions();
         
         public int panelId;
     }

@@ -68,6 +68,14 @@ namespace UI.PanelScripts
                 UIManager.Instance.DeActivationPanel(panelId);
             });
         }
+
+        public override void UpdateActions()
+        {
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                UIManager.Instance.DeActivationPanel(panelId);
+            }
+        }
     }
 
 }
