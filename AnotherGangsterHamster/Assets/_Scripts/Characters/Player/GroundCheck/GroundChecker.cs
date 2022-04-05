@@ -7,7 +7,7 @@ namespace Characters.Player.GroundCheck
    [RequireComponent(typeof(BoxCollider))]
    public class GroundChecker : MonoBehaviour
    {
-      const string GROUND = "GROUND";
+      public List<string> _tags = new List<string>();
 
       private IGroundCallback _callback = null;
 
@@ -18,19 +18,13 @@ namespace Characters.Player.GroundCheck
 
       private void OnTriggerEnter(Collider other)
       {
-         if (other.CompareTag(GROUND))
+         if (_tags.Find(x => other.CompareTag(x)) != null) // TODO: List=>find
             _callback?.OnGround();
       }
-
-      // private void OnTriggerStay(Collider other)
-      // {
-      //    if (other.CompareTag(GROUND))
-      //       _callback?.OnGround();
-      // }
-
+      
       private void OnTriggerExit(Collider other)
       {
-         if (other.CompareTag(GROUND))
+         if (_tags.Find(x => other.CompareTag(x)) != null)
             _callback?.ExitGround();
       }
    }

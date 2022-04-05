@@ -574,26 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83185d2616cdb31b880a0fdde34fe5f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetTags:
-  - PLAYER_BASE
-  OnActive:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1418358671}
-        m_TargetAssemblyTypeName: Objects.StageObjects.BreakableWall, Assembly-CSharp
-        m_MethodName: Active
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnDeactive:
-    m_PersistentCalls:
-      m_Calls: []
+  _callbacks: []
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
 --- !u!65 &1418358673
@@ -931,38 +912,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83185d2616cdb31b880a0fdde34fe5f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetTags:
-  - PLAYER_BASE
-  OnActive:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 926035687}
-        m_TargetAssemblyTypeName: Objects.StageObjects.TriggerDoor, Assembly-CSharp
-        m_MethodName: Active
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnDeactive:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 926035687}
-        m_TargetAssemblyTypeName: Objects.StageObjects.TriggerDoor, Assembly-CSharp
-        m_MethodName: Deactive
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _callbacks:
+  - key: PLAYER_BASE
+    OnActive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 926035687}
+          m_TargetAssemblyTypeName: Objects.StageObjects.TriggerDoor, Assembly-CSharp
+          m_MethodName: Active
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeactive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 926035687}
+          m_TargetAssemblyTypeName: Objects.StageObjects.TriggerDoor, Assembly-CSharp
+          m_MethodName: Deactive
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   <EventIsToggle>k__BackingField: 1
   <InitalActiveStatus>k__BackingField: 0
 --- !u!1 &1853836783
