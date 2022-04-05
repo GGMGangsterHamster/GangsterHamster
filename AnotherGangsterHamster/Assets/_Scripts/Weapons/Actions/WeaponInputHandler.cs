@@ -27,8 +27,6 @@ namespace Weapons.Actions
 
             WeaponVO vo = Utils.JsonToVO<WeaponVO>(_path);
 
-            Debug.Log(vo.Shot);
-            Debug.Log(vo.Activate);
             _weaponCommand.Add((KeyCode)vo.Shot, () => _weaponManagement.FireCurrentWeapon());
             _weaponCommand.Add((KeyCode)vo.Activate, () => _weaponManagement.UseCurrentWeapon());
             _weaponCommand.Add((KeyCode)vo.Reset, () => _weaponManagement.ResetCurrentWeapon());
