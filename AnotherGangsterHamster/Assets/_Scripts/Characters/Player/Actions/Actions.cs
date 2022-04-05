@@ -150,6 +150,8 @@ namespace Characters.Player.Actions
          force.y *= gravityDir.y;
          force.z *= gravityDir.z;
 
+         Collider.sharedMaterial.frictionCombine = PhysicMaterialCombine.Minimum;
+
          _rigid.velocity = -force;
 
          PlayerStatus.IsJumping = true;

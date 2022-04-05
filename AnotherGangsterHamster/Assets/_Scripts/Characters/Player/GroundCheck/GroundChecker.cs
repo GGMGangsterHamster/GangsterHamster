@@ -22,11 +22,11 @@ namespace Characters.Player.GroundCheck
             _callback?.OnGround();
       }
 
-      private void OnTriggerStay(Collider other)
-      {
-         if (other.CompareTag(GROUND))
-            _callback?.OnGround();
-      }
+      // private void OnTriggerStay(Collider other)
+      // {
+      //    if (other.CompareTag(GROUND))
+      //       _callback?.OnGround();
+      // }
 
       private void OnTriggerExit(Collider other)
       {
