@@ -13,12 +13,12 @@ namespace Weapons.Actions
             _weaponEnum = WeaponEnum.Inercio;
         }
 
-        public override void ShotWeapon()
+        public override void FireWeapon()
         {
 
         }
 
-        public override void ActivateWeapon()
+        public override void UseWeapon()
         {
 
         }
