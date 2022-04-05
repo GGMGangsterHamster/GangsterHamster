@@ -1,3 +1,4 @@
+using UI.Screen;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,22 +35,22 @@ namespace UI.PanelScripts
 
             _fullScreenModeButton.onClick.AddListener(() =>
             {
-                // 전체화면으로 변환
+                ScreenManager.Instance.SetFullScreen();
             });
 
             _windowScreenModeButton.onClick.AddListener(() =>
             {
-                // 창화면으로 전환
+                ScreenManager.Instance.SetWindowScreen();
             });
 
             _1920x1080ResolutionButton.onClick.AddListener(() =>
             {
-                // 1920x1080 해상도로 전환
+                ScreenManager.Instance.SetResolution(1920, 1080);
             });
 
             _2560x1080ResolutionButton.onClick.AddListener(() =>
             {
-                // 2560x1080 해상도로 전환
+                ScreenManager.Instance.SetResolution(2560, 1080);
             });
 
             _goTitleButton.onClick.AddListener(() =>
@@ -64,7 +65,7 @@ namespace UI.PanelScripts
 
             _disableButton.onClick.AddListener(() =>
             {
-                // 현재의 패널을 비활성화
+                UIManager.Instance.DeActivationPanel(panelId);
             });
         }
     }

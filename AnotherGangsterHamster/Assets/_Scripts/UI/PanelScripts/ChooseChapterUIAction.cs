@@ -26,7 +26,7 @@ namespace UI.PanelScripts
 
             _disableButton.onClick.AddListener(() =>
             {
-                // 활성화 된 현재 패널을 비활성화시킨다.
+                UIManager.Instance.DeActivationPanel(panelId);
             });
 
             for(int i = 0; i < _stageButtonParent.childCount; i++)

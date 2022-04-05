@@ -25,7 +25,7 @@ namespace UI.PanelScripts
 
             _disableButton.onClick.AddListener(() =>
             {
-                // 현재 활성화 되어 있는 패널 비활성화
+                UIManager.Instance.DeActivationPanel(panelId);
             });
 
             _acceptButton.onClick.AddListener(() =>
