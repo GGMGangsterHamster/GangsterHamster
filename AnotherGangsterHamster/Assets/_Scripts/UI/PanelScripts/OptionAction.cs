@@ -23,24 +23,24 @@ namespace UI.PanelScripts
         public override void ActivationActions()
         {
             // 여기서 스크롤바들의 값을 초기화 시켜줌
-            _soundScrollbar.value = Utils.JsonToVO<SoundVO>(resourcesSoundPath).master;
-            _sensitivityScrollbar.value = Utils.JsonToVO<SensitivityVO>(resourcesSensitivityPath).sensitivity;
+            //_soundScrollbar.value = Utils.JsonToVO<SoundVO>(resourcesSoundPath).master;
+            //_sensitivityScrollbar.value = Utils.JsonToVO<SensitivityVO>(resourcesSensitivityPath).sensitivity;
         }
 
         public override void DeActivationActions()
         {
-            SoundVO soundVo = new SoundVO(_soundScrollbar.value);
-            SensitivityVO senVo = new SensitivityVO(_sensitivityScrollbar.value);
+//            SoundVO soundVo = new SoundVO(_soundScrollbar.value);
+//            SensitivityVO senVo = new SensitivityVO(_sensitivityScrollbar.value);
 
-            Debug.Log(soundVo.master);
-            Debug.Log(senVo.sensitivity);
-#if UNITY_EDITOR
-            Utils.VOToJson(Application.dataPath + "/Resources/" + resourcesSoundPath + ".json", soundVo);
-            Utils.VOToJson(Application.dataPath + "/Resources/" + resourcesSensitivityPath + ".json", senVo);
-#else
-            //Utils.VOToJson(Application.persistentDataPath + "/Resources/" + resourcesSoundPath + ".json", soundVo);
-            //Utils.VOToJson(Application.persistentDataPath + "/Resources/" + resourcesSensitivityPath + ".json", senVo);
-#endif
+//            Debug.Log(soundVo.master);
+//            Debug.Log(senVo.sensitivity);
+//#if UNITY_EDITOR
+//            Utils.VOToJson(Application.dataPath + "/Resources/" + resourcesSoundPath + ".json", soundVo);
+//            Utils.VOToJson(Application.dataPath + "/Resources/" + resourcesSensitivityPath + ".json", senVo);
+//#else
+//            //Utils.VOToJson(Application.persistentDataPath + "/Resources/" + resourcesSoundPath + ".json", soundVo);
+//            //Utils.VOToJson(Application.persistentDataPath + "/Resources/" + resourcesSensitivityPath + ".json", senVo);
+//#endif
         }
 
         public override void InitActions()
