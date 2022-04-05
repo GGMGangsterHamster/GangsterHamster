@@ -51,16 +51,16 @@ namespace Objects.StageObjects
             if(!EventIsToggle)
             {
                _activated = true;
-               OnActivate(other);
+               OnActive?.Invoke(other);
                return;
             }
 
             _activated = !_activated;
 
             if (_activated)
-               OnActivate(other);
+               OnActive?.Invoke(other);
             else
-               OnDeactivate(other);
+               OnDeactive?.Invoke(other);
          }
       }
 
@@ -73,18 +73,8 @@ namespace Objects.StageObjects
          if (_targetTags.Find(x => x == other.tag) != null)
          {
             _activated = false;
-            OnDeactivate(other);
+            OnDeactive?.Invoke(other);
          }
-      }
-
-      private void OnActivate(GameObject other)
-      {
-         OnActive?.Invoke(other);
-      }
-
-      private void OnDeactivate(GameObject other)
-      {
-         OnDeactive?.Invoke(other);
       }
    }
 }
