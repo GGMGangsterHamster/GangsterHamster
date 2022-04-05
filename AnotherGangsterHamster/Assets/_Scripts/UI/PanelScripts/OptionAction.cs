@@ -7,8 +7,8 @@ namespace UI.PanelScripts
 {
     public class OptionAction : UIAction
     {
-        public string resourcesSoundPath;
-        public string resourcesSensitivityPath;
+        public string soundPath = "SettingValue/Sound";
+        public string sensitivityPath = "SettingValue/Sensitivity";
 
         [Header("각자의 기능이 있는 UI들")]
         [SerializeField] private Button _fullScreenModeButton;
@@ -23,25 +23,21 @@ namespace UI.PanelScripts
         public override void ActivationActions()
         {
             // 여기서 스크롤바들의 값을 초기화 시켜줌
-            Utils.VOToJson
-            //_soundScrollbar.value = Utils.JsonToVO<SoundVO>(resourcesSoundPath).master;
-            //_sensitivityScrollbar.value = Utils.JsonToVO<SensitivityVO>(resourcesSensitivityPath).sensitivity;
+            SoundVO soundVO = Utils.JsonToVO<SoundVO>(soundPath);
+            SensitivityVO sensitivityVO = Utils.JsonToVO<SensitivityVO>(sensitivityPath);
+
+            _soundScrollbar.value = soundVO.master;
+            _sensitivityScrollbar.value = sensitivityVO.sensitivity;
         }
 
         public override void DeActivationActions()
         {
-//            SoundVO soundVo = new SoundVO(_soundScrollbar.value);
-//            SensitivityVO senVo = new SensitivityVO(_sensitivityScrollbar.value);
 
-//            Debug.Log(soundVo.master);
-//            Debug.Log(senVo.sensitivity);
-//#if UNITY_EDITOR
-//            Utils.VOToJson(Application.dataPath + "/Resources/" + resourcesSoundPath + ".json", soundVo);
-//            Utils.VOToJson(Application.dataPath + "/Resources/" + resourcesSensitivityPath + ".json", senVo);
-//#else
-//            //Utils.VOToJson(Application.persistentDataPath + "/Resources/" + resourcesSoundPath + ".json", soundVo);
-//            //Utils.VOToJson(Application.persistentDataPath + "/Resources/" + resourcesSensitivityPath + ".json", senVo);
-//#endif
+            SoundVO soundVO = new SoundVO(_soundScrollbar.value);
+            SensitivityVO sensitivityVO = new SensitivityVO(_sensitivityScrollbar.value);
+
+            Utils.VOToJson(soundPath, soundVO);
+            Utils.VOToJson(sensitivityPath, sensitivityVO);
         }
 
         public override void InitActions()

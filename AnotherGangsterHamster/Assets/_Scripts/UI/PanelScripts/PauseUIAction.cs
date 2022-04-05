@@ -1,3 +1,4 @@
+using Setting.VO;
 using UI.Screen;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +23,7 @@ namespace UI.PanelScripts
         {
             // _soundScrollbar.value 를 지금 사운드 설정에 따라서 초기화 시켜주고 변환되는 값을 적용 시켜주기도 해야 함
             // _sensitivityScrollbar.value 를 지금 민감도 설정에 따라서 초기화 시켜주고 변환되는 값을 적용 시켜주기도 해야 함
+
         }
 
         public override void DeActivationActions()

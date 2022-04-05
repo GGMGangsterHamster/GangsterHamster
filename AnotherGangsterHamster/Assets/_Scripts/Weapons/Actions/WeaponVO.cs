@@ -1,5 +1,6 @@
 namespace Weapons.Actions
 {
+    [System.Serializable]
     public class WeaponVO
     {
         public int Shot;
