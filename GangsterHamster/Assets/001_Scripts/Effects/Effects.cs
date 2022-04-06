@@ -25,19 +25,12 @@ namespace Effects
          _volume = GetComponent<Volume>();
 
 #if UNITY_EDITOR
-         NULL.Check(_volume, () =>
-         {
-            this.enabled = false;
-         });
+         NULL.Check(_volume, () => this.enabled = false);
 #endif
          if (!_volume.profile.TryGet<GlobalVolume>(out var globalVolume))
-         {
             _globalVolume = _volume.profile.Add<GlobalVolume>(false);
-         }
-         else
-         { // 이렇게 안하면 안 들어가져서
+         else  // 이렇게 안하면 안 들어가져서
             _globalVolume = globalVolume;
-         }
       }
 
       /// <summary>
@@ -70,7 +63,7 @@ namespace Effects
       /// <summary>
       /// Global 로 사용되는 volume 을 반환합니다.
       /// </summary>
-      public GlobalVolume GetChromaticAberration()
+      public GlobalVolume GetGlobalVolume()
       {
          return _globalVolume;
       }
