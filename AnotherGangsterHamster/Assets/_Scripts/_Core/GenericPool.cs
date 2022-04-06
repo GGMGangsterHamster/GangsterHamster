@@ -37,7 +37,7 @@ namespace _Core
       /// <summary>
       /// 풀링할 오브젝트를 추가합니다.
       /// </summary>
-      public void AddManagedObject<T>(
+      public void AddManagedObject<T>(Transform parent = null,
                int preInstantiatedObjectCount = 20)
                where T : Component
       {
@@ -53,7 +53,7 @@ namespace _Core
 
          for (int i = 0; i < preInstantiatedObjectCount; ++i)
          {
-            Add<T>();
+            Add<T>().transform.SetParent(parent);
          }
 
       }
