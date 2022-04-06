@@ -43,6 +43,7 @@ namespace Objects.StageObjects
       {
          CollisionCallback callback =
                   _callbacks.Find(x => other.gameObject.CompareTag(x.key));
+
          if (callback != null)
          {
             if (!EventIsToggle)

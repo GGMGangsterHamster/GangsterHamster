@@ -18,14 +18,13 @@ namespace Weapons.Actions
             Fire,
             Use,
             Stickly,
-            Reset,
         }
 
         private Transform _mainCameraTransform;
         private Transform _playerBaseTransform;
         private Transform _playerTrasnform;
 
-        #region Propertitys
+        #region Propertys
         private Transform MainCameraTransform
         {
             get
@@ -70,7 +69,7 @@ namespace Weapons.Actions
         private Vector3 HandPosition => PlayerBaseTransform.position
                                       + PlayerBaseTransform.up * (PlayerTrasnform.localScale.y - 0.5f)
                                       + MainCameraTransform.forward 
-                                      + PlayerBaseTransform.right;
+                                      + PlayerBaseTransform.right * (Utils.JsonToVO<HandModeVO>(Path).isRightHand ? 1 : -1);
         private bool isCanFire
         {
             get
@@ -83,7 +82,7 @@ namespace Weapons.Actions
 
         private InercioStatus _currentStatus = InercioStatus.Idle;
 
-        private Transform _sticklyObjectTransform;
+        private Collision _sticklyObjectCollision;
         private Vector3 _fireDir;
 
         private void Awake()
@@ -103,48 +102,59 @@ namespace Weapons.Actions
 
         public override void UseWeapon()
         {
-
+            _currentStatus = InercioStatus.Use;
         }
 
         public override void ResetWeapon()
         {
-            _currentStatus = InercioStatus.Reset;
+            _currentStatus = InercioStatus.Idle;
+
+            _sticklyObjectCollision = null;
         }
 
         #region CollisionEvents
-        public void PlayerCollisionEvent(GameObject obj)
+        public void PlayerCollisionEvent(Collision col)
         {
             ResetWeapon();
         }
-        public void ATypeObjectCollisionEvent(Collision obj)
+        public void ATypeObjectCollisionEnterEvent(Collision col)
         {
+            if (_sticklyObjectCollision != null && _sticklyObjectCollision.gameObject == obj.gameObject)
+            {
+                return;
+            }
+            
             _currentStatus = InercioStatus.Stickly;
-
-            _sticklyObjectTransform = obj.transform;
+            _sticklyObjectCollision = col;
         }
-        public void BTypeObjectCollisionEvent(Collision obj)
+        public void ATypeObjectCollisionExitEvent(Collision col)
         {
 
+        }
+        public void BTypeObjectCollisionEnterEvent(Collision col)
+        {
+            
         }
         #endregion
 
         private void Update()
         {
-            if(_currentStatus == InercioStatus.Idle)
+            switch(_currentStatus)
             {
-                transform.position = HandPosition;
-            }
-            else if(_currentStatus == InercioStatus.Fire)
-            {
-                transform.position += _fireDir * Time.deltaTime * FireSpeed;
-            }
-            else if(_currentStatus == InercioStatus.Stickly)
-            {
+                case InercioStatus.Idle:
+                    transform.position = HandPosition;
+                    break;
+                case InercioStatus.Fire:
+                    transform.position += _fireDir * Time.deltaTime * FireSpeed;
+                    break;
+                case InercioStatus.Use:
+                    transform.position += (MainCameraTransform.position - transform.position).normalized * Time.deltaTime * FireSpeed;
 
-            }
-            else if(_currentStatus == InercioStatus.Reset)
-            {
-                _currentStatus = InercioStatus.Idle;
+
+                    break;
+                case InercioStatus.Stickly:
+                    Debug.Log("Stickly ป๓ลย");
+                    break;
             }
         }
     }

@@ -33,10 +33,8 @@ namespace Weapons.Actions
 
         public void FireCurrentWeapon()
         {
-            Debug.Log("asdf");
             if(_curWeapon != WeaponEnum.None)
             {
-                Debug.Log("¿ÍµÎ");
                 _weaponActions[_curWeapon].FireWeapon();
             }
         }
