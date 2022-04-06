@@ -37,6 +37,8 @@ namespace Sound
                                  Path.GetFileName(e),
                                  audio
                               );
+
+                              Play("Button.mp3");
                            }));
                         });
       }
@@ -71,19 +73,19 @@ namespace Sound
       {
          using (UnityWebRequest req =
                   UnityWebRequestMultimedia
-                     .GetAudioClip($"file:///{path}.mp3",
+                     .GetAudioClip($"file:///{path}",
                                    AudioType.MPEG))
          {
             yield return req.SendWebRequest();
             if(req.result == UnityWebRequest.Result.Success)
             {
-               Logger.Log($"Loaded {path}.mp3");
+               Logger.Log($"Loaded {path}");
                AudioClip clip = DownloadHandlerAudioClip.GetContent(req);
                callback(clip);
             }
             else
             {
-               Logger.Log($"Failed to load {path}.mp3", LogLevel.Error);
+               Logger.Log($"Failed to load {path}", LogLevel.Error);
             }
          }
       }

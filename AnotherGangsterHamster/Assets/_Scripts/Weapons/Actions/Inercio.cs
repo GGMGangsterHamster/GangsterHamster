@@ -11,7 +11,7 @@ namespace Weapons.Actions
         public string Path = "SettingValue/HandMode.json";
         public float FireSpeed;
 
-        // ¹«±â°¡ °¡Áú ¼ö ÀÖ´Â »óÈ²À» ¸ð¾Æ³õÀ½
+        // ï¿½ï¿½ï¿½â°¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½È²ï¿½ï¿½ ï¿½ï¿½Æ³ï¿½ï¿½ï¿½
         private enum InercioStatus
         {
             Idle,
@@ -62,10 +62,10 @@ namespace Weapons.Actions
             }
         }
 
-        // ÇÃ·¹ÀÌ¾î À§Ä¡¿¡¼­
-        // ÇÃ·¹ÀÌ¾î ³ôÀÌ¿¡ ¸ÂÃß°í
-        // ¾ÕÀ¸·Î Á¶±Ý ÀÌµ¿ÇÏ°í
-        // ¿Þ¼Õ ¿À¸¥¼Õ¿¡ µû¶ó ÀÌµ¿ÇÑ´Ù
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½
+        // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½ß°ï¿½
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ï°ï¿½
+        // ï¿½Þ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ñ´ï¿½
         private Vector3 HandPosition => PlayerBaseTransform.position
                                       + PlayerBaseTransform.up * (PlayerTrasnform.localScale.y - 0.5f)
                                       + MainCameraTransform.forward 
@@ -74,7 +74,7 @@ namespace Weapons.Actions
         {
             get
             {
-                // Àá½Ã ÀÓ½Ã·Î ³ÖÀº°Å ÀÌÈÄ ¹Ù²ð ÄÚµåÀÌºó´Ù
+                // ï¿½ï¿½ï¿½ ï¿½Ó½Ã·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ ï¿½Úµï¿½ï¿½Ìºï¿½ï¿½
                 return FindObjectOfType<WeaponManagement>().transform == transform.parent;
             }
         }
@@ -119,7 +119,7 @@ namespace Weapons.Actions
         }
         public void ATypeObjectCollisionEnterEvent(Collision col)
         {
-            if (_sticklyObjectCollision != null && _sticklyObjectCollision.gameObject == obj.gameObject)
+            if (_sticklyObjectCollision != null && _sticklyObjectCollision.gameObject == col.gameObject)
             {
                 return;
             }
@@ -153,7 +153,7 @@ namespace Weapons.Actions
 
                     break;
                 case InercioStatus.Stickly:
-                    Debug.Log("Stickly »óÅÂ");
+                    Debug.Log("Stickly ï¿½ï¿½ï¿½ï¿½");
                     break;
             }
         }
