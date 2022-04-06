@@ -12,5 +12,20 @@ namespace Weapons.Actions
         {
             _weaponEnum = WeaponEnum.Gravito;
         }
+
+        public override void FireWeapon()
+        {
+
+        }
+
+        public override void UseWeapon()
+        {
+
+        }
+
+        public override void ResetWeapon()
+        {
+
+        }
     }
 }

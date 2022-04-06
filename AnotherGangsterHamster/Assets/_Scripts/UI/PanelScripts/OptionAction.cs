@@ -32,7 +32,6 @@ namespace UI.PanelScripts
 
         public override void DeActivationActions()
         {
-
             SoundVO soundVO = new SoundVO(_soundScrollbar.value);
             SensitivityVO sensitivityVO = new SensitivityVO(_sensitivityScrollbar.value);
 
