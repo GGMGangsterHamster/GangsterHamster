@@ -12,20 +12,5 @@ namespace Weapons.Actions
         {
             _weaponEnum = WeaponEnum.Grand;
         }
-
-        public override void FireWeapon()
-        {
-
-        }
-
-        public override void UseWeapon()
-        {
-
-        }
-
-        public override void ResetWeapon()
-        {
-
-        }
     }
 }
