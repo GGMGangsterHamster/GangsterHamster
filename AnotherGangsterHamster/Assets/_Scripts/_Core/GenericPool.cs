@@ -64,7 +64,7 @@ namespace _Core
       private T Add<T>() where T : Component
       {
 #if UNITY_EDITOR
-         if(_pool.ContainsKey(typeof(T)))
+         if(!_pool.ContainsKey(typeof(T)))
          {
             Logger.Log($"Type: {typeof(T)} not found on pooled list",
                      LogLevel.Fatal);
