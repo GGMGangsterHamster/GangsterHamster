@@ -16,7 +16,7 @@ namespace _Core
       /// 오브젝트를 가져옵니다.
       /// </summary>
       /// <typeparam name="T">가져올 타입</typeparam>
-      public T Get<T>() where T : Component
+      public T Get<T>(System.Predicate<T> compare) where T : Component
       {
          if (!_pool.ContainsKey(typeof(T)))
          {
@@ -25,8 +25,7 @@ namespace _Core
             return null;
          }
 
-         Object temp = _pool[typeof(T)]
-                        .Find(x => (x as T).gameObject.activeSelf);
+         Object temp = _pool[typeof(T)].Find((obj) => compare((obj as T)));
 
          if (temp == null)
             temp = Add<T>();
@@ -38,6 +37,7 @@ namespace _Core
       /// 풀링할 오브젝트를 추가합니다.
       /// </summary>
       public void AddManagedObject<T>(Transform parent = null,
+               System.Action<T> onInstantiateCallback = null,
                int preInstantiatedObjectCount = 20)
                where T : Component
       {
@@ -53,7 +53,9 @@ namespace _Core
 
          for (int i = 0; i < preInstantiatedObjectCount; ++i)
          {
-            Add<T>().transform.SetParent(parent);
+            T temp = Add<T>();
+            temp.transform.SetParent(parent);
+            onInstantiateCallback?.Invoke(temp);
          }
 
       }

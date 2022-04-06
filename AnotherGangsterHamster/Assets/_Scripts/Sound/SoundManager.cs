@@ -11,14 +11,21 @@ namespace Sound
 {
    public class SoundManager : MonoSingleton<SoundManager>
    {
-      private List<AudioSource> _pool = new List<AudioSource>();
-
+      private Dictionary<string, AudioClip> _audioDictionary;
       public string ttsPath = "Resources/TTS/*.mp3";
 
       protected override void Awake()
       {
          base.Awake();
-         GenericPool.Instance.AddManagedObject<AudioSource>(transform);
+         GenericPool
+            .Instance
+            .AddManagedObject<AudioSource>(transform,
+                                          (source) => {
+                                             source.playOnAwake = false;
+                                          }
+         );
+
+         _audioDictionary = new Dictionary<string, AudioClip>();
 
          string path = Path.Combine(Directory.GetCurrentDirectory(), ttsPath);
 
@@ -26,15 +33,32 @@ namespace Sound
                         .ToList()
                         .ForEach(e => {
                            StartCoroutine(LoadAudio(e, (audio) => {
-                              // TODO: 파일 저장
+                              _audioDictionary.Add(
+                                 Path.GetFileName(e),
+                                 audio
+                              );
                            }));
                         });
-
       }
 
-      public void Play()
+      /// <summary>
+      /// 오디오를 플레이 합니다.
+      /// </summary>
+      /// <param name="name"></param>
+      public void Play(string name)
       {
+         if(!_audioDictionary.ContainsKey(name))
+         {
+            Logger.Log($"Cannot find audio {name}", LogLevel.Error);
+            return;
+         }
 
+         AudioSource source = GenericPool
+                                 .Instance
+                                 .Get<AudioSource>(e => !e.isPlaying);
+         source.gameObject.SetActive(true);
+         source.clip = _audioDictionary[name];
+         source.Play();
       }
       
       // TODO: 유틸로 빼야함
