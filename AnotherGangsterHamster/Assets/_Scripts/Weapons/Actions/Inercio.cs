@@ -10,14 +10,16 @@ namespace Weapons.Actions
     {
         public string Path = "SettingValue/HandMode.json";
         public float FireSpeed;
+        public float ReboundPower; // 무기로 인해 반동 받을 때의 힘
 
-        // ���Ⱑ ���� �� �ִ� ��Ȳ�� ��Ƴ���
+        // 이너시오가 가질 수 있는 상태들
         private enum InercioStatus
         {
             Idle,
             Fire,
             Use,
             Stickly,
+            LosePower,
         }
 
         private Transform _mainCameraTransform;
@@ -62,10 +64,6 @@ namespace Weapons.Actions
             }
         }
 
-        // �÷��̾� ��ġ����
-        // �÷��̾� ���̿� ���߰�
-        // ������ ���� �̵��ϰ�
-        // �޼� �����տ� ���� �̵��Ѵ�
         private Vector3 HandPosition => PlayerBaseTransform.position
                                       + PlayerBaseTransform.up * (PlayerTrasnform.localScale.y - 0.5f)
                                       + MainCameraTransform.forward 
@@ -74,18 +72,21 @@ namespace Weapons.Actions
         {
             get
             {
-                // ��� �ӽ÷� ������ ���� �ٲ� �ڵ��̺��
-                return FindObjectOfType<WeaponManagement>().transform == transform.parent;
+                return FindObjectOfType<WeaponManagement>().transform == transform.parent && _currentInercioStatus != InercioStatus.Use;
             }
         }
         #endregion
 
-        private InercioStatus _currentStatus = InercioStatus.Idle;
+        private InercioStatus _currentInercioStatus = InercioStatus.Idle;
 
-        private GameObject _sticklyObjectObject = null;
-
+        private GameObject _sticklyObject = null;
+        private Rigidbody _sticklyObjectRigid = null;
         private Transform _sticklyObjBeforeParent;
+        
         private Collider _myCollider;
+        private Rigidbody _myRigid;
+
+        private float _weaponUsedTime = 0f;
         private Vector3 _fireDir;
 
         private void Awake()
@@ -93,37 +94,51 @@ namespace Weapons.Actions
             _weaponEnum = WeaponEnum.Inercio;
 
             _myCollider = GetComponent<Collider>();
+            _myRigid = GetComponent<Rigidbody>();
         }
 
         public override void FireWeapon()
         {
-            if (isCanFire && _currentStatus != InercioStatus.Fire)
+            if (isCanFire && _currentInercioStatus != InercioStatus.Fire)
             {
                 _fireDir = MainCameraTransform.forward;
 
-                _currentStatus = InercioStatus.Fire;
+                _currentInercioStatus = InercioStatus.Fire;
 
                 if (_myCollider.isTrigger)
                     _myCollider.isTrigger = false;
-
             }
         }
 
         public override void UseWeapon()
         {
-            _currentStatus = InercioStatus.Use;
+            if (_myRigid.constraints == RigidbodyConstraints.None)
+                _myRigid.constraints = RigidbodyConstraints.FreezeAll;
+
+            _currentInercioStatus = InercioStatus.Use;
+            _weaponUsedTime = 0f;
         }
 
         public override void ResetWeapon()
         {
-            _currentStatus = InercioStatus.Idle;
+            _currentInercioStatus = InercioStatus.Idle;
 
-            if(_sticklyObjectObject != null)
+            // 이너시오에 ATypeObject가 붙어있다면
+            if(_sticklyObject != null)
             {
-                _sticklyObjectObject.transform.parent = _sticklyObjBeforeParent;
+                _sticklyObject.transform.parent = _sticklyObjBeforeParent;
+                _sticklyObjectRigid.constraints = RigidbodyConstraints.None;
+
+                
+                PlayerBaseTransform.GetComponent<Rigidbody>().velocity = 
+                    (MainCameraTransform.position - transform.position).normalized 
+                    * ReboundPower 
+                    * _weaponUsedTime
+                ;
             }
 
-            _sticklyObjectObject = null;
+            _sticklyObject = null;
+            _sticklyObjectRigid = null;
             _sticklyObjBeforeParent = null;
         }
 
@@ -134,33 +149,40 @@ namespace Weapons.Actions
         }
         public void ATypeObjectCollisionEnterEvent(GameObject col)
         {
-            if (_sticklyObjectObject != null)
+            if (_sticklyObject != null)
             {
                 return;
             }
             
-            _currentStatus = InercioStatus.Stickly;
-            _sticklyObjectObject = col;
+            _currentInercioStatus = InercioStatus.Stickly;
+            _sticklyObject = col;
+            _sticklyObjectRigid = _sticklyObject.GetComponent<Rigidbody>();
+            _sticklyObjectRigid.constraints = RigidbodyConstraints.FreezeAll;
             _sticklyObjBeforeParent = col.transform.parent;
-            _sticklyObjectObject.transform.parent = transform;
+            _sticklyObject.transform.parent = transform;
         }
         public void ATypeObjectCollisionExitEvent(GameObject col)
         {
-
+            // 일단 만들긴 만들었는데 쓸건지는 모르겟슴
         }
         public void BTypeObjectCollisionEnterEvent(GameObject col)
         {
-            
+            _myRigid.constraints = RigidbodyConstraints.None;
+            _currentInercioStatus = InercioStatus.LosePower;
         }
         #endregion
 
         private void Update()
         {
-            switch(_currentStatus)
+            switch(_currentInercioStatus)
             {
                 case InercioStatus.Idle:
                     if (!_myCollider.isTrigger)
                         _myCollider.isTrigger = true;
+                    if (_myRigid.useGravity)
+                        _myRigid.useGravity = false;
+                    if (_myRigid.constraints == RigidbodyConstraints.None)
+                        _myRigid.constraints = RigidbodyConstraints.FreezeAll;
 
                     transform.position = HandPosition;
                     break;
@@ -168,12 +190,20 @@ namespace Weapons.Actions
                     transform.position += _fireDir * Time.deltaTime * FireSpeed;
                     break;
                 case InercioStatus.Use:
+                    if (_myRigid.useGravity)
+                        _myRigid.useGravity = false;
+
                     transform.position += (MainCameraTransform.position - transform.position).normalized * Time.deltaTime * FireSpeed;
-
-
+                    _weaponUsedTime += Time.deltaTime;
                     break;
                 case InercioStatus.Stickly:
 
+                    break;
+                case InercioStatus.LosePower:
+                    if (!_myRigid.useGravity)
+                        _myRigid.useGravity = true;
+                    if (_myRigid.constraints == RigidbodyConstraints.FreezeAll)
+                        _myRigid.constraints = RigidbodyConstraints.None;
                     break;
             }
         }

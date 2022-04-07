@@ -31,6 +31,7 @@ namespace Weapons.Actions
             }
         }
 
+        // 좌클릭 시 발동되는 함수
         public void FireCurrentWeapon()
         {
             if(_curWeapon != WeaponEnum.None)
@@ -39,6 +40,7 @@ namespace Weapons.Actions
             }
         }
 
+        // 우클릭 시 발동되는 함수
         public void UseCurrentWeapon()
         {
             if (_curWeapon != WeaponEnum.None)
@@ -47,6 +49,7 @@ namespace Weapons.Actions
             }
         }
 
+        // R키 누를시 발동되는 함수
         public void ResetCurrentWeapon()
         {
             if (_curWeapon != WeaponEnum.None)
@@ -55,19 +58,22 @@ namespace Weapons.Actions
             }
         }
 
+        // 1,2,3번 같이 숫자 누르면 발동되는 함수
         public void ChangeCurrentWeapon(WeaponEnum weaponEnum)
         {
-            if(weaponEnum == WeaponEnum.None)
+            bool isChanged = false;
+            
+            foreach(WeaponAction weaponAction in _weaponActions.Values)
             {
-                // 손에 든게 없어지도록 만들기
-            }
-            else
-            {
-                if(_weaponActions[weaponEnum].possibleUse)
+                if(weaponAction.SetActiveWeaponObj(weaponEnum))
                 {
                     _curWeapon = weaponEnum;
+                    isChanged = true;
                 }
             }
+
+            if (!isChanged)
+                _curWeapon = WeaponEnum.None;
         }
 
         // InputHandler에서는 키를 입력함하고 호출만 함

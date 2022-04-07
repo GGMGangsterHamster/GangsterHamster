@@ -37,5 +37,17 @@ namespace Weapons.Actions
         {
 
         }
+
+        /// <summary>
+        /// 들어온 인자값에 따라 SetActive True, false 해주는 함수
+        /// </summary>
+        public bool SetActiveWeaponObj(WeaponEnum wenum)
+        {
+            if (!possibleUse) return false;
+
+            gameObject.SetActive(wenum == _weaponEnum);
+
+            return gameObject.activeSelf;
+        }
     }
 }
