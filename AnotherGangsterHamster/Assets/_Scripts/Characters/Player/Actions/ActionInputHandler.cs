@@ -8,7 +8,7 @@ namespace Characters.Player.Actions
    [RequireComponent(typeof(Actions))]
    public class ActionInputHandler : MonoBehaviour
    {
-      public string _path = "KeyCodes/Actions";
+      public string _path = "KeyCodes/Actions.json";
 
       private Dictionary<KeyCode, Command> _actionDownCommands;
       private Dictionary<KeyCode, Command> _actionUpCommands;
@@ -22,6 +22,7 @@ namespace Characters.Player.Actions
       private CrouchStart  _crouchStart;
       private CrouchEnd    _crouchEnd;
       private Jump         _jump;
+      private Interaction  _interaction;
 
       private void Awake()
       {
@@ -34,6 +35,7 @@ namespace Characters.Player.Actions
          _crouchStart   = new CrouchStart(_actions);
          _crouchEnd     = new CrouchEnd(_actions);
          _jump          = new Jump(_actions);
+         _interaction   = new Interaction(_actions);
 
          RemapCommands();
       }
@@ -44,9 +46,10 @@ namespace Characters.Player.Actions
 
          ActionVO vo = Utils.JsonToVO<ActionVO>(_path);
 
-         _actionDownCommands.Add((KeyCode)vo.Crouch,  _crouchStart);
-         _actionDownCommands.Add((KeyCode)vo.Dash,    _dashStart);
-         _actionDownCommands.Add((KeyCode)vo.Jump,    _jump);
+         _actionDownCommands.Add((KeyCode)vo.Crouch,     _crouchStart);
+         _actionDownCommands.Add((KeyCode)vo.Dash,       _dashStart);
+         _actionDownCommands.Add((KeyCode)vo.Jump,       _jump);
+         _actionDownCommands.Add((KeyCode)vo.Interact,   _interaction);
 
          _actionUpCommands.Add((KeyCode)vo.Crouch, _crouchEnd);
          _actionUpCommands.Add((KeyCode)vo.Dash,   _dashEnd);

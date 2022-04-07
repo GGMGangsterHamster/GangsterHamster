@@ -1,3 +1,4 @@
+using Objects.Interaction;
 using Physics.Gravity;
 using UnityEngine;
 
@@ -7,6 +8,18 @@ namespace Characters.Player.Actions
    public class Actions : MonoBehaviour, IActionable
    {
       private Rigidbody _rigid;
+
+      private Transform _playerTopTrm = null;
+      private Transform PlayerTopTrm
+      {
+         get
+         {
+            if (_playerTopTrm == null)
+               _playerTopTrm = GameObject.FindWithTag("PLAYER_TOP").transform;
+
+            return _playerTopTrm;
+         }
+      }
 
       private Transform _playerTrm = null;
       private Transform PlayerTrm 
@@ -35,7 +48,9 @@ namespace Characters.Player.Actions
          }
       }
 
-      Vector3 _jumpForce;
+      private Vector3 _jumpForce;
+      private bool _pendingCrouchStand = false; // 일어서야 하는지
+      private int _ignoreLayer;
 
       private void Awake() {
          _jumpForce =
@@ -45,6 +60,7 @@ namespace Characters.Player.Actions
                                       PlayerValues.JumpHeight),
                            1.0f);
          _rigid = GetComponent<Rigidbody>();
+         _ignoreLayer = 1 << LayerMask.GetMask("PLAYER");
       }
 
       public void CrouchStart()
@@ -66,6 +82,18 @@ namespace Characters.Player.Actions
 
       public void CrouchEnd()
       {
+         // 플레이어 천장 체크
+         if (UnityEngine.Physics.Raycast(PlayerTopTrm.position,
+                                         PlayerTrm.up,
+                                         0.9f,
+                                         _ignoreLayer
+                                         ))
+         {
+            _pendingCrouchStand = true;
+            return;
+         }
+         _pendingCrouchStand = false;
+
          Vector3 targetScale  = PlayerTrm.localScale;
          Vector3 targetPos    = PlayerTrm.localPosition;
 
@@ -122,9 +150,24 @@ namespace Characters.Player.Actions
          force.y *= gravityDir.y;
          force.z *= gravityDir.z;
 
+         Collider.sharedMaterial.frictionCombine = PhysicMaterialCombine.Minimum;
+
          _rigid.velocity = -force;
 
          PlayerStatus.IsJumping = true;
+      }
+
+      public void Interact()
+      {
+         Logger.Log("상호작용 의존성 이슈", LogLevel.Warning);
+         InteractionManager.Instance.Interact();
+      }
+
+      private void FixedUpdate()
+      {
+         // 플레이어 못 일어난 경우
+         if (_pendingCrouchStand)
+            CrouchEnd();
       }
    }
 }

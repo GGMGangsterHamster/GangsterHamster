@@ -7,7 +7,7 @@ namespace Characters.Player.Move
    [RequireComponent(typeof(Movement))]
    public class MoveInputHandler : MonoBehaviour
    {
-      public string _path = "KeyCodes/Movements";
+      public string _path = "KeyCodes/Movements.json";
 
       private Dictionary<KeyCode, Command> _moveCommands;
 

@@ -58,4 +58,16 @@ namespace Characters.Player.Actions
                => _actionable.Jump();
 
    }
+
+   public class Interaction : Command
+   {
+      IActionable _actionable;
+
+      public Interaction(IActionable actionable)
+               => _actionable = actionable;
+
+      public override void Execute(object param = null)
+               => _actionable.Interact();
+
+   }
 }

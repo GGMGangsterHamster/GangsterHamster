@@ -6,15 +6,15 @@ namespace Objects.StageObjects
 {
    public class CollisionInteractableObject : MonoBehaviour
    {
-      [SerializeField] private List<string> _targetTags
-               = new List<string>();
+      public List<CollisionCallback> _callbacks
+               = new List<CollisionCallback>();
 
-      public UnityEvent OnActive;
-      public UnityEvent OnDeactive;
-
+      // 토글 방식 이벤트인지
+      [field: SerializeField]
+      public bool EventIsToggle { get; set; } = true;
 
       [field: SerializeField]
-      public bool InitalActiveStatus { get; set; }
+      public bool InitalActiveStatus { get; set; } = false;
       private bool _activated = false;
 
       private void Awake()
@@ -22,27 +22,60 @@ namespace Objects.StageObjects
          _activated = InitalActiveStatus;
       }
 
-      public void CollisionEvent(GameObject other)
+      #region Unity Collision Event
+      private void OnCollisionEnter(Collision other)
       {
-         if (_targetTags.Find(x => x == other.tag) != null)
+         CollisionEnterEvent(other.gameObject);
+      }
+
+      private void OnCollisionExit(Collision other)
+      {
+         if (!EventIsToggle)
+            CollisionExitEvent(other.gameObject);
+      }
+      #endregion // Unity Collision Event
+
+      /// <summary>
+      /// 충돌 시 호출됨
+      /// </summary>
+      /// <param name="other">충돌한 GameObject</param>
+      public void CollisionEnterEvent(GameObject other)
+      {
+         CollisionCallback callback =
+                  _callbacks.Find(x => other.CompareTag(x.key));
+
+         if (callback != null)
          {
+            if (!EventIsToggle)
+            {
+               _activated = true;
+               callback.OnActive?.Invoke(other);
+               return;
+            }
+
             _activated = !_activated;
 
             if (_activated)
-               OnButtonActivate();
+               callback.OnActive?.Invoke(other);
             else
-               OnButtonDeactive();
+               callback.OnDeactive?.Invoke(other);
          }
       }
 
-      private void OnButtonActivate()
+      /// <summary>
+      /// Collision Exit 이벤트 시 호출됨
+      /// </summary>
+      /// <param name="other">충돌한 GameObject</param>
+      public void CollisionExitEvent(GameObject other)
       {
-         OnActive?.Invoke();
-      }
+         CollisionCallback callback =
+                  _callbacks.Find(x => other.CompareTag(x.key));
 
-      private void OnButtonDeactive()
-      {
-         OnDeactive?.Invoke();
+         if (callback != null)
+         {
+            _activated = false;
+            callback.OnDeactive?.Invoke(other);
+         }
       }
    }
 }
