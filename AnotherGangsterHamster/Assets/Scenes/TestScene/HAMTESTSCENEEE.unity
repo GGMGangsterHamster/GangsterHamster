@@ -175,6 +175,7 @@ MonoBehaviour:
   possibleUse: 1
   Path: SettingValue/HandMode.json
   FireSpeed: 6
+  ReboundPower: 5
 --- !u!114 &121367801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,7 +258,7 @@ MonoBehaviour:
     OnDeactive:
       m_PersistentCalls:
         m_Calls: []
-  <EventIsToggle>k__BackingField: 1
+  <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
 --- !u!135 &121367802
 SphereCollider:
@@ -335,7 +336,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1 &157682660
 GameObject:
@@ -539,7 +540,7 @@ GameObject:
   - component: {fileID: 269377628}
   - component: {fileID: 269377627}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: TestBTypeObj
   m_TagString: BTYPEOBJECT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1091,7 +1092,7 @@ GameObject:
   - component: {fileID: 905283422}
   - component: {fileID: 905283426}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: TestATypeObj
   m_TagString: ATYPEOBJECT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2277,7 +2278,7 @@ Rigidbody:
   m_GameObject: {fileID: 1969506308}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 3
   m_AngularDrag: 20
   m_UseGravity: 1
   m_IsKinematic: 0
