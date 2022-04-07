@@ -24,7 +24,7 @@ namespace Objects.StageObjects
             ValueTween.Stop(this);
 
          Vector3 step = target / duration;
-         Vector3 final = transform.localPosition + target;
+         Vector3 final = _initalPos + target;
 
          _up = ValueTween.To(this,
                   () => {
