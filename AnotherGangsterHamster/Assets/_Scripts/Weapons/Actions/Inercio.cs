@@ -72,7 +72,7 @@ namespace Weapons.Actions
         {
             get
             {
-                return FindObjectOfType<WeaponManagement>().transform == transform.parent && _currentInercioStatus != InercioStatus.Use;
+                return _currentInercioStatus != InercioStatus.Use;
             }
         }
         #endregion

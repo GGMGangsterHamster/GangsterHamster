@@ -73,11 +73,23 @@ namespace Weapons.Actions
                 return _playerTrasnform;
             }
         }
+        private float fullChangeTime
+        {
+            get
+            {
+                if (_currentSizeLevel == GrandSizeLevel.OneGrade)
+                    return 1f;
+                else if (_currentSizeLevel == GrandSizeLevel.TwoGrade)
+                    return 0.5f;
+                else
+                    return 0f;
+            }
+        }
         private bool isCanFire
         {
             get
             {
-                return FindObjectOfType<WeaponManagement>().transform == transform.parent && _currentGrandStatus != GrandStatus.Use;
+                return _currentGrandStatus != GrandStatus.Use;
             }
         }
         private Vector3 HandPosition => PlayerBaseTransform.position
@@ -85,6 +97,8 @@ namespace Weapons.Actions
                                       + MainCameraTransform.forward
                                       + PlayerBaseTransform.right * (Utils.JsonToVO<HandModeVO>(Path).isRightHand ? 1 : -1);
         #endregion
+
+        private Dictionary<GrandSizeLevel, float> _sizeLevelValue = new Dictionary<GrandSizeLevel, float>();
 
         private GrandSizeLevel _currentSizeLevel = GrandSizeLevel.OneGrade;
         private GrandStatus _currentGrandStatus = GrandStatus.Idle;
@@ -94,12 +108,18 @@ namespace Weapons.Actions
         private Collider _myCollider;
         private Rigidbody _myRigid;
 
+        private float _beforeWeaponSize = 0f;
+        private float _currentLerpTime = 0f;
         private float _weaponUsedTime = 0f;
         private Vector3 _fireDir;
 
 
         private void Awake()
         {
+            _sizeLevelValue.Add(GrandSizeLevel.OneGrade, 1f);
+            _sizeLevelValue.Add(GrandSizeLevel.TwoGrade, 2f);
+            _sizeLevelValue.Add(GrandSizeLevel.FourGrade, 4f);
+
             _weaponEnum = WeaponEnum.Grand;
 
             _myCollider = GetComponent<Collider>();
@@ -123,7 +143,7 @@ namespace Weapons.Actions
         }
         public override void UseWeapon()
         {
-            if (isCanFire) return;
+            if (_currentGrandStatus == (GrandStatus.Idle | GrandStatus.Resize)) return;
 
             _currentGrandStatus = GrandStatus.Use;
         }
@@ -156,24 +176,73 @@ namespace Weapons.Actions
 
                         // 차징 되는 UI 보여주기
                         
-                        if(_weaponUsedTime >= 1f)
+                        if(_weaponUsedTime >= fullChangeTime)
                         {
-                            _currentSizeLevel = GrandSizeLevel.FourGrade;
-                            _currentGrandStatus = GrandStatus.Resize;
-                            _weaponUsedTime = 0f;
+                            MaxSizeLevel();
+                            ResizeStart();
                             // 키를 누른지 1초가 지나면 Resize로 이동
                         }
                     }
                     else
                     {
-                        _weaponUsedTime = 0f;
+                        NextSizeLevel();
+                        ResizeStart();
                         // 키를 누르고 떼면 Resize로 이동
                     }
                     break;
                 case GrandStatus.Resize:
-                    
+                    if(_currentLerpTime >= ResizeSpeed)
+                    {
+                        transform.localScale = Vector3.one * _sizeLevelValue[_currentSizeLevel];
+                        transform.rotation = Quaternion.identity;
+
+                        _myRigid.useGravity = true;
+                        _currentGrandStatus = GrandStatus.LosePower;
+                    }
+                    else
+                    {
+                        _currentLerpTime += Time.deltaTime;
+                        transform.localScale = Vector3.one * Mathf.Lerp(_beforeWeaponSize, _sizeLevelValue[_currentSizeLevel], _currentLerpTime / ResizeSpeed);
+                        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, _currentLerpTime / ResizeSpeed);
+                    }
+                    break;
+                case GrandStatus.LosePower:
+                    // 여기서 시작하기
                     break;
             }
+        }
+
+        private void NextSizeLevel()
+        {
+            int jumpLevel = 0;
+
+            if (_weaponUsedTime >= 1f)
+                jumpLevel = 2;
+            else
+                jumpLevel = 1;
+
+            if (_currentSizeLevel + jumpLevel >= GrandSizeLevel.FourGrade)
+                _currentSizeLevel = GrandSizeLevel.OneGrade;
+            else
+                _currentSizeLevel += jumpLevel;
+        }
+
+        private void MaxSizeLevel()
+        {
+            if (_currentSizeLevel == GrandSizeLevel.FourGrade)
+                _currentSizeLevel = GrandSizeLevel.OneGrade;
+            else
+                _currentSizeLevel = GrandSizeLevel.FourGrade;
+        }
+
+        private void ResizeStart()
+        {
+            _currentGrandStatus = GrandStatus.Resize;
+            _weaponUsedTime = 0f;
+            _currentLerpTime = 0f;
+            _beforeWeaponSize = transform.localScale.x;
+
+            _myRigid.angularVelocity = Vector3.zero;
         }
     }
 }
