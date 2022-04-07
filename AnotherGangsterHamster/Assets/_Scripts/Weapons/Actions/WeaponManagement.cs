@@ -76,6 +76,10 @@ namespace Weapons.Actions
                 _curWeapon = WeaponEnum.None;
         }
 
+        public WeaponEnum GetCurrentWeapon()
+        {
+            return _curWeapon;
+        }
         // InputHandler에서는 키를 입력함하고 호출만 함
         // 여기서는 그 호출 된거에만 잘 해서 반응해주면 됨
     }

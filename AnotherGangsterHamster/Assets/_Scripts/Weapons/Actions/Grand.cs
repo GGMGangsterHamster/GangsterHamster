@@ -89,7 +89,10 @@ namespace Weapons.Actions
         {
             get
             {
-                return _currentGrandStatus != GrandStatus.Use;
+                return _currentGrandStatus != GrandStatus.Use 
+                    && _currentGrandStatus != GrandStatus.LosePower 
+                    && _currentGrandStatus != GrandStatus.Fire 
+                    && _currentGrandStatus != GrandStatus.Resize;
             }
         }
         private Vector3 HandPosition => PlayerBaseTransform.position
@@ -131,7 +134,7 @@ namespace Weapons.Actions
 
         public override void FireWeapon()
         {
-            if (isCanFire && _currentGrandStatus != GrandStatus.Fire)
+            if (isCanFire)
             {
                 _fireDir = MainCameraTransform.forward;
 
@@ -143,13 +146,21 @@ namespace Weapons.Actions
         }
         public override void UseWeapon()
         {
-            if (_currentGrandStatus == (GrandStatus.Idle | GrandStatus.Resize)) return;
+            if (_currentGrandStatus == GrandStatus.Idle || _currentGrandStatus == GrandStatus.Resize) return;
 
             _currentGrandStatus = GrandStatus.Use;
         }
         public override void ResetWeapon()
         {
-            _currentGrandStatus = GrandStatus.Idle;
+            if(_currentSizeLevel == GrandSizeLevel.OneGrade && _currentGrandStatus != GrandStatus.Resize)
+            {
+                _currentGrandStatus = GrandStatus.Idle;
+            }
+        }
+
+        public override bool IsHandleWeapon()
+        {
+            return _currentGrandStatus == GrandStatus.Idle;
         }
 
         private void Update()
@@ -196,7 +207,6 @@ namespace Weapons.Actions
                         transform.localScale = Vector3.one * _sizeLevelValue[_currentSizeLevel];
                         transform.rotation = Quaternion.identity;
 
-                        _myRigid.useGravity = true;
                         _currentGrandStatus = GrandStatus.LosePower;
                     }
                     else
@@ -207,13 +217,19 @@ namespace Weapons.Actions
                     }
                     break;
                 case GrandStatus.LosePower:
-                    // 여기서 시작하기
+                    if (!_myRigid.useGravity)
+                        _myRigid.useGravity = true;
+                    if (_myRigid.constraints == RigidbodyConstraints.FreezePosition)
+                        _myRigid.constraints = RigidbodyConstraints.None;
+
                     break;
             }
         }
 
         private void NextSizeLevel()
         {
+            Debug.Log("before : " + _currentSizeLevel.ToString());
+
             int jumpLevel = 0;
 
             if (_weaponUsedTime >= 1f)
@@ -221,18 +237,27 @@ namespace Weapons.Actions
             else
                 jumpLevel = 1;
 
-            if (_currentSizeLevel + jumpLevel >= GrandSizeLevel.FourGrade)
+            if (_currentSizeLevel + jumpLevel > GrandSizeLevel.FourGrade)
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
             else
                 _currentSizeLevel += jumpLevel;
+
+
+            Debug.Log("after : " + _currentSizeLevel.ToString());
+
         }
 
         private void MaxSizeLevel()
         {
+            Debug.Log("before : " + _currentSizeLevel.ToString());
+
             if (_currentSizeLevel == GrandSizeLevel.FourGrade)
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
             else
                 _currentSizeLevel = GrandSizeLevel.FourGrade;
+
+            Debug.Log("after : " + _currentSizeLevel.ToString());
+
         }
 
         private void ResizeStart()
