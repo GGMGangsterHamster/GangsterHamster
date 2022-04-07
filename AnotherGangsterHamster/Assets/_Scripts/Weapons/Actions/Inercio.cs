@@ -10,9 +10,9 @@ namespace Weapons.Actions
     {
         public string Path = "SettingValue/HandMode.json";
         public float FireSpeed;
-        public float ReboundPower;
+        public float ReboundPower; // 무기로 인해 반동 받을 때의 힘
 
-        // ���Ⱑ ���� �� �ִ� ��Ȳ�� ��Ƴ���
+        // 이너시오가 가질 수 있는 상태들
         private enum InercioStatus
         {
             Idle,
@@ -64,10 +64,6 @@ namespace Weapons.Actions
             }
         }
 
-        // �÷��̾� ��ġ����
-        // �÷��̾� ���̿� ���߰�
-        // ������ ���� �̵��ϰ�
-        // �޼� �����տ� ���� �̵��Ѵ�
         private Vector3 HandPosition => PlayerBaseTransform.position
                                       + PlayerBaseTransform.up * (PlayerTrasnform.localScale.y - 0.5f)
                                       + MainCameraTransform.forward 
@@ -76,13 +72,12 @@ namespace Weapons.Actions
         {
             get
             {
-                // ��� �ӽ÷� ������ ���� �ٲ� �ڵ��̺��
-                return FindObjectOfType<WeaponManagement>().transform == transform.parent;
+                return FindObjectOfType<WeaponManagement>().transform == transform.parent && _currentInercioStatus != InercioStatus.Use;
             }
         }
         #endregion
 
-        private InercioStatus _currentStatus = InercioStatus.Idle;
+        private InercioStatus _currentInercioStatus = InercioStatus.Idle;
 
         private GameObject _sticklyObject = null;
         private Rigidbody _sticklyObjectRigid = null;
@@ -104,15 +99,14 @@ namespace Weapons.Actions
 
         public override void FireWeapon()
         {
-            if (isCanFire && _currentStatus != InercioStatus.Fire && _currentStatus != InercioStatus.Use)
+            if (isCanFire && _currentInercioStatus != InercioStatus.Fire)
             {
                 _fireDir = MainCameraTransform.forward;
 
-                _currentStatus = InercioStatus.Fire;
+                _currentInercioStatus = InercioStatus.Fire;
 
                 if (_myCollider.isTrigger)
                     _myCollider.isTrigger = false;
-
             }
         }
 
@@ -121,13 +115,13 @@ namespace Weapons.Actions
             if (_myRigid.constraints == RigidbodyConstraints.None)
                 _myRigid.constraints = RigidbodyConstraints.FreezeAll;
 
-            _currentStatus = InercioStatus.Use;
+            _currentInercioStatus = InercioStatus.Use;
             _weaponUsedTime = 0f;
         }
 
         public override void ResetWeapon()
         {
-            _currentStatus = InercioStatus.Idle;
+            _currentInercioStatus = InercioStatus.Idle;
 
             // 이너시오에 ATypeObject가 붙어있다면
             if(_sticklyObject != null)
@@ -160,7 +154,7 @@ namespace Weapons.Actions
                 return;
             }
             
-            _currentStatus = InercioStatus.Stickly;
+            _currentInercioStatus = InercioStatus.Stickly;
             _sticklyObject = col;
             _sticklyObjectRigid = _sticklyObject.GetComponent<Rigidbody>();
             _sticklyObjectRigid.constraints = RigidbodyConstraints.FreezeAll;
@@ -174,13 +168,13 @@ namespace Weapons.Actions
         public void BTypeObjectCollisionEnterEvent(GameObject col)
         {
             _myRigid.constraints = RigidbodyConstraints.None;
-            _currentStatus = InercioStatus.LosePower;
+            _currentInercioStatus = InercioStatus.LosePower;
         }
         #endregion
 
         private void Update()
         {
-            switch(_currentStatus)
+            switch(_currentInercioStatus)
             {
                 case InercioStatus.Idle:
                     if (!_myCollider.isTrigger)

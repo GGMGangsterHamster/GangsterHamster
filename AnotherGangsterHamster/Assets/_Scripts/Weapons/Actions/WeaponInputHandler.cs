@@ -28,7 +28,7 @@ namespace Weapons.Actions
             WeaponVO vo = Utils.JsonToVO<WeaponVO>(_path);
 
             _weaponCommand.Add((KeyCode)vo.Shot, () => _weaponManagement.FireCurrentWeapon());
-            _weaponCommand.Add((KeyCode)vo.Activate, () => _weaponManagement.UseCurrentWeapon());
+            _weaponCommand.Add((KeyCode)vo.Use, () => _weaponManagement.UseCurrentWeapon());
             _weaponCommand.Add((KeyCode)vo.Reset, () => _weaponManagement.ResetCurrentWeapon());
             // 각각 1, 2, 3번 키를 누르면 그에 해당하는 무기로 변환하는거임
             _weaponCommand.Add((KeyCode)vo.ChangeToInercio, () => _weaponManagement.ChangeCurrentWeapon(WeaponEnum.Inercio));
