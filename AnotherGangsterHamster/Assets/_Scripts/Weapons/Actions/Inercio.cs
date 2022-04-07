@@ -83,6 +83,7 @@ namespace Weapons.Actions
         private InercioStatus _currentStatus = InercioStatus.Idle;
 
         private Collision _sticklyObjectCollision;
+        private Transform _sticklyObjBeforeParent;
         private Vector3 _fireDir;
 
         private void Awake()
@@ -109,7 +110,16 @@ namespace Weapons.Actions
         {
             _currentStatus = InercioStatus.Idle;
 
+            if(_sticklyObjectCollision != null)
+            {
+                Debug.Log("ASDASED");
+                Debug.Log(_sticklyObjectCollision.transform);
+                Debug.Log(_sticklyObjectCollision.transform.parent);
+                _sticklyObjectCollision.transform.parent = _sticklyObjBeforeParent;
+            }
+
             _sticklyObjectCollision = null;
+            _sticklyObjBeforeParent = null;
         }
 
         #region CollisionEvents
@@ -119,13 +129,17 @@ namespace Weapons.Actions
         }
         public void ATypeObjectCollisionEnterEvent(Collision col)
         {
-            if (_sticklyObjectCollision != null && _sticklyObjectCollision.gameObject == col.gameObject)
+            if (_sticklyObjBeforeParent != null)
             {
                 return;
             }
             
             _currentStatus = InercioStatus.Stickly;
+            Debug.Log("SticklyObj : " + col.transform.name);
             _sticklyObjectCollision = col;
+            _sticklyObjBeforeParent = col.transform.parent;
+            _sticklyObjectCollision.transform.parent = transform;
+            Debug.Log(_sticklyObjectCollision.transform.name);
         }
         public void ATypeObjectCollisionExitEvent(Collision col)
         {

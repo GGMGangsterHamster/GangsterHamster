@@ -14,10 +14,6 @@ static partial class Utils
       path = Path.Combine(Directory.GetCurrentDirectory(), path);
       string json = File.ReadAllText(path);
 
-#if UNITY_EDITOR
-      Logger.Log($"Loaded JSON ${typeof(T)}.\r\n{json}");
-#endif
-
       return JsonUtility.FromJson<T>(json);
    }
 }
