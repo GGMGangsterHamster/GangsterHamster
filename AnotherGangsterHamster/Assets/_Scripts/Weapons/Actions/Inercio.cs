@@ -82,13 +82,17 @@ namespace Weapons.Actions
 
         private InercioStatus _currentStatus = InercioStatus.Idle;
 
-        private Collision _sticklyObjectCollision;
+        private GameObject _sticklyObjectObject = null;
+
         private Transform _sticklyObjBeforeParent;
+        private Collider _myCollider;
         private Vector3 _fireDir;
 
         private void Awake()
         {
             _weaponEnum = WeaponEnum.Inercio;
+
+            _myCollider = GetComponent<Collider>();
         }
 
         public override void FireWeapon()
@@ -98,6 +102,10 @@ namespace Weapons.Actions
                 _fireDir = MainCameraTransform.forward;
 
                 _currentStatus = InercioStatus.Fire;
+
+                if (_myCollider.isTrigger)
+                    _myCollider.isTrigger = false;
+
             }
         }
 
@@ -110,42 +118,37 @@ namespace Weapons.Actions
         {
             _currentStatus = InercioStatus.Idle;
 
-            if(_sticklyObjectCollision != null)
+            if(_sticklyObjectObject != null)
             {
-                Debug.Log("ASDASED");
-                Debug.Log(_sticklyObjectCollision.transform);
-                Debug.Log(_sticklyObjectCollision.transform.parent);
-                _sticklyObjectCollision.transform.parent = _sticklyObjBeforeParent;
+                _sticklyObjectObject.transform.parent = _sticklyObjBeforeParent;
             }
 
-            _sticklyObjectCollision = null;
+            _sticklyObjectObject = null;
             _sticklyObjBeforeParent = null;
         }
 
         #region CollisionEvents
-        public void PlayerCollisionEvent(Collision col)
+        public void PlayerCollisionEvent(GameObject col)
         {
             ResetWeapon();
         }
-        public void ATypeObjectCollisionEnterEvent(Collision col)
+        public void ATypeObjectCollisionEnterEvent(GameObject col)
         {
-            if (_sticklyObjBeforeParent != null)
+            if (_sticklyObjectObject != null)
             {
                 return;
             }
             
             _currentStatus = InercioStatus.Stickly;
-            Debug.Log("SticklyObj : " + col.transform.name);
-            _sticklyObjectCollision = col;
+            _sticklyObjectObject = col;
             _sticklyObjBeforeParent = col.transform.parent;
-            _sticklyObjectCollision.transform.parent = transform;
-            Debug.Log(_sticklyObjectCollision.transform.name);
+            _sticklyObjectObject.transform.parent = transform;
         }
-        public void ATypeObjectCollisionExitEvent(Collision col)
+        public void ATypeObjectCollisionExitEvent(GameObject col)
         {
 
         }
-        public void BTypeObjectCollisionEnterEvent(Collision col)
+        public void BTypeObjectCollisionEnterEvent(GameObject col)
         {
             
         }
@@ -156,6 +159,9 @@ namespace Weapons.Actions
             switch(_currentStatus)
             {
                 case InercioStatus.Idle:
+                    if (!_myCollider.isTrigger)
+                        _myCollider.isTrigger = true;
+
                     transform.position = HandPosition;
                     break;
                 case InercioStatus.Fire:
@@ -167,7 +173,7 @@ namespace Weapons.Actions
 
                     break;
                 case InercioStatus.Stickly:
-                    Debug.Log("Stickly ����");
+
                     break;
             }
         }

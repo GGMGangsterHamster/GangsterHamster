@@ -25,13 +25,13 @@ namespace Objects.StageObjects
       #region Unity Collision Event
       private void OnCollisionEnter(Collision other)
       {
-         CollisionEnterEvent(other);
+         CollisionEnterEvent(other.gameObject);
       }
 
       private void OnCollisionExit(Collision other)
       {
          if (!EventIsToggle)
-            CollisionExitEvent(other);
+            CollisionExitEvent(other.gameObject);
       }
       #endregion // Unity Collision Event
 
@@ -39,10 +39,10 @@ namespace Objects.StageObjects
       /// 충돌 시 호출됨
       /// </summary>
       /// <param name="other">충돌한 GameObject</param>
-      public void CollisionEnterEvent(Collision other)
+      public void CollisionEnterEvent(GameObject other)
       {
          CollisionCallback callback =
-                  _callbacks.Find(x => other.gameObject.CompareTag(x.key));
+                  _callbacks.Find(x => other.CompareTag(x.key));
 
          if (callback != null)
          {
@@ -66,10 +66,10 @@ namespace Objects.StageObjects
       /// Collision Exit 이벤트 시 호출됨
       /// </summary>
       /// <param name="other">충돌한 GameObject</param>
-      public void CollisionExitEvent(Collision other)
+      public void CollisionExitEvent(GameObject other)
       {
          CollisionCallback callback =
-                  _callbacks.Find(x => other.gameObject.CompareTag(x.key));
+                  _callbacks.Find(x => other.CompareTag(x.key));
 
          if (callback != null)
          {
