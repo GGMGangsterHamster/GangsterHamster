@@ -77,6 +77,8 @@ namespace Weapons.Actions
         }
         #endregion
 
+        private WeaponManagement _weaponManagement;
+
         private InercioStatus _currentInercioStatus = InercioStatus.Idle;
 
         private GameObject _sticklyObject = null;
@@ -95,6 +97,8 @@ namespace Weapons.Actions
 
             _myCollider = GetComponent<Collider>();
             _myRigid = GetComponent<Rigidbody>();
+
+            _weaponManagement = transform.parent.GetComponent<WeaponManagement>();
         }
 
         public override void FireWeapon()
@@ -121,6 +125,8 @@ namespace Weapons.Actions
 
         public override void ResetWeapon()
         {
+            if (_weaponManagement.GetCurrentWeapon() != _weaponEnum) gameObject.SetActive(false);
+
             _currentInercioStatus = InercioStatus.Idle;
 
             // 이너시오에 ATypeObject가 붙어있다면
@@ -140,14 +146,20 @@ namespace Weapons.Actions
             _sticklyObject = null;
             _sticklyObjectRigid = null;
             _sticklyObjBeforeParent = null;
+
+        }
+
+        public override bool IsHandleWeapon()
+        {
+            return _currentInercioStatus == InercioStatus.Idle;
         }
 
         #region CollisionEvents
-        public void PlayerCollisionEvent(GameObject col)
+        public void PlayerCollisionEvent(GameObject obj)
         {
             ResetWeapon();
         }
-        public void ATypeObjectCollisionEnterEvent(GameObject col)
+        public void ATypeObjectCollisionEnterEvent(GameObject obj)
         {
             if (_sticklyObject != null)
             {
@@ -155,17 +167,21 @@ namespace Weapons.Actions
             }
             
             _currentInercioStatus = InercioStatus.Stickly;
-            _sticklyObject = col;
+            _sticklyObject = obj;
             _sticklyObjectRigid = _sticklyObject.GetComponent<Rigidbody>();
             _sticklyObjectRigid.constraints = RigidbodyConstraints.FreezeAll;
-            _sticklyObjBeforeParent = col.transform.parent;
+            _sticklyObjBeforeParent = obj.transform.parent;
             _sticklyObject.transform.parent = transform;
         }
-        public void ATypeObjectCollisionExitEvent(GameObject col)
+        public void ATypeObjectCollisionExitEvent(GameObject obj)
         {
+            if(obj.TryGetComponent(out WeaponAction wa))
+            {
+                ResetWeapon();
+            }
             // 일단 만들긴 만들었는데 쓸건지는 모르겟슴
         }
-        public void BTypeObjectCollisionEnterEvent(GameObject col)
+        public void BTypeObjectCollisionEnterEvent(GameObject obj)
         {
             _myRigid.constraints = RigidbodyConstraints.None;
             _currentInercioStatus = InercioStatus.LosePower;

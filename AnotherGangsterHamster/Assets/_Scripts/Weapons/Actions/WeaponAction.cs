@@ -38,6 +38,11 @@ namespace Weapons.Actions
 
         }
 
+        public virtual bool IsHandleWeapon()
+        {
+            return false;
+        }
+
         /// <summary>
         /// 들어온 인자값에 따라 SetActive True, false 해주는 함수
         /// </summary>
@@ -45,9 +50,11 @@ namespace Weapons.Actions
         {
             if (!possibleUse) return false;
 
-            gameObject.SetActive(wenum == _weaponEnum);
+            gameObject.SetActive(wenum == _weaponEnum || !IsHandleWeapon());
 
             return gameObject.activeSelf;
         }
+
+
     }
 }
