@@ -148,6 +148,7 @@ namespace Weapons.Actions
         {
             if (currentGrandStatus == GrandStatus.Idle || currentGrandStatus == GrandStatus.Resize) return;
 
+            _myRigid.velocity = Vector3.zero;
             currentGrandStatus = GrandStatus.Use;
         }
         public override void ResetWeapon()
@@ -178,10 +179,14 @@ namespace Weapons.Actions
                     transform.position = HandPosition;
                     break;
                 case GrandStatus.Fire:
-                    transform.position += _fireDir * Time.deltaTime * fireSpeed;
+                    if (_myRigid.constraints == RigidbodyConstraints.FreezePosition)
+                        _myRigid.constraints = RigidbodyConstraints.None;
+                    _myRigid.velocity = _fireDir * fireSpeed;
+                    //transform.position += 
                     break;
                 case GrandStatus.Use:
-                    if(Input.GetKey(_useKeycode))
+                    _myRigid.velocity = Vector3.zero;
+                    if (Input.GetKey(_useKeycode))
                     {
                         _weaponUsedTime += Time.deltaTime;
 

@@ -9,7 +9,7 @@ namespace Weapons.Actions
     public class Inercio : WeaponAction
     {
         public string Path = "SettingValue/HandMode.json";
-        public float FireSpeed;
+        public float FireAcceleration;
         public float ReboundPower; // 무기로 인해 반동 받을 때의 힘
 
         // 이너시오가 가질 수 있는 상태들
@@ -89,6 +89,7 @@ namespace Weapons.Actions
         private Rigidbody _myRigid;
 
         private float _weaponUsedTime = 0f;
+        private float _fireTime = 0f; // 발사하고 나서 초마다 FireAcceleration만큼 증가하는 변수
         private Vector3 _fireDir;
 
         private void Awake()
@@ -106,6 +107,7 @@ namespace Weapons.Actions
             if (isCanFire && _currentInercioStatus != InercioStatus.Fire)
             {
                 _fireDir = MainCameraTransform.forward;
+                _fireTime = 0f;
 
                 _currentInercioStatus = InercioStatus.Fire;
 
@@ -200,14 +202,18 @@ namespace Weapons.Actions
                     transform.position = HandPosition;
                     break;
                 case InercioStatus.Fire:
-                    transform.position += _fireDir * Time.deltaTime * FireSpeed;
+                    if (_myRigid.constraints == RigidbodyConstraints.FreezeAll)
+                        _myRigid.constraints = RigidbodyConstraints.None;
+
+                    _fireTime += Time.deltaTime * FireAcceleration;
+                    _myRigid.velocity = _fireDir * _fireTime;
                     break;
                 case InercioStatus.Use:
                     {
                         if (_myRigid.useGravity)
                             _myRigid.useGravity = false;
 
-                        transform.position += (MainCameraTransform.position - transform.position).normalized * Time.deltaTime * FireSpeed;
+                        transform.position += (MainCameraTransform.position - transform.position).normalized * Time.deltaTime * FireAcceleration;
                         _weaponUsedTime += Time.deltaTime;
 
                         if(_sticklyObject != null)
