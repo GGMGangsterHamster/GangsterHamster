@@ -189,6 +189,8 @@ namespace Weapons.Actions
         }
         public void BTypeObjectCollisionEnterEvent(GameObject obj)
         {
+            _myRigid.velocity = Vector3.zero;
+            _myRigid.angularVelocity = Vector3.zero;
             _myRigid.constraints = RigidbodyConstraints.None;
             _currentInercioStatus = InercioStatus.LosePower;
         }
