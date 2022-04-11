@@ -10,8 +10,8 @@ namespace Weapons.Actions
     {
         public string Path = "SettingValue/HandMode.json";
         public string WeaponKeyCodePath = "KeyCodes/Weapons.json";
-        public float FireSpeed;
-        public float ResizeSpeed; // 크기 변환할 때 드는 시간
+        public float fireSpeed;
+        public float resizeSpeed; // 크기 변환할 때 드는 시간
 
         // 그랜드의 크기 변환 단계
         private enum GrandSizeLevel
@@ -178,7 +178,7 @@ namespace Weapons.Actions
                     transform.position = HandPosition;
                     break;
                 case GrandStatus.Fire:
-                    transform.position += _fireDir * Time.deltaTime * FireSpeed;
+                    transform.position += _fireDir * Time.deltaTime * fireSpeed;
                     break;
                 case GrandStatus.Use:
                     if(Input.GetKey(_useKeycode))
@@ -202,7 +202,7 @@ namespace Weapons.Actions
                     }
                     break;
                 case GrandStatus.Resize:
-                    if(_currentLerpTime >= ResizeSpeed)
+                    if(_currentLerpTime >= resizeSpeed)
                     {
                         transform.localScale = Vector3.one * _sizeLevelValue[_currentSizeLevel];
                         transform.rotation = Quaternion.identity;
@@ -212,8 +212,8 @@ namespace Weapons.Actions
                     else
                     {
                         _currentLerpTime += Time.deltaTime;
-                        transform.localScale = Vector3.one * Mathf.Lerp(_beforeWeaponSize, _sizeLevelValue[_currentSizeLevel], _currentLerpTime / ResizeSpeed);
-                        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, _currentLerpTime / ResizeSpeed);
+                        transform.localScale = Vector3.one * Mathf.Lerp(_beforeWeaponSize, _sizeLevelValue[_currentSizeLevel], _currentLerpTime / resizeSpeed);
+                        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, _currentLerpTime / resizeSpeed);
                     }
                     break;
                 case GrandStatus.LosePower:
