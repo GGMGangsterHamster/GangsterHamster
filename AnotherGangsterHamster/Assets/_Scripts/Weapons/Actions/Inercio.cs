@@ -106,6 +106,9 @@ namespace Weapons.Actions
         {
             if (isCanFire && _currentInercioStatus != InercioStatus.Fire)
             {
+                if (_myRigid.constraints == RigidbodyConstraints.FreezeAll)
+                    _myRigid.constraints = RigidbodyConstraints.None;
+
                 _fireDir = MainCameraTransform.forward;
                 _fireTime = 0f;
 
@@ -119,8 +122,8 @@ namespace Weapons.Actions
         public override void UseWeapon()
         {
             if (_currentInercioStatus == InercioStatus.Idle) return;
-            if (_myRigid.constraints == RigidbodyConstraints.None)
-                _myRigid.constraints = RigidbodyConstraints.FreezeAll;
+            //if (_myRigid.constraints == RigidbodyConstraints.None)
+            //    _myRigid.constraints = RigidbodyConstraints.FreezeAll;
 
             _currentInercioStatus = InercioStatus.Use;
             _weaponUsedTime = 0f;
@@ -160,6 +163,7 @@ namespace Weapons.Actions
         #region CollisionEvents
         public void PlayerCollisionEvent(GameObject obj)
         {
+            _myRigid.velocity = Vector3.zero;
             ResetWeapon();
         }
         public void ATypeObjectCollisionEnterEvent(GameObject obj)
@@ -168,7 +172,9 @@ namespace Weapons.Actions
             {
                 return;
             }
-            
+
+            _myRigid.velocity = Vector3.zero;
+            _myRigid.angularVelocity = Vector3.zero;
             _currentInercioStatus = InercioStatus.Stickly;
             _sticklyObject = obj;
             _sticklyObjectRigid = _sticklyObject.GetComponent<Rigidbody>();
@@ -202,9 +208,6 @@ namespace Weapons.Actions
                     transform.position = HandPosition;
                     break;
                 case InercioStatus.Fire:
-                    if (_myRigid.constraints == RigidbodyConstraints.FreezeAll)
-                        _myRigid.constraints = RigidbodyConstraints.None;
-
                     _fireTime += Time.deltaTime * FireAcceleration;
                     _myRigid.velocity = _fireDir * _fireTime;
                     break;
@@ -213,8 +216,10 @@ namespace Weapons.Actions
                         if (_myRigid.useGravity)
                             _myRigid.useGravity = false;
 
-                        transform.position += (MainCameraTransform.position - transform.position).normalized * Time.deltaTime * FireAcceleration;
+                        _fireDir = (MainCameraTransform.position - transform.position).normalized;
                         _weaponUsedTime += Time.deltaTime;
+
+                        _myRigid.velocity = _fireDir * _weaponUsedTime / FireAcceleration;
 
                         if(_sticklyObject != null)
                         {

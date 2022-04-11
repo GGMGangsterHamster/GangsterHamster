@@ -136,6 +136,9 @@ namespace Weapons.Actions
         {
             if (isCanFire)
             {
+                if (_myRigid.constraints == RigidbodyConstraints.FreezePosition)
+                    _myRigid.constraints = RigidbodyConstraints.None;
+
                 _fireDir = MainCameraTransform.forward;
 
                 currentGrandStatus = GrandStatus.Fire;
@@ -179,10 +182,7 @@ namespace Weapons.Actions
                     transform.position = HandPosition;
                     break;
                 case GrandStatus.Fire:
-                    if (_myRigid.constraints == RigidbodyConstraints.FreezePosition)
-                        _myRigid.constraints = RigidbodyConstraints.None;
                     _myRigid.velocity = _fireDir * fireSpeed;
-                    //transform.position += 
                     break;
                 case GrandStatus.Use:
                     _myRigid.velocity = Vector3.zero;

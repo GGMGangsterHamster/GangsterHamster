@@ -89,6 +89,9 @@ namespace Weapons.Actions
         {
             if(_currentGravitoStatus != GravitoStatus.Fire && _currentGravitoStatus != GravitoStatus.Use)
             {
+                if (_myRigid.constraints == RigidbodyConstraints.FreezePosition)
+                    _myRigid.constraints = RigidbodyConstraints.None;
+                
                 _fireDir = MainCameraTransform.forward;
                 _currentGravitoStatus = GravitoStatus.Fire;
             }
@@ -124,7 +127,7 @@ namespace Weapons.Actions
                     transform.position = HandPosition;
                     break;
                 case GravitoStatus.Fire:
-                    transform.position += _fireDir * Time.deltaTime * fireSpeed;
+                    _myRigid.velocity = _fireDir * fireSpeed;
                     break;
             }
         }
