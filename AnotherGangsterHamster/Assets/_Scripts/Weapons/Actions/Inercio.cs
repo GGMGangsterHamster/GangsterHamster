@@ -10,6 +10,7 @@ namespace Weapons.Actions
     {
         public string Path = "SettingValue/HandMode.json";
         public float FireAcceleration;
+        public float DefaultFireSpeed;
         public float ReboundPower; // 무기로 인해 반동 받을 때의 힘
 
         // 이너시오가 가질 수 있는 상태들
@@ -110,7 +111,7 @@ namespace Weapons.Actions
                     _myRigid.constraints = RigidbodyConstraints.None;
 
                 _fireDir = MainCameraTransform.forward;
-                _fireTime = 0f;
+                _fireTime = DefaultFireSpeed;
 
                 _currentInercioStatus = InercioStatus.Fire;
 
@@ -122,11 +123,9 @@ namespace Weapons.Actions
         public override void UseWeapon()
         {
             if (_currentInercioStatus == InercioStatus.Idle) return;
-            //if (_myRigid.constraints == RigidbodyConstraints.None)
-            //    _myRigid.constraints = RigidbodyConstraints.FreezeAll;
 
             _currentInercioStatus = InercioStatus.Use;
-            _weaponUsedTime = 0f;
+            _weaponUsedTime = DefaultFireSpeed;
         }
 
         public override void ResetWeapon()
@@ -208,8 +207,8 @@ namespace Weapons.Actions
                     transform.position = HandPosition;
                     break;
                 case InercioStatus.Fire:
-                    _fireTime += Time.deltaTime;
-                    _myRigid.velocity = _fireDir * _fireTime * FireAcceleration;
+                    _fireTime += Time.deltaTime * FireAcceleration;
+                    _myRigid.velocity = _fireDir * _fireTime;
                     break;
                 case InercioStatus.Use:
                     {
@@ -217,9 +216,9 @@ namespace Weapons.Actions
                             _myRigid.useGravity = false;
 
                         _fireDir = (MainCameraTransform.position - transform.position).normalized;
-                        _weaponUsedTime += Time.deltaTime;
+                        _weaponUsedTime += Time.deltaTime * FireAcceleration;
 
-                        _myRigid.velocity = _fireDir * _weaponUsedTime / FireAcceleration;
+                        _myRigid.velocity = _fireDir * _weaponUsedTime;
 
                         if(_sticklyObject != null)
                         {

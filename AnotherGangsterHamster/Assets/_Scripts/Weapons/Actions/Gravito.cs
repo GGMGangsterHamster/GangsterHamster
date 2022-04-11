@@ -16,6 +16,7 @@ namespace Weapons.Actions
             Idle,
             Fire,
             Use,
+            Stickly,
             ChangeGravity,
         }
 
@@ -105,11 +106,43 @@ namespace Weapons.Actions
         public override void ResetWeapon()
         {
             _currentGravitoStatus = GravitoStatus.Idle;
+
+            // 중력 초기화
         }
 
         public override bool IsHandleWeapon()
         {
             return _currentGravitoStatus == GravitoStatus.Idle;
+        }
+
+        public void ATypeObjectCollisionEnterEvent(GameObject obj)
+        {
+            if (!obj.TryGetComponent(out BoxCollider boxCol))
+            {
+                // 여기서 이곳에는 적용이 안된다는 것을 출력해줘야 함
+                return;
+            }
+
+            if(_currentGravitoStatus == GravitoStatus.Fire)
+            {
+                Stop();
+                _currentGravitoStatus = GravitoStatus.Stickly;
+            }
+        }
+
+        public void BTypeObjectCollisionEnterEvent(GameObject obj)
+        {
+            if (!obj.TryGetComponent(out BoxCollider boxCol))
+            {
+                // 여기서 이곳에는 적용이 안된다는 것을 출력해줘야 함
+                return;
+            }
+
+            if (_currentGravitoStatus == GravitoStatus.Fire)
+            {
+                Stop();
+                _currentGravitoStatus = GravitoStatus.Stickly;
+            }
         }
 
         private void Update()
@@ -129,7 +162,20 @@ namespace Weapons.Actions
                 case GravitoStatus.Fire:
                     _myRigid.velocity = _fireDir * fireSpeed;
                     break;
+                case GravitoStatus.Stickly:
+                    // 이 상태에 능력 사용시 벽의 방향에 따라 중력이 변환되어야 함.
+                    // 가장 가장 가장.. 어려운 부분
+                    break;
             }
+        }
+
+        private void Stop()
+        {
+            _myRigid.constraints = RigidbodyConstraints.FreezeAll;
+            _myRigid.velocity = Vector3.zero;
+            _myRigid.angularVelocity = Vector3.zero;
+
+
         }
     }
 }
