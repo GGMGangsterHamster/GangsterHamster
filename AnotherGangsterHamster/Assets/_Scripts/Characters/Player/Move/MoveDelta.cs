@@ -33,11 +33,12 @@ namespace Characters.Player.Move
       /// <returns>계산된 Delta</returns>
       public Vector3 Calculate(Transform target, bool keepDelta = false)
       {
+         float scalar = _delta.magnitude;
          Vector3 finalDelta =
-               (target.TransformDirection(_delta) + _rawDelta)
+               (target.TransformDirection(_delta).normalized * scalar + _rawDelta)
                * Time.deltaTime;
 
-         if(!keepDelta)
+         if (!keepDelta)
          {
             _rawDelta = Vector3.zero;
             _delta = Vector3.zero;
