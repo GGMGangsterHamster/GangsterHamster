@@ -22,6 +22,12 @@ namespace Characters.Player.GroundCheck
             _callback?.OnGround();
       }
 
+      private void OnTriggerStay(Collider other) // FIXME: 이거 고쳐야 함
+      {
+         if (_tags.Find(x => other.CompareTag(x)) != null)
+            _callback?.OnGround();
+      }
+
       private void OnTriggerExit(Collider other)
       {
          if (_tags.Find(x => other.CompareTag(x)) != null)
