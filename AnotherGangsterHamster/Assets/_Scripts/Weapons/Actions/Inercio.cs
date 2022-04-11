@@ -116,6 +116,7 @@ namespace Weapons.Actions
 
         public override void UseWeapon()
         {
+            if (_currentInercioStatus == InercioStatus.Idle) return;
             if (_myRigid.constraints == RigidbodyConstraints.None)
                 _myRigid.constraints = RigidbodyConstraints.FreezeAll;
 
@@ -175,10 +176,6 @@ namespace Weapons.Actions
         }
         public void ATypeObjectCollisionExitEvent(GameObject obj)
         {
-            if(obj.TryGetComponent(out WeaponAction wa))
-            {
-                ResetWeapon();
-            }
             // 일단 만들긴 만들었는데 쓸건지는 모르겟슴
         }
         public void BTypeObjectCollisionEnterEvent(GameObject obj)
@@ -206,15 +203,33 @@ namespace Weapons.Actions
                     transform.position += _fireDir * Time.deltaTime * FireSpeed;
                     break;
                 case InercioStatus.Use:
-                    if (_myRigid.useGravity)
-                        _myRigid.useGravity = false;
+                    {
+                        if (_myRigid.useGravity)
+                            _myRigid.useGravity = false;
 
-                    transform.position += (MainCameraTransform.position - transform.position).normalized * Time.deltaTime * FireSpeed;
-                    _weaponUsedTime += Time.deltaTime;
-                    break;
+                        if (_sticklyObject.TryGetComponent(out Grand grand))
+                        {
+                            if (grand.currentGrandStatus == Grand.GrandStatus.Resize)
+                            {
+                                ResetWeapon();
+                            }
+                        }
+
+                        transform.position += (MainCameraTransform.position - transform.position).normalized * Time.deltaTime * FireSpeed;
+                        _weaponUsedTime += Time.deltaTime;
+                        break;
+                    }
                 case InercioStatus.Stickly:
-
-                    break;
+                    {
+                        if (_sticklyObject.TryGetComponent(out Grand grand))
+                        {
+                            if (grand.currentGrandStatus == Grand.GrandStatus.Resize)
+                            {
+                                ResetWeapon();
+                            }
+                        }
+                        break;
+                    }
                 case InercioStatus.LosePower:
                     if (!_myRigid.useGravity)
                         _myRigid.useGravity = true;

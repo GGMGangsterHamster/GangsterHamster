@@ -22,7 +22,7 @@ namespace Weapons.Actions
         }
 
         // 그랜드가 가질 수 있는 상태들
-        private enum GrandStatus
+        public enum GrandStatus
         {
             Idle,
             Fire,
@@ -89,10 +89,10 @@ namespace Weapons.Actions
         {
             get
             {
-                return _currentGrandStatus != GrandStatus.Use 
-                    && _currentGrandStatus != GrandStatus.LosePower 
-                    && _currentGrandStatus != GrandStatus.Fire 
-                    && _currentGrandStatus != GrandStatus.Resize;
+                return currentGrandStatus != GrandStatus.Use 
+                    && currentGrandStatus != GrandStatus.LosePower 
+                    && currentGrandStatus != GrandStatus.Fire 
+                    && currentGrandStatus != GrandStatus.Resize;
             }
         }
         private Vector3 HandPosition => PlayerBaseTransform.position
@@ -104,7 +104,7 @@ namespace Weapons.Actions
         private Dictionary<GrandSizeLevel, float> _sizeLevelValue = new Dictionary<GrandSizeLevel, float>();
 
         private GrandSizeLevel _currentSizeLevel = GrandSizeLevel.OneGrade;
-        private GrandStatus _currentGrandStatus = GrandStatus.Idle;
+        [HideInInspector] public GrandStatus currentGrandStatus = GrandStatus.Idle;
 
         private KeyCode _useKeycode;
 
@@ -138,7 +138,7 @@ namespace Weapons.Actions
             {
                 _fireDir = MainCameraTransform.forward;
 
-                _currentGrandStatus = GrandStatus.Fire;
+                currentGrandStatus = GrandStatus.Fire;
 
                 if (_myCollider.isTrigger)
                     _myCollider.isTrigger = false;
@@ -146,26 +146,26 @@ namespace Weapons.Actions
         }
         public override void UseWeapon()
         {
-            if (_currentGrandStatus == GrandStatus.Idle || _currentGrandStatus == GrandStatus.Resize) return;
+            if (currentGrandStatus == GrandStatus.Idle || currentGrandStatus == GrandStatus.Resize) return;
 
-            _currentGrandStatus = GrandStatus.Use;
+            currentGrandStatus = GrandStatus.Use;
         }
         public override void ResetWeapon()
         {
-            if(_currentSizeLevel == GrandSizeLevel.OneGrade && _currentGrandStatus != GrandStatus.Resize)
+            if(_currentSizeLevel == GrandSizeLevel.OneGrade && currentGrandStatus != GrandStatus.Resize)
             {
-                _currentGrandStatus = GrandStatus.Idle;
+                currentGrandStatus = GrandStatus.Idle;
             }
         }
 
         public override bool IsHandleWeapon()
         {
-            return _currentGrandStatus == GrandStatus.Idle;
+            return currentGrandStatus == GrandStatus.Idle;
         }
 
         private void Update()
         {
-            switch(_currentGrandStatus)
+            switch(currentGrandStatus)
             {
                 case GrandStatus.Idle:
                     if (!_myCollider.isTrigger)
@@ -207,7 +207,7 @@ namespace Weapons.Actions
                         transform.localScale = Vector3.one * _sizeLevelValue[_currentSizeLevel];
                         transform.rotation = Quaternion.identity;
 
-                        _currentGrandStatus = GrandStatus.LosePower;
+                        currentGrandStatus = GrandStatus.LosePower;
                     }
                     else
                     {
@@ -262,7 +262,7 @@ namespace Weapons.Actions
 
         private void ResizeStart()
         {
-            _currentGrandStatus = GrandStatus.Resize;
+            currentGrandStatus = GrandStatus.Resize;
             _weaponUsedTime = 0f;
             _currentLerpTime = 0f;
             _beforeWeaponSize = transform.localScale.x;
