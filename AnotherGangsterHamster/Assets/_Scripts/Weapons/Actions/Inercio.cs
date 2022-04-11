@@ -144,10 +144,10 @@ namespace Weapons.Actions
                 ;
             }
 
+
             _sticklyObject = null;
             _sticklyObjectRigid = null;
             _sticklyObjBeforeParent = null;
-
         }
 
         public override bool IsHandleWeapon()
@@ -207,16 +207,20 @@ namespace Weapons.Actions
                         if (_myRigid.useGravity)
                             _myRigid.useGravity = false;
 
-                        if (_sticklyObject.TryGetComponent(out Grand grand))
+                        transform.position += (MainCameraTransform.position - transform.position).normalized * Time.deltaTime * FireSpeed;
+                        _weaponUsedTime += Time.deltaTime;
+
+                        if(_sticklyObject != null)
                         {
-                            if (grand.currentGrandStatus == Grand.GrandStatus.Resize)
+                            if (_sticklyObject.TryGetComponent(out Grand grand))
                             {
-                                ResetWeapon();
+                                if (grand.currentGrandStatus == Grand.GrandStatus.Resize)
+                                {
+                                    ResetWeapon();
+                                }
                             }
                         }
 
-                        transform.position += (MainCameraTransform.position - transform.position).normalized * Time.deltaTime * FireSpeed;
-                        _weaponUsedTime += Time.deltaTime;
                         break;
                     }
                 case InercioStatus.Stickly:

@@ -228,8 +228,6 @@ namespace Weapons.Actions
 
         private void NextSizeLevel()
         {
-            Debug.Log("before : " + _currentSizeLevel.ToString());
-
             int jumpLevel = 0;
 
             if (_weaponUsedTime >= 1f)
@@ -241,10 +239,6 @@ namespace Weapons.Actions
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
             else
                 _currentSizeLevel += jumpLevel;
-
-
-            Debug.Log("after : " + _currentSizeLevel.ToString());
-
         }
 
         private void MaxSizeLevel()
