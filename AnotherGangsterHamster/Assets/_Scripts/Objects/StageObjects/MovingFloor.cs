@@ -23,6 +23,8 @@ namespace Objects.StageObjects
          if (_down != null || _up != null)
             ValueTween.Stop(this);
 
+         Debug.Log("A");
+
          Vector3 step = target / duration;
          Vector3 final = _initalPos + target;
 
@@ -31,7 +33,7 @@ namespace Objects.StageObjects
                      transform.localPosition += step * Time.deltaTime;
                   },
                   () => {
-                     return Utils.Compare(transform.position, final);
+                     return Utils.Compare(transform.localPosition, final);
                   },
                   () => {
                      transform.localPosition = final;
@@ -51,7 +53,7 @@ namespace Objects.StageObjects
                      transform.localPosition -= step * Time.deltaTime;
                   },
                   () => {
-                     return Utils.Compare(transform.position, _initalPos);
+                     return Utils.Compare(transform.localPosition, _initalPos);
                   },
                   () => {
                      transform.localPosition = _initalPos;
