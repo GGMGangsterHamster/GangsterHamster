@@ -140,8 +140,10 @@ namespace Weapons.Actions
                 _sticklyObject.transform.parent = _sticklyObjBeforeParent;
                 _sticklyObjectRigid.constraints = RigidbodyConstraints.None;
 
-                if (Vector3.Distance(transform.position, PlayerBaseTransform.position) <= 1)
+                if (Vector3.Distance(transform.position, PlayerBaseTransform.position) <= 2.5f)
                 {
+
+
                     PlayerBaseTransform.GetComponent<Rigidbody>().velocity =
                        (MainCameraTransform.position - transform.position).normalized
                        * ReboundPower
