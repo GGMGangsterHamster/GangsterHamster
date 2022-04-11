@@ -208,8 +208,8 @@ namespace Weapons.Actions
                     transform.position = HandPosition;
                     break;
                 case InercioStatus.Fire:
-                    _fireTime += Time.deltaTime * FireAcceleration;
-                    _myRigid.velocity = _fireDir * _fireTime;
+                    _fireTime += Time.deltaTime;
+                    _myRigid.velocity = _fireDir * _fireTime * FireAcceleration;
                     break;
                 case InercioStatus.Use:
                     {
