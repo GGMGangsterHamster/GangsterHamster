@@ -135,19 +135,19 @@ namespace Weapons.Actions
             _currentInercioStatus = InercioStatus.Idle;
 
             // 이너시오에 ATypeObject가 붙어있다면
-            if(_sticklyObject != null)
+            if (_sticklyObject != null)
             {
                 _sticklyObject.transform.parent = _sticklyObjBeforeParent;
                 _sticklyObjectRigid.constraints = RigidbodyConstraints.None;
 
-                
-                PlayerBaseTransform.GetComponent<Rigidbody>().velocity = 
-                    (MainCameraTransform.position - transform.position).normalized 
-                    * ReboundPower 
-                    * _weaponUsedTime
-                ;
+                if (Vector3.Distance(transform.position, PlayerBaseTransform.position) <= 1)
+                {
+                    PlayerBaseTransform.GetComponent<Rigidbody>().velocity =
+                       (MainCameraTransform.position - transform.position).normalized
+                       * ReboundPower
+                       * _weaponUsedTime;
+                }
             }
-
 
             _sticklyObject = null;
             _sticklyObjectRigid = null;
