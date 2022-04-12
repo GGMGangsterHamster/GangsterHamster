@@ -28,6 +28,7 @@ namespace Weapons.Actions
             foreach (WeaponAction weaponAction in childWeaponActions)
             {
                 _weaponActions.Add(weaponAction._weaponEnum, weaponAction);
+                weaponAction.gameObject.SetActive(false);
             }
         }
 
