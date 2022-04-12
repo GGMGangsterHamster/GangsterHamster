@@ -4,15 +4,15 @@ namespace Characters.Player.GroundCheck
 {
    public class OnGround : MonoBehaviour, IGroundCallback
    {
-      private CapsuleCollider _collider = null;
-      private CapsuleCollider Collider
+      private BoxCollider _collider = null;
+      private BoxCollider Collider
       {
          get
          {
             if (_collider == null)
             {
                _collider = GameObject.FindWithTag("PLAYER_BASE")
-                                     .GetComponent<CapsuleCollider>();
+                                     .GetComponent<BoxCollider>();
             }
 
             return _collider;
