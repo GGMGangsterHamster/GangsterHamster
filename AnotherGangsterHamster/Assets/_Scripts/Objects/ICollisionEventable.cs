@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Objects.StageObjects
+namespace Objects
 {
    public interface ICollisionEventable
    {

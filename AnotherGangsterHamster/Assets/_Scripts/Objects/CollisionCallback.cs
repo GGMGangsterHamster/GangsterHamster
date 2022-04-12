@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Objects.StageObjects
+namespace Objects
 {
    [Serializable]
    public class CollisionCallback
