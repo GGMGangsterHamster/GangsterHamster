@@ -122,12 +122,6 @@ namespace Weapons.Actions
 
         public void ATypeObjectCollisionEnterEvent(GameObject obj)
         {
-            if (!obj.TryGetComponent(out BoxCollider boxCol))
-            {
-                // 여기서 이곳에는 적용이 안된다는 것을 출력해줘야 함
-                return;
-            }
-
             if(_currentGravitoStatus == GravitoStatus.Fire)
             {
                 Stop();

@@ -71,7 +71,8 @@ namespace Weapons.Actions
                                       + MainCameraTransform.forward 
                                       + PlayerBaseTransform.right * (Utils.JsonToVO<HandModeVO>(Path).isRightHand ? 1 : -1);
 
-        private Vector3 FirePosition => MainCameraTransform.position + (MainCameraTransform.forward * 1.2f);
+        // 무기들이 발사될때 처음으로 갖는 값
+        private Vector3 FirePosition => MainCameraTransform.position + MainCameraTransform.forward;
         #endregion
 
         private WeaponManagement _weaponManagement;
@@ -134,6 +135,9 @@ namespace Weapons.Actions
             Invoke("SetTrigger", 0.1f);
         }
 
+        /// <summary>
+        /// Invoke용 함수
+        /// </summary>
         private void SetTrigger()
         {
             _myCollider.isTrigger = true;
@@ -142,12 +146,6 @@ namespace Weapons.Actions
         public override void ResetWeapon()
         {
             if (_weaponManagement.GetCurrentWeapon() != _weaponEnum) gameObject.SetActive(false);
-
-            _currentInercioStatus = InercioStatus.Idle;
-
-            _myRigid.velocity = Vector3.zero;
-            _myRigid.angularVelocity = Vector3.zero;
-            _myCollider.isTrigger = true;
 
             // 이너시오에 ATypeObject가 붙어있다면
             if (_sticklyObject != null)
@@ -167,6 +165,11 @@ namespace Weapons.Actions
                 }
             }
 
+            _currentInercioStatus = InercioStatus.Idle;
+            _myRigid.velocity = Vector3.zero;
+            _myRigid.angularVelocity = Vector3.zero;
+            _myCollider.isTrigger = true;
+            
             _sticklyObject = null;
             _sticklyObjectRigid = null;
             _sticklyObjBeforeParent = null;
