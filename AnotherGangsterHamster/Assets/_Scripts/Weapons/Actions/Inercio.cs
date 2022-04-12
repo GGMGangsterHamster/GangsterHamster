@@ -1,4 +1,4 @@
-using Objects.StageObjects;
+using Objects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +10,8 @@ namespace Weapons.Actions
     {
         public string Path = "SettingValue/HandMode.json";
         public float DefaultFireSpeed;
-        public float ReboundPower; // 무기로 인해 반동 받을 때의 힘
+        public float DefaultReboundPower;
+        public float TimeReboundPower; // 무기로 인해 반동 받을 때의 힘
 
         // 이너시오가 가질 수 있는 상태들
         private enum InercioStatus
@@ -128,7 +129,7 @@ namespace Weapons.Actions
 
             _myRigid.constraints = RigidbodyConstraints.None;
             _currentInercioStatus = InercioStatus.Use;
-            _weaponUsedTime = DefaultFireSpeed / 20;
+            _weaponUsedTime = DefaultReboundPower;
         }
 
         public override void ResetWeapon()
@@ -139,7 +140,7 @@ namespace Weapons.Actions
 
             _myRigid.velocity = Vector3.zero;
             _myRigid.angularVelocity = Vector3.zero;
-            _myCollider.isTrigger = true;
+                        _myCollider.isTrigger = true;
 
             // 이너시오에 ATypeObject가 붙어있다면
             if (_sticklyObject != null)
@@ -152,7 +153,7 @@ namespace Weapons.Actions
                 {
                     PlayerBaseTransform.GetComponent<Rigidbody>().velocity =
                        (MainCameraTransform.position - transform.position).normalized
-                       * ReboundPower
+                       * TimeReboundPower
                        * _weaponUsedTime;
                 }
             }
