@@ -125,12 +125,14 @@ namespace Weapons.Actions
 
             _myRigid.constraints = RigidbodyConstraints.None;
             _currentInercioStatus = InercioStatus.Use;
-            _weaponUsedTime = DefaultFireSpeed / 10;
+            _weaponUsedTime = DefaultFireSpeed / 20;
         }
 
         public override void ResetWeapon()
         {
             if (_weaponManagement.GetCurrentWeapon() != _weaponEnum) gameObject.SetActive(false);
+
+            if (!possibleUse) possibleUse = true;
 
             _currentInercioStatus = InercioStatus.Idle;
 
