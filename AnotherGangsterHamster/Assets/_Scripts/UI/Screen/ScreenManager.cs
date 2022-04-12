@@ -55,13 +55,13 @@ namespace UI.Screen
             _width = width;
             _height = height;
 
-            GamePlayCanvasScaler.referenceResolution = new Vector2(_width, _height);
             SaveScreenSetting();
         }
 
         private void SaveScreenSetting()
         {
             UnityEngine.Screen.SetResolution(_width, _height, _isFullScreen);
+            GamePlayCanvasScaler.referenceResolution = new Vector2(_width, _height);
             ScreenVO vo = new ScreenVO(_isFullScreen, _width, _height);
             Utils.VOToJson(_screenPath, vo);
         }
