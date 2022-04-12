@@ -6,6 +6,7 @@ using UnityEngine;
 namespace Weapons.Actions
 {
     [RequireComponent(typeof(CollisionInteractableObject))]
+    [RequireComponent(typeof(TriggerInteractableObject))]
     public class Gravito : WeaponAction
     {
         public string Path = "SettingValue/HandMode.json";

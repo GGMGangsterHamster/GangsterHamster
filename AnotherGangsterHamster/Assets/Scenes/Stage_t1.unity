@@ -24387,6 +24387,7 @@ GameObject:
   - component: {fileID: 1097068032}
   - component: {fileID: 1097068031}
   - component: {fileID: 1097068030}
+  - component: {fileID: 1097068035}
   - component: {fileID: 1097068029}
   m_Layer: 0
   m_Name: Grand
@@ -24542,6 +24543,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097068027}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1097068035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097068027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8476a3bdbcdf96b058a4f960b4883763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callbacks: []
+  <EventIsToggle>k__BackingField: 0
+  <InitalActiveStatus>k__BackingField: 0
 --- !u!1001 &1097324669
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41501,6 +41517,7 @@ GameObject:
   - component: {fileID: 1887536075}
   - component: {fileID: 1887536074}
   - component: {fileID: 1887536073}
+  - component: {fileID: 1887536078}
   - component: {fileID: 1887536072}
   m_Layer: 0
   m_Name: Inercio
@@ -41538,7 +41555,7 @@ MonoBehaviour:
   _weaponEnum: 0
   possibleUse: 1
   Path: SettingValue/HandMode.json
-  DefaultFireSpeed: 20
+  DefaultFireSpeed: 12
   DefaultReboundPower: 1.8
   TimeReboundPower: 3
 --- !u!114 &1887536073
@@ -41703,6 +41720,78 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1887536070}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1887536078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887536070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8476a3bdbcdf96b058a4f960b4883763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callbacks:
+  - key: PLAYER_BASE
+    OnActive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1887536072}
+          m_TargetAssemblyTypeName: Weapons.Actions.Inercio, Assembly-CSharp
+          m_MethodName: PlayerTriggerEvent
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeactive:
+      m_PersistentCalls:
+        m_Calls: []
+  - key: BTYPEOBJECT
+    OnActive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1887536072}
+          m_TargetAssemblyTypeName: Weapons.Actions.Inercio, Assembly-CSharp
+          m_MethodName: ObjectBTriggerEvent
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeactive:
+      m_PersistentCalls:
+        m_Calls: []
+  - key: ATYPEOBJECT
+    OnActive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1887536072}
+          m_TargetAssemblyTypeName: Weapons.Actions.Inercio, Assembly-CSharp
+          m_MethodName: ObjectATriggerEvent
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeactive:
+      m_PersistentCalls:
+        m_Calls: []
+  <EventIsToggle>k__BackingField: 0
+  <InitalActiveStatus>k__BackingField: 0
 --- !u!4 &1892753478 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1590359531255866352, guid: 6f1e6855ab06de81195ff791bd651bb9, type: 3}
@@ -43825,6 +43914,7 @@ GameObject:
   - component: {fileID: 1981766040}
   - component: {fileID: 1981766039}
   - component: {fileID: 1981766038}
+  - component: {fileID: 1981766043}
   - component: {fileID: 1981766037}
   m_Layer: 0
   m_Name: Gravito
@@ -43958,6 +44048,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1981766035}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1981766043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981766035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8476a3bdbcdf96b058a4f960b4883763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callbacks: []
+  <EventIsToggle>k__BackingField: 0
+  <InitalActiveStatus>k__BackingField: 0
 --- !u!1 &1983380888
 GameObject:
   m_ObjectHideFlags: 0

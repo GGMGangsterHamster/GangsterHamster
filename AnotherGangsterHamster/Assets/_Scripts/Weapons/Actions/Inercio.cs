@@ -6,6 +6,7 @@ using UnityEngine;
 namespace Weapons.Actions
 {
     [RequireComponent(typeof(CollisionInteractableObject))]
+    [RequireComponent(typeof(TriggerInteractableObject))]
     public class Inercio : WeaponAction
     {
         public string Path = "SettingValue/HandMode.json";
@@ -103,9 +104,10 @@ namespace Weapons.Actions
             _weaponManagement = transform.parent.GetComponent<WeaponManagement>();
         }
 
+        #region Actions
         public override void FireWeapon()
         {
-            if (isCanFire && _currentInercioStatus != InercioStatus.Fire && 
+            if (isCanFire && _currentInercioStatus != InercioStatus.Fire &&
                 _currentInercioStatus != InercioStatus.Stickly &&
                 _currentInercioStatus != InercioStatus.LosePower
                 )
@@ -130,6 +132,13 @@ namespace Weapons.Actions
             _myRigid.constraints = RigidbodyConstraints.None;
             _currentInercioStatus = InercioStatus.Use;
             _weaponUsedTime = DefaultReboundPower;
+
+            Invoke("SetTrigger", 0.1f);
+        }
+
+        private void SetTrigger()
+        {
+            _myCollider.isTrigger = true;
         }
 
         public override void ResetWeapon()
@@ -140,7 +149,7 @@ namespace Weapons.Actions
 
             _myRigid.velocity = Vector3.zero;
             _myRigid.angularVelocity = Vector3.zero;
-                        _myCollider.isTrigger = true;
+            _myCollider.isTrigger = true;
 
             // 이너시오에 ATypeObject가 붙어있다면
             if (_sticklyObject != null)
@@ -148,13 +157,15 @@ namespace Weapons.Actions
                 _sticklyObject.transform.parent = _sticklyObjBeforeParent;
                 _sticklyObjectRigid.constraints = RigidbodyConstraints.None;
 
-                if (Vector3.Distance(transform.position, PlayerBaseTransform.position) <= 2.5f 
+                if (Vector3.Distance(transform.position, PlayerBaseTransform.position) <= 2.5f
                     && _myRigid.constraints != RigidbodyConstraints.FreezeAll)
                 {
                     PlayerBaseTransform.GetComponent<Rigidbody>().velocity =
                        (MainCameraTransform.position - transform.position).normalized
                        * TimeReboundPower
                        * _weaponUsedTime;
+
+                    _sticklyObject.transform.position = transform.position;
                 }
             }
 
@@ -167,6 +178,7 @@ namespace Weapons.Actions
         {
             return _currentInercioStatus == InercioStatus.Idle;
         }
+        #endregion
 
         #region CollisionEvents
         public void PlayerCollisionEvent(GameObject obj)
@@ -209,7 +221,52 @@ namespace Weapons.Actions
                 _sticklyObject = null;
                 _sticklyObjectRigid = null;
                 _sticklyObjBeforeParent = null;
+            }
+        }
+        #endregion
 
+        #region TriggerEvents
+        public void PlayerTriggerEvent(GameObject obj)
+        {
+            _myRigid.velocity = Vector3.zero;
+            ResetWeapon();
+        }
+
+        public void ObjectATriggerEvent(GameObject obj)
+        {
+            if (_sticklyObject != null || _currentInercioStatus == InercioStatus.Idle)
+            {
+                return;
+            }
+
+            _currentInercioStatus = InercioStatus.Stickly;
+            _sticklyObject = obj;
+            _sticklyObjBeforeParent = obj.transform.parent;
+            _sticklyObject.transform.parent = transform;
+
+            _sticklyObjectRigid = _sticklyObject.GetComponent<Rigidbody>();
+            _sticklyObjectRigid.constraints = RigidbodyConstraints.FreezeAll;
+            _sticklyObjectRigid.velocity = Vector3.zero;
+            _sticklyObjectRigid.angularVelocity = Vector3.zero;
+        }
+
+        public void ObjectBTriggerEvent(GameObject obj)
+        {
+            if (_currentInercioStatus == InercioStatus.Idle) return;
+
+            _myRigid.velocity = Vector3.zero;
+            _myRigid.angularVelocity = Vector3.zero;
+            _currentInercioStatus = InercioStatus.LosePower;
+
+            _myCollider.isTrigger = false;
+
+            if (_sticklyObject != null)
+            {
+                _sticklyObject.transform.parent = _sticklyObjBeforeParent;
+                _sticklyObjectRigid.constraints = RigidbodyConstraints.None;
+                _sticklyObject = null;
+                _sticklyObjectRigid = null;
+                _sticklyObjBeforeParent = null;
             }
         }
         #endregion
