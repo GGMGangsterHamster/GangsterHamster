@@ -65,18 +65,13 @@ namespace Weapons.Actions
                 return _playerTrasnform;
             }
         }
-
+        
         private Vector3 HandPosition => PlayerBaseTransform.position
                                       + PlayerBaseTransform.up * (PlayerTrasnform.localScale.y - 0.5f)
                                       + MainCameraTransform.forward 
                                       + PlayerBaseTransform.right * (Utils.JsonToVO<HandModeVO>(Path).isRightHand ? 1 : -1);
-        private bool isCanFire
-        {
-            get
-            {
-                return _currentInercioStatus != InercioStatus.Use;
-            }
-        }
+
+        private Vector3 FirePosition => MainCameraTransform.position + MainCameraTransform.forward;
         #endregion
 
         private WeaponManagement _weaponManagement;
@@ -91,7 +86,7 @@ namespace Weapons.Actions
         private Rigidbody _myRigid;
 
         private float _weaponUsedTime = 0f;
-        private float _fireTime = 0f; // 발사하고 나서 초마다 FireAcceleration만큼 증가하는 변수
+        private bool isCanFire = true;
         private Vector3 _fireDir;
 
         private void Awake()
@@ -107,7 +102,8 @@ namespace Weapons.Actions
         #region Actions
         public override void FireWeapon()
         {
-            if (isCanFire && _currentInercioStatus != InercioStatus.Fire &&
+            if (isCanFire && _currentInercioStatus != InercioStatus.Use && 
+                _currentInercioStatus != InercioStatus.Fire &&
                 _currentInercioStatus != InercioStatus.Stickly &&
                 _currentInercioStatus != InercioStatus.LosePower
                 )
@@ -116,8 +112,8 @@ namespace Weapons.Actions
                     _myRigid.constraints = RigidbodyConstraints.None;
 
                 _fireDir = MainCameraTransform.forward;
-                _fireTime = DefaultFireSpeed;
 
+                transform.position = FirePosition;
                 _currentInercioStatus = InercioStatus.Fire;
 
                 if (_myCollider.isTrigger)
@@ -250,9 +246,13 @@ namespace Weapons.Actions
             _sticklyObjectRigid.angularVelocity = Vector3.zero;
         }
 
-        public void ObjectBTriggerEvent(GameObject obj)
+        public void ObjectBTriggerEnterEvent(GameObject obj)
         {
-            if (_currentInercioStatus == InercioStatus.Idle) return;
+            if (_currentInercioStatus == InercioStatus.Idle)
+            {
+                isCanFire = false;
+                return;
+            }
 
             _myRigid.velocity = Vector3.zero;
             _myRigid.angularVelocity = Vector3.zero;
@@ -267,6 +267,15 @@ namespace Weapons.Actions
                 _sticklyObject = null;
                 _sticklyObjectRigid = null;
                 _sticklyObjBeforeParent = null;
+            }
+        }
+
+        public void ObjectBTriggetExitEvent(GameObject obj)
+        {
+            if (_currentInercioStatus == InercioStatus.Idle)
+            {
+                isCanFire = true;
+                return;
             }
         }
         #endregion

@@ -100,6 +100,9 @@ namespace Weapons.Actions
                                       + PlayerBaseTransform.up * (PlayerTrasnform.localScale.y - 0.5f)
                                       + MainCameraTransform.forward
                                       + PlayerBaseTransform.right * (Utils.JsonToVO<HandModeVO>(Path).isRightHand ? 1 : -1);
+
+
+        private Vector3 FirePosition => MainCameraTransform.position + MainCameraTransform.forward;
         #endregion
 
         private Dictionary<GrandSizeLevel, float> _sizeLevelValue = new Dictionary<GrandSizeLevel, float>();
@@ -142,6 +145,7 @@ namespace Weapons.Actions
 
                 _fireDir = MainCameraTransform.forward;
 
+                transform.position = FirePosition;
                 currentGrandStatus = GrandStatus.Fire;
 
                 if (_myCollider.isTrigger)

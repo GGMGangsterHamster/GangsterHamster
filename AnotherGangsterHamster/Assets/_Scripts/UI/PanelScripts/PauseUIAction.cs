@@ -7,6 +7,9 @@ namespace UI.PanelScripts
 {
     public class PauseUIAction : UIAction
     {
+        private string _soundPath = "SettingValue/Sound.json";
+        private string _sensitivityPath = "SettingValue/Sensitivity.json";
+
         [Header("각자의 기능이 있는 UI들")]
         [SerializeField] private Button _fullScreenModeButton;
         [SerializeField] private Button _windowScreenModeButton;
@@ -21,14 +24,22 @@ namespace UI.PanelScripts
 
         public override void ActivationActions()
         {
-            // _soundScrollbar.value 를 지금 사운드 설정에 따라서 초기화 시켜주고 변환되는 값을 적용 시켜주기도 해야 함
-            // _sensitivityScrollbar.value 를 지금 민감도 설정에 따라서 초기화 시켜주고 변환되는 값을 적용 시켜주기도 해야 함
+            // 여기서 스크롤바들의 값을 초기화 시켜줌
+            SoundVO soundVO = Utils.JsonToVO<SoundVO>(_soundPath);
+            SensitivityVO sensitivityVO = Utils.JsonToVO<SensitivityVO>(_sensitivityPath);
 
+            _soundScrollbar.value = soundVO.master;
+            _sensitivityScrollbar.value = sensitivityVO.sensitivity;
         }
 
         public override void DeActivationActions()
         {
 
+            SoundVO soundVO = new SoundVO(_soundScrollbar.value);
+            SensitivityVO sensitivityVO = new SensitivityVO(_sensitivityScrollbar.value);
+
+            Utils.VOToJson(_soundPath, soundVO);
+            Utils.VOToJson(_sensitivityPath, sensitivityVO);
         }
 
         public override void InitActions()
@@ -67,17 +78,20 @@ namespace UI.PanelScripts
 
             _disableButton.onClick.AddListener(() =>
             {
+                Utils.LockCursor();
                 UIManager.Instance.DeActivationPanel(panelId);
             });
 
             _soundScrollbar.onValueChanged.AddListener(value =>
             {
-
+                // 바뀌는 값들을 어딘가에 저장하고
+                // 그 값으로 다른 설정들을 적용한다
             });
 
             _sensitivityScrollbar.onValueChanged.AddListener(value =>
             {
-
+                // 바뀌는 값들을 어딘가에 저장하고
+                // 그 값으로 다른 설정들을 적용한다
             });
         }
 
@@ -85,6 +99,7 @@ namespace UI.PanelScripts
         {
             if(Input.GetKeyDown(KeyCode.Escape))
             {
+                Utils.LockCursor();
                 UIManager.Instance.DeActivationPanel(panelId);
             }
         }

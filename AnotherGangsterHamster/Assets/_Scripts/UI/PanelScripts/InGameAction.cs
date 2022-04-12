@@ -24,6 +24,7 @@ namespace UI.PanelScripts
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                Utils.UnlockCursor();
                 UIManager.Instance.ActivationPanel(UIPanels.Pause);
             }
         }

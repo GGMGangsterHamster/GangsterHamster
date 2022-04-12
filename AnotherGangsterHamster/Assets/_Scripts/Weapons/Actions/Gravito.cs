@@ -70,6 +70,8 @@ namespace Weapons.Actions
                                       + MainCameraTransform.forward
                                       + PlayerBaseTransform.right * (Utils.JsonToVO<HandModeVO>(Path).isRightHand ? 1 : -1);
 
+
+        private Vector3 FirePosition => MainCameraTransform.position + MainCameraTransform.forward;
         #endregion
 
         private GravitoStatus _currentGravitoStatus = GravitoStatus.Idle;
@@ -95,6 +97,7 @@ namespace Weapons.Actions
                     _myRigid.constraints = RigidbodyConstraints.None;
                 
                 _fireDir = MainCameraTransform.forward;
+                transform.position = FirePosition;
                 _currentGravitoStatus = GravitoStatus.Fire;
             }
         }
