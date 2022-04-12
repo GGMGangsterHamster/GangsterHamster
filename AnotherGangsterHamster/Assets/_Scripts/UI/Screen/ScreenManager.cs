@@ -45,7 +45,6 @@ namespace UI.Screen
 
         public void SetWindowScreen()
         {
-            
             _isFullScreen = false;
 
             SaveScreenSetting();

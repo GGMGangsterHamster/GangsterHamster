@@ -71,7 +71,7 @@ namespace Weapons.Actions
                                       + MainCameraTransform.forward 
                                       + PlayerBaseTransform.right * (Utils.JsonToVO<HandModeVO>(Path).isRightHand ? 1 : -1);
 
-        private Vector3 FirePosition => MainCameraTransform.position + MainCameraTransform.forward;
+        private Vector3 FirePosition => MainCameraTransform.position + (MainCameraTransform.forward * 1.2f);
         #endregion
 
         private WeaponManagement _weaponManagement;
@@ -85,6 +85,7 @@ namespace Weapons.Actions
         private Collider _myCollider;
         private Rigidbody _myRigid;
 
+        private float _fireDelay = 0f; // 무기를 발사하고 나서 바로 회수되는 일 없도록 만든 변수
         private float _weaponUsedTime = 0f;
         private bool isCanFire = true;
         private Vector3 _fireDir;
@@ -115,6 +116,7 @@ namespace Weapons.Actions
 
                 transform.position = FirePosition;
                 _currentInercioStatus = InercioStatus.Fire;
+                _fireDelay = 0f;
 
                 if (_myCollider.isTrigger)
                     _myCollider.isTrigger = false;
@@ -179,6 +181,8 @@ namespace Weapons.Actions
         #region CollisionEvents
         public void PlayerCollisionEvent(GameObject obj)
         {
+            if (_fireDelay < 0.4f && _currentInercioStatus == InercioStatus.Fire) return;
+
             _myRigid.velocity = Vector3.zero;
             ResetWeapon();
         }
@@ -295,6 +299,7 @@ namespace Weapons.Actions
                     transform.position = HandPosition;
                     break;
                 case InercioStatus.Fire:
+                    _fireDelay += Time.deltaTime;
                     _myRigid.velocity = _fireDir * DefaultFireSpeed;
                     break;
                 case InercioStatus.Use:
