@@ -33,15 +33,15 @@ namespace Characters.Player.Actions
          }
       }
 
-      private CapsuleCollider _collider = null;
-      private CapsuleCollider Collider
+      private BoxCollider _collider = null;
+      private BoxCollider Collider
       {
          get
          {
             if (_collider == null)
             {
                _collider = GameObject.FindWithTag("PLAYER_BASE")
-                                     .GetComponent<CapsuleCollider>();
+                                     .GetComponent<BoxCollider>();
             }
 
             return _collider;
@@ -74,8 +74,11 @@ namespace Characters.Player.Actions
          targetScale.y  = PlayerValues.PlayerCrouchYScale;
          targetPos.y    = PlayerValues.PlayerCrouchYPos;
 
-         Collider.height         = PlayerValues.PlayerCrouchHeight;
-         Collider.center         = new Vector3(0.0f, Collider.height / 2.0f, 0.0f);
+         Collider.size
+            = new Vector3(0.9f, PlayerValues.PlayerCrouchHeight, 0.9f);
+         Collider.center
+            = new Vector3(0.0f, Collider.size.y / 2.0f, 0.0f);
+            
          PlayerTrm.localScale    = targetScale;
          PlayerTrm.localPosition = targetPos;
       }
@@ -103,8 +106,12 @@ namespace Characters.Player.Actions
          targetScale.y  = PlayerValues.PlayerStandingYScale;
          targetPos.y    = PlayerValues.PlayerStandingYPos;
 
-         Collider.height         = PlayerValues.PlayerStandingHeight;
-         Collider.center         = new Vector3(0.0f, Collider.height / 2.0f, 0.0f);
+         Collider.size
+            = new Vector3(0.9f, PlayerValues.PlayerStandingHeight, 0.9f);
+
+         Collider.center
+            = new Vector3(0.0f, Collider.size.y / 2.0f, 0.0f);
+
          PlayerTrm.localScale    = targetScale;
          PlayerTrm.localPosition = targetPos;
       }
