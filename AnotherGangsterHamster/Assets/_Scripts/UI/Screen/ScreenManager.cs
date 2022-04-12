@@ -18,7 +18,7 @@ namespace UI.Screen
             {
                 if(_gamePlayCanvas == null)
                 {
-                    _gamePlayCanvas = GameObject.Find("GamePlayCanvas").GetComponent<CanvasScaler>();
+                    _gamePlayCanvas = GetComponent<CanvasScaler>();
                 }
 
                 return _gamePlayCanvas;
