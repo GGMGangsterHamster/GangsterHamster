@@ -139,6 +139,7 @@ namespace Weapons.Actions
 
             _myRigid.velocity = Vector3.zero;
             _myRigid.angularVelocity = Vector3.zero;
+            _myCollider.isTrigger = true;
 
             // 이너시오에 ATypeObject가 붙어있다면
             if (_sticklyObject != null)
@@ -146,7 +147,8 @@ namespace Weapons.Actions
                 _sticklyObject.transform.parent = _sticklyObjBeforeParent;
                 _sticklyObjectRigid.constraints = RigidbodyConstraints.None;
 
-                if (Vector3.Distance(transform.position, PlayerBaseTransform.position) <= 2.5f)
+                if (Vector3.Distance(transform.position, PlayerBaseTransform.position) <= 2.5f 
+                    && _myRigid.constraints != RigidbodyConstraints.FreezeAll)
                 {
                     PlayerBaseTransform.GetComponent<Rigidbody>().velocity =
                        (MainCameraTransform.position - transform.position).normalized
@@ -179,13 +181,14 @@ namespace Weapons.Actions
             }
 
             _currentInercioStatus = InercioStatus.Stickly;
-            _sticklyObject = obj;
+            _sticklyObject = obj; 
+            _sticklyObjBeforeParent = obj.transform.parent;
+            _sticklyObject.transform.parent = transform;
+
             _sticklyObjectRigid = _sticklyObject.GetComponent<Rigidbody>();
             _sticklyObjectRigid.constraints = RigidbodyConstraints.FreezeAll;
             _sticklyObjectRigid.velocity = Vector3.zero;
             _sticklyObjectRigid.angularVelocity = Vector3.zero;
-            _sticklyObjBeforeParent = obj.transform.parent;
-            _sticklyObject.transform.parent = transform;
         }
         public void ATypeObjectCollisionExitEvent(GameObject obj)
         {
@@ -202,7 +205,6 @@ namespace Weapons.Actions
             {
                 _sticklyObject.transform.parent = _sticklyObjBeforeParent;
                 _sticklyObjectRigid.constraints = RigidbodyConstraints.None;
-
                 _sticklyObject = null;
                 _sticklyObjectRigid = null;
                 _sticklyObjBeforeParent = null;
