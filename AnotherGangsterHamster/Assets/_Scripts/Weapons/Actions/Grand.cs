@@ -158,6 +158,7 @@ namespace Weapons.Actions
         {
             if(_currentSizeLevel == GrandSizeLevel.OneGrade && currentGrandStatus != GrandStatus.Resize)
             {
+                transform.position = HandPosition;
                 currentGrandStatus = GrandStatus.Idle;
             }
         }

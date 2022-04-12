@@ -105,6 +105,7 @@ namespace Weapons.Actions
 
         public override void ResetWeapon()
         {
+            transform.position = HandPosition;
             _currentGravitoStatus = GravitoStatus.Idle;
 
             // 중력 초기화

@@ -104,7 +104,10 @@ namespace Weapons.Actions
 
         public override void FireWeapon()
         {
-            if (isCanFire && _currentInercioStatus != InercioStatus.Fire && _currentInercioStatus != InercioStatus.Stickly)
+            if (isCanFire && _currentInercioStatus != InercioStatus.Fire && 
+                _currentInercioStatus != InercioStatus.Stickly &&
+                _currentInercioStatus != InercioStatus.LosePower
+                )
             {
                 if (_myRigid.constraints == RigidbodyConstraints.FreezeAll)
                     _myRigid.constraints = RigidbodyConstraints.None;
@@ -132,9 +135,10 @@ namespace Weapons.Actions
         {
             if (_weaponManagement.GetCurrentWeapon() != _weaponEnum) gameObject.SetActive(false);
 
-            if (!possibleUse) possibleUse = true;
-
             _currentInercioStatus = InercioStatus.Idle;
+
+            _myRigid.velocity = Vector3.zero;
+            _myRigid.angularVelocity = Vector3.zero;
 
             // 이너시오에 ATypeObject가 붙어있다면
             if (_sticklyObject != null)
@@ -144,8 +148,6 @@ namespace Weapons.Actions
 
                 if (Vector3.Distance(transform.position, PlayerBaseTransform.position) <= 2.5f)
                 {
-
-
                     PlayerBaseTransform.GetComponent<Rigidbody>().velocity =
                        (MainCameraTransform.position - transform.position).normalized
                        * ReboundPower
@@ -176,14 +178,12 @@ namespace Weapons.Actions
                 return;
             }
 
-            _myRigid.velocity = Vector3.zero;
-            _myRigid.angularVelocity = Vector3.zero;
-            _myRigid.constraints = RigidbodyConstraints.FreezeAll;
-
             _currentInercioStatus = InercioStatus.Stickly;
             _sticklyObject = obj;
             _sticklyObjectRigid = _sticklyObject.GetComponent<Rigidbody>();
             _sticklyObjectRigid.constraints = RigidbodyConstraints.FreezeAll;
+            _sticklyObjectRigid.velocity = Vector3.zero;
+            _sticklyObjectRigid.angularVelocity = Vector3.zero;
             _sticklyObjBeforeParent = obj.transform.parent;
             _sticklyObject.transform.parent = transform;
         }
@@ -193,10 +193,21 @@ namespace Weapons.Actions
         }
         public void BTypeObjectCollisionEnterEvent(GameObject obj)
         {
+            _myRigid.constraints = RigidbodyConstraints.None;
             _myRigid.velocity = Vector3.zero;
             _myRigid.angularVelocity = Vector3.zero;
-            _myRigid.constraints = RigidbodyConstraints.None;
             _currentInercioStatus = InercioStatus.LosePower;
+
+            if (_sticklyObject != null)
+            {
+                _sticklyObject.transform.parent = _sticklyObjBeforeParent;
+                _sticklyObjectRigid.constraints = RigidbodyConstraints.None;
+
+                _sticklyObject = null;
+                _sticklyObjectRigid = null;
+                _sticklyObjBeforeParent = null;
+
+            }
         }
         #endregion
 
@@ -242,6 +253,12 @@ namespace Weapons.Actions
                     }
                 case InercioStatus.Stickly:
                     {
+                        if(_myRigid.constraints == RigidbodyConstraints.None)
+                        {
+                            _myRigid.constraints = RigidbodyConstraints.FreezeAll;
+                            _myRigid.velocity = Vector3.zero;
+                            _myRigid.angularVelocity = Vector3.zero;
+                        }
                         if (_sticklyObject.TryGetComponent(out Grand grand))
                         {
                             if (grand.currentGrandStatus == Grand.GrandStatus.Resize)
