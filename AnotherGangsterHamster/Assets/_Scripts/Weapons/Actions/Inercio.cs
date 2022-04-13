@@ -1,79 +1,13 @@
-using Objects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Weapons.Actions
 {
-    [RequireComponent(typeof(CollisionInteractableObject))]
-    [RequireComponent(typeof(TriggerInteractableObject))]
     public class Inercio : WeaponAction
     {
-        public string Path = "SettingValue/HandMode.json";
-        public float DefaultFireSpeed;
         public float DefaultReboundPower;
         public float TimeReboundPower; // 무기로 인해 반동 받을 때의 힘
-
-        // 이너시오가 가질 수 있는 상태들
-        private enum InercioStatus
-        {
-            Idle,
-            Fire,
-            Use,
-            Stickly,
-            LosePower,
-        }
-
-        private Transform _mainCameraTransform;
-        private Transform _playerBaseTransform;
-        private Transform _playerTrasnform;
-
-        #region Propertys
-        private Transform MainCameraTransform
-        {
-            get
-            {
-                if(_mainCameraTransform == null)
-                {
-                    _mainCameraTransform = Camera.main.transform;
-                }
-
-                return _mainCameraTransform;
-            }
-        }
-        private Transform PlayerBaseTransform
-        {
-            get
-            {
-                if(_playerBaseTransform == null)
-                {
-                    _playerBaseTransform = GameObject.FindGameObjectWithTag("PLAYER_BASE").transform;
-                }
-
-                return _playerBaseTransform;
-            }
-        }
-        private Transform PlayerTrasnform
-        {
-            get
-            {
-                if (_playerTrasnform == null)
-                {
-                    _playerTrasnform = GameObject.FindGameObjectWithTag("PLAYER").transform;
-                }
-
-                return _playerTrasnform;
-            }
-        }
-        
-        private Vector3 HandPosition => PlayerBaseTransform.position
-                                      + PlayerBaseTransform.up * (PlayerTrasnform.localScale.y - 0.5f)
-                                      + MainCameraTransform.forward 
-                                      + PlayerBaseTransform.right * (Utils.JsonToVO<HandModeVO>(Path).isRightHand ? 1 : -1);
-
-        // 무기들이 발사될때 처음으로 갖는 값
-        private Vector3 FirePosition => MainCameraTransform.position + MainCameraTransform.forward;
-        #endregion
 
         private WeaponManagement _weaponManagement;
 
@@ -82,14 +16,10 @@ namespace Weapons.Actions
         private GameObject _sticklyObject = null;
         private Rigidbody _sticklyObjectRigid = null;
         private Transform _sticklyObjBeforeParent;
-        
-        private Collider _myCollider;
-        private Rigidbody _myRigid;
 
         private float _fireDelay = 0f; // 무기를 발사하고 나서 바로 회수되는 일 없도록 만든 변수
         private float _weaponUsedTime = 0f;
         private bool isCanFire = true;
-        private Vector3 _fireDir;
 
         private void Awake()
         {
@@ -303,7 +233,7 @@ namespace Weapons.Actions
                     break;
                 case InercioStatus.Fire:
                     _fireDelay += Time.deltaTime;
-                    _myRigid.velocity = _fireDir * DefaultFireSpeed;
+                    _myRigid.velocity = _fireDir * fireSpeed;
                     break;
                 case InercioStatus.Use:
                     {
@@ -313,13 +243,13 @@ namespace Weapons.Actions
                         _fireDir = (MainCameraTransform.position - transform.position).normalized;
                         _weaponUsedTime += Time.deltaTime;
 
-                        _myRigid.velocity = _fireDir * DefaultFireSpeed;
+                        _myRigid.velocity = _fireDir * fireSpeed;
 
                         if(_sticklyObject != null)
                         {
                             if (_sticklyObject.TryGetComponent(out Grand grand))
                             {
-                                if (grand.currentGrandStatus == Grand.GrandStatus.Resize)
+                                if (grand.currentGrandStatus == GrandStatus.Resize)
                                 {
                                     ResetWeapon();
                                 }
@@ -338,7 +268,7 @@ namespace Weapons.Actions
                         }
                         if (_sticklyObject.TryGetComponent(out Grand grand))
                         {
-                            if (grand.currentGrandStatus == Grand.GrandStatus.Resize)
+                            if (grand.currentGrandStatus == GrandStatus.Resize)
                             {
                                 ResetWeapon();
                             }

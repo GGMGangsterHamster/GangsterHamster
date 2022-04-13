@@ -1,17 +1,12 @@
-using Objects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Weapons.Actions
 {
-    [RequireComponent(typeof(CollisionInteractableObject))]
-    [RequireComponent(typeof(TriggerInteractableObject))]
     public class Grand : WeaponAction
     {
-        public string Path = "SettingValue/HandMode.json";
         public string WeaponKeyCodePath = "KeyCodes/Weapons.json";
-        public float fireSpeed;
         public float resizeSpeed; // 크기 변환할 때 드는 시간
 
         // 그랜드의 크기 변환 단계
@@ -22,58 +17,6 @@ namespace Weapons.Actions
             FourGrade,
         }
 
-        // 그랜드가 가질 수 있는 상태들
-        public enum GrandStatus
-        {
-            Idle,
-            Fire,
-            Use,
-            Resize,
-            LosePower,
-        }
-
-        #region Propertys
-        private Transform _mainCameraTransform;
-        private Transform _playerBaseTransform;
-        private Transform _playerTrasnform;
-
-        private Transform MainCameraTransform
-        {
-            get
-            {
-                if (_mainCameraTransform == null)
-                {
-                    _mainCameraTransform = Camera.main.transform;
-                }
-
-                return _mainCameraTransform;
-            }
-        }
-
-        private Transform PlayerBaseTransform
-        {
-            get
-            {
-                if (_playerBaseTransform == null)
-                {
-                    _playerBaseTransform = GameObject.FindGameObjectWithTag("PLAYER_BASE").transform;
-                }
-
-                return _playerBaseTransform;
-            }
-        }
-        private Transform PlayerTrasnform
-        {
-            get
-            {
-                if (_playerTrasnform == null)
-                {
-                    _playerTrasnform = GameObject.FindGameObjectWithTag("PLAYER").transform;
-                }
-
-                return _playerTrasnform;
-            }
-        }
         private float fullChangeTime
         {
             get
@@ -96,14 +39,6 @@ namespace Weapons.Actions
                     && currentGrandStatus != GrandStatus.Resize;
             }
         }
-        private Vector3 HandPosition => PlayerBaseTransform.position
-                                      + PlayerBaseTransform.up * (PlayerTrasnform.localScale.y - 0.5f)
-                                      + MainCameraTransform.forward
-                                      + PlayerBaseTransform.right * (Utils.JsonToVO<HandModeVO>(Path).isRightHand ? 1 : -1);
-
-
-        private Vector3 FirePosition => MainCameraTransform.position + MainCameraTransform.forward;
-        #endregion
 
         private Dictionary<GrandSizeLevel, float> _sizeLevelValue = new Dictionary<GrandSizeLevel, float>();
 
@@ -112,14 +47,9 @@ namespace Weapons.Actions
 
         private KeyCode _useKeycode;
 
-        private Collider _myCollider;
-        private Rigidbody _myRigid;
-
         private float _beforeWeaponSize = 0f;
         private float _currentLerpTime = 0f;
         private float _weaponUsedTime = 0f;
-        private Vector3 _fireDir;
-
 
         private void Awake()
         {
