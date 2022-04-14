@@ -84,14 +84,12 @@ namespace UI.PanelScripts
 
             _soundScrollbar.onValueChanged.AddListener(value =>
             {
-                // 바뀌는 값들을 어딘가에 저장하고
-                // 그 값으로 다른 설정들을 적용한다
+                soundAction(value);
             });
 
             _sensitivityScrollbar.onValueChanged.AddListener(value =>
             {
-                // 바뀌는 값들을 어딘가에 저장하고
-                // 그 값으로 다른 설정들을 적용한다
+                sensitivityAction(value);
             });
         }
 

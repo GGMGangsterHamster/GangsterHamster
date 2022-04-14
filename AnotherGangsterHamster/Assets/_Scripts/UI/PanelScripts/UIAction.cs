@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace UI.PanelScripts
@@ -11,7 +12,10 @@ namespace UI.PanelScripts
         public abstract void InitActions();
 
         public abstract void UpdateActions();
-        
+
+        public Action<float> soundAction;
+        public Action<float> sensitivityAction;
+
         public int panelId;
     }
 

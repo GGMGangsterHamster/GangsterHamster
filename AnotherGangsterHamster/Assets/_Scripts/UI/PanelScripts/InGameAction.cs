@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +11,7 @@ namespace UI.PanelScripts
         public Image aimImage;
 
         [Header("에임포인트 색깔")]
-        public Color ATYPEOBJ;
-        public Color DEFAULT;
+        public List<AimColor> aimColors = new List<AimColor>();
 
         private Transform MainCameraTransform
         {
@@ -51,13 +51,12 @@ namespace UI.PanelScripts
 
             if (UnityEngine.Physics.Raycast(MainCameraTransform.position, MainCameraTransform.forward, out RaycastHit hit))
             {
-                if (hit.transform.tag == "ATYPEOBJECT")
+                foreach(AimColor ac in aimColors)
                 {
-                    aimImage.color = ATYPEOBJ;
-                }
-                else
-                {
-                    aimImage.color = DEFAULT;
+                    if(hit.transform.tag == ac.tag)
+                    {
+                        aimImage.color = ac.tagColor;
+                    }
                 }
             }
         }
