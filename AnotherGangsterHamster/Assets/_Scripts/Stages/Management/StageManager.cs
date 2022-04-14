@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-namespace Stage.Management
+namespace Stages.Management
 {
    public enum SceneEventType
    {
