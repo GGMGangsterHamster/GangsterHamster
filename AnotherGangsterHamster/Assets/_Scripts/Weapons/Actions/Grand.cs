@@ -10,6 +10,8 @@ namespace Weapons.Actions
         public float resizeSpeed; // 크기 변환할 때 드는 시간
         public float reboundPower;
 
+        public Transform chargeBar;
+
         // 그랜드의 크기 변환 단계
         private enum GrandSizeLevel
         {
@@ -28,6 +30,19 @@ namespace Weapons.Actions
                     return 0.5f;
                 else
                     return 0f;
+            }
+        }
+
+        private float ChargeBarValue
+        {
+            get
+            {
+                if (_currentSizeLevel == GrandSizeLevel.OneGrade)
+                    return _weaponUsedTime;
+                else if (_currentSizeLevel == GrandSizeLevel.TwoGrade)
+                    return 0.5f + _weaponUsedTime;
+                else
+                    return 1f;
             }
         }
 
@@ -134,9 +149,10 @@ namespace Weapons.Actions
                     {
                         _weaponUsedTime += Time.deltaTime;
 
+                        chargeBar.localScale = new Vector3(ChargeBarValue, 1, 1);
                         // 차징 되는 UI 보여주기
-                        
-                        if(_weaponUsedTime >= fullChangeTime)
+
+                        if (_weaponUsedTime >= fullChangeTime)
                         {
                             MaxSizeLevel();
                             ResizeStart();
@@ -201,6 +217,8 @@ namespace Weapons.Actions
             _weaponUsedTime = 0f;
             _currentLerpTime = 0f;
             _beforeWeaponSize = transform.localScale.x;
+            chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ? 0 : _sizeLevelValue[_currentSizeLevel] * 0.25f
+                                                , 1, 1);
 
             _myRigid.angularVelocity = Vector3.zero;
         }

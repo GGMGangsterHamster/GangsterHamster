@@ -13,6 +13,8 @@ namespace Weapons.Actions
     }
     public class WeaponManagement : MonoBehaviour
     {
+        public Transform grandCharge;
+
         private Dictionary<WeaponEnum, WeaponAction> _weaponActions;
 
         private WeaponEnum _curWeapon = WeaponEnum.None;
@@ -66,9 +68,10 @@ namespace Weapons.Actions
             
             foreach(WeaponAction weaponAction in _weaponActions.Values)
             {
-                if(weaponAction.SetActiveWeaponObj(weaponEnum))
+                if (weaponAction.SetActiveWeaponObj(weaponEnum))
                 {
                     _curWeapon = weaponEnum;
+                    grandCharge.gameObject.SetActive(_curWeapon == WeaponEnum.Grand);
                     isChanged = true;
                 }
             }
