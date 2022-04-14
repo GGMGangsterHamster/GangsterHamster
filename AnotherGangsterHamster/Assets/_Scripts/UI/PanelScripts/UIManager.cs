@@ -27,6 +27,9 @@ namespace UI.PanelScripts
 
         private void Start()
         {
+            soundAction = (value) => { };
+            sensitivityAction = (value) => { };
+
             for(int i = 0; i < _uiPanelParent.childCount; i++)
             {
                 UIAction ui = _uiPanelParent.GetChild(i).GetComponent<UIAction>();

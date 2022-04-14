@@ -226,21 +226,11 @@ namespace Weapons.Actions
         //          그 더한 값이 After Size보다 작다면
         //          그 즉시 크기 변환을 멈추고 LosePower상태로 변환한다.
             ///
-            if (UnityEngine.Physics.Raycast(transform.position, transform.up, out RaycastHit upHit) && 
-                UnityEngine.Physics.Raycast(transform.position, transform.up, out RaycastHit downHit))
+            if(CanResize(transform.up) || 
+               CanResize(transform.right) || 
+               CanResize(transform.forward))
             {
-                if(upHit.transform.CompareTag("BTYPEOBJECT") && downHit.transform.CompareTag("BTYPEOBJECT"))
-                {
-                    if(Vector3.Distance(transform.position, upHit.point) + Vector3.Distance(transform.position, downHit.point) > _sizeLevelValue[_currentSizeLevel])
-                    {
-                        _currentSizeLevel = _beforeSizeLevel;
-                        _currentGrandStatus = GrandStatus.LosePower;
-
-                        chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ? 0 : _sizeLevelValue[_currentSizeLevel] * 0.25f
-                                    , 1, 1);
-                        return;
-                    }
-                }
+                return;
             }
 
             _currentGrandStatus = GrandStatus.Resize;
@@ -253,9 +243,28 @@ namespace Weapons.Actions
             _myRigid.angularVelocity = Vector3.zero;
         }
 
-        //private bool ChangeSize()
-        //{
+        private bool CanResize(Vector3 checkDir)
+        {
+            if (UnityEngine.Physics.Raycast(transform.position, checkDir, out RaycastHit plusHit) &&
+                UnityEngine.Physics.Raycast(transform.position, -checkDir, out RaycastHit minusHit))
+            {
+                if (plusHit.transform.CompareTag("BTYPEOBJECT") && minusHit.transform.CompareTag("BTYPEOBJECT"))
+                {
+                    if (Vector3.Distance(transform.position, plusHit.point) + 
+                        Vector3.Distance(transform.position, minusHit.point) > _sizeLevelValue[_currentSizeLevel])
+                    {
+                        _currentSizeLevel = _beforeSizeLevel;
+                        _currentGrandStatus = GrandStatus.LosePower;
 
-        //}
+                        chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ? 
+                                                            0 : 
+                                                            _sizeLevelValue[_currentSizeLevel] * 0.25f, 1, 1);
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
     }
 }
