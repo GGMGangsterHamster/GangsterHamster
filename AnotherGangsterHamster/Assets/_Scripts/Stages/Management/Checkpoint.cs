@@ -4,7 +4,7 @@ namespace Stages.Management
 {   
    public class Checkpoint : MonoBehaviour
    {
-      const string PLYAER = "PLAYER";
+      const string PLYAER = "PLAYER_BASE";
 
       private void OnTriggerEnter(Collider other)
       {
