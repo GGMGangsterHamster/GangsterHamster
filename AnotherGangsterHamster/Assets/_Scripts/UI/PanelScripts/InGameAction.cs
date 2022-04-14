@@ -9,6 +9,10 @@ namespace UI.PanelScripts
 
         public Image aimImage;
 
+        [Header("에임포인트 색깔")]
+        public Color ATYPEOBJ;
+        public Color DEFAULT;
+
         private Transform MainCameraTransform
         {
             get
@@ -49,11 +53,11 @@ namespace UI.PanelScripts
             {
                 if (hit.transform.tag == "ATYPEOBJECT")
                 {
-                    aimImage.color = Color.red;
+                    aimImage.color = ATYPEOBJ;
                 }
                 else
                 {
-                    aimImage.color = Color.black;
+                    aimImage.color = DEFAULT;
                 }
             }
         }
