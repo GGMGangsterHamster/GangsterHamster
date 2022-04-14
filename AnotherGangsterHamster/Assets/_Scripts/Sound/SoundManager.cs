@@ -14,6 +14,7 @@ namespace Sound
       private Dictionary<string, AudioClip> _audioDictionary;
       // public string ttsPath = "Resources/TTS/*.mp3";
       public string ttsPath = "Audio/TTS/";
+      public float GlobalVolume { get; set; } = 0.8f;
 
       protected override void Awake()
       {
@@ -82,6 +83,7 @@ namespace Sound
                                  .Get<AudioSource>(e => !e.isPlaying);
          source.gameObject.SetActive(true);
          source.clip = _audioDictionary[name];
+         source.volume = GlobalVolume; // FIXME: TEMP
          source.Play();
       }
       
