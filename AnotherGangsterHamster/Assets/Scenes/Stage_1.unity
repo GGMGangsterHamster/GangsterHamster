@@ -176,6 +176,7 @@ MonoBehaviour:
   Path: SettingValue/HandMode.json
   possibleUse: 0
   fireSpeed: 10
+  weaponDamage: 0
   gravityChangeSpeed: 1
 --- !u!114 &201256074
 MonoBehaviour:
@@ -344,6 +345,7 @@ MonoBehaviour:
   Path: SettingValue/HandMode.json
   possibleUse: 1
   fireSpeed: 4
+  weaponDamage: 25
   WeaponKeyCodePath: KeyCodes/Weapons.json
   resizeSpeed: 0.35
   reboundPower: 2
@@ -1196,6 +1198,27 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7969819419383083097, guid: 5e9d941179367c94cb687883473d757e, type: 3}
   m_PrefabInstance: {fileID: 1635704490}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1122318391 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 60493967840551282, guid: 8bb3b0a9c1b2913aeba90d58c3b2d9dd, type: 3}
+  m_PrefabInstance: {fileID: 626343478}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1122318392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1122318391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e72c891fdc8896d96b2b595c766a47c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHp: 100
+  _hp: 0
+  regenerationDelay: 3
+  regenerationValue: 1
 --- !u!1001 &1186248782
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2165,6 +2188,7 @@ MonoBehaviour:
   Path: SettingValue/HandMode.json
   possibleUse: 1
   fireSpeed: 10
+  weaponDamage: 0
   DefaultReboundPower: 1.8
   TimeReboundPower: 3
 --- !u!114 &1577489382

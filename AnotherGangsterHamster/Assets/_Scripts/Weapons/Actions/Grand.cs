@@ -212,6 +212,7 @@ namespace Weapons.Actions
                 return;
             }
 
+
             _currentGrandStatus = GrandStatus.Resize;
             _weaponUsedTime = 0f;
             _currentLerpTime = 0f;
@@ -219,6 +220,7 @@ namespace Weapons.Actions
             chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ? 0 : _sizeLevelValue[_currentSizeLevel] * 0.25f
                                                 , 1, 1);
 
+            // 이런 저런 조건에 맞으면 플레이어에게 반동을 주고 데미지도 줌
             if (_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize > 0)
             {
                 if((_sizeLevelValue[_currentSizeLevel] / 2) > Vector3.Distance(transform.position, PlayerBaseTransform.position))
@@ -227,6 +229,7 @@ namespace Weapons.Actions
                     float rebound = (_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize) * reboundPower;
 
                     Debug.Log(rebound);
+                    Player.Damage(weaponDamage);
 
                     PlayerBaseTransform.GetComponent<Rigidbody>().velocity = reboundDir * rebound;
                 }

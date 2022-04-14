@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Objects;
+using Characters.Player;
 
 namespace Weapons.Actions
 {
@@ -48,13 +49,27 @@ namespace Weapons.Actions
         [HideInInspector] public string Path = "SettingValue/HandMode.json";    // 주로 사용하는 손이 무엇인가의 정보가 있는 곳의 위치
         public bool possibleUse = false;                                        // 무기를 사용이 가능한가
         public float fireSpeed;                                                 // 무기가 움직이는 속도를 말함
+        public int weaponDamage;                                                // 무기 데미지
 
+        protected Player _player;
         protected Transform _mainCameraTransform;
         protected Transform _playerBaseTransform;
         protected Transform _playerTransform;
 
         private HandModeVO _handModeVO;
 
+        protected Player Player
+        {
+            get
+            {
+                if(_player == null)
+                {
+                    _player = PlayerBaseTransform.GetComponent<Player>();
+                }
+
+                return _player;
+            }
+        }
         protected Transform MainCameraTransform
         {
             get
