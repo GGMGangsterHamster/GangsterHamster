@@ -71,14 +71,12 @@ namespace UI.PanelScripts
 
             _soundScrollbar.onValueChanged.AddListener(value =>
             {
-                // 여기 Action<float>
-                soundAction(value);
+                UIManager.Instance.soundAction(value);
             });
 
             _sensitivityScrollbar.onValueChanged.AddListener(value =>
             {
-                // 여기 Action<float>
-                sensitivityAction(value);
+                UIManager.Instance.sensitivityAction(value);
             });
         }
 

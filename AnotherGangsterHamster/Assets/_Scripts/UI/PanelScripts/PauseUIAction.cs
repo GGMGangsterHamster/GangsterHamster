@@ -84,12 +84,12 @@ namespace UI.PanelScripts
 
             _soundScrollbar.onValueChanged.AddListener(value =>
             {
-                soundAction(value);
+                UIManager.Instance.soundAction(value);
             });
 
             _sensitivityScrollbar.onValueChanged.AddListener(value =>
             {
-                sensitivityAction(value);
+                UIManager.Instance.sensitivityAction(value);
             });
         }
 

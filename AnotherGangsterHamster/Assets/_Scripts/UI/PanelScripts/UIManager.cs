@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace UI.PanelScripts
 {
@@ -17,6 +18,9 @@ namespace UI.PanelScripts
     public class UIManager : MonoSingleton<UIManager>
     {
         [SerializeField] private Transform _uiPanelParent;
+
+        public Action<float> soundAction;
+        public Action<float> sensitivityAction;
 
         // UIAction을 상속받고 있는 클래스들을 _uiDict에 모아서 관리한다
         private Dictionary<UIPanels, UIAction> _uiDict = new Dictionary<UIPanels, UIAction>();
