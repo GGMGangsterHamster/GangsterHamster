@@ -216,19 +216,9 @@ namespace Weapons.Actions
         private void ResizeStart()
         {
             // 여기서 정해진 조건에 충족하지 못하는 경우 밑의 코드를 실행하지 못함
-
-            /// 조건설명
-        //          2번 무기 크기 변환 할 때
-        //          총 6방향으로 Ray를 After Size만큼의 길이로 발사함.
-        //          그리고 x, y, z축으로 각각 2개씩 묶음으로 나뉠텐데
-        //          만약 한개의 묶음이라도 BTYPEOBJECT가 발견 "되고"
-        //          그 발견된 obj 두개의 길이를 더해서
-        //          그 더한 값이 After Size보다 작다면
-        //          그 즉시 크기 변환을 멈추고 LosePower상태로 변환한다.
-            ///
-            if(CanResize(transform.up) || 
-               CanResize(transform.right) || 
-               CanResize(transform.forward))
+            if(!CanResize(transform.up) || 
+               !CanResize(transform.right) || 
+               !CanResize(transform.forward))
             {
                 return;
             }
@@ -243,22 +233,34 @@ namespace Weapons.Actions
             _myRigid.angularVelocity = Vector3.zero;
         }
 
+        /// 조건설명
+        //          2번 무기 크기 변환 할 때
+        //          총 6방향으로 Ray를 After Size만큼의 길이로 발사함.
+        //          그리고 x, y, z축으로 각각 (x, -x), (y, -y), (z, -z) 로 총 3개의 묶음으로 나뉠텐데
+        //          만약 한개의 묶음이라도 둘다 BTYPEOBJECT가 발견 "되고"
+        //          그 발견된 obj 두개의 길이를 더해서
+        //          그 더한 값이 After Size보다 작다면
+        //          그 즉시 크기 변환을 멈추고 LosePower상태로 변환한다.
+        ///
         private bool CanResize(Vector3 checkDir)
         {
-            if (UnityEngine.Physics.Raycast(transform.position, checkDir, out RaycastHit plusHit) &&
-                UnityEngine.Physics.Raycast(transform.position, -checkDir, out RaycastHit minusHit))
+            if (UnityEngine.Physics.Raycast(transform.position, checkDir, out RaycastHit plusHit, _sizeLevelValue[_currentSizeLevel]) &&
+                UnityEngine.Physics.Raycast(transform.position, -checkDir, out RaycastHit minusHit, _sizeLevelValue[_currentSizeLevel]))
             {
+
                 if (plusHit.transform.CompareTag("BTYPEOBJECT") && minusHit.transform.CompareTag("BTYPEOBJECT"))
                 {
                     if (Vector3.Distance(transform.position, plusHit.point) + 
-                        Vector3.Distance(transform.position, minusHit.point) > _sizeLevelValue[_currentSizeLevel])
+                        Vector3.Distance(transform.position, minusHit.point) < _sizeLevelValue[_currentSizeLevel])
                     {
                         _currentSizeLevel = _beforeSizeLevel;
                         _currentGrandStatus = GrandStatus.LosePower;
+                        _weaponUsedTime = 0f;
 
                         chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ? 
                                                             0 : 
                                                             _sizeLevelValue[_currentSizeLevel] * 0.25f, 1, 1);
+
                         return false;
                     }
                 }
