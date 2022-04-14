@@ -21,20 +21,19 @@ namespace Weapons.Actions
         private float _weaponUsedTime = 0f;
         private bool isCanFire = true;
 
-        private void Awake()
+        private new void Awake()
         {
+            base.Awake();
+
             _weaponEnum = WeaponEnum.Inercio;
-
-            _myCollider = GetComponent<Collider>();
-            _myRigid = GetComponent<Rigidbody>();
-
             _weaponManagement = transform.parent.GetComponent<WeaponManagement>();
         }
 
         #region Actions
         public override void FireWeapon()
         {
-            if (isCanFire && _currentInercioStatus != InercioStatus.Use && 
+            if (isCanFire && 
+                _currentInercioStatus != InercioStatus.Use && 
                 _currentInercioStatus != InercioStatus.Fire &&
                 _currentInercioStatus != InercioStatus.Stickly &&
                 _currentInercioStatus != InercioStatus.LosePower
@@ -249,7 +248,7 @@ namespace Weapons.Actions
                         {
                             if (_sticklyObject.TryGetComponent(out Grand grand))
                             {
-                                if (grand.currentGrandStatus == GrandStatus.Resize)
+                                if (grand._currentGrandStatus == GrandStatus.Resize)
                                 {
                                     ResetWeapon();
                                 }
@@ -268,7 +267,7 @@ namespace Weapons.Actions
                         }
                         if (_sticklyObject.TryGetComponent(out Grand grand))
                         {
-                            if (grand.currentGrandStatus == GrandStatus.Resize)
+                            if (grand._currentGrandStatus == GrandStatus.Resize)
                             {
                                 ResetWeapon();
                             }

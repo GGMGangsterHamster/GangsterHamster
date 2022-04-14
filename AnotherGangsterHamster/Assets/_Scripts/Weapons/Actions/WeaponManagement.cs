@@ -22,7 +22,7 @@ namespace Weapons.Actions
             _weaponActions = new Dictionary<WeaponEnum, WeaponAction>();
             _weaponActions.Clear();
 
-            // 자식 오브젝트가 순서대로 배치되어 있다는 전제하에 만들어진 코드
+            // 자식 오브젝트가 1번무기, 2번무기, 3번무기 순서대로 배치되어 있다는 전제하에 만들어진 코드
             WeaponAction[] childWeaponActions = transform.GetComponentsInChildren<WeaponAction>();
 
             foreach (WeaponAction weaponAction in childWeaponActions)
@@ -81,7 +81,5 @@ namespace Weapons.Actions
         {
             return _curWeapon;
         }
-        // InputHandler에서는 키를 입력함하고 호출만 함
-        // 여기서는 그 호출 된거에만 잘 해서 반응해주면 됨
     }
 }

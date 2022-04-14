@@ -173,8 +173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponEnum: 0
-  possibleUse: 0
   Path: SettingValue/HandMode.json
+  possibleUse: 0
   fireSpeed: 10
   gravityChangeSpeed: 1
 --- !u!114 &201256074
@@ -341,12 +341,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponEnum: 0
-  possibleUse: 0
   Path: SettingValue/HandMode.json
-  WeaponKeyCodePath: KeyCodes/Weapons.json
+  possibleUse: 1
   fireSpeed: 4
-  resizeSpeed: 0.5
-  currentGrandStatus: 0
+  WeaponKeyCodePath: KeyCodes/Weapons.json
+  resizeSpeed: 0.2
+  reboundPower: 2
+  _currentGrandStatus: 0
 --- !u!114 &396352225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -378,7 +379,19 @@ MonoBehaviour:
   - key: PLAYER_BASE
     OnActive:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 396352224}
+          m_TargetAssemblyTypeName: Weapons.Actions.Grand, Assembly-CSharp
+          m_MethodName: PlayerCollisionEnterEvent
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     OnDeactive:
       m_PersistentCalls:
         m_Calls: []
@@ -1151,7 +1164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1064760979, guid: 9f489821f20e05564b98cc8fde715445, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 147
+      value: 5.8576875
       objectReference: {fileID: 0}
     - target: {fileID: 1064760979, guid: 9f489821f20e05564b98cc8fde715445, type: 3}
       propertyPath: m_BoundingSphereOverride.x
@@ -1159,11 +1172,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1064760979, guid: 9f489821f20e05564b98cc8fde715445, type: 3}
       propertyPath: m_BoundingSphereOverride.y
-      value: 143
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1064760979, guid: 9f489821f20e05564b98cc8fde715445, type: 3}
       propertyPath: m_UseBoundingSphereOverride
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1783967586, guid: 9f489821f20e05564b98cc8fde715445, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1171,11 +1184,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1783967588, guid: 9f489821f20e05564b98cc8fde715445, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 4.0740925e-11
+      value: 8.37
       objectReference: {fileID: 0}
     - target: {fileID: 1783967588, guid: 9f489821f20e05564b98cc8fde715445, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: 3.0309076e+24
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1783967588, guid: 9f489821f20e05564b98cc8fde715445, type: 3}
       propertyPath: m_BoundingSphereOverride.y
@@ -1187,7 +1200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1783967588, guid: 9f489821f20e05564b98cc8fde715445, type: 3}
       propertyPath: m_UseBoundingSphereOverride
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7051733477785526197, guid: 9f489821f20e05564b98cc8fde715445, type: 3}
       propertyPath: m_RootOrder
@@ -1248,7 +1261,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1371659415, guid: 27b261a9868c30b9c887cf914ba5b667, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 4.0058797e-11
+      value: 4.4735293
       objectReference: {fileID: 0}
     - target: {fileID: 1371659415, guid: 27b261a9868c30b9c887cf914ba5b667, type: 3}
       propertyPath: m_BoundingSphereOverride.x
@@ -1264,7 +1277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1371659415, guid: 27b261a9868c30b9c887cf914ba5b667, type: 3}
       propertyPath: m_UseBoundingSphereOverride
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8180825053961949000, guid: 27b261a9868c30b9c887cf914ba5b667, type: 3}
       propertyPath: m_RootOrder
@@ -1937,9 +1950,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponEnum: 0
-  possibleUse: 1
   Path: SettingValue/HandMode.json
-  DefaultFireSpeed: 12
+  possibleUse: 1
+  fireSpeed: 0
   DefaultReboundPower: 1.8
   TimeReboundPower: 3
 --- !u!114 &1577489382
@@ -2416,11 +2429,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 256405371, guid: 0ce76a2df7cb85ebcaf32fcd48ad2e58, type: 3}
       propertyPath: m_BoundingSphereOverride.w
-      value: 4.028617e-11
+      value: 12.234758
       objectReference: {fileID: 0}
     - target: {fileID: 256405371, guid: 0ce76a2df7cb85ebcaf32fcd48ad2e58, type: 3}
       propertyPath: m_BoundingSphereOverride.x
-      value: NaN
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 256405371, guid: 0ce76a2df7cb85ebcaf32fcd48ad2e58, type: 3}
       propertyPath: m_BoundingSphereOverride.y
@@ -2428,7 +2441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 256405371, guid: 0ce76a2df7cb85ebcaf32fcd48ad2e58, type: 3}
       propertyPath: m_UseBoundingSphereOverride
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1751461414133499494, guid: 0ce76a2df7cb85ebcaf32fcd48ad2e58, type: 3}
       propertyPath: m_Name

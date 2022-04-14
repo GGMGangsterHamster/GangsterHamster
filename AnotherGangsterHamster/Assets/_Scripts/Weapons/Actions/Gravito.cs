@@ -10,17 +10,17 @@ namespace Weapons.Actions
 
         private GravitoStatus _currentGravitoStatus = GravitoStatus.Idle;
 
-        private void Awake()
+        private new void Awake()
         {
-            _myCollider = GetComponent<Collider>();
-            _myRigid = GetComponent<Rigidbody>();
+            base.Awake();
 
             _weaponEnum = WeaponEnum.Gravito;
         }
 
         public override void FireWeapon()
         {
-            if(_currentGravitoStatus != GravitoStatus.Fire && _currentGravitoStatus != GravitoStatus.Use)
+            if(_currentGravitoStatus != GravitoStatus.Fire 
+                && _currentGravitoStatus != GravitoStatus.Use)
             {
                 if (_myRigid.constraints == RigidbodyConstraints.FreezePosition)
                     _myRigid.constraints = RigidbodyConstraints.None;

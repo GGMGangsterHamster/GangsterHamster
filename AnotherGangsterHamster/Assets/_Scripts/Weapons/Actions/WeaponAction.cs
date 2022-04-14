@@ -44,11 +44,10 @@ namespace Weapons.Actions
     {
         [HideInInspector] public WeaponEnum _weaponEnum; // 상속받은 무기의 종류
 
-
         #region Propertys
         [HideInInspector] public string Path = "SettingValue/HandMode.json";    // 주로 사용하는 손이 무엇인가의 정보가 있는 곳의 위치
-        public float fireSpeed;                                                 // 무기가 움직이는 속도를 말함
         public bool possibleUse = false;                                        // 무기를 사용이 가능한가
+        public float fireSpeed;                                                 // 무기가 움직이는 속도를 말함
 
         protected Transform _mainCameraTransform;
         protected Transform _playerBaseTransform;
@@ -123,6 +122,12 @@ namespace Weapons.Actions
         #endregion
 
         // 기본적인 함수들
+
+        virtual protected void Awake()
+        {
+            _myCollider = GetComponent<Collider>();
+            _myRigid = GetComponent<Rigidbody>();
+        }
 
         /// <summary>
         /// 좌클릭으로 무기 발사

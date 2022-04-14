@@ -8,6 +8,7 @@ namespace Weapons.Actions
     {
         public string WeaponKeyCodePath = "KeyCodes/Weapons.json";
         public float resizeSpeed; // 크기 변환할 때 드는 시간
+        public float reboundPower;
 
         // 그랜드의 크기 변환 단계
         private enum GrandSizeLevel
@@ -29,21 +30,11 @@ namespace Weapons.Actions
                     return 0f;
             }
         }
-        private bool isCanFire
-        {
-            get
-            {
-                return currentGrandStatus != GrandStatus.Use 
-                    && currentGrandStatus != GrandStatus.LosePower 
-                    && currentGrandStatus != GrandStatus.Fire 
-                    && currentGrandStatus != GrandStatus.Resize;
-            }
-        }
 
         private Dictionary<GrandSizeLevel, float> _sizeLevelValue = new Dictionary<GrandSizeLevel, float>();
 
         private GrandSizeLevel _currentSizeLevel = GrandSizeLevel.OneGrade;
-        [HideInInspector] public GrandStatus currentGrandStatus = GrandStatus.Idle;
+        [HideInInspector] public GrandStatus _currentGrandStatus = GrandStatus.Idle;
 
         private KeyCode _useKeycode;
 
@@ -51,16 +42,15 @@ namespace Weapons.Actions
         private float _currentLerpTime = 0f;
         private float _weaponUsedTime = 0f;
 
-        private void Awake()
+        private new void Awake()
         {
+            base.Awake();
+
             _sizeLevelValue.Add(GrandSizeLevel.OneGrade, 1f);
             _sizeLevelValue.Add(GrandSizeLevel.TwoGrade, 2f);
             _sizeLevelValue.Add(GrandSizeLevel.FourGrade, 4f);
 
             _weaponEnum = WeaponEnum.Grand;
-
-            _myCollider = GetComponent<Collider>();
-            _myRigid = GetComponent<Rigidbody>();
 
             WeaponVO vo = Utils.JsonToVO<WeaponVO>(WeaponKeyCodePath);
             _useKeycode = (KeyCode)vo.Use;
@@ -68,7 +58,10 @@ namespace Weapons.Actions
 
         public override void FireWeapon()
         {
-            if (isCanFire)
+            if (_currentGrandStatus != GrandStatus.Use
+                    && _currentGrandStatus != GrandStatus.LosePower
+                    && _currentGrandStatus != GrandStatus.Fire
+                    && _currentGrandStatus != GrandStatus.Resize)
             {
                 if (_myRigid.constraints == RigidbodyConstraints.FreezePosition)
                     _myRigid.constraints = RigidbodyConstraints.None;
@@ -76,7 +69,7 @@ namespace Weapons.Actions
                 _fireDir = MainCameraTransform.forward;
 
                 transform.position = FirePosition;
-                currentGrandStatus = GrandStatus.Fire;
+                _currentGrandStatus = GrandStatus.Fire;
 
                 if (_myCollider.isTrigger)
                     _myCollider.isTrigger = false;
@@ -84,36 +77,51 @@ namespace Weapons.Actions
         }
         public override void UseWeapon()
         {
-            if (currentGrandStatus == GrandStatus.Idle || currentGrandStatus == GrandStatus.Resize) return;
+            if (_currentGrandStatus == GrandStatus.Idle || _currentGrandStatus == GrandStatus.Resize) return;
 
             _myRigid.velocity = Vector3.zero;
-            currentGrandStatus = GrandStatus.Use;
+            _currentGrandStatus = GrandStatus.Use;
         }
         public override void ResetWeapon()
         {
-            if(_currentSizeLevel == GrandSizeLevel.OneGrade && currentGrandStatus != GrandStatus.Resize)
+            if(_currentSizeLevel == GrandSizeLevel.OneGrade && _currentGrandStatus != GrandStatus.Resize)
             {
                 transform.position = HandPosition;
-                currentGrandStatus = GrandStatus.Idle;
+                _currentGrandStatus = GrandStatus.Idle;
             }
         }
 
         public override bool IsHandleWeapon()
         {
-            return currentGrandStatus == GrandStatus.Idle;
+            return _currentGrandStatus == GrandStatus.Idle;
         }
+
+        #region CollisionEvents
+        public void PlayerCollisionEnterEvent(GameObject obj)
+        {
+            if(_currentGrandStatus == GrandStatus.Resize)
+            {
+                if(_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize > 0)
+                {
+                    Vector3 reboundDir = (obj.transform.position - transform.position).normalized;
+                    float rebound = (_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize) * reboundPower;
+
+                    Debug.Log(rebound);
+
+                    obj.GetComponent<Rigidbody>().velocity = reboundDir * rebound;
+                }
+            }
+        }
+        #endregion
 
         private void Update()
         {
-            switch(currentGrandStatus)
+            switch(_currentGrandStatus)
             {
                 case GrandStatus.Idle:
-                    if (!_myCollider.isTrigger)
-                        _myCollider.isTrigger = true;
-                    if (_myRigid.useGravity)
-                        _myRigid.useGravity = false;
-                    if (_myRigid.constraints == RigidbodyConstraints.None)
-                        _myRigid.constraints = RigidbodyConstraints.FreezePosition;
+                    if (!_myCollider.isTrigger) _myCollider.isTrigger = true;
+                    if (_myRigid.useGravity) _myRigid.useGravity = false;
+                    if (_myRigid.constraints == RigidbodyConstraints.None) _myRigid.constraints = RigidbodyConstraints.FreezePosition;
 
                     transform.position = HandPosition;
                     break;
@@ -132,7 +140,6 @@ namespace Weapons.Actions
                         {
                             MaxSizeLevel();
                             ResizeStart();
-                            // 키를 누른지 1초가 지나면 Resize로 이동
                         }
                     }
                     else
@@ -148,7 +155,7 @@ namespace Weapons.Actions
                         transform.localScale = Vector3.one * _sizeLevelValue[_currentSizeLevel];
                         transform.rotation = Quaternion.identity;
 
-                        currentGrandStatus = GrandStatus.LosePower;
+                        _currentGrandStatus = GrandStatus.LosePower;
                     }
                     else
                     {
@@ -158,10 +165,8 @@ namespace Weapons.Actions
                     }
                     break;
                 case GrandStatus.LosePower:
-                    if (!_myRigid.useGravity)
-                        _myRigid.useGravity = true;
-                    if (_myRigid.constraints == RigidbodyConstraints.FreezePosition)
-                        _myRigid.constraints = RigidbodyConstraints.None;
+                    if (!_myRigid.useGravity) _myRigid.useGravity = true;
+                    if (_myRigid.constraints == RigidbodyConstraints.FreezePosition) _myRigid.constraints = RigidbodyConstraints.None;
 
                     break;
             }
@@ -184,20 +189,15 @@ namespace Weapons.Actions
 
         private void MaxSizeLevel()
         {
-            Debug.Log("before : " + _currentSizeLevel.ToString());
-
             if (_currentSizeLevel == GrandSizeLevel.FourGrade)
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
             else
                 _currentSizeLevel = GrandSizeLevel.FourGrade;
-
-            Debug.Log("after : " + _currentSizeLevel.ToString());
-
         }
 
         private void ResizeStart()
         {
-            currentGrandStatus = GrandStatus.Resize;
+            _currentGrandStatus = GrandStatus.Resize;
             _weaponUsedTime = 0f;
             _currentLerpTime = 0f;
             _beforeWeaponSize = transform.localScale.x;
