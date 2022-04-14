@@ -116,18 +116,7 @@ namespace Weapons.Actions
         #region CollisionEvents
         public void PlayerCollisionEnterEvent(GameObject obj)
         {
-            if(_currentGrandStatus == GrandStatus.Resize)
-            {
-                if(_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize > 0)
-                {
-                    Vector3 reboundDir = (obj.transform.position - transform.position).normalized;
-                    float rebound = (_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize) * reboundPower;
 
-                    Debug.Log(rebound);
-
-                    obj.GetComponent<Rigidbody>().velocity = reboundDir * rebound;
-                }
-            }
         }
         #endregion
 
@@ -230,6 +219,19 @@ namespace Weapons.Actions
             chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ? 0 : _sizeLevelValue[_currentSizeLevel] * 0.25f
                                                 , 1, 1);
 
+            if (_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize > 0)
+            {
+                if((_sizeLevelValue[_currentSizeLevel] / 2) > Vector3.Distance(transform.position, PlayerBaseTransform.position))
+                {
+                    Vector3 reboundDir = (PlayerBaseTransform.position - transform.position).normalized;
+                    float rebound = (_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize) * reboundPower;
+
+                    Debug.Log(rebound);
+
+                    PlayerBaseTransform.GetComponent<Rigidbody>().velocity = reboundDir * rebound;
+                }
+            }
+
             _myRigid.angularVelocity = Vector3.zero;
         }
 
@@ -256,6 +258,7 @@ namespace Weapons.Actions
                         _currentSizeLevel = _beforeSizeLevel;
                         _currentGrandStatus = GrandStatus.LosePower;
                         _weaponUsedTime = 0f;
+                        _currentLerpTime = 0f;
 
                         chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ? 
                                                             0 : 
