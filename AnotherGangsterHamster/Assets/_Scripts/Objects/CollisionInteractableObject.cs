@@ -16,6 +16,9 @@ namespace Objects
       [field: SerializeField]
       public bool InitalActiveStatus { get; set; } = false;
       private bool _activated = false;
+      
+      // Collision에서 Normal 벡터를 빼내기 위해서 존재하는 변수
+      public Collision objCollision; 
 
       private void Awake()
       {
@@ -25,6 +28,7 @@ namespace Objects
       #region Unity Collision Event
       private void OnCollisionEnter(Collision other)
       {
+         objCollision = other;
          CollisionEnterEvent(other.gameObject);
       }
 

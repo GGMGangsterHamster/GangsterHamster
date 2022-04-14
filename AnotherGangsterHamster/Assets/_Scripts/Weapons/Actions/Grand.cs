@@ -101,8 +101,16 @@ namespace Weapons.Actions
         }
         public override void ResetWeapon()
         {
-            if(_currentSizeLevel == GrandSizeLevel.OneGrade && _currentGrandStatus != GrandStatus.Resize)
+            if(_currentGrandStatus != GrandStatus.Resize)
             {
+                _currentSizeLevel = GrandSizeLevel.OneGrade;
+                transform.localScale = Vector3.one * _sizeLevelValue[_currentSizeLevel];
+
+                chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ?
+                                                            0 :
+                                                            _sizeLevelValue[_currentSizeLevel] * 0.25f, 1, 1);
+
+
                 transform.position = HandPosition;
                 _currentGrandStatus = GrandStatus.Idle;
             }
@@ -228,7 +236,7 @@ namespace Weapons.Actions
                     Vector3 reboundDir = (PlayerBaseTransform.position - transform.position).normalized;
                     float rebound = (_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize) * reboundPower;
 
-                    Debug.Log(rebound);
+                    Debug.Log("플레이어에게 준 반동 값 : " + rebound);
                     Player.Damage(weaponDamage);
 
                     PlayerBaseTransform.GetComponent<Rigidbody>().velocity = reboundDir * rebound;

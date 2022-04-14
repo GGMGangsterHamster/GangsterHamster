@@ -174,10 +174,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponEnum: 0
   Path: SettingValue/HandMode.json
-  possibleUse: 0
+  possibleUse: 1
   fireSpeed: 10
   weaponDamage: 0
-  gravityChangeSpeed: 1
+  gravityChangeTime: 1
 --- !u!114 &201256074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,8 +205,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83185d2616cdb31b880a0fdde34fe5f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _callbacks: []
-  <EventIsToggle>k__BackingField: 1
+  _callbacks:
+  - key: ATYPEOBJECT
+    OnActive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 201256073}
+          m_TargetAssemblyTypeName: Weapons.Actions.Gravito, Assembly-CSharp
+          m_MethodName: ATypeObjectCollisionEnterEvent
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeactive:
+      m_PersistentCalls:
+        m_Calls: []
+  - key: BTYPEOBJECT
+    OnActive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 201256073}
+          m_TargetAssemblyTypeName: Weapons.Actions.Gravito, Assembly-CSharp
+          m_MethodName: BTypeObjectCollisionEnterEvent
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeactive:
+      m_PersistentCalls:
+        m_Calls: []
+  <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
 --- !u!54 &201256076
 Rigidbody:
