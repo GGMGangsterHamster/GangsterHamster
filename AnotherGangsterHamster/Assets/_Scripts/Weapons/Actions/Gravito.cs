@@ -2,16 +2,29 @@ using Objects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Weapons.Checkpoint;
 
 namespace Weapons.Actions
 {
     public class Gravito : WeaponAction
     {
         public float gravityChangeTime;
-
         private GravitoStatus _currentGravitoStatus = GravitoStatus.Idle;
-
         private CollisionInteractableObject _colInteractableObj;
+        private CheckpointManager _checkpoint;
+
+        private CheckpointManager Checkpoint
+        {
+            get
+            {
+                if(_checkpoint == null)
+                {
+                    _checkpoint = FindObjectOfType<CheckpointManager>();
+                }
+
+                return _checkpoint;
+            }
+        }
 
         private Vector3 colNormalVec
         {
@@ -27,7 +40,6 @@ namespace Weapons.Actions
         }
 
         private float _currentGravityChangeTime = 0f;
-
         private bool isChangedGravity = false;
 
         private new void Awake()
@@ -63,7 +75,12 @@ namespace Weapons.Actions
                 _currentGravityChangeTime = 0f;
                 isChangedGravity = true;
 
-                Debug.Log(Quaternion.LookRotation(colNormalVec));
+                Debug.Log(colNormalVec);
+
+                Checkpoint.SetStartCheckpoint(PlayerBaseTransform.forward);
+                Checkpoint.SetEndCheckpoint(colNormalVec);
+
+                //Debug.Log(Quaternion.LookRotation(colNormalVec));
 
                 // 그 정해진 방향으로 중력이 변환되고,
                 // 카메라의 방향도 일정하게 변환되어야 함
@@ -87,9 +104,6 @@ namespace Weapons.Actions
             if (_currentGravitoStatus == GravitoStatus.Fire)
             {
                 Stop();
-
-                Debug.Log(colNormalVec);
-
                 _currentGravitoStatus = GravitoStatus.Stickly;
             }
         }
@@ -99,9 +113,6 @@ namespace Weapons.Actions
             if (_currentGravitoStatus == GravitoStatus.Fire)
             {
                 Stop();
-                
-                Debug.Log(colNormalVec);
-
                 _currentGravitoStatus = GravitoStatus.Stickly;
             }
         }
@@ -121,9 +132,6 @@ namespace Weapons.Actions
                     _myRigid.velocity = _fireDir * fireSpeed;
                     break;
                 case GravitoStatus.Stickly:
-
-
-
                     // 이 상태에 능력 사용시 벽의 방향에 따라 중력이 변환되어야 함.
                     // 가장 가장 가장.. 어려운 부분
                     break;
@@ -132,14 +140,14 @@ namespace Weapons.Actions
 
                     if (_currentGravityChangeTime >= 1f)
                     {
-                        PlayerBaseTransform.rotation = Quaternion.LookRotation(colNormalVec);
+                        PlayerBaseTransform.rotation = Checkpoint.endCheckpoint.rotation;
                         _currentGravitoStatus = GravitoStatus.Stickly;
                     }
                     else
                     {
                         PlayerBaseTransform.rotation = Quaternion.Lerp(
-                            PlayerBaseTransform.rotation,
-                            Quaternion.LookRotation(colNormalVec),
+                            Checkpoint.startCheckpoint.rotation,
+                            Checkpoint.endCheckpoint.rotation,
                             _currentGravityChangeTime);
                     }
                     break;
