@@ -35,12 +35,13 @@ namespace Weapons.Actions
                     _colInteractableObj = GetComponent<CollisionInteractableObject>();
                 }
 
-                return _colInteractableObj.objCollision.contacts[0].normal;
+                return _colInteractableObj.colNormalVec;
             }
         }
 
         private float _currentGravityChangeTime = 0f;
         private bool isChangedGravity = false;
+        private bool isReseting = false;
 
         private new void Awake()
         {
@@ -54,7 +55,8 @@ namespace Weapons.Actions
             if(_currentGravitoStatus != GravitoStatus.Fire && 
                _currentGravitoStatus != GravitoStatus.Use &&
                _currentGravitoStatus != GravitoStatus.Stickly &&
-               _currentGravitoStatus != GravitoStatus.ChangeGravity)
+               _currentGravitoStatus != GravitoStatus.ChangeGravity &&
+               !isReseting)
             {
                 if (_myRigid.constraints != RigidbodyConstraints.None) _myRigid.constraints = RigidbodyConstraints.None;
                 
@@ -79,19 +81,28 @@ namespace Weapons.Actions
 
                 Checkpoint.SetStartCheckpoint(PlayerBaseTransform.forward);
                 Checkpoint.SetEndCheckpoint(colNormalVec);
-
-                //Debug.Log(Quaternion.LookRotation(colNormalVec));
-
-                // 그 정해진 방향으로 중력이 변환되고,
-                // 카메라의 방향도 일정하게 변환되어야 함
             }
         }
 
         public override void ResetWeapon()
         {
-            _currentGravitoStatus = GravitoStatus.Idle;
+            if(isReseting)
+            {
+                return;
+            }
+            else if (!isChangedGravity)
+            {
+                _currentGravitoStatus = GravitoStatus.Idle;
+                return;
+            }
+
+            _currentGravitoStatus = GravitoStatus.Reset;
+            _currentGravityChangeTime = 0f;
             isChangedGravity = false;
-            // 중력 초기화
+            isReseting = true;
+
+            Checkpoint.startCheckpoint.rotation = PlayerBaseTransform.rotation;
+            Checkpoint.endCheckpoint.rotation = Quaternion.Euler(new Vector3(0, PlayerBaseTransform.rotation.y, 0));
         }
 
         public override bool IsHandleWeapon()
@@ -151,6 +162,23 @@ namespace Weapons.Actions
                             _currentGravityChangeTime);
                     }
                     break;
+                case GravitoStatus.Reset:
+                    _currentGravityChangeTime += Time.deltaTime / gravityChangeTime;
+
+                    if(_currentGravityChangeTime >= 1f)
+                    {
+                        PlayerBaseTransform.rotation = Quaternion.Euler(new Vector3(0, PlayerBaseTransform.rotation.y, 0));
+                        _currentGravitoStatus = GravitoStatus.Idle;
+                        isReseting = false;
+                    }
+                    else
+                    {
+                        PlayerBaseTransform.rotation = Quaternion.Lerp(
+                            Checkpoint.startCheckpoint.rotation,
+                            Checkpoint.endCheckpoint.rotation,
+                            _currentGravityChangeTime);
+                    }
+                    break;
             }
         }
 
@@ -159,8 +187,6 @@ namespace Weapons.Actions
             _myRigid.constraints = RigidbodyConstraints.FreezeAll;
             _myRigid.velocity = Vector3.zero;
             _myRigid.angularVelocity = Vector3.zero;
-
-
         }
     }
 }

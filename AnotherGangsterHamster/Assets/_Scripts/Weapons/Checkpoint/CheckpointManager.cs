@@ -24,15 +24,22 @@ namespace Weapons.Checkpoint
         public void SetStartCheckpoint(Vector3 dir)
         {
             startCheckpoint.rotation = Quaternion.LookRotation(dir);
-            //startCheckpoint.rotation = Quaternion.LookRotation(-startCheckpoint.up);
         }
 
         public void SetEndCheckpoint(Vector3 dir)
         {
-            //endCheckpoint.rotation = Quaternion.LookRotation(dir);
-            //endCheckpoint.rotation = Quaternion.LookRotation(-endCheckpoint.up);
+            endCheckpoint.rotation = Quaternion.LookRotation(dir);
+            Debug.Log("endCheckpoint.down : " + -endCheckpoint.up);
 
-            //endCheckpoint.rotation = Quaternion.Euler(new Vector3(dir.x * 90, 90 + -(dir.z * 90), 0)) * endCheckpoint.rotation;
+            //endCheckpoint.rotation *= Quaternion.LookRotation(-endCheckpoint.up);
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                endCheckpoint.rotation *= Quaternion.LookRotation(-endCheckpoint.up);
+            }
         }
     }
 }
