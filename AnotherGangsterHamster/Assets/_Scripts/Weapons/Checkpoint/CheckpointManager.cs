@@ -12,8 +12,6 @@ namespace Weapons.Checkpoint
         [HideInInspector] public Transform startCheckpoint;
         [HideInInspector] public Transform endCheckpoint;
 
-
-
         private void Awake()
         {
             startCheckpoint = new GameObject("StartCheckpoint").transform;

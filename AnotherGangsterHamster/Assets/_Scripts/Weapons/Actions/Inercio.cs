@@ -6,8 +6,8 @@ namespace Weapons.Actions
 {
     public class Inercio : WeaponAction
     {
-        public float DefaultReboundPower;
-        public float TimeReboundPower; // 무기로 인해 반동 받을 때의 힘
+        public float DefaultReboundPower; // 최소한으로 반동 받는 값
+        public float TimeReboundPower; // 시간에 따라 늘어나는 반동의 값
 
         private WeaponManagement _weaponManagement;
 
