@@ -81,18 +81,23 @@ namespace Weapons.Actions
         /// <summary>
         /// 현재 상태가 Stickly이며 지금 중력을 변환중이 아니라면 사용가능
         /// 
+        /// 만약 부딪힌 곳이 바닥이라면 패스
+        /// 
         /// 중력변환을 하고 플레이어를 중력에 맞춰서 화면을 돌린다.
         /// </summary>
         public override void UseWeapon()
         {
             if(_currentGravitoStatus == GravitoStatus.Stickly && !isChangedGravity)
             {
+                if (colNormalVec == Vector3.up) return;
+
                 _currentGravitoStatus = GravitoStatus.ChangeGravity;
                 _currentGravityChangeTime = 0f;
                 isChangedGravity = true;
 
                 Checkpoint.SetStartCheckpoint(PlayerBaseTransform.forward);
                 Checkpoint.SetEndCheckpoint(colNormalVec);
+
 
                 GravityManager.ChangeGlobalGravityDirection(-colNormalVec);
             }
@@ -203,7 +208,7 @@ namespace Weapons.Actions
 
                     if(_currentGravityChangeTime >= 1f)
                     {
-                        PlayerBaseTransform.rotation = Quaternion.Euler(new Vector3(0, PlayerBaseTransform.rotation.y, 0));
+                        PlayerBaseTransform.rotation = Checkpoint.endCheckpoint.rotation;
                         _currentGravitoStatus = GravitoStatus.Idle;
                         isReseting = false;
                     }
