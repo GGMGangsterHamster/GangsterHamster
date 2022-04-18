@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Weapons.Checkpoint;
+using Physics.Gravity;
 
 namespace Weapons.Actions
 {
@@ -77,10 +78,10 @@ namespace Weapons.Actions
                 _currentGravityChangeTime = 0f;
                 isChangedGravity = true;
 
-                //Debug.Log(colNormalVec);
-
                 Checkpoint.SetStartCheckpoint(PlayerBaseTransform.forward);
                 Checkpoint.SetEndCheckpoint(colNormalVec);
+
+                GravityManager.ChangeGlobalGravityDirection(-colNormalVec);
             }
         }
 
@@ -103,6 +104,8 @@ namespace Weapons.Actions
 
             Checkpoint.startCheckpoint.rotation = PlayerBaseTransform.rotation;
             Checkpoint.endCheckpoint.rotation = Quaternion.Euler(new Vector3(0, PlayerBaseTransform.rotation.y, 0));
+
+            GravityManager.ChangeGlobalGravityDirection(Vector3.down);
         }
 
         public override bool IsHandleWeapon()

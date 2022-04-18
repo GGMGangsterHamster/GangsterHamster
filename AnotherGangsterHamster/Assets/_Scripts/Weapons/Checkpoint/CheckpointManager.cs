@@ -31,10 +31,8 @@ namespace Weapons.Checkpoint
         public void SetEndCheckpoint(Vector3 normalVec)
         {
             endCheckpoint.rotation = Quaternion.LookRotation(-normalVec);
-            Debug.Log("normalVec : " + -normalVec);
-            Debug.Log("endCheckpoint.down : " + endCheckpoint.up);
 
-            endCheckpoint.rotation *= Quaternion.LookRotation(endCheckpoint.up);
+            endCheckpoint.rotation *= Quaternion.LookRotation(Vector3.up);
         }
     }
 }
