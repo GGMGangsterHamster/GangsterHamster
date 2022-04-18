@@ -139,7 +139,6 @@ GameObject:
   - component: {fileID: 201256075}
   - component: {fileID: 201256074}
   - component: {fileID: 201256073}
-  - component: {fileID: 201256080}
   m_Layer: 0
   m_Name: Gravito
   m_TagString: Untagged
@@ -247,6 +246,7 @@ MonoBehaviour:
         m_Calls: []
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
+  colNormalVec: {x: 0, y: 0, z: 0}
 --- !u!54 &201256076
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -326,20 +326,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 201256071}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &201256080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 201256071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07f04aa3b27b4a54e868ebbfe8ec3e77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startCheckpoint: {fileID: 0}
-  endCheckpoint: {fileID: 0}
 --- !u!224 &272659093 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4194646839281217651, guid: b668cc91022bd1e478cb17c442b4fb8b, type: 3}
@@ -467,6 +453,7 @@ MonoBehaviour:
         m_Calls: []
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
+  colNormalVec: {x: 0, y: 0, z: 0}
 --- !u!54 &396352227
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2436,6 +2423,7 @@ MonoBehaviour:
         m_Calls: []
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
+  colNormalVec: {x: 0, y: 0, z: 0}
 --- !u!54 &1577489384
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2737,6 +2725,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54751d05779f8375fb159654f51f95e2, type: 3}
+--- !u!1 &1875064043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1875064045}
+  - component: {fileID: 1875064044}
+  m_Layer: 0
+  m_Name: TrmCheckpointManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1875064044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875064043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07f04aa3b27b4a54e868ebbfe8ec3e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startCheckpoint: {fileID: 0}
+  endCheckpoint: {fileID: 0}
+--- !u!4 &1875064045
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875064043}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.6130166, y: 2.5389445, z: -2.11557}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1967442725
 PrefabInstance:
   m_ObjectHideFlags: 0

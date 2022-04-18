@@ -12,6 +12,8 @@ namespace Weapons.Checkpoint
         [HideInInspector] public Transform startCheckpoint;
         [HideInInspector] public Transform endCheckpoint;
 
+
+
         private void Awake()
         {
             startCheckpoint = new GameObject("StartCheckpoint").transform;
@@ -26,20 +28,13 @@ namespace Weapons.Checkpoint
             startCheckpoint.rotation = Quaternion.LookRotation(dir);
         }
 
-        public void SetEndCheckpoint(Vector3 dir)
+        public void SetEndCheckpoint(Vector3 normalVec)
         {
-            endCheckpoint.rotation = Quaternion.LookRotation(dir);
-            Debug.Log("endCheckpoint.down : " + -endCheckpoint.up);
+            endCheckpoint.rotation = Quaternion.LookRotation(-normalVec);
+            Debug.Log("normalVec : " + -normalVec);
+            Debug.Log("endCheckpoint.down : " + endCheckpoint.up);
 
-            //endCheckpoint.rotation *= Quaternion.LookRotation(-endCheckpoint.up);
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.L))
-            {
-                endCheckpoint.rotation *= Quaternion.LookRotation(-endCheckpoint.up);
-            }
+            endCheckpoint.rotation *= Quaternion.LookRotation(endCheckpoint.up);
         }
     }
 }

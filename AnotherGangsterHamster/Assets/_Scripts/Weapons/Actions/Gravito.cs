@@ -77,7 +77,7 @@ namespace Weapons.Actions
                 _currentGravityChangeTime = 0f;
                 isChangedGravity = true;
 
-                Debug.Log(colNormalVec);
+                //Debug.Log(colNormalVec);
 
                 Checkpoint.SetStartCheckpoint(PlayerBaseTransform.forward);
                 Checkpoint.SetEndCheckpoint(colNormalVec);
