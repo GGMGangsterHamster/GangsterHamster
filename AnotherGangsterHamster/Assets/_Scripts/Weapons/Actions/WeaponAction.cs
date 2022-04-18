@@ -34,6 +34,7 @@ namespace Weapons.Actions
         Use,
         Stickly,
         ChangeGravity,
+        Reset,
     }
     #endregion
 

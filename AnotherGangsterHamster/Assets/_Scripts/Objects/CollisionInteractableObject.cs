@@ -18,7 +18,7 @@ namespace Objects
       private bool _activated = false;
       
       // Collision에서 Normal 벡터를 빼내기 위해서 존재하는 변수
-      public Collision objCollision; 
+      public Vector3 colNormalVec; 
 
       private void Awake()
       {
@@ -28,7 +28,7 @@ namespace Objects
       #region Unity Collision Event
       private void OnCollisionEnter(Collision other)
       {
-         objCollision = other;
+         colNormalVec = other.contacts[0].normal;
          CollisionEnterEvent(other.gameObject);
       }
 
