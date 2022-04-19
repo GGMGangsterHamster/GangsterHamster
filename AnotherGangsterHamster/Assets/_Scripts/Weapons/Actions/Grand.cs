@@ -122,9 +122,13 @@ namespace Weapons.Actions
         }
 
         #region CollisionEvents
-        public void PlayerCollisionEnterEvent(GameObject obj)
+        public void BTypeObjCollisionEnterEvent(GameObject obj)
         {
-
+            if(_currentGrandStatus != GrandStatus.Resize &&
+                _currentGrandStatus != GrandStatus.Use)
+            {
+                _currentGrandStatus = GrandStatus.LosePower;
+            }
         }
         #endregion
 
@@ -220,7 +224,6 @@ namespace Weapons.Actions
                 return;
             }
 
-
             _currentGrandStatus = GrandStatus.Resize;
             _weaponUsedTime = 0f;
             _currentLerpTime = 0f;
@@ -236,10 +239,20 @@ namespace Weapons.Actions
                     Vector3 reboundDir = (PlayerBaseTransform.position - transform.position).normalized;
                     float rebound = (_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize) * reboundPower;
 
-                    Debug.Log("플레이어에게 준 반동 값 : " + rebound);
-                    Player.Damage(weaponDamage);
+                    float maxValue = Mathf.Max(Mathf.Abs(reboundDir.x),
+                                     Mathf.Max(Mathf.Abs(reboundDir.y), 
+                                               Mathf.Abs(reboundDir.z)));
 
-                    PlayerBaseTransform.GetComponent<Rigidbody>().velocity = reboundDir * rebound;
+                    PlayerBaseTransform.GetComponent<Rigidbody>().velocity = new Vector3(
+                        maxValue == Mathf.Abs(reboundDir.x) ? rebound * Mathf.Sign(reboundDir.x) : 0,
+                        maxValue == Mathf.Abs(reboundDir.y) ? rebound * Mathf.Sign(reboundDir.y) : 0,
+                        maxValue == Mathf.Abs(reboundDir.z) ? rebound * Mathf.Sign(reboundDir.z) : 0
+                        );
+
+                    
+
+                    Debug.Log(reboundDir);
+                    Player.Damage(weaponDamage);
                 }
             }
 
