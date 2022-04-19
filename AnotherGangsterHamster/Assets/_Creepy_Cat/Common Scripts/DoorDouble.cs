@@ -24,10 +24,14 @@ public class DoorDouble : MonoBehaviour {
 	private float point = 0.0f;
 	private bool opening = false;
 
+	private ButtonCountRequirement _requirement;
+
 	// Use this for initialization
 	void Start () {
 		initialDoorL = doorL.localPosition;
-		initialDoorR = doorR.localPosition;		
+		initialDoorR = doorR.localPosition;
+
+		_requirement = GetComponent<ButtonCountRequirement>();
 	}
 	
 	// Update is called once per frame
@@ -41,11 +45,29 @@ public class DoorDouble : MonoBehaviour {
 			doorDirection = Vector3.back;
 		}
 
-		// If opening
-		if(opening) {
-			point = Mathf.Lerp(point,1.0f,Time.deltaTime * speed);
-		}else{
-			point = Mathf.Lerp(point,0.0f,Time.deltaTime * speed);
+		if(_requirement != null)
+        {
+			if(_requirement.Checked)
+			{
+				point = Mathf.Lerp(point, 1.0f, Time.deltaTime * speed);
+			}
+            else
+            {
+				point = Mathf.Lerp(point, 0.0f, Time.deltaTime * speed);
+            }
+        }
+        else
+        {
+			// If opening
+			if (opening)
+			{
+
+				point = Mathf.Lerp(point, 1.0f, Time.deltaTime * speed);
+			}
+			else
+			{
+				point = Mathf.Lerp(point, 0.0f, Time.deltaTime * speed);
+			}
 		}
 
 		// Move doors

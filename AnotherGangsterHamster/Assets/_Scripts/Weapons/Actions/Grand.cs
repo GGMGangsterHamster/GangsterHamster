@@ -263,6 +263,8 @@ namespace Weapons.Actions
 
                 if (plusHit.transform.CompareTag("BTYPEOBJECT") && minusHit.transform.CompareTag("BTYPEOBJECT"))
                 {
+                    Debug.Log(Vector3.Distance(transform.position, plusHit.point) +
+                        Vector3.Distance(transform.position, minusHit.point));
                     if (Vector3.Distance(transform.position, plusHit.point) + 
                         Vector3.Distance(transform.position, minusHit.point) < _sizeLevelValue[_currentSizeLevel])
                     {
