@@ -47,7 +47,7 @@ namespace Objects
       public void CollisionEnterEvent(GameObject other)
       {
          CollisionCallback callback =
-                  _callbacks.Find(x => other.CompareTag(x.key));
+                  _callbacks.Find(x => (x.key == "") || other.CompareTag(x.key));
 
          if (callback != null)
          {
@@ -74,7 +74,7 @@ namespace Objects
       public void CollisionExitEvent(GameObject other)
       {
          CollisionCallback callback =
-                  _callbacks.Find(x => other.CompareTag(x.key));
+                  _callbacks.Find(x => (x.key == "") || other.CompareTag(x.key));
 
          if (callback != null)
          {
