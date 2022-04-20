@@ -70,7 +70,7 @@ namespace Physics.Gravity
 
       static public Vector3 GetGlobalGravityDirection()
       {
-         return _instance._globalGravity._direction;
+         return _instance._globalGravity._direction.normalized;
       }
    }
 }
