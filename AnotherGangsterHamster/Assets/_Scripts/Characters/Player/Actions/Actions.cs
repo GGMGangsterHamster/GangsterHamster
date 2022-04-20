@@ -53,12 +53,11 @@ namespace Characters.Player.Actions
       private int _ignoreLayer;
 
       private void Awake() {
-         _jumpForce =
-                  new Vector3(1.0f,
-                           Mathf.Sqrt(2.0f *
+         float force = Mathf.Sqrt(2.0f *
                                       9.8f * // Gravity
-                                      PlayerValues.JumpHeight),
-                           1.0f);
+                                      PlayerValues.JumpHeight);
+
+         _jumpForce = new Vector3(force, force, force);
          _rigid = GetComponent<Rigidbody>();
          _ignoreLayer = 1 << LayerMask.GetMask("PLAYER");
       }
