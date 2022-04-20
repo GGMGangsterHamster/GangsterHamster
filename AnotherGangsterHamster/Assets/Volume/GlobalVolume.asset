@@ -275,27 +275,27 @@ MonoBehaviour:
   active: 0
   m_AdvancedMode: 0
   quality:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 2
   enable:
     m_OverrideState: 1
     m_Value: 1
   depthBufferThickness:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0.2
     min: 0
     max: 0.5
   m_RaySteps:
-    m_OverrideState: 1
-    m_Value: 96
+    m_OverrideState: 0
+    m_Value: 64
     min: 16
     max: 128
   m_FullResolutionSS:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   m_FilterRadius:
-    m_OverrideState: 1
-    m_Value: 7
+    m_OverrideState: 0
+    m_Value: 5
     min: 2
     max: 8
   rayTracing:
@@ -320,35 +320,35 @@ MonoBehaviour:
     min: 1
     max: 8
   m_RayLength:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 50
     min: 0.01
   m_ClampValue:
-    m_OverrideState: 1
-    m_Value: 1.5
+    m_OverrideState: 0
+    m_Value: 0.8
     min: 0.001
     max: 10
   m_FullResolution:
-    m_OverrideState: 1
-    m_Value: 1
+    m_OverrideState: 0
+    m_Value: 0
   m_UpscaleRadius:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 4
     min: 2
     max: 4
   m_Denoise:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   m_HalfResolutionDenoiser:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0
   m_DenoiserRadius:
-    m_OverrideState: 1
-    m_Value: 0.25
+    m_OverrideState: 0
+    m_Value: 1
     min: 0.001
     max: 1
   m_SecondDenoiserPass:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
 --- !u!114 &-7350055264262128594
 MonoBehaviour:
@@ -969,7 +969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31394aa05878563408489d5c1688f3a0, type: 3}
   m_Name: PathTracing
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   m_AdvancedMode: 0
   enable:
     m_OverrideState: 1
@@ -981,7 +981,7 @@ MonoBehaviour:
       m_Bits: 119
   maximumSamples:
     m_OverrideState: 1
-    m_Value: 16384
+    m_Value: 256
     min: 1
     max: 16384
   minimumDepth:
