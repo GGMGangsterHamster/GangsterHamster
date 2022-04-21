@@ -71,7 +71,13 @@ namespace Weapons.Actions
                 
                 _fireDir = MainCameraTransform.forward;
                 transform.position = FirePosition;
+                _myRigid.angularVelocity = Vector3.zero;
                 _currentGravitoStatus = GravitoStatus.Fire;
+
+                // 여기서 발사하는 방향으로 이 무기가 그곳을 바라보게 해야 함.
+                transform.rotation = Quaternion.LookRotation(_fireDir) * Quaternion.Euler(90, 0, 0);
+
+                _myRigid.velocity = _fireDir * fireSpeed;
 
                 if (_myCollider.isTrigger)
                     _myCollider.isTrigger = false;
@@ -112,11 +118,12 @@ namespace Weapons.Actions
         /// </summary>
         public override void ResetWeapon()
         {
-            if(isReseting)
+            if (isReseting)
                 return;
             else if (!isChangedGravity)
             {
                 _currentGravitoStatus = GravitoStatus.Idle;
+                transform.rotation = Quaternion.identity;
                 return;
             }
 
@@ -182,7 +189,7 @@ namespace Weapons.Actions
                     transform.position = HandPosition;
                     break;
                 case GravitoStatus.Fire: // _fireDir로 계속해서 날아가기
-                    _myRigid.velocity = _fireDir * fireSpeed;
+
                     break;
                 case GravitoStatus.Stickly:
                     // 이 상태에 능력 사용시 벽의 방향에 따라 중력이 변환되어야 함.
@@ -210,6 +217,7 @@ namespace Weapons.Actions
                     {
                         PlayerBaseTransform.rotation = Checkpoint.endCheckpoint.rotation;
                         _currentGravitoStatus = GravitoStatus.Idle;
+                        transform.rotation = Quaternion.identity;
                         isReseting = false;
                     }
                     else
@@ -231,6 +239,7 @@ namespace Weapons.Actions
             _myRigid.constraints = RigidbodyConstraints.FreezeAll;
             _myRigid.velocity = Vector3.zero;
             _myRigid.angularVelocity = Vector3.zero;
+            transform.rotation = Quaternion.LookRotation(_fireDir) * Quaternion.Euler(90, 0, 0);
         }
     }
 }

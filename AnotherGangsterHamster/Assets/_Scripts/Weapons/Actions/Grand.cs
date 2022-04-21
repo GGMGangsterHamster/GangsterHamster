@@ -1,9 +1,11 @@
+using Physics.Gravity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Weapons.Actions
 {
+    [RequireComponent(typeof(GravityAffectedObject))]
     public class Grand : WeaponAction
     {
         public string WeaponKeyCodePath = "KeyCodes/Weapons.json";
@@ -138,7 +140,6 @@ namespace Weapons.Actions
             {
                 case GrandStatus.Idle:
                     if (!_myCollider.isTrigger) _myCollider.isTrigger = true;
-                    if (_myRigid.useGravity) _myRigid.useGravity = false;
                     if (_myRigid.constraints == RigidbodyConstraints.None) _myRigid.constraints = RigidbodyConstraints.FreezePosition;
 
                     transform.position = HandPosition;
@@ -184,9 +185,8 @@ namespace Weapons.Actions
                     }
                     break;
                 case GrandStatus.LosePower:
-                    if (!_myRigid.useGravity) _myRigid.useGravity = true;
                     if (_myRigid.constraints == RigidbodyConstraints.FreezePosition) _myRigid.constraints = RigidbodyConstraints.None;
-
+                    
                     break;
             }
         }
