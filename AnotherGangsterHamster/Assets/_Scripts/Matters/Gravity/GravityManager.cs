@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-namespace Physics.Gravity
+namespace Matters.Gravity
 {
    public class GravityManager : MonoBehaviour
    {

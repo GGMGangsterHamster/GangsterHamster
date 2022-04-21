@@ -1,5 +1,5 @@
 using Objects.Interaction;
-using Physics.Gravity;
+using Matters.Gravity;
 using UnityEngine;
 
 namespace Characters.Player.Actions

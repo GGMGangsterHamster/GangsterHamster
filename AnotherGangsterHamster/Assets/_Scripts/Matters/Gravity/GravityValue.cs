@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Physics.Gravity
+namespace Matters.Gravity
 {
    /// <summary>
    /// 중력 값 저장용 클래스

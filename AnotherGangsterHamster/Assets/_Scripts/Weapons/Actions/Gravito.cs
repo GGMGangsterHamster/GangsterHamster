@@ -9,14 +9,14 @@ namespace Weapons.Actions
 {
     public class Gravito : WeaponAction
     {
-        public float gravityChangeTime; // Áß·Â º¯È¯ ÇÒ¶§ °É¸®´Â ½Ã°£
+        public float gravityChangeTime; // ï¿½ß·ï¿½ ï¿½ï¿½È¯ ï¿½Ò¶ï¿½ ï¿½É¸ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
 
-        private GravitoStatus _currentGravitoStatus = GravitoStatus.Idle; // ÇöÀç ¹«±âÀÇ »óÅÂÀÓ
+        private GravitoStatus _currentGravitoStatus = GravitoStatus.Idle; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-        private CollisionInteractableObject _colInteractableObj; // ¹«±â¿Í Ãæµ¹ÇÑ ¿ÀºêÁ§Æ®
+        private CollisionInteractableObject _colInteractableObj; // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
         private CheckpointManager _checkpoint;
 
-        private CheckpointManager Checkpoint // Áß·Âº¯È¯ÀÇ Ã³À½°ú ³¡À» °¡Á®¿À´Â ÇÁ·ÎÆÛÆ¼·Î ¼±Çü º¯È¯ ÇÒ·Á°í »ç¿ëÇÔ
+        private CheckpointManager Checkpoint // ï¿½ß·Âºï¿½È¯ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ ï¿½Ò·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
         {
             get
             {
@@ -29,7 +29,7 @@ namespace Weapons.Actions
             }
         }
 
-        private Vector3 colNormalVec // ºÎµúÈù ¿ÀºêÁ§Æ®ÀÇ ¹ý¼±.
+        private Vector3 colNormalVec // ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
         {
             get
             {
@@ -42,22 +42,22 @@ namespace Weapons.Actions
             }
         }
 
-        private float _currentGravityChangeTime = 0f; // Lerp ÇÏ·Á°í ¸¸µç º¯¼ö 
+        private float _currentGravityChangeTime = 0f; // Lerp ï¿½Ï·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
         private bool isChangedGravity = false;
-        private bool isReseting = false; // Áö±Ý ResetÇÏ´Â ÁßÀÎ°¡ ¾Æ´Ñ°¡
+        private bool isReseting = false; // ï¿½ï¿½ï¿½ï¿½ Resetï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Î°ï¿½ ï¿½Æ´Ñ°ï¿½
 
         private new void Awake()
         {
             base.Awake();
 
-            _weaponEnum = WeaponEnum.Gravito; // ÀÌ ¹«±â´Â Gravito ¿¡¿ä
+            _weaponEnum = WeaponEnum.Gravito; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Gravito ï¿½ï¿½ï¿½ï¿½
         }
 
         /// <summary>
-        /// ÇöÀç »óÅÂ°¡ Fire, Use, Stickly, ChangeGravity°¡ ¾Æ´Ï°í Áö±Ý ¸®¼ÂÇÏ´Â ÁßÀÌ ¾Æ´Ï¶ó¸é ½ÇÇàÇÔ
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ Fire, Use, Stickly, ChangeGravityï¿½ï¿½ ï¿½Æ´Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         /// 
-        /// ÇöÀç ÇÃ·¹ÀÌ¾î°¡ ¹Ù¶óº¸´Â ¹æÇâÀ¸·Î ¹«±â¸¦ ³¯¸²
-        /// (UpdateÀÇ Fire »óÅÂ¿¡ ³¯·Áº¸³»´Â ÄÚµå ÀÖÀ½)
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½Ù¶óº¸´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¸¦ ï¿½ï¿½ï¿½ï¿½
+        /// (Updateï¿½ï¿½ Fire ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½)
         /// </summary>
         public override void FireWeapon()
         {
@@ -74,7 +74,7 @@ namespace Weapons.Actions
                 _myRigid.angularVelocity = Vector3.zero;
                 _currentGravitoStatus = GravitoStatus.Fire;
 
-                // ¿©±â¼­ ¹ß»çÇÏ´Â ¹æÇâÀ¸·Î ÀÌ ¹«±â°¡ ±×°÷À» ¹Ù¶óº¸°Ô ÇØ¾ß ÇÔ.
+                // ï¿½ï¿½ï¿½â¼­ ï¿½ß»ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½â°¡ ï¿½×°ï¿½ï¿½ï¿½ ï¿½Ù¶óº¸°ï¿½ ï¿½Ø¾ï¿½ ï¿½ï¿½.
                 transform.rotation = Quaternion.LookRotation(_fireDir) * Quaternion.Euler(90, 0, 0);
 
                 _myRigid.velocity = _fireDir * fireSpeed;
@@ -85,11 +85,11 @@ namespace Weapons.Actions
         }
 
         /// <summary>
-        /// ÇöÀç »óÅÂ°¡ SticklyÀÌ¸ç Áö±Ý Áß·ÂÀ» º¯È¯ÁßÀÌ ¾Æ´Ï¶ó¸é »ç¿ë°¡´É
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ Sticklyï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß·ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ï¿½ ï¿½ï¿½ë°¡ï¿½ï¿½
         /// 
-        /// ¸¸¾à ºÎµúÈù °÷ÀÌ ¹Ù´ÚÀÌ¶ó¸é ÆÐ½º
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù´ï¿½ï¿½Ì¶ï¿½ï¿½ ï¿½Ð½ï¿½
         /// 
-        /// Áß·Âº¯È¯À» ÇÏ°í ÇÃ·¹ÀÌ¾î¸¦ Áß·Â¿¡ ¸ÂÃç¼­ È­¸éÀ» µ¹¸°´Ù.
+        /// ï¿½ß·Âºï¿½È¯ï¿½ï¿½ ï¿½Ï°ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ß·Â¿ï¿½ ï¿½ï¿½ï¿½ç¼­ È­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
         /// </summary>
         public override void UseWeapon()
         {
@@ -110,11 +110,11 @@ namespace Weapons.Actions
         }
 
         /// <summary>
-        /// Áö±Ý ¸®¼ÂÁõÀÌ¶ó¸é ½ÇÇà ¾ÈÇÔ
-        /// ¶Ç´Â Áö±Ý Áß·ÂÀ» ¹Ù²ÙÁö ¾ÊÀº »óÅÂ¶ó¸é ¹«±â¸¦ È¸¼öÇÑ´Ù.
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        /// ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß·ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ ï¿½ï¿½ï¿½â¸¦ È¸ï¿½ï¿½ï¿½Ñ´ï¿½.
         /// 
-        /// ÀÌ¿ÜÀÇ »óÈ²Àº Áß·ÂÀÌ ¹Ù²ãÁ® ÀÖ´Â »óÅÂÀÎ °æ¿ì¿¡¸¸ ½ÇÇàÀÌ µÇ´Âµ¥
-        /// Áß·ÂÀ» ¿ø·¡ »óÅÂ·Î ¸¸µé°í ±× Áß·Â´ë·Î È­¸éÀ» È¸Àü ½ÃÅ²´Ù.
+        /// ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½ï¿½È²ï¿½ï¿½ ï¿½ß·ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ì¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´Âµï¿½
+        /// ï¿½ß·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß·Â´ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½Å²ï¿½ï¿½.
         /// </summary>
         public override void ResetWeapon()
         {
@@ -139,7 +139,7 @@ namespace Weapons.Actions
         }
 
         /// <summary>
-        /// Áö±Ý ¼Õ¿¡ ÀÌ ¹«±â°¡ ÀÖ´Â°¡¸¦ ÆÇº°ÇÔ
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½Õ¿ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½â°¡ ï¿½Ö´Â°ï¿½ï¿½ï¿½ ï¿½Çºï¿½ï¿½ï¿½
         /// </summary>
         /// <returns></returns>
         public override bool IsHandleWeapon()
@@ -148,7 +148,7 @@ namespace Weapons.Actions
         }
 
         /// <summary>
-        /// ATypeObj¿Í Ãæµ¹ÇÏ¸é ¸ØÃß¸ç Stickly »óÅÂ·Î º¯È¯.
+        /// ATypeObjï¿½ï¿½ ï¿½æµ¹ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ß¸ï¿½ Stickly ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½È¯.
         /// </summary>
         /// <param name="obj"></param>
         public void ATypeObjectCollisionEnterEvent(GameObject obj)
@@ -161,7 +161,7 @@ namespace Weapons.Actions
         }
 
         /// <summary>
-        /// À§¿Í ¶È°°À½
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½È°ï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="obj"></param>
         public void BTypeObjectCollisionEnterEvent(GameObject obj)
@@ -174,27 +174,27 @@ namespace Weapons.Actions
         }
 
         /// <summary>
-        /// Áö±Ý ¹«±âÀÇ ÇöÀç »óÅÂ¿¡ µû¶ó¼­ Çàµ¿À» ´Þ¸®ÇÔ
-        /// Win32ÀÇ ¸Þ½ÃÁö ¹æ½ÄÀ» ÂüÁ¶ÇØ¼­ Á¶±Ý µû¶óÇÑ ´À³¦ÀÌ ÀÖÀ½..
+        /// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½àµ¿ï¿½ï¿½ ï¿½Þ¸ï¿½ï¿½ï¿½
+        /// Win32ï¿½ï¿½ ï¿½Þ½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½..
         /// </summary>
         private void Update()
         {
             switch(_currentGravitoStatus)
             {
-                case GravitoStatus.Idle: // HandPosition¿¡ ¹«±â °íÁ¤
+                case GravitoStatus.Idle: // HandPositionï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                     if (!_myCollider.isTrigger) _myCollider.isTrigger = true;
                     if (_myRigid.useGravity) _myRigid.useGravity = false;
                     if (_myRigid.constraints == RigidbodyConstraints.None) _myRigid.constraints = RigidbodyConstraints.FreezePosition;
 
                     transform.position = HandPosition;
                     break;
-                case GravitoStatus.Fire: // _fireDir·Î °è¼ÓÇØ¼­ ³¯¾Æ°¡±â
+                case GravitoStatus.Fire: // _fireDirï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½
 
                     break;
                 case GravitoStatus.Stickly:
-                    // ÀÌ »óÅÂ¿¡ ´É·Â »ç¿ë½Ã º®ÀÇ ¹æÇâ¿¡ µû¶ó Áß·ÂÀÌ º¯È¯µÇ¾î¾ß ÇÔ.
+                    // ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½É·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ß·ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ç¾ï¿½ï¿½ ï¿½ï¿½.
                     break;
-                case GravitoStatus.ChangeGravity: // È­¸éÀ» Lerp¸¦ ÅëÇØ È¸Àü½ÃÅ´
+                case GravitoStatus.ChangeGravity: // È­ï¿½ï¿½ï¿½ï¿½ Lerpï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½Å´
                     _currentGravityChangeTime += Time.deltaTime / gravityChangeTime;
 
                     if (_currentGravityChangeTime >= 1f)
@@ -210,7 +210,7 @@ namespace Weapons.Actions
                             _currentGravityChangeTime);
                     }
                     break;
-                case GravitoStatus.Reset: // È­¸éÀ» Lerp¸¦ ÅëÇØ È¸Àü½ÃÅ´
+                case GravitoStatus.Reset: // È­ï¿½ï¿½ï¿½ï¿½ Lerpï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½Å´
                     _currentGravityChangeTime += Time.deltaTime / gravityChangeTime;
 
                     if(_currentGravityChangeTime >= 1f)
@@ -232,7 +232,7 @@ namespace Weapons.Actions
         }
 
         /// <summary>
-        /// ¹«±â¸¦ ¸ø ¿òÁ÷ÀÌ°Ô ÇÏ±â.
+        /// ï¿½ï¿½ï¿½â¸¦ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½Ï±ï¿½.
         /// </summary>
         private void Stop()
         {

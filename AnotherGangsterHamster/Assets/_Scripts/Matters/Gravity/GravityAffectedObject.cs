@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Physics.Gravity
+namespace Matters.Gravity
 {
    /// <summary>
    /// 중력 영향을 받는 모든 오브젝트가 가지고 있어야 하는 컴포넌트
