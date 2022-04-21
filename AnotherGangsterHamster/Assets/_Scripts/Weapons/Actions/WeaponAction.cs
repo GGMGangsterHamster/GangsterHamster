@@ -13,7 +13,6 @@ namespace Weapons.Actions
         Idle,
         Fire,
         Use,
-        Stickly,
         LosePower,
     }
 
