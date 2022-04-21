@@ -34,7 +34,7 @@ namespace Physics.Gravity
       public virtual void Gravity (GravityValue gravity)
       {
          _rigid.AddForce(gravity._direction.normalized * gravity._force,
-                        ForceMode.Force);
+                        ForceMode.Acceleration);
       }
    }
 }
