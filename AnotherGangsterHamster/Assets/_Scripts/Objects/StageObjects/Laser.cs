@@ -19,7 +19,7 @@ namespace Objects.StageObjects
          _collider = GetComponent<BoxCollider>();
       }
 
-      private void FixedUpdate()
+      private void Update()
       {
          if (UnityEngine.Physics.Raycast(transform.position,
                                          transform.forward,
@@ -52,6 +52,9 @@ namespace Objects.StageObjects
          }
       }
 
-      public void Deactive(GameObject other) { }
+      public void Deactive(GameObject other)
+      {
+
+      }
    }
 }
