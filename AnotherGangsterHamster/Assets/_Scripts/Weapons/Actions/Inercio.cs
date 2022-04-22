@@ -56,6 +56,7 @@ namespace Weapons.Actions
 
             _currentInercioStatus = InercioStatus.Idle;
             _myCollider.isTrigger = true;
+            sticklyObj = null;
         }
 
         public override bool IsHandleWeapon()

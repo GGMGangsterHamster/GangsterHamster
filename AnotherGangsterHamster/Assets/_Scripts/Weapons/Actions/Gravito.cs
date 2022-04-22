@@ -9,14 +9,14 @@ namespace Weapons.Actions
 {
     public class Gravito : WeaponAction
     {
-        public float gravityChangeTime; // �߷� ��ȯ �Ҷ� �ɸ��� �ð�
+        public float gravityChangeTime;
 
-        private GravitoStatus _currentGravitoStatus = GravitoStatus.Idle; // ���� ������ ������
+        private GravitoStatus _currentGravitoStatus = GravitoStatus.Idle; 
 
-        private CollisionInteractableObject _colInteractableObj; // ����� �浹�� ������Ʈ
+        private CollisionInteractableObject _colInteractableObj;
         private CheckpointManager _checkpoint;
 
-        private CheckpointManager Checkpoint // �߷º�ȯ�� ó���� ���� �������� ������Ƽ�� ���� ��ȯ �ҷ��� �����
+        private CheckpointManager Checkpoint
         {
             get
             {
@@ -29,7 +29,7 @@ namespace Weapons.Actions
             }
         }
 
-        private Vector3 colNormalVec // �ε��� ������Ʈ�� ����.
+        private Vector3 colNormalVec
         {
             get
             {
@@ -42,23 +42,17 @@ namespace Weapons.Actions
             }
         }
 
-        private float _currentGravityChangeTime = 0f; // Lerp �Ϸ��� ���� ���� 
+        private float _currentGravityChangeTime = 0f;  
         private bool isChangedGravity = false;
-        private bool isReseting = false; // ���� Reset�ϴ� ���ΰ� �ƴѰ�
+        private bool isReseting = false; 
 
         private new void Awake()
         {
             base.Awake();
 
-            _weaponEnum = WeaponEnum.Gravito; // �� ����� Gravito ����
+            _weaponEnum = WeaponEnum.Gravito;
         }
 
-        /// <summary>
-        /// ���� ���°� Fire, Use, Stickly, ChangeGravity�� �ƴϰ� ���� �����ϴ� ���� �ƴ϶�� ������
-        /// 
-        /// ���� �÷��̾ �ٶ󺸴� �������� ���⸦ ����
-        /// (Update�� Fire ���¿� ���������� �ڵ� ����)
-        /// </summary>
         public override void FireWeapon()
         {
             if(_currentGravitoStatus != GravitoStatus.Fire && 
@@ -74,7 +68,6 @@ namespace Weapons.Actions
                 _myRigid.angularVelocity = Vector3.zero;
                 _currentGravitoStatus = GravitoStatus.Fire;
 
-                // ���⼭ �߻��ϴ� �������� �� ���Ⱑ �װ��� �ٶ󺸰� �ؾ� ��.
                 transform.rotation = Quaternion.LookRotation(_fireDir) * Quaternion.Euler(90, 0, 0);
 
                 _myRigid.velocity = _fireDir * fireSpeed;
@@ -84,13 +77,6 @@ namespace Weapons.Actions
             }
         }
 
-        /// <summary>
-        /// ���� ���°� Stickly�̸� ���� �߷��� ��ȯ���� �ƴ϶�� ��밡��
-        /// 
-        /// ���� �ε��� ���� �ٴ��̶�� �н�
-        /// 
-        /// �߷º�ȯ�� �ϰ� �÷��̾ �߷¿� ���缭 ȭ���� ������.
-        /// </summary>
         public override void UseWeapon()
         {
             if(_currentGravitoStatus == GravitoStatus.Stickly && !isChangedGravity)
@@ -108,14 +94,6 @@ namespace Weapons.Actions
                 GravityManager.ChangeGlobalGravityDirection(-colNormalVec);
             }
         }
-
-        /// <summary>
-        /// ���� �������̶�� ���� ����
-        /// �Ǵ� ���� �߷��� �ٲ��� ���� ���¶�� ���⸦ ȸ���Ѵ�.
-        /// 
-        /// �̿��� ��Ȳ�� �߷��� �ٲ��� �ִ� ������ ��쿡�� ������ �Ǵµ�
-        /// �߷��� ���� ���·� ����� �� �߷´�� ȭ���� ȸ�� ��Ų��.
-        /// </summary>
         public override void ResetWeapon()
         {
             if (isReseting)
@@ -138,19 +116,11 @@ namespace Weapons.Actions
             GravityManager.ChangeGlobalGravityDirection(Vector3.down);
         }
 
-        /// <summary>
-        /// ���� �տ� �� ���Ⱑ �ִ°��� �Ǻ���
-        /// </summary>
-        /// <returns></returns>
         public override bool IsHandleWeapon()
         {
             return _currentGravitoStatus == GravitoStatus.Idle;
         }
 
-        /// <summary>
-        /// ATypeObj�� �浹�ϸ� ���߸� Stickly ���·� ��ȯ.
-        /// </summary>
-        /// <param name="obj"></param>
         public void ATypeObjectCollisionEnterEvent(GameObject obj)
         {            
             if (_currentGravitoStatus == GravitoStatus.Fire)
@@ -159,11 +129,6 @@ namespace Weapons.Actions
                 _currentGravitoStatus = GravitoStatus.Stickly;
             }
         }
-
-        /// <summary>
-        /// ���� �Ȱ���
-        /// </summary>
-        /// <param name="obj"></param>
         public void BTypeObjectCollisionEnterEvent(GameObject obj)
         {
             if (_currentGravitoStatus == GravitoStatus.Fire)
@@ -173,28 +138,23 @@ namespace Weapons.Actions
             }
         }
 
-        /// <summary>
-        /// ���� ������ ���� ���¿� ���� �ൿ�� �޸���
-        /// Win32�� �޽��� ����� �����ؼ� ���� ������ ������ ����..
-        /// </summary>
         private void Update()
         {
             switch(_currentGravitoStatus)
             {
-                case GravitoStatus.Idle: // HandPosition�� ���� ����
+                case GravitoStatus.Idle:
                     if (!_myCollider.isTrigger) _myCollider.isTrigger = true;
                     if (_myRigid.useGravity) _myRigid.useGravity = false;
                     if (_myRigid.constraints == RigidbodyConstraints.None) _myRigid.constraints = RigidbodyConstraints.FreezePosition;
 
                     transform.position = HandPosition;
                     break;
-                case GravitoStatus.Fire: // _fireDir�� ����ؼ� ���ư���
+                case GravitoStatus.Fire: 
 
                     break;
                 case GravitoStatus.Stickly:
-                    // �� ���¿� �ɷ� ���� ���� ���⿡ ���� �߷��� ��ȯ�Ǿ�� ��.
                     break;
-                case GravitoStatus.ChangeGravity: // ȭ���� Lerp�� ���� ȸ����Ŵ
+                case GravitoStatus.ChangeGravity:
                     _currentGravityChangeTime += Time.deltaTime / gravityChangeTime;
 
                     if (_currentGravityChangeTime >= 1f)
@@ -210,7 +170,7 @@ namespace Weapons.Actions
                             _currentGravityChangeTime);
                     }
                     break;
-                case GravitoStatus.Reset: // ȭ���� Lerp�� ���� ȸ����Ŵ
+                case GravitoStatus.Reset: 
                     _currentGravityChangeTime += Time.deltaTime / gravityChangeTime;
 
                     if(_currentGravityChangeTime >= 1f)
@@ -231,9 +191,6 @@ namespace Weapons.Actions
             }
         }
 
-        /// <summary>
-        /// ���⸦ �� �����̰� �ϱ�.
-        /// </summary>
         private void Stop()
         {
             _myRigid.constraints = RigidbodyConstraints.FreezeAll;
