@@ -13,7 +13,6 @@ namespace Weapons.Actions
         Idle,
         Fire,
         Use,
-        Stickly,
         LosePower,
     }
 
@@ -128,7 +127,9 @@ namespace Weapons.Actions
                               + MainCameraTransform.forward
                               + PlayerBaseTransform.right * (IsRightHand ? 1 : -1);
 
-        protected Vector3 FirePosition => MainCameraTransform.position + MainCameraTransform.forward / 2;
+        protected Vector3 FirePosition => MainCameraTransform.position
+                                        + MainCameraTransform.forward / 6
+                                        ;
 
         protected Collider _myCollider;
         protected Rigidbody _myRigid;
