@@ -21,6 +21,8 @@ namespace Weapons.Actions
         #region Actions
         public override void FireWeapon()
         {
+            if (_currentInercioStatus != InercioStatus.Idle) return;
+
             transform.position = FirePosition;
             _fireDir = MainCameraTransform.forward;
             _myRigid.constraints = RigidbodyConstraints.None;
@@ -56,7 +58,13 @@ namespace Weapons.Actions
 
             _currentInercioStatus = InercioStatus.Idle;
             _myCollider.isTrigger = true;
-            sticklyObj = null;
+
+            if(sticklyObj != null)
+            {
+                sticklyObj = null;
+
+                sticklyObjRigid.constraints = RigidbodyConstraints.None;
+            }
         }
 
         public override bool IsHandleWeapon()
