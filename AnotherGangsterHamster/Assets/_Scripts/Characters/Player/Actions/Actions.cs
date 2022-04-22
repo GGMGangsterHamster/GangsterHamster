@@ -22,7 +22,7 @@ namespace Characters.Player.Actions
       }
 
       private Transform _playerTrm = null;
-      private Transform PlayerTrm 
+      private Transform PlayerTrm
       {
          get
          {
