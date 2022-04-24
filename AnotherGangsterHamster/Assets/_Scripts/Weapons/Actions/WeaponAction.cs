@@ -14,6 +14,9 @@ namespace Weapons.Actions
         Fire,
         Use,
         LosePower,
+        Selected,
+        OneSelected,
+        TwoSelected,
     }
 
     // 그랜드가 가질 수 있는 상태들

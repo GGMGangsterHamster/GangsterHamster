@@ -63,6 +63,7 @@ namespace Weapons.Actions
             {
                 sticklyObj = null;
 
+
                 sticklyObjRigid.constraints = RigidbodyConstraints.None;
             }
         }
