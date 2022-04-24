@@ -140,6 +140,7 @@ namespace Weapons.Actions
 
         private void Update()
         {
+            Debug.Log(PlayerBaseTransform.rotation.eulerAngles);
             switch(_currentGravitoStatus)
             {
                 case GravitoStatus.Idle:

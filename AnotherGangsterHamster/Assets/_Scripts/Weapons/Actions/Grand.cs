@@ -243,11 +243,13 @@ namespace Weapons.Actions
                                      Mathf.Max(Mathf.Abs(reboundDir.y), 
                                                Mathf.Abs(reboundDir.z)));
 
-                    PlayerBaseTransform.GetComponent<Rigidbody>().velocity = new Vector3(
-                        maxValue == Mathf.Abs(reboundDir.x) ? rebound * Mathf.Sign(reboundDir.x) : 0,
-                        maxValue == Mathf.Abs(reboundDir.y) ? rebound * Mathf.Sign(reboundDir.y) : 0,
-                        maxValue == Mathf.Abs(reboundDir.z) ? rebound * Mathf.Sign(reboundDir.z) : 0
-                        );
+                    float x, y, z;
+
+                    x = maxValue == Mathf.Abs(reboundDir.x) ? rebound * Mathf.Sign(reboundDir.x) : 0;
+                    y = maxValue == Mathf.Abs(reboundDir.y) ? rebound * Mathf.Sign(reboundDir.y) : 0;
+                    z = maxValue == Mathf.Abs(reboundDir.z) ? rebound * Mathf.Sign(reboundDir.z) : 0;
+
+                    PlayerBaseTransform.GetComponent<Rigidbody>().velocity = (transform.right * x) + (transform.up * y) + (transform.forward * z);
 
                     
 
