@@ -60,6 +60,8 @@ namespace Weapons.Actions
         private float _currentLerpTime = 0f;
         private float _weaponUsedTime = 0f;
 
+        private Quaternion lerpQuaternion;
+
         private new void Awake()
         {
             base.Awake();
@@ -167,6 +169,18 @@ namespace Weapons.Actions
                         NextSizeLevel();
                         ResizeStart();
                         // 키를 누르고 떼면 Resize로 이동
+
+                        float x = Mathf.Floor(transform.rotation.eulerAngles.x % 90);
+                        float y = Mathf.Floor(transform.rotation.eulerAngles.y % 90);
+                        float z = Mathf.Floor(transform.rotation.eulerAngles.z % 90);
+
+                        lerpQuaternion = Quaternion.Euler(x < 45 ? -x : 90 - x,
+                                                          y < 45 ? -y : 90 - y,
+                                                          z < 45 ? -z : 90 - z);
+
+                        lerpQuaternion = Quaternion.Euler(transform.rotation.eulerAngles.x + lerpQuaternion.eulerAngles.x,
+                                                            transform.rotation.eulerAngles.y + lerpQuaternion.eulerAngles.y,
+                                                            transform.rotation.eulerAngles.z + lerpQuaternion.eulerAngles.z);
                     }
                     break;
                 case GrandStatus.Resize:
@@ -174,14 +188,13 @@ namespace Weapons.Actions
                     {
                         transform.localScale = Vector3.one * _sizeLevelValue[_currentSizeLevel];
                         transform.rotation = Quaternion.identity;
-
                         _currentGrandStatus = GrandStatus.LosePower;
                     }
                     else
                     {
                         _currentLerpTime += Time.deltaTime;
                         transform.localScale = Vector3.one * Mathf.Lerp(_beforeWeaponSize, _sizeLevelValue[_currentSizeLevel], _currentLerpTime / resizeSpeed);
-                        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.identity, _currentLerpTime / resizeSpeed);
+                        transform.rotation = Quaternion.Lerp(transform.rotation, lerpQuaternion, _currentLerpTime / resizeSpeed);
                     }
                     break;
                 case GrandStatus.LosePower:
@@ -217,8 +230,8 @@ namespace Weapons.Actions
         private void ResizeStart()
         {
             // 여기서 정해진 조건에 충족하지 못하는 경우 밑의 코드를 실행하지 못함
-            if(!CanResize(transform.up) || 
-               !CanResize(transform.right) || 
+            if (!CanResize(transform.up) ||
+               !CanResize(transform.right) ||
                !CanResize(transform.forward))
             {
                 return;
@@ -234,13 +247,13 @@ namespace Weapons.Actions
             // 이런 저런 조건에 맞으면 플레이어에게 반동을 주고 데미지도 줌
             if (_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize > 0)
             {
-                if((_sizeLevelValue[_currentSizeLevel] / 2) > Vector3.Distance(transform.position, PlayerBaseTransform.position))
+                if ((_sizeLevelValue[_currentSizeLevel] / 2) > Vector3.Distance(transform.position, PlayerBaseTransform.position))
                 {
                     Vector3 reboundDir = (PlayerBaseTransform.position - transform.position).normalized;
                     float rebound = (_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize) * reboundPower;
 
                     float maxValue = Mathf.Max(Mathf.Abs(reboundDir.x),
-                                     Mathf.Max(Mathf.Abs(reboundDir.y), 
+                                     Mathf.Max(Mathf.Abs(reboundDir.y),
                                                Mathf.Abs(reboundDir.z)));
 
                     float x, y, z;
@@ -251,7 +264,7 @@ namespace Weapons.Actions
 
                     PlayerBaseTransform.GetComponent<Rigidbody>().velocity = (transform.right * x) + (transform.up * y) + (transform.forward * z);
 
-                    
+
 
                     Debug.Log(reboundDir);
                     Player.Damage(weaponDamage);
@@ -272,8 +285,8 @@ namespace Weapons.Actions
         ///
         private bool CanResize(Vector3 checkDir)
         {
-            if (UnityEngine.Physics.Raycast(transform.position, checkDir, out RaycastHit plusHit, _sizeLevelValue[_currentSizeLevel]) &&
-                UnityEngine.Physics.Raycast(transform.position, -checkDir, out RaycastHit minusHit, _sizeLevelValue[_currentSizeLevel]))
+            if (Physics.Raycast(transform.position, checkDir, out RaycastHit plusHit, _sizeLevelValue[_currentSizeLevel]) &&
+                Physics.Raycast(transform.position, -checkDir, out RaycastHit minusHit, _sizeLevelValue[_currentSizeLevel]))
             {
 
                 if (plusHit.transform.CompareTag("BTYPEOBJECT") && minusHit.transform.CompareTag("BTYPEOBJECT"))
