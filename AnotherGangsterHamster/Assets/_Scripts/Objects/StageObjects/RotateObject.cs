@@ -7,7 +7,7 @@ namespace Objects.StageObjects
    {
       [SerializeField] private float anglePerSecond = 360;
 
-      private void Update()
+      private void FixedUpdate()
       {
          transform.Rotate(Vector3.up * anglePerSecond * Time.deltaTime, Space.Self);
       }
