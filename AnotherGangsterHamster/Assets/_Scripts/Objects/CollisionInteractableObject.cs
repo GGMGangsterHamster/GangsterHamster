@@ -17,7 +17,10 @@ namespace Objects
       public bool InitalActiveStatus { get; set; } = false;
 
       [HideInInspector] public bool _activated = false;
-      
+
+      // 현제 상호작용 이루어지고 있는 오브젝트
+      private GameObject _curInteractedObject = null;
+
       // Collision에서 Normal 벡터를 빼내기 위해서 존재하는 변수
       public Vector3 colNormalVec; 
 
@@ -29,12 +32,18 @@ namespace Objects
       #region Unity Collision Event
       private void OnCollisionEnter(Collision other)
       {
+         if (_curInteractedObject != null) return;
+         _curInteractedObject = other.gameObject;
+
          colNormalVec = other.contacts[0].normal;
          CollisionEnterEvent(other.gameObject);
       }
 
       private void OnCollisionExit(Collision other)
       {
+         if (_curInteractedObject != other.gameObject) return;
+         _curInteractedObject = null;
+
          if (!EventIsToggle)
             CollisionExitEvent(other.gameObject);
       }
