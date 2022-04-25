@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ButtonCountRequirement : MonoBehaviour
 {
-    [SerializeField] private List<CollisionInteractableObject> countCheckList 
-        = new List<CollisionInteractableObject>();
+    [SerializeField] private List<TriggerInteractableObject> countCheckList 
+        = new List<TriggerInteractableObject>();
 
     private int _count = 0;
     public bool Checked

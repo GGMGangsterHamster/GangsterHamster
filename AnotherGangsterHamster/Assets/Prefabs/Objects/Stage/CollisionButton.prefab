@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 7616858044794495554}
   - component: {fileID: 2816079979007065429}
   - component: {fileID: 2623677697336075968}
-  - component: {fileID: 5617024771269407224}
+  - component: {fileID: 147947795686086866}
+  - component: {fileID: 5384198332445280696}
   - component: {fileID: 4152761354482176809}
+  - component: {fileID: 7451563831076328579}
   m_Layer: 0
   m_Name: CollisionButton
   m_TagString: Untagged
@@ -97,7 +99,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Center: {x: -0.000003814698, y: 0, z: -0.0000019073493}
---- !u!114 &5617024771269407224
+--- !u!65 &147947795686086866
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6738424376175256779}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &5384198332445280696
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,7 +121,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6738424376175256779}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83185d2616cdb31b880a0fdde34fe5f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 8476a3bdbcdf96b058a4f960b4883763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _callbacks:
@@ -116,6 +131,18 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 4152761354482176809}
           m_TargetAssemblyTypeName: Objects.Materials.ChangeColor, Assembly-CSharp
+          m_MethodName: Active
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 7451563831076328579}
+          m_TargetAssemblyTypeName: Objects.StageObjects.MovingFloor, Assembly-CSharp
           m_MethodName: Active
           m_Mode: 0
           m_Arguments:
@@ -141,8 +168,21 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 7451563831076328579}
+          m_TargetAssemblyTypeName: Objects.StageObjects.MovingFloor, Assembly-CSharp
+          m_MethodName: Deactive
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
+  _activated: 0
 --- !u!114 &4152761354482176809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,3 +198,17 @@ MonoBehaviour:
   _active: {r: 0.3254717, g: 0.87302995, b: 1, a: 0}
   _deactive: {r: 1, g: 0.48584908, b: 0.48584908, a: 0}
   defaultColorStatusToActive: 0
+--- !u!114 &7451563831076328579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6738424376175256779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ebca3e42eca84f208eb19945fe9a882, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {x: 0, y: -0.05, z: 0}
+  duration: 0.1

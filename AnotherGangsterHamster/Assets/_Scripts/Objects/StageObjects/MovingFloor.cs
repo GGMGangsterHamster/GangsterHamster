@@ -8,6 +8,7 @@ namespace Objects.StageObjects
    {
       public   Vector3  target      = Vector3.zero;
       public   float    duration    = 2.0f;
+      public   float    threshould  = 0.08f;
       private  Vector3  _initalPos  = Vector3.zero; // 기본 포지션
 
       private Coroutine _up = null;
@@ -33,7 +34,7 @@ namespace Objects.StageObjects
                      transform.localPosition += step * Time.deltaTime;
                   },
                   () => {
-                     return Utils.Compare(transform.localPosition, final);
+                     return Utils.Compare(transform.localPosition, final, threshould);
                   },
                   () => {
                      transform.localPosition = final;
@@ -53,7 +54,7 @@ namespace Objects.StageObjects
                      transform.localPosition -= step * Time.deltaTime;
                   },
                   () => {
-                     return Utils.Compare(transform.localPosition, _initalPos);
+                     return Utils.Compare(transform.localPosition, _initalPos, threshould);
                   },
                   () => {
                      transform.localPosition = _initalPos;
