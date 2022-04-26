@@ -199,6 +199,9 @@ namespace Weapons.Actions
                         transform.rotation = Quaternion.identity;
                         _currentGrandStatus = GrandStatus.LosePower;
                         _myRigid.constraints = RigidbodyConstraints.None;
+
+                        _myRigid.velocity = Vector3.zero;
+                        _myRigid.angularVelocity = Vector3.zero;
                     }
                     else
                     {
@@ -312,8 +315,6 @@ namespace Weapons.Actions
 
                 if (plusHit.transform.CompareTag("BTYPEOBJECT") && minusHit.transform.CompareTag("BTYPEOBJECT"))
                 {
-                    Debug.Log(Vector3.Distance(transform.position, plusHit.point) +
-                        Vector3.Distance(transform.position, minusHit.point));
                     if (Vector3.Distance(transform.position, plusHit.point) + 
                         Vector3.Distance(transform.position, minusHit.point) < _sizeLevelValue[_currentSizeLevel])
                     {
