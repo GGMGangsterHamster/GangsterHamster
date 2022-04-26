@@ -129,6 +129,8 @@ namespace Weapons.Actions
 
 
                 transform.position = HandPosition;
+                transform.rotation = Quaternion.identity;
+                _myRigid.angularVelocity = Vector3.zero;
                 _currentGrandStatus = GrandStatus.Idle;
             }
         }
@@ -182,18 +184,6 @@ namespace Weapons.Actions
                         NextSizeLevel();
                         ResizeStart();
                         // 키를 누르고 떼면 Resize로 이동
-
-                        float x = Mathf.Floor(transform.rotation.eulerAngles.x % 90);
-                        float y = Mathf.Floor(transform.rotation.eulerAngles.y % 90);
-                        float z = Mathf.Floor(transform.rotation.eulerAngles.z % 90);
-
-                        lerpQuaternion = Quaternion.Euler(x < 45 ? -x : 90 - x,
-                                                          y < 45 ? -y : 90 - y,
-                                                          z < 45 ? -z : 90 - z);
-
-                        lerpQuaternion = Quaternion.Euler(transform.rotation.eulerAngles.x + lerpQuaternion.eulerAngles.x,
-                                                            transform.rotation.eulerAngles.y + lerpQuaternion.eulerAngles.y,
-                                                            transform.rotation.eulerAngles.z + lerpQuaternion.eulerAngles.z);
                     }
                     break;
                 case GrandStatus.Resize:
@@ -207,8 +197,8 @@ namespace Weapons.Actions
                     else
                     {
                         _currentLerpTime += Time.deltaTime;
-                        transform.localScale = Vector3.one * Mathf.Lerp(_beforeWeaponSize, _sizeLevelValue[_currentSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 1));
-                        transform.rotation = Quaternion.Lerp(transform.rotation, lerpQuaternion, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 1));
+                        transform.localScale = Vector3.one * Mathf.Lerp(_beforeWeaponSize, _sizeLevelValue[_currentSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
+                        transform.rotation = Quaternion.Lerp(transform.rotation, lerpQuaternion, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
                     }
                     break;
                 case GrandStatus.LosePower:
@@ -251,6 +241,8 @@ namespace Weapons.Actions
                 return;
             }
 
+            float x, y, z;
+
             _currentGrandStatus = GrandStatus.Resize;
             _weaponUsedTime = 0f;
             _currentLerpTime = 0f;
@@ -270,17 +262,28 @@ namespace Weapons.Actions
                                      Mathf.Max(Mathf.Abs(reboundDir.y),
                                                Mathf.Abs(reboundDir.z)));
 
-                    float x, y, z;
-
                     x = maxValue == Mathf.Abs(reboundDir.x) ? rebound * Mathf.Sign(reboundDir.x) : 0;
                     y = maxValue == Mathf.Abs(reboundDir.y) ? rebound * Mathf.Sign(reboundDir.y) : 0;
                     z = maxValue == Mathf.Abs(reboundDir.z) ? rebound * Mathf.Sign(reboundDir.z) : 0;
 
-                    PlayerBaseTransform.GetComponent<Rigidbody>().velocity = (transform.right * x) + (transform.up * y) + (transform.forward * z);
+                    //PlayerBaseTransform.GetComponent<Rigidbody>().velocity = (transform.right * x) + (transform.up * y) + (transform.forward * z); // 도형의 각도에 따라 반동 주는 거
+                    PlayerBaseTransform.GetComponent<Rigidbody>().velocity = new Vector3(x, y, z); // 도형의 각도를 무시하고 World 좌표로 반동 주는거
                     
                     Player.Damage(weaponDamage);
                 }
             }
+
+            x = Mathf.Floor(transform.rotation.eulerAngles.x % 90);
+            y = Mathf.Floor(transform.rotation.eulerAngles.y % 90);
+            z = Mathf.Floor(transform.rotation.eulerAngles.z % 90);
+
+            lerpQuaternion = Quaternion.Euler(x < 45 ? -x : 90 - x,
+                                              y < 45 ? -y : 90 - y,
+                                              z < 45 ? -z : 90 - z);
+
+            lerpQuaternion = Quaternion.Euler(transform.rotation.eulerAngles.x + lerpQuaternion.eulerAngles.x,
+                                                transform.rotation.eulerAngles.y + lerpQuaternion.eulerAngles.y,
+                                                transform.rotation.eulerAngles.z + lerpQuaternion.eulerAngles.z);
 
             _myRigid.angularVelocity = Vector3.zero;
             _myRigid.constraints = RigidbodyConstraints.FreezeRotation;
