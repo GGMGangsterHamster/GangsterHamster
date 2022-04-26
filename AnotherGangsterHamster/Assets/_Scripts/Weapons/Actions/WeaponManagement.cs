@@ -13,7 +13,7 @@ namespace Weapons.Actions
     }
     public class WeaponManagement : MonoBehaviour
     {
-        public Transform grandCharge;
+        private Transform grandCharge;
 
         private Dictionary<WeaponEnum, WeaponAction> _weaponActions;
 
@@ -32,6 +32,9 @@ namespace Weapons.Actions
                 _weaponActions.Add(weaponAction._weaponEnum, weaponAction);
                 weaponAction.gameObject.SetActive(false);
             }
+
+            grandCharge = GameObject.Find("GrandCharge").transform;
+            grandCharge.gameObject.SetActive(false);
         }
 
         // 좌클릭 시 발동되는 함수

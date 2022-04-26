@@ -13,7 +13,7 @@ namespace Weapons.Actions
         public float reboundPower;
         public float alphaSensorValue; // 오브젝트가 투명해지는 거리
 
-        public Transform chargeBar;
+        private Transform chargeBar;
 
         // 그랜드의 크기 변환 단계
         private enum GrandSizeLevel
@@ -64,7 +64,7 @@ namespace Weapons.Actions
         private float _currentLerpTime = 0f;
         private float _weaponUsedTime = 0f;
 
-
+        [System.Obsolete]
         private new void Awake()
         {
             base.Awake();
@@ -77,6 +77,8 @@ namespace Weapons.Actions
 
             WeaponVO vo = Utils.JsonToVO<WeaponVO>(WeaponKeyCodePath);
             _useKeycode = (KeyCode)vo.Use;
+
+            chargeBar = GameObject.Find("ChargeBar").transform;
 
             _sensor = GetComponent<AlphaSensor>();
 
@@ -205,8 +207,8 @@ namespace Weapons.Actions
                     else
                     {
                         _currentLerpTime += Time.deltaTime;
-                        transform.localScale = Vector3.one * Mathf.Lerp(_beforeWeaponSize, _sizeLevelValue[_currentSizeLevel], _currentLerpTime / resizeSpeed);
-                        transform.rotation = Quaternion.Lerp(transform.rotation, lerpQuaternion, _currentLerpTime / resizeSpeed);
+                        transform.localScale = Vector3.one * Mathf.Lerp(_beforeWeaponSize, _sizeLevelValue[_currentSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 1));
+                        transform.rotation = Quaternion.Lerp(transform.rotation, lerpQuaternion, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 1));
                     }
                     break;
                 case GrandStatus.LosePower:
