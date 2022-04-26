@@ -42,8 +42,8 @@ namespace Weapons.Actions
                 // Change Location
 
                 Vector3 playerTrmPos = PlayerBaseTransform.position;
-                PlayerBaseTransform.position = _selectedTrm.position;
-                _selectedTrm.position = playerTrmPos;
+                PlayerBaseTransform.position = _selectedTrm.position - new Vector3(0, (_selectedTrm.localScale.y / 2), 0);
+                _selectedTrm.position = playerTrmPos + new Vector3(0, (_selectedTrm.localScale.y / 2), 0);
             }
         }
 
