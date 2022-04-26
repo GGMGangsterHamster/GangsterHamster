@@ -189,6 +189,7 @@ namespace Weapons.Actions
                         transform.localScale = Vector3.one * _sizeLevelValue[_currentSizeLevel];
                         transform.rotation = Quaternion.identity;
                         _currentGrandStatus = GrandStatus.LosePower;
+                        _myRigid.constraints = RigidbodyConstraints.None;
                     }
                     else
                     {
@@ -247,7 +248,7 @@ namespace Weapons.Actions
             // 이런 저런 조건에 맞으면 플레이어에게 반동을 주고 데미지도 줌
             if (_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize > 0)
             {
-                if ((_sizeLevelValue[_currentSizeLevel] / 2) > Vector3.Distance(transform.position, PlayerBaseTransform.position))
+                if ((_sizeLevelValue[_currentSizeLevel] / 2) > Vector3.Distance(transform.position, PlayerBaseTransform.position) - (PlayerBaseTransform.localScale.x + PlayerBaseTransform.localScale.y) / 3)
                 {
                     Vector3 reboundDir = (PlayerBaseTransform.position - transform.position).normalized;
                     float rebound = (_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize) * reboundPower;
@@ -263,15 +264,13 @@ namespace Weapons.Actions
                     z = maxValue == Mathf.Abs(reboundDir.z) ? rebound * Mathf.Sign(reboundDir.z) : 0;
 
                     PlayerBaseTransform.GetComponent<Rigidbody>().velocity = (transform.right * x) + (transform.up * y) + (transform.forward * z);
-
-
-
-                    Debug.Log(reboundDir);
+                    
                     Player.Damage(weaponDamage);
                 }
             }
 
             _myRigid.angularVelocity = Vector3.zero;
+            _myRigid.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
         /// 조건설명
