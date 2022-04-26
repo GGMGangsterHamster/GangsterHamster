@@ -102,6 +102,12 @@ namespace Weapons.Actions
                 _fireDir = MainCameraTransform.forward;
 
                 transform.position = FirePosition;
+                
+                if(Physics.Raycast(MainCameraTransform.position, PlayerBaseTransform.forward, out RaycastHit hit, 1) && hit.transform.CompareTag("BTYPEOBJECT"))
+                {
+                    transform.position -= MainCameraTransform.forward / 2;
+                }
+
                 _currentGrandStatus = GrandStatus.Fire;
 
                 if (_myCollider.isTrigger)
