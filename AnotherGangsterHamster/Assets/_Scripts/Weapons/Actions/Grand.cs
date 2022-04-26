@@ -11,6 +11,7 @@ namespace Weapons.Actions
         public string WeaponKeyCodePath = "KeyCodes/Weapons.json";
         public float resizeSpeed; // 크기 변환할 때 드는 시간
         public float reboundPower;
+        public float alphaSensorValue; // 오브젝트가 투명해지는 거리
 
         public Transform chargeBar;
 
@@ -48,19 +49,21 @@ namespace Weapons.Actions
             }
         }
 
+        private AlphaSensor _sensor;
+
         private Dictionary<GrandSizeLevel, float> _sizeLevelValue = new Dictionary<GrandSizeLevel, float>();
 
         private GrandSizeLevel _currentSizeLevel = GrandSizeLevel.OneGrade;
         private GrandSizeLevel _beforeSizeLevel = GrandSizeLevel.OneGrade;
         [HideInInspector] public GrandStatus _currentGrandStatus = GrandStatus.Idle;
 
+        private Quaternion lerpQuaternion;
         private KeyCode _useKeycode;
 
         private float _beforeWeaponSize = 0f;
         private float _currentLerpTime = 0f;
         private float _weaponUsedTime = 0f;
 
-        private Quaternion lerpQuaternion;
 
         private new void Awake()
         {
@@ -74,6 +77,14 @@ namespace Weapons.Actions
 
             WeaponVO vo = Utils.JsonToVO<WeaponVO>(WeaponKeyCodePath);
             _useKeycode = (KeyCode)vo.Use;
+
+            _sensor = GetComponent<AlphaSensor>();
+
+            // 만약 플레이어와의 거리가 alphaSensorValue보다 가깝다면 투명도를 올린다.
+            _sensor.requirement = () =>
+            {
+                return alphaSensorValue > Vector3.Distance(PlayerBaseTransform.position, transform.position) - _sizeLevelValue[_currentSizeLevel];
+            };
         }
 
         public override void FireWeapon()
