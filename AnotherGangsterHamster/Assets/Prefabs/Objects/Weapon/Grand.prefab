@@ -110,7 +110,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4857206529191508533}
   serializedVersion: 2
-  m_Mass: 9999
+  m_Mass: 20
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -166,7 +166,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8476a3bdbcdf96b058a4f960b4883763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _callbacks: []
+  _callbacks:
+  - key: BTYPEOBJECT
+    OnActive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4857206529191508491}
+          m_TargetAssemblyTypeName: Weapons.Actions.Grand, Assembly-CSharp
+          m_MethodName: BTypeObjTriggerEnterEvent
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeactive:
+      m_PersistentCalls:
+        m_Calls: []
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
   _activated: 0
@@ -191,7 +210,6 @@ MonoBehaviour:
   resizeSpeed: 0.35
   reboundPower: 3.5
   alphaSensorValue: 1
-  chargeBar: {fileID: 0}
   _currentGrandStatus: 0
 --- !u!114 &4857206529191508492
 MonoBehaviour:

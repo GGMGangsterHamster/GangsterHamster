@@ -131,7 +131,7 @@ namespace Weapons.Actions
                               + PlayerBaseTransform.right * (IsRightHand ? 1 : -1);
 
         protected Vector3 FirePosition => MainCameraTransform.position
-                                        + MainCameraTransform.forward / 6
+                                        + MainCameraTransform.forward
                                         ;
 
         protected Collider _myCollider;
