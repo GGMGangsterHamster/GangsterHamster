@@ -4,15 +4,15 @@ namespace Characters.Player.GroundCheck
 {
    public class OnGround : MonoBehaviour, IGroundCallback
    {
-      private BoxCollider _collider = null;
-      private BoxCollider Collider
+      private CapsuleCollider _collider = null;
+      private CapsuleCollider Collider
       {
          get
          {
             if (_collider == null)
             {
                _collider = GameObject.FindWithTag("PLAYER_BASE")
-                                     .GetComponent<BoxCollider>();
+                                     .GetComponent<CapsuleCollider>();
             }
 
             return _collider;
@@ -41,7 +41,7 @@ namespace Characters.Player.GroundCheck
          PlayerStatus.OnGround   = true;
          PlayerStatus.Jumpable   = true;
 
-         Collider.material.frictionCombine = PhysicMaterialCombine.Maximum;
+         Collider.material.frictionCombine = PhysicMaterialCombine.Average;
       }
    }
 }
