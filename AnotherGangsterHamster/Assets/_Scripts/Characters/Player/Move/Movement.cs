@@ -18,31 +18,31 @@ namespace Characters.Player.Move
       public void MoveBackward()
       {
          if(!PlayerStatus.Moveable) return;
-         _delta.AddZDelta(-PlayerValues.Speed);
+         _delta.SubZDelta();
       }
 
       public void MoveForward()
       {
          if(!PlayerStatus.Moveable) return;
-         _delta.AddZDelta(PlayerValues.Speed);
+         _delta.AddZDelta();
       }
 
       public void MoveLeft()
       {
          if(!PlayerStatus.Moveable) return;
-         _delta.AddXDelta(-PlayerValues.Speed);
+         _delta.SubXDelta();
       }
 
       public void MoveRight()
       {
          if(!PlayerStatus.Moveable) return;
-         _delta.AddXDelta(PlayerValues.Speed);
+         _delta.AddXDelta();
       }
 
       private void FixedUpdate() // TOOD: 루트모션 넣으면 바꿔야 함
       {
          _rigid.MovePosition(transform.position +
-                             _delta.Calculate(transform));
+                             _delta.Calculate(transform, PlayerValues.Speed));
       }
    }
 }

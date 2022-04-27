@@ -22,20 +22,25 @@ namespace Characters.Player.Move
       public void SetDelta(Vector3 delta) => _delta  = delta;
       public void AddDelta(Vector3 delta) => _delta += delta;
 
-      public void AddXDelta(float x) => _delta.x += x;
-      public void AddYDelta(float y) => _delta.y += y;
-      public void AddZDelta(float z) => _delta.z += z;
+      public void AddXDelta() => ++_delta.x;
+      public void AddYDelta() => ++_delta.y;
+      public void AddZDelta() => ++_delta.z;
+
+
+      public void SubXDelta() => --_delta.x;
+      public void SubYDelta() => --_delta.y;
+      public void SubZDelta() => --_delta.z;
 
       /// <summary>
       /// target 의 회전에 따른 delta 를 계산한 뒤 Raw delta 를 더해 반환합니다.
       /// </summary>
       /// <param name="target">회전 계산 기준 Transform</param>
+      /// <param name="deltaMultiply">delta * this</param>
       /// <returns>계산된 Delta</returns>
-      public Vector3 Calculate(Transform target, bool keepDelta = false)
+      public Vector3 Calculate(Transform target, float deltaMultiply = 1.0f, bool keepDelta = false)
       {
-         float scalar = _delta.magnitude;
          Vector3 finalDelta =
-               (target.TransformDirection(_delta).normalized * scalar + _rawDelta)
+               (target.TransformDirection(_delta).normalized * deltaMultiply + _rawDelta)
                * Time.deltaTime;
 
          if (!keepDelta)
