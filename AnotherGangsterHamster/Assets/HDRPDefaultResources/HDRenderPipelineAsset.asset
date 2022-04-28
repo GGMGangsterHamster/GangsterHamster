@@ -201,7 +201,7 @@ MonoBehaviour:
     supportSSR: 1
     supportSSRTransparent: 1
     supportSSAO: 1
-    supportSSGI: 1
+    supportSSGI: 0
     supportSubsurfaceScattering: 1
     sssSampleBudget:
       m_Values: 140000002800000050000000
@@ -274,9 +274,9 @@ MonoBehaviour:
       maxPlanarReflectionOnScreen: 16
       maxLightsPerClusterCell: 8
     hdShadowInitParams:
-      maxShadowRequests: 256
+      maxShadowRequests: 128
       directionalShadowsDepthBits: 16
-      shadowFilteringQuality: 2
+      shadowFilteringQuality: 1
       punctualLightShadowAtlas:
         shadowAtlasResolution: 4096
         shadowAtlasDepthBits: 16
@@ -306,7 +306,7 @@ MonoBehaviour:
       maxScreenSpaceShadowSlots: 6
       screenSpaceShadowBufferFormat: 48
     decalSettings:
-      drawDistance: 500
+      drawDistance: 1000
       atlasWidth: 2048
       atlasHeight: 2048
       perChannelMask: 1
@@ -315,7 +315,7 @@ MonoBehaviour:
       lutFormat: 48
       bufferFormat: 74
     dynamicResolutionSettings:
-      enabled: 1
+      enabled: 0
       maxPercentage: 100
       minPercentage: 100
       dynResType: 1
