@@ -11,18 +11,18 @@ namespace Characters.Player.GroundCheck
       public List<string> _tags = new List<string>();
       [SerializeField] private SetObjectParent _setParent = null;
 
-      private ICollisionEventable _callback = null;
+      private IGroundCallback _callback = null;
 
       private void Awake()
       {
-         _callback = GetComponentInChildren<ICollisionEventable>();
+         _callback = GetComponentInChildren<IGroundCallback>();
       }
 
       private void OnTriggerEnter(Collider other)
       {
          if (_tags.Find(x => other.CompareTag(x)) != null)
          {
-            _callback?.Active(null);
+            _callback?.OnGround();
             _setParent?.Active(null);
          }
       }
@@ -31,7 +31,7 @@ namespace Characters.Player.GroundCheck
       {
          if (_tags.Find(x => other.CompareTag(x)) != null)
          {
-            _callback?.Active(null);
+            _callback?.OnGround();
             _setParent?.Active(null);
          }
       }
@@ -40,7 +40,7 @@ namespace Characters.Player.GroundCheck
       {
          if (_tags.Find(x => other.CompareTag(x)) != null)
          {
-            _callback?.Deactive(null);
+            _callback?.ExitGround();
             _setParent?.Deactive(null);
          }
       }

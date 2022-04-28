@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Characters.Player.GroundCheck
 {
-   public class OnGround : MonoBehaviour, ICollisionEventable
+   public class OnGround : MonoBehaviour, IGroundCallback
    {
       private CapsuleCollider _collider = null;
       private CapsuleCollider Collider
@@ -20,22 +20,22 @@ namespace Characters.Player.GroundCheck
          }
       }
 
-      public void Active(GameObject other)
-      {
-         PlayerStatus.IsJumping = false;
-         PlayerStatus.OnGround = true;
-         PlayerStatus.Jumpable = true;
-
-         Collider.material.frictionCombine = PhysicMaterialCombine.Average;
-      }
-
-      public void Deactive(GameObject other)
+      public void ExitGround()
       {
          PlayerStatus.OnGround = false;
          PlayerStatus.IsJumping = true;
          PlayerStatus.Jumpable = false;
 
          Collider.material.frictionCombine = PhysicMaterialCombine.Minimum;
+      }
+
+      void IGroundCallback.OnGround()
+      {
+         PlayerStatus.IsJumping = false;
+         PlayerStatus.OnGround = true;
+         PlayerStatus.Jumpable = true;
+
+         Collider.material.frictionCombine = PhysicMaterialCombine.Average;
       }
    }
 }
