@@ -9,21 +9,26 @@ namespace Objects.StageObjects
    {
       const string PLAYER = "PLAYER_BASE";
       [SerializeField] private int _damage = 100;
+      [SerializeField] LayerMask _ignoreMe;
 
       private LineRenderer _line;
       private BoxCollider  _collider;
+
 
       private void Awake()
       {
          _line = GetComponent<LineRenderer>();
          _collider = GetComponent<BoxCollider>();
+         _ignoreMe = ~_ignoreMe;
       }
 
       private void Update()
       {
          if (UnityEngine.Physics.Raycast(transform.position,
                                          transform.forward,
-                                         out var hit))
+                                         out var hit,
+                                         Mathf.Infinity,
+                                         _ignoreMe))
          {
             Vector3 targetPos = transform.InverseTransformPoint(hit.point);
 
