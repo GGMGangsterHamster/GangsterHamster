@@ -10,7 +10,7 @@ namespace Objects.StageObjects
       const string PLAYER = "PLAYER_BASE";
       [SerializeField] private int _damage = 100;
       [SerializeField] LayerMask _ignoreMe;
-
+      
       private LineRenderer _line;
       private BoxCollider  _collider;
 
