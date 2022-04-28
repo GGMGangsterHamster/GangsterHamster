@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace Objects
 {
-   public class CollisionInteractableObject : MonoBehaviour
+   public class CollisionInteractableObject : MonoBehaviour, IActivated
    {
       public List<CollisionCallback> _callbacks
                = new List<CollisionCallback>();
@@ -16,7 +16,9 @@ namespace Objects
       [field: SerializeField]
       public bool InitalActiveStatus { get; set; } = false;
 
+
       [HideInInspector] public bool _activated = false;
+      public bool Activated => _activated;
 
       // 현제 상호작용 이루어지고 있는 오브젝트
       private GameObject _curInteractedObject = null;

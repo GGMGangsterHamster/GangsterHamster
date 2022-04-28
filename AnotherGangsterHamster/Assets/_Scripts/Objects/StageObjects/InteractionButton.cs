@@ -5,7 +5,7 @@ using Objects.Interaction;
 
 namespace Objects.StageObjects
 {
-   public class InteractionButton : Interactable
+   public class InteractionButton : Interactable, IActivated
    {
       public UnityEvent<GameObject> OnActive;
       public UnityEvent<GameObject> OnDeactive;
@@ -16,7 +16,9 @@ namespace Objects.StageObjects
 
       [field: SerializeField]
       public bool InitalActiveStatus { get; set; } = false; // 점프 OnStay
+
       private bool _activated = false;
+      public bool Activated => _activated;
 
       private void Awake()
       {
@@ -27,6 +29,7 @@ namespace Objects.StageObjects
 
       public override void Interact()
       {
+         Debug.Log("A");
          OnInteraction();
       }
 

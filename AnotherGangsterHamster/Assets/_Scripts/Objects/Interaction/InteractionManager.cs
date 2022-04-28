@@ -26,5 +26,6 @@ namespace Objects.Interaction
       /// </summary>
       public void Interact()
             => CurrentActiveInteraction?.Interact();
+
    }
 }
