@@ -37,11 +37,20 @@ namespace Characters.Player.Move
       /// <param name="target">회전 계산 기준 Transform</param>
       /// <param name="deltaMultiply">delta * this</param>
       /// <returns>계산된 Delta</returns>
-      public Vector3 Calculate(Transform target, float deltaMultiply = 1.0f, bool keepDelta = false)
+      public Vector3 Calculate(Transform target, float deltaMultiply = 1.0f, bool globalDelta = false, bool keepDelta = false)
       {
-         Vector3 finalDelta =
+         Vector3 finalDelta;
+
+         if (globalDelta)
+         {
+            finalDelta = (_delta.normalized * deltaMultiply + _rawDelta) * Time.deltaTime;
+         }
+         else
+         {
+            finalDelta =
                (target.TransformDirection(_delta).normalized * deltaMultiply + _rawDelta)
                * Time.deltaTime;
+         }
 
          if (!keepDelta)
          {

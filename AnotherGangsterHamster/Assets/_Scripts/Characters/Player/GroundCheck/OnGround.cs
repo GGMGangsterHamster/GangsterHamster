@@ -1,8 +1,9 @@
+using Objects;
 using UnityEngine;
 
 namespace Characters.Player.GroundCheck
 {
-   public class OnGround : MonoBehaviour, IGroundCallback
+   public class OnGround : MonoBehaviour, ICollisionEventable
    {
       private CapsuleCollider _collider = null;
       private CapsuleCollider Collider
@@ -19,29 +20,22 @@ namespace Characters.Player.GroundCheck
          }
       }
 
-
-      /// <summary>
-      /// 바닥 떠날 시 호출됨
-      /// </summary>
-      public void ExitGround()
+      public void Active(GameObject other)
       {
-         PlayerStatus.OnGround   = false;
-         PlayerStatus.IsJumping  = true;
-         PlayerStatus.Jumpable   = false;
-
-         Collider.material.frictionCombine = PhysicMaterialCombine.Minimum;
-      }
-
-      /// <summary>
-      /// 바닥이랑 붙어있으면 계속 호출됨 (고쳐아 함)
-      /// </summary>
-      void IGroundCallback.OnGround()
-      {
-         PlayerStatus.IsJumping  = false;
-         PlayerStatus.OnGround   = true;
-         PlayerStatus.Jumpable   = true;
+         PlayerStatus.IsJumping = false;
+         PlayerStatus.OnGround = true;
+         PlayerStatus.Jumpable = true;
 
          Collider.material.frictionCombine = PhysicMaterialCombine.Average;
+      }
+
+      public void Deactive(GameObject other)
+      {
+         PlayerStatus.OnGround = false;
+         PlayerStatus.IsJumping = true;
+         PlayerStatus.Jumpable = false;
+
+         Collider.material.frictionCombine = PhysicMaterialCombine.Minimum;
       }
    }
 }

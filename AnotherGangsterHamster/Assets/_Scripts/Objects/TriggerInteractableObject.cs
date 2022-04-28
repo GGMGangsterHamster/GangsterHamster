@@ -65,7 +65,7 @@ namespace Objects
                return;
             }
 
-            _activated = !_activated;
+            _activated = !_activated; // TODO: 문에 이거 걸어야 힘
 
             if (_activated)
                callback.OnActive?.Invoke(other);

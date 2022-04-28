@@ -29,7 +29,6 @@ namespace Objects.StageObjects
 
       public override void Interact()
       {
-         Debug.Log("A");
          OnInteraction();
       }
 

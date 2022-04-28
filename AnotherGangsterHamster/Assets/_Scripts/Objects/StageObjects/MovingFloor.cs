@@ -24,7 +24,6 @@ namespace Objects.StageObjects
          if (_down != null || _up != null)
             ValueTween.Stop(this);
 
-         Debug.Log("A");
 
          Vector3 step = target / duration;
          Vector3 final = _initalPos + target;
