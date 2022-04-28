@@ -82,10 +82,10 @@ MonoBehaviour:
   m_AdvancedMode: 0
   mode:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 4
   meteringMode:
-    m_OverrideState: 0
-    m_Value: 2
+    m_OverrideState: 1
+    m_Value: 4
   luminanceSource:
     m_OverrideState: 0
     m_Value: 1
@@ -96,10 +96,10 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0
   limitMin:
-    m_OverrideState: 0
-    m_Value: -1
+    m_OverrideState: 1
+    m_Value: 5
   limitMax:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 14
   curveMap:
     m_OverrideState: 0
@@ -180,22 +180,22 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   adaptationMode:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   adaptationSpeedDarkToLight:
-    m_OverrideState: 0
-    m_Value: 3
+    m_OverrideState: 1
+    m_Value: 4
     min: 0.001
   adaptationSpeedLightToDark:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 4
     min: 0.001
   weightTextureMask:
     m_OverrideState: 0
     m_Value: {fileID: 0}
   histogramPercentages:
-    m_OverrideState: 0
-    m_Value: {x: 40, y: 90}
+    m_OverrideState: 1
+    m_Value: {x: 10, y: 90}
     min: 0
     max: 100
   histogramUseCurveRemapping:
@@ -211,8 +211,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: {x: 0.5, y: 0.5}
   proceduralRadii:
-    m_OverrideState: 0
-    m_Value: {x: 0.3, y: 0.3}
+    m_OverrideState: 1
+    m_Value: {x: 0.5, y: 0.5}
   maskMinIntensity:
     m_OverrideState: 0
     m_Value: -30
@@ -220,8 +220,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 30
   proceduralSoftness:
-    m_OverrideState: 0
-    m_Value: 0.5
+    m_OverrideState: 1
+    m_Value: 1
     min: 0
 --- !u!114 &-7518891571694693433
 MonoBehaviour:
@@ -235,13 +235,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ef2681fa3dc8c4fa031f044e68c63f, type: 3}
   m_Name: GlobalIllumination
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   m_AdvancedMode: 0
   quality:
     m_OverrideState: 0
     m_Value: 2
   enable:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   depthBufferThickness:
     m_OverrideState: 0
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 384c4d03a551c44448145f4093304119, type: 3}
   m_Name: ScreenSpaceReflection
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   m_AdvancedMode: 0
   quality:
     m_OverrideState: 0
@@ -625,6 +625,12 @@ MonoBehaviour:
   m_Name: GlobalVolume
   m_EditorClassIdentifier: 
   components:
+  - {fileID: -7786532549973170308}
+  - {fileID: 6762252611351634696}
+  - {fileID: 5108279556216800218}
+  - {fileID: -7518891571694693433}
+  - {fileID: -7350055264262128594}
+  - {fileID: 8804001718207091630}
   - {fileID: 7081718427282773310}
   - {fileID: -3211206587427525457}
   - {fileID: -4196396855156613519}
@@ -632,17 +638,11 @@ MonoBehaviour:
   - {fileID: 6271617962690601216}
   - {fileID: -5218196669100640552}
   - {fileID: 7800799549085380507}
-  - {fileID: 5108279556216800218}
   - {fileID: 6266750776091091316}
   - {fileID: -8874516983510320643}
-  - {fileID: -7786532549973170308}
   - {fileID: -4148485636106085339}
   - {fileID: -2202059584729027642}
   - {fileID: 2978760774509008760}
-  - {fileID: 6762252611351634696}
-  - {fileID: -7350055264262128594}
-  - {fileID: -7518891571694693433}
-  - {fileID: 8804001718207091630}
 --- !u!114 &167647153947004282
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1137,10 +1137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e17fad69ea181b4483974138b566975, type: 3}
   m_Name: ScreenSpaceRefraction
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   m_AdvancedMode: 0
   screenFadeDistance:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0.1
     min: 0.001
     max: 1
