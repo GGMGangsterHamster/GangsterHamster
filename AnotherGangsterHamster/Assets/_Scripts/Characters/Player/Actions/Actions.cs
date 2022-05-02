@@ -108,6 +108,7 @@ namespace Characters.Player.Actions
             = new Vector3(0.0f, PlayerValues.PlayerStandingHeight / 2.0f, 0.0f);
          Collider.height = Collider.center.y * 2.0f;
 
+         
          PlayerTrm.localScale    = targetScale;
          PlayerTrm.localPosition = targetPos;
       }
