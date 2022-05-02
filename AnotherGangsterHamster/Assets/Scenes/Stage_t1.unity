@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.17980957, g: 0.17980957, b: 0.17980957, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -187,6 +187,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4704299422026483020, guid: e9fed65fb6b2e2622b6708846c0b1b54, type: 3}
+      propertyPath: m_Version
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4704299422026483020, guid: e9fed65fb6b2e2622b6708846c0b1b54, type: 3}
+      propertyPath: m_RenderingPathCustomFrameSettings.msaaMode
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4704299422026483022, guid: e9fed65fb6b2e2622b6708846c0b1b54, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -253,6 +261,7 @@ GameObject:
   - component: {fileID: 1097068030}
   - component: {fileID: 1097068035}
   - component: {fileID: 1097068029}
+  - component: {fileID: 1097068036}
   m_Layer: 0
   m_Name: Grand
   m_TagString: ATYPEOBJECT
@@ -270,6 +279,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.34, y: 0, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1264653182}
   m_RootOrder: 1
@@ -287,12 +297,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponEnum: 0
-  possibleUse: 0
   Path: SettingValue/HandMode.json
-  WeaponKeyCodePath: KeyCodes/Weapons.json
+  possibleUse: 0
   fireSpeed: 4
+  weaponDamage: 0
+  WeaponKeyCodePath: KeyCodes/Weapons.json
   resizeSpeed: 0.5
-  currentGrandStatus: 0
+  reboundPower: 0
+  alphaSensorValue: 0
+  _currentGrandStatus: 0
 --- !u!114 &1097068030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,6 +342,8 @@ MonoBehaviour:
         m_Calls: []
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
+  _activated: 0
+  colNormalVec: {x: 0, y: 0, z: 0}
 --- !u!54 &1097068031
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -369,6 +384,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -422,6 +438,19 @@ MonoBehaviour:
   _callbacks: []
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
+  _activated: 0
+--- !u!114 &1097068036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097068027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 056c7320f5acea5e29f99e796f36e5f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1264653179
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,6 +504,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1887536071}
   - {fileID: 1097068028}
@@ -515,6 +545,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1264653182}
   m_RootOrder: 0
@@ -532,11 +563,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponEnum: 0
-  possibleUse: 1
   Path: SettingValue/HandMode.json
-  DefaultFireSpeed: 12
-  DefaultReboundPower: 1.8
-  TimeReboundPower: 3
+  possibleUse: 1
+  fireSpeed: 0
+  weaponDamage: 0
 --- !u!114 &1887536073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,6 +651,8 @@ MonoBehaviour:
         m_Calls: []
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
+  _activated: 0
+  colNormalVec: {x: 0, y: 0, z: 0}
 --- !u!54 &1887536074
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -661,6 +693,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -771,6 +804,7 @@ MonoBehaviour:
         m_Calls: []
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
+  _activated: 0
 --- !u!1001 &1910809699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -861,6 +895,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.34, y: 0, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1264653182}
   m_RootOrder: 2
@@ -878,10 +913,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponEnum: 0
-  possibleUse: 0
   Path: SettingValue/HandMode.json
+  possibleUse: 0
   fireSpeed: 10
-  gravityChangeSpeed: 1
+  weaponDamage: 0
+  gravityChangeTime: 0
 --- !u!114 &1981766038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -897,6 +933,8 @@ MonoBehaviour:
   _callbacks: []
   <EventIsToggle>k__BackingField: 1
   <InitalActiveStatus>k__BackingField: 0
+  _activated: 0
+  colNormalVec: {x: 0, y: 0, z: 0}
 --- !u!54 &1981766039
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -938,6 +976,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -991,6 +1030,7 @@ MonoBehaviour:
   _callbacks: []
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
+  _activated: 0
 --- !u!1001 &2056930851
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1087,6 +1127,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
