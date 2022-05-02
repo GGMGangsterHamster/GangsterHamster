@@ -110,7 +110,7 @@ namespace Weapons.Actions
 
                 _currentGrandStatus = GrandStatus.Fire;
 
-                if (!_myCollider.enabled) _myCollider.enabled = true;
+                _myCollider.enabled = true;
             }
         }
         public override void UseWeapon()
@@ -148,6 +148,7 @@ namespace Weapons.Actions
         #region CollisionEvents
         public void BTypeObjCollisionEnterEvent(GameObject obj)
         {
+            Debug.Log("Collision");
             if(_currentGrandStatus != GrandStatus.Resize &&
                 _currentGrandStatus != GrandStatus.Use)
             {
