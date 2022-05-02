@@ -16,6 +16,8 @@ namespace Objects
       [field: SerializeField]
       public bool InitalActiveStatus { get; set; } = false;
 
+      [SerializeField]
+      public bool MultipleCollisionable = false;
 
       [HideInInspector] public bool _activated = false;
       public bool Activated => _activated;
@@ -34,7 +36,9 @@ namespace Objects
       #region Unity Collision Event
       private void OnCollisionEnter(Collision other)
       {
-         if (_curInteractedObject != null) return;
+         if (!MultipleCollisionable
+            && _curInteractedObject != null) return;
+
          _curInteractedObject = other.gameObject;
 
          colNormalVec = other.contacts[0].normal;
@@ -43,7 +47,9 @@ namespace Objects
 
       private void OnCollisionExit(Collision other)
       {
-         if (_curInteractedObject != other.gameObject) return;
+         if (!MultipleCollisionable
+            && _curInteractedObject != other.gameObject) return;
+            
          _curInteractedObject = null;
 
          if (!EventIsToggle)
