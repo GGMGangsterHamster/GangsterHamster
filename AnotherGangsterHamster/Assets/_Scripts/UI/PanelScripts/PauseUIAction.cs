@@ -1,6 +1,7 @@
 using Setting.VO;
 using UI.Screen;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace UI.PanelScripts
@@ -73,6 +74,7 @@ namespace UI.PanelScripts
 
             _gameRestartButton.onClick.AddListener(() =>
             {
+                SceneManager.LoadScene(gameObject.scene.name);
                 // 현재의 스테이지를 재시작
             });
 
