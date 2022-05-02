@@ -148,7 +148,6 @@ namespace Weapons.Actions
         #region CollisionEvents
         public void BTypeObjCollisionEnterEvent(GameObject obj)
         {
-            Debug.Log("Collision");
             if(_currentGrandStatus != GrandStatus.Resize &&
                 _currentGrandStatus != GrandStatus.Use)
             {
@@ -221,7 +220,7 @@ namespace Weapons.Actions
         {
             int jumpLevel = 0;
 
-            if (_weaponUsedTime >= 1f)
+            if (_weaponUsedTime >= 0.65f)
                 jumpLevel = 2;
             else
                 jumpLevel = 1;
