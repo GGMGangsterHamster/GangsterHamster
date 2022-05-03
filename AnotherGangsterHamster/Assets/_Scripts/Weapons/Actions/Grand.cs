@@ -110,7 +110,9 @@ namespace Weapons.Actions
 
                 _currentGrandStatus = GrandStatus.Fire;
 
-                _myCollider.enabled = true;
+                //_myCollider.enabled = true;
+                _myCollider.isTrigger = false;
+                (_myCollider as BoxCollider).center = Vector3.zero;
             }
         }
         public override void UseWeapon()
@@ -161,7 +163,9 @@ namespace Weapons.Actions
             switch(_currentGrandStatus)
             {
                 case GrandStatus.Idle:
-                    if (_myCollider.enabled) _myCollider.enabled = false;
+                    //if (_myCollider.enabled) _myCollider.enabled = false;
+                    //_myCollider.isTrigger = true;
+                    (_myCollider as BoxCollider).center = Vector3.one * short.MaxValue;
                     if (_myRigid.constraints == RigidbodyConstraints.None) _myRigid.constraints = RigidbodyConstraints.FreezePosition;
 
                     transform.position = HandPosition;

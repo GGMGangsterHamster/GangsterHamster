@@ -32,7 +32,8 @@ Transform:
   m_GameObject: {fileID: 6561639687853262556}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.34, y: 0, z: -6}
-  m_LocalScale: {x: 0.05, y: 0.8, z: 0.05}
+  m_LocalScale: {x: 0.05, y: 1.8, z: 0.05}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -56,6 +57,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -97,9 +99,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 0.3
   m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 0.85, z: 0}
 --- !u!54 &6561639687853262497
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -169,6 +171,7 @@ MonoBehaviour:
         m_Calls: []
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
+  MultipleCollisionable: 0
   _activated: 0
   colNormalVec: {x: 0, y: 0, z: 0}
 --- !u!114 &6561639687853262559
@@ -186,6 +189,7 @@ MonoBehaviour:
   _callbacks: []
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
+  _activated: 0
 --- !u!114 &6561639687853262558
 MonoBehaviour:
   m_ObjectHideFlags: 0
