@@ -36,7 +36,7 @@ namespace Characters.Player
 #endregion // Player Height
 
 
-      public const float InteractionMaxDistance = 1.0f;
+      public const float InteractionMaxDistance = 2.0f;
 
 
       static private float _speed = WalkingSpeed;
