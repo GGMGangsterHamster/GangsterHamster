@@ -28,6 +28,8 @@ namespace Objects
       // Collision에서 Normal 벡터를 빼내기 위해서 존재하는 변수
       public Vector3 colNormalVec; 
 
+      public Vector3 colVelocity;
+
       private void Awake()
       {
          _activated = InitalActiveStatus;
@@ -42,6 +44,7 @@ namespace Objects
          _curInteractedObject = other.gameObject;
 
          colNormalVec = other.contacts[0].normal;
+         colVelocity = other.relativeVelocity;
          CollisionEnterEvent(other.gameObject);
       }
 
