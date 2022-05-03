@@ -110,7 +110,9 @@ namespace Weapons.Actions
 
                 _currentGrandStatus = GrandStatus.Fire;
 
-                _myCollider.enabled = true;
+                //_myCollider.enabled = true;
+                _myCollider.isTrigger = false;
+                (_myCollider as BoxCollider).center = Vector3.zero;
             }
         }
         public override void UseWeapon()
@@ -161,7 +163,9 @@ namespace Weapons.Actions
             switch(_currentGrandStatus)
             {
                 case GrandStatus.Idle:
-                    if (_myCollider.enabled) _myCollider.enabled = false;
+                    //if (_myCollider.enabled) _myCollider.enabled = false;
+                    //_myCollider.isTrigger = true;
+                    (_myCollider as BoxCollider).center = Vector3.one * short.MaxValue;
                     if (_myRigid.constraints == RigidbodyConstraints.None) _myRigid.constraints = RigidbodyConstraints.FreezePosition;
 
                     transform.position = HandPosition;
@@ -242,9 +246,9 @@ namespace Weapons.Actions
         private void ResizeStart()
         {
             // 여기서 정해진 조건에 충족하지 못하는 경우 밑의 코드를 실행하지 못함
-            if (!CanResize(transform.up) ||
-               !CanResize(transform.right) ||
-               !CanResize(transform.forward))
+            if (!CanResize(Vector3.up) ||
+               !CanResize(Vector3.right) ||
+               !CanResize(Vector3.forward))
             {
                 return;
             }

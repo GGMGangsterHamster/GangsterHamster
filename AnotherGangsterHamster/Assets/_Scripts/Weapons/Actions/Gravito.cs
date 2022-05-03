@@ -64,7 +64,7 @@ namespace Weapons.Actions
                 if (_myRigid.constraints != RigidbodyConstraints.None) _myRigid.constraints = RigidbodyConstraints.None;
                 
                 _fireDir = MainCameraTransform.forward;
-                transform.position = FirePosition;
+                transform.position = FirePosition - MainCameraTransform.forward * 2.5f;
                 _myRigid.angularVelocity = Vector3.zero;
                 _currentGravitoStatus = GravitoStatus.Fire;
 
