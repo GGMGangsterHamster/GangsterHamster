@@ -246,9 +246,9 @@ namespace Weapons.Actions
         private void ResizeStart()
         {
             // 여기서 정해진 조건에 충족하지 못하는 경우 밑의 코드를 실행하지 못함
-            if (!CanResize(transform.up) ||
-               !CanResize(transform.right) ||
-               !CanResize(transform.forward))
+            if (!CanResize(Vector3.up) ||
+               !CanResize(Vector3.right) ||
+               !CanResize(Vector3.forward))
             {
                 return;
             }
