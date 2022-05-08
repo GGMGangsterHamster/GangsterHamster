@@ -75,12 +75,15 @@ namespace UI.PanelScripts
             _gameRestartButton.onClick.AddListener(() =>
             {
                 SceneManager.LoadScene(gameObject.scene.name);
+                Utils.LockCursor();
+                Utils.MoveTime();
                 // 현재의 스테이지를 재시작
             });
 
             _disableButton.onClick.AddListener(() =>
             {
                 Utils.LockCursor();
+                Utils.MoveTime();
                 UIManager.Instance.DeActivationPanel(panelId);
             });
 
@@ -100,6 +103,7 @@ namespace UI.PanelScripts
             if(Input.GetKeyDown(KeyCode.Escape))
             {
                 Utils.LockCursor();
+                Utils.MoveTime();
                 UIManager.Instance.DeActivationPanel(panelId);
             }
         }

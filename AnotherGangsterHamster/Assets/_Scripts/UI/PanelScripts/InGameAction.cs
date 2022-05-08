@@ -46,10 +46,11 @@ namespace UI.PanelScripts
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Utils.UnlockCursor();
+                Utils.StopTime();
                 UIManager.Instance.ActivationPanel(UIPanels.Pause);
             }
 
-            if (UnityEngine.Physics.Raycast(MainCameraTransform.position, MainCameraTransform.forward, out RaycastHit hit))
+            if (Physics.Raycast(MainCameraTransform.position, MainCameraTransform.forward, out RaycastHit hit))
             {
                 foreach(AimColor ac in aimColors)
                 {
@@ -60,5 +61,7 @@ namespace UI.PanelScripts
                 }
             }
         }
+
+        
     }
 }
