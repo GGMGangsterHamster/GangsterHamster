@@ -21,7 +21,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7755665799687726562
 Transform:
@@ -33,6 +33,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -56,6 +57,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -199,8 +201,10 @@ MonoBehaviour:
         m_Calls: []
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
+  MultipleCollisionable: 0
   _activated: 0
   colNormalVec: {x: 0, y: 0, z: 0}
+  colVelocity: {x: 0, y: 0, z: 0}
 --- !u!114 &7755665799687726588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,6 +289,7 @@ MonoBehaviour:
         m_Calls: []
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
+  _activated: 0
 --- !u!114 &6820202014178921094
 MonoBehaviour:
   m_ObjectHideFlags: 0
