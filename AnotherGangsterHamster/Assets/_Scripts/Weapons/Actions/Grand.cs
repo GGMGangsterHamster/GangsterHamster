@@ -64,7 +64,6 @@ namespace Weapons.Actions
         private float _currentLerpTime = 0f;
         private float _weaponUsedTime = 0f;
 
-        [System.Obsolete]
         private new void Awake()
         {
             base.Awake();
@@ -81,9 +80,12 @@ namespace Weapons.Actions
             chargeBar = GameObject.Find("ChargeBar").transform;
 
             _sensor = GetComponent<AlphaSensor>();
+        }
 
+        private void Start()
+        {
             // 만약 플레이어와의 거리가 alphaSensorValue보다 가깝다면 투명도를 올린다.
-            _sensor.requirement = () =>
+            _sensor.requirement += () =>
             {
                 return alphaSensorValue > Vector3.Distance(PlayerBaseTransform.position, transform.position) - _sizeLevelValue[_currentSizeLevel];
             };
@@ -101,16 +103,31 @@ namespace Weapons.Actions
 
                 _fireDir = MainCameraTransform.forward;
 
-                transform.position = FirePosition;
-                
-                if(Physics.Raycast(MainCameraTransform.position, PlayerBaseTransform.forward, out RaycastHit hit, 1) && hit.transform.CompareTag("BTYPEOBJECT"))
+                if(_fireDir.y < -0.8f)
                 {
-                    transform.position -= MainCameraTransform.forward / 2;
+                    transform.position = FirePosition;
+                    PlayerBaseTransform.position -= Vector3.up * _fireDir.y;
                 }
+                else if (Physics.Raycast(MainCameraTransform.position, PlayerBaseTransform.forward, out RaycastHit hit, 1.5f) && hit.transform.CompareTag("BTYPEOBJECT"))
+                {
+                    float dist = (1.5f - Vector3.Distance(MainCameraTransform.position, hit.point));
+
+                    transform.position = FirePosition;
+                    transform.position += new Vector3(PlayerBaseTransform.localScale.x * hit.normal.x * (dist / 1.4f),
+                                                      PlayerBaseTransform.localScale.y * hit.normal.y * (dist / 1.4f),
+                                                      PlayerBaseTransform.localScale.z * hit.normal.z * (dist / 1.4f));
+
+                    PlayerBaseTransform.position += hit.normal * (dist + 0.5f);
+                }
+                else
+                {
+                    transform.position = FirePosition;
+                }
+                
+
 
                 _currentGrandStatus = GrandStatus.Fire;
 
-                //_myCollider.enabled = true;
                 _myCollider.isTrigger = false;
                 (_myCollider as BoxCollider).center = Vector3.zero;
             }
@@ -151,7 +168,17 @@ namespace Weapons.Actions
         public void BTypeObjCollisionEnterEvent(GameObject obj)
         {
             if(_currentGrandStatus != GrandStatus.Resize &&
-                _currentGrandStatus != GrandStatus.Use)
+               _currentGrandStatus != GrandStatus.Use)
+            {
+                _currentGrandStatus = GrandStatus.LosePower;
+            }
+        }
+
+        public void BTypeObjCollisionStayEvent(GameObject obj)
+        {
+            if (_currentGrandStatus != GrandStatus.Resize &&
+                _currentGrandStatus != GrandStatus.Use &&
+                _currentGrandStatus != GrandStatus.LosePower)
             {
                 _currentGrandStatus = GrandStatus.LosePower;
             }
@@ -163,8 +190,6 @@ namespace Weapons.Actions
             switch(_currentGrandStatus)
             {
                 case GrandStatus.Idle:
-                    //if (_myCollider.enabled) _myCollider.enabled = false;
-                    //_myCollider.isTrigger = true;
                     (_myCollider as BoxCollider).center = Vector3.one * short.MaxValue;
                     if (_myRigid.constraints == RigidbodyConstraints.None) _myRigid.constraints = RigidbodyConstraints.FreezePosition;
 

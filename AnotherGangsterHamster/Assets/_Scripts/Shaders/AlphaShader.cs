@@ -10,30 +10,28 @@ public class AlphaShader : MonoBehaviour
     {
         get
         {
-            return _alphaMat.GetFloat("alpha");
+            return _alphaMat.color.a;
         }
         set
         {
-            _alphaMat.SetFloat("alpha", value);
+            _alphaMat.color = new Color(_alphaMat.color.r,
+                                        _alphaMat.color.g,
+                                        _alphaMat.color.b,
+                                        value
+            );
         }
     }
 
     private void Awake()
     {
-        Material[] mats = GetComponent<MeshRenderer>().materials;
+        Material mat = GetComponent<MeshRenderer>().material;
 
-        foreach(Material mat in mats)
-        {
-            if (mat.name == "AlphaMat (Instance)")
-            {
-                _alphaMat = mat;
-                break;
-            }
-        }
+        _alphaMat = mat;
 
         if(_alphaMat == null)
         {
             Debug.LogError("알파 Material이 없어요");
+            Time.timeScale = 0;
         }
     }
 }
