@@ -22,7 +22,6 @@ namespace Weapons.Actions
             TwoGrade,
             FourGrade,
         }
-
         private float fullChangeTime
         {
             get
@@ -35,7 +34,6 @@ namespace Weapons.Actions
                     return 0f;
             }
         }
-
         private float ChargeBarValue
         {
             get
@@ -63,6 +61,9 @@ namespace Weapons.Actions
         private float _beforeWeaponSize = 0f;
         private float _currentLerpTime = 0f;
         private float _weaponUsedTime = 0f;
+
+        private Vector3 beforePos;
+        private Vector3 afterPos;
 
         private new void Awake()
         {
@@ -154,6 +155,7 @@ namespace Weapons.Actions
                 transform.rotation = Quaternion.identity;
                 _myRigid.angularVelocity = Vector3.zero;
                 _currentGrandStatus = GrandStatus.Idle;
+                _weaponUsedTime = 0f;
             }
         }
 
@@ -190,7 +192,6 @@ namespace Weapons.Actions
                 case GrandStatus.Idle:
                     (_myCollider as BoxCollider).center = Vector3.one * short.MaxValue;
                     if (_myRigid.constraints == RigidbodyConstraints.None) _myRigid.constraints = RigidbodyConstraints.FreezePosition;
-
                     transform.position = HandPosition;
                     break;
                 case GrandStatus.Fire:
@@ -218,11 +219,12 @@ namespace Weapons.Actions
                         // 키를 누르고 떼면 Resize로 이동
                     }
                     break;
-                case GrandStatus.Resize:
+                case GrandStatus.Resize: // 크기 변환 과정
                     if(_currentLerpTime >= resizeSpeed)
                     {
                         transform.localScale = Vector3.one * _sizeLevelValue[_currentSizeLevel];
                         transform.rotation = Quaternion.identity;
+                        //transform.position = afterPos;
                         _currentGrandStatus = GrandStatus.LosePower;
                         _myRigid.constraints = RigidbodyConstraints.None;
 
@@ -234,6 +236,7 @@ namespace Weapons.Actions
                         _currentLerpTime += Time.deltaTime;
                         transform.localScale = Vector3.one * Mathf.Lerp(_beforeWeaponSize, _sizeLevelValue[_currentSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
                         transform.rotation = Quaternion.Lerp(transform.rotation, lerpQuaternion, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
+                        transform.position = Vector3.Lerp(beforePos, afterPos, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
                     }
                     break;
                 case GrandStatus.LosePower:
@@ -266,7 +269,7 @@ namespace Weapons.Actions
                 _currentSizeLevel = GrandSizeLevel.FourGrade;
         }
 
-        private void ResizeStart()
+        private void ResizeStart() 
         {
             // 여기서 정해진 조건에 충족하지 못하는 경우 밑의 코드를 실행하지 못함
             if (!CanResize(Vector3.up) ||
@@ -276,6 +279,7 @@ namespace Weapons.Actions
                 return;
             }
 
+            // 크기 변환 전 초기 작업
             float x, y, z;
 
             _currentGrandStatus = GrandStatus.Resize;
@@ -286,6 +290,8 @@ namespace Weapons.Actions
                                                 , 1, 1);
 
             // 이런 저런 조건에 맞으면 플레이어에게 반동을 주고 데미지도 줌
+            // 1. 작아지는 경우라면 실행 안함
+            // 2. 플레이어가 정해진 범위에 들어와야 실행함
             if (_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize > 0)
             {
                 if ((_sizeLevelValue[_currentSizeLevel] / 2) > Vector3.Distance(transform.position, PlayerBaseTransform.position) - (PlayerBaseTransform.localScale.x + PlayerBaseTransform.localScale.y) / 3)
@@ -319,6 +325,13 @@ namespace Weapons.Actions
             lerpQuaternion = Quaternion.Euler(transform.rotation.eulerAngles.x + lerpQuaternion.eulerAngles.x,
                                                 transform.rotation.eulerAngles.y + lerpQuaternion.eulerAngles.y,
                                                 transform.rotation.eulerAngles.z + lerpQuaternion.eulerAngles.z);
+
+            beforePos = transform.position;
+            afterPos = transform.position;
+
+            ReadjustmentPos(Vector3.right);
+            ReadjustmentPos(Vector3.up);
+            ReadjustmentPos(Vector3.forward);
 
             _myRigid.angularVelocity = Vector3.zero;
             _myRigid.constraints = RigidbodyConstraints.FreezeRotation;
@@ -359,6 +372,51 @@ namespace Weapons.Actions
             }
 
             return true;
+        }
+
+        private void ReadjustmentPos(Vector3 checkDir)
+        {
+            float curSize = _sizeLevelValue[_currentSizeLevel] / 2;
+            float plusAxisDist = GetDistance(checkDir);
+            float minusAxisDist = GetDistance(-checkDir);
+
+            if (plusAxisDist < curSize)
+            {
+                float padding = curSize - plusAxisDist;
+
+                if(minusAxisDist > curSize + padding)
+                {
+                    afterPos += -checkDir * padding;
+                    // padding 만큼 이동
+                }
+            }
+            else if (minusAxisDist < curSize)
+            {
+                float padding = curSize - minusAxisDist;
+
+                if (plusAxisDist > curSize + padding)
+                {
+                    afterPos += checkDir * padding;
+                    // padding 만큼 이동
+                }
+            }
+            else
+            {
+                // 문제가 없다는 것!!
+            }
+        }
+
+        private float GetDistance(Vector3 dir)
+        {
+            if (Physics.Raycast(transform.position, dir, out RaycastHit hit))
+            {
+                if (hit.transform.CompareTag("BTYPEOBJECT"))
+                {
+                    return Vector3.Distance(hit.point, transform.position);
+                }
+            }
+
+            return float.MaxValue;
         }
     }
 }
