@@ -19,6 +19,14 @@ namespace Weapons.Actions
         TwoSelected,
     }
 
+    public enum StopStatus
+    {
+        Idle,
+        Fire,
+        Use,
+        Stay
+    }
+
     // 그랜드가 가질 수 있는 상태들
     public enum GrandStatus
     {
