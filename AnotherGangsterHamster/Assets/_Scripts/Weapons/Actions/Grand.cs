@@ -269,6 +269,10 @@ namespace Weapons.Actions
 
         private void NextSizeLevel()
         {
+            ReadjustmentPos(Vector3.right);
+            ReadjustmentPos(Vector3.up);
+            ReadjustmentPos(Vector3.forward);
+
             int jumpLevel = 0;
 
             if (_weaponUsedTime >= 0.65f)
@@ -284,6 +288,10 @@ namespace Weapons.Actions
 
         private void MaxSizeLevel()
         {
+            ReadjustmentPos(Vector3.right);
+            ReadjustmentPos(Vector3.up);
+            ReadjustmentPos(Vector3.forward);
+
             if (_currentSizeLevel == GrandSizeLevel.FourGrade)
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
             else
@@ -350,10 +358,6 @@ namespace Weapons.Actions
             beforePos = transform.position;
             afterPos = transform.position;
 
-            ReadjustmentPos(Vector3.right);
-            ReadjustmentPos(Vector3.up);
-            ReadjustmentPos(Vector3.forward);
-
             _myRigid.angularVelocity = Vector3.zero;
             _myRigid.constraints = RigidbodyConstraints.FreezeRotation;
         }
@@ -401,6 +405,10 @@ namespace Weapons.Actions
             float plusAxisDist = GetDistance(checkDir);
             float minusAxisDist = GetDistance(-checkDir);
 
+            Debug.Log("DIR : " + checkDir + " plusdist : " + plusAxisDist);
+            Debug.Log("DIR : " + checkDir + " minusdist : " + minusAxisDist);
+            Debug.Log("DIR : " + checkDir + " CurSIze : " + curSize);
+
             if (plusAxisDist < curSize)
             {
                 float padding = curSize - plusAxisDist;
@@ -429,6 +437,14 @@ namespace Weapons.Actions
 
         private float GetDistance(Vector3 dir)
         {
+            //if (Physics.BoxCast(transform.position, Vector3.one * (_sizeLevelValue[_currentSizeLevel] / 2 -(_sizeLevelValue[_currentSizeLevel] / 10)), dir, out RaycastHit hit))
+            //{
+            //    if (hit.transform.CompareTag("BTYPEOBJECT") && !hit.collider.isTrigger)
+            //    {
+            //        return hit.distance;
+            //    }
+            //}
+
             if (Physics.Raycast(transform.position, dir, out RaycastHit hit))
             {
                 if (hit.transform.CompareTag("BTYPEOBJECT") && !hit.collider.isTrigger)
@@ -439,25 +455,26 @@ namespace Weapons.Actions
 
             return float.MaxValue;
         }
+        private void DrawGizmossss(Vector3 dir)
+        {
+            if (Physics.BoxCast(transform.position, Vector3.one * _sizeLevelValue[_currentSizeLevel] / 2, dir, out RaycastHit hit1))
+            {
+                Gizmos.DrawRay(transform.position, dir * hit1.distance);
+
+                Gizmos.DrawWireCube(transform.position + dir * hit1.distance, Vector3.one * _sizeLevelValue[_currentSizeLevel]);
+            }
+        }
 
         private void OnDrawGizmos()
         {
+#if UNITY_EDITOR
             DrawGizmossss(Vector3.up);
             DrawGizmossss(Vector3.down);
             DrawGizmossss(Vector3.right);
             DrawGizmossss(Vector3.left);
             DrawGizmossss(Vector3.forward);
             DrawGizmossss(Vector3.back);
-        }
-
-        private void DrawGizmossss(Vector3 dir)
-        {
-            if (Physics.BoxCast(transform.position, Vector3.one * _sizeLevelValue[_currentSizeLevel] / 2, dir, out RaycastHit hit1))
-            {
-                Gizmos.DrawRay(transform.position, dir * hit1.distance);
-                
-                Gizmos.DrawWireCube(transform.position + dir * hit1.distance, Vector3.one * _sizeLevelValue[_currentSizeLevel]);
-            }
+#endif
         }
     }
 }
