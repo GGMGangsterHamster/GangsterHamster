@@ -68,7 +68,6 @@ namespace Objects.Interaction
             if (target.CompareTag(ATYPE))
             {
                resetHandleObject = false;
-               a = target;
                InteractionManager
                      .Instance
                      .SetActiveAtype(target.transform);
@@ -77,12 +76,10 @@ namespace Objects.Interaction
 
          if (resetHandleObject)
          {
-            a = null;
             InteractionManager.Instance.ClearActvieAtype();
          }
 
          return target?.GetComponent<Interactable>();
       }
-      public Transform a;
    }
 }

@@ -89,15 +89,30 @@ namespace Characters.Player.Actions
             switch (InteractionManager.Instance.GetGrep())
             {
                case false:
+                  // TODO: 판단 추후 수정
+
+                  if (handle.lossyScale.x *
+                      handle.lossyScale.y *
+                      handle.lossyScale.z > 1.1f)
+                  {
+                     InteractionManager.Instance.UnGrep();
+                     return;
+                  }
+
                   handle.SetParent((param as Transform));
 
                   _curAtype = // 중력 받는 오브젝트라면 중력 비활성
                      handle.GetComponent<GravityAffectedObject>();
 
+                  Rigidbody rigid = handle.GetComponent<Rigidbody>();
+
                   if (_curAtype != null) // 물리 연산 비활성화
-                  {
                      _curAtype.AffectedByGlobalGravity = false;
-                     handle.GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+                  if (rigid != null)
+                  {
+                     rigid.velocity = Vector3.zero;
+                     rigid.angularVelocity = Vector3.zero;
                   }
 
                   _curAtypeCollider = // 컬라이더 체크
@@ -106,7 +121,11 @@ namespace Characters.Player.Actions
                   if (_curAtypeCollider != null) // 충돌 비활성화
                      _curAtypeCollider.enabled = false;
 
+                  // 좌표 초기화
                   handle.localPosition = Vector3.zero;
+                  handle.localRotation = Quaternion.identity;
+
+
                   InteractionManager.Instance.Grep();
                   break;
 

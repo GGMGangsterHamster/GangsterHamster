@@ -32,7 +32,6 @@ namespace Objects.Interaction
 
       public void ClearActvieAtype()
       {
-         Debug.Log(_grep);
          if (!_grep)
          {
             _currentActiveAtype = null;
