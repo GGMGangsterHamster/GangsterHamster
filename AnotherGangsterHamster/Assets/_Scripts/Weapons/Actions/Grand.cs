@@ -104,21 +104,42 @@ namespace Weapons.Actions
 
                 _fireDir = MainCameraTransform.forward;
 
-                if(Vector3.Angle(_fireDir, -PlayerBaseTransform.up) < 37.5f)
+                if (Vector3.Angle(_fireDir, -PlayerBaseTransform.up) < 37.5f)
                 {
-                    transform.position = FirePosition;
-                    PlayerBaseTransform.position += PlayerBaseTransform.up;
+                    bool b = Physics.Raycast(PlayerTrasnform.position - (PlayerBaseTransform.up * 0.88f), _fireDir, out RaycastHit hit);
+                    float dist = Vector3.Distance(PlayerBaseTransform.position, hit.point);
+
+
+                    if (b && dist < 0.2f
+                    && hit.transform.CompareTag("BTYPEOBJECT"))
+                    {
+                        transform.position = FirePosition;
+                        PlayerBaseTransform.position += PlayerBaseTransform.up;
+                    }
+                    else
+                    {
+                        if(dist >= 0.9f)
+                        {
+                            transform.position = FirePosition - (PlayerBaseTransform.up * 0.9f);
+                        }
+                        else
+                        {
+                            transform.position = FirePosition - (PlayerBaseTransform.up * dist);
+                            PlayerBaseTransform.position += PlayerBaseTransform.up * (0.9f - dist);
+                            PlayerBaseTransform.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                        }
+                    }
                 }
-                else if (Physics.Raycast(MainCameraTransform.position, PlayerBaseTransform.forward, out RaycastHit hit, 1.5f) && hit.transform.CompareTag("BTYPEOBJECT"))
+                else if (Physics.Raycast(MainCameraTransform.position, PlayerBaseTransform.forward, out RaycastHit hit2, 1.5f) && hit2.transform.CompareTag("BTYPEOBJECT"))
                 {
-                    float dist = (1.5f - Vector3.Distance(MainCameraTransform.position, hit.point));
+                    float dist = (1.5f - Vector3.Distance(MainCameraTransform.position, hit2.point));
 
                     transform.position = FirePosition;
-                    transform.position += new Vector3(PlayerBaseTransform.localScale.x * hit.normal.x * (dist / 1.4f),
-                                                      PlayerBaseTransform.localScale.y * hit.normal.y * (dist / 1.4f),
-                                                      PlayerBaseTransform.localScale.z * hit.normal.z * (dist / 1.4f));
+                    transform.position += new Vector3(PlayerBaseTransform.localScale.x * hit2.normal.x * (dist / 1.4f),
+                                                      PlayerBaseTransform.localScale.y * hit2.normal.y * (dist / 1.4f),
+                                                      PlayerBaseTransform.localScale.z * hit2.normal.z * (dist / 1.4f));
 
-                    PlayerBaseTransform.position += hit.normal * (dist + 0.5f);
+                    PlayerBaseTransform.position += hit2.normal * (dist + 0.5f);
                 }
                 else
                 {
@@ -408,11 +429,14 @@ namespace Weapons.Actions
 
         private float GetDistance(Vector3 dir)
         {
-            if (Physics.Raycast(transform.position, dir, out RaycastHit hit))
+            if (Physics.BoxCast(transform.position, Vector3.one * (_sizeLevelValue[_currentSizeLevel] - 0.2f), dir, out RaycastHit hit))
             {
                 if (hit.transform.CompareTag("BTYPEOBJECT"))
                 {
-                    return Vector3.Distance(hit.point, transform.position);
+                    if(!hit.collider.isTrigger)
+                    {
+                        return Vector3.Distance(hit.point, transform.position);
+                    }
                 }
             }
 
