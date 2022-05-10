@@ -429,18 +429,35 @@ namespace Weapons.Actions
 
         private float GetDistance(Vector3 dir)
         {
-            if (Physics.BoxCast(transform.position, Vector3.one * (_sizeLevelValue[_currentSizeLevel] - 0.2f), dir, out RaycastHit hit))
+            if (Physics.Raycast(transform.position, dir, out RaycastHit hit))
             {
-                if (hit.transform.CompareTag("BTYPEOBJECT"))
+                if (hit.transform.CompareTag("BTYPEOBJECT") && !hit.collider.isTrigger)
                 {
-                    if(!hit.collider.isTrigger)
-                    {
-                        return Vector3.Distance(hit.point, transform.position);
-                    }
+                    return Vector3.Distance(hit.point, transform.position);
                 }
             }
 
             return float.MaxValue;
+        }
+
+        private void OnDrawGizmos()
+        {
+            DrawGizmossss(Vector3.up);
+            DrawGizmossss(Vector3.down);
+            DrawGizmossss(Vector3.right);
+            DrawGizmossss(Vector3.left);
+            DrawGizmossss(Vector3.forward);
+            DrawGizmossss(Vector3.back);
+        }
+
+        private void DrawGizmossss(Vector3 dir)
+        {
+            if (Physics.BoxCast(transform.position, Vector3.one * _sizeLevelValue[_currentSizeLevel] / 2, dir, out RaycastHit hit1))
+            {
+                Gizmos.DrawRay(transform.position, dir * hit1.distance);
+                
+                Gizmos.DrawWireCube(transform.position + dir * hit1.distance, Vector3.one * _sizeLevelValue[_currentSizeLevel]);
+            }
         }
     }
 }
