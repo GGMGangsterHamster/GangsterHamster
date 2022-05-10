@@ -86,7 +86,7 @@ namespace Characters.Player.Actions
       public override void Execute(object param = null)
       {
          _actionable.Interact(handle => {
-            switch (_grep)
+            switch (InteractionManager.Instance.GetGrep())
             {
                case false:
                   handle.SetParent((param as Transform));
@@ -107,7 +107,7 @@ namespace Characters.Player.Actions
                      _curAtypeCollider.enabled = false;
 
                   handle.localPosition = Vector3.zero;
-                  _grep = true;
+                  InteractionManager.Instance.Grep();
                   break;
 
                case true:
@@ -119,9 +119,9 @@ namespace Characters.Player.Actions
                      _curAtypeCollider.enabled = true;
 
                      
-                  InteractionManager.Instance.UnSetActiveAtype(handle);
+                  InteractionManager.Instance.UnGrep();
 
-                  _grep = false;
+                  InteractionManager.Instance.UnGrep();
                   break;
             }
          });

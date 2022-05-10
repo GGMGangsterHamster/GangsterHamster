@@ -25,4 +25,6 @@ public class Flag
 
       return false;
    }
+   
+   public bool Status() => _status;
 }

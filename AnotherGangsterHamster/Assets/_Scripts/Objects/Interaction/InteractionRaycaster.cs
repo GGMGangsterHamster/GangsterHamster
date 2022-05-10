@@ -56,6 +56,7 @@ namespace Objects.Interaction
 
       private Interactable FireRay()
       {
+         bool resetHandleObject = true;
          Transform target = null;
          if (UnityEngine.Physics.Raycast(MainCam.position,
                                          MainCam.forward,
@@ -66,16 +67,18 @@ namespace Objects.Interaction
 
             if (target.CompareTag(ATYPE))
             {
+               resetHandleObject = false;
                a = target;
                InteractionManager
                      .Instance
                      .SetActiveAtype(target.transform);
             }
-            else
-            {
-               a = null;
-               InteractionManager.Instance.ClearActvieAtype();
-            }
+         }
+
+         if (resetHandleObject)
+         {
+            a = null;
+            InteractionManager.Instance.ClearActvieAtype();
          }
 
          return target?.GetComponent<Interactable>();

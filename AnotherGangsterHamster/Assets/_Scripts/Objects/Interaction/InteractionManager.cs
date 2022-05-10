@@ -7,39 +7,36 @@ namespace Objects.Interaction
       Interactable   _currentActiveInteraction;
       Transform      _currentActiveAtype;
 
-      Flag _atype; // true 시 해제 상태
-      public bool Grep { get; set; } // 잡기 상태
-
-      public InteractionManager()
-      {
-         _atype = new Flag(true);
-      }
+      private bool _grep = false; // 잡기 상태
 
       public void SetActiveAtype(Transform transform)
       {
-         if (_atype.Get()) // 소유권 존재 시
+         if (!_grep) // 잡기 상태가 아닐 시
          {
             _currentActiveAtype = transform;
          }
       }
 
-      public void UnSetActiveAtype(Transform transform)
+      public void UnGrep()
       {
-         if (_currentActiveAtype == transform)
-         {
-            _currentActiveAtype = null;
-            _atype.Set();
-            Grep = false;
-         }
+         _grep = false;
+         ClearActvieAtype();
       }
+
+      public void Grep()
+      {
+         _grep = true;
+      }
+
+      public bool GetGrep() => _grep;
 
       public void ClearActvieAtype()
       {
-         if (_atype.Get() || !Grep)
+         Debug.Log(_grep);
+         if (!_grep)
          {
             _currentActiveAtype = null;
-            Grep = false;
-            _atype.Set();
+            _grep = false;
          }
       }
 
@@ -71,7 +68,6 @@ namespace Objects.Interaction
          if (_currentActiveAtype != null)
          {
             onPickup?.Invoke(_currentActiveAtype);
-            Grep = true;
          }
       }
 
