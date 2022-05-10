@@ -3,8 +3,8 @@
 /// </summary>
 public class Flag
 {
-   private           bool _status;
-   private readonly  bool _autoReset;
+   protected           bool _status;
+   protected readonly  bool _autoReset;
 
    public Flag(bool initalStatus,
                bool autoResetEvent = true)
@@ -13,7 +13,7 @@ public class Flag
       _autoReset  = autoResetEvent;
    }
 
-   public void Set() => _status = true;
+   public void Set(bool status = true) => _status = status;
 
    public bool Get()
    {

@@ -1,6 +1,7 @@
 using Objects.Interaction;
 using Matters.Gravity;
 using UnityEngine;
+using System;
 
 namespace Characters.Player.Actions
 {
@@ -161,10 +162,9 @@ namespace Characters.Player.Actions
          PlayerStatus.IsJumping = true;
       }
 
-      public void Interact()
+      public void Interact(Action<Transform> onPickup = null)
       {
-         Logger.Log("상호작용 의존성 이슈", LogLevel.Warning);
-         InteractionManager.Instance.Interact();
+         InteractionManager.Instance.Interact(onPickup);
       }
 
       private void FixedUpdate()

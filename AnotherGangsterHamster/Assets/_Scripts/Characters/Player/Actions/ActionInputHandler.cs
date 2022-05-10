@@ -8,6 +8,7 @@ namespace Characters.Player.Actions
    [RequireComponent(typeof(Actions))]
    public class ActionInputHandler : MonoBehaviour
    {
+      public Transform RightHandTrm = null;
       public string _path = "KeyCodes/Actions.json";
 
       private Dictionary<KeyCode, Command> _actionDownCommands;
@@ -15,6 +16,9 @@ namespace Characters.Player.Actions
 
       // IActionable 구체화 한 클레스
       private Actions _actions;
+
+      // 키코드
+      private ActionVO _key;
 
       // 엑션 커멘드
       private DashStart    _dashStart;
@@ -26,6 +30,8 @@ namespace Characters.Player.Actions
 
       private void Awake()
       {
+         Debug.Assert(RightHandTrm != null);
+
          _actionDownCommands  = new Dictionary<KeyCode, Command>();
          _actionUpCommands    = new Dictionary<KeyCode, Command>();
          _actions             = GetComponent<Actions>();
@@ -44,15 +50,14 @@ namespace Characters.Player.Actions
       {
          _actionDownCommands.Clear();
 
-         ActionVO vo = Utils.JsonToVO<ActionVO>(_path);
+         _key = Utils.JsonToVO<ActionVO>(_path);
 
-         _actionDownCommands.Add((KeyCode)vo.Crouch,     _crouchStart);
-         _actionDownCommands.Add((KeyCode)vo.Dash,       _dashStart);
-         _actionDownCommands.Add((KeyCode)vo.Jump,       _jump);
-         _actionDownCommands.Add((KeyCode)vo.Interact,   _interaction);
+         _actionDownCommands.Add((KeyCode)_key.Crouch,     _crouchStart);
+         _actionDownCommands.Add((KeyCode)_key.Dash,       _dashStart);
+         _actionDownCommands.Add((KeyCode)_key.Jump,       _jump);
 
-         _actionUpCommands.Add((KeyCode)vo.Crouch, _crouchEnd);
-         _actionUpCommands.Add((KeyCode)vo.Dash,   _dashEnd);
+         _actionUpCommands.Add((KeyCode)_key.Crouch, _crouchEnd);
+         _actionUpCommands.Add((KeyCode)_key.Dash,   _dashEnd);
       }
 
       private void Update()
@@ -67,6 +72,12 @@ namespace Characters.Player.Actions
          {
             if(Input.GetKeyUp(key))
                _actionUpCommands[key].Execute();
+         }
+
+         // 상호작용
+         if (Input.GetKeyDown((KeyCode)_key.Interact))
+         {
+            _interaction.Execute(RightHandTrm);
          }
       }
 

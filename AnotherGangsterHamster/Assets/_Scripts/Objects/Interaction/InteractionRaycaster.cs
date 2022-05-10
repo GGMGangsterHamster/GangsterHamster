@@ -7,6 +7,8 @@ namespace Objects.Interaction
    // 메인 카메라에서 Ray 발사함
    public class InteractionRaycaster : MonoBehaviour
    {
+      public const string ATYPE = "ATYPEOBJECT";
+
       // 현제 상호작용 가능한 오브젝트
       private Interactable _currentObject = null;
       private Transform _mainCam = null;
@@ -21,13 +23,16 @@ namespace Objects.Interaction
          }
       }
 
+      // 현제 시아에 들어온 Atype 오브젝트
+      private Transform _curAtype = null;
+
       private void FixedUpdate()
       {
          Interactable target = FireRay();
 
 
          // 상호작용 가능한 오브젝트가 없는 경우
-         if(target == null || !target.canInteractByPlayer)
+         if (target == null || !target.canInteractByPlayer)
          {
             _currentObject?.DeFocus();
             _currentObject = null;
@@ -58,10 +63,23 @@ namespace Objects.Interaction
                                          PlayerValues.InteractionMaxDistance))
          {
             target = hit.transform;
+
+            if (target.CompareTag(ATYPE))
+            {
+               a = target;
+               InteractionManager
+                     .Instance
+                     .SetActiveAtype(target.transform);
+            }
+            else
+            {
+               a = null;
+               InteractionManager.Instance.ClearActvieAtype();
+            }
          }
 
          return target?.GetComponent<Interactable>();
       }
-
+      public Transform a;
    }
 }
