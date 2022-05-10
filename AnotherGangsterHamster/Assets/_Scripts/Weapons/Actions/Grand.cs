@@ -245,7 +245,6 @@ namespace Weapons.Actions
                     {
                         transform.localScale = Vector3.one * _sizeLevelValue[_currentSizeLevel];
                         transform.rotation = Quaternion.identity;
-                        //transform.position = afterPos;
                         _currentGrandStatus = GrandStatus.LosePower;
                         _myRigid.constraints = RigidbodyConstraints.None;
 
@@ -269,10 +268,6 @@ namespace Weapons.Actions
 
         private void NextSizeLevel()
         {
-            ReadjustmentPos(Vector3.right);
-            ReadjustmentPos(Vector3.up);
-            ReadjustmentPos(Vector3.forward);
-
             int jumpLevel = 0;
 
             if (_weaponUsedTime >= 0.65f)
@@ -288,10 +283,6 @@ namespace Weapons.Actions
 
         private void MaxSizeLevel()
         {
-            ReadjustmentPos(Vector3.right);
-            ReadjustmentPos(Vector3.up);
-            ReadjustmentPos(Vector3.forward);
-
             if (_currentSizeLevel == GrandSizeLevel.FourGrade)
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
             else
@@ -354,9 +345,12 @@ namespace Weapons.Actions
             lerpQuaternion = Quaternion.Euler(transform.rotation.eulerAngles.x + lerpQuaternion.eulerAngles.x,
                                                 transform.rotation.eulerAngles.y + lerpQuaternion.eulerAngles.y,
                                                 transform.rotation.eulerAngles.z + lerpQuaternion.eulerAngles.z);
-
+            
             beforePos = transform.position;
             afterPos = transform.position;
+            ReadjustmentPos(Vector3.right);
+            ReadjustmentPos(Vector3.up);
+            ReadjustmentPos(Vector3.forward);
 
             _myRigid.angularVelocity = Vector3.zero;
             _myRigid.constraints = RigidbodyConstraints.FreezeRotation;
@@ -437,15 +431,7 @@ namespace Weapons.Actions
 
         private float GetDistance(Vector3 dir)
         {
-            //if (Physics.BoxCast(transform.position, Vector3.one * (_sizeLevelValue[_currentSizeLevel] / 2 -(_sizeLevelValue[_currentSizeLevel] / 10)), dir, out RaycastHit hit))
-            //{
-            //    if (hit.transform.CompareTag("BTYPEOBJECT") && !hit.collider.isTrigger)
-            //    {
-            //        return hit.distance;
-            //    }
-            //}
-
-            if (Physics.Raycast(transform.position, dir, out RaycastHit hit))
+            if (Physics.BoxCast(transform.position, Vector3.one * (_sizeLevelValue[_beforeSizeLevel] / 2 - _sizeLevelValue[_beforeSizeLevel] / 10), dir, out RaycastHit hit))
             {
                 if (hit.transform.CompareTag("BTYPEOBJECT") && !hit.collider.isTrigger)
                 {
@@ -454,27 +440,6 @@ namespace Weapons.Actions
             }
 
             return float.MaxValue;
-        }
-        private void DrawGizmossss(Vector3 dir)
-        {
-            if (Physics.BoxCast(transform.position, Vector3.one * _sizeLevelValue[_currentSizeLevel] / 2, dir, out RaycastHit hit1))
-            {
-                Gizmos.DrawRay(transform.position, dir * hit1.distance);
-
-                Gizmos.DrawWireCube(transform.position + dir * hit1.distance, Vector3.one * _sizeLevelValue[_currentSizeLevel]);
-            }
-        }
-
-        private void OnDrawGizmos()
-        {
-#if UNITY_EDITOR
-            DrawGizmossss(Vector3.up);
-            DrawGizmossss(Vector3.down);
-            DrawGizmossss(Vector3.right);
-            DrawGizmossss(Vector3.left);
-            DrawGizmossss(Vector3.forward);
-            DrawGizmossss(Vector3.back);
-#endif
         }
     }
 }
