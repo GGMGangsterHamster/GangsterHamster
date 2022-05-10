@@ -35,6 +35,9 @@ namespace Characters.Player.Mouse
 
       public void OnMouseX(float x)
       {
+         if (!PlayerStatus.Moveable) return;
+         
+
          // 4원수는 교환 법칙이 성립되지 않는대요
          // 4원수 * 곱하고자 하는 수 = local
          // 곱하고자 하는 수 * 4원수 = world
@@ -47,6 +50,8 @@ namespace Characters.Player.Mouse
 
       public void OnMouseY(float y, bool includingMouseSpeed = true)
       {
+         if (!PlayerStatus.Moveable) return;
+
          // 마우스 감도 사용할 지
          rotY += -y * (includingMouseSpeed ? PlayerValues.MouseSpeed : 1.0f);
          rotY = Mathf.Clamp(rotY, -90f, 90f);
