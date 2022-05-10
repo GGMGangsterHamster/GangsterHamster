@@ -103,10 +103,10 @@ namespace Weapons.Actions
 
                 _fireDir = MainCameraTransform.forward;
 
-                if(_fireDir.y < -0.8f)
+                if(Vector3.Angle(_fireDir, -PlayerBaseTransform.up) < 37.5f)
                 {
                     transform.position = FirePosition;
-                    PlayerBaseTransform.position -= Vector3.up * _fireDir.y;
+                    PlayerBaseTransform.position += PlayerBaseTransform.up;
                 }
                 else if (Physics.Raycast(MainCameraTransform.position, PlayerBaseTransform.forward, out RaycastHit hit, 1.5f) && hit.transform.CompareTag("BTYPEOBJECT"))
                 {
@@ -123,8 +123,6 @@ namespace Weapons.Actions
                 {
                     transform.position = FirePosition;
                 }
-                
-
 
                 _currentGrandStatus = GrandStatus.Fire;
 

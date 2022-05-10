@@ -32,7 +32,6 @@ namespace Weapons.Actions
     public enum GravitoStatus
     {
         Idle,
-        Fire,
         Use,
         Stickly,
         ChangeGravity,

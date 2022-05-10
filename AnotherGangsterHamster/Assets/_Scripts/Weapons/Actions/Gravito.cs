@@ -10,11 +10,9 @@ namespace Weapons.Actions
     public class Gravito : WeaponAction
     {
         public float gravityChangeTime;
-
         private GravitoStatus _currentGravitoStatus = GravitoStatus.Idle; 
-
-        private CollisionInteractableObject _colInteractableObj;
         private CheckpointManager _checkpoint;
+        private RaycastHit _aTypeHit;
 
         private CheckpointManager Checkpoint
         {
@@ -26,19 +24,6 @@ namespace Weapons.Actions
                 }
 
                 return _checkpoint;
-            }
-        }
-
-        private Vector3 colNormalVec
-        {
-            get
-            {
-                if(_colInteractableObj == null)
-                {
-                    _colInteractableObj = GetComponent<CollisionInteractableObject>();
-                }
-
-                return _colInteractableObj.colNormalVec;
             }
         }
 
@@ -55,25 +40,20 @@ namespace Weapons.Actions
 
         public override void FireWeapon()
         {
-            if(_currentGravitoStatus != GravitoStatus.Fire && 
-               _currentGravitoStatus != GravitoStatus.Use &&
+            if(_currentGravitoStatus != GravitoStatus.Use &&
                _currentGravitoStatus != GravitoStatus.Stickly &&
                _currentGravitoStatus != GravitoStatus.ChangeGravity &&
                !isReseting)
             {
-                if (_myRigid.constraints != RigidbodyConstraints.None) _myRigid.constraints = RigidbodyConstraints.None;
-                
-                _fireDir = MainCameraTransform.forward;
-                transform.position = FirePosition - MainCameraTransform.forward * 2.5f;
-                _myRigid.angularVelocity = Vector3.zero;
-                _currentGravitoStatus = GravitoStatus.Fire;
+                if(Physics.Raycast(MainCameraTransform.position, MainCameraTransform.forward, out RaycastHit hit) && hit.transform.CompareTag("ATYPEOBJECT"))
+                {
+                    _fireDir = MainCameraTransform.forward;
+                    _currentGravitoStatus = GravitoStatus.Stickly;
+                    transform.position = hit.point - (_fireDir * transform.localScale.y);
+                    transform.rotation = Quaternion.LookRotation(_fireDir) * Quaternion.Euler(90, 0, 0);
 
-                transform.rotation = Quaternion.LookRotation(_fireDir) * Quaternion.Euler(90, 0, 0);
-
-                _myRigid.velocity = _fireDir * fireSpeed;
-
-                if (_myCollider.isTrigger)
-                    _myCollider.isTrigger = false;
+                    _aTypeHit = hit;
+                }
             }
         }
 
@@ -81,19 +61,19 @@ namespace Weapons.Actions
         {
             if(_currentGravitoStatus == GravitoStatus.Stickly && !isChangedGravity)
             {
-                if (colNormalVec == Vector3.up) return;
+                if (_aTypeHit.normal == Vector3.up) return;
 
                 _currentGravitoStatus = GravitoStatus.ChangeGravity;
                 _currentGravityChangeTime = 0f;
                 isChangedGravity = true;
 
                 Checkpoint.SetStartCheckpoint(PlayerBaseTransform.forward);
-                Checkpoint.SetEndCheckpoint(colNormalVec);
+                Checkpoint.SetEndCheckpoint(_aTypeHit.normal);
 
-
-                GravityManager.ChangeGlobalGravityDirection(-colNormalVec);
+                GravityManager.ChangeGlobalGravityDirection(-_aTypeHit.normal);
             }
         }
+
         public override void ResetWeapon()
         {
             if (isReseting)
@@ -121,38 +101,12 @@ namespace Weapons.Actions
             return _currentGravitoStatus == GravitoStatus.Idle;
         }
 
-        public void ATypeObjectCollisionEnterEvent(GameObject obj)
-        {            
-            if (_currentGravitoStatus == GravitoStatus.Fire)
-            {
-                Stop();
-                _currentGravitoStatus = GravitoStatus.Stickly;
-            }
-        }
-        public void BTypeObjectCollisionEnterEvent(GameObject obj)
-        {
-            if (_currentGravitoStatus == GravitoStatus.Fire)
-            {
-                Stop();
-                _currentGravitoStatus = GravitoStatus.Stickly;
-            }
-        }
-
         private void Update()
         {
             switch(_currentGravitoStatus)
             {
                 case GravitoStatus.Idle:
-                    if (!_myCollider.isTrigger) _myCollider.isTrigger = true;
-                    if (_myRigid.useGravity) _myRigid.useGravity = false;
-                    if (_myRigid.constraints == RigidbodyConstraints.None) _myRigid.constraints = RigidbodyConstraints.FreezePosition;
-
                     transform.position = HandPosition;
-                    break;
-                case GravitoStatus.Fire: 
-
-                    break;
-                case GravitoStatus.Stickly:
                     break;
                 case GravitoStatus.ChangeGravity:
                     _currentGravityChangeTime += Time.deltaTime / gravityChangeTime;
@@ -189,14 +143,6 @@ namespace Weapons.Actions
                     }
                     break;
             }
-        }
-
-        private void Stop()
-        {
-            _myRigid.constraints = RigidbodyConstraints.FreezeAll;
-            _myRigid.velocity = Vector3.zero;
-            _myRigid.angularVelocity = Vector3.zero;
-            transform.rotation = Quaternion.LookRotation(_fireDir) * Quaternion.Euler(90, 0, 0);
         }
     }
 }
