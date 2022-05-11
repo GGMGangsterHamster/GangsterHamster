@@ -13,11 +13,10 @@ GameObject:
   - component: {fileID: 86042993510249648}
   - component: {fileID: 186215171673006215}
   - component: {fileID: 1347130225760859082}
-  - component: {fileID: 5138064547722528585}
   - component: {fileID: 4400473116302693762}
   - component: {fileID: 4163395063460984134}
   - component: {fileID: 6405069620216455865}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Stop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,20 +116,8 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &5138064547722528585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3095322266830674703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 056c7320f5acea5e29f99e796f36e5f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4400473116302693762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,7 +170,6 @@ MonoBehaviour:
   possibleUse: 0
   fireSpeed: 0
   weaponDamage: 0
-  fullCharge: 0
 --- !u!1 &9205905944009815722
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +183,8 @@ GameObject:
   - component: {fileID: 5740651799924868369}
   - component: {fileID: 1822764082940055933}
   - component: {fileID: 4163020943380600456}
-  m_Layer: 0
+  - component: {fileID: 3370712399061230932}
+  m_Layer: 7
   m_Name: StopPillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +264,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9205905944009815722}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
@@ -295,3 +282,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6272abbaec0bd234abe972d342c1c3cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3370712399061230932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9205905944009815722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8476a3bdbcdf96b058a4f960b4883763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callbacks:
+  - key: 
+    OnActive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4163020943380600456}
+          m_TargetAssemblyTypeName: Weapons.Actions.StopPillar, Assembly-CSharp
+          m_MethodName: ObjTriggerEnterEvent
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeactive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4163020943380600456}
+          m_TargetAssemblyTypeName: Weapons.Actions.StopPillar, Assembly-CSharp
+          m_MethodName: ObjTriggerExitEvent
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  <EventIsToggle>k__BackingField: 0
+  <InitalActiveStatus>k__BackingField: 0
+  _activated: 0

@@ -22,9 +22,8 @@ namespace Weapons.Actions
     public enum StopStatus
     {
         Idle,
-        Fire,
-        Moving,
         Use,
+        Stickly,
         Stay
     }
 

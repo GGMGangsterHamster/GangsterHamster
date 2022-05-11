@@ -14,7 +14,6 @@ namespace Weapons.Actions
     public class WeaponManagement : MonoBehaviour
     {
         private Transform grandCharge;
-        private Transform stopCharge;
 
         private Dictionary<WeaponEnum, WeaponAction> _weaponActions;
 
@@ -36,9 +35,6 @@ namespace Weapons.Actions
 
             grandCharge = GameObject.Find("GrandCharge").transform;
             grandCharge.gameObject.SetActive(false);
-
-            stopCharge = GameObject.Find("StopCharge").transform;
-            stopCharge.gameObject.SetActive(false);
         }
 
         // 좌클릭 시 발동되는 함수
@@ -78,7 +74,6 @@ namespace Weapons.Actions
                 if (weaponAction.SetActiveWeaponObj(weaponEnum))
                 {
                     _curWeapon = weaponEnum;
-                    stopCharge.gameObject.SetActive(_curWeapon == WeaponEnum.Inercio);
                     grandCharge.gameObject.SetActive(_curWeapon == WeaponEnum.Grand);
                     isChanged = true;
                 }
