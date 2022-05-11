@@ -94,10 +94,7 @@ namespace Weapons.Actions
 
         public override void FireWeapon()
         {
-            if (_currentGrandStatus != GrandStatus.Use
-                    && _currentGrandStatus != GrandStatus.LosePower
-                    && _currentGrandStatus != GrandStatus.Fire
-                    && _currentGrandStatus != GrandStatus.Resize)
+            if (_currentGrandStatus == GrandStatus.Idle)
             {
                 if (_myRigid.constraints == RigidbodyConstraints.FreezePosition)
                     _myRigid.constraints = RigidbodyConstraints.None;
