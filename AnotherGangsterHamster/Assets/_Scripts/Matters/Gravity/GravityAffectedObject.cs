@@ -14,14 +14,15 @@ namespace Matters.Gravity
          get => _affectedByGlobalGravity;
          set
          {
-            if (value) // 전역 중력이 활성화되면 기본값으로 초기화 함
-            {
-               _affectedByGlobalGravity      = value;
-               _individualGravity._direction  = Vector3.down;
-               _individualGravity._force      = 9.8f;
-            }
-            else
-               _affectedByGlobalGravity = value;
+            _affectedByGlobalGravity = value;
+            // if (value) // 전역 중력이 활성화되면 기본값으로 초기화 함
+            // {
+            //    _affectedByGlobalGravity      = value;
+            //    _individualGravity._direction  = Vector3.down;
+            //    _individualGravity._force      = 9.8f;
+            // }
+            // else
+            //    _affectedByGlobalGravity = value;
          }
       }
 
