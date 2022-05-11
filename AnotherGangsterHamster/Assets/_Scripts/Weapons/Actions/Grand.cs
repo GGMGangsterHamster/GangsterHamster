@@ -177,6 +177,7 @@ namespace Weapons.Actions
                 _myRigid.angularVelocity = Vector3.zero;
                 _currentGrandStatus = GrandStatus.Idle;
                 _weaponUsedTime = 0f;
+                _myRigid.constraints = RigidbodyConstraints.None;
             }
         }
 
@@ -397,10 +398,6 @@ namespace Weapons.Actions
             float curSize = _sizeLevelValue[_currentSizeLevel] / 2;
             float plusAxisDist = GetDistance(checkDir);
             float minusAxisDist = GetDistance(-checkDir);
-
-            Debug.Log("DIR : " + checkDir + " plusdist : " + plusAxisDist);
-            Debug.Log("DIR : " + checkDir + " minusdist : " + minusAxisDist);
-            Debug.Log("DIR : " + checkDir + " CurSIze : " + curSize);
 
             if (plusAxisDist < curSize)
             {
