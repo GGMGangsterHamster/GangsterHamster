@@ -26,12 +26,17 @@ namespace Characters.Player
 
       protected override void Dead()
       {
+         if (_isDead) return;
+
          Debug.Log("죽었어요!");
-         PlayerStatus.Moveable = false;
+         _isDead = true;
+         PlayerStatus.Moveable   = false;
+         PlayerStatus.Jumpable   = false;
+         PlayerStatus.Crouchable = false;
          // 죽는다면 무엇을 해야 할까?
 
          // 우앱: 
-         Utils.ExecuteCallback(_deadCallbacks);         
+         Utils.ExecuteCallback(_deadCallbacks);
       }
 
       protected override void Awake()

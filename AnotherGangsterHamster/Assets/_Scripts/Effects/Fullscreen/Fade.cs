@@ -13,7 +13,7 @@ namespace Effects.Fullscreen
          _fader = GetComponentInChildren<Image>();
       }
 
-      public void FadeOut(float duration)
+      public void FadeOut(float duration, System.Action callback = null)
       {
          float step = 1.0f / duration;
 
@@ -22,7 +22,7 @@ namespace Effects.Fullscreen
             Color c = _fader.color;
             c.a += duration * Time.deltaTime;
             _fader.color = c;
-         }, () => _fader.color.a >= 1.0f);
+         }, () => _fader.color.a >= 1.0f, callback);
       }
    }
 }

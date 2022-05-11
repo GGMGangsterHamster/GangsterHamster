@@ -31,7 +31,7 @@ namespace Stages.Management
 
       public StageManager()
       {
-         CurrentStage = StageNames.NONE;
+         CurrentStage = StageNames.GrandStages; // FIXME: 임시 스테이지 리로드
 
          AddLoadedEvent((s, l) =>
          { // 체크포인트 등록
