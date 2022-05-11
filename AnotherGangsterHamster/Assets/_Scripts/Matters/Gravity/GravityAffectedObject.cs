@@ -8,33 +8,50 @@ namespace Matters.Gravity
    [RequireComponent(typeof(Rigidbody))]
    public class GravityAffectedObject : MonoBehaviour
    {
-      public bool AffectedByGlobalGravity { get; set; } = true;
+      public bool _affectedByGlobalGravity = true;
+      public bool AffectedByGlobalGravity
+      {
+         get => _affectedByGlobalGravity;
+         set
+         {
+            if (value) // 전역 중력이 활성화되면 기본값으로 초기화 함
+            {
+               _affectedByGlobalGravity      = value;
+               _individualGravity._direction  = Vector3.down;
+               _individualGravity._force      = 9.8f;
+            }
+            else
+               _affectedByGlobalGravity = value;
+         }
+      }
 
+      private GravityValue _individualGravity = null; // 지역 중력
       private Rigidbody _rigid;
 
       private void Awake()
       {
          _rigid = GetComponent<Rigidbody>();
+         _individualGravity = new GravityValue(Vector3.down);
       }
 
-      /// <summary>
-      /// 중력을 가합니다.
-      /// </summary>
-      /// <param name="dir">가할 방향</param>
-      /// <param name="amount">가할 양</param>
-      public virtual void Gravity(Vector3 dir, float amount)
+      public void SetIndividualGravity(Vector3 direction, float force = 9.8f)
       {
-         _rigid.AddForce(dir.normalized * amount, ForceMode.Force);
+         _individualGravity._direction = direction;
+         _individualGravity._force = force;
       }
 
       /// <summary>
       /// 중력을 가합니다.
       /// </summary>
       /// <param name="gravity">중력 인스턴스</param>
-      public virtual void Gravity (GravityValue gravity)
+      public virtual void Gravity(GravityValue globalGravity)
       {
-         _rigid.AddForce(gravity._direction.normalized * gravity._force,
-                        ForceMode.Acceleration);
+         if (AffectedByGlobalGravity) // 전역 중력 영향 받는 오브젝트 인 경우
+            _rigid.AddForce(globalGravity._direction.normalized * globalGravity._force,
+                           ForceMode.Acceleration);
+         else // 전역 중력 영향 안 받는 오브젝트 인 경우
+            _rigid.AddForce(_individualGravity._direction.normalized * _individualGravity._force,
+                           ForceMode.Acceleration);
       }
    }
 }

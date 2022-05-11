@@ -36,11 +36,8 @@ namespace Matters.Gravity
 
          foreach(GravityAffectedObject obj in _affectedObjects)
          {
-            if(!obj.AffectedByGlobalGravity) continue;
-
             obj.Gravity(_globalGravity);
          }
-
       }
 
       /// <summary>
@@ -71,6 +68,11 @@ namespace Matters.Gravity
       static public Vector3 GetGlobalGravityDirection()
       {
          return _instance._globalGravity._direction.normalized;
+      }
+
+      static public GravityValue GetGlobalGravity()
+      {
+         return _instance._globalGravity;
       }
    }
 }
