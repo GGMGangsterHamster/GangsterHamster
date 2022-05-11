@@ -23,16 +23,6 @@ namespace Weapons.Actions
     public class StopPillar : MonoBehaviour
     {
         private Dictionary<GameObject, BeforeRigidValue> _colDict = new Dictionary<GameObject, BeforeRigidValue>();
-        public void ObjTriggerEnterEvent(GameObject obj)
-        {
-            if (obj.CompareTag("PLAYER_BASE")) return;
-
-            if(!_colDict.ContainsKey(obj))
-            {
-                Debug.Log("Entered : " + obj.name);
-                StopObj(obj);
-            }
-        }
 
         public void ObjTriggerStayEvent(GameObject obj)
         {

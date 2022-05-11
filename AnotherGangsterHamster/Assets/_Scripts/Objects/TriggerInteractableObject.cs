@@ -20,8 +20,6 @@ namespace Objects
       [HideInInspector] public bool _activated = false;
       public bool Activated => _activated;
 
-      // 현제 상호작용 이루어지고 있는 오브젝트
-      private GameObject _curInteractedObject = null;
       
       private void Awake()
       {
@@ -31,17 +29,11 @@ namespace Objects
       #region Unity Trigger Event
       private void OnTriggerEnter(Collider other)
       {
-         if (_curInteractedObject != null) return;
-         _curInteractedObject = other.gameObject;
-
          TriggerEnterEvent(other.gameObject);
       }
 
       private void OnTriggerExit(Collider other)
       {
-         if (_curInteractedObject != other.gameObject) return;
-         _curInteractedObject = null;
-
          if (!EventIsToggle)
             TriggerExitEvent(other.gameObject);
       }
