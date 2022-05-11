@@ -23,23 +23,25 @@ namespace Weapons.Actions
                 Debug.Log("Stay..");
                 _playerGravity.AffectedByGlobalGravity = false;
                 _playerGravity.SetIndividualGravity(Vector3.down, 4.9f);
-                PlayerValues.Speed = PlayerValues.Speed * 2;
                 _isReinforcemented = true;
+            }
+
+            if (PlayerStatus.IsRunning)
+            {
+                PlayerValues.Speed = PlayerValues.DashSpeed * 2;
             }
             else
             {
-
+                PlayerValues.Speed = PlayerValues.WalkingSpeed * 2;
             }
         }
 
         public void ObjTriggerExitEvent(GameObject obj)
         {
-            Debug.Log("되긴 하는걸까");
             if (_isReinforcemented)
             {
                 Debug.Log("Exited");
                 _playerGravity.AffectedByGlobalGravity = true;
-                PlayerValues.Speed = PlayerValues.WalkingSpeed;
                 _isReinforcemented = false;
             }
         }

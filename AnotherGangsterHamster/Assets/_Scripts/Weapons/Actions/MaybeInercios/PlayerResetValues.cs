@@ -17,11 +17,16 @@ namespace Weapons.Actions
 
         public void Invoke(object param)
         {
-            //if(!_playerGravity.AffectedByGlobalGravity)
-            if(false)
+            if (_playerGravity.AffectedByGlobalGravity)
             {
-                _playerGravity.AffectedByGlobalGravity = true;
-                PlayerValues.Speed = PlayerValues.WalkingSpeed;
+                if(PlayerStatus.IsRunning)
+                {
+                    PlayerValues.Speed = PlayerValues.DashSpeed;
+                }
+                else
+                {
+                    PlayerValues.Speed = PlayerValues.WalkingSpeed;
+                }
             }
         }
     }
