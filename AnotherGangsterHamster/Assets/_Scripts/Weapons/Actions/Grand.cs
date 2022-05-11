@@ -392,7 +392,6 @@ namespace Weapons.Actions
 
             return true;
         }
-
         private void ReadjustmentPos(Vector3 checkDir)
         {
             float curSize = _sizeLevelValue[_currentSizeLevel] / 2;
@@ -428,7 +427,6 @@ namespace Weapons.Actions
                 // 문제가 없다는 것!!
             }
         }
-
         private float GetDistance(Vector3 dir)
         {
             if (Physics.BoxCast(transform.position, Vector3.one * (_sizeLevelValue[_beforeSizeLevel] / 2 - _sizeLevelValue[_beforeSizeLevel] / 10), dir, out RaycastHit hit))
