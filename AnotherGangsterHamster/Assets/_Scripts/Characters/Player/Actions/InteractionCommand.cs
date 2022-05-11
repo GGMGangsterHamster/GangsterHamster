@@ -5,19 +5,18 @@ using UnityEngine;
 
 namespace Characters.Player.Actions
 {
-public class Interaction : Command
+   public class Interaction : Command
    {
-      IActionable _actionable;
-      GravityAffectedObject _curAtype; // 잡고 있는 Atype
-      Collider _curAtypeCollider; // 잡고 있는 Atype 컬라이더
-      bool _grep;
+      IActionable             _actionable;
+      GravityAffectedObject   _curAtype;           // 잡고 있는 Atype
+      Rigidbody               _curRigid;           // 잡고 있는 Atype Rigidbody
+      Collider                _curAtypeCollider;   // 잡고 있는 Atype 컬라이더
 
 
       public Interaction(IActionable actionable)
       {
          _actionable = actionable;
-         _grep = false;
-         _curAtype = null;
+         _curAtype   = null;
       }
 
       /// <summary>
@@ -31,7 +30,6 @@ public class Interaction : Command
             switch (InteractionManager.Instance.GetGrep())
             {
                case false: // 잡기
-                  // TODO: 판단 추후 수정
                   if (handle.lossyScale.x *
                       handle.lossyScale.y *
                       handle.lossyScale.z > 1.1f)
@@ -43,23 +41,27 @@ public class Interaction : Command
                   handle.SetParent((param as Transform));
 
                   #region GetComponent
-                  _curAtype = handle.GetComponent<GravityAffectedObject>();
+                  _curAtype         = handle.GetComponent<GravityAffectedObject>();
                   _curAtypeCollider = handle.GetComponent<Collider>();
-                  Rigidbody rigid = handle.GetComponent<Rigidbody>();
+                  _curRigid         = handle.GetComponent<Rigidbody>();
                   #endregion // GetComponent
 
                   #region 불필요 연산 비활성화
                   if (_curAtype != null) // 중력 비활성화
+                  {
                      _curAtype.AffectedByGlobalGravity = false;
-
-                  if (rigid != null) // 기존 물리 초기화
-                  { 
-                     rigid.velocity = Vector3.zero;
-                     rigid.angularVelocity = Vector3.zero;
+                     _curAtype.SetIndividualGravity(Vector3.zero, 0.0f);
                   }
 
-                  if (_curAtypeCollider != null) // 충돌 비활성화
-                     _curAtypeCollider.enabled = false;
+                  if (_curRigid != null) // 기존 물리 초기화
+                  { 
+                     _curRigid.velocity = Vector3.zero;
+                     _curRigid.angularVelocity = Vector3.zero;
+                     _curRigid.constraints = RigidbodyConstraints.FreezeAll;
+                  }
+
+                  // if (_curAtypeCollider != null) // 충돌 비활성화
+                  //    _curAtypeCollider.enabled = false;
 
                   #endregion // 불필요 연산 비활성화
 
@@ -77,8 +79,12 @@ public class Interaction : Command
 
                   if (_curAtype != null) // 물리 연산 활성화
                      _curAtype.AffectedByGlobalGravity = true;
-                  if (_curAtypeCollider != null) // 충돌 활성화
-                     _curAtypeCollider.enabled = true;
+
+                  if(_curRigid != null)
+                     _curRigid.constraints = RigidbodyConstraints.None;
+
+                  // if (_curAtypeCollider != null) // 충돌 활성화
+                  //    _curAtypeCollider.enabled = true;
 
                   // 잡기 해제
                   InteractionManager.Instance.UnGrep();

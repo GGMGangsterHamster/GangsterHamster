@@ -8,7 +8,7 @@ namespace Matters.Gravity
    [RequireComponent(typeof(Rigidbody))]
    public class GravityAffectedObject : MonoBehaviour
    {
-      public bool _affectedByGlobalGravity = true;
+      private bool _affectedByGlobalGravity = true;
       public bool AffectedByGlobalGravity
       {
          get => _affectedByGlobalGravity;
