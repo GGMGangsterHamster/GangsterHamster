@@ -23,6 +23,7 @@ namespace Weapons.Actions
     {
         Idle,
         Fire,
+        Moving,
         Use,
         Stay
     }
