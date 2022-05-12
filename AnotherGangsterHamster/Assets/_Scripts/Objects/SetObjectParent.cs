@@ -17,12 +17,12 @@ namespace Objects
 
       public void Active(GameObject other)
       {
-         _root.SetParent(other.transform);
+         // _root.SetParent(other.transform);
       }
 
       public void Deactive(GameObject other)
       {
-         _root.SetParent(null);
+         // _root.SetParent(null);
       }
    }
 }
