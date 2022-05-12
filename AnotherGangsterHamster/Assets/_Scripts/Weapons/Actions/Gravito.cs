@@ -10,6 +10,7 @@ namespace Weapons.Actions
     public class Gravito : WeaponAction
     {
         public float gravityChangeTime;
+        public float penetratePadding;
         private GravitoStatus _currentGravitoStatus = GravitoStatus.Idle; 
         private CheckpointManager _checkpoint;
         private RaycastHit _aTypeHit;
@@ -49,7 +50,7 @@ namespace Weapons.Actions
                 {
                     _fireDir = MainCameraTransform.forward;
                     _currentGravitoStatus = GravitoStatus.Stickly;
-                    transform.position = hit.point - (_fireDir * transform.localScale.y);
+                    transform.position = hit.point - (_fireDir * (transform.localScale.y + penetratePadding));
                     transform.rotation = Quaternion.LookRotation(_fireDir) * Quaternion.Euler(90, 0, 0);
 
                     _aTypeHit = hit;
