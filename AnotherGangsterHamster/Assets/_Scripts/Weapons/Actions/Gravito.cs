@@ -61,7 +61,7 @@ namespace Weapons.Actions
         {
             if(_currentGravitoStatus == GravitoStatus.Stickly && !isChangedGravity)
             {
-                if (_aTypeHit.normal == Vector3.up) return;
+                //if (_aTypeHit.normal == Vector3.up) return;
 
                 _currentGravitoStatus = GravitoStatus.ChangeGravity;
                 _currentGravityChangeTime = 0f;
@@ -91,7 +91,7 @@ namespace Weapons.Actions
             isReseting = true;
 
             Checkpoint.startCheckpoint.rotation = PlayerBaseTransform.rotation;
-            Checkpoint.endCheckpoint.rotation = Quaternion.Euler(new Vector3(0, PlayerBaseTransform.rotation.y, 0));
+            Checkpoint.endCheckpoint.rotation = Quaternion.Euler(new Vector3(0, PlayerBaseTransform.rotation.eulerAngles.y, 0));
 
             GravityManager.ChangeGlobalGravityDirection(Vector3.down);
         }
@@ -115,6 +115,7 @@ namespace Weapons.Actions
                     {
                         PlayerBaseTransform.rotation = Checkpoint.endCheckpoint.rotation;
                         _currentGravitoStatus = GravitoStatus.Stickly;
+                        Debug.Log(_aTypeHit.normal + " : " + PlayerBaseTransform.rotation.eulerAngles);
                     }
                     else
                     {
