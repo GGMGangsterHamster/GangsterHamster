@@ -29,7 +29,7 @@ namespace Objects.StageObjects
 
       public void Deactive(GameObject other)
       {
-         if (_buttons.Find(e => !e.Activated) != null) return;
+         if (_buttons.FindAll(e => !e.Activated).Count <= 0) return;
 
          OnDisqualified?.Invoke(this.gameObject);
       }
