@@ -65,6 +65,8 @@ namespace Weapons.Actions
         private Vector3 beforePos;
         private Vector3 afterPos;
 
+        private float _fireCoolTime;
+
         private new void Awake()
         {
             base.Awake();
@@ -94,6 +96,9 @@ namespace Weapons.Actions
 
         public override void FireWeapon()
         {
+            if(Time.time - _fireCoolTime > 0.3f) _fireCoolTime = Time.time;
+            else return; 
+
             if (_currentGrandStatus == GrandStatus.Idle)
             {
                 if (_myRigid.constraints == RigidbodyConstraints.FreezePosition)
@@ -127,7 +132,7 @@ namespace Weapons.Actions
                         }
                     }
                 }
-                else if (Physics.Raycast(MainCameraTransform.position, PlayerBaseTransform.forward, out RaycastHit hit2, 1.5f) && hit2.transform.CompareTag("BTYPEOBJECT"))
+                else if (Physics.Raycast(MainCameraTransform.position, _fireDir, out RaycastHit hit2, 1.5f) && hit2.transform.CompareTag("BTYPEOBJECT"))
                 {
                     float dist = (1.5f - Vector3.Distance(MainCameraTransform.position, hit2.point));
 
