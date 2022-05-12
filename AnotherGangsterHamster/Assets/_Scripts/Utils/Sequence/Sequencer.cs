@@ -19,10 +19,34 @@ namespace Sequence
             return;
          }
 
-         // if (type == SequenceType.ONESHOT)
+         // 클로져 시킬 용도
+         int seqIdx = 0;
+         bool loop = true;
 
-         // CoroutineCaller.Instance.Use();
+         // 루프 용
+         Func<bool> keepGoing = () => loop;
 
+         // 딜레이
+         Func<YieldInstruction> wait
+            = () => new WaitForSeconds(seq.seqObjects[seqIdx].Delay);
+
+         // 매 loop 마다 실행할 것
+         Action execute = () => {
+            seq.seqObjects[seqIdx]
+               .Event
+              ?.Invoke();
+
+            ++seqIdx;
+
+            if (seqIdx >= seq.seqObjects.Count)
+               seqIdx = 0;
+         };
+
+         if (type == SequenceType.ONESHOT) // 한번만 실행하는 경우
+            execute += () => loop = false;
+
+
+         CoroutineCaller.Instance.Use(keepGoing, wait, execute);
       }
    }
 }
