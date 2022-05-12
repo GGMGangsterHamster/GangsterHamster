@@ -40,6 +40,8 @@ namespace Weapons.Actions
         {
             foreach (KeyCode key in _weaponCommand.Keys)
             {
+                if (Time.timeScale == 0) return;
+
                 if (Input.GetKeyDown(key))
                     _weaponCommand[key]();
             }

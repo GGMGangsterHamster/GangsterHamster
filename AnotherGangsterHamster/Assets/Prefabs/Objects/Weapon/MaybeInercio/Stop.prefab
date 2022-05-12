@@ -167,7 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponEnum: 0
   Path: SettingValue/HandMode.json
-  possibleUse: 0
+  possibleUse: 1
   fireSpeed: 0
   weaponDamage: 0
 --- !u!1 &9205905944009815722
@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 1822764082940055933}
   - component: {fileID: 4163020943380600456}
   - component: {fileID: 3370712399061230932}
+  - component: {fileID: 8871249997093640569}
   m_Layer: 0
   m_Name: StopPillar
   m_TagString: Untagged
@@ -298,19 +299,7 @@ MonoBehaviour:
   - key: 
     OnActive:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4163020943380600456}
-          m_TargetAssemblyTypeName: Weapons.Actions.StopPillar, Assembly-CSharp
-          m_MethodName: ObjTriggerEnterEvent
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
     OnDeactive:
       m_PersistentCalls:
         m_Calls:
@@ -329,3 +318,35 @@ MonoBehaviour:
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
   _activated: 0
+--- !u!114 &8871249997093640569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9205905944009815722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01fe4906c1fb32b4d9b0132470d9f469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callbacks:
+  - key: 
+    OnActive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4163020943380600456}
+          m_TargetAssemblyTypeName: Weapons.Actions.StopPillar, Assembly-CSharp
+          m_MethodName: ObjTriggerStayEvent
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeactive:
+      m_PersistentCalls:
+        m_Calls: []

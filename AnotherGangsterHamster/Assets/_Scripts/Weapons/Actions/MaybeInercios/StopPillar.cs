@@ -38,7 +38,6 @@ namespace Weapons.Actions
 
             if (_colDict.ContainsKey(obj))
             {
-                Debug.Log("Exited : " + obj.name);
                 MoveObj(obj);
                 _colDict.Remove(obj);
             }
