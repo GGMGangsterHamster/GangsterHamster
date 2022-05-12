@@ -26,6 +26,7 @@ namespace Weapons.Actions
 
         public void ObjTriggerStayEvent(GameObject obj)
         {
+            Debug.Log("Stayedd");
             if (obj.CompareTag("PLAYER_BASE")) return;
             if (obj.GetComponent<GravityAffectedObject>() == null) return;
 
@@ -34,6 +35,7 @@ namespace Weapons.Actions
 
         public void ObjTriggerExitEvent(GameObject obj)
         {
+            Debug.Log("Exitedddd");
             if (obj.CompareTag("PLAYER_BASE")) return;
 
             if (_colDict.ContainsKey(obj))
