@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Objects.StageObjects
+namespace Objects.StageObjects.CollisionEventable
 {
    public class TriggerDoor : MonoBehaviour, ICollisionEventable
    {

@@ -2,7 +2,7 @@ using Characters.Damage;
 using UnityEngine;
 
 
-namespace Objects.StageObjects
+namespace Objects.StageObjects.CollisionEventable
 {
    [RequireComponent(typeof(TriggerInteractableObject), typeof(BoxCollider), typeof(LineRenderer))]
    public class Laser : MonoBehaviour, ICollisionEventable

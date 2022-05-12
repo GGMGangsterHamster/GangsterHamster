@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Characters.Player.Move;
 
-namespace Objects.StageObjects
+namespace Objects.StageObjects.CollisionEventable
 {
    [RequireComponent(typeof(CollisionInteractableObject))]
    public class Treadmill : MonoBehaviour, ICollisionEventable

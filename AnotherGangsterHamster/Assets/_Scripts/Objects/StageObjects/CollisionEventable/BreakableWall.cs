@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Objects.StageObjects
+namespace Objects.StageObjects.CollisionEventable
 {
    [RequireComponent(typeof(CollisionInteractableObject))]
    public class BreakableWall : MonoBehaviour, ICollisionEventable

@@ -2,7 +2,7 @@ using UnityEngine;
 using Tween;
 
 
-namespace Objects.StageObjects
+namespace Objects.StageObjects.CollisionEventable
 {
    public class MovingFloor : MonoBehaviour, ICollisionEventable
    {
