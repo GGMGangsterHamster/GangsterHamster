@@ -92,7 +92,7 @@ namespace Weapons.Actions
 
             Checkpoint.startCheckpoint.rotation = PlayerBaseTransform.rotation;
             Checkpoint.endCheckpoint.rotation = Quaternion.Euler(new Vector3(0, PlayerBaseTransform.rotation.eulerAngles.y, 0));
-
+            
             GravityManager.ChangeGlobalGravityDirection(Vector3.down);
         }
 
@@ -115,7 +115,6 @@ namespace Weapons.Actions
                     {
                         PlayerBaseTransform.rotation = Checkpoint.endCheckpoint.rotation;
                         _currentGravitoStatus = GravitoStatus.Stickly;
-                        Debug.Log(_aTypeHit.normal + " : " + PlayerBaseTransform.rotation.eulerAngles);
                     }
                     else
                     {
