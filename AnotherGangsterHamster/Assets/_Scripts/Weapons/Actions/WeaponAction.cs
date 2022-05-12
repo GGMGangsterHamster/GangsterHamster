@@ -35,6 +35,14 @@ namespace Weapons.Actions
         Stickly
     }
 
+    public enum ConnectionStatus
+    {
+        Idle,
+        OneStickly,
+        TwoStickly,
+        Use
+    }
+
     // 그랜드가 가질 수 있는 상태들
     public enum GrandStatus
     {
