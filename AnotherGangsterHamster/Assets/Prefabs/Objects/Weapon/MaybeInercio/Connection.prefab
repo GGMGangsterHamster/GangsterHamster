@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 2432366749830479239}
   - component: {fileID: 7466965542860393653}
   - component: {fileID: 5886098396582158649}
+  - component: {fileID: 4282582314456428951}
+  - component: {fileID: 8234618531214442963}
+  - component: {fileID: 1156952496964525749}
   m_Layer: 0
   m_Name: Connection
   m_TagString: Untagged
@@ -97,3 +100,57 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4282582314456428951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566919355155172199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83185d2616cdb31b880a0fdde34fe5f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callbacks: []
+  <EventIsToggle>k__BackingField: 1
+  <InitalActiveStatus>k__BackingField: 0
+  MultipleCollisionable: 0
+  _activated: 0
+  colNormalVec: {x: 0, y: 0, z: 0}
+  colVelocity: {x: 0, y: 0, z: 0}
+--- !u!114 &8234618531214442963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566919355155172199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8476a3bdbcdf96b058a4f960b4883763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callbacks: []
+  <EventIsToggle>k__BackingField: 1
+  <InitalActiveStatus>k__BackingField: 0
+  _activated: 0
+--- !u!114 &1156952496964525749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566919355155172199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a41a81f842291f41b9acb9164a17f34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponEnum: 0
+  Path: SettingValue/HandMode.json
+  possibleUse: 1
+  fireSpeed: 0
+  weaponDamage: 0
+  fireConnectionPrefab: {fileID: 8502506331196709040, guid: 5b4b0d8890f389847991d60f4cd3c2b5, type: 3}
+  platformPrefab: {fileID: 6859187282595270190, guid: 4b5e239568e86ba40bb45f2090c34dec, type: 3}

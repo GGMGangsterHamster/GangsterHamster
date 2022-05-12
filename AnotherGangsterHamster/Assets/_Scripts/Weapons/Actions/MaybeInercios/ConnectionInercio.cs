@@ -7,10 +7,14 @@ namespace Weapons.Actions
     public class ConnectionInercio : WeaponAction
     {
         public GameObject fireConnectionPrefab;
+        public GameObject platformPrefab;
         private ConnectionStatus _currentStatus = ConnectionStatus.Idle;
 
         private GameObject _firstFireConnectionObj;
         private GameObject _secondFireConnectionObj;
+        private GameObject _platformObj;
+
+        private MeshRenderer _myRenderer;
 
         private new void Awake()
         {
@@ -23,6 +27,11 @@ namespace Weapons.Actions
 
             _secondFireConnectionObj = Instantiate(fireConnectionPrefab);
             _secondFireConnectionObj.name = "fireConnection-2";
+
+            _platformObj = Instantiate(platformPrefab);
+            _platformObj.name = "Platform";
+
+            _myRenderer = GetComponent<MeshRenderer>();
         }
         public override void FireWeapon()
         {
@@ -44,6 +53,7 @@ namespace Weapons.Actions
                     _secondFireConnectionObj.transform.position = hit.point;
                     _secondFireConnectionObj.SetActive(true);
                     _currentStatus = ConnectionStatus.TwoStickly;
+                    _myRenderer.enabled = false;
                 }
             }
         }
@@ -53,6 +63,15 @@ namespace Weapons.Actions
             if(_currentStatus == ConnectionStatus.TwoStickly)
             {
                 // 첫번째와 두번째 사이에 다리 생성
+
+                Vector3 platformPos = _firstFireConnectionObj.transform.position -
+                                        (_firstFireConnectionObj.transform.position - _secondFireConnectionObj.transform.position) / 2;
+
+                _platformObj.transform.position = platformPos;
+                _platformObj.transform.LookAt(_firstFireConnectionObj.transform.position);
+                _platformObj.transform.localScale = new Vector3(3, 0.05f, Vector3.Distance(_firstFireConnectionObj.transform.position, _secondFireConnectionObj.transform.position));
+                _platformObj.SetActive(true);
+
 
                 _currentStatus = ConnectionStatus.Use;
             }
@@ -64,8 +83,10 @@ namespace Weapons.Actions
             {
                 _firstFireConnectionObj.SetActive(false);
                 _secondFireConnectionObj.SetActive(false);
+                _platformObj.SetActive(false);
 
                 _currentStatus = ConnectionStatus.Idle;
+                _myRenderer.enabled = true;
             }
         }
 
@@ -79,6 +100,9 @@ namespace Weapons.Actions
             switch(_currentStatus)
             {
                 case ConnectionStatus.Idle:
+                    transform.position = HandPosition;
+                    break;
+                case ConnectionStatus.OneStickly:
                     transform.position = HandPosition;
                     break;
             }
