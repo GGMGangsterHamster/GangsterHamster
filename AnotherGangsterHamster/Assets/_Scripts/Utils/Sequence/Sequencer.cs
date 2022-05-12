@@ -33,8 +33,6 @@ namespace Sequence
          int seqIdx = 0;
          bool loop = true;
 
-         // 루프 용
-         Func<bool> keepGoing = () => loop;
 
          // 딜레이
          Func<YieldInstruction> wait
@@ -51,6 +49,9 @@ namespace Sequence
             if (seqIdx >= seq.seqObjects.Count)
                seqIdx = 0;
          };
+
+         // 루프 용
+         Func<bool> keepGoing = () => loop;
 
          if (type == SequenceType.ONESHOT) // 한번만 실행하는 경우
             execute += () => loop = false;

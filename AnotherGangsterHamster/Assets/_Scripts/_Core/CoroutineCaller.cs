@@ -29,8 +29,8 @@ public class CoroutineCaller : MonoSingleton<CoroutineCaller>
    {
       while (keepGoing())
       {
-         yield return wait;
          execute();
+         yield return wait();
       }
    }
 }
