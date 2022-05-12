@@ -9,6 +9,16 @@ namespace Sequence
    {
       public List<SeqDictionary> sequenceDictionary;
 
+      private void Start()
+      {
+         var startSequence
+            = sequenceDictionary.FindAll(e => e.executeOnStart);
+
+         startSequence.ForEach(e => {
+            Execute(e.key, e.type);
+         });
+      }
+
       public void Execute(string key, SequenceType type)
       {
          SeqDictionary seq = sequenceDictionary.Find(e => e.key == key);

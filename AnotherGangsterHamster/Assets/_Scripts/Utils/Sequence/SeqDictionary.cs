@@ -9,5 +9,7 @@ namespace Sequence
    {
       public string key;
       public List<SeqObject> seqObjects;
+      public bool executeOnStart;
+      public SequenceType type;
    }
 }
