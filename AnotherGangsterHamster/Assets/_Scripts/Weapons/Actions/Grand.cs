@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 기능 코드는 100줄 남짓
+// 버그 코드는 400줄 이상
+
 namespace Weapons.Actions
 {
     [RequireComponent(typeof(GravityAffectedObject))]
