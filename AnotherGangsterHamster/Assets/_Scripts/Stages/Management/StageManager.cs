@@ -14,7 +14,7 @@ namespace Stages.Management
 
    public class StageManager : Singleton<StageManager>
    {
-      public StageNames CurrentStage { get; private set; }
+      public StageNames CurrentStage { get; set; }
       private string activatedCheckpointName = "";
 
       private Transform _playerTrm = null;

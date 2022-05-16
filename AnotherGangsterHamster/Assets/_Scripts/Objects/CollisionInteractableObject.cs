@@ -26,9 +26,13 @@ namespace Objects
       private GameObject _curInteractedObject = null;
 
       // Collision에서 Normal 벡터를 빼내기 위해서 존재하는 변수
-      public Vector3 colNormalVec; 
+      public Vector3 colNormalVec;
 
+      // 충돌 시의 Velocity
       public Vector3 colVelocity;
+
+      // 충돌 지점
+      public Vector3 colPosition;
 
       private void Awake()
       {
@@ -43,8 +47,10 @@ namespace Objects
 
          _curInteractedObject = other.gameObject;
 
-         colNormalVec = other.contacts[0].normal;
-         colVelocity = other.relativeVelocity;
+         colNormalVec   = other.contacts[0].normal;
+         colVelocity    = other.relativeVelocity;
+         colPosition    = other.contacts[0].point;
+
          CollisionEnterEvent(other.gameObject);
       }
 

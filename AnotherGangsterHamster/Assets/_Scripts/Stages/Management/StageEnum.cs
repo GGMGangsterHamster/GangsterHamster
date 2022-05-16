@@ -14,6 +14,8 @@ namespace Stages.Management
       Stage_4_Gravito,
       Stage_5_Gravito,
       Stage_6_Gravito,
+      ConnectionStage,
+      DStage,
       END_OF_ENUM
    }
 }

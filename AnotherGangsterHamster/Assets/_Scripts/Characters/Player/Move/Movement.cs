@@ -45,6 +45,8 @@ namespace Characters.Player.Move
          // _rigid.MovePosition(transform.position +
          //                     _delta.Calculate(transform, PlayerValues.Speed));
 
+         // _rigid.
+
          transform.Translate(_delta.Calculate(transform, PlayerValues.Speed, true));
       }
    }
