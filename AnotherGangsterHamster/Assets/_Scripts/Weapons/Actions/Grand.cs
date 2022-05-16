@@ -17,6 +17,7 @@ namespace Weapons.Actions
         public float alphaSensorValue; // 오브젝트가 투명해지는 거리
 
         private Transform chargeBar;
+        private LineRenderer _fireLineRenderer;
 
         // 그랜드의 크기 변환 단계
         private enum GrandSizeLevel
@@ -73,12 +74,11 @@ namespace Weapons.Actions
         private new void Awake()
         {
             base.Awake();
+            _weaponEnum = WeaponEnum.Grand;
 
             _sizeLevelValue.Add(GrandSizeLevel.OneGrade, 1f);
             _sizeLevelValue.Add(GrandSizeLevel.TwoGrade, 2f);
             _sizeLevelValue.Add(GrandSizeLevel.FourGrade, 4f);
-
-            _weaponEnum = WeaponEnum.Grand;
 
             WeaponVO vo = Utils.JsonToVO<WeaponVO>(WeaponKeyCodePath);
             _useKeycode = (KeyCode)vo.Use;
@@ -86,6 +86,7 @@ namespace Weapons.Actions
             chargeBar = GameObject.Find("ChargeBar").transform;
 
             _sensor = GetComponent<AlphaSensor>();
+            _fireLineRenderer = GetComponentInChildren<LineRenderer>();
         }
 
         private void Start()
@@ -108,6 +109,7 @@ namespace Weapons.Actions
                     _myRigid.constraints = RigidbodyConstraints.None;
 
                 _fireDir = MainCameraTransform.forward;
+                _fireLineRenderer.gameObject.SetActive(true);
 
                 if (Vector3.Angle(_fireDir, -PlayerBaseTransform.up) < 37.5f)
                 {
@@ -130,7 +132,7 @@ namespace Weapons.Actions
                         else
                         {
                             transform.position = FirePosition - (PlayerBaseTransform.up * dist);
-                            PlayerBaseTransform.position += PlayerBaseTransform.up * (0.9f - dist);
+                            PlayerBaseTransform.position += PlayerBaseTransform.up * (1.2f - dist);
                             PlayerBaseTransform.GetComponent<Rigidbody>().velocity = Vector3.zero;
                         }
                     }
@@ -175,7 +177,6 @@ namespace Weapons.Actions
                 chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ?
                                                             0 :
                                                             _sizeLevelValue[_currentSizeLevel] * 0.25f, 1, 1);
-
 
                 transform.position = HandPosition;
                 transform.rotation = Quaternion.identity;
@@ -270,6 +271,8 @@ namespace Weapons.Actions
                     
                     break;
             }
+
+            ShowDropPoint();
         }
 
         private void NextSizeLevel()
@@ -440,6 +443,47 @@ namespace Weapons.Actions
             }
 
             return float.MaxValue;
+        }
+
+        private void ShowDropPoint()
+        {
+            if(_currentGrandStatus == GrandStatus.Fire)
+            {
+                _fireLineRenderer.SetPosition(0, Vector3.down * (_sizeLevelValue[_currentSizeLevel] / 2 - 0.5f));
+
+                RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector3.down);
+                float minDistance = float.MaxValue;
+                int index = -1;
+
+                if (hits != null)
+                {
+
+                    for(int i = 0; i < hits.Length; i++)
+                    {
+                        if(hits[i].transform.CompareTag("BTYPEOBJECT") && hits[i].distance < minDistance)
+                        {
+                            minDistance = hits[i].distance;
+                            index = i;
+                        }
+                    }
+
+                    if(index != -1)
+                    {
+                        RaycastHit hit = hits[index];
+
+                        _fireLineRenderer.SetPosition(1, Vector3.down * (Vector3.Distance(transform.position, hit.point) - 0.5f));
+                    }
+                }
+
+                if(index == -1)
+                {
+                    _fireLineRenderer.SetPosition(1, Vector3.down * short.MaxValue);
+                }
+            }
+            else
+            {
+                _fireLineRenderer.gameObject.SetActive(false);
+            }
         }
     }
 }
