@@ -8,7 +8,6 @@ namespace _Core.Initialize.InitScripts
    public class SetCurrentScene : InitBase
    {
       public override RunLevel RunLevel => RunLevel.SCENE_LOAD;
-      
 
       public override void Call()
       {

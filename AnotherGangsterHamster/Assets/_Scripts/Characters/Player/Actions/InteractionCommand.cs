@@ -32,7 +32,9 @@ namespace Characters.Player.Actions
                case false: // 잡기
                   if (handle.lossyScale.x *
                       handle.lossyScale.y *
-                      handle.lossyScale.z > 1.1f)
+                      handle.lossyScale.z > 1.1f ||
+                      handle.gameObject.isStatic ||
+                      handle.name.CompareTo("Grand") == 0)
                   {
                      InteractionManager.Instance.UnGrep();
                      return;
