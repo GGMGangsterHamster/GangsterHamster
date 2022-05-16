@@ -14,6 +14,9 @@ namespace Weapons.Actions
         private GravitoStatus _currentGravitoStatus = GravitoStatus.Idle; 
         private CheckpointManager _checkpoint;
         private RaycastHit _aTypeHit;
+        private Transform _aTypeTrm;
+        private Vector3 _aTypeCurPos;
+        private Quaternion _aTypeCurRot;
 
         private CheckpointManager Checkpoint
         {
@@ -41,9 +44,7 @@ namespace Weapons.Actions
 
         public override void FireWeapon()
         {
-            if(_currentGravitoStatus != GravitoStatus.Use &&
-               _currentGravitoStatus != GravitoStatus.Stickly &&
-               _currentGravitoStatus != GravitoStatus.ChangeGravity &&
+            if (_currentGravitoStatus == GravitoStatus.Idle &&
                !isReseting)
             {
                 if(Physics.Raycast(MainCameraTransform.position, MainCameraTransform.forward, out RaycastHit hit) && hit.transform.CompareTag("ATYPEOBJECT"))
@@ -54,6 +55,23 @@ namespace Weapons.Actions
                     transform.rotation = Quaternion.LookRotation(_fireDir) * Quaternion.Euler(90, 0, 0);
 
                     _aTypeHit = hit;
+                    _aTypeTrm = hit.transform;
+                    _aTypeCurPos = hit.transform.position - hit.point;
+                    _aTypeCurRot = _aTypeTrm.rotation;
+
+                    // 일정 각도 차 만큼 돌리고 픔
+                    // 차 값, 위치 이동 값
+                    // 쿼터니언 끼리의 차를 구하고
+                    // 그걸 계속해서 저장한 뒤
+                    // 그게 변환되면
+                    // 새로이 변환된 값을 이용해서 각도와 위치를 돌린다.
+
+
+
+                    // 위치는 어떤 기준이 되는 방향 벡터를 기준으로
+                    // 처음 각도를 할당한 뒤
+                    // 나중에 들어온 값과 비교해서 그거의 차 만큼
+                    // 얘를 돌려주면 됨
                 }
             }
         }
@@ -62,7 +80,7 @@ namespace Weapons.Actions
         {
             if(_currentGravitoStatus == GravitoStatus.Stickly && !isChangedGravity)
             {
-                //if (_aTypeHit.normal == Vector3.up) return;
+                if (_aTypeHit.normal == Vector3.up) return;
 
                 _currentGravitoStatus = GravitoStatus.ChangeGravity;
                 _currentGravityChangeTime = 0f;
@@ -95,6 +113,8 @@ namespace Weapons.Actions
             Checkpoint.endCheckpoint.rotation = Quaternion.Euler(new Vector3(0, PlayerBaseTransform.rotation.eulerAngles.y, 0));
             
             GravityManager.ChangeGlobalGravityDirection(Vector3.down);
+
+            Update();
         }
 
         public override bool IsHandleWeapon()
@@ -109,7 +129,12 @@ namespace Weapons.Actions
                 case GravitoStatus.Idle:
                     transform.position = HandPosition;
                     break;
+                case GravitoStatus.Stickly:
+                    SettingGravitoPos();
+
+                    break;
                 case GravitoStatus.ChangeGravity:
+                    SettingGravitoPos();
                     _currentGravityChangeTime += Time.deltaTime / gravityChangeTime;
 
                     if (_currentGravityChangeTime >= 1f)
@@ -143,6 +168,22 @@ namespace Weapons.Actions
                             _currentGravityChangeTime);
                     }
                     break;
+            }
+        }
+
+        private void SettingGravitoPos()
+        {
+            if (_aTypeCurPos != _aTypeTrm.position - _aTypeHit.point)
+            {
+                transform.position -= _aTypeCurPos - (_aTypeTrm.position - _aTypeHit.point);
+                _aTypeCurPos = _aTypeTrm.position - _aTypeHit.point;
+
+
+            }
+
+            if(_aTypeCurRot != _aTypeTrm.rotation)
+            {
+
             }
         }
     }
