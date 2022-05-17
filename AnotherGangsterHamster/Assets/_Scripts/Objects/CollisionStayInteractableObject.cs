@@ -12,10 +12,14 @@ namespace Objects
 
       public Vector3 colPosition;
 
+      public bool isOn = true;
+
       private GameObject _curCollision;
 
       private void OnCollisionStay(Collision other)
       {
+         if (!isOn) return;
+
          colPosition = other.contacts[0].point;
 
          var obj = _callbacks.Find(x => (x.key == "")
@@ -29,7 +33,7 @@ namespace Objects
 
       private void OnCollisionExit(Collision other)
       {
-         if (_curCollision != other.gameObject) return;
+         if (!isOn || _curCollision != other.gameObject) return;
 
          var obj = _callbacks.Find(x => (x.key == "")
                || other.gameObject.CompareTag(x.key));

@@ -34,6 +34,8 @@ namespace Objects
       // 충돌 지점
       public Vector3 colPosition;
 
+      public bool isOn = true;
+
       private void Awake()
       {
          _activated = InitalActiveStatus;
@@ -42,8 +44,8 @@ namespace Objects
       #region Unity Collision Event
       private void OnCollisionEnter(Collision other)
       {
-         if (!MultipleCollisionable
-            && _curInteractedObject != null) return;
+         if (!isOn || (!MultipleCollisionable
+            && _curInteractedObject != null)) return;
 
          _curInteractedObject = other.gameObject;
 
@@ -56,7 +58,7 @@ namespace Objects
 
       private void OnCollisionExit(Collision other)
       {
-         if (_curInteractedObject != other.gameObject) return;
+         if (!isOn || _curInteractedObject != other.gameObject) return;
             
          _curInteractedObject = null;
 

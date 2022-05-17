@@ -1,4 +1,5 @@
 using Matters.Gravity;
+using Objects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,9 @@ namespace Weapons.Actions
         private Transform chargeBar;
         private Transform _dropPoint;
         private LineRenderer _dropLineRenderer;
+
+        private CollisionInteractableObject _enterCollision;
+        private CollisionStayInteractableObject _stayCollision;
 
         // 그랜드의 크기 변환 단계
         private enum GrandSizeLevel
@@ -90,13 +94,14 @@ namespace Weapons.Actions
 
             _sensor = GetComponent<AlphaSensor>();
 
+            _enterCollision = GetComponent<CollisionInteractableObject>();
+            _stayCollision = GetComponent<CollisionStayInteractableObject>();
+
             _dropPoint = transform.GetChild(0);
             _dropLineRenderer = transform.GetChild(1).GetComponent<LineRenderer>();
 
             _dropPoint.parent = null;
             _dropLineRenderer.transform.parent = null;
-
-            Debug.Log(_dropPoint.name);
         }
 
         private void Start()
@@ -234,12 +239,25 @@ namespace Weapons.Actions
 
         private void Update()
         {
+            _enterCollision.isOn = _currentGrandStatus != GrandStatus.Idle;
+            _stayCollision.isOn = _currentGrandStatus != GrandStatus.Idle;
+
+            gameObject.layer = _currentGrandStatus == GrandStatus.Idle ? LayerMask.NameToLayer("NOCOLWEAPON") : LayerMask.NameToLayer("Default");
+
             switch (_currentGrandStatus)
             {
                 case GrandStatus.Idle:
-                    (_myCollider as BoxCollider).center = Vector3.one * short.MaxValue;
-                    if (_myRigid.constraints == RigidbodyConstraints.None) _myRigid.constraints = RigidbodyConstraints.FreezePosition;
-                    transform.position = HandPosition;
+                    //(_myCollider as BoxCollider).center = Vector3.one * short.MaxValue;
+                    //if (_myRigid.constraints == RigidbodyConstraints.None) _myRigid.constraints = RigidbodyConstraints.FreezePosition;
+                    //transform.position = HandPosition;
+
+                    if (Vector3.Distance(transform.position, HandPosition) > 2f)
+                    {
+                        transform.position = HandPosition;
+                    }
+                    _myRigid.velocity = (HandPosition - transform.position) * 5;
+                    _myRigid.angularVelocity = Vector3.zero;
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, 0.5f);
                     break;
                 case GrandStatus.Fire:
                     _myRigid.velocity = _fireDir * fireSpeed;
@@ -497,9 +515,7 @@ namespace Weapons.Actions
                 }
             }
 
-            if (!(_currentGrandStatus == GrandStatus.Fire
-            || _currentGrandStatus == GrandStatus.Use
-            || _currentGrandStatus == GrandStatus.Resize))
+            if (!(_currentGrandStatus == GrandStatus.Fire))
             {
                 if (_alpha >= 0.2f)
                 {

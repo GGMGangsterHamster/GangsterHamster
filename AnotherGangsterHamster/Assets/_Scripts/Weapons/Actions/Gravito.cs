@@ -14,9 +14,6 @@ namespace Weapons.Actions
         private GravitoStatus _currentGravitoStatus = GravitoStatus.Idle; 
         private CheckpointManager _checkpoint;
         private RaycastHit _aTypeHit;
-        private Transform _aTypeTrm;
-        private Vector3 _aTypeCurPos;
-        private Quaternion _aTypeCurRot;
 
         private CheckpointManager Checkpoint
         {
@@ -49,15 +46,13 @@ namespace Weapons.Actions
             {
                 if(Physics.Raycast(MainCameraTransform.position, MainCameraTransform.forward, out RaycastHit hit) && hit.transform.CompareTag("ATYPEOBJECT"))
                 {
+                    _myRigid.constraints = RigidbodyConstraints.FreezeAll;
                     _fireDir = MainCameraTransform.forward;
                     _currentGravitoStatus = GravitoStatus.Stickly;
                     transform.position = hit.point - (_fireDir * (transform.localScale.y + penetratePadding));
                     transform.rotation = Quaternion.LookRotation(_fireDir) * Quaternion.Euler(90, 0, 0);
 
                     _aTypeHit = hit;
-                    _aTypeTrm = hit.transform;
-                    _aTypeCurPos = hit.transform.position - hit.point;
-                    _aTypeCurRot = _aTypeTrm.rotation;
 
                     // 일정 각도 차 만큼 돌리고 픔
                     // 차 값, 위치 이동 값
@@ -104,6 +99,7 @@ namespace Weapons.Actions
                 return;
             }
 
+            _myRigid.constraints = RigidbodyConstraints.None;
             _currentGravitoStatus = GravitoStatus.Reset;
             _currentGravityChangeTime = 0f;
             isChangedGravity = false;
@@ -127,7 +123,13 @@ namespace Weapons.Actions
             switch(_currentGravitoStatus)
             {
                 case GravitoStatus.Idle:
-                    transform.position = HandPosition;
+                    if(Vector3.Distance(transform.position, HandPosition) > 1f)
+                    {
+                        transform.position = HandPosition;
+                    }
+                    _myRigid.velocity = (HandPosition - transform.position) * 20;
+                    _myRigid.angularVelocity = _myRigid.angularVelocity / 2;
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, 0.5f);
                     break;
                 case GravitoStatus.Stickly:
                     SettingGravitoPos();
@@ -173,18 +175,7 @@ namespace Weapons.Actions
 
         private void SettingGravitoPos()
         {
-            if (_aTypeCurPos != _aTypeTrm.position - _aTypeHit.point)
-            {
-                transform.position -= _aTypeCurPos - (_aTypeTrm.position - _aTypeHit.point);
-                _aTypeCurPos = _aTypeTrm.position - _aTypeHit.point;
 
-
-            }
-
-            if(_aTypeCurRot != _aTypeTrm.rotation)
-            {
-
-            }
         }
     }
 }
