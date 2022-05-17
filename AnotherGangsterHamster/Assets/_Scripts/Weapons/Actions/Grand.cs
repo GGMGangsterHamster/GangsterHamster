@@ -17,7 +17,7 @@ namespace Weapons.Actions
         public float alphaSensorValue; // 오브젝트가 투명해지는 거리
 
         private Transform chargeBar;
-        private LineRenderer _fireLineRenderer;
+        private Transform _dropPoint;
 
         // 그랜드의 크기 변환 단계
         private enum GrandSizeLevel
@@ -86,7 +86,9 @@ namespace Weapons.Actions
             chargeBar = GameObject.Find("ChargeBar").transform;
 
             _sensor = GetComponent<AlphaSensor>();
-            _fireLineRenderer = GetComponentInChildren<LineRenderer>();
+            _dropPoint = transform.GetChild(0);
+
+            Debug.Log(_dropPoint.name);
         }
 
         private void Start()
@@ -108,8 +110,9 @@ namespace Weapons.Actions
                 if (_myRigid.constraints == RigidbodyConstraints.FreezePosition)
                     _myRigid.constraints = RigidbodyConstraints.None;
 
+                _dropPoint.gameObject.SetActive(true);
+
                 _fireDir = MainCameraTransform.forward;
-                _fireLineRenderer.gameObject.SetActive(true);
 
                 if (Vector3.Angle(_fireDir, -PlayerBaseTransform.up) < 37.5f)
                 {
@@ -449,8 +452,6 @@ namespace Weapons.Actions
         {
             if(_currentGrandStatus == GrandStatus.Fire)
             {
-                _fireLineRenderer.SetPosition(0, Vector3.down * (_sizeLevelValue[_currentSizeLevel] / 2 - 0.5f));
-
                 RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector3.down);
                 float minDistance = float.MaxValue;
                 int index = -1;
@@ -471,18 +472,13 @@ namespace Weapons.Actions
                     {
                         RaycastHit hit = hits[index];
 
-                        _fireLineRenderer.SetPosition(1, Vector3.down * (Vector3.Distance(transform.position, hit.point) - 0.5f));
+                        _dropPoint.position = hit.point + Vector3.up * 0.05f;
                     }
-                }
-
-                if(index == -1)
-                {
-                    _fireLineRenderer.SetPosition(1, Vector3.down * short.MaxValue);
                 }
             }
             else
             {
-                _fireLineRenderer.gameObject.SetActive(false);
+                _dropPoint.gameObject.SetActive(false);
             }
         }
     }
