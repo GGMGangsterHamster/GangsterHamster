@@ -56,8 +56,7 @@ namespace Objects
 
       private void OnCollisionExit(Collision other)
       {
-         if (!MultipleCollisionable
-            && _curInteractedObject != other.gameObject) return;
+         if (_curInteractedObject != other.gameObject) return;
             
          _curInteractedObject = null;
 

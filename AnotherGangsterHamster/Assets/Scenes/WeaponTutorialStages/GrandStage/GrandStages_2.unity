@@ -2235,6 +2235,7 @@ GameObject:
   - component: {fileID: 114135066}
   - component: {fileID: 114135065}
   - component: {fileID: 114135068}
+  - component: {fileID: 114135069}
   m_Layer: 0
   m_Name: L
   m_TagString: BTYPEOBJECT
@@ -2335,6 +2336,18 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: 5}
   duration: 5
   threshould: 0.08
+--- !u!114 &114135069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114135063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c35fe27cf2e8e758cb2bfaa02756ce29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &118499356
 GameObject:
   m_ObjectHideFlags: 0
@@ -4939,6 +4952,7 @@ GameObject:
   - component: {fileID: 208531980}
   - component: {fileID: 208531979}
   - component: {fileID: 208531981}
+  - component: {fileID: 208531982}
   m_Layer: 0
   m_Name: MovingFloor
   m_TagString: BTYPEOBJECT
@@ -5001,6 +5015,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 860c5747b2b14eb53928a424869680ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &208531982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208531977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c35fe27cf2e8e758cb2bfaa02756ce29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &211256557
@@ -5196,7 +5222,7 @@ GameObject:
   m_IsActive: 1
 --- !u!114 &223332784
 MonoBehaviour:
-  m_ObjectHideFlags: 19
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -9187,58 +9213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e56c01117f90b1783e44d52cbc8f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _curStandingPos: {fileID: 0}
---- !u!114 &469385358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469385344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83185d2616cdb31b880a0fdde34fe5f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _callbacks:
-  - key: 
-    OnActive:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 469385357}
-          m_TargetAssemblyTypeName: Matters.Velocity.FollowGroundPos, Assembly-CSharp
-          m_MethodName: Active
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    OnDeactive:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 469385357}
-          m_TargetAssemblyTypeName: Matters.Velocity.FollowGroundPos, Assembly-CSharp
-          m_MethodName: Deactive
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  <EventIsToggle>k__BackingField: 0
-  <InitalActiveStatus>k__BackingField: 0
-  MultipleCollisionable: 0
-  _activated: 0
-  colNormalVec: {x: 0, y: 0, z: 0}
-  colVelocity: {x: 0, y: 0, z: 0}
-  colPosition: {x: 0, y: 0, z: 0}
 --- !u!1001 &472572729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12029,6 +12003,7 @@ GameObject:
   - component: {fileID: 611147117}
   - component: {fileID: 611147118}
   - component: {fileID: 611147119}
+  - component: {fileID: 611147120}
   m_Layer: 0
   m_Name: MovingPlatform
   m_TagString: BTYPEOBJECT
@@ -12080,6 +12055,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4, y: 0.1, z: 6}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &611147120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611147116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c35fe27cf2e8e758cb2bfaa02756ce29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &611424073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13792,6 +13779,7 @@ GameObject:
   - component: {fileID: 695560960}
   - component: {fileID: 695560959}
   - component: {fileID: 695560958}
+  - component: {fileID: 695560962}
   m_Layer: 0
   m_Name: L
   m_TagString: BTYPEOBJECT
@@ -13892,6 +13880,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 695560956}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &695560962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695560956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c35fe27cf2e8e758cb2bfaa02756ce29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &697551338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15936,6 +15936,7 @@ GameObject:
   - component: {fileID: 802047851}
   - component: {fileID: 802047850}
   - component: {fileID: 802047853}
+  - component: {fileID: 802047854}
   m_Layer: 0
   m_Name: R
   m_TagString: BTYPEOBJECT
@@ -16036,6 +16037,18 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: -5}
   duration: 5
   threshould: 0.08
+--- !u!114 &802047854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802047848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c35fe27cf2e8e758cb2bfaa02756ce29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &814753290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28096,12 +28109,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _callbacks:
-  - key: BTYPEOBJECT
+  - key: 
     OnActive:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1688689554}
-          m_TargetAssemblyTypeName: Objects.SetObjectParent, Assembly-CSharp
+        - m_Target: {fileID: 469385357}
+          m_TargetAssemblyTypeName: Matters.Velocity.FollowGroundPos, Assembly-CSharp
           m_MethodName: Active
           m_Mode: 0
           m_Arguments:
@@ -28115,8 +28128,8 @@ MonoBehaviour:
     OnDeactive:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1688689554}
-          m_TargetAssemblyTypeName: Objects.SetObjectParent, Assembly-CSharp
+        - m_Target: {fileID: 469385357}
+          m_TargetAssemblyTypeName: Matters.Velocity.FollowGroundPos, Assembly-CSharp
           m_MethodName: Deactive
           m_Mode: 0
           m_Arguments:
@@ -28130,38 +28143,6 @@ MonoBehaviour:
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
   _activated: 0
---- !u!114 &1424101878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1424101870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01fe4906c1fb32b4d9b0132470d9f469, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _callbacks:
-  - key: BTYPEOBJECT
-    OnActive:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1688689554}
-          m_TargetAssemblyTypeName: Objects.SetObjectParent, Assembly-CSharp
-          m_MethodName: Active
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    OnDeactive:
-      m_PersistentCalls:
-        m_Calls: []
 --- !u!1001 &1426760231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32291,6 +32272,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 390804765, guid: 8bb3b0a9c1b2913aeba90d58c3b2d9dd, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 60493967840551276, guid: 8bb3b0a9c1b2913aeba90d58c3b2d9dd, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -32991,6 +32976,7 @@ GameObject:
   - component: {fileID: 1665730070}
   - component: {fileID: 1665730069}
   - component: {fileID: 1665730068}
+  - component: {fileID: 1665730072}
   m_Layer: 0
   m_Name: R
   m_TagString: BTYPEOBJECT
@@ -33091,6 +33077,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1665730066}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1665730072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665730066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c35fe27cf2e8e758cb2bfaa02756ce29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1668981748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -34787,24 +34785,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2764017440565451686, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
   m_PrefabInstance: {fileID: 1744143904}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1744143906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1744143905}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c91e7a8d43ca9d396220998735c698, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _root: {fileID: 1744143907}
---- !u!4 &1744143907 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2764017440565451687, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
-  m_PrefabInstance: {fileID: 1744143904}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1744143912 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2764017440565451672, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
@@ -34833,18 +34813,6 @@ MonoBehaviour:
     OnActive:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1744143906}
-          m_TargetAssemblyTypeName: Objects.SetObjectParent, Assembly-CSharp
-          m_MethodName: Active
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 1744143912}
           m_TargetAssemblyTypeName: Weapons.Actions.Grand, Assembly-CSharp
           m_MethodName: BTypeObjCollisionEnterEvent
@@ -34857,11 +34825,23 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1744143930}
+          m_TargetAssemblyTypeName: Matters.Velocity.FollowGroundPos, Assembly-CSharp
+          m_MethodName: Active
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     OnDeactive:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1744143906}
-          m_TargetAssemblyTypeName: Objects.SetObjectParent, Assembly-CSharp
+        - m_Target: {fileID: 1744143930}
+          m_TargetAssemblyTypeName: Matters.Velocity.FollowGroundPos, Assembly-CSharp
           m_MethodName: Deactive
           m_Mode: 0
           m_Arguments:
@@ -34876,18 +34856,6 @@ MonoBehaviour:
     OnActive:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1744143906}
-          m_TargetAssemblyTypeName: Objects.SetObjectParent, Assembly-CSharp
-          m_MethodName: Active
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 1744143912}
           m_TargetAssemblyTypeName: Weapons.Actions.Grand, Assembly-CSharp
           m_MethodName: BTypeObjCollisionEnterEvent
@@ -34902,19 +34870,7 @@ MonoBehaviour:
           m_CallState: 2
     OnDeactive:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1744143906}
-          m_TargetAssemblyTypeName: Objects.SetObjectParent, Assembly-CSharp
-          m_MethodName: Deactive
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
   MultipleCollisionable: 1
@@ -34922,7 +34878,7 @@ MonoBehaviour:
   colNormalVec: {x: 0, y: 0, z: 0}
   colVelocity: {x: 0, y: 0, z: 0}
   colPosition: {x: 0, y: 0, z: 0}
---- !u!114 &1744143920
+--- !u!114 &1744143930
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -34931,49 +34887,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1744143905}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d92a7220ca1d1d4aacd6596cd8b83cd, type: 3}
+  m_Script: {fileID: 11500000, guid: b5e56c01117f90b1783e44d52cbc8f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _callbacks:
-  - key: BTYPEOBJECT
-    OnActive:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1744143906}
-          m_TargetAssemblyTypeName: Objects.SetObjectParent, Assembly-CSharp
-          m_MethodName: Active
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    OnDeactive:
-      m_PersistentCalls:
-        m_Calls: []
-  - key: ATYPEOBJECT
-    OnActive:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1744143906}
-          m_TargetAssemblyTypeName: Objects.SetObjectParent, Assembly-CSharp
-          m_MethodName: Active
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    OnDeactive:
-      m_PersistentCalls:
-        m_Calls: []
-  colPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &1744143931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744143905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31d9846746c97de6fb3e3e99dbd4dc14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CalculateByItself: 1
 --- !u!1001 &1744497532
 PrefabInstance:
   m_ObjectHideFlags: 0

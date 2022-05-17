@@ -20,7 +20,9 @@ namespace Objects
       [HideInInspector] public bool _activated = false;
       public bool Activated => _activated;
 
-      
+      private Collider _curTriggerObj;
+
+
       private void Awake()
       {
          _activated = InitalActiveStatus;
@@ -29,13 +31,18 @@ namespace Objects
       #region Unity Trigger Event
       private void OnTriggerEnter(Collider other)
       {
+         if (_curTriggerObj != null) return;
+         _curTriggerObj = other;
+
          TriggerEnterEvent(other.gameObject);
       }
 
       private void OnTriggerExit(Collider other)
       {
-         if (!EventIsToggle)
-            TriggerExitEvent(other.gameObject);
+         if (_curTriggerObj != other || EventIsToggle) return;
+
+         TriggerExitEvent(other.gameObject);
+         _curTriggerObj = null;
       }
       #endregion // Unity Trigger Event
 

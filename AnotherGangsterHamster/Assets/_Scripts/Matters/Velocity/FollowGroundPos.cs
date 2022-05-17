@@ -1,53 +1,46 @@
 using Characters.Player;
 using Characters.Player.Move;
 using Objects;
+using Objects.StageObjects;
 using UnityEngine;
 
 namespace Matters.Velocity
 {
-   [RequireComponent(typeof(MoveDelta),
-                     typeof(CollisionInteractableObject))]
+   [RequireComponent(typeof(MoveDelta))]
    public class FollowGroundPos : MonoBehaviour, ICollisionEventable
    {
-      private CollisionInteractableObject _colInterObj;
       private MoveDelta _delta;
 
-      // FIXME: change to private
-      public Transform _curStandingPos;
-      private Vector3 _pastPosition = Vector3.zero;
+      private Transform _curRootTrm;
+      private Vector3 _pastPos;
 
       private void Awake()
       {
-         _colInterObj
-            = GetComponent<CollisionInteractableObject>();
-
          _delta = GetComponent<MoveDelta>();
       }
 
       public void Active(GameObject other)
       {
-         _curStandingPos   = other.transform;
-         _pastPosition     = _curStandingPos.localPosition;
+         _curRootTrm = other.transform;
+         _pastPos = other.transform.position;
       }
 
       public void Deactive(GameObject other)
       {
-         if (_curStandingPos == other.transform)
-            _curStandingPos = null;
+         if (_curRootTrm == other.transform)
+         {
+            _curRootTrm = null;
+         }
       }
 
       private void FixedUpdate()
       {
+         if (_curRootTrm == null) return;
 
-         if (_curStandingPos != null)
-         {
-            // Debug.Log("CUR: " + _curStandingPos.localPosition);
-            // Vector3 d = _curStandingPos.localPosition - _pastPosition;
-            // Debug.Log("D  : " + d);
-            // _delta.AddRawDelta(d);
-         }
-
-         // transform.Translate(_delta.Calculate(transform, PlayerValues.Speed, true));
+         Vector3 d = _curRootTrm.position - _pastPos;
+         _delta.AddRawDelta(d);
+         _pastPos = _curRootTrm.position;
+         
       }
    }
 }
