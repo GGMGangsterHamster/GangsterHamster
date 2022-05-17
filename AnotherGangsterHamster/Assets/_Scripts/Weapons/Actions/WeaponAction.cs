@@ -30,7 +30,6 @@ namespace Weapons.Actions
     public enum ReinforcementStatus
     {
         Idle,
-        Fire,
         Use,
         Stickly
     }

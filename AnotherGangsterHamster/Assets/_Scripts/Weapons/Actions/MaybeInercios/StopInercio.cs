@@ -21,7 +21,6 @@ namespace Weapons.Actions
         public override void FireWeapon()
         {
             if (_currentStopStatus != StopStatus.Use
-            && _currentStopStatus != StopStatus.Stay
             && _currentStopStatus != StopStatus.Stickly)
             {
                 if (Physics.Raycast(MainCameraTransform.position, MainCameraTransform.forward, out RaycastHit hit))
@@ -68,8 +67,6 @@ namespace Weapons.Actions
             {
                 case StopStatus.Idle:
                     transform.position = HandPosition;
-                    break;
-                case StopStatus.Stickly:
                     break;
             }
         }
