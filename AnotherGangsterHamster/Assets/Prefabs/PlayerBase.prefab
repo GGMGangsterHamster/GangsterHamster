@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 60493965882696529}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &390804766
 MonoBehaviour:
@@ -107,6 +107,51 @@ Transform:
   m_Father: {fileID: 60493967840551276}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1688689552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1688689553}
+  - component: {fileID: 1688689554}
+  m_Layer: 6
+  m_Name: SetParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1688689553
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688689552}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 60493965882696529}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1688689554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688689552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c91e7a8d43ca9d396220998735c698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _root: {fileID: 0}
 --- !u!1 &1885025454
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +313,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1688689553}
   - {fileID: 390804765}
   m_Father: {fileID: 60493967049730935}
   m_RootOrder: 0
@@ -295,6 +341,7 @@ GameObject:
   - component: {fileID: 60493967049730935}
   - component: {fileID: 60493967049730929}
   - component: {fileID: 60493967049730934}
+  - component: {fileID: 1424101874}
   m_Layer: 6
   m_Name: GroundChecker
   m_TagString: Untagged
@@ -349,6 +396,53 @@ MonoBehaviour:
   - ATYPEOBJECT
   - B_Obj
   _setParent: {fileID: 0}
+--- !u!114 &1424101874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60493967049730932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8476a3bdbcdf96b058a4f960b4883763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callbacks:
+  - key: 
+    OnActive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 469385357}
+          m_TargetAssemblyTypeName: Matters.Velocity.FollowGroundPos, Assembly-CSharp
+          m_MethodName: Active
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeactive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 469385357}
+          m_TargetAssemblyTypeName: Matters.Velocity.FollowGroundPos, Assembly-CSharp
+          m_MethodName: Deactive
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  <EventIsToggle>k__BackingField: 0
+  <InitalActiveStatus>k__BackingField: 0
+  _activated: 0
 --- !u!1 &60493967266636773
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,6 +525,7 @@ GameObject:
   - component: {fileID: 60493967840551271}
   - component: {fileID: 1472637702}
   - component: {fileID: 1472637701}
+  - component: {fileID: 469385357}
   m_Layer: 6
   m_Name: PlayerBase
   m_TagString: PLAYER_BASE
@@ -511,6 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d9846746c97de6fb3e3e99dbd4dc14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CalculateByItself: 0
 --- !u!114 &60493967840551278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -602,6 +698,18 @@ MonoBehaviour:
   _deadCallbacks: {fileID: 923426877}
   regenerationDelay: 3
   regenerationValue: 1
+--- !u!114 &469385357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60493967840551282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e56c01117f90b1783e44d52cbc8f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1606516212
 PrefabInstance:
   m_ObjectHideFlags: 0
