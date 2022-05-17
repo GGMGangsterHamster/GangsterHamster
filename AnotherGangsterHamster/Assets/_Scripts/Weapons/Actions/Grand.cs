@@ -208,6 +208,8 @@ namespace Weapons.Actions
                 _currentGrandStatus = GrandStatus.Idle;
                 _weaponUsedTime = 0f;
                 _myRigid.constraints = RigidbodyConstraints.None;
+
+                Update();
             }
         }
 

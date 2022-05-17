@@ -92,14 +92,17 @@ namespace Weapons.Actions
         {
             if (isReseting)
                 return;
-            else if (!isChangedGravity)
+
+            _myRigid.constraints = RigidbodyConstraints.None;
+            
+            if (!isChangedGravity)
             {
                 _currentGravitoStatus = GravitoStatus.Idle;
                 transform.rotation = Quaternion.identity;
+                Update();
                 return;
             }
 
-            _myRigid.constraints = RigidbodyConstraints.None;
             _currentGravitoStatus = GravitoStatus.Reset;
             _currentGravityChangeTime = 0f;
             isChangedGravity = false;
@@ -123,11 +126,13 @@ namespace Weapons.Actions
             switch(_currentGravitoStatus)
             {
                 case GravitoStatus.Idle:
-                    if(Vector3.Distance(transform.position, HandPosition) > 1f)
+                    Vector3 gravitoHandPos = HandPosition - (PlayerBaseTransform.right / 4);
+
+                    if(Vector3.Distance(transform.position, gravitoHandPos) > 1f)
                     {
-                        transform.position = HandPosition;
+                        transform.position = gravitoHandPos;
                     }
-                    _myRigid.velocity = (HandPosition - transform.position) * 20;
+                    _myRigid.velocity = (gravitoHandPos - transform.position) * 20;
                     _myRigid.angularVelocity = _myRigid.angularVelocity / 2;
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, 0.5f);
                     break;
