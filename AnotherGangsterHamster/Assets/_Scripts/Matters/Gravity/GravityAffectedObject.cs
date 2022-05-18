@@ -8,6 +8,8 @@ namespace Matters.Gravity
    [RequireComponent(typeof(Rigidbody))]
    public class GravityAffectedObject : MonoBehaviour
    {
+      public bool Enabled { get; set; } = true;
+
       private bool _affectedByGlobalGravity = true;
       public bool AffectedByGlobalGravity
       {
@@ -47,6 +49,8 @@ namespace Matters.Gravity
       /// <param name="gravity">중력 인스턴스</param>
       public virtual void Gravity(GravityValue globalGravity)
       {
+         if (!Enabled) return;
+
          if (AffectedByGlobalGravity) // 전역 중력 영향 받는 오브젝트 인 경우
             _rigid.AddForce(globalGravity._direction.normalized * globalGravity._force,
                            ForceMode.Acceleration);

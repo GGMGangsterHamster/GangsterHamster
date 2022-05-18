@@ -14,6 +14,8 @@ namespace Matters.Velocity
       private Transform _curRootTrm;
       private Vector3 _pastPos;
 
+      public bool Calculate { get; set; } = true;
+
       private void Awake()
       {
          _delta = GetComponent<MoveDelta>();
@@ -35,7 +37,7 @@ namespace Matters.Velocity
 
       private void FixedUpdate()
       {
-         if (_curRootTrm == null) return;
+         if (_curRootTrm == null || !Calculate) return;
 
          Vector3 d = _curRootTrm.position - _pastPos;
          _delta.AddRawDelta(d);

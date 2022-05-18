@@ -1,4 +1,6 @@
+using Characters.Player.Move;
 using Matters.Gravity;
+using Matters.Velocity;
 using Objects;
 using System.Collections;
 using System.Collections.Generic;
@@ -24,6 +26,8 @@ namespace Weapons.Actions
 
         private CollisionInteractableObject _enterCollision;
         private CollisionStayInteractableObject _stayCollision;
+
+        private FollowGroundPos _playerFollow;
 
         // 그랜드의 크기 변환 단계
         private enum GrandSizeLevel
@@ -106,6 +110,7 @@ namespace Weapons.Actions
 
         private void Start()
         {
+            _playerFollow = PlayerBaseTransform.GetComponent<FollowGroundPos>();
             // 만약 플레이어와의 거리가 alphaSensorValue보다 가깝다면 투명도를 올린다.
             _sensor.requirement += () =>
             {
@@ -191,12 +196,20 @@ namespace Weapons.Actions
             _beforeSizeLevel = _currentSizeLevel;
             _currentGrandStatus = GrandStatus.Use;
         }
+
+        private void ReEnable()
+            => _playerFollow.Calculate = true;
+
         public override void ResetWeapon()
         {
             if (_currentGrandStatus != GrandStatus.Resize)
             {
+                _playerFollow.Calculate = false;
+                Invoke(nameof(ReEnable), 0.1f); // FIXME: 응애
+                
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
                 transform.localScale = Vector3.one * _sizeLevelValue[_currentSizeLevel];
+
 
                 chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ?
                                                             0 :
@@ -259,11 +272,14 @@ namespace Weapons.Actions
                     }
                     _myRigid.velocity = (HandPosition - transform.position) * 5;
                     _myRigid.angularVelocity = Vector3.zero;
+                    // FIXME: GravityAffectedObject 에 Enabled 있어요 그거 한번 써줘요 -우앱
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, 0.5f);
                     break;
+
                 case GrandStatus.Fire:
                     _myRigid.velocity = _fireDir * fireSpeed;
                     break;
+
                 case GrandStatus.Use:
                     _myRigid.velocity = Vector3.zero;
                     if (Input.GetKey(_useKeycode))
@@ -286,6 +302,7 @@ namespace Weapons.Actions
                         // 키를 누르고 떼면 Resize로 이동
                     }
                     break;
+
                 case GrandStatus.Resize: // 크기 변환 과정
                     if (_currentLerpTime >= resizeSpeed)
                     {
@@ -305,6 +322,7 @@ namespace Weapons.Actions
                         transform.position = Vector3.Lerp(beforePos, afterPos, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
                     }
                     break;
+                    
                 case GrandStatus.LosePower:
                     if (_myRigid.constraints == RigidbodyConstraints.FreezePosition) _myRigid.constraints = RigidbodyConstraints.None;
 
