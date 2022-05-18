@@ -9,11 +9,24 @@ namespace Weapons.Actions
 {
     public class Gravito : WeaponAction
     {
+        enum GravityDir
+        {
+            UP,
+            DOWN,
+            LEFT,
+            RIGHT,
+            FORWARD,
+            BACK
+        }
+
         public float gravityChangeTime;
         public float penetratePadding;
+
+        private Dictionary<GravityDir, Vector3> _gravityDirDict = new Dictionary<GravityDir, Vector3>();
         private GravitoStatus _currentGravitoStatus = GravitoStatus.Idle; 
         private CheckpointManager _checkpoint;
         private RaycastHit _aTypeHit;
+        private Vector3 _currentChangeGravityDir;
 
         private CheckpointManager Checkpoint
         {
@@ -37,6 +50,13 @@ namespace Weapons.Actions
             base.Awake();
 
             _weaponEnum = WeaponEnum.Gravito;
+
+            _gravityDirDict.Add(GravityDir.UP, Vector3.up);
+            _gravityDirDict.Add(GravityDir.DOWN, Vector3.down);
+            _gravityDirDict.Add(GravityDir.LEFT, Vector3.left);
+            _gravityDirDict.Add(GravityDir.RIGHT, Vector3.right);
+            _gravityDirDict.Add(GravityDir.FORWARD, Vector3.forward);
+            _gravityDirDict.Add(GravityDir.BACK, Vector3.back);
         }
 
         public override void FireWeapon()
@@ -53,6 +73,7 @@ namespace Weapons.Actions
                     transform.rotation = Quaternion.LookRotation(_fireDir) * Quaternion.Euler(90, 0, 0);
 
                     _aTypeHit = hit;
+                    _currentChangeGravityDir = CheckDir(hit.normal);
 
                     // 일정 각도 차 만큼 돌리고 픔
                     // 차 값, 위치 이동 값
@@ -75,16 +96,16 @@ namespace Weapons.Actions
         {
             if(_currentGravitoStatus == GravitoStatus.Stickly && !isChangedGravity)
             {
-                if (_aTypeHit.normal == Vector3.up) return;
+                if (_currentChangeGravityDir == Vector3.up) return;
 
                 _currentGravitoStatus = GravitoStatus.ChangeGravity;
                 _currentGravityChangeTime = 0f;
                 isChangedGravity = true;
 
                 Checkpoint.SetStartCheckpoint(PlayerBaseTransform.forward);
-                Checkpoint.SetEndCheckpoint(_aTypeHit.normal);
+                Checkpoint.SetEndCheckpoint(_currentChangeGravityDir);
 
-                GravityManager.ChangeGlobalGravityDirection(-_aTypeHit.normal);
+                GravityManager.ChangeGlobalGravityDirection(-_currentChangeGravityDir);
             }
         }
 
@@ -137,11 +158,9 @@ namespace Weapons.Actions
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, 0.5f);
                     break;
                 case GravitoStatus.Stickly:
-                    SettingGravitoPos();
 
                     break;
                 case GravitoStatus.ChangeGravity:
-                    SettingGravitoPos();
                     _currentGravityChangeTime += Time.deltaTime / gravityChangeTime;
 
                     if (_currentGravityChangeTime >= 1f)
@@ -178,9 +197,20 @@ namespace Weapons.Actions
             }
         }
 
-        private void SettingGravitoPos()
+        private Vector3 CheckDir(Vector3 dir)
         {
+            GravityDir gravityDir = GravityDir.UP;
 
+            for(int i = 0; i < 6; i++)
+            {
+                if(Vector3.Angle(_gravityDirDict[(GravityDir)i], dir) <= 45)
+                {
+                    gravityDir = (GravityDir)i;
+                    break;
+                }
+            }
+
+            return _gravityDirDict[gravityDir];
         }
     }
 }
