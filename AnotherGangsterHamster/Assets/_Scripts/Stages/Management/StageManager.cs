@@ -14,7 +14,7 @@ namespace Stages.Management
 
    public class StageManager : Singleton<StageManager>
    {
-      public StageNames CurrentStage { get; private set; }
+      public StageNames CurrentStage { get; set; }
       private string activatedCheckpointName = "";
 
       private Transform _playerTrm = null;
@@ -31,8 +31,6 @@ namespace Stages.Management
 
       public StageManager()
       {
-         CurrentStage = StageNames.GrandStages; // FIXME: 임시 스테이지 리로드
-
          AddLoadedEvent((s, l) =>
          { // 체크포인트 등록
             LoadCheckpoint();

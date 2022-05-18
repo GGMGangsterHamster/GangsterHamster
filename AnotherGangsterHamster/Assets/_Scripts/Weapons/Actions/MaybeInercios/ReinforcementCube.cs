@@ -18,9 +18,9 @@ namespace Weapons.Actions
 
         public void ObjTriggerStayEvent(GameObject obj)
         {
+            Debug.Log("Stay");
             if (!_isReinforcemented)
             {
-                Debug.Log("Stay..");
                 _playerGravity.AffectedByGlobalGravity = false;
                 _playerGravity.SetIndividualGravity(Vector3.down, 4.9f);
                 _isReinforcemented = true;
@@ -38,13 +38,18 @@ namespace Weapons.Actions
 
         public void ObjTriggerExitEvent(GameObject obj)
         {
+            Debug.Log("Exited");
             if (_isReinforcemented)
             {
-                Debug.Log("Exited");
                 _playerGravity.AffectedByGlobalGravity = true;
                 _isReinforcemented = false;
             }
         }
 
+        private void OnDisable()
+        {
+            _playerGravity.AffectedByGlobalGravity = true;
+            _isReinforcemented = false;
+        }
     }
 }

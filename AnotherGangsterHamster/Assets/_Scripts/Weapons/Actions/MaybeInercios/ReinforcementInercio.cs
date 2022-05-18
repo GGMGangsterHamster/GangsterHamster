@@ -6,66 +6,62 @@ namespace Weapons.Actions
 {
     public class ReinforcementInercio : WeaponAction
     {
-        private ReinforcementStatus _currrentStatus = ReinforcementStatus.Idle;
-        private Transform _reinforcementCube;
+        private ReinforcementStatus _currentStatus = ReinforcementStatus.Idle;
+        private Transform _reinforcementCapsule;
         private new void Awake()
         {
             base.Awake();
 
             _weaponEnum = WeaponEnum.Inercio;
 
-            _reinforcementCube = transform.GetChild(0);
+            _reinforcementCapsule = transform.GetChild(0);
         }
-
-        //Idle,
-        //Fire,
-        //Use,
-        //Stickly
 
         public override void FireWeapon()
         {
-            if(_currrentStatus == ReinforcementStatus.Idle)
+            if (_currentStatus != ReinforcementStatus.Use
+            && _currentStatus != ReinforcementStatus.Stickly)
             {
-                _myRigid.constraints = RigidbodyConstraints.None;
-                _fireDir = MainCameraTransform.forward;
-                _currrentStatus = ReinforcementStatus.Fire;
-                (_myCollider as SphereCollider).center = Vector3.zero;
+                if (Physics.Raycast(MainCameraTransform.position, MainCameraTransform.forward, out RaycastHit hit) && hit.transform.CompareTag("ATYPEOBJECT"))
+                {
+                    _fireDir = MainCameraTransform.forward;
+                    transform.position = hit.point + (hit.normal * transform.localScale.y / 2);
+                    transform.rotation = Quaternion.LookRotation(hit.normal) * Quaternion.Euler(90, 0, 0);
+
+                    _currentStatus = ReinforcementStatus.Stickly;
+                }
             }
         }
 
         public override void UseWeapon()
         {
-            if(_currrentStatus != ReinforcementStatus.Use)
+            if (_currentStatus == ReinforcementStatus.Stickly)
             {
-                transform.rotation = Quaternion.identity;
-                _myRigid.constraints = RigidbodyConstraints.FreezeAll;
-                _reinforcementCube.gameObject.SetActive(true);
-                _currrentStatus = ReinforcementStatus.Use;
+                _reinforcementCapsule.gameObject.SetActive(true);
             }
         }
 
         public override void ResetWeapon()
         {
-            _currrentStatus = ReinforcementStatus.Idle;
-            _reinforcementCube.gameObject.SetActive(false);
+            _currentStatus = ReinforcementStatus.Idle;
+            _myRigid.velocity = Vector3.zero;
+            _myRigid.angularVelocity = Vector3.zero;
+            _myRigid.constraints = RigidbodyConstraints.FreezeAll;
+
+            _reinforcementCapsule.gameObject.SetActive(false);
         }
 
         public override bool IsHandleWeapon()
         {
-            return _currrentStatus == ReinforcementStatus.Idle;
+            return _currentStatus == ReinforcementStatus.Idle;
         }
 
         private void Update()
         {
-            switch(_currrentStatus)
+            switch(_currentStatus)
             {
                 case ReinforcementStatus.Idle:
-                    (_myCollider as SphereCollider).center = Vector3.one * short.MaxValue;
-                    if (_myRigid.constraints == RigidbodyConstraints.None) _myRigid.constraints = RigidbodyConstraints.FreezePosition;
                     transform.position = HandPosition;
-                    break;
-                case ReinforcementStatus.Fire:
-                    _myRigid.velocity = _fireDir * fireSpeed;
                     break;
             }
         }

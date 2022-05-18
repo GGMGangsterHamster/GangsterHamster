@@ -30,7 +30,6 @@ namespace Weapons.Actions
     public enum ReinforcementStatus
     {
         Idle,
-        Fire,
         Use,
         Stickly
     }
@@ -65,8 +64,6 @@ namespace Weapons.Actions
 
     // 이너시오, 그랜드, 그래비토 3가지의 무기들을 관리하기 위한 부모 클래스이며
     // 공통된 기능들을 함수로 정리 해놓기도 하였다.
-    [RequireComponent(typeof(CollisionInteractableObject))]
-    [RequireComponent(typeof(TriggerInteractableObject))]
     public class WeaponAction : MonoBehaviour
     {
         [HideInInspector] public WeaponEnum _weaponEnum; // 상속받은 무기의 종류

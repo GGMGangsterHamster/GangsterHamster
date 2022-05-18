@@ -26,9 +26,15 @@ namespace Objects
       private GameObject _curInteractedObject = null;
 
       // Collision에서 Normal 벡터를 빼내기 위해서 존재하는 변수
-      public Vector3 colNormalVec; 
+      public Vector3 colNormalVec;
 
+      // 충돌 시의 Velocity
       public Vector3 colVelocity;
+
+      // 충돌 지점
+      public Vector3 colPosition;
+
+      public bool isOn = true;
 
       private void Awake()
       {
@@ -38,20 +44,21 @@ namespace Objects
       #region Unity Collision Event
       private void OnCollisionEnter(Collision other)
       {
-         if (!MultipleCollisionable
-            && _curInteractedObject != null) return;
+         if (!isOn || (!MultipleCollisionable
+            && _curInteractedObject != null)) return;
 
          _curInteractedObject = other.gameObject;
 
-         colNormalVec = other.contacts[0].normal;
-         colVelocity = other.relativeVelocity;
+         colNormalVec   = other.contacts[0].normal;
+         colVelocity    = other.relativeVelocity;
+         colPosition    = other.contacts[0].point;
+
          CollisionEnterEvent(other.gameObject);
       }
 
       private void OnCollisionExit(Collision other)
       {
-         if (!MultipleCollisionable
-            && _curInteractedObject != other.gameObject) return;
+         if (!isOn || _curInteractedObject != other.gameObject) return;
             
          _curInteractedObject = null;
 

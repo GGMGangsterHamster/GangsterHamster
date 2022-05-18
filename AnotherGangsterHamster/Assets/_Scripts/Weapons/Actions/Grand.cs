@@ -1,7 +1,13 @@
+using Characters.Player.Move;
 using Matters.Gravity;
+using Matters.Velocity;
+using Objects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+// 기능 코드는 100줄 남짓
+// 버그 코드는 400줄 이상
 
 namespace Weapons.Actions
 {
@@ -12,8 +18,16 @@ namespace Weapons.Actions
         public float resizeSpeed; // 크기 변환할 때 드는 시간
         public float reboundPower;
         public float alphaSensorValue; // 오브젝트가 투명해지는 거리
+        public float alphaToZeroSpeed;
 
         private Transform chargeBar;
+        private Transform _dropPoint;
+        private LineRenderer _dropLineRenderer;
+
+        private CollisionInteractableObject _enterCollision;
+        private CollisionStayInteractableObject _stayCollision;
+
+        private FollowGroundPos _playerFollow;
 
         // 그랜드의 크기 변환 단계
         private enum GrandSizeLevel
@@ -66,16 +80,16 @@ namespace Weapons.Actions
         private Vector3 afterPos;
 
         private float _fireCoolTime;
+        private float _alpha;
 
         private new void Awake()
         {
             base.Awake();
+            _weaponEnum = WeaponEnum.Grand;
 
             _sizeLevelValue.Add(GrandSizeLevel.OneGrade, 1f);
             _sizeLevelValue.Add(GrandSizeLevel.TwoGrade, 2f);
             _sizeLevelValue.Add(GrandSizeLevel.FourGrade, 4f);
-
-            _weaponEnum = WeaponEnum.Grand;
 
             WeaponVO vo = Utils.JsonToVO<WeaponVO>(WeaponKeyCodePath);
             _useKeycode = (KeyCode)vo.Use;
@@ -83,10 +97,20 @@ namespace Weapons.Actions
             chargeBar = GameObject.Find("ChargeBar").transform;
 
             _sensor = GetComponent<AlphaSensor>();
+
+            _enterCollision = GetComponent<CollisionInteractableObject>();
+            _stayCollision = GetComponent<CollisionStayInteractableObject>();
+
+            _dropPoint = transform.GetChild(0);
+            _dropLineRenderer = transform.GetChild(1).GetComponent<LineRenderer>();
+
+            _dropPoint.parent = null;
+            _dropLineRenderer.transform.parent = null;
         }
 
         private void Start()
         {
+            _playerFollow = PlayerBaseTransform.GetComponent<FollowGroundPos>();
             // 만약 플레이어와의 거리가 alphaSensorValue보다 가깝다면 투명도를 올린다.
             _sensor.requirement += () =>
             {
@@ -96,18 +120,28 @@ namespace Weapons.Actions
 
         public override void FireWeapon()
         {
-            if(Time.time - _fireCoolTime > 0.3f) _fireCoolTime = Time.time;
-            else return; 
+            if (Time.time - _fireCoolTime > 0.3f) _fireCoolTime = Time.time;
+            else return;
 
             if (_currentGrandStatus == GrandStatus.Idle)
             {
                 if (_myRigid.constraints == RigidbodyConstraints.FreezePosition)
                     _myRigid.constraints = RigidbodyConstraints.None;
 
+                _dropPoint.gameObject.SetActive(true);
+                _dropLineRenderer.gameObject.SetActive(true);
+
+                _alpha = 1;
+                Color temp = _dropPoint.GetComponent<MeshRenderer>().material.color;
+                _dropPoint.GetComponent<MeshRenderer>().material.color = new Color(temp.r, temp.g, temp.b, 1);
+
                 _fireDir = MainCameraTransform.forward;
 
                 if (Vector3.Angle(_fireDir, -PlayerBaseTransform.up) < 37.5f)
                 {
+                    _dropPoint.gameObject.SetActive(false);
+                    _dropLineRenderer.gameObject.SetActive(false);
+
                     bool b = Physics.Raycast(PlayerTrasnform.position - (PlayerBaseTransform.up * 0.88f), _fireDir, out RaycastHit hit);
                     float dist = Vector3.Distance(PlayerBaseTransform.position, hit.point);
 
@@ -120,14 +154,14 @@ namespace Weapons.Actions
                     }
                     else
                     {
-                        if(dist >= 0.9f)
+                        if (dist >= 0.9f)
                         {
                             transform.position = FirePosition - (PlayerBaseTransform.up * 0.9f);
                         }
                         else
                         {
                             transform.position = FirePosition - (PlayerBaseTransform.up * dist);
-                            PlayerBaseTransform.position += PlayerBaseTransform.up * (0.9f - dist);
+                            PlayerBaseTransform.position += PlayerBaseTransform.up * (1.2f - dist);
                             PlayerBaseTransform.GetComponent<Rigidbody>().velocity = Vector3.zero;
                         }
                     }
@@ -162,17 +196,24 @@ namespace Weapons.Actions
             _beforeSizeLevel = _currentSizeLevel;
             _currentGrandStatus = GrandStatus.Use;
         }
+
+        private void ReEnable()
+            => _playerFollow.Calculate = true;
+
         public override void ResetWeapon()
         {
-            if(_currentGrandStatus != GrandStatus.Resize)
+            if (_currentGrandStatus != GrandStatus.Resize)
             {
+                _playerFollow.Calculate = false;
+                Invoke(nameof(ReEnable), 0.1f); // FIXME: 응애
+                
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
                 transform.localScale = Vector3.one * _sizeLevelValue[_currentSizeLevel];
+
 
                 chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ?
                                                             0 :
                                                             _sizeLevelValue[_currentSizeLevel] * 0.25f, 1, 1);
-
 
                 transform.position = HandPosition;
                 transform.rotation = Quaternion.identity;
@@ -180,6 +221,8 @@ namespace Weapons.Actions
                 _currentGrandStatus = GrandStatus.Idle;
                 _weaponUsedTime = 0f;
                 _myRigid.constraints = RigidbodyConstraints.None;
+
+                Update();
             }
         }
 
@@ -191,7 +234,7 @@ namespace Weapons.Actions
         #region CollisionEvents
         public void BTypeObjCollisionEnterEvent(GameObject obj)
         {
-            if(_currentGrandStatus != GrandStatus.Resize &&
+            if (_currentGrandStatus != GrandStatus.Resize &&
                _currentGrandStatus != GrandStatus.Use)
             {
                 _currentGrandStatus = GrandStatus.LosePower;
@@ -211,16 +254,32 @@ namespace Weapons.Actions
 
         private void Update()
         {
-            switch(_currentGrandStatus)
+            _enterCollision.isOn = _currentGrandStatus != GrandStatus.Idle;
+            _stayCollision.isOn = _currentGrandStatus != GrandStatus.Idle;
+
+            gameObject.layer = _currentGrandStatus == GrandStatus.Idle ? LayerMask.NameToLayer("NOCOLWEAPON") : LayerMask.NameToLayer("Default");
+
+            switch (_currentGrandStatus)
             {
                 case GrandStatus.Idle:
-                    (_myCollider as BoxCollider).center = Vector3.one * short.MaxValue;
-                    if (_myRigid.constraints == RigidbodyConstraints.None) _myRigid.constraints = RigidbodyConstraints.FreezePosition;
-                    transform.position = HandPosition;
+                    //(_myCollider as BoxCollider).center = Vector3.one * short.MaxValue;
+                    //if (_myRigid.constraints == RigidbodyConstraints.None) _myRigid.constraints = RigidbodyConstraints.FreezePosition;
+                    //transform.position = HandPosition;
+
+                    if (Vector3.Distance(transform.position, HandPosition) > 2f)
+                    {
+                        transform.position = HandPosition;
+                    }
+                    _myRigid.velocity = (HandPosition - transform.position) * 5;
+                    _myRigid.angularVelocity = Vector3.zero;
+                    // FIXME: GravityAffectedObject 에 Enabled 있어요 그거 한번 써줘요 -우앱
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, 0.5f);
                     break;
+
                 case GrandStatus.Fire:
                     _myRigid.velocity = _fireDir * fireSpeed;
                     break;
+
                 case GrandStatus.Use:
                     _myRigid.velocity = Vector3.zero;
                     if (Input.GetKey(_useKeycode))
@@ -243,8 +302,9 @@ namespace Weapons.Actions
                         // 키를 누르고 떼면 Resize로 이동
                     }
                     break;
+
                 case GrandStatus.Resize: // 크기 변환 과정
-                    if(_currentLerpTime >= resizeSpeed)
+                    if (_currentLerpTime >= resizeSpeed)
                     {
                         transform.localScale = Vector3.one * _sizeLevelValue[_currentSizeLevel];
                         transform.rotation = Quaternion.identity;
@@ -262,11 +322,14 @@ namespace Weapons.Actions
                         transform.position = Vector3.Lerp(beforePos, afterPos, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
                     }
                     break;
+                    
                 case GrandStatus.LosePower:
                     if (_myRigid.constraints == RigidbodyConstraints.FreezePosition) _myRigid.constraints = RigidbodyConstraints.None;
-                    
+
                     break;
             }
+
+            ShowDropPoint();
         }
 
         private void NextSizeLevel()
@@ -292,7 +355,7 @@ namespace Weapons.Actions
                 _currentSizeLevel = GrandSizeLevel.FourGrade;
         }
 
-        private void ResizeStart() 
+        private void ResizeStart()
         {
             // 여기서 정해진 조건에 충족하지 못하는 경우 밑의 코드를 실행하지 못함
             if (!CanResize(Vector3.up) ||
@@ -332,7 +395,7 @@ namespace Weapons.Actions
 
                     //PlayerBaseTransform.GetComponent<Rigidbody>().velocity = (transform.right * x) + (transform.up * y) + (transform.forward * z); // 도형의 각도에 따라 반동 주는 거
                     PlayerBaseTransform.GetComponent<Rigidbody>().velocity = new Vector3(x, y, z); // 도형의 각도를 무시하고 World 좌표로 반동 주는거
-                    
+
                     Player.Damage(weaponDamage);
                 }
             }
@@ -348,7 +411,7 @@ namespace Weapons.Actions
             lerpQuaternion = Quaternion.Euler(transform.rotation.eulerAngles.x + lerpQuaternion.eulerAngles.x,
                                                 transform.rotation.eulerAngles.y + lerpQuaternion.eulerAngles.y,
                                                 transform.rotation.eulerAngles.z + lerpQuaternion.eulerAngles.z);
-            
+
             beforePos = transform.position;
             afterPos = transform.position;
             ReadjustmentPos(Vector3.right);
@@ -376,7 +439,7 @@ namespace Weapons.Actions
 
                 if (plusHit.transform.CompareTag("BTYPEOBJECT") && minusHit.transform.CompareTag("BTYPEOBJECT"))
                 {
-                    if (Vector3.Distance(transform.position, plusHit.point) + 
+                    if (Vector3.Distance(transform.position, plusHit.point) +
                         Vector3.Distance(transform.position, minusHit.point) < _sizeLevelValue[_currentSizeLevel])
                     {
                         _currentSizeLevel = _beforeSizeLevel;
@@ -384,8 +447,8 @@ namespace Weapons.Actions
                         _weaponUsedTime = 0f;
                         _currentLerpTime = 0f;
 
-                        chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ? 
-                                                            0 : 
+                        chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ?
+                                                            0 :
                                                             _sizeLevelValue[_currentSizeLevel] * 0.25f, 1, 1);
 
                         return false;
@@ -405,7 +468,7 @@ namespace Weapons.Actions
             {
                 float padding = curSize - plusAxisDist;
 
-                if(minusAxisDist > curSize + padding)
+                if (minusAxisDist > curSize + padding)
                 {
                     afterPos += -checkDir * padding;
                     // padding 만큼 이동
@@ -437,6 +500,55 @@ namespace Weapons.Actions
             }
 
             return float.MaxValue;
+        }
+
+        private void ShowDropPoint()
+        {
+            if(_currentGrandStatus != GrandStatus.Idle)
+            {
+                RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector3.down);
+                float minDistance = float.MaxValue;
+                int index = -1;
+
+                if (hits != null)
+                {
+
+                    for (int i = 0; i < hits.Length; i++)
+                    {
+                        if (hits[i].transform.CompareTag("BTYPEOBJECT") && hits[i].distance < minDistance)
+                        {
+                            minDistance = hits[i].distance;
+                            index = i;
+                        }
+                    }
+
+                    if (index != -1)
+                    {
+                        RaycastHit hit = hits[index];
+
+                        _dropPoint.position = hit.point + Vector3.up * 0.1f;
+                        _dropLineRenderer.transform.position = hit.point + Vector3.up * (Vector3.Distance(hit.point, transform.position) / 2);
+
+                        _dropLineRenderer.SetPosition(0, Vector3.up * (Vector3.Distance(_dropLineRenderer.transform.position, hit.point) - _sizeLevelValue[_currentSizeLevel] / 2));
+                        _dropLineRenderer.SetPosition(1, Vector3.down * Vector3.Distance(_dropLineRenderer.transform.position, hit.point));
+                    }
+                }
+            }
+
+            if (!(_currentGrandStatus == GrandStatus.Fire))
+            {
+                if (_alpha >= 0.2f)
+                {
+                    _alpha -= Time.deltaTime * alphaToZeroSpeed;
+                    Color temp = _dropPoint.GetComponent<MeshRenderer>().material.color;
+                    _dropPoint.GetComponent<MeshRenderer>().material.color = new Color(temp.r, temp.g, temp.b, _alpha > 0.2f ? _alpha : 0);
+                }
+                else
+                {
+                    _dropPoint.gameObject.SetActive(false);
+                }
+                _dropLineRenderer.gameObject.SetActive(false);
+            }
         }
     }
 }
