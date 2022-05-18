@@ -27,6 +27,7 @@ namespace Weapons.Actions
         private CheckpointManager _checkpoint;
         private RaycastHit _aTypeHit;
         private Vector3 _currentChangeGravityDir;
+        private RectTransform gravity3DUI;
 
         private CheckpointManager Checkpoint
         {
@@ -50,6 +51,8 @@ namespace Weapons.Actions
             base.Awake();
 
             _weaponEnum = WeaponEnum.Gravito;
+
+            gravity3DUI = GameObject.Find("GravitoCube").GetComponent<RectTransform>();
 
             _gravityDirDict.Add(GravityDir.UP, Vector3.up);
             _gravityDirDict.Add(GravityDir.DOWN, Vector3.down);
@@ -81,8 +84,6 @@ namespace Weapons.Actions
                     // 그걸 계속해서 저장한 뒤
                     // 그게 변환되면
                     // 새로이 변환된 값을 이용해서 각도와 위치를 돌린다.
-
-
 
                     // 위치는 어떤 기준이 되는 방향 벡터를 기준으로
                     // 처음 각도를 할당한 뒤
@@ -165,15 +166,17 @@ namespace Weapons.Actions
 
                     if (_currentGravityChangeTime >= 1f)
                     {
-                        PlayerBaseTransform.rotation = Checkpoint.endCheckpoint.rotation;
+                        PlayerBaseTransform.rotation = gravity3DUI.localRotation = Checkpoint.endCheckpoint.rotation;
                         _currentGravitoStatus = GravitoStatus.Stickly;
                     }
                     else
                     {
-                        PlayerBaseTransform.rotation = Quaternion.Lerp(
+                        PlayerBaseTransform.rotation = gravity3DUI.localRotation = Quaternion.Lerp(
                             Checkpoint.startCheckpoint.rotation,
                             Checkpoint.endCheckpoint.rotation,
                             _currentGravityChangeTime);
+
+                        
                     }
                     break;
                 case GravitoStatus.Reset: 
@@ -181,14 +184,14 @@ namespace Weapons.Actions
 
                     if(_currentGravityChangeTime >= 1f)
                     {
-                        PlayerBaseTransform.rotation = Checkpoint.endCheckpoint.rotation;
+                        PlayerBaseTransform.rotation = gravity3DUI.localRotation = Checkpoint.endCheckpoint.rotation;
                         _currentGravitoStatus = GravitoStatus.Idle;
                         transform.rotation = Quaternion.identity;
                         isReseting = false;
                     }
                     else
                     {
-                        PlayerBaseTransform.rotation = Quaternion.Lerp(
+                        PlayerBaseTransform.rotation = gravity3DUI.localRotation = Quaternion.Lerp(
                             Checkpoint.startCheckpoint.rotation,
                             Checkpoint.endCheckpoint.rotation,
                             _currentGravityChangeTime);
