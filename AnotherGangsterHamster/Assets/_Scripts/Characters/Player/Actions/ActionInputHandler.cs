@@ -62,15 +62,15 @@ namespace Characters.Player.Actions
 
       private void Update()
       {
-         foreach(KeyCode key in _actionDownCommands.Keys)
+         foreach (KeyCode key in _actionDownCommands.Keys)
          {
-            if(Input.GetKeyDown(key))
+            if (Input.GetKeyDown(key))
                _actionDownCommands[key].Execute();
          }
 
-         foreach(KeyCode key in _actionUpCommands.Keys)
+         foreach (KeyCode key in _actionUpCommands.Keys)
          {
-            if(Input.GetKeyUp(key))
+            if (Input.GetKeyUp(key))
                _actionUpCommands[key].Execute();
          }
 
