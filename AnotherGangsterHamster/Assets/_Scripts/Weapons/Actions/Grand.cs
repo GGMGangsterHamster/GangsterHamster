@@ -193,6 +193,7 @@ namespace Weapons.Actions
             if (_currentGrandStatus == GrandStatus.Idle || _currentGrandStatus == GrandStatus.Resize) return;
 
             _myRigid.velocity = Vector3.zero;
+            _myRigid.angularVelocity /= 10;
             _beforeSizeLevel = _currentSizeLevel;
             _currentGrandStatus = GrandStatus.Use;
         }

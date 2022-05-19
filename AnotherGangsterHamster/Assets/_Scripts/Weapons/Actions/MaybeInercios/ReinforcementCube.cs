@@ -22,7 +22,7 @@ namespace Weapons.Actions
             if (!_isReinforcemented)
             {
                 _playerGravity.AffectedByGlobalGravity = false;
-                _playerGravity.SetIndividualGravity(Vector3.down, 4.9f);
+                _playerGravity.SetIndividualGravity(GravityManager.GetGlobalGravityDirection(), 4.9f);
                 _isReinforcemented = true;
             }
 

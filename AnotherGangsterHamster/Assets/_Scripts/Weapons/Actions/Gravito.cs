@@ -28,6 +28,8 @@ namespace Weapons.Actions
         private CheckpointManager _checkpoint;
         private RaycastHit _aTypeHit;
         private Vector3 _currentChangeGravityDir;
+        private Transform _aTypeTrm;
+        private Vector3 _aTypeCurPos;
         private Transform _dropPoint;
         private LineRenderer _dropLineRenderer;
 
@@ -84,6 +86,8 @@ namespace Weapons.Actions
                     transform.rotation = Quaternion.LookRotation(_fireDir) * Quaternion.Euler(90, 0, 0);
 
                     _aTypeHit = hit;
+                    _aTypeTrm = hit.transform;
+                    _aTypeCurPos = hit.transform.position - hit.point;
                     _currentChangeGravityDir = CheckDir(hit.normal);
 
                     // 일정 각도 차 만큼 돌리고 픔
@@ -174,9 +178,10 @@ namespace Weapons.Actions
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, 0.5f);
                     break;
                 case GravitoStatus.Stickly:
-
+                    SettingGravitoPos();
                     break;
                 case GravitoStatus.ChangeGravity:
+                    SettingGravitoPos();
                     _currentGravityChangeTime += Time.deltaTime / gravityChangeTime;
 
                     if (_currentGravityChangeTime >= 1f)
@@ -194,7 +199,8 @@ namespace Weapons.Actions
                         
                     }
                     break;
-                case GravitoStatus.Reset: 
+                case GravitoStatus.Reset:
+                    SettingGravitoPos();
                     _currentGravityChangeTime += Time.deltaTime / gravityChangeTime;
 
                     if(_currentGravityChangeTime >= 1f)
@@ -231,6 +237,15 @@ namespace Weapons.Actions
             }
 
             return _gravityDirDict[gravityDir];
+        }
+
+        private void SettingGravitoPos()
+        {
+            if (_aTypeCurPos != _aTypeTrm.position - _aTypeHit.point)
+            {
+                transform.position -= _aTypeCurPos - (_aTypeTrm.position - _aTypeHit.point);
+                _aTypeCurPos = _aTypeTrm.position - _aTypeHit.point;
+            }
         }
 
         private void ShowDropPoint()
