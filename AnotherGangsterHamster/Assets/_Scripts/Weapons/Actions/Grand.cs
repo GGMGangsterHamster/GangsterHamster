@@ -104,8 +104,8 @@ namespace Weapons.Actions
             _dropPoint = transform.GetChild(0);
             _dropLineRenderer = transform.GetChild(1).GetComponent<LineRenderer>();
 
-            _dropPoint.parent = null;
-            _dropLineRenderer.transform.parent = null;
+            _dropPoint.parent = WeaponObjectParentTransform;
+            _dropLineRenderer.transform.parent = WeaponObjectParentTransform;
         }
 
         private void Start()
@@ -202,7 +202,7 @@ namespace Weapons.Actions
 
         public override void ResetWeapon()
         {
-            if (_currentGrandStatus != GrandStatus.Resize)
+            if (_currentGrandStatus != GrandStatus.Resize && _currentGrandStatus != GrandStatus.Idle)
             {
                 _playerFollow.Calculate = false;
                 Invoke(nameof(ReEnable), 0.1f); // FIXME: ¿¿æ÷

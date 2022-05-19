@@ -20,6 +20,7 @@ namespace Weapons.Actions
         }
 
         public float gravityChangeTime;
+        public float alphaToZeroSpeed;
         public float penetratePadding;
 
         private Dictionary<GravityDir, Vector3> _gravityDirDict = new Dictionary<GravityDir, Vector3>();
@@ -27,7 +28,8 @@ namespace Weapons.Actions
         private CheckpointManager _checkpoint;
         private RaycastHit _aTypeHit;
         private Vector3 _currentChangeGravityDir;
-        private RectTransform gravity3DUI;
+        private Transform _dropPoint;
+        private LineRenderer _dropLineRenderer;
 
         private CheckpointManager Checkpoint
         {
@@ -44,7 +46,9 @@ namespace Weapons.Actions
 
         private float _currentGravityChangeTime = 0f;  
         private bool isChangedGravity = false;
-        private bool isReseting = false; 
+        private bool isReseting = false;
+
+        private float _alpha;
 
         private new void Awake()
         {
@@ -52,14 +56,18 @@ namespace Weapons.Actions
 
             _weaponEnum = WeaponEnum.Gravito;
 
-            gravity3DUI = GameObject.Find("GravitoCube").GetComponent<RectTransform>();
-
             _gravityDirDict.Add(GravityDir.UP, Vector3.up);
             _gravityDirDict.Add(GravityDir.DOWN, Vector3.down);
             _gravityDirDict.Add(GravityDir.LEFT, Vector3.left);
             _gravityDirDict.Add(GravityDir.RIGHT, Vector3.right);
             _gravityDirDict.Add(GravityDir.FORWARD, Vector3.forward);
             _gravityDirDict.Add(GravityDir.BACK, Vector3.back);
+
+            _dropPoint = transform.GetChild(0);
+            _dropLineRenderer = transform.GetChild(1).GetComponent<LineRenderer>();
+
+            _dropPoint.parent = WeaponObjectParentTransform;
+            _dropLineRenderer.transform.parent = WeaponObjectParentTransform;
         }
 
         public override void FireWeapon()
@@ -107,6 +115,13 @@ namespace Weapons.Actions
                 Checkpoint.SetEndCheckpoint(_currentChangeGravityDir);
 
                 GravityManager.ChangeGlobalGravityDirection(-_currentChangeGravityDir);
+
+                _dropPoint.gameObject.SetActive(true);
+                _dropLineRenderer.gameObject.SetActive(true);
+
+                _alpha = 1;
+                Color temp = _dropPoint.GetComponent<MeshRenderer>().material.color;
+                _dropPoint.GetComponent<MeshRenderer>().material.color = new Color(temp.r, temp.g, temp.b, 1);
             }
         }
 
@@ -145,7 +160,7 @@ namespace Weapons.Actions
 
         private void Update()
         {
-            switch(_currentGravitoStatus)
+            switch (_currentGravitoStatus)
             {
                 case GravitoStatus.Idle:
                     Vector3 gravitoHandPos = HandPosition - (PlayerBaseTransform.right / 4);
@@ -166,12 +181,12 @@ namespace Weapons.Actions
 
                     if (_currentGravityChangeTime >= 1f)
                     {
-                        PlayerBaseTransform.rotation = gravity3DUI.localRotation = Checkpoint.endCheckpoint.rotation;
+                        PlayerBaseTransform.rotation = Checkpoint.endCheckpoint.rotation;
                         _currentGravitoStatus = GravitoStatus.Stickly;
                     }
                     else
                     {
-                        PlayerBaseTransform.rotation = gravity3DUI.localRotation = Quaternion.Lerp(
+                        PlayerBaseTransform.rotation = Quaternion.Lerp(
                             Checkpoint.startCheckpoint.rotation,
                             Checkpoint.endCheckpoint.rotation,
                             _currentGravityChangeTime);
@@ -184,20 +199,22 @@ namespace Weapons.Actions
 
                     if(_currentGravityChangeTime >= 1f)
                     {
-                        PlayerBaseTransform.rotation = gravity3DUI.localRotation = Checkpoint.endCheckpoint.rotation;
+                        PlayerBaseTransform.rotation = Checkpoint.endCheckpoint.rotation;
                         _currentGravitoStatus = GravitoStatus.Idle;
                         transform.rotation = Quaternion.identity;
                         isReseting = false;
                     }
                     else
                     {
-                        PlayerBaseTransform.rotation = gravity3DUI.localRotation = Quaternion.Lerp(
+                        PlayerBaseTransform.rotation = Quaternion.Lerp(
                             Checkpoint.startCheckpoint.rotation,
                             Checkpoint.endCheckpoint.rotation,
                             _currentGravityChangeTime);
                     }
                     break;
             }
+
+            ShowDropPoint();
         }
 
         private Vector3 CheckDir(Vector3 dir)
@@ -218,9 +235,9 @@ namespace Weapons.Actions
 
         private void ShowDropPoint()
         {
-            if(_currentGravitoStatus != GravitoStatus.Idle && _currentGravitoStatus != GravitoStatus.Stickly)
+            if(_currentGravitoStatus != GravitoStatus.Idle && isChangedGravity)
             {
-                RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector3.down);
+                RaycastHit[] hits = Physics.RaycastAll(PlayerBaseTransform.position + PlayerBaseTransform.up, Vector3.down);
                 float minDistance = float.MaxValue;
                 int index = -1;
 
@@ -240,9 +257,28 @@ namespace Weapons.Actions
                     {
                         RaycastHit hit = hits[index]; // 가장 가까운 바닥
 
+                        _dropPoint.position = hit.point + Vector3.up * 0.1f;
+                        _dropLineRenderer.transform.position = hit.point + Vector3.up * (Vector3.Distance(hit.point, PlayerBaseTransform.position) / 2);
 
+                        _dropLineRenderer.SetPosition(0, Vector3.up * (Vector3.Distance(_dropLineRenderer.transform.position, hit.point) - 0.2f));
+                        _dropLineRenderer.SetPosition(1, Vector3.down * Vector3.Distance(_dropLineRenderer.transform.position, hit.point));
                     }
                 }
+            }
+
+            if (_currentGravitoStatus == GravitoStatus.Idle)
+            {
+                if (_alpha >= 0.2f)
+                {
+                    _alpha -= Time.deltaTime * alphaToZeroSpeed;
+                    Color temp = _dropPoint.GetComponent<MeshRenderer>().material.color;
+                    _dropPoint.GetComponent<MeshRenderer>().material.color = new Color(temp.r, temp.g, temp.b, _alpha > 0.2f ? _alpha : 0);
+                }
+                else
+                {
+                    _dropPoint.gameObject.SetActive(false);
+                }
+                _dropLineRenderer.gameObject.SetActive(false);
             }
         }
     }

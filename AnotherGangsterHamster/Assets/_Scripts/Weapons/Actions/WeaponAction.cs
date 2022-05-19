@@ -74,10 +74,11 @@ namespace Weapons.Actions
         public float fireSpeed;                                                 // 무기가 움직이는 속도를 말함
         public int weaponDamage;                                                // 무기 데미지
 
-        protected Player _player;
-        protected Transform _mainCameraTransform;
-        protected Transform _playerBaseTransform;
-        protected Transform _playerTransform;
+        private Player _player;
+        private Transform _mainCameraTransform;
+        private Transform _playerBaseTransform;
+        private Transform _playerTransform;
+        private Transform _weaponObjectParentTransform;
 
         private HandModeVO _handModeVO;
 
@@ -129,6 +130,19 @@ namespace Weapons.Actions
                 }
 
                 return _playerTransform;
+            }
+        }
+
+        protected Transform WeaponObjectParentTransform
+        {
+            get
+            {
+                if(_weaponObjectParentTransform == null)
+                {
+                    _weaponObjectParentTransform = GameObject.Find("WeaponObjects").transform;
+                }
+
+                return _weaponObjectParentTransform;
             }
         }
 

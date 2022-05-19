@@ -33,8 +33,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1176655191006536616}
   - {fileID: 2321908991466767770}
+  - {fileID: 1176655191006536616}
   - {fileID: 3100598983818223618}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -94,6 +94,7 @@ MonoBehaviour:
   fireSpeed: 0
   weaponDamage: 0
   gravityChangeTime: 0.75
+  alphaToZeroSpeed: 5
   penetratePadding: 0.29
 --- !u!54 &4595924153855817787
 Rigidbody:
@@ -134,7 +135,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1813965389684021297, guid: 00cc4b304e30cd949b4ff4b22bc689d9, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1813965389684021297, guid: 00cc4b304e30cd949b4ff4b22bc689d9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -278,7 +279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5768764983103864958, guid: 630b9b2db241ba94381eef6f5a157c22, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5768764983103864958, guid: 630b9b2db241ba94381eef6f5a157c22, type: 3}
       propertyPath: m_LocalPosition.x
