@@ -516,7 +516,7 @@ namespace Weapons.Actions
 
                     for (int i = 0; i < hits.Length; i++)
                     {
-                        if (hits[i].transform.CompareTag("BTYPEOBJECT") && hits[i].distance < minDistance)
+                        if ((hits[i].transform.CompareTag("BTYPEOBJECT") || hits[i].transform.CompareTag("ATYPEOBJECT")) && hits[i].distance < minDistance)
                         {
                             minDistance = hits[i].distance;
                             index = i;

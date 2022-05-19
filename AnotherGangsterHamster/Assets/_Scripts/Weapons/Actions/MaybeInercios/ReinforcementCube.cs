@@ -18,6 +18,7 @@ namespace Weapons.Actions
 
         public void ObjTriggerStayEvent(GameObject obj)
         {
+            
             Debug.Log("Stay");
             if (!_isReinforcemented)
             {
