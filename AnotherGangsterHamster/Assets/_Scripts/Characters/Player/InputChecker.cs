@@ -15,7 +15,7 @@ namespace Characters.Player
 
       private int _idx = 0;
 
-      private Func<bool> _compareable;
+      private Func<KeyCode, bool> _compareable;
 
       private void Awake()
       {
@@ -28,15 +28,13 @@ namespace Characters.Player
 
          if (StepByStepInput)
          {
-            _compareable = () => {
-               return false;
-            };
+            _compareable = key
+               => inputList[_idx].key == key;
          }
          else
          {
-            _compareable = () => {
-               return false;
-            };
+            _compareable = key
+               => inputList.Find(obj => obj.key == key) != null;
          }
       }
 
@@ -44,7 +42,7 @@ namespace Characters.Player
       {
          Event e = Event.KeyboardEvent(Input.inputString);
 
-         if (inputList[_idx].key == e.keyCode)
+         if (e.isKey && _compareable(e.keyCode))
          {
             Debug.Log("Pressed: " + e.keyCode);
             inputList[_idx++].OnPressed?.Invoke();
