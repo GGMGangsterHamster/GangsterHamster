@@ -14,6 +14,7 @@ namespace Weapons.Actions
     public class WeaponManagement : MonoBehaviour
     {
         private Transform grandCharge;
+        private Transform gravity3DUI;
 
         private Dictionary<WeaponEnum, WeaponAction> _weaponActions;
 
@@ -35,6 +36,9 @@ namespace Weapons.Actions
 
             grandCharge = GameObject.Find("GrandCharge").transform;
             grandCharge.gameObject.SetActive(false);
+
+            gravity3DUI = GameObject.Find("GravitoCube").transform;
+            gravity3DUI.gameObject.SetActive(false);
         }
 
         // 좌클릭 시 발동되는 함수
@@ -75,6 +79,7 @@ namespace Weapons.Actions
                 {
                     _curWeapon = weaponEnum;
                     grandCharge.gameObject.SetActive(_curWeapon == WeaponEnum.Grand);
+                    gravity3DUI.gameObject.SetActive(_curWeapon == WeaponEnum.Gravito);
                     isChanged = true;
                 }
             }
