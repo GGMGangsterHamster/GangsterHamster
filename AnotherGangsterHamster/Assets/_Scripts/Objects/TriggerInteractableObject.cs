@@ -16,6 +16,9 @@ namespace Objects
       [field: SerializeField]
       public bool InitalActiveStatus { get; set; } = false;
 
+      [field: SerializeField]
+      public bool MultipleCollisionable { get; set; } = false;
+
 
       [HideInInspector] public bool _activated = false;
       public bool Activated => _activated;
@@ -31,7 +34,7 @@ namespace Objects
       #region Unity Trigger Event
       private void OnTriggerEnter(Collider other)
       {
-         if (_curTriggerObj != null) return;
+         if (!MultipleCollisionable && _curTriggerObj != null) return;
          _curTriggerObj = other;
 
          TriggerEnterEvent(other.gameObject);
