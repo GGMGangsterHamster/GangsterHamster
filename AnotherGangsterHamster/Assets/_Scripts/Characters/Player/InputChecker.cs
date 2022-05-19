@@ -10,6 +10,8 @@ namespace Characters.Player
       public List<InputCheckObj> inputList
          = new List<InputCheckObj>();
 
+      public UnityEvent OnCompleted;
+
       [field: SerializeField]
       public bool StepByStepInput { get; set; } = false;
 
@@ -52,6 +54,7 @@ namespace Characters.Player
                Logger.Log(
                   $"Check Completed for {inputList.Count} conditions."
                  + "Disabling checker.");
+               OnCompleted?.Invoke();
                this.enabled = false;
                return;
             }
