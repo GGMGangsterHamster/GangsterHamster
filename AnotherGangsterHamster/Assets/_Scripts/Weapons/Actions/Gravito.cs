@@ -101,6 +101,17 @@ namespace Weapons.Actions
                     // 처음 각도를 할당한 뒤
                     // 나중에 들어온 값과 비교해서 그거의 차 만큼
                     // 얘를 돌려주면 됨
+
+                    if (!_dropPoint.gameObject.activeSelf)
+                    {
+                        _dropPoint.gameObject.SetActive(true);
+                        _dropLineRenderer.gameObject.SetActive(true);
+
+                        _alpha = 1;
+                        Color temp = _dropPoint.GetComponent<MeshRenderer>().material.color;
+                        _dropPoint.GetComponent<MeshRenderer>().material.color = new Color(temp.r, temp.g, temp.b, 1);
+                        _dropPoint.rotation = Quaternion.LookRotation(-_aTypeHit.normal) * Quaternion.LookRotation(Vector3.up);
+                    }
                 }
             }
         }
@@ -120,12 +131,7 @@ namespace Weapons.Actions
 
                 GravityManager.ChangeGlobalGravityDirection(-_currentChangeGravityDir);
 
-                _dropPoint.gameObject.SetActive(true);
-                _dropLineRenderer.gameObject.SetActive(true);
-
-                _alpha = 1;
-                Color temp = _dropPoint.GetComponent<MeshRenderer>().material.color;
-                _dropPoint.GetComponent<MeshRenderer>().material.color = new Color(temp.r, temp.g, temp.b, 1);
+                _dropPoint.rotation = Quaternion.identity;
             }
         }
 
@@ -176,12 +182,24 @@ namespace Weapons.Actions
                     _myRigid.velocity = (gravitoHandPos - transform.position) * 20;
                     _myRigid.angularVelocity = _myRigid.angularVelocity / 2;
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, 0.5f);
+
+                    ResetDropPoint();
                     break;
                 case GravitoStatus.Stickly:
                     SettingGravitoPos();
+
+                    if(isChangedGravity)
+                    {
+                        ShowDropPoint(Vector3.down);
+                    }
+                    else
+                    {
+                        ShowDropPoint(-_aTypeHit.normal);
+                    }
                     break;
                 case GravitoStatus.ChangeGravity:
                     SettingGravitoPos();
+                    ShowDropPoint(Vector3.down);
                     _currentGravityChangeTime += Time.deltaTime / gravityChangeTime;
 
                     if (_currentGravityChangeTime >= 1f)
@@ -201,6 +219,7 @@ namespace Weapons.Actions
                     break;
                 case GravitoStatus.Reset:
                     SettingGravitoPos();
+                    ShowDropPoint(Vector3.down);
                     _currentGravityChangeTime += Time.deltaTime / gravityChangeTime;
 
                     if(_currentGravityChangeTime >= 1f)
@@ -220,7 +239,6 @@ namespace Weapons.Actions
                     break;
             }
 
-            ShowDropPoint();
         }
 
         private Vector3 CheckDir(Vector3 dir)
@@ -247,54 +265,51 @@ namespace Weapons.Actions
                 _aTypeCurPos = _aTypeTrm.position - _aTypeHit.point;
             }
         }
-
-        private void ShowDropPoint()
+        private void ShowDropPoint(Vector3 dir)
         {
-            if(_currentGravitoStatus != GravitoStatus.Idle && isChangedGravity)
+            RaycastHit[] hits = Physics.RaycastAll(PlayerBaseTransform.position + PlayerBaseTransform.up, dir);
+            float minDistance = float.MaxValue;
+            int index = -1;
+
+            if (hits != null)
             {
-                RaycastHit[] hits = Physics.RaycastAll(PlayerBaseTransform.position + PlayerBaseTransform.up, Vector3.down);
-                float minDistance = float.MaxValue;
-                int index = -1;
 
-                if (hits != null)
+                for (int i = 0; i < hits.Length; i++)
                 {
-
-                    for (int i = 0; i < hits.Length; i++)
+                    if ((hits[i].transform.CompareTag("BTYPEOBJECT") || hits[i].transform.CompareTag("ATYPEOBJECT")) && hits[i].distance < minDistance)
                     {
-                        if ((hits[i].transform.CompareTag("BTYPEOBJECT") || hits[i].transform.CompareTag("ATYPEOBJECT")) && hits[i].distance < minDistance)
-                        {
-                            minDistance = hits[i].distance;
-                            index = i;
-                        }
-                    }
-
-                    if (index != -1)
-                    {
-                        RaycastHit hit = hits[index]; // 가장 가까운 바닥
-
-                        _dropPoint.position = hit.point + Vector3.up * 0.1f;
-                        _dropLineRenderer.transform.position = hit.point + Vector3.up * (Vector3.Distance(hit.point, PlayerBaseTransform.position) / 2);
-
-                        _dropLineRenderer.SetPosition(0, Vector3.up * (Vector3.Distance(_dropLineRenderer.transform.position, hit.point) - 0.2f));
-                        _dropLineRenderer.SetPosition(1, Vector3.down * Vector3.Distance(_dropLineRenderer.transform.position, hit.point));
+                        minDistance = hits[i].distance;
+                        index = i;
                     }
                 }
-            }
 
-            if (_currentGravitoStatus == GravitoStatus.Idle)
-            {
-                if (_alpha >= 0.2f)
+                if (index != -1)
                 {
-                    _alpha -= Time.deltaTime * alphaToZeroSpeed;
-                    Color temp = _dropPoint.GetComponent<MeshRenderer>().material.color;
-                    _dropPoint.GetComponent<MeshRenderer>().material.color = new Color(temp.r, temp.g, temp.b, _alpha > 0.2f ? _alpha : 0);
+                    RaycastHit hit = hits[index]; // 가장 가까운 바닥
+
+                    _dropPoint.position = hit.point + -dir * 0.1f;
+                    _dropLineRenderer.transform.position = hit.point + -dir * (Vector3.Distance(hit.point, PlayerBaseTransform.position) / 2);
+
+                    _dropLineRenderer.SetPosition(0, -dir * (Vector3.Distance(_dropLineRenderer.transform.position, hit.point) - 0.2f));
+                    _dropLineRenderer.SetPosition(1, dir * Vector3.Distance(_dropLineRenderer.transform.position, hit.point));
                 }
-                else
-                {
-                    _dropPoint.gameObject.SetActive(false);
-                }
-                _dropLineRenderer.gameObject.SetActive(false);
             }
         }
+        private void ResetDropPoint()
+        {
+            if (_alpha >= 0.2f)
+            {
+                _alpha -= Time.deltaTime * alphaToZeroSpeed;
+                Color temp = _dropPoint.GetComponent<MeshRenderer>().material.color;
+                _dropPoint.GetComponent<MeshRenderer>().material.color = new Color(temp.r, temp.g, temp.b, _alpha > 0.2f ? _alpha : 0);
+            }
+            else
+            {
+                _dropPoint.gameObject.SetActive(false);
+            }
+            _dropLineRenderer.gameObject.SetActive(false);
+        }
+
+
     }
 }
