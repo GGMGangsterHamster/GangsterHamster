@@ -215,5 +215,35 @@ namespace Weapons.Actions
 
             return _gravityDirDict[gravityDir];
         }
+
+        private void ShowDropPoint()
+        {
+            if(_currentGravitoStatus != GravitoStatus.Idle && _currentGravitoStatus != GravitoStatus.Stickly)
+            {
+                RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector3.down);
+                float minDistance = float.MaxValue;
+                int index = -1;
+
+                if (hits != null)
+                {
+
+                    for (int i = 0; i < hits.Length; i++)
+                    {
+                        if (hits[i].transform.CompareTag("BTYPEOBJECT") && hits[i].distance < minDistance)
+                        {
+                            minDistance = hits[i].distance;
+                            index = i;
+                        }
+                    }
+
+                    if (index != -1)
+                    {
+                        RaycastHit hit = hits[index]; // 가장 가까운 바닥
+
+
+                    }
+                }
+            }
+        }
     }
 }
