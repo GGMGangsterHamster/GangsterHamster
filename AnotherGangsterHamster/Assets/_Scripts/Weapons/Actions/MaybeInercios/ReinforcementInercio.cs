@@ -12,6 +12,8 @@ namespace Weapons.Actions
         private RaycastHit _aTypeHit;
         private Transform _aTypeTrm;
         private Vector3 _aTypeCurPos;
+        private float _aTypeBeforeSize;
+        private float _aTypeCurSize;
 
         private new void Awake()
         {
@@ -81,18 +83,14 @@ namespace Weapons.Actions
         {
             if (_aTypeCurPos != _aTypeTrm.position - _aTypeHit.point)
             {
-                if(_aTypeHit.transform.TryGetComponent(out Grand grand))
-                {
-                    if (grand._currentGrandStatus == GrandStatus.Idle)
-                    {
-                        ResetWeapon();
-                        gameObject.SetActive(false);
-                        return;
-                    }
-                }
-
                 transform.position -= _aTypeCurPos - (_aTypeTrm.position - _aTypeHit.point);
                 _aTypeCurPos = _aTypeTrm.position - _aTypeHit.point;
+            }
+            if (_aTypeCurSize != _aTypeHit.transform.localScale.x)
+            {
+                _aTypeBeforeSize = _aTypeCurSize;
+                _aTypeCurSize = _aTypeHit.transform.localScale.x;
+                transform.position -= _aTypeHit.normal * (_aTypeBeforeSize - _aTypeCurSize) / 2;
             }
         }
     }
