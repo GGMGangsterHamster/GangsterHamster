@@ -258,7 +258,7 @@ namespace Weapons.Actions
             _enterCollision.isOn = _currentGrandStatus != GrandStatus.Idle;
             _stayCollision.isOn = _currentGrandStatus != GrandStatus.Idle;
 
-            gameObject.layer = _currentGrandStatus == GrandStatus.Idle ? LayerMask.NameToLayer("NOCOLWEAPON") : LayerMask.NameToLayer("Default");
+            gameObject.layer = _currentGrandStatus == GrandStatus.Idle ? LayerMask.NameToLayer("NOCOLLISION") : LayerMask.NameToLayer("Default");
 
             switch (_currentGrandStatus)
             {
