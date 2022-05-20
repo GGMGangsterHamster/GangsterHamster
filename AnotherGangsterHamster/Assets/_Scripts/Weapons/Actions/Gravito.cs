@@ -21,6 +21,7 @@ namespace Weapons.Actions
 
         public float gravityChangeTime;
         public float alphaToZeroSpeed;
+        public float dropPointAlphaDistance;
         public float penetratePadding;
 
         private Dictionary<GravityDir, Vector3> _gravityDirDict = new Dictionary<GravityDir, Vector3>();
@@ -31,7 +32,6 @@ namespace Weapons.Actions
         private Transform _aTypeTrm;
         private Vector3 _aTypeCurPos;
         private Transform _dropPoint;
-        private LineRenderer _dropLineRenderer;
 
         private CheckpointManager Checkpoint
         {
@@ -66,10 +66,7 @@ namespace Weapons.Actions
             _gravityDirDict.Add(GravityDir.BACK, Vector3.back);
 
             _dropPoint = transform.GetChild(0);
-            _dropLineRenderer = transform.GetChild(1).GetComponent<LineRenderer>();
-
             _dropPoint.parent = WeaponObjectParentTransform;
-            _dropLineRenderer.transform.parent = WeaponObjectParentTransform;
         }
 
         public override void FireWeapon()
@@ -90,22 +87,9 @@ namespace Weapons.Actions
                     _aTypeCurPos = hit.transform.position - hit.point;
                     _currentChangeGravityDir = CheckDir(hit.normal);
 
-                    // 일정 각도 차 만큼 돌리고 픔
-                    // 차 값, 위치 이동 값
-                    // 쿼터니언 끼리의 차를 구하고
-                    // 그걸 계속해서 저장한 뒤
-                    // 그게 변환되면
-                    // 새로이 변환된 값을 이용해서 각도와 위치를 돌린다.
-
-                    // 위치는 어떤 기준이 되는 방향 벡터를 기준으로
-                    // 처음 각도를 할당한 뒤
-                    // 나중에 들어온 값과 비교해서 그거의 차 만큼
-                    // 얘를 돌려주면 됨
-
                     if (!_dropPoint.gameObject.activeSelf)
                     {
                         _dropPoint.gameObject.SetActive(true);
-                        _dropLineRenderer.gameObject.SetActive(true);
 
                         _alpha = 1;
                         Color temp = _dropPoint.GetComponent<MeshRenderer>().material.color;
@@ -194,7 +178,7 @@ namespace Weapons.Actions
                     }
                     else
                     {
-                        ShowDropPoint(-_aTypeHit.normal);
+                        ShowDropPoint(-_currentChangeGravityDir);
                     }
                     break;
                 case GravitoStatus.ChangeGravity:
@@ -288,10 +272,10 @@ namespace Weapons.Actions
                     RaycastHit hit = hits[index]; // 가장 가까운 바닥
 
                     _dropPoint.position = hit.point + -dir * 0.1f;
-                    _dropLineRenderer.transform.position = hit.point + -dir * (Vector3.Distance(hit.point, PlayerBaseTransform.position) / 2);
 
-                    _dropLineRenderer.SetPosition(0, -dir * (Vector3.Distance(_dropLineRenderer.transform.position, hit.point) - 0.2f));
-                    _dropLineRenderer.SetPosition(1, dir * Vector3.Distance(_dropLineRenderer.transform.position, hit.point));
+
+                    Color temp = _dropPoint.GetComponent<MeshRenderer>().material.color;
+                    _dropPoint.GetComponent<MeshRenderer>().material.color = new Color(temp.r, temp.g, temp.b, Mathf.Clamp(Vector3.Distance(MainCameraTransform.position, hit.point) / dropPointAlphaDistance, 0, 1f));
                 }
             }
         }
@@ -307,9 +291,6 @@ namespace Weapons.Actions
             {
                 _dropPoint.gameObject.SetActive(false);
             }
-            _dropLineRenderer.gameObject.SetActive(false);
         }
-
-
     }
 }
