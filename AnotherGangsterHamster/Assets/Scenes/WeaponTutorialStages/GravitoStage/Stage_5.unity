@@ -207,6 +207,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 24319682315630632, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 578695659554428950, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -227,6 +231,10 @@ PrefabInstance:
       propertyPath: _callbacks.Array.data[0].OnActive.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ObjTriggerStayEvent
       objectReference: {fileID: 0}
+    - target: {fileID: 2764017440565451686, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3557044717135549989, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: _callbacks.Array.data[0].OnDeactive.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -234,6 +242,10 @@ PrefabInstance:
     - target: {fileID: 3557044717135549989, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: _callbacks.Array.data[0].OnDeactive.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ObjTriggerExitEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 4568602332298959424, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7327468906899021415, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: m_Name
@@ -362,7 +374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4112272072307093236, guid: e3f6dfe340075f85d85d1e7ac9d21845, type: 3}
       propertyPath: Load
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3f6dfe340075f85d85d1e7ac9d21845, type: 3}
@@ -590,6 +602,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Version: 11
+  m_ObsoleteShadowResolutionTier: 1
+  m_ObsoleteUseShadowQualitySettings: 0
+  m_ObsoleteCustomShadowResolution: 512
+  m_ObsoleteContactShadows: 0
+  m_PointlightHDType: 0
+  m_SpotLightShape: 0
+  m_AreaLightShape: 0
   m_Intensity: 20000
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
@@ -692,14 +712,6 @@ MonoBehaviour:
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
   m_AreaLightEmissiveMeshLayer: -1
-  m_Version: 11
-  m_ObsoleteShadowResolutionTier: 1
-  m_ObsoleteUseShadowQualitySettings: 0
-  m_ObsoleteCustomShadowResolution: 512
-  m_ObsoleteContactShadows: 0
-  m_PointlightHDType: 0
-  m_SpotLightShape: 0
-  m_AreaLightShape: 0
 --- !u!108 &379632419
 Light:
   m_ObjectHideFlags: 0
@@ -1181,7 +1193,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 551fff02b26898506a0fb1cd2e6fc7ff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1287,7 +1299,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &837954610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1300,6 +1312,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Version: 11
+  m_ObsoleteShadowResolutionTier: 1
+  m_ObsoleteUseShadowQualitySettings: 0
+  m_ObsoleteCustomShadowResolution: 512
+  m_ObsoleteContactShadows: 0
+  m_PointlightHDType: 0
+  m_SpotLightShape: 0
+  m_AreaLightShape: 0
   m_Intensity: 40000
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
@@ -1402,14 +1422,6 @@ MonoBehaviour:
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
   m_AreaLightEmissiveMeshLayer: -1
-  m_Version: 11
-  m_ObsoleteShadowResolutionTier: 1
-  m_ObsoleteUseShadowQualitySettings: 0
-  m_ObsoleteCustomShadowResolution: 512
-  m_ObsoleteContactShadows: 0
-  m_PointlightHDType: 0
-  m_SpotLightShape: 0
-  m_AreaLightShape: 0
 --- !u!108 &837954611
 Light:
   m_ObjectHideFlags: 0
@@ -2148,7 +2160,7 @@ GameObject:
   m_TagString: BTYPEOBJECT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!65 &1206282809
 BoxCollider:
@@ -3155,6 +3167,10 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4704299422026483020, guid: e9fed65fb6b2e2622b6708846c0b1b54, type: 3}
+      propertyPath: clearColorMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4704299422026483020, guid: e9fed65fb6b2e2622b6708846c0b1b54, type: 3}
       propertyPath: exposureTarget
       value: 
       objectReference: {fileID: 0}
@@ -3168,15 +3184,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4704299422026483022, guid: e9fed65fb6b2e2622b6708846c0b1b54, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.74
+      value: -0.010000229
       objectReference: {fileID: 0}
     - target: {fileID: 4704299422026483022, guid: e9fed65fb6b2e2622b6708846c0b1b54, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5900002
+      value: 1.3400002
       objectReference: {fileID: 0}
     - target: {fileID: 4704299422026483022, guid: e9fed65fb6b2e2622b6708846c0b1b54, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.869995
+      value: -3.119995
       objectReference: {fileID: 0}
     - target: {fileID: 4704299422026483022, guid: e9fed65fb6b2e2622b6708846c0b1b54, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3220,7 +3236,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4704299422026483023, guid: e9fed65fb6b2e2622b6708846c0b1b54, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 2147483647
+      value: 503
       objectReference: {fileID: 0}
     - target: {fileID: 4704299422026483023, guid: e9fed65fb6b2e2622b6708846c0b1b54, type: 3}
       propertyPath: m_projectionMatrixMode
@@ -3298,7 +3314,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 54fec93213b2765ed81cbe8118ad5e8a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
