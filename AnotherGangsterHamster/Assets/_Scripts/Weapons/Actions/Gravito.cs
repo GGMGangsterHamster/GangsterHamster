@@ -31,7 +31,11 @@ namespace Weapons.Actions
         private Vector3 _currentChangeGravityDir;
         private Transform _aTypeTrm;
         private Vector3 _aTypeCurPos;
+        private float _aTypeBeforeSize;
+        private float _aTypeCurSize;
         private Transform _dropPoint;
+
+        private WeaponManagement _weaponManagement;
 
         private CheckpointManager Checkpoint
         {
@@ -67,6 +71,8 @@ namespace Weapons.Actions
 
             _dropPoint = transform.GetChild(0);
             _dropPoint.parent = WeaponObjectParentTransform;
+
+            _weaponManagement = GameObject.FindObjectOfType<WeaponManagement>();
         }
 
         public override void FireWeapon()
@@ -85,6 +91,8 @@ namespace Weapons.Actions
                     _aTypeHit = hit;
                     _aTypeTrm = hit.transform;
                     _aTypeCurPos = hit.transform.position - hit.point;
+                    _aTypeBeforeSize = hit.transform.localScale.x;
+                    _aTypeCurSize = hit.transform.localScale.x;
                     _currentChangeGravityDir = CheckDir(hit.normal);
 
                     if (!_dropPoint.gameObject.activeSelf)
@@ -165,7 +173,7 @@ namespace Weapons.Actions
                     }
                     _myRigid.velocity = (gravitoHandPos - transform.position) * 20;
                     _myRigid.angularVelocity = _myRigid.angularVelocity / 2;
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, 0.5f);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
 
                     ResetDropPoint();
                     break;
@@ -212,6 +220,11 @@ namespace Weapons.Actions
                         _currentGravitoStatus = GravitoStatus.Idle;
                         transform.rotation = Quaternion.identity;
                         isReseting = false;
+
+                        if(_weaponManagement.GetCurrentWeapon() != _weaponEnum)
+                        {
+                            gameObject.SetActive(false);
+                        }
                     }
                     else
                     {
@@ -245,8 +258,15 @@ namespace Weapons.Actions
         {
             if (_aTypeCurPos != _aTypeTrm.position - _aTypeHit.point)
             {
-                transform.position -= _aTypeCurPos - (_aTypeTrm.position - _aTypeHit.point);
+                transform.position -= _aTypeCurPos - ((_aTypeTrm.position - _aTypeHit.point));
                 _aTypeCurPos = _aTypeTrm.position - _aTypeHit.point;
+            }
+
+            if (_aTypeCurSize != _aTypeHit.transform.localScale.x)
+            {
+                _aTypeBeforeSize = _aTypeCurSize;
+                _aTypeCurSize = _aTypeHit.transform.localScale.x;
+                transform.position -= _aTypeHit.normal * (_aTypeBeforeSize - _aTypeCurSize) / 2;
             }
         }
         private void ShowDropPoint(Vector3 dir)
