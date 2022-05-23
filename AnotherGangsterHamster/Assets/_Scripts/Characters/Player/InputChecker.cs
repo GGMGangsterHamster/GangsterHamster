@@ -18,6 +18,7 @@ namespace Characters.Player
 
       private int _idx = 0; // Current Input index
       private bool _keyReseted = true;
+      private bool _next = true; // can get next input
 
       private Action<Action> _inputCompareable;
 
@@ -71,11 +72,18 @@ namespace Characters.Player
 
       private void Update()
       {
+         if (!_next) return;
+
          _inputCompareable(() => {
             Debug.Log("Pressed");
-            inputList[_idx++].OnPressed?.Invoke();
 
-            if (_idx >= inputList.Count) // 완료 시 비활성화
+            if (inputList[_idx].OnActionCompleted != null) {
+               _next = false;
+            }
+
+            inputList[_idx].OnPressed?.Invoke();
+
+            if (++_idx >= inputList.Count) // 완료 시 비활성화
             {
                Logger.Log(
                   $"Check Completed for {inputList.Count} conditions."
@@ -98,7 +106,7 @@ namespace Characters.Player
       IEnumerator IsStillPressing(KeyCode key, float duration, Action callback)
       {
          _keyReseted = false;
-         
+
          yield return new WaitForSeconds(duration);
          if (Input.GetKey(key))
             callback();
@@ -134,6 +142,10 @@ namespace Characters.Player
    {
       public UnityEvent OnPressed;
       public KeyCode key;
+
+      // 키를 눌러서 발생한 Action 이 종료될 때 호출, 없다면 바로 진행함
+      public UnityEvent OnActionCompleted = null;
+
       public float duration = 0.0f;
    }
 }

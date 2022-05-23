@@ -408,17 +408,17 @@ namespace Weapons.Actions
             switch(jumpLevel)
             {
                 case 1:
-                    WeaponEvents.Instance.ChangedOneStep();
+                    WeaponEvents.Instance.ChangedOneStep?.Invoke();
                     break;
                 case 2:
-                    WeaponEvents.Instance.ChangedTwoStep();
+                    WeaponEvents.Instance.ChangedTwoStep?.Invoke();
                     break;
             }
 
             if (_currentSizeLevel + jumpLevel > GrandSizeLevel.FourGrade)
             {
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
-                WeaponEvents.Instance.ChangedMinSize();
+                WeaponEvents.Instance.ChangedMinSize?.Invoke();
             }
             else
                 _currentSizeLevel += jumpLevel;
