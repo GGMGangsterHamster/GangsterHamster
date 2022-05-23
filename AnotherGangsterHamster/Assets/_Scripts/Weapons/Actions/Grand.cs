@@ -22,14 +22,8 @@ namespace Weapons.Actions
 
         public bool IsCanChangeTwoStep
         {
-            get
-            {
-                return isCanChangeTwoStep;
-            }
-            set
-            {
-                isCanChangeTwoStep = value;
-            }
+            get => isCanChangeTwoStep;
+            set => isCanChangeTwoStep = value;
         }
 
         private Transform chargeBar;
@@ -143,9 +137,7 @@ namespace Weapons.Actions
             _playerFollow = PlayerBaseTransform.GetComponent<FollowGroundPos>();
             // 만약 플레이어와의 거리가 alphaSensorValue보다 가깝다면 투명도를 올린다.
             _sensor.requirement += () =>
-            {
-                return alphaSensorValue > Vector3.Distance(PlayerBaseTransform.position, transform.position) - _sizeLevelValue[_currentSizeLevel];
-            };
+                alphaSensorValue > Vector3.Distance(PlayerBaseTransform.position, transform.position) - _sizeLevelValue[_currentSizeLevel];
         }
 
         public override void FireWeapon()
@@ -186,9 +178,7 @@ namespace Weapons.Actions
                     else
                     {
                         if (dist >= 0.9f)
-                        {
                             transform.position = FirePosition - (PlayerBaseTransform.up * 0.9f);
-                        }
                         else
                         {
                             transform.position = FirePosition - (PlayerBaseTransform.up * dist);
@@ -209,9 +199,7 @@ namespace Weapons.Actions
                     PlayerBaseTransform.position += hit2.normal * (dist + 0.5f);
                 }
                 else
-                {
                     transform.position = FirePosition;
-                }
 
                 _currentGrandStatus = GrandStatus.Fire;
 
@@ -266,9 +254,7 @@ namespace Weapons.Actions
         }
 
         public override bool IsHandleWeapon()
-        {
-            return _currentGrandStatus == GrandStatus.Idle;
-        }
+            => _currentGrandStatus == GrandStatus.Idle;
 
         #region CollisionEvents
         public void BTypeObjCollisionEnterEvent(GameObject obj)
@@ -303,9 +289,8 @@ namespace Weapons.Actions
                 case GrandStatus.Idle:
 
                     if (Vector3.Distance(transform.position, HandPosition) > 2f)
-                    {
                         transform.position = HandPosition;
-                    }
+                        
                     _myRigid.velocity = (HandPosition - transform.position) * 10;
                     _myRigid.angularVelocity = Vector3.zero;
                     // FIXME: GravityAffectedObject 에 Enabled 있어요 그거 한번 써줘요 -우앱
@@ -329,15 +314,11 @@ namespace Weapons.Actions
                         if (_weaponUsedTime >= fullChangeTime)
                         {
                             if (isCanChangeTwoStep)
-                            {
                                 MaxSizeLevel();
-                                ResizeStart();
-                            }
                             else
-                            {
                                 NextSizeLevel();
-                                ResizeStart();
-                            }
+
+                            ResizeStart();
                         }
                     }
                     else
@@ -356,8 +337,7 @@ namespace Weapons.Actions
                         _currentGrandStatus = GrandStatus.LosePower;
                         _myRigid.constraints = RigidbodyConstraints.None;
 
-                        _myRigid.velocity = Vector3.zero;
-                        _myRigid.angularVelocity = Vector3.zero;
+                        _myRigid.angularVelocity = _myRigid.velocity = Vector3.zero;
 
                         switch (_currentSizeLevel)
                         {
@@ -405,18 +385,14 @@ namespace Weapons.Actions
             int jumpLevel = 0;
 
             if (_weaponUsedTime >= 0.65f && isCanChangeTwoStep)
-                jumpLevel = 2;
-            else
-                jumpLevel = 1;
-
-            switch(jumpLevel)
             {
-                case 1:
-                    _events?.ChangedOneStep?.Invoke();
-                    break;
-                case 2:
-                    _events?.ChangedTwoStep?.Invoke();
-                    break;
+                jumpLevel = 2;
+                _events?.ChangedTwoStep?.Invoke();
+            }
+            else
+            {
+                jumpLevel = 1;
+                _events?.ChangedOneStep?.Invoke();
             }
 
             if (_currentSizeLevel + jumpLevel > GrandSizeLevel.FourGrade)
@@ -430,10 +406,8 @@ namespace Weapons.Actions
 
         private void MaxSizeLevel()
         {
-            if (_currentSizeLevel == GrandSizeLevel.FourGrade)
-                _currentSizeLevel = GrandSizeLevel.OneGrade;
-            else
-                _currentSizeLevel = GrandSizeLevel.FourGrade;
+            _currentSizeLevel = ((_currentSizeLevel == GrandSizeLevel.FourGrade) ? 
+                GrandSizeLevel.OneGrade : GrandSizeLevel.FourGrade);
         }
 
         private void ResizeStart()
@@ -550,24 +524,14 @@ namespace Weapons.Actions
                 float padding = curSize - plusAxisDist;
 
                 if (minusAxisDist > curSize + padding)
-                {
-                    afterPos += -checkDir * padding;
-                    // padding 만큼 이동
-                }
+                    afterPos += -checkDir * padding; // padding 만큼 이동
             }
             else if (minusAxisDist < curSize)
             {
                 float padding = curSize - minusAxisDist;
 
                 if (plusAxisDist > curSize + padding)
-                {
-                    afterPos += checkDir * padding;
-                    // padding 만큼 이동
-                }
-            }
-            else
-            {
-                // 문제가 없다는 것!!
+                    afterPos += checkDir * padding; // padding 만큼 이동
             }
         }
         private float GetDistance(Vector3 dir)
@@ -575,9 +539,7 @@ namespace Weapons.Actions
             if (Physics.BoxCast(transform.position, Vector3.one * (_sizeLevelValue[_beforeSizeLevel] / 2 - _sizeLevelValue[_beforeSizeLevel] / 10), dir, out RaycastHit hit))
             {
                 if (hit.transform.CompareTag("BTYPEOBJECT") && !hit.collider.isTrigger)
-                {
                     return Vector3.Distance(hit.point, transform.position);
-                }
             }
 
             return float.MaxValue;
@@ -593,7 +555,6 @@ namespace Weapons.Actions
 
                 if (hits != null)
                 {
-
                     for (int i = 0; i < hits.Length; i++)
                     {
                         if ((hits[i].transform.CompareTag("BTYPEOBJECT") || hits[i].transform.CompareTag("ATYPEOBJECT")) && hits[i].distance < minDistance)
@@ -625,9 +586,8 @@ namespace Weapons.Actions
                     _dropPoint.GetComponent<MeshRenderer>().material.color = new Color(temp.r, temp.g, temp.b, _alpha > 0.2f ? _alpha : 0);
                 }
                 else
-                {
                     _dropPoint.gameObject.SetActive(false);
-                }
+                    
                 _dropLineRenderer.gameObject.SetActive(false);
             }
         }
