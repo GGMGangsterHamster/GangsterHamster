@@ -7,12 +7,13 @@ namespace Weapons.Actions
     public enum WeaponEnum
     {
         None,
-        Inercio,
+        Lumo,
         Grand,
         Gravito,
     }
     public class WeaponManagement : MonoBehaviour
     {
+        public WeaponEnum startHandleWeapon;
         private Transform grandCharge;
 
         private Dictionary<WeaponEnum, WeaponAction> _weaponActions;
@@ -30,11 +31,14 @@ namespace Weapons.Actions
             foreach (WeaponAction weaponAction in childWeaponActions)
             {
                 _weaponActions.Add(weaponAction._weaponEnum, weaponAction);
-                weaponAction.gameObject.SetActive(false);
+
+                weaponAction.gameObject.SetActive(startHandleWeapon == weaponAction._weaponEnum);
             }
 
             grandCharge = GameObject.Find("GrandCharge").transform;
-            grandCharge.gameObject.SetActive(false);
+            grandCharge.gameObject.SetActive(startHandleWeapon ==  WeaponEnum.Grand);
+
+            _curWeapon = startHandleWeapon;
         }
 
         // 좌클릭 시 발동되는 함수

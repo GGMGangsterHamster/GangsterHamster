@@ -13,7 +13,7 @@ namespace Weapons.Actions
         private new void Awake()
         {
             base.Awake();
-            _weaponEnum = WeaponEnum.Inercio;
+            _weaponEnum = WeaponEnum.Lumo;
 
             stopPillarTrm = transform.GetChild(0);
         }

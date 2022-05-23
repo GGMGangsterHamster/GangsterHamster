@@ -14,7 +14,7 @@ namespace Weapons.Actions
         {
             base.Awake();
 
-            _weaponEnum = WeaponEnum.Inercio;
+            _weaponEnum = WeaponEnum.Lumo;
         }
 
         #region Actions

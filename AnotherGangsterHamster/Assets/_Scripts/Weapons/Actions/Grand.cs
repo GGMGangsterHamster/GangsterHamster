@@ -75,6 +75,10 @@ namespace Weapons.Actions
 
         private AlphaSensor _sensor;
 
+        private GameObject grandLv1Model;
+        private GameObject grandLv2Model;
+        private GameObject grandLv3Model;
+
         private Dictionary<GrandSizeLevel, float> _sizeLevelValue = new Dictionary<GrandSizeLevel, float>();
 
         private GrandSizeLevel _currentSizeLevel = GrandSizeLevel.OneGrade;
@@ -120,6 +124,14 @@ namespace Weapons.Actions
 
             _dropPoint.parent = WeaponObjectParentTransform;
             _dropLineRenderer.transform.parent = WeaponObjectParentTransform;
+
+            GetComponent<MeshRenderer>().enabled = false;
+
+            grandLv1Model = transform.GetChild(0).gameObject;
+            grandLv2Model = transform.GetChild(1).gameObject;
+            grandLv3Model = transform.GetChild(2).gameObject;
+
+            grandLv1Model.SetActive(true);
         }
 
         private void Start()
@@ -224,7 +236,7 @@ namespace Weapons.Actions
                 Invoke(nameof(ReEnable), 0.1f); // FIXME: ¿¿æ÷
                 
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
-                transform.localScale = Vector3.one * _sizeLevelValue[_currentSizeLevel];
+                transform.localScale = Vector3.one;
 
 
                 chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ?
@@ -237,6 +249,13 @@ namespace Weapons.Actions
                 _currentGrandStatus = GrandStatus.Idle;
                 _weaponUsedTime = 0f;
                 _myRigid.constraints = RigidbodyConstraints.None;
+
+
+                grandLv1Model.SetActive(true);
+                grandLv2Model.SetActive(false);
+                grandLv3Model.SetActive(false);
+
+                (_myCollider as BoxCollider).size = Vector3.one * _sizeLevelValue[_currentSizeLevel];
 
                 Update();
             }
@@ -335,11 +354,34 @@ namespace Weapons.Actions
 
                         _myRigid.velocity = Vector3.zero;
                         _myRigid.angularVelocity = Vector3.zero;
+
+                        switch (_currentSizeLevel)
+                        {
+                            case GrandSizeLevel.OneGrade:
+                                grandLv1Model.SetActive(true);
+                                grandLv2Model.SetActive(false);
+                                grandLv3Model.SetActive(false);
+                                break;
+                            case GrandSizeLevel.TwoGrade:
+                                grandLv1Model.SetActive(false);
+                                grandLv2Model.SetActive(true);
+                                grandLv3Model.SetActive(false);
+                                break;
+                            case GrandSizeLevel.FourGrade:
+                                grandLv1Model.SetActive(false);
+                                grandLv2Model.SetActive(false);
+                                grandLv3Model.SetActive(true);
+                                break;
+                        }
+
+                        transform.localScale = Vector3.one;
+                        (_myCollider as BoxCollider).size = Vector3.one * _sizeLevelValue[_currentSizeLevel];
                     }
                     else
                     {
                         _currentLerpTime += Time.deltaTime;
-                        transform.localScale = Vector3.one * Mathf.Lerp(_beforeWeaponSize, _sizeLevelValue[_currentSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
+                        //transform.localScale = Vector3.one * Mathf.Lerp(_beforeWeaponSize, _sizeLevelValue[_currentSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
+                        transform.localScale = Vector3.one * Mathf.Lerp(1, _sizeLevelValue[_currentSizeLevel] / _sizeLevelValue[_beforeSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
                         transform.rotation = Quaternion.Lerp(transform.rotation, lerpQuaternion, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
                         transform.position = Vector3.Lerp(beforePos, afterPos, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
                     }
