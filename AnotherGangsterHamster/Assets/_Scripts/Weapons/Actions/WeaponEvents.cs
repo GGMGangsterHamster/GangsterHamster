@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace Weapons.Actions
 {
-    public class WeaponEvents : MonoSingleton<WeaponEvents>
+    public class WeaponEvents : MonoBehaviour
     {
         public UnityEvent ChangedOneStep;
         public UnityEvent ChangedTwoStep;

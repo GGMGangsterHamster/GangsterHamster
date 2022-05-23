@@ -38,6 +38,9 @@ namespace Weapons.Actions
 
         private CollisionInteractableObject _enterCollision;
         private CollisionStayInteractableObject _stayCollision;
+        
+        // WeaponEvents Singleton 패턴 피하기 위함
+        private WeaponEvents _events;
 
         private FollowGroundPos _playerFollow;
 
@@ -103,6 +106,7 @@ namespace Weapons.Actions
         private new void Awake()
         {
             base.Awake();
+            _events = FindObjectOfType<WeaponEvents>();
             _weaponEnum = WeaponEnum.Grand;
 
             _sizeLevelValue.Add(GrandSizeLevel.OneGrade, 1f);
@@ -408,17 +412,17 @@ namespace Weapons.Actions
             switch(jumpLevel)
             {
                 case 1:
-                    WeaponEvents.Instance.ChangedOneStep?.Invoke();
+                    _events?.ChangedOneStep?.Invoke();
                     break;
                 case 2:
-                    WeaponEvents.Instance.ChangedTwoStep?.Invoke();
+                    _events?.ChangedTwoStep?.Invoke();
                     break;
             }
 
             if (_currentSizeLevel + jumpLevel > GrandSizeLevel.FourGrade)
             {
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
-                WeaponEvents.Instance.ChangedMinSize?.Invoke();
+                _events?.ChangedMinSize?.Invoke();
             }
             else
                 _currentSizeLevel += jumpLevel;
