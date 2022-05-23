@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Weapons.Actions
 {
-    public class ReinforcementCube : MonoBehaviour
+    public class LumoCube : MonoBehaviour
     {
         private bool _isReinforcemented = false;
         private GravityAffectedObject _playerGravity;

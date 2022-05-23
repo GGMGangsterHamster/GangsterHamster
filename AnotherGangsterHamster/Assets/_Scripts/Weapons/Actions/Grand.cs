@@ -136,6 +136,7 @@ namespace Weapons.Actions
                 _dropPoint.GetComponent<MeshRenderer>().material.color = new Color(temp.r, temp.g, temp.b, 1);
 
                 _fireDir = MainCameraTransform.forward;
+                transform.rotation = Quaternion.identity;
 
                 if (Vector3.Angle(_fireDir, -PlayerBaseTransform.up) < 37.5f)
                 {
@@ -271,10 +272,11 @@ namespace Weapons.Actions
                     {
                         transform.position = HandPosition;
                     }
-                    _myRigid.velocity = (HandPosition - transform.position) * 5;
+                    _myRigid.velocity = (HandPosition - transform.position) * 15;
                     _myRigid.angularVelocity = Vector3.zero;
                     // FIXME: GravityAffectedObject 에 Enabled 있어요 그거 한번 써줘요 -우앱
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, 0.5f);
+                    // ANSWER : 그거 써보았는데 그럼 오히려 복잡해지더라고요 - To 우앱
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
                     break;
 
                 case GrandStatus.Fire:
