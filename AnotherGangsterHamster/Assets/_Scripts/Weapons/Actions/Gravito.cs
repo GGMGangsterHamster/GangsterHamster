@@ -171,7 +171,7 @@ namespace Weapons.Actions
                     {
                         transform.position = gravitoHandPos;
                     }
-                    _myRigid.velocity = (gravitoHandPos - transform.position) * 20;
+                    _myRigid.velocity = (gravitoHandPos - transform.position) * 10;
                     _myRigid.angularVelocity = _myRigid.angularVelocity / 2;
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
 

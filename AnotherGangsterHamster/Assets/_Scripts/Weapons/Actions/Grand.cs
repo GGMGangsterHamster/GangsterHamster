@@ -20,6 +20,18 @@ namespace Weapons.Actions
         public float alphaSensorValue; // 오브젝트가 투명해지는 거리
         public float alphaToZeroSpeed;
 
+        public bool IsCanChangeTwoStep
+        {
+            get
+            {
+                return isCanChangeTwoStep;
+            }
+            set
+            {
+                isCanChangeTwoStep = value;
+            }
+        }
+
         private Transform chargeBar;
         private Transform _dropPoint;
         private LineRenderer _dropLineRenderer;
@@ -81,6 +93,8 @@ namespace Weapons.Actions
 
         private float _fireCoolTime;
         private float _alpha;
+
+        private bool isCanChangeTwoStep = true;
 
         private new void Awake()
         {
@@ -264,15 +278,12 @@ namespace Weapons.Actions
             switch (_currentGrandStatus)
             {
                 case GrandStatus.Idle:
-                    //(_myCollider as BoxCollider).center = Vector3.one * short.MaxValue;
-                    //if (_myRigid.constraints == RigidbodyConstraints.None) _myRigid.constraints = RigidbodyConstraints.FreezePosition;
-                    //transform.position = HandPosition;
 
                     if (Vector3.Distance(transform.position, HandPosition) > 2f)
                     {
                         transform.position = HandPosition;
                     }
-                    _myRigid.velocity = (HandPosition - transform.position) * 15;
+                    _myRigid.velocity = (HandPosition - transform.position) * 10;
                     _myRigid.angularVelocity = Vector3.zero;
                     // FIXME: GravityAffectedObject 에 Enabled 있어요 그거 한번 써줘요 -우앱
                     // ANSWER : 그거 써보았는데 그럼 오히려 복잡해지더라고요 - To 우앱
@@ -294,8 +305,16 @@ namespace Weapons.Actions
 
                         if (_weaponUsedTime >= fullChangeTime)
                         {
-                            MaxSizeLevel();
-                            ResizeStart();
+                            if (isCanChangeTwoStep)
+                            {
+                                MaxSizeLevel();
+                                ResizeStart();
+                            }
+                            else
+                            {
+                                NextSizeLevel();
+                                ResizeStart();
+                            }
                         }
                     }
                     else
@@ -339,13 +358,26 @@ namespace Weapons.Actions
         {
             int jumpLevel = 0;
 
-            if (_weaponUsedTime >= 0.65f)
+            if (_weaponUsedTime >= 0.65f && isCanChangeTwoStep)
                 jumpLevel = 2;
             else
                 jumpLevel = 1;
 
+            switch(jumpLevel)
+            {
+                case 1:
+                    WeaponEvents.Instance.ChangedOneStep();
+                    break;
+                case 2:
+                    WeaponEvents.Instance.ChangedTwoStep();
+                    break;
+            }
+
             if (_currentSizeLevel + jumpLevel > GrandSizeLevel.FourGrade)
+            {
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
+                WeaponEvents.Instance.ChangedMinSize();
+            }
             else
                 _currentSizeLevel += jumpLevel;
         }

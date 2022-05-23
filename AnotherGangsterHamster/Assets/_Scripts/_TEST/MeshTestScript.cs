@@ -13,5 +13,7 @@ public class MeshTestScript : MonoBehaviour
         _meshFilter = GetComponent<MeshFilter>();
         _meshRenderer = GetComponent<MeshRenderer>();
         _mesh = _meshFilter.mesh;
+
+
     }
 }
