@@ -97,6 +97,8 @@ namespace Characters.Player
 
       IEnumerator IsStillPressing(KeyCode key, float duration, Action callback)
       {
+         _keyReseted = false;
+         
          yield return new WaitForSeconds(duration);
          if (Input.GetKey(key))
             callback();
@@ -106,10 +108,11 @@ namespace Characters.Player
 
       private void ExecuteInputEvent(InputCheckObj input, Action callback)
       {
-         _keyReseted = false;
 
-         if (_stillPressingRoutine != null)
+         if (_stillPressingRoutine != null) {
+            Debug.Log("A");
             StopCoroutine(_stillPressingRoutine);
+         }
 
          _stillPressingRoutine = StartCoroutine(
             IsStillPressing(input.key, input.duration,
