@@ -94,6 +94,7 @@ namespace Weapons.Actions
 
         private float _fireCoolTime;
         private float _alpha;
+        private int jumpLevel;
 
         private bool isCanChangeTwoStep = true;
 
@@ -358,6 +359,23 @@ namespace Weapons.Actions
                                 break;
                         }
 
+                        if(_currentSizeLevel == GrandSizeLevel.OneGrade)
+                        {
+                            _events?.ChangedMinSize?.Invoke();
+                        }
+                        else
+                        {
+                            switch (jumpLevel)
+                            {
+                                case 1:
+                                    _events?.ChangedOneStep?.Invoke();
+                                    break;
+                                case 2:
+                                    _events?.ChangedTwoStep?.Invoke();
+                                    break;
+                            }
+                        }
+
                         transform.localScale = Vector3.one;
                         (_myCollider as BoxCollider).size = Vector3.one * _sizeLevelValue[_currentSizeLevel];
                     }
@@ -382,24 +400,15 @@ namespace Weapons.Actions
 
         private void NextSizeLevel()
         {
-            int jumpLevel = 0;
+            jumpLevel = 0;
 
             if (_weaponUsedTime >= 0.65f && isCanChangeTwoStep)
-            {
                 jumpLevel = 2;
-                _events?.ChangedTwoStep?.Invoke();
-            }
             else
-            {
                 jumpLevel = 1;
-                _events?.ChangedOneStep?.Invoke();
-            }
 
             if (_currentSizeLevel + jumpLevel > GrandSizeLevel.FourGrade)
-            {
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
-                _events?.ChangedMinSize?.Invoke();
-            }
             else
                 _currentSizeLevel += jumpLevel;
         }
