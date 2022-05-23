@@ -54,7 +54,7 @@ namespace Characters.Player.Mouse
 
          // 마우스 감도 사용할 지
          rotY += -y * (includingMouseSpeed ? PlayerValues.MouseSpeed : 1.0f);
-         rotY = Mathf.Clamp(rotY, -90f, 90f);
+         rotY = Mathf.Clamp(rotY, -89f, 89f);
 
          CamTrm.localRotation = Quaternion.Euler(rotY, 0.0f, 0.0f);
       }

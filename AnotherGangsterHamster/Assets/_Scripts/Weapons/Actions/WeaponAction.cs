@@ -27,7 +27,7 @@ namespace Weapons.Actions
         Stay
     }
 
-    public enum ReinforcementStatus
+    public enum LumoStatus
     {
         Idle,
         Use,

@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace Weapons.Actions
 {
-    public class ReinforcementInercio : WeaponAction
+    public class Lumo : WeaponAction
     {
-        private ReinforcementStatus _currentStatus = ReinforcementStatus.Idle;
-        private Transform _reinforcementCapsule;
+        private LumoStatus _currentStatus = LumoStatus.Idle;
+        private Transform _lumoCube;
 
         private RaycastHit _aTypeHit;
         private Transform _aTypeTrm;
@@ -21,13 +21,13 @@ namespace Weapons.Actions
 
             _weaponEnum = WeaponEnum.Inercio;
 
-            _reinforcementCapsule = transform.GetChild(0);
+            _lumoCube = transform.GetChild(0);
         }
 
         public override void FireWeapon()
         {
-            if (_currentStatus != ReinforcementStatus.Use
-            && _currentStatus != ReinforcementStatus.Stickly)
+            if (_currentStatus != LumoStatus.Use
+            && _currentStatus != LumoStatus.Stickly)
             {
                 if (Physics.Raycast(MainCameraTransform.position, MainCameraTransform.forward, out RaycastHit hit) && hit.transform.CompareTag("ATYPEOBJECT"))
                 {
@@ -39,24 +39,24 @@ namespace Weapons.Actions
                     _aTypeTrm = hit.transform;
                     _aTypeCurPos = hit.transform.position - hit.point;
 
-                    _currentStatus = ReinforcementStatus.Stickly;
+                    _currentStatus = LumoStatus.Stickly;
                 }
             }
         }
 
         public override void UseWeapon()
         {
-            if (_currentStatus == ReinforcementStatus.Stickly)
+            if (_currentStatus == LumoStatus.Stickly)
             {
-                _reinforcementCapsule.gameObject.SetActive(true);
+                _lumoCube.gameObject.SetActive(true);
             }
         }
 
         public override void ResetWeapon()
         {
-            _reinforcementCapsule.gameObject.SetActive(false);
+            _lumoCube.gameObject.SetActive(false);
 
-            _currentStatus = ReinforcementStatus.Idle;
+            _currentStatus = LumoStatus.Idle;
             _myRigid.velocity = Vector3.zero;
             _myRigid.angularVelocity = Vector3.zero;
             _myRigid.constraints = RigidbodyConstraints.FreezeAll;
@@ -64,17 +64,18 @@ namespace Weapons.Actions
 
         public override bool IsHandleWeapon()
         {
-            return _currentStatus == ReinforcementStatus.Idle;
+            return _currentStatus == LumoStatus.Idle;
         }
 
         private void Update()
         {
             switch(_currentStatus)
             {
-                case ReinforcementStatus.Idle:
+                case LumoStatus.Idle:
                     transform.position = HandPosition;
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
                     break;
-                case ReinforcementStatus.Stickly:
+                case LumoStatus.Stickly:
                     SettingGravitoPos();
                     break;
             }

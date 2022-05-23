@@ -35,6 +35,8 @@ namespace Weapons.Actions
         private float _aTypeCurSize;
         private Transform _dropPoint;
 
+        private WeaponManagement _weaponManagement;
+
         private CheckpointManager Checkpoint
         {
             get
@@ -69,6 +71,8 @@ namespace Weapons.Actions
 
             _dropPoint = transform.GetChild(0);
             _dropPoint.parent = WeaponObjectParentTransform;
+
+            _weaponManagement = GameObject.FindObjectOfType<WeaponManagement>();
         }
 
         public override void FireWeapon()
@@ -169,7 +173,7 @@ namespace Weapons.Actions
                     }
                     _myRigid.velocity = (gravitoHandPos - transform.position) * 20;
                     _myRigid.angularVelocity = _myRigid.angularVelocity / 2;
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, 0.5f);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
 
                     ResetDropPoint();
                     break;
@@ -216,6 +220,11 @@ namespace Weapons.Actions
                         _currentGravitoStatus = GravitoStatus.Idle;
                         transform.rotation = Quaternion.identity;
                         isReseting = false;
+
+                        if(_weaponManagement.GetCurrentWeapon() != _weaponEnum)
+                        {
+                            gameObject.SetActive(false);
+                        }
                     }
                     else
                     {
