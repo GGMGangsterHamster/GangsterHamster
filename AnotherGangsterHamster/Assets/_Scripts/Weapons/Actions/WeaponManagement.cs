@@ -1,3 +1,4 @@
+using Objects.Interaction;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,9 +45,12 @@ namespace Weapons.Actions
         // 좌클릭 시 발동되는 함수
         public void FireCurrentWeapon()
         {
-            if(_curWeapon != WeaponEnum.None)
+            if(!InteractionManager.Instance.GetGrep())
             {
-                _weaponActions[_curWeapon].FireWeapon();
+                if (_curWeapon != WeaponEnum.None)
+                {
+                    _weaponActions[_curWeapon].FireWeapon();
+                }
             }
         }
 
