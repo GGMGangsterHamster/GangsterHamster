@@ -145,8 +145,6 @@ namespace Characters.Player.Actions
 
                 yield return null;
             }
-
-            Debug.Log("끝났어요");
         }
     }
 }

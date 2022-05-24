@@ -282,8 +282,11 @@ namespace Weapons.Actions
                 {
                     if ((hits[i].transform.CompareTag("BTYPEOBJECT") || hits[i].transform.CompareTag("ATYPEOBJECT")) && hits[i].distance < minDistance)
                     {
-                        minDistance = hits[i].distance;
-                        index = i;
+                        if(hits[i].transform.GetComponent<GravityAffectedObject>() == null || hits[i].transform.GetComponent<GravityAffectedObject>().AffectedByGlobalGravity)
+                        {
+                            minDistance = hits[i].distance;
+                            index = i;
+                        }
                     }
                 }
 
