@@ -61,11 +61,14 @@ namespace Characters.Player.Actions
                 switch (InteractionManager.Instance.GetGrep())
                 {
                     case false: // 잡기
-                        if (handle.lossyScale.x *
+                        Debug.Log(Mathf.Abs(Mathf.Abs(MainCameraTransform.position.y) - Mathf.Abs(handle.position.y)));
+
+                        if ((handle.lossyScale.x *
                             handle.lossyScale.y *
                             handle.lossyScale.z > 1.1f ||
                             handle.gameObject.isStatic ||
-                            handle.name.CompareTo("Grand") == 0)
+                            handle.name.CompareTo("Grand") == 0) || 
+                            Mathf.Abs(Mathf.Abs(MainCameraTransform.position.y) - Mathf.Abs(handle.position.y)) > 1.1f)
                         {
                             InteractionManager.Instance.UnGrep();
                             return;
