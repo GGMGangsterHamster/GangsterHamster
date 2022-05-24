@@ -586,6 +586,9 @@ namespace Weapons.Actions
                         _dropLineRenderer.SetPosition(1, GravityManager.GetGlobalGravityDirection() * Vector3.Distance(_dropLineRenderer.transform.position, hit.point));
                     }
                 }
+
+                _dropPoint.gameObject.SetActive(hits != null);
+                _dropLineRenderer.gameObject.SetActive(hits != null);
             }
 
             if (!(_currentGrandStatus == GrandStatus.Fire))
