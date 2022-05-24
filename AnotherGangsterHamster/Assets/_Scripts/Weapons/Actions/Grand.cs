@@ -258,7 +258,7 @@ namespace Weapons.Actions
             => _currentGrandStatus == GrandStatus.Idle;
 
         #region CollisionEvents
-        public void BTypeObjCollisionEnterEvent(GameObject obj)
+        public void BAndATypeObjCollisionEnterEvent(GameObject obj)
         {
             if (_currentGrandStatus != GrandStatus.Resize &&
                _currentGrandStatus != GrandStatus.Use)
@@ -267,7 +267,7 @@ namespace Weapons.Actions
             }
         }
 
-        public void BTypeObjCollisionStayEvent(GameObject obj)
+        public void BAndATypeObjCollisionStayEvent(GameObject obj)
         {
             if (_currentGrandStatus != GrandStatus.Resize &&
                 _currentGrandStatus != GrandStatus.Use &&
@@ -501,7 +501,8 @@ namespace Weapons.Actions
                 Physics.Raycast(transform.position, -checkDir, out RaycastHit minusHit, _sizeLevelValue[_currentSizeLevel]))
             {
 
-                if (plusHit.transform.CompareTag("BTYPEOBJECT") && minusHit.transform.CompareTag("BTYPEOBJECT"))
+                if ((plusHit.transform.CompareTag("BTYPEOBJECT") || plusHit.transform.CompareTag("ATYPEOBJECT")) 
+                && ((minusHit.transform.CompareTag("BTYPEOBJECT") || minusHit.transform.CompareTag("ATYPEOBJECT"))))
                 {
                     if (Vector3.Distance(transform.position, plusHit.point) +
                         Vector3.Distance(transform.position, minusHit.point) < _sizeLevelValue[_currentSizeLevel])
@@ -547,7 +548,7 @@ namespace Weapons.Actions
         {
             if (Physics.BoxCast(transform.position, Vector3.one * (_sizeLevelValue[_beforeSizeLevel] / 2 - _sizeLevelValue[_beforeSizeLevel] / 10), dir, out RaycastHit hit))
             {
-                if (hit.transform.CompareTag("BTYPEOBJECT") && !hit.collider.isTrigger)
+                if ((hit.transform.CompareTag("BTYPEOBJECT") || hit.transform.CompareTag("ATYPEOBJECT")) && !hit.collider.isTrigger)
                     return Vector3.Distance(hit.point, transform.position);
             }
 
@@ -558,7 +559,7 @@ namespace Weapons.Actions
         {
             if(_currentGrandStatus != GrandStatus.Idle)
             {
-                RaycastHit[] hits = Physics.RaycastAll(transform.position, Vector3.down);
+                RaycastHit[] hits = Physics.RaycastAll(transform.position, GravityManager.GetGlobalGravityDirection());
                 float minDistance = float.MaxValue;
                 int index = -1;
 
@@ -576,12 +577,13 @@ namespace Weapons.Actions
                     if (index != -1)
                     {
                         RaycastHit hit = hits[index];
+                        
+                        _dropPoint.position = hit.point + -GravityManager.GetGlobalGravityDirection() * 0.1f;
+                        _dropPoint.rotation = Quaternion.LookRotation(-GravityManager.GetGlobalGravityDirection()) * Quaternion.Euler(90, 0, 0);
+                        _dropLineRenderer.transform.position = hit.point + -GravityManager.GetGlobalGravityDirection() * (Vector3.Distance(hit.point, transform.position) / 2);
 
-                        _dropPoint.position = hit.point + Vector3.up * 0.1f;
-                        _dropLineRenderer.transform.position = hit.point + Vector3.up * (Vector3.Distance(hit.point, transform.position) / 2);
-
-                        _dropLineRenderer.SetPosition(0, Vector3.up * (Vector3.Distance(_dropLineRenderer.transform.position, hit.point) - _sizeLevelValue[_currentSizeLevel] / 2));
-                        _dropLineRenderer.SetPosition(1, Vector3.down * Vector3.Distance(_dropLineRenderer.transform.position, hit.point));
+                        _dropLineRenderer.SetPosition(0, -GravityManager.GetGlobalGravityDirection() * (Vector3.Distance(_dropLineRenderer.transform.position, hit.point) - _sizeLevelValue[_currentSizeLevel] / 2));
+                        _dropLineRenderer.SetPosition(1, GravityManager.GetGlobalGravityDirection() * Vector3.Distance(_dropLineRenderer.transform.position, hit.point));
                     }
                 }
             }

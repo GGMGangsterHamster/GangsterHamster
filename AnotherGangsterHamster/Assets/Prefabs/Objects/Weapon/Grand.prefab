@@ -178,7 +178,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d92a7220ca1d1d4aacd6596cd8b83cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _callbacks: []
+  _callbacks:
+  - key: BTYPEOBJECT
+    OnActive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4857206529191508491}
+          m_TargetAssemblyTypeName: Weapons.Actions.Grand, Assembly-CSharp
+          m_MethodName: BAndATypeObjCollisionStayEvent
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeactive:
+      m_PersistentCalls:
+        m_Calls: []
+  - key: ATYPEOBJECT
+    OnActive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4857206529191508491}
+          m_TargetAssemblyTypeName: Weapons.Actions.Grand, Assembly-CSharp
+          m_MethodName: BAndATypeObjCollisionStayEvent
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeactive:
+      m_PersistentCalls:
+        m_Calls: []
   colPosition: {x: 0, y: 0, z: 0}
   isOn: 1
 --- !u!114 &4857206529191508490
@@ -200,7 +238,26 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 4857206529191508491}
           m_TargetAssemblyTypeName: Weapons.Actions.Grand, Assembly-CSharp
-          m_MethodName: BTypeObjTriggerEnterEvent
+          m_MethodName: BAndATypeObjCollisionEnterEvent
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeactive:
+      m_PersistentCalls:
+        m_Calls: []
+  - key: ATYPEOBJECT
+    OnActive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4857206529191508491}
+          m_TargetAssemblyTypeName: Weapons.Actions.Grand, Assembly-CSharp
+          m_MethodName: BAndATypeObjCollisionEnterEvent
           m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
