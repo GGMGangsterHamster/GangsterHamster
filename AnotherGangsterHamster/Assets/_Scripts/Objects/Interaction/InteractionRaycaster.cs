@@ -8,7 +8,7 @@ namespace Objects.Interaction
    public class InteractionRaycaster : MonoBehaviour
    {
       public const string ATYPE = "ATYPEOBJECT";
-
+        
       // 현제 상호작용 가능한 오브젝트
       private Interactable _currentObject = null;
       private Transform _mainCam = null;

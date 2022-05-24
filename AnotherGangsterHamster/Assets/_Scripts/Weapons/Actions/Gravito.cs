@@ -159,7 +159,7 @@ namespace Weapons.Actions
         {
             return _currentGravitoStatus == GravitoStatus.Idle;
         }
-
+        
         private void Update()
         {
             switch (_currentGravitoStatus)

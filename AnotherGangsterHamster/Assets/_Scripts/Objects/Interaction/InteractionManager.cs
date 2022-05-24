@@ -1,4 +1,5 @@
 using UnityEngine;
+using Weapons.Actions;
 
 namespace Objects.Interaction
 {  
