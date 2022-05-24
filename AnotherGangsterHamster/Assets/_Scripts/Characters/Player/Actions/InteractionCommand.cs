@@ -61,14 +61,19 @@ namespace Characters.Player.Actions
                 switch (InteractionManager.Instance.GetGrep())
                 {
                     case false: // 잡기
-                        Debug.Log(Mathf.Abs(Mathf.Abs(MainCameraTransform.position.y) - Mathf.Abs(handle.position.y)));
+                        Vector3 gravityDir = GravityManager.GetGlobalGravityDirection();
 
                         if ((handle.lossyScale.x *
                             handle.lossyScale.y *
                             handle.lossyScale.z > 1.1f ||
                             handle.gameObject.isStatic ||
                             handle.name.CompareTo("Grand") == 0) || 
-                            Mathf.Abs(Mathf.Abs(MainCameraTransform.position.y) - Mathf.Abs(handle.position.y)) > 1.1f)
+                            Vector3.Distance(new Vector3(MainCameraTransform.position.x * gravityDir.x,
+                                                         MainCameraTransform.position.y * gravityDir.y,
+                                                         MainCameraTransform.position.z * gravityDir.z),
+                                             new Vector3(handle.position.x * gravityDir.x,
+                                                         handle.position.y * gravityDir.y,
+                                                         handle.position.z * gravityDir.z)) > 1.1f)
                         {
                             InteractionManager.Instance.UnGrep();
                             return;
@@ -93,11 +98,7 @@ namespace Characters.Player.Actions
                         {
                             _curRigid.velocity = Vector3.zero;
                             _curRigid.angularVelocity = Vector3.zero;
-                            //_curRigid.constraints = RigidbodyConstraints.FreezeAll;
                         }
-
-                        // if (_curAtypeCollider != null) // 충돌 비활성화
-                        //    _curAtypeCollider.enabled = false;
 
                         #endregion // 불필요 연산 비활성화
 
@@ -109,16 +110,11 @@ namespace Characters.Player.Actions
                         break;
 
                     case true: // 놓기
-                        //handle.SetParent(null);
-
                         if (_curAtype != null) // 물리 연산 활성화
                             _curAtype.AffectedByGlobalGravity = true;
 
                         if (_curRigid != null)
-                            //_curRigid.constraints = RigidbodyConstraints.None;
-
-                        // if (_curAtypeCollider != null) // 충돌 활성화
-                        //    _curAtypeCollider.enabled = true;
+                            _curRigid.velocity /= 4.5f;
 
                         // 잡기 해제
                         InteractionManager.Instance.UnGrep();
@@ -143,6 +139,9 @@ namespace Characters.Player.Actions
 
                     if (_curAtype != null) // 물리 연산 활성화
                         _curAtype.AffectedByGlobalGravity = true;
+
+
+                    _curRigid.velocity /= 4.5f;
                     break;
                 }
 
