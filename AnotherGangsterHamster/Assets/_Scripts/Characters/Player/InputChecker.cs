@@ -77,7 +77,7 @@ namespace Characters.Player
          _inputCompareable(() => {
             Debug.Log("Pressed");
 
-            if (inputList[_idx].OnActionCompleted != null) {
+            if (inputList[_idx].wait) {
                _next = false;
             }
 
@@ -94,6 +94,9 @@ namespace Characters.Player
             } // if (_idx >= inputList.Count)
          }); // _inputCompareable();
       }
+
+      public void CanProceedToNext()
+         => _next = true;
 
       IEnumerator CaptureKeyUpEvent(KeyCode key) // 키 리셋 이벤트
       {
@@ -144,7 +147,7 @@ namespace Characters.Player
       public KeyCode key;
 
       // 키를 눌러서 발생한 Action 이 종료될 때 호출, 없다면 바로 진행함
-      public UnityEvent OnActionCompleted = null;
+      public bool wait = false;
 
       public float duration = 0.0f;
    }
