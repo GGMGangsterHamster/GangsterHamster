@@ -3,6 +3,7 @@ using Matters.Gravity;
 using Objects.Interaction;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Characters.Player.Actions
 {
@@ -47,6 +48,11 @@ namespace Characters.Player.Actions
         {
             _actionable = actionable;
             _curAtype = null;
+
+            SceneManager.sceneLoaded += (s, enumm) =>
+            {
+                InteractionManager.Instance.UnGrep();
+            };
         }
 
         /// <summary>
@@ -139,7 +145,6 @@ namespace Characters.Player.Actions
 
                     if (_curAtype != null) // 물리 연산 활성화
                         _curAtype.AffectedByGlobalGravity = true;
-
 
                     _curRigid.velocity /= 4.5f;
                     break;
