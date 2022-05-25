@@ -1,17 +1,27 @@
 using Objects;
 using Objects.StageObjects;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ButtonCountRequirement : MonoBehaviour
 {
-    [SerializeField] private List<TriggerInteractableObject> countCheckList 
+    public bool reverse = false; // 말 그대로 조건을 반전 시키는 변수
+
+    public Action<bool> changedEvent;
+
+    // TriggetInteractableObject 를 조건으로 받는 리스트
+    [SerializeField]
+    private List<TriggerInteractableObject> triggerCheckList
         = new List<TriggerInteractableObject>();
 
+    // InteractionButton 를 조건으로 받는 리스트
     [SerializeField]
-    private List<InteractionButton> icountCheckList
+    private List<InteractionButton> interactionCheckList
        = new List<InteractionButton>();
+
+    private bool beforeChecked;
 
     private int _count = 0;
     public bool Checked
@@ -20,24 +30,40 @@ public class ButtonCountRequirement : MonoBehaviour
         {
             _count = 0;
 
-            for(int i = 0; i < countCheckList.Count; i++)
+            for (int i = 0; i < triggerCheckList.Count; i++)
             {
-                if(countCheckList[i].Activated) 
+                if (triggerCheckList[i].Activated)
                 {
                     _count++;
                 }
             }
 
-            for (int i = 0; i < icountCheckList.Count; i++)
+            for (int i = 0; i < interactionCheckList.Count; i++)
             {
-                if (icountCheckList[i].Activated)
+                if (interactionCheckList[i].Activated)
                 {
                     _count++;
                 }
             }
 
-            return _count == countCheckList.Count + icountCheckList.Count;
+            bool result = _count == triggerCheckList.Count + interactionCheckList.Count;
+
+            return (reverse ? !result : result);
         }
     }
 
+    private void Awake()
+    {
+        beforeChecked = Checked;
+    }
+
+    private void Update()
+    {
+        if (beforeChecked != Checked)
+        {
+            beforeChecked = Checked;
+            Debug.Log("Action : " + Checked);
+            changedEvent?.Invoke(Checked);
+        }
+    }
 }
