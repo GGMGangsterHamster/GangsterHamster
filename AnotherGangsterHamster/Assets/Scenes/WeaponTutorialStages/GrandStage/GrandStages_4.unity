@@ -290,7 +290,7 @@ Transform:
   - {fileID: 477310447}
   - {fileID: 803931990}
   - {fileID: 1672451383}
-  m_Father: {fileID: 781404294}
+  m_Father: {fileID: 2015173805}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &130889524
@@ -403,7 +403,7 @@ Transform:
   - {fileID: 774626365}
   - {fileID: 1265009833}
   - {fileID: 718249419}
-  m_Father: {fileID: 781404294}
+  m_Father: {fileID: 2015173805}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &150733278
@@ -2676,7 +2676,7 @@ Transform:
   - {fileID: 1004074206}
   - {fileID: 1935951753}
   - {fileID: 1585897095}
-  m_Father: {fileID: 781404294}
+  m_Father: {fileID: 2015173805}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &624150076
@@ -3289,7 +3289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 657591773235129906, guid: fdf4b2f02b1e255198bc44201bacb177, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 657591773235129906, guid: fdf4b2f02b1e255198bc44201bacb177, type: 3}
       propertyPath: m_LocalScale.x
@@ -3531,41 +3531,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 774626364}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &781404293
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 781404294}
-  m_Layer: 0
-  m_Name: Stage
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &781404294
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 781404293}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 112818943}
-  - {fileID: 624123959}
-  - {fileID: 136130900}
-  - {fileID: 1493552888}
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &793577928
 GameObject:
   m_ObjectHideFlags: 0
@@ -5424,6 +5389,7 @@ GameObject:
   - component: {fileID: 1015914436}
   - component: {fileID: 1015914435}
   - component: {fileID: 1015914438}
+  - component: {fileID: 1015914439}
   m_Layer: 0
   m_Name: Lv1_movingFloor
   m_TagString: BTYPEOBJECT
@@ -5524,6 +5490,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {x: 0, y: 8, z: 0}
+  duration: 2
+  threshould: 0.08
+  startActive: 0
+--- !u!114 &1015914439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015914433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ebca3e42eca84f208eb19945fe9a882, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {x: 0, y: 16, z: 0}
   duration: 2
   threshould: 0.08
   startActive: 0
@@ -7891,6 +7873,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1015914438}
+        m_TargetAssemblyTypeName: Objects.StageObjects.CollisionEventable.MovingFloor,
+          Assembly-CSharp
+        m_MethodName: Active
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1015914439}
+        m_TargetAssemblyTypeName: Objects.StageObjects.CollisionEventable.MovingFloor,
+          Assembly-CSharp
+        m_MethodName: Active
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnDeactive:
     m_PersistentCalls:
       m_Calls:
@@ -7920,6 +7928,32 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1907260457}
+        m_TargetAssemblyTypeName: Objects.StageObjects.CollisionEventable.MovingFloor,
+          Assembly-CSharp
+        m_MethodName: Deactive
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1015914438}
+        m_TargetAssemblyTypeName: Objects.StageObjects.CollisionEventable.MovingFloor,
+          Assembly-CSharp
+        m_MethodName: Deactive
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1015914439}
         m_TargetAssemblyTypeName: Objects.StageObjects.CollisionEventable.MovingFloor,
           Assembly-CSharp
         m_MethodName: Deactive
@@ -8200,7 +8234,7 @@ Transform:
   - {fileID: 287504345}
   - {fileID: 179571759}
   - {fileID: 2025346249}
-  m_Father: {fileID: 781404294}
+  m_Father: {fileID: 2015173805}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1503532206
@@ -9835,7 +9869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 657591773235129906, guid: fdf4b2f02b1e255198bc44201bacb177, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 657591773235129906, guid: fdf4b2f02b1e255198bc44201bacb177, type: 3}
       propertyPath: m_LocalScale.x
@@ -10717,6 +10751,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4776762453667527443, guid: 9b86d1cabd29d196caa49c0e0ed66379, type: 3}
   m_PrefabInstance: {fileID: 905462199}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2015173804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2015173805}
+  m_Layer: 0
+  m_Name: Stage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2015173805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015173804}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 112818943}
+  - {fileID: 624123959}
+  - {fileID: 136130900}
+  - {fileID: 1493552888}
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2025346248
 GameObject:
   m_ObjectHideFlags: 0
