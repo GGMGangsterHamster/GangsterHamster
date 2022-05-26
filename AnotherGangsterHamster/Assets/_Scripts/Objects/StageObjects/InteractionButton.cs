@@ -17,19 +17,26 @@ namespace Objects.StageObjects
       [field: SerializeField]
       public bool InitalActiveStatus { get; set; } = false; // 점프 OnStay
 
+      private ButtonCountRequirement _requirement;
+
       private bool _activated = false;
       public bool Activated => _activated;
 
       private void Awake()
       {
          _activated = InitalActiveStatus;
+
+         _requirement = GetComponent<ButtonCountRequirement>();
       }
 
       #region Unity Collision Event
 
       public override void Interact()
       {
-         OnInteraction();
+            if(_requirement == null || _requirement.Checked)
+            {
+                OnInteraction();
+            }
       }
 
       #endregion // Unity Collision Event

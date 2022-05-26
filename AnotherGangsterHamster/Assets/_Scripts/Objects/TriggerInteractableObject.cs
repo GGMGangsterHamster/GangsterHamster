@@ -58,6 +58,7 @@ namespace Objects
          CollisionCallback callback =
                   _callbacks.Find(x => (x.key == "") || other.CompareTag(x.key));
 
+
          if (callback != null)
          {
             if (!EventIsToggle)

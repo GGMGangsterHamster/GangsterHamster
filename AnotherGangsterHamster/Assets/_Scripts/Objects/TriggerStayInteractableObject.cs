@@ -11,6 +11,7 @@ namespace Objects
 
         private void OnTriggerStay(Collider other)
         {
+            Debug.Log("stayaaaasdfasdfasdfasfd");
             _callbacks.Find(x => (x.key == "") || other.gameObject.CompareTag(x.key))
                 ?.OnActive?.
                 Invoke(other.gameObject);

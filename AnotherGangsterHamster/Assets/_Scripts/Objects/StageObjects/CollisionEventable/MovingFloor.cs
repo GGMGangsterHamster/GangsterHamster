@@ -9,6 +9,7 @@ namespace Objects.StageObjects.CollisionEventable
       public   Vector3  target      = Vector3.zero;
       public   float    duration    = 2.0f;
       public   float    threshould  = 0.08f;
+      public   bool     startActive = false;
       private  Vector3  _initalPos  = Vector3.zero; // 기본 포지션
 
       private Coroutine _up = null;
@@ -17,6 +18,11 @@ namespace Objects.StageObjects.CollisionEventable
       private void Awake()
       {
          _initalPos = this.transform.localPosition;
+
+         if(startActive)
+         {
+                Active(null);
+         }
       }
 
       public void Active(GameObject other)
