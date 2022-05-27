@@ -133,7 +133,7 @@ namespace Characters.Player.Actions
         {
             while(InteractionManager.Instance.GetGrep())
             {
-                Vector3 moveDir = ((PlayerBaseTransform.position + (PlayerBaseTransform.forward * 1.4f) + PlayerBaseTransform.up) - _curRigid.transform.position);
+                Vector3 moveDir = ((PlayerBaseTransform.position + (PlayerBaseTransform.forward * 2.0f) + PlayerBaseTransform.up) - _curRigid.transform.position);
                 _curRigid.velocity = moveDir * 20;
                 _curRigid.angularVelocity = Vector3.Lerp(_curRigid.angularVelocity, Vector3.zero, 0.5f);
                 _curRigid.transform.rotation = Quaternion.Slerp(_curRigid.transform.rotation, Quaternion.LookRotation(PlayerBaseTransform.forward), 0.5f);
