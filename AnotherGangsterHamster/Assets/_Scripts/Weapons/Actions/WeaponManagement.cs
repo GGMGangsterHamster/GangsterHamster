@@ -21,11 +21,16 @@ namespace Weapons.Actions
 
         private WeaponEnum _curWeapon = WeaponEnum.None;
 
-        private void Start()
+        private void Awake()
         {
             _weaponActions = new Dictionary<WeaponEnum, WeaponAction>();
             _weaponActions.Clear();
 
+            _curWeapon = startHandleWeapon;
+        }
+
+        private void Start()
+        {
             // 자식 오브젝트가 1번무기, 2번무기, 3번무기 순서대로 배치되어 있다는 전제하에 만들어진 코드
             WeaponAction[] childWeaponActions = transform.GetComponentsInChildren<WeaponAction>();
 
@@ -37,9 +42,7 @@ namespace Weapons.Actions
             }
 
             grandCharge = GameObject.Find("GrandCharge").transform;
-            grandCharge.gameObject.SetActive(startHandleWeapon ==  WeaponEnum.Grand);
-
-            _curWeapon = startHandleWeapon;
+            grandCharge.gameObject.SetActive(startHandleWeapon == WeaponEnum.Grand);
         }
 
         // 좌클릭 시 발동되는 함수
@@ -69,6 +72,11 @@ namespace Weapons.Actions
             if (_curWeapon != WeaponEnum.None)
             {
                 _weaponActions[_curWeapon].ResetWeapon();
+
+                if(InteractionManager.Instance.GetGrep())
+                {
+                    _weaponActions[_curWeapon].gameObject.SetActive(false);
+                }
             }
         }
 
@@ -87,13 +95,18 @@ namespace Weapons.Actions
                 }
             }
 
-            if (!isChanged)
-                _curWeapon = WeaponEnum.None;
+            //if (!isChanged)
+                //_curWeapon = WeaponEnum.None;
         }
 
         public WeaponEnum GetCurrentWeapon()
         {
             return _curWeapon;
+        }
+
+        public WeaponAction GetCurrentWeaponAction()
+        {
+            return _weaponActions[_curWeapon];
         }
     }
 }

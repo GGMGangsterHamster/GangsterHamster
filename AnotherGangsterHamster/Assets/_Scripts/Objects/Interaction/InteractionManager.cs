@@ -8,6 +8,21 @@ namespace Objects.Interaction
       Interactable   _currentActiveInteraction;
       Transform      _currentActiveAtype;
 
+      WeaponManagement _weaponManagement;
+
+      WeaponManagement WM
+      {
+          get
+          {
+              if(_weaponManagement == null)
+              {
+                  _weaponManagement = GameObject.FindObjectOfType<WeaponManagement>();
+              }
+
+              return _weaponManagement;
+          }
+      }
+
       private bool _grep = false; // 잡기 상태
 
       public void SetActiveAtype(Transform transform)
@@ -21,12 +36,25 @@ namespace Objects.Interaction
       public void UnGrep()
       {
          _grep = false;
+
+         WeaponAction wa = WM.GetCurrentWeaponAction();
+
+         if(!wa.gameObject.activeSelf)
+         {
+             wa.gameObject.SetActive(true);
+             wa.ResetPosiiton();
+         }
+
          ClearActvieAtype();
       }
 
       public void Grep()
       {
          _grep = true;
+
+         WeaponAction wa = WM.GetCurrentWeaponAction();
+
+         wa.gameObject.SetActive(!wa.IsHandleWeapon());
       }
 
       public bool GetGrep() => _grep;

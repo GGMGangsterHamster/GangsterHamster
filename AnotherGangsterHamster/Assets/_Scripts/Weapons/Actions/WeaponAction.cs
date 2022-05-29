@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Objects;
 using Characters.Player;
+using Objects.Interaction;
 
 namespace Weapons.Actions
 {
@@ -81,7 +82,6 @@ namespace Weapons.Actions
         private Transform _weaponObjectParentTransform;
 
         private HandModeVO _handModeVO;
-
         protected Player Player
         {
             get
@@ -223,11 +223,15 @@ namespace Weapons.Actions
         {
             if (!possibleUse) return false;
 
-            gameObject.SetActive(wenum == _weaponEnum || !IsHandleWeapon());
+            Debug.Log(InteractionManager.Instance.GetGrep());
+            gameObject.SetActive((wenum == _weaponEnum && !InteractionManager.Instance.GetGrep()) || !IsHandleWeapon());
 
             return gameObject.activeSelf;
         }
 
-
+        public void ResetPosiiton()
+        {
+            transform.position = HandPosition;
+        }
     }
 }

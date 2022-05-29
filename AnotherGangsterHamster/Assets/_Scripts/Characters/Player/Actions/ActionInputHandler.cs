@@ -28,7 +28,7 @@ namespace Characters.Player.Actions
       private Jump         _jump;
       private Interaction  _interaction;
 
-      private void Awake()
+      private void Start()
       {
          Debug.Assert(RightHandTrm != null);
 
