@@ -12,6 +12,7 @@ namespace Objects.StageObjects.CollisionEventable
         public List<GameObject> activateObjects = new List<GameObject>();
 
         private ButtonCountRequirement _requirement;
+        private bool eventCheck = false;
 
         private void Awake()
         {
@@ -19,11 +20,12 @@ namespace Objects.StageObjects.CollisionEventable
 
             _requirement.changedEvent += value =>
             {
-                Debug.Log("In");
                 if (value)
                     Active(null);
                 else
                     Deactive(null);
+
+                eventCheck = value;
             };
 
             if (startActive)
@@ -50,11 +52,10 @@ namespace Objects.StageObjects.CollisionEventable
 
         public void Deactive(GameObject other)
         {
-            if(activateMe)
+            if (activateMe)
                 gameObject.SetActive(false);
             else
             {
-                Debug.Log("false");
                 foreach (GameObject obj in activateObjects)
                 {
                     obj.SetActive(false);
