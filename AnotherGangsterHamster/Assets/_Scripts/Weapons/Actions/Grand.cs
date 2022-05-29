@@ -264,6 +264,8 @@ namespace Weapons.Actions
                _currentGrandStatus != GrandStatus.Use)
             {
                 _currentGrandStatus = GrandStatus.LosePower;
+                _myRigid.velocity = Vector3.zero;
+                _myRigid.angularVelocity = Vector3.zero;
             }
         }
 
@@ -274,6 +276,8 @@ namespace Weapons.Actions
                 _currentGrandStatus != GrandStatus.LosePower)
             {
                 _currentGrandStatus = GrandStatus.LosePower;
+                _myRigid.velocity = Vector3.zero;
+                _myRigid.angularVelocity = Vector3.zero;
             }
         }
         #endregion
