@@ -106,6 +106,8 @@ namespace Weapons.Actions
 
         public WeaponAction GetCurrentWeaponAction()
         {
+            if (_curWeapon == WeaponEnum.None) return null;
+
             return _weaponActions[_curWeapon];
         }
     }

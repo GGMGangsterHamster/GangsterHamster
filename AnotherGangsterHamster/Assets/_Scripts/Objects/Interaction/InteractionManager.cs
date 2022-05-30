@@ -39,10 +39,13 @@ namespace Objects.Interaction
 
          WeaponAction wa = WM.GetCurrentWeaponAction();
 
-         if(!wa.gameObject.activeSelf)
+         if(wa != null)
          {
-             wa.gameObject.SetActive(true);
-             wa.ResetPosiiton();
+            if (!wa.gameObject.activeSelf)
+            {
+                wa.gameObject.SetActive(true);
+                wa.ResetPosiiton();
+            }
          }
 
          ClearActvieAtype();
@@ -54,7 +57,8 @@ namespace Objects.Interaction
 
          WeaponAction wa = WM.GetCurrentWeaponAction();
 
-         wa.gameObject.SetActive(!wa.IsHandleWeapon());
+         if (wa != null)
+            wa.gameObject.SetActive(!wa.IsHandleWeapon());
       }
 
       public bool GetGrep() => _grep;

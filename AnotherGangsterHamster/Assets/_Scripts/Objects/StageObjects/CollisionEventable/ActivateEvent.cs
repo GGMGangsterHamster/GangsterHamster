@@ -17,16 +17,19 @@ namespace Objects.StageObjects.CollisionEventable
         private void Awake()
         {
             _requirement = GetComponent<ButtonCountRequirement>();
-
-            _requirement.changedEvent += value =>
+            
+            if(_requirement != null)
             {
-                if (value)
-                    Active(null);
-                else
-                    Deactive(null);
+                _requirement.changedEvent += value =>
+                {
+                    if (value)
+                        Active(null);
+                    else
+                        Deactive(null);
 
-                eventCheck = value;
-            };
+                    eventCheck = value;
+                };
+            }
 
             if (startActive)
                 Active(null);
