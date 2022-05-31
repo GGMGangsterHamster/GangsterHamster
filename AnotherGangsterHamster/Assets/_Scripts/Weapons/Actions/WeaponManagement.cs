@@ -68,7 +68,7 @@ namespace Weapons.Actions
         {
             if(!InteractionManager.Instance.GetGrep())
             {
-                if (_curWeapon != WeaponEnum.None)
+                if (_curWeapon != WeaponEnum.None && _weaponActions[_curWeapon].possibleUse)
                 {
                     _weaponActions[_curWeapon].FireWeapon();
                 }
@@ -78,7 +78,7 @@ namespace Weapons.Actions
         // 우클릭 시 발동되는 함수
         public void UseCurrentWeapon()
         {
-            if (_curWeapon != WeaponEnum.None)
+            if (_curWeapon != WeaponEnum.None && _weaponActions[_curWeapon].possibleUse)
             {
                 _weaponActions[_curWeapon].UseWeapon();
             }
@@ -87,7 +87,7 @@ namespace Weapons.Actions
         // R키 누를시 발동되는 함수
         public void ResetCurrentWeapon()
         {
-            if (_curWeapon != WeaponEnum.None)
+            if (_curWeapon != WeaponEnum.None && _weaponActions[_curWeapon].possibleUse)
             {
                 _weaponActions[_curWeapon].ResetWeapon();
 
@@ -112,7 +112,7 @@ namespace Weapons.Actions
                 if (weaponAction.SetActiveWeaponObj(weaponEnum))
                 {
                     _curWeapon = weaponEnum;
-                    grandCharge.gameObject.SetActive(_curWeapon == WeaponEnum.Grand);
+                    grandCharge.gameObject.SetActive(_curWeapon == WeaponEnum.Grand && _weaponActions[_curWeapon].possibleUse);
                     isChanged = true;
                 }
             }
