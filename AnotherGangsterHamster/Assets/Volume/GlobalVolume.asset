@@ -228,31 +228,6 @@ MonoBehaviour:
   saturation:
     m_OverrideState: 1
     m_Value: -20
---- !u!114 &-4945947943023331382
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a6b00fcf518bb94a90b408492e07b44, type: 3}
-  m_Name: FilmGrain
-  m_EditorClassIdentifier: 
-  active: 1
-  type:
-    m_OverrideState: 1
-    m_Value: 0
-  intensity:
-    m_OverrideState: 1
-    m_Value: 0.2
-  response:
-    m_OverrideState: 1
-    m_Value: 0.8
-  texture:
-    m_OverrideState: 0
-    m_Value: {fileID: 0}
 --- !u!114 &-4196396855156613519
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -390,7 +365,6 @@ MonoBehaviour:
   - {fileID: -2202059584729027642}
   - {fileID: 4767573165977135432}
   - {fileID: 8314116048209159663}
-  - {fileID: -4945947943023331382}
 --- !u!114 &167647153947004282
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -489,7 +463,7 @@ MonoBehaviour:
   active: 1
   quality:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 3
   enabled:
     m_OverrideState: 1
     m_Value: 1
@@ -501,7 +475,7 @@ MonoBehaviour:
     m_Value: 1
   m_MinSmoothness:
     m_OverrideState: 1
-    m_Value: 0.9
+    m_Value: 0
   m_SmoothnessFadeStart:
     m_OverrideState: 1
     m_Value: 0.9
@@ -510,10 +484,10 @@ MonoBehaviour:
     m_Value: 1
   usedAlgorithm:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   depthBufferThickness:
     m_OverrideState: 1
-    m_Value: 0.01
+    m_Value: 0.4
   screenFadeDistance:
     m_OverrideState: 0
     m_Value: 0.1
@@ -522,7 +496,7 @@ MonoBehaviour:
     m_Value: 0.75
   m_RayMaxIterations:
     m_OverrideState: 1
-    m_Value: 64
+    m_Value: 128
   rayMiss:
     m_OverrideState: 0
     m_Value: 3
