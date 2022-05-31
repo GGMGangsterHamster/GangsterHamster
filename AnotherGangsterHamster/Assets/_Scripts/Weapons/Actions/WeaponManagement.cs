@@ -128,7 +128,7 @@ namespace Weapons.Actions
 
         public WeaponAction GetCurrentWeaponAction()
         {
-            if (_curWeapon == WeaponEnum.None || !_weaponActions.ContainsKey(_curWeapon)) return null;
+            if (_curWeapon == WeaponEnum.None || !_weaponActions.ContainsKey(_curWeapon) || !_weaponActions[_curWeapon].possibleUse) return null;
 
             return _weaponActions[_curWeapon];
         }
