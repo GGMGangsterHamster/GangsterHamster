@@ -1,5 +1,6 @@
 using Characters.Player;
 using UnityEngine;
+using UnityEngine.UI;
 using Weapons.Actions;
 
 namespace Objects.Interaction
@@ -52,7 +53,7 @@ namespace Objects.Interaction
             return _gravito;
          }
       }
-
+        
         // 현제 시아에 들어온 Atype 오브젝트
       private Transform _curAtype = null;
 

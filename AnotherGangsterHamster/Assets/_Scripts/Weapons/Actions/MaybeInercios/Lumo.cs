@@ -61,8 +61,6 @@ namespace Weapons.Actions
             _myRigid.velocity = Vector3.zero;
             _myRigid.angularVelocity = Vector3.zero;
             _myRigid.constraints = RigidbodyConstraints.FreezeAll;
-
-            _aTypeTrm = null;
         }
 
         public override bool IsHandleWeapon()

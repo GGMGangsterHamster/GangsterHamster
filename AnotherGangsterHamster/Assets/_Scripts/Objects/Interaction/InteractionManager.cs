@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using Weapons.Actions;
 
 namespace Objects.Interaction
@@ -35,7 +36,7 @@ namespace Objects.Interaction
 
       public void UnGrep()
       {
-         _grep = false;
+         _grep = false; 
 
          WeaponAction wa = WM.GetCurrentWeaponAction();
 

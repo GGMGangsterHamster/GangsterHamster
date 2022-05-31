@@ -133,7 +133,6 @@ namespace Weapons.Actions
                 return;
 
             _myRigid.constraints = RigidbodyConstraints.None;
-            _aTypeTrm = null;
 
             if (!isChangedGravity)
             {
@@ -225,8 +224,9 @@ namespace Weapons.Actions
                         _currentGravitoStatus = GravitoStatus.Idle;
                         transform.rotation = Quaternion.identity;
                         isReseting = false;
-
-                        if(_weaponManagement.GetCurrentWeapon() != _weaponEnum)
+                        _aTypeTrm = null;
+                        
+                        if (_weaponManagement.GetCurrentWeapon() != _weaponEnum)
                         {
                             gameObject.SetActive(false);
                         }
