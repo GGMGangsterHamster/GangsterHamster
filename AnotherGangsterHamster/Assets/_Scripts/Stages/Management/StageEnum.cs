@@ -22,6 +22,7 @@ namespace Stages.Management
       Stage_8_1,
       Stage_9,
       ConnectionStage,
+      LumoStages,
       DStage,
       END_OF_ENUM
    }
