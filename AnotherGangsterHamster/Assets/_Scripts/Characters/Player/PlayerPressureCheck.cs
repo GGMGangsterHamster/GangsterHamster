@@ -35,6 +35,8 @@ namespace Characters.Player
                 distance = (Vector3.Distance(rightHit.point, leftHit.point) < distance) ? Vector3.Distance(rightHit.point, leftHit.point) : distance;
             }
 
+            if (distance == 0) return false; // ¸Ê ¹Ù±ù°ú ¸Â´ê¾Æ ÀÖ´Ù¸é
+
             return distance < pressureDistance;
         }
     }
