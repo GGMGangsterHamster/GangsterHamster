@@ -38,6 +38,7 @@ namespace Weapons.Actions
                     _aTypeHit = hit;
                     _aTypeTrm = hit.transform;
                     _aTypeCurPos = hit.transform.position - hit.point;
+                    _aTypeCurSize = _aTypeHit.transform.localScale.x;
 
                     _currentStatus = LumoStatus.Stickly;
                 }
@@ -71,16 +72,17 @@ namespace Weapons.Actions
         {
             switch(_currentStatus)
             {
+
                 case LumoStatus.Idle:
                     transform.position = HandPosition;
                     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
                     break;
                 case LumoStatus.Stickly:
-                    SettingGravitoPos();
+                    SettingLumoPos();
                     break;
             }
         }
-        private void SettingGravitoPos()
+        private void SettingLumoPos()
         {
             if (_aTypeCurPos != _aTypeTrm.position - _aTypeHit.point)
             {

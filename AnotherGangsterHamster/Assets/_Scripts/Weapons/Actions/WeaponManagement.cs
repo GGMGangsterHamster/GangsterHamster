@@ -1,3 +1,4 @@
+using Matters.Velocity;
 using Objects.Interaction;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,8 +16,24 @@ namespace Weapons.Actions
     public class WeaponManagement : MonoBehaviour
     {
         public WeaponEnum startHandleWeapon;
-        private Transform grandCharge;
 
+        private Transform _playerBaseTransform;
+
+        private Transform PlayerBaseTransform
+        {
+            get
+            {
+                if (_playerBaseTransform == null)
+                {
+                    _playerBaseTransform = GameObject.FindGameObjectWithTag("PLAYER_BASE").transform;
+                }
+
+                return _playerBaseTransform;
+            }
+        }
+
+        private Transform grandCharge;
+        private Transform lumoCube;
         private Dictionary<WeaponEnum, WeaponAction> _weaponActions;
 
         private WeaponEnum _curWeapon = WeaponEnum.None;
@@ -42,6 +59,7 @@ namespace Weapons.Actions
             }
 
             grandCharge = GameObject.Find("GrandCharge").transform;
+            lumoCube = _weaponActions[WeaponEnum.Lumo].transform.GetChild(0);
             grandCharge.gameObject.SetActive(startHandleWeapon == WeaponEnum.Grand);
         }
 
@@ -73,8 +91,12 @@ namespace Weapons.Actions
             {
                 _weaponActions[_curWeapon].ResetWeapon();
 
-                if(InteractionManager.Instance.GetGrep())
+                if (_weaponActions[WeaponEnum.Lumo].gameObject.activeSelf)
+                    PlayerBaseTransform.GetComponent<FollowGroundPos>().Deactive(lumoCube.gameObject);
+
+                if (InteractionManager.Instance.GetGrep())
                 {
+                    PlayerBaseTransform.GetComponent<FollowGroundPos>().Deactive(_weaponActions[_curWeapon].gameObject);
                     _weaponActions[_curWeapon].gameObject.SetActive(false);
                 }
             }
