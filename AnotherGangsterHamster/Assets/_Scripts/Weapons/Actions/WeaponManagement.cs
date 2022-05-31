@@ -117,8 +117,8 @@ namespace Weapons.Actions
                 }
             }
 
-            //if (!isChanged)
-                //_curWeapon = WeaponEnum.None;
+            if (!isChanged)
+                _curWeapon = WeaponEnum.None;
         }
 
         public WeaponEnum GetCurrentWeapon()
