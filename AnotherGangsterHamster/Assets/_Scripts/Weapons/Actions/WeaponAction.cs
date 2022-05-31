@@ -223,7 +223,6 @@ namespace Weapons.Actions
         {
             if (!possibleUse) return false;
 
-            Debug.Log(InteractionManager.Instance.GetGrep());
             gameObject.SetActive((wenum == _weaponEnum && !InteractionManager.Instance.GetGrep()) || !IsHandleWeapon());
 
             return gameObject.activeSelf;
