@@ -133,7 +133,8 @@ namespace Weapons.Actions
                 return;
 
             _myRigid.constraints = RigidbodyConstraints.None;
-            
+            _aTypeTrm = null;
+
             if (!isChangedGravity)
             {
                 _currentGravitoStatus = GravitoStatus.Idle;
@@ -159,7 +160,11 @@ namespace Weapons.Actions
         {
             return _currentGravitoStatus == GravitoStatus.Idle;
         }
-        
+        public override Transform SticklyTrm()
+        {
+            return _aTypeTrm;
+        }
+
         private void Update()
         {
             switch (_currentGravitoStatus)

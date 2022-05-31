@@ -216,6 +216,11 @@ namespace Weapons.Actions
             return false;
         }
 
+        public virtual Transform SticklyTrm()
+        {
+            return null;
+        }
+
         /// <summary>
         /// 들어온 인자값에 따라 SetActive True, false 해주는 함수
         /// </summary>

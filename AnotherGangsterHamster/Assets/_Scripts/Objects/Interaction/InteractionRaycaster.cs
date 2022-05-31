@@ -1,6 +1,6 @@
 using Characters.Player;
 using UnityEngine;
-
+using Weapons.Actions;
 
 namespace Objects.Interaction
 {   
@@ -23,7 +23,37 @@ namespace Objects.Interaction
          }
       }
 
-      // 현제 시아에 들어온 Atype 오브젝트
+      private WeaponManagement _wm;
+      private Lumo _lumo;
+      private Gravito _gravito;
+
+      private Lumo lumo
+      {
+         get
+         {
+            if(_lumo == null)
+            {
+               if (_wm == null) _wm = GameObject.FindObjectOfType<WeaponManagement>();
+               _lumo = _wm.transform.GetChild(0).GetComponent<Lumo>();
+            }
+            return _lumo;
+         }
+      }
+
+      private Gravito gravito
+      {
+         get
+         {
+            if (_gravito == null)
+            {
+               if (_wm == null) _wm = GameObject.FindObjectOfType<WeaponManagement>();
+               _gravito = _wm.transform.GetChild(2).GetComponent<Gravito>();
+            }
+            return _gravito;
+         }
+      }
+
+        // 현제 시아에 들어온 Atype 오브젝트
       private Transform _curAtype = null;
 
       private void FixedUpdate()
@@ -64,8 +94,9 @@ namespace Objects.Interaction
                                          PlayerValues.InteractionMaxDistance))
          {
             target = hit.transform;
-
-            if (target.CompareTag(ATYPE))
+            
+                
+            if (target.CompareTag(ATYPE) && !(target == gravito.SticklyTrm() || target == lumo.SticklyTrm()))
             {
                resetHandleObject = false;
                InteractionManager
