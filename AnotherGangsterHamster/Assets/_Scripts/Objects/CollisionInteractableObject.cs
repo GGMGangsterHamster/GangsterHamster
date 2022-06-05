@@ -16,14 +16,10 @@ namespace Objects
       [field: SerializeField]
       public bool InitalActiveStatus { get; set; } = false;
 
-      [SerializeField]
-      public bool MultipleCollisionable = false;
-
-      [HideInInspector] public bool _activated = false;
+      private bool _activated = false;
       public bool Activated => _activated;
 
-      // 현제 상호작용 이루어지고 있는 오브젝트
-      private GameObject _curInteractedObject = null;
+      private int _collisionObjectsCount = 0;
 
       // Collision에서 Normal 벡터를 빼내기 위해서 존재하는 변수
       public Vector3 colNormalVec;
@@ -44,26 +40,27 @@ namespace Objects
       #region Unity Collision Event
       private void OnCollisionEnter(Collision other)
       {
-         if (!isOn || (!MultipleCollisionable
-            && _curInteractedObject != null)) return;
-
-         _curInteractedObject = other.gameObject;
+         if (!isOn) return;
 
          colNormalVec   = other.contacts[0].normal;
          colVelocity    = other.relativeVelocity;
          colPosition    = other.contacts[0].point;
+         ++_collisionObjectsCount;
 
          CollisionEnterEvent(other.gameObject);
       }
 
       private void OnCollisionExit(Collision other)
       {
-         if (!isOn || _curInteractedObject != other.gameObject) return;
-            
-         _curInteractedObject = null;
+         if (!isOn) return;
 
-         if (!EventIsToggle)
+         --_collisionObjectsCount;
+
+         if (!EventIsToggle && _collisionObjectsCount <= 0)
+         {
+            _collisionObjectsCount = 0;
             CollisionExitEvent(other.gameObject);
+         }
       }
       #endregion // Unity Collision Event
 

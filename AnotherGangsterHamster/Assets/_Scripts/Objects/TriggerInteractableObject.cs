@@ -31,7 +31,6 @@ namespace Objects
       {
          TriggerEnterEvent(other.gameObject);
          ++_triggeredObjectsCount;
-         Debug.Log(_triggeredObjectsCount + "E");
       }
 
       private void OnTriggerExit(Collider other)
@@ -39,7 +38,6 @@ namespace Objects
          if (EventIsToggle) return;
 
          --_triggeredObjectsCount;
-         Debug.Log(_triggeredObjectsCount + "L");
 
          if (_triggeredObjectsCount <= 0)
          {
