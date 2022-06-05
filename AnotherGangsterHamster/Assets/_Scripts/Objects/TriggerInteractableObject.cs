@@ -16,15 +16,10 @@ namespace Objects
       [field: SerializeField]
       public bool InitalActiveStatus { get; set; } = false;
 
-      [field: SerializeField]
-      public bool MultipleCollisionable { get; set; } = false;
-
-
-      [HideInInspector] public bool _activated = false;
+      private bool _activated = false;
       public bool Activated => _activated;
 
-      private Collider _curTriggerObj;
-
+      private int _triggeredObjectsCount = 0;
 
       private void Awake()
       {
@@ -34,18 +29,23 @@ namespace Objects
       #region Unity Trigger Event
       private void OnTriggerEnter(Collider other)
       {
-         if (!MultipleCollisionable && _curTriggerObj != null) return;
-         _curTriggerObj = other;
-
          TriggerEnterEvent(other.gameObject);
+         ++_triggeredObjectsCount;
+         Debug.Log(_triggeredObjectsCount + "E");
       }
 
       private void OnTriggerExit(Collider other)
       {
-         if (_curTriggerObj != other || EventIsToggle) return;
+         if (EventIsToggle) return;
 
-         TriggerExitEvent(other.gameObject);
-         _curTriggerObj = null;
+         --_triggeredObjectsCount;
+         Debug.Log(_triggeredObjectsCount + "L");
+
+         if (_triggeredObjectsCount <= 0)
+         {
+            _triggeredObjectsCount = 0; // 혹시 모르니
+            TriggerExitEvent(other.gameObject);
+         }  
       }
       #endregion // Unity Trigger Event
 
