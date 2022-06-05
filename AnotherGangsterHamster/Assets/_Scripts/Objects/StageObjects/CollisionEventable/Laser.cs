@@ -34,7 +34,7 @@ namespace Objects.StageObjects.CollisionEventable
 
             if (Utils.Compare(targetPos, Vector3.zero, 0.01f)) return;
 
-            float length = (hit.point - transform.position).magnitude;
+            float length = (hit.point - transform.position).magnitude + 0.05f;
             
             _line.SetPosition(1, targetPos);
 
