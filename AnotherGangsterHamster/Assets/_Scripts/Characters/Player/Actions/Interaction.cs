@@ -132,9 +132,6 @@ namespace Characters.Player.Actions
             _curRigid.mass = 0.001f;
             while (InteractionManager.Instance.GetGrep())
             {
-                Debug.Log(MainCameraTransform.forward);
-                //Vector3 moveDir = ((MainCameraTransform.position + MainCameraTransform.forward * 2) - _curRigid.transform.position);
-
                 Vector3 moveDir = (MainCameraTransform.position + new Vector3(MainCameraTransform.forward.x,
                                                                        Mathf.Clamp(MainCameraTransform.forward.y, -0.5f, 1),
                                                                        MainCameraTransform.forward.z) * 2 - _curRigid.transform.position);
