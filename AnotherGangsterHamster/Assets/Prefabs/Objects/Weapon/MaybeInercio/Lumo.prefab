@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6024206430787283481}
   - component: {fileID: 1586967583431927554}
   - component: {fileID: 7611216553837753838}
-  - component: {fileID: 2226733857868770124}
   - component: {fileID: 3862251125999650487}
   m_Layer: 9
   m_Name: Capsule
@@ -113,42 +112,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61f0d1157852af4cb38518540b0c356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2226733857868770124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2863211108319913343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8476a3bdbcdf96b058a4f960b4883763, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _callbacks:
-  - key: PLAYER_BASE
-    OnActive:
-      m_PersistentCalls:
-        m_Calls: []
-    OnDeactive:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 7611216553837753838}
-          m_TargetAssemblyTypeName: Weapons.Actions.ReinforcementCube, Assembly-CSharp
-          m_MethodName: ObjTriggerExitEvent
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  <EventIsToggle>k__BackingField: 0
-  <InitalActiveStatus>k__BackingField: 0
-  <MultipleCollisionable>k__BackingField: 0
-  _activated: 0
 --- !u!114 &3862251125999650487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +143,19 @@ MonoBehaviour:
           m_CallState: 2
     OnDeactive:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 7611216553837753838}
+          m_TargetAssemblyTypeName: Weapons.Actions.LumoCube, Assembly-CSharp
+          m_MethodName: ObjTriggerExitEvent
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &6429823994444281370
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,8 +289,6 @@ MonoBehaviour:
   _callbacks: []
   <EventIsToggle>k__BackingField: 1
   <InitalActiveStatus>k__BackingField: 0
-  MultipleCollisionable: 0
-  _activated: 0
   colNormalVec: {x: 0, y: 0, z: 0}
   colVelocity: {x: 0, y: 0, z: 0}
   colPosition: {x: 0, y: 0, z: 0}
@@ -335,8 +308,6 @@ MonoBehaviour:
   _callbacks: []
   <EventIsToggle>k__BackingField: 1
   <InitalActiveStatus>k__BackingField: 0
-  <MultipleCollisionable>k__BackingField: 0
-  _activated: 0
 --- !u!114 &6101248649304924584
 MonoBehaviour:
   m_ObjectHideFlags: 0

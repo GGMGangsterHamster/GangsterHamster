@@ -15,5 +15,12 @@ namespace Objects
                 ?.OnActive?.
                 Invoke(other.gameObject);
         }
+
+        private void OnTriggerExit(Collider other)
+        {
+            _callbacks.Find(x => (x.key == "") || other.gameObject.CompareTag(x.key))
+                ?.OnDeactive?.
+                Invoke(other.gameObject);
+        }
     }
 }

@@ -18,6 +18,8 @@ namespace Weapons.Actions
 
         public void ObjTriggerStayEvent(GameObject obj)
         {
+            if (!obj.CompareTag("PLAYER_BASE")) return;
+
             if (!_isReinforcemented)
             {
                 _playerGravity.AffectedByGlobalGravity = false;
@@ -37,6 +39,8 @@ namespace Weapons.Actions
 
         public void ObjTriggerExitEvent(GameObject obj)
         {
+            if (!obj.CompareTag("PLAYER_BASE")) return;
+
             Debug.Log("Exited");
             if (_isReinforcemented)
             {
