@@ -94,6 +94,15 @@ namespace Weapons.Actions
                 if (_weaponActions[WeaponEnum.Lumo].gameObject.activeSelf)
                     PlayerBaseTransform.GetComponent<FollowGroundPos>().Deactive(lumoCube.gameObject);
 
+                // 그랜드에 루모가 붙어있는데 
+                // 그랜드를 리셋 시키면 같이 리셋 됨
+                if(_curWeapon == WeaponEnum.Grand && 
+                   _weaponActions[WeaponEnum.Lumo].GetComponent<Lumo>().SticklyTrm() == _weaponActions[WeaponEnum.Grand].transform)
+                {
+                    _weaponActions[WeaponEnum.Lumo].ResetWeapon();
+                    _weaponActions[WeaponEnum.Lumo].gameObject.SetActive(false);
+                }
+
                 if (InteractionManager.Instance.GetGrep())
                 {
                     PlayerBaseTransform.GetComponent<FollowGroundPos>().Deactive(_weaponActions[_curWeapon].gameObject);

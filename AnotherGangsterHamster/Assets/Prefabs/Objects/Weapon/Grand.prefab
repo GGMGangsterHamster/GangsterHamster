@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 4857206529191508532}
   - component: {fileID: 4857206529191508493}
   - component: {fileID: 4857206529191508494}
+  - component: {fileID: 4857206529191508491}
   - component: {fileID: 4857206529191508495}
   - component: {fileID: 4857206529191508488}
   - component: {fileID: 4857206529191508489}
   - component: {fileID: 9194106024689850141}
   - component: {fileID: 4857206529191508490}
-  - component: {fileID: 4857206529191508491}
   - component: {fileID: 4857206529191508492}
   - component: {fileID: 8043448785215126694}
   - component: {fileID: 5338349162365540012}
@@ -97,6 +97,29 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4857206529191508491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4857206529191508533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 093e3c73b72b9034ba68ff9b9ea78b26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponEnum: 0
+  Path: SettingValue/HandMode.json
+  possibleUse: 1
+  fireSpeed: 6.6
+  weaponDamage: 25
+  WeaponKeyCodePath: KeyCodes/Weapons.json
+  resizeSpeed: 0.35
+  reboundPower: 3.5
+  alphaSensorValue: 1
+  alphaToZeroSpeed: 2
+  _currentGrandStatus: 0
 --- !u!65 &4857206529191508495
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -160,8 +183,6 @@ MonoBehaviour:
         m_Calls: []
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
-  MultipleCollisionable: 0
-  _activated: 0
   colNormalVec: {x: 0, y: 0, z: 0}
   colVelocity: {x: 0, y: 0, z: 0}
   colPosition: {x: 0, y: 0, z: 0}
@@ -272,31 +293,6 @@ MonoBehaviour:
         m_Calls: []
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
-  <MultipleCollisionable>k__BackingField: 0
-  _activated: 0
---- !u!114 &4857206529191508491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4857206529191508533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 093e3c73b72b9034ba68ff9b9ea78b26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weaponEnum: 0
-  Path: SettingValue/HandMode.json
-  possibleUse: 1
-  fireSpeed: 6.6
-  weaponDamage: 25
-  WeaponKeyCodePath: KeyCodes/Weapons.json
-  resizeSpeed: 0.35
-  reboundPower: 3.5
-  alphaSensorValue: 1
-  alphaToZeroSpeed: 2
-  _currentGrandStatus: 0
 --- !u!114 &4857206529191508492
 MonoBehaviour:
   m_ObjectHideFlags: 0
