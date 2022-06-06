@@ -132,7 +132,11 @@ namespace Characters.Player.Actions
             _curRigid.mass = 0.001f;
             while (InteractionManager.Instance.GetGrep())
             {
-                Vector3 moveDir = ((MainCameraTransform.position + MainCameraTransform.forward * 2) - _curRigid.transform.position);
+                Debug.Log(MainCameraTransform.forward);
+                //Vector3 moveDir = ((MainCameraTransform.position + MainCameraTransform.forward * 2) - _curRigid.transform.position);
+                Vector3 moveDir = ((MainCameraTransform.position + new Vector3(MainCameraTransform.forward.x,
+                                                                               Mathf.Clamp(MainCameraTransform.forward.y, -0.2f, 1),
+                                                                               MainCameraTransform.forward.z) * 2) - _curRigid.transform.position);
                 _curRigid.velocity = moveDir * 20;
                 _curRigid.angularVelocity = Vector3.Lerp(_curRigid.angularVelocity, Vector3.zero, 0.5f);
                 _curRigid.transform.rotation = Quaternion.Slerp(_curRigid.transform.rotation, Quaternion.LookRotation(PlayerBaseTransform.forward), 0.5f);
