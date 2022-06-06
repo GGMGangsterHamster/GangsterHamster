@@ -1,3 +1,4 @@
+using Characters.Player;
 using Characters.Player.Move;
 using Matters.Gravity;
 using Matters.Velocity;
@@ -166,15 +167,14 @@ namespace Weapons.Actions
                     _dropPoint.gameObject.SetActive(false);
                     _dropLineRenderer.gameObject.SetActive(false);
 
-                    bool b = Physics.Raycast(PlayerTrasnform.position - (PlayerBaseTransform.up * 0.88f), _fireDir, out RaycastHit hit);
+                    bool b = Physics.Raycast(PlayerBaseTransform.position + (PlayerBaseTransform.up * 0.01f), _fireDir, out RaycastHit hit);
                     float dist = Vector3.Distance(PlayerBaseTransform.position, hit.point);
 
-
-                    if (b && dist < 0.2f
-                    && hit.transform.CompareTag("BTYPEOBJECT"))
+                    if (b && dist < 0.2f)
                     {
-                        transform.position = FirePosition;
-                        PlayerBaseTransform.position += PlayerBaseTransform.up;
+                        transform.position = FirePosition + (PlayerStatus.IsCrouching ? hit.normal : Vector3.zero);
+                        Debug.Log(transform.position);
+                        PlayerBaseTransform.position += PlayerBaseTransform.up * (1.2f - (PlayerStatus.IsCrouching ? 0 : dist));
                     }
                     else
                     {
@@ -218,16 +218,13 @@ namespace Weapons.Actions
             _currentGrandStatus = GrandStatus.Use;
         }
 
-        private void ReEnable()
-            => _playerFollow.Calculate = true;
 
         public override void ResetWeapon()
         {
             if (_currentGrandStatus != GrandStatus.Resize && _currentGrandStatus != GrandStatus.Idle)
             {
-                _playerFollow.Calculate = false;
-                Invoke(nameof(ReEnable), 0.1f); // FIXME: ¿¿æ÷
-                
+                PlayerBaseTransform.GetComponent<FollowGroundPos>().Deactive(gameObject);
+
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
                 transform.localScale = Vector3.one;
 
