@@ -133,6 +133,7 @@ namespace Weapons.Actions
                 return;
 
             _myRigid.constraints = RigidbodyConstraints.None;
+            _aTypeTrm = null;
 
             if (!isChangedGravity)
             {
