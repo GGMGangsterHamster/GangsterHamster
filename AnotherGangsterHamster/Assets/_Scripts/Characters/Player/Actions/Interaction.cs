@@ -1,5 +1,6 @@
 using _Core.Commands;
 using Matters.Gravity;
+using Matters.Velocity;
 using Objects.Interaction;
 using System.Collections;
 using UnityEngine;
@@ -69,22 +70,19 @@ namespace Characters.Player.Actions
                     case false: // 잡기
                         Vector3 gravityDir = GravityManager.GetGlobalGravityDirection();
 
+                        Debug.Log(Vector3.Distance(MainCameraTransform.position, handle.position));
                         if ((handle.lossyScale.x *
                             handle.lossyScale.y *
                             handle.lossyScale.z > 1.1f ||
                             handle.gameObject.isStatic ||
                             handle.name.CompareTo("Grand") == 0) || 
-                            Vector3.Distance(new Vector3(MainCameraTransform.position.x * gravityDir.x,
-                                                         MainCameraTransform.position.y * gravityDir.y,
-                                                         MainCameraTransform.position.z * gravityDir.z),
-                                             new Vector3(handle.position.x * gravityDir.x,
-                                                         handle.position.y * gravityDir.y,
-                                                         handle.position.z * gravityDir.z)) > 1.1f)
+                            (Vector3.Distance(MainCameraTransform.position, handle.position) > 2.5f))
                         {
                             InteractionManager.Instance.UnGrep();
                             return;
                         }
 
+                        PlayerBaseTransform.GetComponent<FollowGroundPos>().Deactive(handle.gameObject);
                         //handle.SetParent((param as Transform));
 
                         #region GetComponent
@@ -122,7 +120,6 @@ namespace Characters.Player.Actions
                         if (_curRigid != null)
                             _curRigid.velocity /= 4.5f;
 
-                        // 잡기 해제
                         InteractionManager.Instance.UnGrep();
                         break;
                 }
@@ -131,15 +128,16 @@ namespace Characters.Player.Actions
 
         IEnumerator GrappingRoutine()
         {
-            while(InteractionManager.Instance.GetGrep())
+            float beforeMass = _curRigid.mass;
+            _curRigid.mass = 0.001f;
+            while (InteractionManager.Instance.GetGrep())
             {
-                Vector3 moveDir = ((PlayerBaseTransform.position + (PlayerBaseTransform.forward * 2.0f) + PlayerBaseTransform.up) - _curRigid.transform.position);
+                Vector3 moveDir = ((MainCameraTransform.position + MainCameraTransform.forward * 2) - _curRigid.transform.position);
                 _curRigid.velocity = moveDir * 20;
                 _curRigid.angularVelocity = Vector3.Lerp(_curRigid.angularVelocity, Vector3.zero, 0.5f);
                 _curRigid.transform.rotation = Quaternion.Slerp(_curRigid.transform.rotation, Quaternion.LookRotation(PlayerBaseTransform.forward), 0.5f);
 
-                // 거리가 일정 이상으로 멀어지면 잡기 풀기
-                if(Vector3.Distance((PlayerBaseTransform.position + (PlayerBaseTransform.forward * 1.4f) + PlayerBaseTransform.up), _curRigid.transform.position) > 1.5f)
+                if(Vector3.Distance((MainCameraTransform.position + (MainCameraTransform.forward * 2f)), _curRigid.transform.position) > 1.5f)
                 {
                     InteractionManager.Instance.UnGrep();
 
@@ -152,6 +150,8 @@ namespace Characters.Player.Actions
 
                 yield return null;
             }
+
+            _curRigid.mass = beforeMass;
         }
     }
 }
