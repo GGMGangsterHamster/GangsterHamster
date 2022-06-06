@@ -89,10 +89,26 @@ namespace Objects.Interaction
       {
          bool resetHandleObject = true;
          Transform target = null;
-         if (UnityEngine.Physics.Raycast(MainCam.position,
-                                         MainCam.forward,
-                                         out RaycastHit hit,
-                                         PlayerValues.InteractionMaxDistance))
+
+         RaycastHit[] hits = Physics.RaycastAll(MainCam.position, MainCam.forward, PlayerValues.InteractionMaxDistance);
+
+         RaycastHit hit = new RaycastHit();
+         float minDist = float.MaxValue;
+         
+         // 지금 상호작용 할 수 있는 오브젝트를 A와 B 타입 오브젝트로 제한을 뒀음
+         foreach(RaycastHit rayCastHit in hits)
+         {
+             if(rayCastHit.transform.CompareTag("BTYPEOBJECT") || rayCastHit.transform.CompareTag("ATYPEOBJECT"))
+             {
+                 if(minDist > Vector3.Distance(MainCam.position, rayCastHit.point))
+                 {
+                     hit = rayCastHit;
+                     minDist = Vector3.Distance(MainCam.position, rayCastHit.point);
+                 }
+             }
+         }
+
+         if (minDist != float.MaxValue)
          {
             target = hit.transform;
             
