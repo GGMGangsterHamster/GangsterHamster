@@ -28,6 +28,9 @@ namespace Effects.Fullscreen
       public void FadeIn(float duration, System.Action callback = null)
       {
          float step = 1.0f / duration;
+         Color c = _fader.color;
+         c.a = 1.0f;
+         _fader.color = c;
 
          ValueTween.To(this, () =>
          {
