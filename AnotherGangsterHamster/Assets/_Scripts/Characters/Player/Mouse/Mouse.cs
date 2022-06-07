@@ -36,8 +36,6 @@ namespace Characters.Player.Mouse
       public void OnMouseX(float x)
       {
          if (!PlayerStatus.Moveable) return;
-
-            Debug.Log(x);
          
 
          // 4원수는 교환 법칙이 성립되지 않는대요
