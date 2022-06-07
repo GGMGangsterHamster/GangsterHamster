@@ -155,8 +155,6 @@ namespace Characters.Player.Actions
          force.y *= gravityDir.y;
          force.z *= gravityDir.z;
 
-         Collider.sharedMaterial.frictionCombine = PhysicMaterialCombine.Multiply;
-
          _rigid.velocity = -force;
 
          PlayerStatus.IsJumping = true;
