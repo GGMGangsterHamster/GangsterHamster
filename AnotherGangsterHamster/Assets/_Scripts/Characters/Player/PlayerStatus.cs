@@ -17,5 +17,8 @@ namespace Characters.Player
       static public bool Jumpable   = true;
       static public bool Crouchable = true;
       static public bool Runable    = true;
+
+      // 이동 속도 관련 특수한 변수
+      static public bool Overspeed = false;
    }
 }

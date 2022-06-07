@@ -41,7 +41,7 @@ namespace Characters.Player.Move
 
       private void FixedUpdate() // TOOD: 루트모션 넣으면 바꿔야 함
       {
-         // transform.Translate(_delta.Calculate(transform, PlayerValues.Speed));
+         // transform.Translate(_delta.Calculate(transform, PlayerValues.Speed, true, false));
          _rigid.MovePosition(transform.position +
                              _delta.Calculate(transform, PlayerValues.Speed, false, true));
 
