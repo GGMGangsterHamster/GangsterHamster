@@ -1,4 +1,6 @@
+using Characters.Player;
 using Setting.VO;
+using Stages.Management;
 using UI.Screen;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -19,6 +21,9 @@ namespace UI.PanelScripts
         [SerializeField] private Button _goTitleButton;
         [SerializeField] private Button _gameRestartButton;
         [SerializeField] private Button _disableButton;
+        [SerializeField] private Button _stageSkipButton;
+        [SerializeField] private Button _stageBackButton;
+        [SerializeField] private Button _notDeadButton;
 
         [SerializeField] private Scrollbar _soundScrollbar;
         [SerializeField] private Scrollbar _sensitivityScrollbar;
@@ -86,6 +91,29 @@ namespace UI.PanelScripts
                 Utils.MoveTime();
                 UIManager.Instance.DeActivationPanel(panelId);
             });
+
+            #region юс╫ц
+
+            _stageSkipButton.onClick.AddListener(() =>
+            {
+                SceneManager.LoadScene((StageManager.Instance.CurrentStage + 1).ToString());
+                Utils.LockCursor();
+                Utils.MoveTime();
+            });
+
+            _stageBackButton.onClick.AddListener(() =>
+            {
+                SceneManager.LoadScene((StageManager.Instance.CurrentStage - 1).ToString());
+                Utils.LockCursor();
+                Utils.MoveTime();
+            });
+
+            _notDeadButton.onClick.AddListener(() =>
+            {
+                GameObject.FindObjectOfType<Player>().SetMaxHP(int.MaxValue);
+            });
+
+            #endregion
 
             _soundScrollbar.onValueChanged.AddListener(value =>
             {

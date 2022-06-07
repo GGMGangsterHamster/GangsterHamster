@@ -44,6 +44,12 @@ namespace Characters.Player
          base.Awake();
       }
 
+      public void SetMaxHP(int hp)
+      {
+          _maxHp = hp;
+          _hp = hp;
+      }
+
       private void Update()
       {
          if (_currentRegenerationTime <= 0)
