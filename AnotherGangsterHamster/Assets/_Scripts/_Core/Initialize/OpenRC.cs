@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using Effects.Fullscreen;
 
 namespace _Core.Initialize
 {
@@ -9,6 +10,7 @@ namespace _Core.Initialize
    {
       [Header("Add InitScript here.")]
       public InitBase[] _initScripts;
+      private Fade _fader;
 
 
       private void Awake()
@@ -16,9 +18,16 @@ namespace _Core.Initialize
          Utils.FindDuplicate<OpenRC>(this.gameObject);
          DontDestroyOnLoad(this.gameObject);
 
+
          SceneManager.sceneLoaded += (scene, mode) =>
          {
             FindAndExecute(RunLevel.SCENE_LOAD);
+
+            if(_fader == null)
+               _fader = FindObjectOfType<Fade>();
+
+             _fader.SetFader(1);
+            _fader.FadeIn(0.2f);
          };
 
          SceneManager.sceneUnloaded += (scene) =>

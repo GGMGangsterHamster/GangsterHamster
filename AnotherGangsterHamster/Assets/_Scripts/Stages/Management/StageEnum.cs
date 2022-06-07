@@ -22,6 +22,8 @@ namespace Stages.Management
       LumoStage_8,
       LumoStage_9,
       LumoStage_10,
+      END_OF_STAGE,
+      Title,
       END_OF_ENUM
    }
 }

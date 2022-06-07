@@ -75,6 +75,8 @@ namespace UI.PanelScripts
 
             _goTitleButton.onClick.AddListener(() =>
             {
+                SceneManager.LoadScene(StageNames.Title.ToString());
+                Utils.MoveTime();
                 // 현재 UI 비활성화 시키고 "Title UI"로 변환
             });
 
