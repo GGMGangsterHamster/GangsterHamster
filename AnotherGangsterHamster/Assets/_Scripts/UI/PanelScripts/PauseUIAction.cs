@@ -24,6 +24,7 @@ namespace UI.PanelScripts
         [SerializeField] private Button _stageSkipButton;
         [SerializeField] private Button _stageBackButton;
         [SerializeField] private Button _notDeadButton;
+        [SerializeField] private Button _spectatorButton;
 
         [SerializeField] private Scrollbar _soundScrollbar;
         [SerializeField] private Scrollbar _sensitivityScrollbar;
@@ -110,6 +111,13 @@ namespace UI.PanelScripts
 
             _notDeadButton.onClick.AddListener(() =>
             {
+                GameObject.FindObjectOfType<Player>().SetMaxHP(int.MaxValue);
+            });
+
+            _spectatorButton.onClick.AddListener(() =>
+            {
+                Utils.UnlockCursor();
+                Spectator.Instance.StartSpectorMode();
                 GameObject.FindObjectOfType<Player>().SetMaxHP(int.MaxValue);
             });
 
