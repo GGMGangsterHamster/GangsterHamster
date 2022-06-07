@@ -116,9 +116,7 @@ namespace UI.PanelScripts
 
             _spectatorButton.onClick.AddListener(() =>
             {
-                Utils.UnlockCursor();
                 Spectator.Instance.StartSpectorMode();
-                GameObject.FindObjectOfType<Player>().SetMaxHP(int.MaxValue);
             });
 
             #endregion
