@@ -30,20 +30,13 @@ namespace Objects
       private void OnTriggerEnter(Collider other)
       {
          TriggerEnterEvent(other.gameObject);
-         ++_triggeredObjectsCount;
       }
 
       private void OnTriggerExit(Collider other)
       {
          if (EventIsToggle) return;
 
-         --_triggeredObjectsCount;
-
-         if (_triggeredObjectsCount <= 0)
-         {
-            _triggeredObjectsCount = 0; // 혹시 모르니
-            TriggerExitEvent(other.gameObject);
-         }  
+         TriggerExitEvent(other.gameObject);
       }
       #endregion // Unity Trigger Event
 
@@ -53,12 +46,12 @@ namespace Objects
       /// <param name="other">충돌한 GameObject</param>
       public void TriggerEnterEvent(GameObject other)
       {
-         CollisionCallback callback =
-                  _callbacks.Find(x => (x.key == "") || other.CompareTag(x.key));
-
+         CollisionCallback callback = _callbacks.Find(x => (x.key == "") || other.CompareTag(x.key));
 
          if (callback != null)
          {
+            ++_triggeredObjectsCount;
+
             if (!EventIsToggle)
             {
                _activated = true;
@@ -81,11 +74,15 @@ namespace Objects
       /// <param name="other">충돌한 GameObject</param>
       public void TriggerExitEvent(GameObject other)
       {
-         CollisionCallback callback =
-                  _callbacks.Find(x => (x.key == "") || other.CompareTag(x.key));
+         CollisionCallback callback = _callbacks.Find(x => (x.key == "") || other.CompareTag(x.key));
 
          if (callback != null)
          {
+            ++_triggeredObjectsCount;
+
+            if (_triggeredObjectsCount < 0) return;
+
+            _triggeredObjectsCount = 0;
             _activated = false;
             callback.OnDeactive?.Invoke(other);
          }
