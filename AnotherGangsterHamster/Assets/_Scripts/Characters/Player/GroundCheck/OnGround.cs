@@ -27,7 +27,8 @@ namespace Characters.Player.GroundCheck
          PlayerStatus.Jumpable = false;
          Utils.ExecuteCallback(this.transform, false);
 
-         Collider.material.frictionCombine = PhysicMaterialCombine.Multiply;
+         Collider.sharedMaterial.staticFriction = 0.0f;
+         Collider.sharedMaterial.dynamicFriction = 0.0f;
       }
 
       void IGroundCallback.OnGround()
@@ -37,7 +38,8 @@ namespace Characters.Player.GroundCheck
          PlayerStatus.Jumpable = true;
          Utils.ExecuteCallback(this.transform, true);
 
-         Collider.material.frictionCombine = PhysicMaterialCombine.Multiply;
+         Collider.sharedMaterial.staticFriction = 1.0f;
+         Collider.sharedMaterial.dynamicFriction = 1.0f;
       }
    }
 }

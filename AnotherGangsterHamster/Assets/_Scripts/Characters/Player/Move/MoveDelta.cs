@@ -8,6 +8,7 @@ namespace Characters.Player.Move
    [RequireComponent(typeof(Rigidbody))]
    public class MoveDelta : MonoBehaviour
    {
+
       [field: SerializeField]
       public bool CalculateByItself = false;
 
@@ -50,10 +51,11 @@ namespace Characters.Player.Move
                                float deltaMultiply = 1.0f,
                                bool globalDelta = false,
                                bool dontMultDeltatimeToRaw = false,
-                               bool keepDelta = false)
+                               bool keepDelta = false,
+                               bool dontMultDeltatime = false)
       {
          Vector3 delta = (globalDelta ? _delta : target.TransformDirection(_delta)).normalized
-            * deltaMultiply * Time.deltaTime;
+            * deltaMultiply * (dontMultDeltatime ? 1 : Time.deltaTime);
 
          Vector3 finalDelta = delta + _rawDelta * (dontMultDeltatimeToRaw ? 1 : Time.deltaTime);
 
