@@ -118,6 +118,7 @@ namespace UI.PanelScripts
             {
                 Utils.UnlockCursor();
                 Spectator.Instance.StartSpectorMode();
+                GameObject.FindObjectOfType<Player>().SetMaxHP(int.MaxValue);
             });
 
             #endregion
