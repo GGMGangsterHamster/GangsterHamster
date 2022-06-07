@@ -1,5 +1,7 @@
+using Stages.Management;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace UI.PanelScripts
@@ -9,6 +11,7 @@ namespace UI.PanelScripts
         [Header("각자의 기능이 있는 UI들")]
         [SerializeField] private Button _disableButton;
         [SerializeField] private Transform _stageButtonParent;
+        [SerializeField] private GameObject _stageButtonPrefab;
 
         public override void ActivationActions()
         {
@@ -29,14 +32,9 @@ namespace UI.PanelScripts
                 UIManager.Instance.DeActivationPanel(panelId);
             });
 
-            for(int i = 0; i < _stageButtonParent.childCount; i++)
+            for(int i = 1; i < (int)StageNames.END_OF_STAGE; i++)
             {
-                Button stageButton = _stageButtonParent.GetChild(i).GetComponent<Button>();
-
-                stageButton.onClick.AddListener(() =>
-                {
-                    // 버튼에 저장 된 스테이지 로딩 (아직 클리어 하지 못한 스테이지는 블러 처리)
-                });
+                SpawnChapter(((StageNames)i).ToString());
             }
         }
 
@@ -46,6 +44,23 @@ namespace UI.PanelScripts
             {
                 UIManager.Instance.DeActivationPanel(panelId);
             }
+        }
+
+        // 지금은 이름만 있따
+        private void SpawnChapter(string sceneName)
+        {
+            GameObject obj = Instantiate(_stageButtonPrefab, _stageButtonParent);
+
+            obj.transform.GetChild(0).GetComponent<Text>().text = sceneName;
+
+            Button stageButton = obj.GetComponent<Button>();
+
+            stageButton.onClick.AddListener(() =>
+            {
+                SceneManager.LoadScene(sceneName);
+                Utils.LockCursor();
+                Utils.MoveTime();
+            });
         }
     }
 
