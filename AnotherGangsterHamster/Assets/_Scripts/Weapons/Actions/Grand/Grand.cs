@@ -228,7 +228,6 @@ namespace Weapons.Actions
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
                 transform.localScale = Vector3.one;
 
-
                 chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ?
                                                             0 :
                                                             _sizeLevelValue[_currentSizeLevel] * 0.25f, 1, 1);
