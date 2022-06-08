@@ -20,6 +20,8 @@ GameObject:
   - component: {fileID: 4857206529191508492}
   - component: {fileID: 8043448785215126694}
   - component: {fileID: 5338349162365540012}
+  - component: {fileID: 2422185822500664307}
+  - component: {fileID: 6120117957624118534}
   m_Layer: 0
   m_Name: Grand
   m_TagString: ATYPEOBJECT
@@ -162,6 +164,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _callbacks:
+  - key: BTYPEOBJECT
+    OnActive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4857206529191508491}
+          m_TargetAssemblyTypeName: Weapons.Actions.Grand, Assembly-CSharp
+          m_MethodName: BAndATypeObjCollisionEnterEvent
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 6120117957624118534}
+          m_TargetAssemblyTypeName: Matters.Velocity.FollowGroundPos, Assembly-CSharp
+          m_MethodName: Active
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeactive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6120117957624118534}
+          m_TargetAssemblyTypeName: Matters.Velocity.FollowGroundPos, Assembly-CSharp
+          m_MethodName: Deactive
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - key: BTYPEOBJECT
     OnActive:
       m_PersistentCalls:
@@ -330,6 +375,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onValue: 0.8
+--- !u!114 &2422185822500664307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4857206529191508533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31d9846746c97de6fb3e3e99dbd4dc14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CalculateByItself: 1
+--- !u!114 &6120117957624118534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4857206529191508533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5e56c01117f90b1783e44d52cbc8f5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &746377084378856369
 PrefabInstance:
   m_ObjectHideFlags: 0
