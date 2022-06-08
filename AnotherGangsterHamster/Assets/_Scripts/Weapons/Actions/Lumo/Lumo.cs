@@ -1,13 +1,20 @@
+using Matters.Velocity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Weapon.Animation.LumoAnimation;
 
 namespace Weapons.Actions
 {
     public class Lumo : WeaponAction
     {
+        public float useSpeed;
+
+        public Vector3 GetHandPos => HandPosition;
+
         private LumoStatus _currentStatus = LumoStatus.Idle;
         private Transform _lumoCube;
+        private LumoAnimator _lumoAnimator;
 
         private RaycastHit _aTypeHit;
         private Transform _aTypeTrm;
@@ -21,7 +28,9 @@ namespace Weapons.Actions
 
             _weaponEnum = WeaponEnum.Lumo;
 
-            _lumoCube = transform.GetChild(0);
+            _lumoCube = transform.GetComponentInChildren<LumoCube>().transform;
+            _lumoCube.gameObject.SetActive(false);
+            _lumoAnimator = GetComponent<LumoAnimator>();
         }
 
         public override void FireWeapon()
@@ -32,36 +41,42 @@ namespace Weapons.Actions
                 if (Physics.Raycast(MainCameraTransform.position, MainCameraTransform.forward, out RaycastHit hit) && hit.transform.CompareTag("ATYPEOBJECT"))
                 {
                     _fireDir = MainCameraTransform.forward;
-                    transform.position = hit.point + (hit.normal * transform.localScale.y / 2);
-                    transform.rotation = Quaternion.LookRotation(hit.normal) * Quaternion.Euler(90, 0, 0);
 
                     _aTypeHit = hit;
                     _aTypeTrm = hit.transform;
                     _aTypeCurPos = hit.transform.position - hit.point;
                     _aTypeCurSize = _aTypeHit.transform.localScale.x;
-
                     _currentStatus = LumoStatus.Stickly;
+
+                    _lumoAnimator.FireAnime(transform.position, hit.point, fireSpeed, Quaternion.LookRotation(_fireDir) * Quaternion.Euler(90, 0, 0));
                 }
             }
         }
 
         public override void UseWeapon()
         {
-            if (_currentStatus == LumoStatus.Stickly)
+            if (_currentStatus == LumoStatus.Stickly && _lumoAnimator.isStopedMoving())
             {
-                _lumoCube.gameObject.SetActive(true);
+                _currentStatus = LumoStatus.Use;
+                _lumoCube.rotation = Quaternion.LookRotation(_aTypeHit.normal) * Quaternion.Euler(90, 0, 0);
+                _lumoAnimator.UsingAnime(_aTypeHit.normal, useSpeed);
             }
         }
 
         public override void ResetWeapon()
         {
+            if (_currentStatus == LumoStatus.Reset) return;
+
+            PlayerBaseTransform.GetComponent<FollowGroundPos>().Deactive(_lumoCube.gameObject);
+
             _lumoCube.gameObject.SetActive(false);
 
-            _currentStatus = LumoStatus.Idle;
             _myRigid.velocity = Vector3.zero;
             _myRigid.angularVelocity = Vector3.zero;
             _myRigid.constraints = RigidbodyConstraints.FreezeAll;
             _aTypeTrm = null;
+            _currentStatus = LumoStatus.Reset;
+            _lumoAnimator.ResetAnime(transform.position, HandPosition, fireSpeed, Quaternion.LookRotation((transform.position - MainCameraTransform.position).normalized) * Quaternion.Euler(90, 0, 0));
         }
 
         public override bool IsHandleWeapon()
@@ -78,13 +93,12 @@ namespace Weapons.Actions
         {
             switch(_currentStatus)
             {
-
-                case LumoStatus.Idle:
-                    transform.position = HandPosition;
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
-                    break;
                 case LumoStatus.Stickly:
                     SettingLumoPos();
+                    break;
+                case LumoStatus.Use:
+                    if(_lumoAnimator.isStopedMoving() && !_lumoCube.gameObject.activeSelf)
+                        _lumoCube.gameObject.SetActive(true);
                     break;
             }
         }

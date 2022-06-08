@@ -2,21 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Weapons.Actions;
 
-namespace Weapon.Animation.Lumo
+namespace Weapon.Animation.LumoAnimation
 {
     public class LumoAnimator : MonoBehaviour
     {
+        private Transform _mainCameraTransform;
+        private Transform MainCameraTransform
+        {
+            get
+            {
+                if (_mainCameraTransform == null)
+                {
+                    _mainCameraTransform = Camera.main.transform;
+                }
+
+                return _mainCameraTransform;
+            }
+        }
+
         enum LumoAnimeStatus // 현재 애니메이션 스테이터스
         {
             Idle,
-            Start,
+            Move,
+            Reset,
             Using,
-            Stop
+            Sorting
         }
 
-        [SerializeField] private float startAnimeDelayTime = 0.5f;                    // 애니메이션을 시작하는데 생기는 딜레이
-        [SerializeField] private float stopAnimeDelayTime = 0.5f;                    // 애니메이션을 멈추는데 생기는 딜레이
+        public float usingAnimeDelay = 0.5f;                    // 애니메이션을 시작하는데 생기는 딜레이
+        public float sortPartsSpeed = 0.3f;                    // 애니메이션을 멈추는데 생기는 딜레이
         [SerializeField] private float rotSpeed = 1f;                                 // 돌아가는 회전 속도
 
         public UnityEvent StartAnimationCallback;
@@ -26,68 +42,146 @@ namespace Weapon.Animation.Lumo
         private List<Transform> _partTrmList = new List<Transform>();
         private LumoAnimeStatus _curStatus = LumoAnimeStatus.Idle;    // 지금 애니메이션 스테이터스
 
+        private Quaternion quaternion;
+        private Vector3 start;                                              // 애니메이션 실행시 시작 위치
+        private Vector3 end;                                                // 애니메이션 실행시 끝나는 위치
+        private float moveSpeed;                                            // 애니메이션 실행 스피드
+        
         private float _curTime;                                     // 시간 계산을 위한 변수
+        private float _softMoving;                                  // 부드럽게 움직이기 위하여 사용하는 변수
         private int childCount;                                     // 자식의 수 - 그냥 많이 쓰여서 따로 변수로 뺌
+        private bool isEnd = false; 
+        private bool isReset = true;
+
+        private Lumo _lumo;
 
         private void Awake()
         {
-            childCount = transform.childCount;
+            childCount = 9;
+
             // 시작시 랜덤으로 파츠마다의 랜덤 회전 값 지정
             for (int i = 0; i < childCount; i++)
             {
                 _partRotDirList.Add(new Vector3(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f)));
                 _partTrmList.Add(transform.GetChild(i));
             }
+
+            _lumo = GetComponent<Lumo>();
         }
 
-        public void StartAnimation()
+        public void FireAnime(Vector3 start, Vector3 end, float moveSpeed, Quaternion quaternion)
         {
-            _curTime = 0;
-            _curStatus = LumoAnimeStatus.Start;
+            // Sorting -> Move -> Idle 로 상태 변환
+            InitAnime(start, end, moveSpeed, LumoAnimeStatus.Sorting, quaternion);
+            isReset = false;
+            isEnd = false;
+        }
+        
+        public void ResetAnime(Vector3 start, Vector3 end, float moveSpeed, Quaternion quaternion)
+        {
+            // Sorting -> Move -> Idle 로 상태 변환
+            InitAnime(start, end, moveSpeed, LumoAnimeStatus.Sorting, quaternion);
+            isReset = true;
+            isEnd = false;
         }
 
-        public void StopAnimation()
+        public void UsingAnime(Vector3 normalVec, float moveSpeed)
         {
-            _curTime = stopAnimeDelayTime;
-            _curStatus = LumoAnimeStatus.Stop;
+            // Using -> 계속 유지함
+            InitAnime(transform.position, transform.position + normalVec, moveSpeed, LumoAnimeStatus.Using, Quaternion.identity);
+            _softMoving = 0f;
+            isEnd = false;
+        }
+
+        public bool isStopedMoving()
+        {
+            return _curStatus == LumoAnimeStatus.Idle || isEnd;
         }
 
         private void Update()
         {
-            #region 임시로 넣은 Input.GetKeyDown()
-            if (Input.GetKeyDown(KeyCode.U))
-                StartAnimation();
-            if (Input.GetKeyDown(KeyCode.P))
-                StopAnimation();
-            #endregion
-
-            // Idle 은 아무것도 하지 않는다!
             switch (_curStatus)
             {
-                case LumoAnimeStatus.Start:
-                    if(_curTime >= startAnimeDelayTime)
+                case LumoAnimeStatus.Idle:
+                    if(isReset)
                     {
-                        // 시작 애니메이션 끝
-                        _curStatus = LumoAnimeStatus.Using;
-                        StartAnimationCallback?.Invoke();
+                        transform.position = _lumo.GetHandPos;
+                        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
                     }
+                    break;
+                case LumoAnimeStatus.Sorting:
                     _curTime += Time.deltaTime;
-                    RotationParts(_curTime / startAnimeDelayTime * Time.deltaTime * rotSpeed);
-
-                    break;
-                case LumoAnimeStatus.Stop:
-                    if (_curTime <= 0)
+                    
+                    if (_curTime > sortPartsSpeed)
                     {
-                        // 스탑 애니메이션 끝
-                        _curStatus = LumoAnimeStatus.Idle;
-                        StopAnimationCallback?.Invoke();
-                    }
-                    _curTime -= Time.deltaTime;
-                    RotationParts(_curTime / stopAnimeDelayTime * Time.deltaTime * rotSpeed);
+                        // 행동 전 정렬 완료
+                        if(isReset)
+                            _curStatus = LumoAnimeStatus.Reset;
+                        else
+                            _curStatus = LumoAnimeStatus.Move;
 
+
+                        _curTime = 0;
+
+                        for (int i = 0; i < childCount; i++)
+                        {
+                            _partTrmList[i].rotation = quaternion;
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < childCount; i++)
+                        {
+                            _partTrmList[i].rotation = Quaternion.Slerp(_partTrmList[i].rotation, quaternion, _curTime / sortPartsSpeed);
+                        }
+                    }
                     break;
+                case LumoAnimeStatus.Move:
+                    _curTime += Time.deltaTime * moveSpeed;
+
+                    if (_curTime >= Vector3.Distance(start, end))
+                    {
+                        // 발사 위치로 이동 완료
+                        transform.position = end;
+                        _curStatus = LumoAnimeStatus.Idle;
+                        _curTime = 0;
+                    }
+                    else
+                    {
+                        transform.position = Vector3.Lerp(start, end, _curTime / Vector3.Distance(start, end));
+                    }
+                    break;
+                case LumoAnimeStatus.Reset:
+                    _curTime += Time.deltaTime * moveSpeed;
+
+                    if (_curTime >= Vector3.Distance(start, _lumo.GetHandPos))
+                    {
+                        // 발사 위치로 이동 완료
+                        transform.position = _lumo.GetHandPos;
+                        transform.rotation = Quaternion.LookRotation(MainCameraTransform.forward) * Quaternion.Euler(90, 0, 0);
+                        _curStatus = LumoAnimeStatus.Idle;
+                        _curTime = 0;
+                    }
+                    else
+                    {
+                        transform.position = Vector3.Lerp(start, _lumo.GetHandPos, _curTime / Vector3.Distance(start, _lumo.GetHandPos));
+                    }
+                    break;
+
                 case LumoAnimeStatus.Using:
-                    RotationParts(rotSpeed * Time.deltaTime);
+                    _curTime += Time.deltaTime / usingAnimeDelay * _softMoving;
+                    _softMoving += Time.deltaTime;
+
+                    if (_curTime >= Vector3.Distance(start, end))
+                    {
+                        // 조금 튀어나옴
+                        RotationParts(rotSpeed * Time.deltaTime);
+                        isEnd = true;
+                    }
+                    else
+                    {
+                        transform.position = Vector3.Lerp(start, end, _curTime / Vector3.Distance(start, end));
+                    }
                     break;
             }
         }
@@ -99,6 +193,17 @@ namespace Weapon.Animation.Lumo
             {
                 _partTrmList[i].rotation *= Quaternion.Euler(_partRotDirList[i] * rotSpeed);
             }
+        }
+
+        private void InitAnime(Vector3 start, Vector3 end, float moveSpeed, LumoAnimeStatus status, Quaternion quaternion)
+        {
+            _curTime = 0;
+
+            this.start = start;
+            this.end = end;
+            this.moveSpeed = moveSpeed;
+            this.quaternion = quaternion;
+            _curStatus = status;
         }
     }
 }

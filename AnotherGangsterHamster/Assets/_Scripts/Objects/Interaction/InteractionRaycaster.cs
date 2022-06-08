@@ -113,7 +113,7 @@ namespace Objects.Interaction
             target = hit.transform;
             
                 
-            if (target.CompareTag(ATYPE) && !(target == gravito.SticklyTrm() || target == lumo.SticklyTrm()))
+            if (target.CompareTag(ATYPE) && !(target == gravito.SticklyTrm() || (lumo.SticklyTrm() != null && target == lumo.SticklyTrm())))
             {
                resetHandleObject = false;
                InteractionManager

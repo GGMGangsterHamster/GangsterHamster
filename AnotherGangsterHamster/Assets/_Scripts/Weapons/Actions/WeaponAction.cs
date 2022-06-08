@@ -32,7 +32,8 @@ namespace Weapons.Actions
     {
         Idle,
         Use,
-        Stickly
+        Stickly,
+        Reset
     }
 
     public enum ConnectionStatus
