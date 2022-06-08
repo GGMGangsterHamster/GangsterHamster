@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.17980957, g: 0.17980957, b: 0.17980957, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -167,6 +167,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
@@ -178,6 +179,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4704299422026483020, guid: e9fed65fb6b2e2622b6708846c0b1b54, type: 3}
+      propertyPath: m_Version
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4704299422026483020, guid: e9fed65fb6b2e2622b6708846c0b1b54, type: 3}
+      propertyPath: m_RenderingPathCustomFrameSettings.msaaMode
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4704299422026483022, guid: e9fed65fb6b2e2622b6708846c0b1b54, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -237,22 +246,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4256830511122640484, guid: 4ee645f3863795c40b073373a096290d, type: 3}
   m_PrefabInstance: {fileID: 1553641003}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &562222330 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3435084394375802373, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
-  m_PrefabInstance: {fileID: 1506798211}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &562222332 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3435084394375802375, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
-  m_PrefabInstance: {fileID: 1506798211}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562222330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19733925e0e3b28499f9668430fe09fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &626343478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -376,6 +369,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
@@ -419,6 +413,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
@@ -616,6 +611,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1718929672}
   m_Father: {fileID: 0}
@@ -835,6 +831,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 19.048668, y: -11.568276, z: 5.283653}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
@@ -862,6 +859,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHp: 100
+  _deadCallbacks: {fileID: 0}
   regenerationDelay: 3
   regenerationValue: 1
 --- !u!1001 &1186248782
@@ -1336,6 +1334,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Profile: {fileID: 11400000, guid: 0bbc23d51b51fe99da743f4a401c3b1c, type: 2}
   m_StaticLightingSkyUniqueID: 3
+  m_StaticLightingCloudsUniqueID: 0
+  m_StaticLightingVolumetricClouds: 0
 --- !u!4 &1403636332
 Transform:
   m_ObjectHideFlags: 1
@@ -1346,6 +1346,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -1580,6 +1581,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.7500002, y: 0, z: 1.7500007}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1186248783}
   m_RootOrder: 5
@@ -1678,7 +1680,7 @@ PrefabInstance:
     - target: {fileID: 3435084394375802393, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: _callbacks.Array.data[0].OnActive.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 562222332}
+      objectReference: {fileID: 0}
     - target: {fileID: 3435084394375802393, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: _callbacks.Array.data[0].OnDeactive.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
@@ -1690,11 +1692,11 @@ PrefabInstance:
     - target: {fileID: 3435084394375802393, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: _callbacks.Array.data[0].OnDeactive.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 562222330}
+      objectReference: {fileID: 0}
     - target: {fileID: 3435084394375802393, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: _callbacks.Array.data[1].OnDeactive.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 562222330}
+      objectReference: {fileID: 0}
     - target: {fileID: 3435084394375802393, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: _callbacks.Array.data[0].OnActive.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1965,6 +1967,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 21.884157, y: 2.2571554, z: 10.150892}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
@@ -2112,6 +2115,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1353328861}
   - {fileID: 2089538038}
