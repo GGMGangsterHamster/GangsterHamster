@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using Objects.Interaction;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Objects
 {
-   public class CollisionInteractableObject : MonoBehaviour, IActivated
+   public class BothInteractableObject : Interactable, IActivated
    {
       public List<CollisionCallback> _callbacks
                = new List<CollisionCallback>();
@@ -19,7 +20,7 @@ namespace Objects
       private bool _activated = false;
       public bool Activated => _activated;
 
-      private int _collisionObjectsCount = 0;
+      private int _objectsCount = 0;
 
       // Collision에서 Normal 벡터를 빼내기 위해서 존재하는 변수
       public Vector3 colNormalVec;
@@ -30,11 +31,15 @@ namespace Objects
       // 충돌 지점
       public Vector3 colPosition;
 
+      private ButtonCountRequirement _requirement;
+
       public bool isOn = true;
 
       private void Awake()
       {
          _activated = InitalActiveStatus;
+
+         _requirement = GetComponent<ButtonCountRequirement>();
       }
 
       #region Unity Collision Event
@@ -46,14 +51,28 @@ namespace Objects
          colVelocity    = other.relativeVelocity;
          colPosition    = other.contacts[0].point;
 
-         CollisionEnterEvent(other.gameObject);
+         EnterEvent(other.gameObject);
+      }
+
+      private void OnTriggerEnter(Collider other)
+      {
+         if (!isOn) return;
+
+         EnterEvent(other.gameObject);
       }
 
       private void OnCollisionExit(Collision other)
       {
          if (!isOn || EventIsToggle) return;
 
-         CollisionExitEvent(other.gameObject);
+         ExitEvent(other.gameObject);
+      }
+
+      private void OnTriggerExit(Collider other)
+      {
+         if (!isOn || EventIsToggle) return;
+
+         ExitEvent(other.gameObject);
       }
       #endregion // Unity Collision Event
 
@@ -61,14 +80,14 @@ namespace Objects
       /// 충돌 시 호출됨
       /// </summary>
       /// <param name="other">충돌한 GameObject</param>
-      public void CollisionEnterEvent(GameObject other)
+      public void EnterEvent(GameObject other)
       {
          CollisionCallback callback =
                   _callbacks.Find(x => (x.key == "") || other.CompareTag(x.key));
 
          if (callback != null)
          {
-            ++_collisionObjectsCount;
+            ++_objectsCount;
 
             if (!EventIsToggle)
             {
@@ -90,21 +109,55 @@ namespace Objects
       /// Collision Exit 이벤트 시 호출됨
       /// </summary>
       /// <param name="other">충돌한 GameObject</param>
-      public void CollisionExitEvent(GameObject other)
+      public void ExitEvent(GameObject other)
       {
          CollisionCallback callback =
                   _callbacks.Find(x => (x.key == "") || other.CompareTag(x.key));
 
          if (callback != null)
          {
-            --_collisionObjectsCount;
+            --_objectsCount;
 
-            if (_collisionObjectsCount < 0) return;
+            if (_objectsCount < 0) return;
 
-            _collisionObjectsCount = 0;
+            _objectsCount = 0;
             _activated = false;
             callback.OnDeactive?.Invoke(other);
          }
       }
+
+
+      public override void Interact()
+      {
+         if (_requirement == null || _requirement.Checked)
+         {
+            OnInteraction();
+         }
+      }
+
+      public void OnInteraction()
+      {
+         _activated = !_activated;
+
+         if (_activated)
+            EnterEvent(null);
+         else
+         {
+            if (EventIsToggle)
+               ExitEvent(null);
+            else
+               EnterEvent(null);
+         }
+      }
+
+
+      public override void Focus()
+      {
+      }
+
+      public override void DeFocus()
+      {
+      }
+
    }
 }

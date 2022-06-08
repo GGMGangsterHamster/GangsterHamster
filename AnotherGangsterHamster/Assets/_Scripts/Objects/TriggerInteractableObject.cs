@@ -78,7 +78,7 @@ namespace Objects
 
          if (callback != null)
          {
-            ++_triggeredObjectsCount;
+            --_triggeredObjectsCount;
 
             if (_triggeredObjectsCount < 0) return;
 

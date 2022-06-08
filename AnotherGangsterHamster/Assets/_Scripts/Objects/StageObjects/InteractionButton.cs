@@ -33,10 +33,10 @@ namespace Objects.StageObjects
 
       public override void Interact()
       {
-            if(_requirement == null || _requirement.Checked)
-            {
-                OnInteraction();
-            }
+         if (_requirement == null || _requirement.Checked)
+         {
+            OnInteraction();
+         }
       }
 
       #endregion // Unity Collision Event
@@ -52,7 +52,7 @@ namespace Objects.StageObjects
             OnActive?.Invoke(null);
          else
          {
-            if(EventIsToggle)   
+            if (EventIsToggle)
                OnDeactive?.Invoke(null);
             else
                OnActive?.Invoke(null);
