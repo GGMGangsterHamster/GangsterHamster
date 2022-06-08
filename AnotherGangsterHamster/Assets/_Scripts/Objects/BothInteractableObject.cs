@@ -33,7 +33,8 @@ namespace Objects
 
       private ButtonCountRequirement _requirement;
 
-      public bool isOn = true;
+      public bool canCollision = true;
+      public bool canTrigger = true;
 
       private void Awake()
       {
@@ -45,7 +46,7 @@ namespace Objects
       #region Unity Collision Event
       private void OnCollisionEnter(Collision other)
       {
-         if (!isOn) return;
+         if (!canCollision) return;
 
          colNormalVec   = other.contacts[0].normal;
          colVelocity    = other.relativeVelocity;
@@ -56,21 +57,21 @@ namespace Objects
 
       private void OnTriggerEnter(Collider other)
       {
-         if (!isOn) return;
+         if (!canTrigger) return;
 
          EnterEvent(other.gameObject);
       }
 
       private void OnCollisionExit(Collision other)
       {
-         if (!isOn || EventIsToggle) return;
+         if (!canCollision || EventIsToggle) return;
 
          ExitEvent(other.gameObject);
       }
 
       private void OnTriggerExit(Collider other)
       {
-         if (!isOn || EventIsToggle) return;
+         if (!canTrigger || EventIsToggle) return;
 
          ExitEvent(other.gameObject);
       }
@@ -137,17 +138,7 @@ namespace Objects
 
       public void OnInteraction()
       {
-         _activated = !_activated;
-
-         if (_activated)
-            EnterEvent(null);
-         else
-         {
-            if (EventIsToggle)
-               ExitEvent(null);
-            else
-               EnterEvent(null);
-         }
+         EnterEvent(null);
       }
 
 
