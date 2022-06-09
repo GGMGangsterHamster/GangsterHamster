@@ -80,7 +80,7 @@ namespace Objects
          {
             --_triggeredObjectsCount;
 
-            if (_triggeredObjectsCount < 0) return;
+            if (_triggeredObjectsCount > 0) return;
 
             _triggeredObjectsCount = 0;
             _activated = false;
