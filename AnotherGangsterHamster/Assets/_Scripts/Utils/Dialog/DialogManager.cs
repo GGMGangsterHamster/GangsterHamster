@@ -1,11 +1,31 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UI;
 using UnityEngine;
 
 public class DialogManager : MonoSingleton<DialogManager>
 {
    private Dictionary<string, Dialog> _dialogDictionary;
+
+   private DisplayText _dialogPannel;
+   public DisplayText DialogPannel
+   {
+      get
+      {
+         if (_dialogPannel == null) 
+         {
+            _dialogPannel = FindObjectOfType<DisplayText>();
+
+            if (_dialogPannel == null)
+            {
+               _dialogPannel = Instantiate(Resources.Load<GameObject>("UI/DisplayTextCanvas")).GetComponent<DisplayText>();
+            }
+         }
+
+         return _dialogPannel;
+      }
+   }
 
    protected override void Awake()
    {
@@ -47,6 +67,9 @@ public class DialogManager : MonoSingleton<DialogManager>
 
       return dialog;
    }
+
+   public DisplayText GetPannel()
+      => DialogPannel;
 }
 
 [Serializable]
