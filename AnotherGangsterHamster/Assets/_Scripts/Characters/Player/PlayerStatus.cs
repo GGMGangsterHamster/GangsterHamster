@@ -3,7 +3,6 @@ namespace Characters.Player
    static public class PlayerStatus
    {
       // 상태 변수
-      static public bool IsRunning     = false;
       static public bool IsMoving      = false;
       static public bool IsJumping     = false;
       static public bool IsCrouching   = false;
@@ -16,9 +15,5 @@ namespace Characters.Player
       static public bool Moveable   = true;
       static public bool Jumpable   = true;
       static public bool Crouchable = true;
-      static public bool Runable    = true;
-
-      // 이동 속도 관련 특수한 변수
-      static public bool Overspeed = false;
    }
 }
