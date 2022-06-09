@@ -79,8 +79,8 @@ namespace Weapon.Animation.LumoAnimation
         
         public void ResetAnime(Vector3 start, Vector3 end, float moveSpeed)
         {
-            // Sorting -> Move -> Idle 로 상태 변환
-            InitAnime(start, end, moveSpeed, LumoAnimeStatus.Sorting, Quaternion.Euler(new Vector3(90, 0, 0)));
+            // Move -> Idle 로 상태 변환
+            InitAnime(start, end, moveSpeed, LumoAnimeStatus.Reset, Quaternion.Euler(new Vector3(90, 0, 0)));
             isReset = true;
             isEnd = false;
         }
@@ -116,31 +116,6 @@ namespace Weapon.Animation.LumoAnimation
                         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
                     }
                     break;
-                case LumoAnimeStatus.Sorting:
-                    _curTime += Time.deltaTime;
-
-                    if (_curTime > sortPartsSpeed)
-                    {
-                        // 행동 전 정렬 완료
-                        _curStatus = LumoAnimeStatus.Reset;
-
-                        _curTime = 0;
-
-                        Debug.Log(quaternion.eulerAngles);
-
-                        for (int i = 0; i < childCount; i++)
-                        {
-                            _partTrmList[i].localRotation = quaternion;
-                        }
-                    }
-                    else
-                    {
-                        for (int i = 0; i < childCount; i++)
-                        {
-                            _partTrmList[i].localRotation = Quaternion.Lerp(_partTrmList[i].localRotation, quaternion, _curTime / sortPartsSpeed);
-                        }
-                    }
-                    break;
                 case LumoAnimeStatus.Move:
                     _curTime += Time.deltaTime * moveSpeed;
 
@@ -158,6 +133,8 @@ namespace Weapon.Animation.LumoAnimation
                     break;
                 case LumoAnimeStatus.Reset:
                     _curTime += Time.deltaTime * moveSpeed;
+
+                    if (isReset) Sorting();
 
                     if (_curTime >= Vector3.Distance(start, _lumo.GetHandPos))
                     {
@@ -199,6 +176,23 @@ namespace Weapon.Animation.LumoAnimation
             }
         }
 
+        private void Sorting()
+        {
+            if (_curTime > sortPartsSpeed)
+            {
+                for (int i = 0; i < childCount; i++)
+                {
+                    _partTrmList[i].localRotation = quaternion;
+                }
+            }
+            else
+            {
+                for (int i = 0; i < childCount; i++)
+                {
+                    _partTrmList[i].localRotation = Quaternion.Lerp(_partTrmList[i].localRotation, quaternion, _curTime / sortPartsSpeed);
+                }
+            }
+        }
         private void InitAnime(Vector3 start, Vector3 end, float moveSpeed, LumoAnimeStatus status, Quaternion quaternion)
         {
             _curTime = 0;
