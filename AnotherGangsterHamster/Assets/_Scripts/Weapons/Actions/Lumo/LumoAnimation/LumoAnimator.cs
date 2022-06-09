@@ -33,6 +33,7 @@ namespace Weapon.Animation.LumoAnimation
 
         public float usingAnimeDelay = 0.5f;                    // 애니메이션을 시작하는데 생기는 딜레이
         public float sortPartsSpeed = 0.3f;                    // 애니메이션을 멈추는데 생기는 딜레이
+        public float resetMultiply = 2f;
         [SerializeField] private float rotSpeed = 1f;                                 // 돌아가는 회전 속도
 
         public UnityEvent StartAnimationCallback;
@@ -132,7 +133,7 @@ namespace Weapon.Animation.LumoAnimation
                     }
                     break;
                 case LumoAnimeStatus.Reset:
-                    _curTime += Time.deltaTime * moveSpeed;
+                    _curTime += Time.deltaTime * moveSpeed * resetMultiply;
 
                     if (isReset) Sorting();
 
