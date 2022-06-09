@@ -26,15 +26,8 @@ namespace Weapons.Actions
                 _playerGravity.SetIndividualGravity(GravityManager.GetGlobalGravityDirection(), 4.9f);
                 _isReinforcemented = true;
             }
-
-            if (PlayerStatus.IsRunning)
-            {
-                PlayerValues.Speed = PlayerValues.DashSpeed * 2;
-            }
-            else
-            {
-                PlayerValues.Speed = PlayerValues.WalkingSpeed * 2;
-            }
+            
+            PlayerValues.Speed = PlayerValues.DashSpeed * 2;
         }
 
         public void ObjTriggerExitEvent(GameObject obj)
