@@ -7,7 +7,6 @@ namespace Characters.Player
    {
 
 #region 이동 속도
-      public const float WalkingSpeed  = 2.2f;
       public const float DashSpeed     = 4.0f;
       public const float CrouchSpeed   = 1.2f;
 #endregion // 이동 속도

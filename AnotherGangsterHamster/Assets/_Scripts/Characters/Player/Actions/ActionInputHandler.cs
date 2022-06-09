@@ -22,8 +22,6 @@ namespace Characters.Player.Actions
       private ActionVO _key;
 
       // 엑션 커멘드
-      private DashStart    _dashStart;
-      private DashEnd      _dashEnd;
       private CrouchStart  _crouchStart;
       private CrouchEnd    _crouchEnd;
       private Jump         _jump;
@@ -37,8 +35,6 @@ namespace Characters.Player.Actions
          _actionUpCommands    = new Dictionary<KeyCode, Command>();
          _actions             = GetComponent<Actions>();
 
-         _dashStart     = new DashStart(_actions);
-         _dashEnd       = new DashEnd(_actions);
          _crouchStart   = new CrouchStart(_actions);
          _crouchEnd     = new CrouchEnd(_actions);
          _jump          = new Jump(_actions);
@@ -54,11 +50,9 @@ namespace Characters.Player.Actions
          _key = Utils.JsonToVO<ActionVO>(_path);
 
          _actionDownCommands.Add((KeyCode)_key.Crouch,     _crouchStart);
-         // _actionDownCommands.Add((KeyCode)_key.Dash,       _dashStart);
          _actionDownCommands.Add((KeyCode)_key.Jump,       _jump);
 
          _actionUpCommands.Add((KeyCode)_key.Crouch, _crouchEnd);
-         // _actionUpCommands.Add((KeyCode)_key.Dash,   _dashEnd);
       }
 
       private void Update()

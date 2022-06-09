@@ -114,28 +114,6 @@ namespace Characters.Player.Actions
          PlayerTrm.localPosition = targetPos;
       }
 
-
-      public void DashStart()
-      {
-         if (!PlayerStatus.OnGround) return;
-
-         // 웅크리고 있는 경우 새움
-         if (PlayerStatus.IsCrouching)
-            CrouchEnd();
-         
-         PlayerStatus.IsRunning = true;
-         PlayerValues.Speed = PlayerValues.DashSpeed;
-      }
-
-      public void DashEnd()
-      {
-         if (PlayerStatus.IsCrouching) return;
-
-         PlayerStatus.IsRunning = false;
-         PlayerValues.Speed = PlayerValues.DashSpeed;
-      }
-
-
       public void Jump()
       {
          if(!PlayerStatus.Jumpable) return;

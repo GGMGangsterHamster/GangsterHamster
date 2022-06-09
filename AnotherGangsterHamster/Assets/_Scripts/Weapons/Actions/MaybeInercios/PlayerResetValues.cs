@@ -19,14 +19,7 @@ namespace Weapons.Actions
         {
             if (_playerGravity.AffectedByGlobalGravity)
             {
-                // if(PlayerStatus.IsRunning)
-                // {
-                    PlayerValues.Speed = PlayerValues.DashSpeed;
-                // }
-                // else
-                // {
-                //     PlayerValues.Speed = PlayerValues.WalkingSpeed;
-                // }
+                PlayerValues.Speed = PlayerValues.DashSpeed;
             }
         }
     }
