@@ -72,15 +72,15 @@ namespace Weapon.Animation.LumoAnimation
         public void FireAnime(Vector3 start, Vector3 end, float moveSpeed, Quaternion quaternion)
         {
             // Sorting -> Move -> Idle 로 상태 변환
-            InitAnime(start, end, moveSpeed, LumoAnimeStatus.Sorting, quaternion);
+            InitAnime(start, end, moveSpeed, LumoAnimeStatus.Move, quaternion);
             isReset = false;
             isEnd = false;
         }
         
-        public void ResetAnime(Vector3 start, Vector3 end, float moveSpeed, Quaternion quaternion)
+        public void ResetAnime(Vector3 start, Vector3 end, float moveSpeed)
         {
             // Sorting -> Move -> Idle 로 상태 변환
-            InitAnime(start, end, moveSpeed, LumoAnimeStatus.Sorting, quaternion);
+            InitAnime(start, end, moveSpeed, LumoAnimeStatus.Sorting, Quaternion.Euler(new Vector3(90, 0, 0)));
             isReset = true;
             isEnd = false;
         }
@@ -111,28 +111,26 @@ namespace Weapon.Animation.LumoAnimation
                     break;
                 case LumoAnimeStatus.Sorting:
                     _curTime += Time.deltaTime;
-                    
+
                     if (_curTime > sortPartsSpeed)
                     {
                         // 행동 전 정렬 완료
-                        if(isReset)
-                            _curStatus = LumoAnimeStatus.Reset;
-                        else
-                            _curStatus = LumoAnimeStatus.Move;
-
+                        _curStatus = LumoAnimeStatus.Reset;
 
                         _curTime = 0;
 
+                        Debug.Log(quaternion.eulerAngles);
+
                         for (int i = 0; i < childCount; i++)
                         {
-                            _partTrmList[i].rotation = quaternion;
+                            _partTrmList[i].localRotation = quaternion;
                         }
                     }
                     else
                     {
                         for (int i = 0; i < childCount; i++)
                         {
-                            _partTrmList[i].rotation = Quaternion.Slerp(_partTrmList[i].rotation, quaternion, _curTime / sortPartsSpeed);
+                            _partTrmList[i].localRotation = Quaternion.Lerp(_partTrmList[i].localRotation, quaternion, _curTime / sortPartsSpeed);
                         }
                     }
                     break;
@@ -158,7 +156,6 @@ namespace Weapon.Animation.LumoAnimation
                     {
                         // 발사 위치로 이동 완료
                         transform.position = _lumo.GetHandPos;
-                        transform.rotation = Quaternion.LookRotation(MainCameraTransform.forward) * Quaternion.Euler(90, 0, 0);
                         _curStatus = LumoAnimeStatus.Idle;
                         _curTime = 0;
                     }

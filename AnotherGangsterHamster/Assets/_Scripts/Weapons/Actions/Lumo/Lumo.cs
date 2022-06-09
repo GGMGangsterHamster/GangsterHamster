@@ -36,7 +36,8 @@ namespace Weapons.Actions
         public override void FireWeapon()
         {
             if (_currentStatus != LumoStatus.Use
-            && _currentStatus != LumoStatus.Stickly)
+            && _currentStatus != LumoStatus.Stickly
+            && _lumoAnimator.isStopedMoving())
             {
                 if (Physics.Raycast(MainCameraTransform.position, MainCameraTransform.forward, out RaycastHit hit) && hit.transform.CompareTag("ATYPEOBJECT"))
                 {
@@ -65,7 +66,7 @@ namespace Weapons.Actions
 
         public override void ResetWeapon()
         {
-            if (_currentStatus == LumoStatus.Reset) return;
+            if (_currentStatus == LumoStatus.Idle || !_lumoAnimator.isStopedMoving()) return;
 
             PlayerBaseTransform.GetComponent<FollowGroundPos>().Deactive(_lumoCube.gameObject);
 
@@ -75,8 +76,8 @@ namespace Weapons.Actions
             _myRigid.angularVelocity = Vector3.zero;
             _myRigid.constraints = RigidbodyConstraints.FreezeAll;
             _aTypeTrm = null;
-            _currentStatus = LumoStatus.Reset;
-            _lumoAnimator.ResetAnime(transform.position, HandPosition, fireSpeed, Quaternion.LookRotation((transform.position - MainCameraTransform.position).normalized) * Quaternion.Euler(90, 0, 0));
+            _currentStatus = LumoStatus.Idle;
+            _lumoAnimator.ResetAnime(transform.position, HandPosition, fireSpeed);
         }
 
         public override bool IsHandleWeapon()
