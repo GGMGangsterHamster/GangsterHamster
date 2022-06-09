@@ -68,6 +68,21 @@ public class DialogManager : MonoSingleton<DialogManager>
       return dialog;
    }
 
+   public void DisplayDialog(string type, int id)
+   {
+      InnerDialog dialog = GetDialog(type, id);
+
+      if (dialog == null)
+         return;
+
+      DialogPannel.Display(dialog.text);
+   }
+
+   public void ClearDialog()
+   {
+      DialogPannel.ClearLine();
+   }
+
    public DisplayText GetPannel()
       => DialogPannel;
 }

@@ -46,7 +46,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8476a3bdbcdf96b058a4f960b4883763, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _callbacks: []
+  _callbacks:
+  - key: PLAYER_BASE
+    OnActive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4464693312112862834}
+          m_TargetAssemblyTypeName: Objects.Trigger.ShowDialogTrigger, Assembly-CSharp
+          m_MethodName: Active
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeactive:
+      m_PersistentCalls:
+        m_Calls: []
   <EventIsToggle>k__BackingField: 1
   <InitalActiveStatus>k__BackingField: 0
 --- !u!114 &4464693312112862834
@@ -63,6 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogType: tutroial
   dialogId: 0
+  closeAfter: 5
 --- !u!65 &4464693312112862845
 BoxCollider:
   m_ObjectHideFlags: 0

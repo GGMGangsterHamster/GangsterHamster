@@ -10,17 +10,23 @@ namespace Objects.Trigger
 
       public string dialogType = "tutroial";
       public int dialogId = 0;
+      public float closeAfter = 5.0f;
 
       public void Active(GameObject other)
       {
-         DialogManager.Instance.GetDialog(dialogType, dialogId);
+         DialogManager.Instance.DisplayDialog(dialogType, dialogId);
 
-         // TODO: Enable UI
+         Invoke(nameof(Deactive), closeAfter);
       }
 
       public void Deactive(GameObject other)
       {
-         // TODO: Disable UI
+         DialogManager.Instance.ClearDialog();
+      }
+
+      public void Deactive()
+      {
+         Deactive(null);
       }
    }
 }
