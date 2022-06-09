@@ -75,11 +75,12 @@ namespace Weapon.Animation.LumoAnimation
             }
 
             _lumo = GetComponent<Lumo>();
+            quaternion = Quaternion.Euler(90, 0, 0);
         }
 
         public void FireAnime(Vector3 start, Vector3 end, float moveSpeed, Quaternion quaternion)
         {
-            // Sorting -> Move -> Idle 로 상태 변환
+            // Move -> Idle 로 상태 변환
             InitAnime(start, end, moveSpeed, LumoAnimeStatus.Move, quaternion);
             isReset = false;
             isEnd = false;
@@ -87,7 +88,7 @@ namespace Weapon.Animation.LumoAnimation
         
         public void ResetAnime(Vector3 start, Vector3 end, float moveSpeed)
         {
-            // Move -> Idle 로 상태 변환
+            // Reset -> Idle 로 상태 변환
             InitAnime(start, end, moveSpeed, LumoAnimeStatus.Reset, Quaternion.Euler(new Vector3(90, 0, 0)));
             isReset = true;
             isEnd = false;
