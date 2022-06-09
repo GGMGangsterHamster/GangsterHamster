@@ -34,7 +34,7 @@ namespace Objects
       private ButtonCountRequirement _requirement;
 
       public bool canCollision = true;
-      public bool canTrigger = true;
+      public bool canTrigger = false;
 
       private void Awake()
       {
