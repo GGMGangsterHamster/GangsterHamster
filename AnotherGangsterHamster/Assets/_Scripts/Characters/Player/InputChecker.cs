@@ -27,7 +27,8 @@ namespace Characters.Player
       {
          if (inputList.Count <= 0)
          {
-            Logger.Log("InputChecker: List empty. Disabling checker.");
+            Logger.Log("InputChecker: List empty. " +
+                       "Disabling checker.");
             this.enabled = false;
             return;
          }
@@ -35,7 +36,6 @@ namespace Characters.Player
          if (StepByStepInput)
          {
             _inputCompareable = callback => {
-
                var input   = inputList[_idx];
                bool result = Input.GetKeyDown(input.key);
 
@@ -48,7 +48,6 @@ namespace Characters.Player
          else // Non-Step by step input check
          {
             _inputCompareable = callback => {
-
                bool result = false;
 
                for (int i = 0; i < inputList.Count; ++i)
@@ -85,8 +84,8 @@ namespace Characters.Player
             if (++_idx >= inputList.Count) // 완료 시 비활성화
             {
                Logger.Log(
-                  $"Check Completed for {inputList.Count} conditions."
-               + "Disabling checker.");
+                  $"Check Completed for {inputList.Count}"
+                 + " conditions. Disabling checker.");
 
                OnCompleted?.Invoke();
                this.enabled = false;
@@ -97,7 +96,9 @@ namespace Characters.Player
       public void CanProceedToNext()
          => _next = true;
 
-      IEnumerator IsStillPressing(KeyCode key, float duration, Action callback)
+      IEnumerator IsStillPressing(KeyCode key,
+                                  float duration,
+                                  Action callback)
       {
          yield return new WaitForSeconds(duration);
          if (Input.GetKey(key))
@@ -106,13 +107,16 @@ namespace Characters.Player
          _stillPressingRoutine = null;
       }
 
-      private void ExecuteInputEvent(InputCheckObj input, Action callback)
+      private void ExecuteInputEvent(InputCheckObj input,
+                                     Action callback)
       {
          if (_stillPressingRoutine != null)
             StopCoroutine(_stillPressingRoutine);
 
          _stillPressingRoutine = StartCoroutine(
-            IsStillPressing(input.key, input.duration, () => callback())
+            IsStillPressing(input.key,
+            input.duration,
+            () => callback())
          ); // StartCoroutine(IsStillPressing());
       }
 
