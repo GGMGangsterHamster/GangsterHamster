@@ -54,11 +54,11 @@ namespace Characters.Player.Actions
          _key = Utils.JsonToVO<ActionVO>(_path);
 
          _actionDownCommands.Add((KeyCode)_key.Crouch,     _crouchStart);
-         _actionDownCommands.Add((KeyCode)_key.Dash,       _dashStart);
+         // _actionDownCommands.Add((KeyCode)_key.Dash,       _dashStart);
          _actionDownCommands.Add((KeyCode)_key.Jump,       _jump);
 
          _actionUpCommands.Add((KeyCode)_key.Crouch, _crouchEnd);
-         _actionUpCommands.Add((KeyCode)_key.Dash,   _dashEnd);
+         // _actionUpCommands.Add((KeyCode)_key.Dash,   _dashEnd);
       }
 
       private void Update()

@@ -100,7 +100,7 @@ namespace Characters.Player.Actions
          Vector3 targetPos    = PlayerTrm.localPosition;
 
          PlayerStatus.IsCrouching   = false;
-         PlayerValues.Speed         = PlayerValues.WalkingSpeed;
+         PlayerValues.Speed         = PlayerValues.DashSpeed;
 
          targetScale.y  = PlayerValues.PlayerStandingYScale;
          targetPos.y    = PlayerValues.PlayerStandingYPos;
@@ -132,7 +132,7 @@ namespace Characters.Player.Actions
          if (PlayerStatus.IsCrouching) return;
 
          PlayerStatus.IsRunning = false;
-         PlayerValues.Speed = PlayerValues.WalkingSpeed;
+         PlayerValues.Speed = PlayerValues.DashSpeed;
       }
 
 

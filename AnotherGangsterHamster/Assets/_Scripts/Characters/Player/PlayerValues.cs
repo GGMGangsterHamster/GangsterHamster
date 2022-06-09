@@ -39,7 +39,7 @@ namespace Characters.Player
       public const float InteractionMaxDistance = 2.0f;
 
 
-      static private float _speed = WalkingSpeed;
+      static private float _speed = DashSpeed;
       static public float Speed
       {
          get => _speed;
