@@ -17,7 +17,6 @@ namespace Characters.Player
       public bool StepByStepInput { get; set; } = false;
 
       private int _idx = 0; // Current Input index
-      private bool _keyReseted = true;
       private bool _next = true; // can get next input
 
       private Action<Action> _inputCompareable;
@@ -36,7 +35,6 @@ namespace Characters.Player
          if (StepByStepInput)
          {
             _inputCompareable = callback => {
-               if (!_keyReseted) return;
 
                var input   = inputList[_idx];
                bool result = Input.GetKeyDown(input.key);
@@ -50,7 +48,6 @@ namespace Characters.Player
          else // Non-Step by step input check
          {
             _inputCompareable = callback => {
-               if (!_keyReseted) return;
 
                bool result = false;
 
@@ -77,9 +74,11 @@ namespace Characters.Player
          _inputCompareable(() => {
             Debug.Log("Pressed");
 
-            if (inputList[_idx].wait) {
+            if (inputList[_idx].wait)
                _next = false;
-            }
+            else
+               _next = true;
+            
 
             inputList[_idx].OnPressed?.Invoke();
 
@@ -98,42 +97,22 @@ namespace Characters.Player
       public void CanProceedToNext()
          => _next = true;
 
-      IEnumerator CaptureKeyUpEvent(KeyCode key) // 키 리셋 이벤트
-      {
-         while(!Input.GetKeyUp(key))
-            yield return null;
-
-         _keyReseted = true;
-      }
-
       IEnumerator IsStillPressing(KeyCode key, float duration, Action callback)
       {
-         _keyReseted = false;
-
          yield return new WaitForSeconds(duration);
          if (Input.GetKey(key))
             callback();
-
+         
          _stillPressingRoutine = null;
       }
 
       private void ExecuteInputEvent(InputCheckObj input, Action callback)
       {
-
-         if (_stillPressingRoutine != null) {
-            Debug.Log("A");
+         if (_stillPressingRoutine != null)
             StopCoroutine(_stillPressingRoutine);
-         }
 
          _stillPressingRoutine = StartCoroutine(
-            IsStillPressing(input.key, input.duration,
-                           () => {
-                              callback();
-                              StartCoroutine(
-                                 CaptureKeyUpEvent(input.key)
-                              );
-                           }
-            )
+            IsStillPressing(input.key, input.duration, () => callback())
          ); // StartCoroutine(IsStillPressing());
       }
 
