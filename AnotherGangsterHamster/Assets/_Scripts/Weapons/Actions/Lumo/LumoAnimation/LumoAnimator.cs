@@ -39,6 +39,12 @@ namespace Weapon.Animation.LumoAnimation
         public UnityEvent StartAnimationCallback;
         public UnityEvent StopAnimationCallback;
 
+        public List<GameObject> clockwiseRotObjs = new List<GameObject>();
+        public List<GameObject> antiClockwiseRotObjs = new List<GameObject>();
+
+        public Vector3 clockwiseRotDir;
+        public Vector3 antiClockwiseRotDir;
+
         private List<Vector3> _partRotDirList = new List<Vector3>();    // 파츠마다의 애니메이션 회전 값
         private List<Transform> _partTrmList = new List<Transform>();
         private LumoAnimeStatus _curStatus = LumoAnimeStatus.Idle;    // 지금 애니메이션 스테이터스
@@ -130,6 +136,11 @@ namespace Weapon.Animation.LumoAnimation
                         transform.position = end;
                         _curStatus = LumoAnimeStatus.Idle;
                         _curTime = 0;
+
+                        for (int i = 0; i < childCount; i++)
+                        {
+                            _partTrmList[i].localRotation = Quaternion.Euler(new Vector3(90, 0, 0));
+                        }
                     }
                     else
                     {
@@ -138,7 +149,6 @@ namespace Weapon.Animation.LumoAnimation
                     break;
                 case LumoAnimeStatus.Reset:
                     _curTime += Time.deltaTime * moveSpeed * resetMultiply;
-
 
                     if (_curTime >= Vector3.Distance(start, _lumo.GetHandPos))
                     {
@@ -173,15 +183,20 @@ namespace Weapon.Animation.LumoAnimation
         // 들어온 스피드에 따라서 파츠들을 돌리는 함수
         private void RotationParts(float rotSpeed)
         {
-            for(int i = 0; i < childCount; i++)
+            for(int i = 0; i < clockwiseRotObjs.Count; i++)
             {
-                _partTrmList[i].rotation *= Quaternion.Euler(_partRotDirList[i] * rotSpeed);
+                clockwiseRotObjs[i].transform.rotation *= Quaternion.Euler(clockwiseRotDir * rotSpeed / (i + 4));
+            }
+
+            for (int i = 0; i < antiClockwiseRotObjs.Count; i++)
+            {
+                antiClockwiseRotObjs[i].transform.rotation *= Quaternion.Euler(antiClockwiseRotDir * rotSpeed / (i + 4));
             }
         }
 
         private void Sorting()
         {
-            if (!isReset|| _curSortingTime > sortPartsTime) return;
+            if (!isReset || _curSortingTime > sortPartsTime) return;
 
             _curSortingTime += Time.deltaTime;
 
