@@ -32,7 +32,7 @@ namespace Weapon.Animation.LumoAnimation
         }
 
         public float usingAnimeDelay = 0.5f;                    // 애니메이션을 시작하는데 생기는 딜레이
-        public float sortPartsSpeed = 0.3f;                    // 애니메이션을 멈추는데 생기는 딜레이
+        public float sortPartsTime = 2f;                    // 애니메이션을 멈추는데 생기는 딜레이
         public float resetMultiply = 2f;
         [SerializeField] private float rotSpeed = 1f;                                 // 돌아가는 회전 속도
 
@@ -49,6 +49,7 @@ namespace Weapon.Animation.LumoAnimation
         private float moveSpeed;                                            // 애니메이션 실행 스피드
         
         private float _curTime;                                     // 시간 계산을 위한 변수
+        private float _curSortingTime;                              // 정렬 계산을 위한 변수
         private float _softMoving;                                  // 부드럽게 움직이기 위하여 사용하는 변수
         private int childCount;                                     // 자식의 수 - 그냥 많이 쓰여서 따로 변수로 뺌
         private bool isEnd = false; 
@@ -84,6 +85,7 @@ namespace Weapon.Animation.LumoAnimation
             InitAnime(start, end, moveSpeed, LumoAnimeStatus.Reset, Quaternion.Euler(new Vector3(90, 0, 0)));
             isReset = true;
             isEnd = false;
+            _curSortingTime = 0;
         }
 
         public void UsingAnime(Vector3 normalVec, float moveSpeed)
@@ -108,6 +110,8 @@ namespace Weapon.Animation.LumoAnimation
 
         private void Update()
         {
+            Sorting();
+
             switch (_curStatus)
             {
                 case LumoAnimeStatus.Idle:
@@ -129,20 +133,18 @@ namespace Weapon.Animation.LumoAnimation
                     }
                     else
                     {
-                        transform.position = Vector3.Lerp(start, end, _curTime / Vector3.Distance(start, end));
+                        transform.position = Vector3.Lerp(start, end, _curTime / Vector3.Distance(start, end)); 
                     }
                     break;
                 case LumoAnimeStatus.Reset:
                     _curTime += Time.deltaTime * moveSpeed * resetMultiply;
 
-                    if (isReset) Sorting();
 
                     if (_curTime >= Vector3.Distance(start, _lumo.GetHandPos))
                     {
                         // 발사 위치로 이동 완료
                         transform.position = _lumo.GetHandPos;
                         _curStatus = LumoAnimeStatus.Idle;
-                        _curTime = 0;
                     }
                     else
                     {
@@ -179,7 +181,11 @@ namespace Weapon.Animation.LumoAnimation
 
         private void Sorting()
         {
-            if (_curTime > sortPartsSpeed)
+            if (!isReset|| _curSortingTime > sortPartsTime) return;
+
+            _curSortingTime += Time.deltaTime;
+
+            if (_curSortingTime > sortPartsTime)
             {
                 for (int i = 0; i < childCount; i++)
                 {
@@ -190,7 +196,7 @@ namespace Weapon.Animation.LumoAnimation
             {
                 for (int i = 0; i < childCount; i++)
                 {
-                    _partTrmList[i].localRotation = Quaternion.Lerp(_partTrmList[i].localRotation, quaternion, _curTime / sortPartsSpeed);
+                    _partTrmList[i].localRotation = Quaternion.Lerp(_partTrmList[i].localRotation, quaternion, _curSortingTime / sortPartsTime);
                 }
             }
         }
