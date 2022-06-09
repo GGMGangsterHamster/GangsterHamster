@@ -93,6 +93,13 @@ namespace Weapon.Animation.LumoAnimation
             isEnd = false;
         }
 
+        public void PositionReset(Vector3 pos)
+        {
+            transform.position = pos;
+            _curStatus = LumoAnimeStatus.Idle;
+            isReset = true;
+        }
+
         public bool isStopedMoving()
         {
             return _curStatus == LumoAnimeStatus.Idle || isEnd;

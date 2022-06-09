@@ -16,6 +16,8 @@ namespace Weapons.Actions
         private Transform _lumoCube;
         private LumoAnimator _lumoAnimator;
 
+        private Grand _grand;
+
         private RaycastHit _aTypeHit;
         private Transform _aTypeTrm;
         private Vector3 _aTypeCurPos;
@@ -28,6 +30,7 @@ namespace Weapons.Actions
 
             _weaponEnum = WeaponEnum.Lumo;
 
+            _grand = FindObjectOfType<Grand>();
             _lumoCube = transform.GetComponentInChildren<LumoCube>().transform;
             _lumoCube.gameObject.SetActive(false);
             _lumoAnimator = GetComponent<LumoAnimator>();
@@ -69,14 +72,17 @@ namespace Weapons.Actions
             if (_currentStatus == LumoStatus.Idle || !_lumoAnimator.isStopedMoving()) return;
 
             PlayerBaseTransform.GetComponent<FollowGroundPos>().Deactive(_lumoCube.gameObject);
-
+            _currentStatus = LumoStatus.Idle;
             _lumoCube.gameObject.SetActive(false);
 
-            _myRigid.velocity = Vector3.zero;
-            _myRigid.angularVelocity = Vector3.zero;
-            _myRigid.constraints = RigidbodyConstraints.FreezeAll;
+            if (!gameObject.activeSelf)
+            {
+                transform.position = HandPosition;
+                _lumoAnimator.PositionReset(HandPosition);
+                return;
+            }
+
             _aTypeTrm = null;
-            _currentStatus = LumoStatus.Idle;
             _lumoAnimator.ResetAnime(transform.position, HandPosition, fireSpeed);
         }
 
@@ -110,10 +116,10 @@ namespace Weapons.Actions
                 transform.position -= _aTypeCurPos - (_aTypeTrm.position - _aTypeHit.point);
                 _aTypeCurPos = _aTypeTrm.position - _aTypeHit.point;
             }
-            if (_aTypeCurSize != _aTypeHit.transform.localScale.x)
+            if (_aTypeCurSize != _aTypeHit.transform.localScale.x * _grand._sizeLevelValue[_grand._beforeSizeLevel])
             {
                 _aTypeBeforeSize = _aTypeCurSize;
-                _aTypeCurSize = _aTypeHit.transform.localScale.x;
+                _aTypeCurSize = _aTypeHit.transform.localScale.x * _grand._sizeLevelValue[_grand._currentSizeLevel];
                 transform.position -= _aTypeHit.normal * (_aTypeBeforeSize - _aTypeCurSize) / 2;
             }
         }

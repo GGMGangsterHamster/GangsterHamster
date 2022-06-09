@@ -40,7 +40,7 @@ namespace Weapons.Actions
         private FollowGroundPos _playerFollow;
 
         // 그랜드의 크기 변환 단계
-        private enum GrandSizeLevel
+        public enum GrandSizeLevel
         {
             OneGrade,
             TwoGrade,
@@ -77,10 +77,10 @@ namespace Weapons.Actions
         private GameObject grandLv2Model;
         private GameObject grandLv3Model;
 
-        private Dictionary<GrandSizeLevel, float> _sizeLevelValue = new Dictionary<GrandSizeLevel, float>();
+        public Dictionary<GrandSizeLevel, float> _sizeLevelValue = new Dictionary<GrandSizeLevel, float>();
 
-        private GrandSizeLevel _currentSizeLevel = GrandSizeLevel.OneGrade;
-        private GrandSizeLevel _beforeSizeLevel = GrandSizeLevel.OneGrade;
+        [HideInInspector] public GrandSizeLevel _currentSizeLevel = GrandSizeLevel.OneGrade;
+        [HideInInspector] public GrandSizeLevel _beforeSizeLevel = GrandSizeLevel.OneGrade;
         [HideInInspector] public GrandStatus _currentGrandStatus = GrandStatus.Idle;
 
         private Quaternion lerpQuaternion;

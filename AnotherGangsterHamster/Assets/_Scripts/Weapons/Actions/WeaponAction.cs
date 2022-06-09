@@ -207,6 +207,11 @@ namespace Weapons.Actions
 
         }
 
+        public void SetHandPosition()
+        {
+            transform.position = HandPosition;
+        }
+
         /// <summary>
         /// 그냥 지금 플레이어가 해당하는 오브젝트를 들고 있나를 검사하는 함수
         /// </summary>
