@@ -105,7 +105,6 @@ namespace Weapons.Actions
                     _fireDir = MainCameraTransform.forward;
                     _currentGravitoStatus = GravitoStatus.Stickly;
                     transform.rotation = Quaternion.LookRotation(_fireDir) * Quaternion.Euler(90, 0, 0);
-                    //transform.position = hit.point - (_fireDir * transform.localScale.y);
                     _gravitoAnimator.FireAnime(transform.position, hit.point - (_fireDir * transform.localScale.y), fireSpeed);
 
                     _aTypeHit = hit;
@@ -114,16 +113,6 @@ namespace Weapons.Actions
                     _aTypeBeforeSize = hit.transform.localScale.x;
                     _aTypeCurSize = hit.transform.localScale.x;
                     _currentChangeGravityDir = CheckDir(hit.normal);
-
-                    //if (!_dropPoint.gameObject.activeSelf)
-                    //{
-                    //    _dropPoint.gameObject.SetActive(true);
-
-                    //    _alpha = 1;
-                    //    Color temp = _dropPoint.GetComponent<MeshRenderer>().material.color;
-                    //    _dropPoint.GetComponent<MeshRenderer>().material.color = new Color(temp.r, temp.g, temp.b, 1);
-                    //    _dropPoint.rotation = Quaternion.LookRotation(-_aTypeHit.normal) * Quaternion.LookRotation(Vector3.up);
-                    //}
                 }
             }
         }
@@ -133,6 +122,8 @@ namespace Weapons.Actions
             if(_currentGravitoStatus == GravitoStatus.Stickly && !isChangedGravity && _gravitoAnimator.isStopedMoving())
             {
                 if (_currentChangeGravityDir == Vector3.up) return;
+
+                _gravitoAnimator.UsingAnime();
 
                 _currentGravitoStatus = GravitoStatus.ChangeGravity;
                 _currentGravityChangeTime = 0f;
