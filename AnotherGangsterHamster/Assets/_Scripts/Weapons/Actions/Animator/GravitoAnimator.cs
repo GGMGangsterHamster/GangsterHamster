@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +33,8 @@ namespace Weapon.Animation.GravitoAnimation
 
         public float resetMultiply;
 
+        public Action sticklyAction;
+
         private GravitoAnimeStatus _curStatus = GravitoAnimeStatus.Idle;    // 지금 애니메이션 스테이터스
 
         private Gravito _gravito;
@@ -41,7 +44,8 @@ namespace Weapon.Animation.GravitoAnimation
         private float moveSpeed;
         private float _curTime;
 
-        private bool isReset;
+        private bool isEnd = false;
+        private bool isReset = true;
 
         private void Awake()
         {
@@ -52,13 +56,20 @@ namespace Weapon.Animation.GravitoAnimation
         {
             InitAnime(start, end, moveSpeed, GravitoAnimeStatus.Move);
             isReset = false;
+            isEnd = false;
         }
 
         public void ResetAnime(Vector3 start, Vector3 end, float moveSpeed)
         {
             InitAnime(start, end, moveSpeed, GravitoAnimeStatus.Reset);
             isReset = true;
+            isEnd = false;
         }
+        public bool isStopedMoving()
+        {
+            return _curStatus == GravitoAnimeStatus.Idle || isEnd;
+        }
+
 
         private void Update()
         {
@@ -79,6 +90,7 @@ namespace Weapon.Animation.GravitoAnimation
                         // 발사 위치로 이동 완료
                         transform.position = end;
                         _curStatus = GravitoAnimeStatus.Idle;
+                        sticklyAction?.Invoke();
                         _curTime = 0;
                     }
                     else

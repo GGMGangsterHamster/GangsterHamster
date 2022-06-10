@@ -77,12 +77,28 @@ namespace Weapons.Actions
 
             _gravitoAnimator = GetComponent<GravitoAnimator>();
             _weaponManagement = GameObject.FindObjectOfType<WeaponManagement>();
+
+            _gravitoAnimator.sticklyAction += () =>
+            {
+                if(_currentGravitoStatus == GravitoStatus.Stickly && _gravitoAnimator.isStopedMoving())
+                {
+                    if (!_dropPoint.gameObject.activeSelf)
+                    {
+                        _dropPoint.gameObject.SetActive(true);
+
+                        _alpha = 1;
+                        Color temp = _dropPoint.GetComponent<MeshRenderer>().material.color;
+                        _dropPoint.GetComponent<MeshRenderer>().material.color = new Color(temp.r, temp.g, temp.b, 1);
+                        _dropPoint.rotation = Quaternion.LookRotation(-_aTypeHit.normal) * Quaternion.LookRotation(Vector3.up);
+                    }
+                }
+            };
         }
 
         public override void FireWeapon()
         {
             if (_currentGravitoStatus == GravitoStatus.Idle &&
-               !isReseting)
+               !isReseting && _gravitoAnimator.isStopedMoving())
             {
                 if(Physics.Raycast(MainCameraTransform.position, MainCameraTransform.forward, out RaycastHit hit) && hit.transform.CompareTag("ATYPEOBJECT"))
                 {
@@ -99,22 +115,22 @@ namespace Weapons.Actions
                     _aTypeCurSize = hit.transform.localScale.x;
                     _currentChangeGravityDir = CheckDir(hit.normal);
 
-                    if (!_dropPoint.gameObject.activeSelf)
-                    {
-                        _dropPoint.gameObject.SetActive(true);
+                    //if (!_dropPoint.gameObject.activeSelf)
+                    //{
+                    //    _dropPoint.gameObject.SetActive(true);
 
-                        _alpha = 1;
-                        Color temp = _dropPoint.GetComponent<MeshRenderer>().material.color;
-                        _dropPoint.GetComponent<MeshRenderer>().material.color = new Color(temp.r, temp.g, temp.b, 1);
-                        _dropPoint.rotation = Quaternion.LookRotation(-_aTypeHit.normal) * Quaternion.LookRotation(Vector3.up);
-                    }
+                    //    _alpha = 1;
+                    //    Color temp = _dropPoint.GetComponent<MeshRenderer>().material.color;
+                    //    _dropPoint.GetComponent<MeshRenderer>().material.color = new Color(temp.r, temp.g, temp.b, 1);
+                    //    _dropPoint.rotation = Quaternion.LookRotation(-_aTypeHit.normal) * Quaternion.LookRotation(Vector3.up);
+                    //}
                 }
             }
         }
 
         public override void UseWeapon()
         {
-            if(_currentGravitoStatus == GravitoStatus.Stickly && !isChangedGravity)
+            if(_currentGravitoStatus == GravitoStatus.Stickly && !isChangedGravity && _gravitoAnimator.isStopedMoving())
             {
                 if (_currentChangeGravityDir == Vector3.up) return;
 
@@ -133,7 +149,7 @@ namespace Weapons.Actions
 
         public override void ResetWeapon()
         {
-            if (isReseting || _currentGravitoStatus == GravitoStatus.Idle)
+            if (isReseting || _currentGravitoStatus == GravitoStatus.Idle || !_gravitoAnimator.isStopedMoving())
                 return;
 
             _gravitoAnimator.ResetAnime(transform.position, GravitoHandPosition, fireSpeed);
@@ -141,7 +157,6 @@ namespace Weapons.Actions
             if (!isChangedGravity)
             {
                 _currentGravitoStatus = GravitoStatus.Idle;
-                transform.rotation = Quaternion.identity;
                 Update();
                 return;
             }
