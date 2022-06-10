@@ -25,7 +25,6 @@ public class Authority : Singleton<Authority>
    {
       if (!_keyDictionary.ContainsKey(type))
          return true;
-
       return _keyDictionary[type] == key;
    }
 }
