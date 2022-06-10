@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Weapons.Checkpoint;
 using Matters.Gravity;
+using Weapon.Animation.GravitoAnimation;
 
 namespace Weapons.Actions
 {
@@ -22,7 +23,8 @@ namespace Weapons.Actions
         public float gravityChangeTime;
         public float alphaToZeroSpeed;
         public float dropPointAlphaDistance;
-        public float penetratePadding;
+
+        public Vector3 GravitoHandPosition => HandPosition - (PlayerBaseTransform.right / 4);
 
         private Dictionary<GravityDir, Vector3> _gravityDirDict = new Dictionary<GravityDir, Vector3>();
         private GravitoStatus _currentGravitoStatus = GravitoStatus.Idle; 
@@ -35,6 +37,7 @@ namespace Weapons.Actions
         private float _aTypeCurSize;
         private Transform _dropPoint;
 
+        private GravitoAnimator _gravitoAnimator;
         private WeaponManagement _weaponManagement;
 
         private CheckpointManager Checkpoint
@@ -72,29 +75,13 @@ namespace Weapons.Actions
             _dropPoint = transform.GetChild(0);
             _dropPoint.parent = WeaponObjectParentTransform;
 
+            _gravitoAnimator = GetComponent<GravitoAnimator>();
             _weaponManagement = GameObject.FindObjectOfType<WeaponManagement>();
-        }
 
-        public override void FireWeapon()
-        {
-            if (_currentGravitoStatus == GravitoStatus.Idle &&
-               !isReseting)
+            _gravitoAnimator.sticklyAction += () =>
             {
-                if(Physics.Raycast(MainCameraTransform.position, MainCameraTransform.forward, out RaycastHit hit) && hit.transform.CompareTag("ATYPEOBJECT"))
+                if(_currentGravitoStatus == GravitoStatus.Stickly && _gravitoAnimator.isStopedMoving())
                 {
-                    _myRigid.constraints = RigidbodyConstraints.FreezeAll;
-                    _fireDir = MainCameraTransform.forward;
-                    _currentGravitoStatus = GravitoStatus.Stickly;
-                    transform.position = hit.point - (_fireDir * (transform.localScale.y + penetratePadding));
-                    transform.rotation = Quaternion.LookRotation(_fireDir) * Quaternion.Euler(90, 0, 0);
-
-                    _aTypeHit = hit;
-                    _aTypeTrm = hit.transform;
-                    _aTypeCurPos = hit.transform.position - hit.point;
-                    _aTypeBeforeSize = hit.transform.localScale.x;
-                    _aTypeCurSize = hit.transform.localScale.x;
-                    _currentChangeGravityDir = CheckDir(hit.normal);
-
                     if (!_dropPoint.gameObject.activeSelf)
                     {
                         _dropPoint.gameObject.SetActive(true);
@@ -105,14 +92,38 @@ namespace Weapons.Actions
                         _dropPoint.rotation = Quaternion.LookRotation(-_aTypeHit.normal) * Quaternion.LookRotation(Vector3.up);
                     }
                 }
+            };
+        }
+
+        public override void FireWeapon()
+        {
+            if (_currentGravitoStatus == GravitoStatus.Idle &&
+               !isReseting && _gravitoAnimator.isStopedMoving())
+            {
+                if(Physics.Raycast(MainCameraTransform.position, MainCameraTransform.forward, out RaycastHit hit) && hit.transform.CompareTag("ATYPEOBJECT"))
+                {
+                    _fireDir = MainCameraTransform.forward;
+                    _currentGravitoStatus = GravitoStatus.Stickly;
+                    transform.rotation = Quaternion.LookRotation(_fireDir) * Quaternion.Euler(90, 0, 0);
+                    _gravitoAnimator.FireAnime(transform.position, hit.point - (_fireDir * transform.localScale.y), fireSpeed);
+
+                    _aTypeHit = hit;
+                    _aTypeTrm = hit.transform;
+                    _aTypeCurPos = hit.transform.position - hit.point;
+                    _aTypeBeforeSize = hit.transform.localScale.x;
+                    _aTypeCurSize = hit.transform.localScale.x;
+                    _currentChangeGravityDir = CheckDir(hit.normal);
+                }
             }
         }
 
         public override void UseWeapon()
         {
-            if(_currentGravitoStatus == GravitoStatus.Stickly && !isChangedGravity)
+            if(_currentGravitoStatus == GravitoStatus.Stickly && !isChangedGravity && _gravitoAnimator.isStopedMoving())
             {
                 if (_currentChangeGravityDir == Vector3.up) return;
+
+                _gravitoAnimator.UsingAnime();
 
                 _currentGravitoStatus = GravitoStatus.ChangeGravity;
                 _currentGravityChangeTime = 0f;
@@ -129,15 +140,14 @@ namespace Weapons.Actions
 
         public override void ResetWeapon()
         {
-            if (isReseting)
+            if (isReseting || _currentGravitoStatus == GravitoStatus.Idle || !_gravitoAnimator.isStopedMoving())
                 return;
 
-            _myRigid.constraints = RigidbodyConstraints.None;
+            _gravitoAnimator.ResetAnime(transform.position, GravitoHandPosition, fireSpeed);
 
             if (!isChangedGravity)
             {
                 _currentGravitoStatus = GravitoStatus.Idle;
-                transform.rotation = Quaternion.identity;
                 Update();
                 return;
             }
@@ -169,16 +179,6 @@ namespace Weapons.Actions
             switch (_currentGravitoStatus)
             {
                 case GravitoStatus.Idle:
-                    Vector3 gravitoHandPos = HandPosition - (PlayerBaseTransform.right / 4);
-
-                    if(Vector3.Distance(transform.position, gravitoHandPos) > 1f)
-                    {
-                        transform.position = gravitoHandPos;
-                    }
-                    _myRigid.velocity = (gravitoHandPos - transform.position) * 10;
-                    _myRigid.angularVelocity = _myRigid.angularVelocity / 2;
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
-
                     ResetDropPoint();
                     break;
                 case GravitoStatus.Stickly:
@@ -209,8 +209,6 @@ namespace Weapons.Actions
                             Checkpoint.startCheckpoint.rotation,
                             Checkpoint.endCheckpoint.rotation,
                             _currentGravityChangeTime);
-
-                        
                     }
                     break;
                 case GravitoStatus.Reset:
@@ -309,6 +307,8 @@ namespace Weapons.Actions
         }
         private void ResetDropPoint()
         {
+            if (!_dropPoint.gameObject.activeSelf) return;
+
             if (_alpha >= 0.2f)
             {
                 _alpha -= Time.deltaTime * alphaToZeroSpeed;

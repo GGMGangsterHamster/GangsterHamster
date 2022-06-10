@@ -66,6 +66,7 @@ namespace Objects.Interaction
          if (target == null || !target.canInteractByPlayer)
          {
             _currentObject?.DeFocus();
+            DialogManager.Instance.GetPannel().ClearChar();
             _currentObject = null;
             InteractionManager.Instance.ClearInteraction();
             return;
@@ -82,6 +83,7 @@ namespace Objects.Interaction
 
          _currentObject = target;
          _currentObject?.Focus();
+         DialogManager.Instance.GetPannel().DisplaySingleChar("E");
          InteractionManager.Instance.SetInteraction(target);
       }
 
