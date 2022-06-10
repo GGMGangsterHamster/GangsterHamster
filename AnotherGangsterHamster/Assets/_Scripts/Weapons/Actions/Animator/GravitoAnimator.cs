@@ -31,6 +31,10 @@ namespace Weapon.Animation.GravitoAnimation
             Sorting
         }
 
+        public GameObject rotEtcObj;
+        public Vector3 rotDir;
+        public float rotSpeed;
+        public float usingAnimeDelay;
         public float resetMultiply;
 
         public Action sticklyAction;
@@ -43,6 +47,7 @@ namespace Weapon.Animation.GravitoAnimation
         private Vector3 end;
         private float moveSpeed;
         private float _curTime;
+        private float _softMoving = 0;
 
         private bool isEnd = false;
         private bool isReset = true;
@@ -65,6 +70,13 @@ namespace Weapon.Animation.GravitoAnimation
             isReset = true;
             isEnd = false;
         }
+        public void UsingAnime()
+        {
+            // Using -> 계속 유지함
+            InitAnime(Vector3.zero, Vector3.zero, 0, GravitoAnimeStatus.Using);
+            isEnd = false;
+        }
+
         public bool isStopedMoving()
         {
             return _curStatus == GravitoAnimeStatus.Idle || isEnd;
@@ -98,12 +110,28 @@ namespace Weapon.Animation.GravitoAnimation
                         transform.position = Vector3.Lerp(start, end, _curTime / Vector3.Distance(start, end));
                     }
                     break;
+                case GravitoAnimeStatus.Using:
+                    _curTime += Time.deltaTime / usingAnimeDelay * _softMoving;
+                    _softMoving += Time.deltaTime;
+
+                    if (_curTime >= Vector3.Distance(start, end))
+                    {
+                        // 조금 튀어나옴
+                        RotationEtc(rotSpeed * Time.deltaTime);
+                        isEnd = true;
+                    }
+                    else
+                    {
+                        transform.position = Vector3.Lerp(start, end, _curTime / Vector3.Distance(start, end));
+                    }
+                    break;
                 case GravitoAnimeStatus.Reset:
                     _curTime += Time.deltaTime * moveSpeed * resetMultiply;
 
                     if (_curTime >= Vector3.Distance(start, _gravito.GravitoHandPosition))
                     {
                         transform.position = _gravito.GravitoHandPosition;
+                        rotEtcObj.transform.localRotation = Quaternion.Euler(-90, 0, 0);
                         _curStatus = GravitoAnimeStatus.Idle;
                     }
                     else
@@ -122,6 +150,12 @@ namespace Weapon.Animation.GravitoAnimation
             this.end = end;
             this.moveSpeed = moveSpeed;
             _curStatus = status;
+        }
+
+        // 들어온 스피드에 따라서 파츠들을 돌리는 함수
+        private void RotationEtc(float rotSpeed)
+        {
+            rotEtcObj.transform.rotation *= Quaternion.Euler(rotDir * rotSpeed);
         }
     }
 }

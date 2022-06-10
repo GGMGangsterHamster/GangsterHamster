@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9191199704002973873}
   - component: {fileID: 4595924153855817787}
   - component: {fileID: 6518199714557262699}
+  - component: {fileID: 8707926135926638045}
   m_Layer: 10
   m_Name: Gravito
   m_TagString: BTYPEOBJECT
@@ -87,7 +88,7 @@ MonoBehaviour:
   _weaponEnum: 0
   Path: SettingValue/HandMode.json
   possibleUse: 1
-  fireSpeed: 0.1
+  fireSpeed: 25
   weaponDamage: 25
   gravityChangeTime: 0.45
   alphaToZeroSpeed: 5
@@ -122,6 +123,23 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8707926135926638045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454697246980119324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d354bad03a70444499deb525940e9bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotEtcObj: {fileID: 355743107710184917}
+  rotDir: {x: 0, y: 0, z: 1}
+  rotSpeed: 400
+  usingAnimeDelay: 1
+  resetMultiply: 1
 --- !u!1001 &7540641510345380293
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -231,6 +249,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 782a11d9e0bbf6748a574e904c8b3fba, type: 3}
+--- !u!1 &355743107710184917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7803163622794361872, guid: 782a11d9e0bbf6748a574e904c8b3fba, type: 3}
+  m_PrefabInstance: {fileID: 7540641510345380293}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8011627747125163566 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 782a11d9e0bbf6748a574e904c8b3fba, type: 3}
