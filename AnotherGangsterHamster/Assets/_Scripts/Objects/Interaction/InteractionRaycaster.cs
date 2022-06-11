@@ -92,7 +92,7 @@ namespace Objects.Interaction
          bool resetHandleObject = true;
          Transform target = null;
 
-         RaycastHit[] hits = Physics.RaycastAll(MainCam.position, MainCam.forward, PlayerValues.InteractionMaxDistance);
+         RaycastHit[] hits = Physics.RaycastAll(MainCam.position, MainCam.forward, PlayerValues.InteractionMaxDistance, -1 - (1 << LayerMask.NameToLayer("DIALOG")));
 
          RaycastHit hit = new RaycastHit();
          float minDist = float.MaxValue;
