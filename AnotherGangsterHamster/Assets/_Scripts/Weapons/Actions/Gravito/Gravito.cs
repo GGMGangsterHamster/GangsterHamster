@@ -5,6 +5,7 @@ using UnityEngine;
 using Weapons.Checkpoint;
 using Matters.Gravity;
 using Weapon.Animation.GravitoAnimation;
+using Objects.Interaction;
 
 namespace Weapons.Actions
 {
@@ -100,8 +101,10 @@ namespace Weapons.Actions
             if (_currentGravitoStatus == GravitoStatus.Idle &&
                !isReseting && _gravitoAnimator.isStopedMoving())
             {
-                if(Physics.Raycast(MainCameraTransform.position, MainCameraTransform.forward, out RaycastHit hit) && hit.transform.CompareTag("ATYPEOBJECT"))
+                if(InteractionManager.Instance.currentRaycastHitTrm.CompareTag("ATYPEOBJECT"))
                 {
+                    RaycastHit hit = InteractionManager.Instance.currentRaycastHit;
+
                     _fireDir = MainCameraTransform.forward;
                     _currentGravitoStatus = GravitoStatus.Stickly;
                     transform.rotation = Quaternion.LookRotation(_fireDir) * Quaternion.Euler(90, 0, 0);

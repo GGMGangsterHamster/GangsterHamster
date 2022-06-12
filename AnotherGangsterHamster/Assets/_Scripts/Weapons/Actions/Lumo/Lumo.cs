@@ -45,7 +45,6 @@ namespace Weapons.Actions
             {
                 if (InteractionManager.Instance.currentRaycastHitTrm.CompareTag("ATYPEOBJECT"))
                 {
-                    Transform trm = InteractionManager.Instance.currentRaycastHitTrm;
                     RaycastHit hit = InteractionManager.Instance.currentRaycastHit;
                     _fireDir = MainCameraTransform.forward;
 
