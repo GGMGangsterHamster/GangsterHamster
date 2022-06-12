@@ -92,7 +92,7 @@ namespace Objects.Interaction
          bool resetHandleObject = true;
          Transform target = null;
 
-         RaycastHit[] hits = Physics.RaycastAll(MainCam.position, MainCam.forward, PlayerValues.InteractionMaxDistance, -1 - (1 << LayerMask.NameToLayer("DIALOG")));
+         RaycastHit[] hits = Physics.RaycastAll(MainCam.position, MainCam.forward);
 
          RaycastHit hit = new RaycastHit();
          float minDist = float.MaxValue;
@@ -102,7 +102,7 @@ namespace Objects.Interaction
          {
              if(rayCastHit.transform.CompareTag("BTYPEOBJECT") || rayCastHit.transform.CompareTag("ATYPEOBJECT"))
              {
-                 if(minDist > Vector3.Distance(MainCam.position, rayCastHit.point))
+                 if (minDist > Vector3.Distance(MainCam.position, rayCastHit.point))
                  {
                      hit = rayCastHit;
                      minDist = Vector3.Distance(MainCam.position, rayCastHit.point);
@@ -113,8 +113,9 @@ namespace Objects.Interaction
          if (minDist != float.MaxValue)
          {
             target = hit.transform;
-            
-                
+            InteractionManager.Instance.SetRaycastHitTrm(hit);
+
+                Debug.Log(target.name);
             if (target.CompareTag(ATYPE) && !(target == gravito.SticklyTrm() || (lumo.SticklyTrm() != null && target == lumo.SticklyTrm())))
             {
                resetHandleObject = false;
@@ -128,6 +129,7 @@ namespace Objects.Interaction
          {
             InteractionManager.Instance.ClearActvieAtype();
          }
+
 
          return target?.GetComponent<Interactable>();
       }

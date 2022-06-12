@@ -6,8 +6,10 @@ namespace Objects.Interaction
 {  
    public class InteractionManager : Singleton<InteractionManager>
    {
-      Interactable   _currentActiveInteraction;
-      Transform      _currentActiveAtype;
+      Interactable       _currentActiveInteraction;
+      Transform          _currentActiveAtype;
+      public Transform   currentRaycastHitTrm;
+      public RaycastHit  currentRaycastHit;
 
       WeaponManagement _weaponManagement;
 
@@ -32,6 +34,12 @@ namespace Objects.Interaction
          {
             _currentActiveAtype = transform;
          }
+      }
+
+      public void SetRaycastHitTrm(RaycastHit hit)
+      {
+         currentRaycastHitTrm = hit.transform;
+         currentRaycastHit = hit;
       }
 
       public void UnGrep()

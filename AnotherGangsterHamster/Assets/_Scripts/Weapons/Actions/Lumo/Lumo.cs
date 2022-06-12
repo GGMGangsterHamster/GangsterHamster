@@ -1,4 +1,5 @@
 using Matters.Velocity;
+using Objects.Interaction;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,8 +43,10 @@ namespace Weapons.Actions
             && _currentStatus != LumoStatus.Stickly
             && _lumoAnimator.isStopedMoving())
             {
-                if (Physics.Raycast(MainCameraTransform.position, MainCameraTransform.forward, out RaycastHit hit) && hit.transform.CompareTag("ATYPEOBJECT"))
+                if (InteractionManager.Instance.currentRaycastHitTrm.CompareTag("ATYPEOBJECT"))
                 {
+                    Transform trm = InteractionManager.Instance.currentRaycastHitTrm;
+                    RaycastHit hit = InteractionManager.Instance.currentRaycastHit;
                     _fireDir = MainCameraTransform.forward;
 
                     _aTypeHit = hit;

@@ -1,3 +1,4 @@
+using Objects.Interaction;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -50,11 +51,11 @@ namespace UI.PanelScripts
                 UIManager.Instance.ActivationPanel(UIPanels.Pause);
             }
 
-            if (Physics.Raycast(MainCameraTransform.position, MainCameraTransform.forward, out RaycastHit hit))
+            if (InteractionManager.Instance.currentRaycastHitTrm != null)
             {
                 foreach(AimColor ac in aimColors)
                 {
-                    if(hit.transform.tag == ac.tag)
+                    if(InteractionManager.Instance.currentRaycastHitTrm.CompareTag(ac.tag))
                     {
                         aimImage.color = ac.tagColor;
                     }
