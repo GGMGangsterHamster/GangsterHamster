@@ -8,7 +8,7 @@ namespace Objects.Interaction
    {
       Interactable       _currentActiveInteraction;
       Transform          _currentActiveAtype;
-      public Transform   currentRaycastHitTrm;
+      public Transform currentRaycastHitTrm;
       public RaycastHit  currentRaycastHit;
 
       WeaponManagement _weaponManagement;

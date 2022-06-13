@@ -110,10 +110,13 @@ namespace Objects.Interaction
              }
          }
 
+
          if (minDist != float.MaxValue)
          {
-            target = hit.transform;
             InteractionManager.Instance.SetRaycastHitTrm(hit);
+            target = Vector3.Distance(MainCam.position, hit.point) < PlayerValues.InteractionMaxDistance ? hit.transform : null;
+
+            if (target == null) return null;
 
                 Debug.Log(target.name);
             if (target.CompareTag(ATYPE) && !(target == gravito.SticklyTrm() || (lumo.SticklyTrm() != null && target == lumo.SticklyTrm())))
