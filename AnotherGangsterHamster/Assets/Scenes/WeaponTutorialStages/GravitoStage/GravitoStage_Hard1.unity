@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17980957, g: 0.17980957, b: 0.17980957, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1672,6 +1672,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 8313406644741424176, guid: 8535e77231fcd7c4e92441d785044301, type: 3}
+      propertyPath: m_TagString
+      value: BTYPEOBJECT
+      objectReference: {fileID: 0}
     - target: {fileID: 8699270757709345077, guid: 8535e77231fcd7c4e92441d785044301, type: 3}
       propertyPath: m_Camera
       value: 
@@ -2938,7 +2942,7 @@ PrefabInstance:
     - target: {fileID: 1883246918711049182, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: _callbacks.Array.data[0].OnActive.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1402917860}
+      objectReference: {fileID: 0}
     - target: {fileID: 1883246918711049182, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: _callbacks.Array.data[0].OnActive.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ObjTriggerStayEvent
@@ -2954,7 +2958,7 @@ PrefabInstance:
     - target: {fileID: 3557044717135549989, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: _callbacks.Array.data[0].OnDeactive.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1402917860}
+      objectReference: {fileID: 0}
     - target: {fileID: 3557044717135549989, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: _callbacks.Array.data[0].OnDeactive.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ObjTriggerExitEvent
@@ -3014,17 +3018,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8182657698645652297, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
   m_PrefabInstance: {fileID: 1402917858}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1402917860 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5051810449591584903, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
-  m_PrefabInstance: {fileID: 1402917858}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e61f0d1157852af4cb38518540b0c356, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1497808888
 GameObject:
   m_ObjectHideFlags: 0

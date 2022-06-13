@@ -250,7 +250,7 @@ PrefabInstance:
     - target: {fileID: 1883246918711049182, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: _callbacks.Array.data[0].OnActive.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 182868477}
+      objectReference: {fileID: 0}
     - target: {fileID: 1883246918711049182, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: _callbacks.Array.data[0].OnActive.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ObjTriggerStayEvent
@@ -262,7 +262,7 @@ PrefabInstance:
     - target: {fileID: 3557044717135549989, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: _callbacks.Array.data[0].OnDeactive.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 182868477}
+      objectReference: {fileID: 0}
     - target: {fileID: 3557044717135549989, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: _callbacks.Array.data[0].OnDeactive.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ObjTriggerExitEvent
@@ -322,17 +322,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8182657698645652297, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
   m_PrefabInstance: {fileID: 182868475}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &182868477 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5051810449591584903, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
-  m_PrefabInstance: {fileID: 182868475}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e61f0d1157852af4cb38518540b0c356, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &224964461
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +336,7 @@ GameObject:
   - component: {fileID: 224964462}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: ATYPEOBJECT
+  m_TagString: BTYPEOBJECT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -898,7 +887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!199 &605802282
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -5962,6 +5951,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 657591773235129906, guid: fdf4b2f02b1e255198bc44201bacb177, type: 3}
   m_PrefabInstance: {fileID: 904964914}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &904964916 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1056803601157671361, guid: fdf4b2f02b1e255198bc44201bacb177, type: 3}
+  m_PrefabInstance: {fileID: 904964914}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8476a3bdbcdf96b058a4f960b4883763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &951952892
 GameObject:
   m_ObjectHideFlags: 0
@@ -7191,7 +7191,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reverse: 0
-  triggerCheckList: []
+  triggerCheckList:
+  - {fileID: 904964916}
   interactionCheckList: []
 --- !u!1 &1926360393
 GameObject:

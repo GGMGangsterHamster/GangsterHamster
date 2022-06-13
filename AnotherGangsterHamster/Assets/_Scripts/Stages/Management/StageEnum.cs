@@ -2,7 +2,7 @@ namespace Stages.Management
 {
    public enum StageNames
    {
-      NONE = 0,
+      NONE = -1,
       GrandStages_Front,
       GrandStages,
       GrandStages_2,
@@ -25,6 +25,9 @@ namespace Stages.Management
       LumoStage_10,
       END_OF_STAGE,
       Title,
+      GrandStages_T,
+      GravitoStages_T,
+      
       END_OF_ENUM
    }
 }
