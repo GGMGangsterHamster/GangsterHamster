@@ -35,7 +35,7 @@ namespace Objects.Interaction
             if(_lumo == null)
             {
                if (_wm == null) _wm = GameObject.FindObjectOfType<WeaponManagement>();
-               _lumo = _wm.transform.GetChild(0).GetComponent<Lumo>();
+               _lumo = _wm.transform.GetChild(2).GetComponent<Lumo>();
             }
             return _lumo;
          }
@@ -48,7 +48,7 @@ namespace Objects.Interaction
             if (_gravito == null)
             {
                if (_wm == null) _wm = GameObject.FindObjectOfType<WeaponManagement>();
-               _gravito = _wm.transform.GetChild(2).GetComponent<Gravito>();
+               _gravito = _wm.transform.GetChild(1).GetComponent<Gravito>();
             }
             return _gravito;
          }
