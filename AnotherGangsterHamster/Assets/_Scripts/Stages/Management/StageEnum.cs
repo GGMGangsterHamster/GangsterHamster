@@ -2,12 +2,14 @@ namespace Stages.Management
 {
    public enum StageNames
    {
-      NONE = -1,
-      GrandStages_Front,
+      NONE = -2,
+      GrandStages_T = -1,
+      GrandStages_Front = 0,
       GrandStages,
       GrandStages_2,
       GrandStages_3,
       GrandStages_4,
+      GravitoStages_T,
       GravitoStage_1,
       GravitoStage_2,
       GravitoStage_3,
@@ -19,14 +21,14 @@ namespace Stages.Management
       GravitoStage_Hard1,
       GravitoStage_Hard2,
       GravitoStage_Hard3,
-      LumoStages,
+      LumoStage_T,
+      LumoStages_Front,
+      LumoStages_Back,
       LumoStage_8,
       LumoStage_9,
       LumoStage_10,
       END_OF_STAGE,
       Title,
-      GrandStages_T,
-      GravitoStages_T,
       
       END_OF_ENUM
    }
