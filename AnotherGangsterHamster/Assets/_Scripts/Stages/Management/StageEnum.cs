@@ -25,6 +25,9 @@ namespace Stages.Management
       LumoStage_10,
       END_OF_STAGE,
       Title,
+      GrandStages_T,
+      GravitoStages_T,
+      
       END_OF_ENUM
    }
 }
