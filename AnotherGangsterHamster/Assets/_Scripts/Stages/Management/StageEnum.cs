@@ -3,8 +3,10 @@ namespace Stages.Management
    public enum StageNames
    {
       NONE = -2,
-      GrandStages_T = -1,
-      GrandStages_Front = 0,
+      GrandStages_T = 0,
+      GrandStages_Front,
+      GrandStages_Mid,
+      GrandStages_Back,
       GrandStages,
       GrandStages_2,
       GrandStages_3,
