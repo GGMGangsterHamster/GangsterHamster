@@ -92,7 +92,7 @@ namespace Objects.Interaction
          bool resetHandleObject = true;
          Transform target = null;
 
-         RaycastHit[] hits = Physics.RaycastAll(MainCam.position, MainCam.forward);
+         RaycastHit[] hits = Physics.RaycastAll(MainCam.position, MainCam.forward, PlayerValues.InteractionMaxDistance);
 
          RaycastHit hit = new RaycastHit();
          float minDist = float.MaxValue;
@@ -112,8 +112,10 @@ namespace Objects.Interaction
 
          if (minDist != float.MaxValue)
          {
-            target = hit.transform;
+            target = Vector3.Distance(MainCam.position, hit.point) < PlayerValues.InteractionMaxDistance ? hit.transform : null;
+
             InteractionManager.Instance.SetRaycastHitTrm(hit);
+            if (target == null) return null;
 
                 Debug.Log(target.name);
             if (target.CompareTag(ATYPE) && !(target == gravito.SticklyTrm() || (lumo.SticklyTrm() != null && target == lumo.SticklyTrm())))
