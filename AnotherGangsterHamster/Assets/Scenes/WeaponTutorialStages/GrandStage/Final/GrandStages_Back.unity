@@ -560,6 +560,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0727e38a19f8801695e24bcb5e6fc70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1096680052 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4306857647759801774, guid: 45c5c1a029f0a6548a7f0c626c4d36a6, type: 3}
+  m_PrefabInstance: {fileID: 1332195735}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1096680061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096680052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15688fbc4af336fde8a5b3f4db2a7cf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.25
+  emission: 5
 --- !u!1001 &1162222862
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -791,12 +810,36 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1806289604076658616, guid: 45c5c1a029f0a6548a7f0c626c4d36a6, type: 3}
+      propertyPath: _callbacks.Array.data[0].OnActive.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1096680061}
+    - target: {fileID: 1806289604076658616, guid: 45c5c1a029f0a6548a7f0c626c4d36a6, type: 3}
+      propertyPath: _callbacks.Array.data[0].OnDeactive.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1096680061}
+    - target: {fileID: 1806289604076658616, guid: 45c5c1a029f0a6548a7f0c626c4d36a6, type: 3}
+      propertyPath: _callbacks.Array.data[0].OnActive.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Active
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806289604076658616, guid: 45c5c1a029f0a6548a7f0c626c4d36a6, type: 3}
       propertyPath: _callbacks.Array.data[0].OnActive.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Deactive
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806289604076658616, guid: 45c5c1a029f0a6548a7f0c626c4d36a6, type: 3}
+      propertyPath: _callbacks.Array.data[0].OnDeactive.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: Deactive
       objectReference: {fileID: 0}
     - target: {fileID: 1806289604076658616, guid: 45c5c1a029f0a6548a7f0c626c4d36a6, type: 3}
       propertyPath: _callbacks.Array.data[0].OnDeactive.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
       value: Active
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806289604076658616, guid: 45c5c1a029f0a6548a7f0c626c4d36a6, type: 3}
+      propertyPath: _callbacks.Array.data[0].OnActive.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Effects.Shaders.Props.ActiveStatusShader, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1806289604076658616, guid: 45c5c1a029f0a6548a7f0c626c4d36a6, type: 3}
+      propertyPath: _callbacks.Array.data[0].OnDeactive.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Effects.Shaders.Props.ActiveStatusShader, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2282564829222637523, guid: 45c5c1a029f0a6548a7f0c626c4d36a6, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -822,6 +865,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3627529924558689379, guid: 45c5c1a029f0a6548a7f0c626c4d36a6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 83a35db3d21828b16b191d23806a158b, type: 2}
     - target: {fileID: 3654240197810821912, guid: 45c5c1a029f0a6548a7f0c626c4d36a6, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -958,7 +1005,8 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4278141255502751762, guid: 45c5c1a029f0a6548a7f0c626c4d36a6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 45c5c1a029f0a6548a7f0c626c4d36a6, type: 3}
 --- !u!1001 &1399480877
 PrefabInstance:
