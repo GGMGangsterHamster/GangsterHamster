@@ -31,7 +31,8 @@ namespace Weapon.Animation.GravitoAnimation
             Sorting
         }
 
-        public List<GameObject> rotEtcObjs = new List<GameObject>();
+        public GameObject rotEtcObj;
+        public List<GameObject> rotCainObjs = new List<GameObject>();
         public Vector3 rotDir;
         public float rotSpeed;
         public float usingAnimeDelay;
@@ -132,8 +133,10 @@ namespace Weapon.Animation.GravitoAnimation
                     {
                         transform.position = _gravito.GravitoHandPosition;
 
-                        for(int i = 0; i < rotEtcObjs.Count; i++)
-                            rotEtcObjs[i].transform.localRotation = Quaternion.Euler(-90, 0, 0);
+                        rotEtcObj.transform.localRotation = Quaternion.Euler(-90, 0, 0);
+
+                        for (int i = 0; i < rotCainObjs.Count; i++)
+                            rotCainObjs[i].transform.localRotation = Quaternion.Euler(-90, 0, 0);
                         _curStatus = GravitoAnimeStatus.Idle;
                     }
                     else
@@ -157,8 +160,10 @@ namespace Weapon.Animation.GravitoAnimation
         // 들어온 스피드에 따라서 파츠들을 돌리는 함수
         private void RotationEtc(float rotSpeed)
         {
-            for (int i = 0; i < rotEtcObjs.Count; i++)
-                rotEtcObjs[i].transform.rotation *= Quaternion.Euler(rotDir * rotSpeed);
+            rotEtcObj.transform.rotation *= Quaternion.Euler(rotDir * rotSpeed);
+
+            for (int i = 0; i < rotCainObjs.Count; i++)
+                rotCainObjs[i].transform.localRotation *= Quaternion.Euler(new Vector3(0.5f, 0.5f, 0.5f) * rotSpeed / 3);
         }
     }
 }

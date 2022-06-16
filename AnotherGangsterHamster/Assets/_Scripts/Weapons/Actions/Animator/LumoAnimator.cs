@@ -1,3 +1,4 @@
+using Matters.Gravity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -141,7 +142,7 @@ namespace Weapon.Animation.LumoAnimation
                     if(isReset)
                     {
                         transform.position = _lumo.GetHandPos;
-                        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
+                        transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
                     }
                     break;
                 case LumoAnimeStatus.Move:
