@@ -142,7 +142,8 @@ namespace Weapon.Animation.LumoAnimation
                     if(isReset)
                     {
                         transform.position = _lumo.GetHandPos;
-                        transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
+
+                        transform.rotation = Quaternion.Lerp(transform.rotation, MainCameraTransform.rotation, 0.5f);
                     }
                     break;
                 case LumoAnimeStatus.Move:

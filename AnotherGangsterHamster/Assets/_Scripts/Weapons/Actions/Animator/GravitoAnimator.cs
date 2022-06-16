@@ -92,7 +92,7 @@ namespace Weapon.Animation.GravitoAnimation
                     if(isReset)
                     {
                         transform.position = _gravito.GravitoHandPosition;
-                        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
+                        transform.rotation = Quaternion.Slerp(transform.rotation, MainCameraTransform.rotation, 0.5f);
                     }
                     break;
                 case GravitoAnimeStatus.Move:
