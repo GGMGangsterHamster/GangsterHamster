@@ -100,8 +100,8 @@ namespace Weapons.Actions
                     // 그랜드를 리셋 시키면 같이 리셋 됨
                     if (_weaponActions[WeaponEnum.Lumo].GetComponent<Lumo>().SticklyTrm() == _weaponActions[WeaponEnum.Grand].transform)
                     {
-                        _weaponActions[WeaponEnum.Lumo].gameObject.SetActive(false);
                         _weaponActions[WeaponEnum.Lumo].ResetWeapon();
+                        _weaponActions[WeaponEnum.Lumo].gameObject.SetActive(false);
                     }
                     if(_weaponActions[WeaponEnum.Gravito].GetComponent<Gravito>().SticklyTrm() == _weaponActions[WeaponEnum.Grand].transform)
                     {

@@ -32,6 +32,7 @@ namespace Weapon.Animation.GravitoAnimation
         }
 
         public GameObject rotEtcObj;
+        public List<GameObject> rotCainObjs = new List<GameObject>();
         public Vector3 rotDir;
         public float rotSpeed;
         public float usingAnimeDelay;
@@ -131,7 +132,11 @@ namespace Weapon.Animation.GravitoAnimation
                     if (_curTime >= Vector3.Distance(start, _gravito.GravitoHandPosition))
                     {
                         transform.position = _gravito.GravitoHandPosition;
+
                         rotEtcObj.transform.localRotation = Quaternion.Euler(-90, 0, 0);
+
+                        for (int i = 0; i < rotCainObjs.Count; i++)
+                            rotCainObjs[i].transform.localRotation = Quaternion.Euler(-90, 0, 0);
                         _curStatus = GravitoAnimeStatus.Idle;
                     }
                     else
@@ -156,6 +161,9 @@ namespace Weapon.Animation.GravitoAnimation
         private void RotationEtc(float rotSpeed)
         {
             rotEtcObj.transform.rotation *= Quaternion.Euler(rotDir * rotSpeed);
+
+            for (int i = 0; i < rotCainObjs.Count; i++)
+                rotCainObjs[i].transform.localRotation *= Quaternion.Euler(new Vector3(0.5f, 0.5f, 0.5f) * rotSpeed / 3);
         }
     }
 }
