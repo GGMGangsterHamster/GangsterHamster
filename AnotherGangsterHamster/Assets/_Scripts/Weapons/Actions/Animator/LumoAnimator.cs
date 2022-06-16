@@ -110,6 +110,22 @@ namespace Weapon.Animation.LumoAnimation
             isReset = true;
         }
 
+        public void RotationReset()
+        {
+            for (int i = 0; i < clockwiseRotObjs.Count; i++)
+            {
+                clockwiseRotObjs[i].transform.rotation = Quaternion.Euler(90, 0, 0);
+            }
+
+            for (int i = 0; i < antiClockwiseRotObjs.Count; i++)
+            {
+                antiClockwiseRotObjs[i].transform.rotation = Quaternion.Euler(90, 0, 0);
+            }
+
+            _curStatus = LumoAnimeStatus.Idle;
+            isReset = true;
+        }
+
         public bool isStopedMoving()
         {
             return _curStatus == LumoAnimeStatus.Idle || isEnd;
