@@ -118,7 +118,6 @@ namespace Objects.Interaction
 
             if (target == null) return null;
 
-                Debug.Log(target.name);
             if (target.CompareTag(ATYPE) && !(target == gravito.SticklyTrm() || (lumo.SticklyTrm() != null && target == lumo.SticklyTrm())))
             {
                resetHandleObject = false;
