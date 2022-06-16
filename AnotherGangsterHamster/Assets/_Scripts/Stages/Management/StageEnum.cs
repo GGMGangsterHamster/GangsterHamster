@@ -10,7 +10,7 @@ namespace Stages.Management
       GrandStages_2 = 5,
       GrandStages_3,
       GrandStages_4,
-      GravitoStages_T,
+      GravitoStage_T,
       GravitoStage_1,
       GravitoStage_2,
       GravitoStage_3,

@@ -1,4 +1,5 @@
 using Characters.Player;
+using Objects.Trigger;
 using Setting.VO;
 using Stages.Management;
 using UI.Screen;
@@ -22,7 +23,6 @@ namespace UI.PanelScripts
         [SerializeField] private Button _gameRestartButton;
         [SerializeField] private Button _disableButton;
         [SerializeField] private Button _stageSkipButton;
-        [SerializeField] private Button _stageBackButton;
         [SerializeField] private Button _notDeadButton;
         [SerializeField] private Button _spectatorButton;
 
@@ -99,14 +99,8 @@ namespace UI.PanelScripts
 
             _stageSkipButton.onClick.AddListener(() =>
             {
-                SceneManager.LoadScene((StageManager.Instance.CurrentStage + 1).ToString());
-                Utils.LockCursor();
-                Utils.MoveTime();
-            });
-
-            _stageBackButton.onClick.AddListener(() =>
-            {
-                SceneManager.LoadScene((StageManager.Instance.CurrentStage - 1).ToString());
+                SceneLoadTrigger sceneLoadTrigger = GameObject.FindObjectOfType<SceneLoadTrigger>();
+                SceneManager.LoadScene((sceneLoadTrigger.Load).ToString());
                 Utils.LockCursor();
                 Utils.MoveTime();
             });
