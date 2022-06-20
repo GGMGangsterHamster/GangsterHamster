@@ -14,7 +14,6 @@ namespace Effects.Shaders.TypeObject
       public const string MINALPHA = "_MinAlpha";
 
       public float wallScale = 1.0f;
-      public float bloom = 1.0f;
       public Vector3Int considerDirection = Vector3Int.down;
       public Transform baseTransform = null;
 
@@ -39,11 +38,6 @@ namespace Effects.Shaders.TypeObject
 
          _mat.SetFloat(WALLHEIGHT, _height / wallScale);
          _mat.SetFloat(WALLSCALE, 1.0f / wallScale);
-      }
-
-      private void Update()
-      {
-         _mat.SetFloat(BLOOM, bloom);
       }
    }
 }

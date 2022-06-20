@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.Events;
 
 namespace Matters.Gravity
 {
@@ -10,8 +10,10 @@ namespace Matters.Gravity
       private GravityValue             _globalGravity;   // 전역 중력
       private GravityAffectedObject[]  _affectedObjects; // 중력 영향 받는 오브젝트들
 
+      public UnityEvent<GravityValue> OnGravityChanged;
+
       // 중력 연산 여부
-#region bool Stop
+      #region bool Stop
       private  bool _stop = true;
       public   bool Stop
       {
@@ -24,6 +26,7 @@ namespace Matters.Gravity
       {
          _instance      = this;
          _globalGravity = new GravityValue(Vector3.down);
+         OnGravityChanged.AddListener(a => { });
 
          InitGravityAffectedObjects();
 
@@ -58,7 +61,13 @@ namespace Matters.Gravity
       static public void ChangeGlobalGravityDirection(Vector3 direction)
       {
          _instance._globalGravity._direction = direction;
-      }     
+         _instance.OnGravityChanged.Invoke(_instance._globalGravity);
+      }
+
+      static public void AddGravityChangedListener(UnityAction<GravityValue> callback)
+      {
+         _instance.OnGravityChanged.AddListener(callback);
+      }
 
       static public void ChangeGlobalGravityForce(float force)
       {
