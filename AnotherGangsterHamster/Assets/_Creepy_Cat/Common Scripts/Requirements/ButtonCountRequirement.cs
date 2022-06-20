@@ -1,4 +1,5 @@
 using Objects;
+using Objects.Interaction;
 using Objects.StageObjects;
 using System;
 using System.Collections;
@@ -13,13 +14,8 @@ public class ButtonCountRequirement : MonoBehaviour
 
     // TriggetInteractableObject 를 조건으로 받는 리스트
     [SerializeField]
-    private List<TriggerInteractableObject> triggerCheckList
-        = new List<TriggerInteractableObject>();
-
-    // InteractionButton 를 조건으로 받는 리스트
-    [SerializeField]
-    private List<InteractionButton> interactionCheckList
-       = new List<InteractionButton>();
+    private List<Interactable> _checkList
+        = new List<Interactable>();
 
     private bool beforeChecked;
 
@@ -30,23 +26,15 @@ public class ButtonCountRequirement : MonoBehaviour
         {
             _count = 0;
 
-            for (int i = 0; i < triggerCheckList.Count; i++)
+            for (int i = 0; i < _checkList.Count; i++)
             {
-                if (triggerCheckList[i].Activated)
+                if (_checkList[i].Activated)
                 {
                     _count++;
                 }
             }
 
-            for (int i = 0; i < interactionCheckList.Count; i++)
-            {
-                if (interactionCheckList[i].Activated)
-                {
-                    _count++;
-                }
-            }
-
-            bool result = _count == triggerCheckList.Count + interactionCheckList.Count;
+            bool result = _count == _checkList.Count;
 
             return (reverse ? !result : result);
         }

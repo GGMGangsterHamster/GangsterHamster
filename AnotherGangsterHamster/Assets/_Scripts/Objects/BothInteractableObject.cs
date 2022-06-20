@@ -17,8 +17,6 @@ namespace Objects
       [field: SerializeField]
       public bool InitalActiveStatus { get; set; } = false;
 
-      private bool _activated = false;
-      public bool Activated => _activated;
 
       private int _objectsCount = 0;
 

@@ -19,9 +19,6 @@ namespace Objects.StageObjects
 
       private ButtonCountRequirement _requirement;
 
-      private bool _activated = false;
-      public bool Activated => _activated;
-
       private void Awake()
       {
          _activated = InitalActiveStatus;
