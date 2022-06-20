@@ -4,10 +4,9 @@ namespace Stages.Management
    {
       NONE = -2,
       GrandStages_T = 0,
-      GrandStages_Front = 1,
-      GrandStages_Mid = 2,
-      GrandStages_Back = 3,
-      GrandStages_2 = 5,
+      GrandStages_Front,
+      GrandStages_Mid,
+      GrandStages_Back,
       GrandStages_3,
       GrandStages_4,
       GravitoStage_T,
