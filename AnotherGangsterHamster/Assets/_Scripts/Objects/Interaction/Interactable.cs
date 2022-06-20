@@ -6,7 +6,11 @@ namespace Objects.Interaction
    {
       // 플레이어가 직접 상호작용 가능한 오브젝트인지
       public bool canInteractByPlayer = false;
+        
+      public bool Activated => _activated;
 
+        
+      protected bool _activated = false;
       /// <summary>
       /// 상호 작용 시 호출
       /// </summary>
