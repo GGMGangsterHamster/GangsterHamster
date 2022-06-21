@@ -38,6 +38,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 0c82836bf1e54fc4eb49e11ea545a7b9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_6ca176b5cdfe405b8fffc0191ff1e7a0_Texture_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -59,6 +63,7 @@ Material:
     - _AlphaToMask: 0
     - _AlphaToMaskInspectorValue: 0
     - _BlendMode: 0
+    - _Bloom: 1
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
     - _CullModeForward: 2
@@ -68,9 +73,11 @@ Material:
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 10
-    - _EnableBlendModePreserveSpecularLighting: 1
+    - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 0
     - _FadingSpeed: 0.25
+    - _MaxAlpha: 0.25
+    - _MinAlpha: 0
     - _OpaqueCullMode: 2
     - _RayTracing: 0
     - _ReceivesSSR: 1
@@ -100,8 +107,8 @@ Material:
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
     - _UseShadowThreshold: 0
-    - _WallHeight: 0
-    - _WallScale: 0.1
+    - _WallHeight: 1
+    - _WallScale: 1
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
@@ -110,6 +117,7 @@ Material:
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _HexagonColor: {r: 0, g: 1, b: 0.8927181, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8536165172392728401
 MonoBehaviour:

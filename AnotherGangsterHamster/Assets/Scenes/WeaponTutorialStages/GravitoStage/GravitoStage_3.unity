@@ -235,6 +235,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 451610341072538697, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.75
+      objectReference: {fileID: 0}
     - target: {fileID: 578695659554428950, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: m_Layer
       value: 9
@@ -243,6 +247,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 673981596663887147, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eb53aa4e3fe6e6e42b6f1110e636568e, type: 2}
+    - target: {fileID: 1048415468092188138, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5e858e73e7b0a4734ad5809c0dd5b6f8, type: 2}
     - target: {fileID: 1297542061864495519, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: penetratePadding
       value: 0.29
@@ -255,6 +267,10 @@ PrefabInstance:
       propertyPath: _callbacks.Array.data[0].OnActive.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ObjTriggerStayEvent
       objectReference: {fileID: 0}
+    - target: {fileID: 2607726496222936484, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3ae710804acaf94499133450d37a5386, type: 2}
     - target: {fileID: 3435084394398570576, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: startHandleWeapon
       value: 3
@@ -267,6 +283,10 @@ PrefabInstance:
       propertyPath: _callbacks.Array.data[0].OnDeactive.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ObjTriggerExitEvent
       objectReference: {fileID: 0}
+    - target: {fileID: 6178539788156215893, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eb53aa4e3fe6e6e42b6f1110e636568e, type: 2}
     - target: {fileID: 7327468906899021415, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: m_Name
       value: AllWeaponManagement
@@ -5951,17 +5971,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 657591773235129906, guid: fdf4b2f02b1e255198bc44201bacb177, type: 3}
   m_PrefabInstance: {fileID: 904964914}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &904964916 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1056803601157671361, guid: fdf4b2f02b1e255198bc44201bacb177, type: 3}
-  m_PrefabInstance: {fileID: 904964914}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8476a3bdbcdf96b058a4f960b4883763, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &951952892
 GameObject:
   m_ObjectHideFlags: 0
@@ -6701,6 +6710,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0727e38a19f8801695e24bcb5e6fc70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnGravityChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1644403813
 GameObject:
   m_ObjectHideFlags: 0
@@ -6828,14 +6840,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Version: 11
-  m_ObsoleteShadowResolutionTier: 1
-  m_ObsoleteUseShadowQualitySettings: 0
-  m_ObsoleteCustomShadowResolution: 512
-  m_ObsoleteContactShadows: 0
-  m_PointlightHDType: 0
-  m_SpotLightShape: 0
-  m_AreaLightShape: 0
   m_Intensity: 40000
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
@@ -6938,6 +6942,14 @@ MonoBehaviour:
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
   m_AreaLightEmissiveMeshLayer: -1
+  m_Version: 11
+  m_ObsoleteShadowResolutionTier: 1
+  m_ObsoleteUseShadowQualitySettings: 0
+  m_ObsoleteCustomShadowResolution: 512
+  m_ObsoleteContactShadows: 0
+  m_PointlightHDType: 0
+  m_SpotLightShape: 0
+  m_AreaLightShape: 0
 --- !u!108 &1687761793
 Light:
   m_ObjectHideFlags: 0
@@ -7191,9 +7203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reverse: 0
-  triggerCheckList:
-  - {fileID: 904964916}
-  interactionCheckList: []
+  _checkList: []
 --- !u!1 &1926360393
 GameObject:
   m_ObjectHideFlags: 0
