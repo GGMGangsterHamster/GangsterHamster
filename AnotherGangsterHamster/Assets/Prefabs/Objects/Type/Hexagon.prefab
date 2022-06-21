@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1285002476919272396}
   - component: {fileID: 5617020358829181888}
   - component: {fileID: 1285002476919272399}
+  - component: {fileID: 6800494957195260632}
   m_Layer: 0
   m_Name: Hexagon
   m_TagString: Untagged
@@ -117,8 +118,9 @@ MonoBehaviour:
     OnActive:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1285002476919272399}
-          m_TargetAssemblyTypeName: Effects.Shaders.TypeObject.ATypeHexagon, Assembly-CSharp
+        - m_Target: {fileID: 6800494957195260632}
+          m_TargetAssemblyTypeName: Effects.Shaders.TypeObject.Hexagon.HexagonBrightnessEffect,
+            Assembly-CSharp
           m_MethodName: Active
           m_Mode: 0
           m_Arguments:
@@ -132,8 +134,9 @@ MonoBehaviour:
     OnDeactive:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1285002476919272399}
-          m_TargetAssemblyTypeName: Effects.Shaders.TypeObject.ATypeHexagon, Assembly-CSharp
+        - m_Target: {fileID: 6800494957195260632}
+          m_TargetAssemblyTypeName: Effects.Shaders.TypeObject.Hexagon.HexagonBrightnessEffect,
+            Assembly-CSharp
           m_MethodName: Deactive
           m_Mode: 0
           m_Arguments:
@@ -160,6 +163,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallScale: 1
   bloom: 1
-  collisionAlphaEffectDuration: 0.25
   considerDirection: {x: 1, y: 1, z: 1}
   baseTransform: {fileID: 0}
+--- !u!114 &6800494957195260632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285002476919272402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6696a56d714cdab228d7262fd2ca3310, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionAlphaEffectDuration: 0.3
