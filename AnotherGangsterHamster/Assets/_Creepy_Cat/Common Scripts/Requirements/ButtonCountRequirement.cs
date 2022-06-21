@@ -12,7 +12,6 @@ public class ButtonCountRequirement : MonoBehaviour
 
     public Action<bool> changedEvent;
 
-    // TriggetInteractableObject 를 조건으로 받는 리스트
     [SerializeField]
     private List<Interactable> _checkList
         = new List<Interactable>();
