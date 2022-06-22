@@ -139,7 +139,7 @@ namespace Characters.Player.Actions
                 _curRigid.angularVelocity = Vector3.Lerp(_curRigid.angularVelocity, Vector3.zero, 0.5f);
                 _curRigid.transform.rotation = Quaternion.Slerp(_curRigid.transform.rotation, Quaternion.LookRotation(PlayerBaseTransform.forward), 0.5f);
 
-                if(Vector3.Distance((MainCameraTransform.position + (MainCameraTransform.forward * 2f)), _curRigid.transform.position) > 1.5f)
+                if(Vector3.Distance((MainCameraTransform.position + (MainCameraTransform.forward * 2f)), _curRigid.transform.position) > 3f)
                 {
                     InteractionManager.Instance.UnGrep();
 
