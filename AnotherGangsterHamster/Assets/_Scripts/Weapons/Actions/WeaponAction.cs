@@ -165,7 +165,7 @@ namespace Weapons.Actions
                               + PlayerBaseTransform.right * (IsRightHand ? 1 : -1);
 
         protected Vector3 FirePosition => MainCameraTransform.position
-                                        + MainCameraTransform.forward
+                                        + MainCameraTransform.forward * (PlayerStatus.IsCrouching ? 0.4f : 1f)
                                         ;
 
         protected Collider _myCollider;

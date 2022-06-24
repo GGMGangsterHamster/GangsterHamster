@@ -151,6 +151,7 @@ namespace Weapons.Actions
             if (!isChangedGravity)
             {
                 _currentGravitoStatus = GravitoStatus.Idle;
+                _aTypeTrm = null;
                 Update();
                 return;
             }

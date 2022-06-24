@@ -70,7 +70,6 @@ namespace Characters.Player.Actions
                     case false: // 잡기
                         Vector3 gravityDir = GravityManager.GetGlobalGravityDirection();
 
-                        Debug.Log(Vector3.Distance(MainCameraTransform.position, handle.position));
                         if ((handle.lossyScale.x *
                             handle.lossyScale.y *
                             handle.lossyScale.z > 1.1f ||
