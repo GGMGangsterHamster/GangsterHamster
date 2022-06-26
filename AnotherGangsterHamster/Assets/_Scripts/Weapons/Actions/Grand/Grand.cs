@@ -11,7 +11,15 @@ using UnityEngine;
 // 버그 코드는 400줄 이상
 
 namespace Weapons.Actions
-{
+{        
+    // 그랜드의 크기 변환 단계
+    public enum GrandSizeLevel
+    {
+        OneGrade,
+        TwoGrade,
+        FourGrade,
+    }
+
     [RequireComponent(typeof(GravityAffectedObject))]
     public class Grand : WeaponAction
     {
@@ -27,7 +35,6 @@ namespace Weapons.Actions
             set => isCanChangeTwoStep = value;
         }
 
-        private Transform chargeBar;
         private Transform _dropPoint;
         private LineRenderer _dropLineRenderer;
 
@@ -39,13 +46,6 @@ namespace Weapons.Actions
 
         private FollowGroundPos _playerFollow;
 
-        // 그랜드의 크기 변환 단계
-        public enum GrandSizeLevel
-        {
-            OneGrade,
-            TwoGrade,
-            FourGrade,
-        }
         private float fullChangeTime
         {
             get
@@ -70,8 +70,6 @@ namespace Weapons.Actions
                     return 1f;
             }
         }
-
-        private AlphaSensor _sensor;
 
         private GameObject grandLv1Model;
         private GameObject grandLv2Model;
@@ -112,10 +110,6 @@ namespace Weapons.Actions
             WeaponVO vo = Utils.JsonToVO<WeaponVO>(WeaponKeyCodePath);
             _useKeycode = (KeyCode)vo.Use;
 
-            chargeBar = GameObject.Find("ChargeBar").transform;
-
-            _sensor = GetComponent<AlphaSensor>();
-
             _enterCollision = GetComponent<CollisionInteractableObject>();
             _stayCollision = GetComponent<CollisionStayInteractableObject>();
 
@@ -138,8 +132,6 @@ namespace Weapons.Actions
         {
             _playerFollow = PlayerBaseTransform.GetComponent<FollowGroundPos>();
             // 만약 플레이어와의 거리가 alphaSensorValue보다 가깝다면 투명도를 올린다.
-            _sensor.requirement += () =>
-                alphaSensorValue > Vector3.Distance(PlayerBaseTransform.position, transform.position) - _sizeLevelValue[_currentSizeLevel];
         }
 
         public override void FireWeapon()
@@ -228,10 +220,6 @@ namespace Weapons.Actions
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
                 transform.localScale = Vector3.one;
 
-                chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ?
-                                                            0 :
-                                                            _sizeLevelValue[_currentSizeLevel] * 0.25f, 1, 1);
-
                 transform.position = HandPosition;
                 transform.rotation = Quaternion.identity;
                 _myRigid.angularVelocity = Vector3.zero;
@@ -308,8 +296,6 @@ namespace Weapons.Actions
                     if (Input.GetKey(_useKeycode))
                     {
                         _weaponUsedTime += Time.deltaTime;
-
-                        chargeBar.localScale = new Vector3(ChargeBarValue, 1, 1);
                         // 차징 되는 UI 보여주기
 
                         if (_weaponUsedTime >= fullChangeTime)
@@ -436,8 +422,8 @@ namespace Weapons.Actions
             _weaponUsedTime = 0f;
             _currentLerpTime = 0f;
             _beforeWeaponSize = transform.localScale.x;
-            chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ? 0 : _sizeLevelValue[_currentSizeLevel] * 0.25f
-                                                , 1, 1);
+            //chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ? 0 : _sizeLevelValue[_currentSizeLevel] * 0.25f
+            //                                    , 1, 1);
 
             // 이런 저런 조건에 맞으면 플레이어에게 반동을 주고 데미지도 줌
             // 1. 작아지는 경우라면 실행 안함
@@ -512,9 +498,9 @@ namespace Weapons.Actions
                         _weaponUsedTime = 0f;
                         _currentLerpTime = 0f;
 
-                        chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ?
-                                                            0 :
-                                                            _sizeLevelValue[_currentSizeLevel] * 0.25f, 1, 1);
+                        //chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ?
+                        //                                    0 :
+                        //                                    _sizeLevelValue[_currentSizeLevel] * 0.25f, 1, 1);
 
                         return false;
                     }
