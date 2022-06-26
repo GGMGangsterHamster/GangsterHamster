@@ -46,6 +46,8 @@ namespace Weapon.Animation.LumoAnimation
         public Vector3 clockwiseRotDir;
         public Vector3 antiClockwiseRotDir;
 
+        public Vector3 lumoIdleLookVec;
+
         private List<Vector3> _partRotDirList = new List<Vector3>();    // 파츠마다의 애니메이션 회전 값
         private List<Transform> _partTrmList = new List<Transform>();
         private LumoAnimeStatus _curStatus = LumoAnimeStatus.Idle;    // 지금 애니메이션 스테이터스
@@ -81,6 +83,8 @@ namespace Weapon.Animation.LumoAnimation
 
         public void FireAnime(Vector3 start, Vector3 end, float moveSpeed, Quaternion quaternion)
         {
+            transform.rotation = MainCameraTransform.rotation;
+
             // Move -> Idle 로 상태 변환
             InitAnime(start, end, moveSpeed, LumoAnimeStatus.Move, quaternion);
             isReset = false;
@@ -143,7 +147,7 @@ namespace Weapon.Animation.LumoAnimation
                     {
                         transform.position = _lumo.GetHandPos;
 
-                        transform.rotation = Quaternion.Lerp(transform.rotation, MainCameraTransform.rotation, 0.5f);
+                        transform.rotation = Quaternion.Lerp(transform.rotation, MainCameraTransform.rotation * Quaternion.Euler(lumoIdleLookVec), 0.5f);
                     }
                     break;
                 case LumoAnimeStatus.Move:

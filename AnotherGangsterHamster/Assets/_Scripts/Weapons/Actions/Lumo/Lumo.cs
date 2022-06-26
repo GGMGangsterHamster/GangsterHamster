@@ -71,8 +71,12 @@ namespace Weapons.Actions
 
         public override void ResetWeapon()
         {
-            if (_currentStatus == LumoStatus.Idle || !_lumoAnimator.isStopedMoving()) _lumoAnimator.RotationReset();
+            if (_currentStatus == LumoStatus.Idle || !_lumoAnimator.isStopedMoving())
+            {
+                return;
+            }
 
+            _lumoAnimator.RotationReset();
             PlayerBaseTransform.GetComponent<FollowGroundPos>().Deactive(_lumoCube.gameObject);
             _currentStatus = LumoStatus.Idle;
             _lumoCube.gameObject.SetActive(false);
