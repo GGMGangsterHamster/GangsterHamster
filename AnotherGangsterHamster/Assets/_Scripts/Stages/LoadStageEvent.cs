@@ -6,7 +6,7 @@ namespace Stages
 {
    public class LoadStageEvent : MonoBehaviour, ICollisionEventable
    {
-      public new StageNames name;
+      public new string name;
 
       public void Active(GameObject other)
       {
