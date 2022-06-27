@@ -8,8 +8,8 @@ namespace Objects
    public class CollisionCallback
    {
       public string key;
-      public UnityEvent<GameObject> OnActive;
-      public UnityEvent<GameObject> OnDeactive;
+      public UnityEvent<GameObject> OnActive = new UnityEvent<GameObject>();
+      public UnityEvent<GameObject> OnDeactive = new UnityEvent<GameObject>();
 
       public CollisionCallback(UnityAction<GameObject> OnActive, UnityAction<GameObject> OnDeactive)
       {
