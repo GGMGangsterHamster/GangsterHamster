@@ -1,6 +1,8 @@
 using Objects;
 using Tween;
 using UnityEngine;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Effects.Shaders.Props
 {
@@ -9,20 +11,28 @@ namespace Effects.Shaders.Props
       const string EMISSION = "_Emission";
       const string TRANSITION = "_Transition";
 
+      public string targetName = "cain";
+
       public float duration = 1.0f;
       public float emission = 1.0f;
       public bool defaultStatus = false;
 
-      private Material _mat;
+      private List<Material> _mat = new List<Material>();
       private Coroutine _curTween;
 
       private float _transition;
 
       private void Awake()
       {
-         _mat = GetComponent<Renderer>().sharedMaterial;
-         _mat.SetFloat(EMISSION, emission);
-         _mat.SetFloat(TRANSITION, (defaultStatus ? 1.0f : 0.0f));
+         Renderer[] renderers = GetComponentsInChildren<Renderer>();
+         for (int i = 0; i < renderers.Length; ++i)
+         {
+            if (renderers[i].name.Contains(targetName))
+               _mat.Add(renderers[i].sharedMaterial);
+         }
+
+         _mat.ForEach(e => e.SetFloat(EMISSION, emission));
+         _mat.ForEach(e => e.SetFloat(TRANSITION, (defaultStatus ? 1.0f : 0.0f)));
       }
 
       public void Active(GameObject other)
@@ -35,12 +45,12 @@ namespace Effects.Shaders.Props
 
          _curTween = ValueTween.To(this, () => {
             _transition += step * Time.deltaTime;
-            _mat.SetFloat(TRANSITION, _transition);
+            _mat.ForEach(e => e.SetFloat(TRANSITION, _transition));
 
          }, () => _transition >= 1.0f, () => {
 
             _transition = 1.0f;
-            _mat.SetFloat(TRANSITION, 1.0f);
+            _mat.ForEach(e => e.SetFloat(TRANSITION, 1.0f));
             _curTween = null;
          });
       }
@@ -55,12 +65,12 @@ namespace Effects.Shaders.Props
 
          _curTween = ValueTween.To(this, () => {
             _transition -= step * Time.deltaTime;
-            _mat.SetFloat(TRANSITION, _transition);
+            _mat.ForEach(e => e.SetFloat(TRANSITION, _transition));
 
          }, () => _transition <= 0.0f, () => {
 
             _transition = 0.0f;
-            _mat.SetFloat(TRANSITION, 0.0f);
+            _mat.ForEach(e => e.SetFloat(TRANSITION, 0.0f));
             _curTween = null;
          });
       }
