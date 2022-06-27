@@ -12,11 +12,11 @@ namespace Objects.StageObjects
       public UnityEvent<GameObject> OnQualified;
       public UnityEvent<GameObject> OnDisqualified;
 
-      private void Awake()
+      private void Start()
       {
          for (int i = 0; i < Buttons.Count; ++i)
          {
-            dynamic interactable = null;
+            dynamic interactable;
 
             interactable = Buttons[i].GetComponent<CollisionInteractableObject>();
             if (interactable == null)
@@ -24,14 +24,15 @@ namespace Objects.StageObjects
             if (interactable == null)
                interactable = Buttons[i].GetComponent<BothInteractableObject>();
 
-
             if (interactable != null)
             {
                interactable._callbacks.Add(
                   new CollisionCallback(e => {
                      Active(this.gameObject);
+                     Debug.Log("ASD");
                   }, e => {
                      Deactive(this.gameObject);
+                     Debug.Log("ASSDDD");
                   })
                );
                _buttons.Add(Buttons[i].GetComponent<IActivated>());
