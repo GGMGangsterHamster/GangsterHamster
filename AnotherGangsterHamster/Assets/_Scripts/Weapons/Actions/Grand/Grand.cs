@@ -45,8 +45,6 @@ namespace Weapons.Actions
         // WeaponEvents Singleton 패턴 피하기 위함
         private WeaponEvents _events;
 
-        private FollowGroundPos _playerFollow;
-
         private float fullChangeTime
         {
             get
@@ -129,12 +127,6 @@ namespace Weapons.Actions
             grandLv3Model = transform.GetChild(2).gameObject;
 
             grandLv1Model.SetActive(true);
-        }
-
-        private void Start()
-        {
-            _playerFollow = PlayerBaseTransform.GetComponent<FollowGroundPos>();
-            // 만약 플레이어와의 거리가 alphaSensorValue보다 가깝다면 투명도를 올린다.
         }
 
         public override void FireWeapon()
@@ -285,14 +277,17 @@ namespace Weapons.Actions
             {
                 case GrandStatus.Idle:
 
-                    if (Vector3.Distance(transform.position, HandPosition) > 2f)
-                        transform.position = HandPosition;
+                    transform.position = HandPosition;
+                    transform.rotation = Quaternion.Slerp(transform.rotation, MainCameraTransform.rotation, 0.5f);
+                    
+                    //if (Vector3.Distance(transform.position, HandPosition) > 2f)
+                    //    transform.position = HandPosition;
                         
-                    _myRigid.velocity = (HandPosition - transform.position) * 10;
-                    _myRigid.angularVelocity = Vector3.zero;
-                    // FIXME: GravityAffectedObject 에 Enabled 있어요 그거 한번 써줘요 -우앱
-                    // ANSWER : 그거 써보았는데 그럼 오히려 복잡해지더라고요 - To 우앱
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
+                    //_myRigid.velocity = (HandPosition - transform.position) * 10;
+                    //_myRigid.angularVelocity = Vector3.zero;
+                    //// FIXME: GravityAffectedObject 에 Enabled 있어요 그거 한번 써줘요 -우앱
+                    //// ANSWER : 그거 써보았는데 그럼 오히려 복잡해지더라고요 - To 우앱
+                    //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
                     break;
 
                 case GrandStatus.Fire:

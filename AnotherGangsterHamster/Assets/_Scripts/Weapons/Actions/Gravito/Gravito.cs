@@ -153,7 +153,12 @@ namespace Weapons.Actions
             {
                 _currentGravitoStatus = GravitoStatus.Idle;
                 _aTypeTrm = null;
-                Update();
+                Update(); 
+                
+                if (_weaponManagement.GetCurrentWeapon() != _weaponEnum)
+                {
+                    gameObject.SetActive(false);
+                }
                 return;
             }
 
