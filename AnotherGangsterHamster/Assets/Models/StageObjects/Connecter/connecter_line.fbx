@@ -8,11 +8,11 @@ FBXHeaderExtension:  {
 		Version: 1000
 		Year: 2022
 		Month: 6
-		Day: 21
-		Hour: 18
-		Minute: 25
-		Second: 41
-		Millisecond: 414
+		Day: 27
+		Hour: 23
+		Minute: 47
+		Second: 32
+		Millisecond: 635
 	}
 	Creator: "FBX SDK/FBX Plugins version 2020.3.1"
 }
@@ -569,13 +569,13 @@ Objects:  {
 			Property: "Original|ApplicationVendor", "KString", "", "Autodesk"
 			Property: "Original|ApplicationName", "KString", "", "3ds Max"
 			Property: "Original|ApplicationVersion", "KString", "", "2022"
-			Property: "Original|DateTime_GMT", "DateTime", "", "21/06/2022 09:25:41.413"
+			Property: "Original|DateTime_GMT", "DateTime", "", "27/06/2022 14:47:32.634"
 			Property: "Original|FileName", "KString", "", "F:\아펠리오스\props\connecter\line\connecter_line.fbx"
 			Property: "LastSaved", "Compound", ""
 			Property: "LastSaved|ApplicationVendor", "KString", "", "Autodesk"
 			Property: "LastSaved|ApplicationName", "KString", "", "3ds Max"
 			Property: "LastSaved|ApplicationVersion", "KString", "", "2022"
-			Property: "LastSaved|DateTime_GMT", "DateTime", "", "21/06/2022 09:25:41.413"
+			Property: "LastSaved|DateTime_GMT", "DateTime", "", "27/06/2022 14:47:32.634"
 			Property: "Original|ApplicationActiveProject", "KString", "", "C:\Users\ROG\Documents\3ds Max 2022"
 			Property: "Original|ApplicationNativeFile", "KString", "", "F:\아펠리오스\button.max"
 		}
@@ -685,10 +685,10 @@ Objects:  {
 			Property: "CoordAxisSign", "int", "",1
 			Property: "OriginalUpAxis", "int", "",2
 			Property: "OriginalUpAxisSign", "int", "",1
-			Property: "UnitScaleFactor", "double", "",2.54
-			Property: "OriginalUnitScaleFactor", "double", "",2.54
+			Property: "UnitScaleFactor", "double", "",1
+			Property: "OriginalUnitScaleFactor", "double", "",1
 			Property: "AmbientColor", "ColorRGB", "",1,1,1
-			Property: "DefaultCamera", "KString", "", "Producer Perspective"
+			Property: "DefaultCamera", "KString", "", "Producer Top"
 			Property: "TimeMode", "enum", "",6
 			Property: "TimeProtocol", "enum", "",2
 			Property: "SnapOnFrameMode", "enum", "",0
@@ -725,9 +725,9 @@ Connections:  {
 	Connect: "OO", "Material::Material #2", "Model::Connecter_Line"
 	Connect: "OO", "Texture::Map #10", "Model::Connecter_Line"
 	Connect: "OO", "Video::Map #10", "Texture::Map #10"
-	Connect: "OO", "Model::Connecter_line", "DisplayLayer::02building"
 	Connect: "OO", "Model::Connecter_cainLine", "DisplayLayer::02building"
 	Connect: "OO", "Model::Connecter_Line", "DisplayLayer::02building"
+	Connect: "OO", "Model::Connecter_line", "DisplayLayer::02building"
 }
 ;Takes and animation section
 ;----------------------------------------------------
@@ -781,7 +781,7 @@ Version5:  {
 		TimeLineStopTime: 470400000
 	}
 	RendererSetting:  {
-		DefaultCamera: "Producer Perspective"
+		DefaultCamera: "Producer Top"
 		DefaultViewingMode: 0
 	}
 }
