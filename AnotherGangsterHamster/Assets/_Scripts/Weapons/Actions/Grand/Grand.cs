@@ -204,8 +204,6 @@ namespace Weapons.Actions
         {
             if (_currentGrandStatus == GrandStatus.Idle || _currentGrandStatus == GrandStatus.Resize) return;
 
-            _myRigid.velocity = Vector3.zero;
-            _myRigid.angularVelocity /= 10;
             _beforeSizeLevel = _currentSizeLevel;
             _currentGrandStatus = GrandStatus.Use;
         }
@@ -292,7 +290,6 @@ namespace Weapons.Actions
                     break;
 
                 case GrandStatus.Use:
-                    _myRigid.velocity = Vector3.zero;
                     if (Input.GetKey(_useKeycode))
                     {
                         _weaponUsedTime += Time.deltaTime;
@@ -323,8 +320,6 @@ namespace Weapons.Actions
                         transform.rotation = Quaternion.identity;
                         _currentGrandStatus = GrandStatus.LosePower;
                         _myRigid.constraints = RigidbodyConstraints.None;
-
-                        _myRigid.angularVelocity = _myRigid.velocity = Vector3.zero;
 
                         switch (_currentSizeLevel)
                         {
