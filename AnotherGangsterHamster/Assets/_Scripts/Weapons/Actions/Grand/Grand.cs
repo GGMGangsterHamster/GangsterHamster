@@ -277,14 +277,17 @@ namespace Weapons.Actions
             {
                 case GrandStatus.Idle:
 
-                    if (Vector3.Distance(transform.position, HandPosition) > 2f)
-                        transform.position = HandPosition;
+                    transform.position = HandPosition;
+                    transform.rotation = Quaternion.Slerp(transform.rotation, MainCameraTransform.rotation, 0.5f);
+                    
+                    //if (Vector3.Distance(transform.position, HandPosition) > 2f)
+                    //    transform.position = HandPosition;
                         
-                    _myRigid.velocity = (HandPosition - transform.position) * 10;
-                    _myRigid.angularVelocity = Vector3.zero;
-                    // FIXME: GravityAffectedObject 에 Enabled 있어요 그거 한번 써줘요 -우앱
-                    // ANSWER : 그거 써보았는데 그럼 오히려 복잡해지더라고요 - To 우앱
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
+                    //_myRigid.velocity = (HandPosition - transform.position) * 10;
+                    //_myRigid.angularVelocity = Vector3.zero;
+                    //// FIXME: GravityAffectedObject 에 Enabled 있어요 그거 한번 써줘요 -우앱
+                    //// ANSWER : 그거 써보았는데 그럼 오히려 복잡해지더라고요 - To 우앱
+                    //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
                     break;
 
                 case GrandStatus.Fire:
