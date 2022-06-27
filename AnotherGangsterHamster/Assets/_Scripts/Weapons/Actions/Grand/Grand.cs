@@ -204,7 +204,9 @@ namespace Weapons.Actions
         {
             if (_currentGrandStatus == GrandStatus.Idle || _currentGrandStatus == GrandStatus.Resize) return;
 
-            _myRigid.velocity = Vector3.zero;
+            if(_currentSizeLevel == GrandSizeLevel.OneGrade)
+                _myRigid.velocity = Vector3.zero;
+            
             _beforeSizeLevel = _currentSizeLevel;
             _currentGrandStatus = GrandStatus.Use;
         }
@@ -364,10 +366,13 @@ namespace Weapons.Actions
                     else
                     {
                         _currentLerpTime += Time.deltaTime;
-                        //transform.localScale = Vector3.one * Mathf.Lerp(_beforeWeaponSize, _sizeLevelValue[_currentSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
                         transform.localScale = Vector3.one * Mathf.Lerp(1, _sizeLevelValue[_currentSizeLevel] / _sizeLevelValue[_beforeSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
                         transform.rotation = Quaternion.Lerp(transform.rotation, lerpQuaternion, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
-                        transform.position = Vector3.Lerp(beforePos, afterPos, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
+
+                        if(beforePos != afterPos)
+                        {
+                            transform.position = Vector3.Lerp(beforePos, afterPos, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
+                        }
                     }
                     break;
                     
@@ -463,9 +468,6 @@ namespace Weapons.Actions
             ReadjustmentPos(Vector3.right);
             ReadjustmentPos(Vector3.up);
             ReadjustmentPos(Vector3.forward);
-
-            _myRigid.angularVelocity = Vector3.zero;
-            _myRigid.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
         /// 조건설명
