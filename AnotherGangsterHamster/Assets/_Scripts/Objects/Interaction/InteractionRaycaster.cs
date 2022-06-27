@@ -65,6 +65,7 @@ namespace Objects.Interaction
          // 상호작용 가능한 오브젝트가 없는 경우
          if (target == null || !target.canInteractByPlayer)
          {
+            Debug.Log("없어요");
             _currentObject?.DeFocus();
             DialogManager.Instance.GetPannel().ClearChar();
             _currentObject = null;
@@ -93,6 +94,8 @@ namespace Objects.Interaction
          Transform target = null;
 
          RaycastHit[] hits = Physics.RaycastAll(MainCam.position, MainCam.forward);
+
+         if(hits.Length == 0) return null;
 
          RaycastHit hit = new RaycastHit();
          float minDist = float.MaxValue;

@@ -101,7 +101,8 @@ namespace Weapons.Actions
             if (_currentGravitoStatus == GravitoStatus.Idle &&
                !isReseting && _gravitoAnimator.isStopedMoving())
             {
-                if(InteractionManager.Instance.currentRaycastHitTrm.CompareTag("ATYPEOBJECT"))
+                if (InteractionManager.Instance.currentRaycastHitTrm != null 
+                    && InteractionManager.Instance.currentRaycastHitTrm.CompareTag("ATYPEOBJECT"))
                 {
                     RaycastHit hit = InteractionManager.Instance.currentRaycastHit;
 

@@ -43,7 +43,8 @@ namespace Weapons.Actions
             && _currentStatus != LumoStatus.Stickly
             && _lumoAnimator.isStopedMoving())
             {
-                if (InteractionManager.Instance.currentRaycastHitTrm.CompareTag("ATYPEOBJECT"))
+                if (InteractionManager.Instance.currentRaycastHitTrm != null
+                    && InteractionManager.Instance.currentRaycastHitTrm.CompareTag("ATYPEOBJECT"))
                 {
                     RaycastHit hit = InteractionManager.Instance.currentRaycastHit;
                     _fireDir = MainCameraTransform.forward;

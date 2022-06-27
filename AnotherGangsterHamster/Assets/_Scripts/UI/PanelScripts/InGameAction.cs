@@ -61,6 +61,10 @@ namespace UI.PanelScripts
                     }
                 }
             }
+            else
+            {
+                aimImage.color = aimColors[0].tagColor;
+            }
         }
 
         
