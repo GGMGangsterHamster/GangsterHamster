@@ -31,8 +31,10 @@ namespace Effects.Shaders.Props
                _mat.Add(renderers[i].sharedMaterial);
          }
 
-         _mat.ForEach(e => e.SetFloat(EMISSION, emission));
-         _mat.ForEach(e => e.SetFloat(TRANSITION, (defaultStatus ? 1.0f : 0.0f)));
+         _mat.ForEach(e => {
+            e.SetFloat(EMISSION, emission);
+            e.SetFloat(TRANSITION, (defaultStatus ? 1.0f : 0.0f));
+         });
       }
 
       public void Active(GameObject other)
