@@ -7,7 +7,7 @@ namespace Objects.Trigger
     public class SceneLoadTrigger : MonoBehaviour, ICollisionEventable
     {
         const string PLAYER = "PLAYER_BASE";
-        public StageNames Load;
+        public string Load;
 
         public void Active(GameObject other)
         {
