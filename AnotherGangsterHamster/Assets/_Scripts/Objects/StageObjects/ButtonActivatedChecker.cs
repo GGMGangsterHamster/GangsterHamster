@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 
 namespace Objects.StageObjects
 {
@@ -26,15 +27,12 @@ namespace Objects.StageObjects
 
             if (interactable != null)
             {
-               interactable._callbacks.Add(
-                  new CollisionCallback(e => {
-                     Active(this.gameObject);
-                     Debug.Log("ASD");
-                  }, e => {
-                     Deactive(this.gameObject);
-                     Debug.Log("ASSDDD");
-                  })
-               );
+               CollisionCallback collisionCallback =
+                  (interactable._callbacks as List<CollisionCallback>)
+                  .Find(e => e.key == "");
+
+               collisionCallback.OnActive.AddListener(Active);
+               collisionCallback.OnDeactive.AddListener(Deactive);
                _buttons.Add(Buttons[i].GetComponent<IActivated>());
             }
 
