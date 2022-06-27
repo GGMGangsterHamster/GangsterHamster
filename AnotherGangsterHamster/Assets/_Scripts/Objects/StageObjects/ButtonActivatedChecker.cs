@@ -16,7 +16,29 @@ namespace Objects.StageObjects
       {
          for (int i = 0; i < Buttons.Count; ++i)
          {
-            _buttons.Add(Buttons[i].GetComponent<IActivated>());
+            dynamic interactable = null;
+
+            interactable = Buttons[i].GetComponent<CollisionInteractableObject>();
+            if (interactable == null)
+               interactable = Buttons[i].GetComponent<TriggerInteractableObject>();
+            if (interactable == null)
+               interactable = Buttons[i].GetComponent<BothInteractableObject>();
+
+
+            if (interactable != null)
+            {
+               interactable._callbacks.Add(
+                  new CollisionCallback(e => {
+                     Active(this.gameObject);
+                  }, e => {
+                     Deactive(this.gameObject);
+                  })
+               );
+               _buttons.Add(Buttons[i].GetComponent<IActivated>());
+            }
+
+
+
          }
       }
 
