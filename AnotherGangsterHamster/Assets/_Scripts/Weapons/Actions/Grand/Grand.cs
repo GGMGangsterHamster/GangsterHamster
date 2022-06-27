@@ -45,8 +45,6 @@ namespace Weapons.Actions
         // WeaponEvents Singleton 패턴 피하기 위함
         private WeaponEvents _events;
 
-        private FollowGroundPos _playerFollow;
-
         private float fullChangeTime
         {
             get
@@ -129,12 +127,6 @@ namespace Weapons.Actions
             grandLv3Model = transform.GetChild(2).gameObject;
 
             grandLv1Model.SetActive(true);
-        }
-
-        private void Start()
-        {
-            _playerFollow = PlayerBaseTransform.GetComponent<FollowGroundPos>();
-            // 만약 플레이어와의 거리가 alphaSensorValue보다 가깝다면 투명도를 올린다.
         }
 
         public override void FireWeapon()

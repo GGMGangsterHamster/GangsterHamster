@@ -106,6 +106,7 @@ namespace Weapons.Actions
                     if(_weaponActions[WeaponEnum.Gravito].GetComponent<Gravito>().SticklyTrm() == _weaponActions[WeaponEnum.Grand].transform)
                     {
                         _weaponActions[WeaponEnum.Gravito].ResetWeapon();
+                        _weaponActions[WeaponEnum.Lumo].gameObject.SetActive(false);
                     }
                 }
 

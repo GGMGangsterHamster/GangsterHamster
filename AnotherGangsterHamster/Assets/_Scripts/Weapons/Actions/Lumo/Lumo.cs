@@ -42,7 +42,7 @@ namespace Weapons.Actions
             if (_currentStatus != LumoStatus.Use
             && _currentStatus != LumoStatus.Stickly
             && _lumoAnimator.isStopedMoving())
-            {
+            { 
                 if (InteractionManager.Instance.currentRaycastHitTrm != null
                     && InteractionManager.Instance.currentRaycastHitTrm.CompareTag("ATYPEOBJECT"))
                 {

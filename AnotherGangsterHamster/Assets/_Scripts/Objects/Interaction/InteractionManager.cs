@@ -96,7 +96,6 @@ namespace Objects.Interaction
       public void ClearInteraction()
       {
           _currentActiveInteraction = null;
-          currentRaycastHitTrm = null;
       }
 
       /// <summary>
