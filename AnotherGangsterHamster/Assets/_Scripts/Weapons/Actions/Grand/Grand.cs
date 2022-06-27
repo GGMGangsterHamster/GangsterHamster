@@ -25,8 +25,8 @@ namespace Weapons.Actions
     {
         public string WeaponKeyCodePath = "KeyCodes/Weapons.json";
         public float resizeSpeed; // 크기 변환할 때 드는 시간
+        public float chargeSpeed; // 차징 하는 속도
         public float reboundPower;
-        public float alphaSensorValue; // 오브젝트가 투명해지는 거리
         public float alphaToZeroSpeed;
 
         public bool IsCanChangeTwoStep
@@ -302,7 +302,7 @@ namespace Weapons.Actions
                 case GrandStatus.Use:
                     if (Input.GetKey(_useKeycode))
                     {
-                        _weaponUsedTime += Time.deltaTime;
+                        _weaponUsedTime += Time.deltaTime * chargeSpeed;
                         chargeBar.localScale = new Vector3(ChargeBarValue, 1, 1);
                         // 차징 되는 UI 보여주기
 
