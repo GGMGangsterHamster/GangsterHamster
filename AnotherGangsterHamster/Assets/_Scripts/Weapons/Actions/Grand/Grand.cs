@@ -439,9 +439,9 @@ namespace Weapons.Actions
                                      Mathf.Max(Mathf.Abs(reboundDir.y),
                                                Mathf.Abs(reboundDir.z)));
 
-                    x = maxValue == Mathf.Abs(reboundDir.x) ? rebound * Mathf.Sign(reboundDir.x) - (Vector3.Distance(transform.position, PlayerBaseTransform.position) - _sizeLevelValue[_currentSizeLevel]) : 0;
-                    y = maxValue == Mathf.Abs(reboundDir.y) ? rebound * Mathf.Sign(reboundDir.y) - (Vector3.Distance(transform.position, PlayerBaseTransform.position) - _sizeLevelValue[_currentSizeLevel]) : 0;
-                    z = maxValue == Mathf.Abs(reboundDir.z) ? rebound * Mathf.Sign(reboundDir.z) - (Vector3.Distance(transform.position, PlayerBaseTransform.position) - _sizeLevelValue[_currentSizeLevel]) : 0;
+                    x = maxValue == Mathf.Abs(reboundDir.x) ? rebound * Mathf.Sign(reboundDir.x) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : 0;
+                    y = maxValue == Mathf.Abs(reboundDir.y) ? rebound * Mathf.Sign(reboundDir.y) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : 0;
+                    z = maxValue == Mathf.Abs(reboundDir.z) ? rebound * Mathf.Sign(reboundDir.z) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : 0;
 
                     //PlayerBaseTransform.GetComponent<Rigidbody>().velocity = (transform.right * x) + (transform.up * y) + (transform.forward * z); // 도형의 각도에 따라 반동 주는 거
                     PlayerBaseTransform.GetComponent<Rigidbody>().velocity = new Vector3(x, y, z); // 도형의 각도를 무시하고 World 좌표로 반동 주는거
