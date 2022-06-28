@@ -98,6 +98,7 @@ namespace Weapons.Actions
             base.Awake();
             _events = FindObjectOfType<WeaponEvents>();
             _weaponEnum = WeaponEnum.Grand;
+            _myRigid.constraints = RigidbodyConstraints.FreezePosition;
 
             _sizeLevelValue.Add(GrandSizeLevel.OneGrade, 1f);
             _sizeLevelValue.Add(GrandSizeLevel.TwoGrade, 2f);
@@ -160,7 +161,6 @@ namespace Weapons.Actions
                     {
                         transform.position = FirePosition + (PlayerStatus.IsCrouching ? hit.normal : Vector3.zero);
                         PlayerBaseTransform.position += PlayerBaseTransform.up * (1.2f - (PlayerStatus.IsCrouching ? 0 : dist));
-                        _currentGrandStatus = GrandStatus.LosePower;
                     }
                     else
                     {
@@ -186,7 +186,9 @@ namespace Weapons.Actions
                     PlayerBaseTransform.position += hit2.normal * (dist + 0.5f);
                 }
                 else
+                {
                     transform.position = FirePosition;
+                }
 
                 _myCollider.isTrigger = false;
                 (_myCollider as BoxCollider).center = Vector3.zero;
@@ -276,15 +278,6 @@ namespace Weapons.Actions
 
                     transform.position = HandPosition;
                     transform.rotation = Quaternion.Slerp(transform.rotation, MainCameraTransform.rotation, 0.5f);
-                    
-                    //if (Vector3.Distance(transform.position, HandPosition) > 2f)
-                    //    transform.position = HandPosition;
-                        
-                    //_myRigid.velocity = (HandPosition - transform.position) * 10;
-                    //_myRigid.angularVelocity = Vector3.zero;
-                    //// FIXME: GravityAffectedObject 에 Enabled 있어요 그거 한번 써줘요 -우앱
-                    //// ANSWER : 그거 써보았는데 그럼 오히려 복잡해지더라고요 - To 우앱
-                    //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
                     break;
 
                 case GrandStatus.Fire:
