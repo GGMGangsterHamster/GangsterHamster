@@ -87,9 +87,6 @@ namespace Weapons.Actions
         private float _currentLerpTime = 0f;
         private float _weaponUsedTime = 0f;
 
-        private Vector3 beforePos;
-        private Vector3 afterPos;
-
         private float _fireCoolTime;
         private float _alpha;
         private int jumpLevel;
@@ -149,6 +146,8 @@ namespace Weapons.Actions
                 _fireDir = MainCameraTransform.forward;
                 transform.rotation = Quaternion.identity;
 
+                _currentGrandStatus = GrandStatus.Fire;
+
                 if (Vector3.Angle(_fireDir, -PlayerBaseTransform.up) < 37.5f)
                 {
                     _dropPoint.gameObject.SetActive(false);
@@ -160,8 +159,8 @@ namespace Weapons.Actions
                     if (b && dist < 0.2f)
                     {
                         transform.position = FirePosition + (PlayerStatus.IsCrouching ? hit.normal : Vector3.zero);
-                        Debug.Log(transform.position);
                         PlayerBaseTransform.position += PlayerBaseTransform.up * (1.2f - (PlayerStatus.IsCrouching ? 0 : dist));
+                        _currentGrandStatus = GrandStatus.LosePower;
                     }
                     else
                     {
@@ -188,8 +187,6 @@ namespace Weapons.Actions
                 }
                 else
                     transform.position = FirePosition;
-
-                _currentGrandStatus = GrandStatus.Fire;
 
                 _myCollider.isTrigger = false;
                 (_myCollider as BoxCollider).center = Vector3.zero;
@@ -371,11 +368,6 @@ namespace Weapons.Actions
                         _currentLerpTime += Time.deltaTime;
                         transform.localScale = Vector3.one * Mathf.Lerp(1, _sizeLevelValue[_currentSizeLevel] / _sizeLevelValue[_beforeSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
                         transform.rotation = Quaternion.Lerp(transform.rotation, lerpQuaternion, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
-
-                        if(beforePos != afterPos)
-                        {
-                            transform.position = Vector3.Lerp(beforePos, afterPos, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
-                        }
                     }
                     break;
                     
@@ -465,12 +457,6 @@ namespace Weapons.Actions
             lerpQuaternion = Quaternion.Euler(transform.rotation.eulerAngles.x + lerpQuaternion.eulerAngles.x,
                                                 transform.rotation.eulerAngles.y + lerpQuaternion.eulerAngles.y,
                                                 transform.rotation.eulerAngles.z + lerpQuaternion.eulerAngles.z);
-
-            beforePos = transform.position;
-            afterPos = transform.position;
-            ReadjustmentPos(Vector3.right);
-            ReadjustmentPos(Vector3.up);
-            ReadjustmentPos(Vector3.forward);
         }
 
         /// 조건설명
@@ -489,7 +475,8 @@ namespace Weapons.Actions
             {
 
                 if ((plusHit.transform.CompareTag("BTYPEOBJECT") || plusHit.transform.CompareTag("ATYPEOBJECT")) 
-                && ((minusHit.transform.CompareTag("BTYPEOBJECT") || minusHit.transform.CompareTag("ATYPEOBJECT"))))
+                && (minusHit.transform.CompareTag("BTYPEOBJECT") || minusHit.transform.CompareTag("ATYPEOBJECT"))
+                && !plusHit.collider.isTrigger && !minusHit.collider.isTrigger)
                 {
                     if (Vector3.Distance(transform.position, plusHit.point) +
                         Vector3.Distance(transform.position, minusHit.point) < _sizeLevelValue[_currentSizeLevel])
@@ -510,27 +497,7 @@ namespace Weapons.Actions
 
             return true;
         }
-        private void ReadjustmentPos(Vector3 checkDir)
-        {
-            float curSize = _sizeLevelValue[_currentSizeLevel] / 2;
-            float plusAxisDist = GetDistance(checkDir);
-            float minusAxisDist = GetDistance(-checkDir);
 
-            if (plusAxisDist < curSize)
-            {
-                float padding = curSize - plusAxisDist;
-
-                if (minusAxisDist > curSize + padding)
-                    afterPos += -checkDir * padding; // padding 만큼 이동
-            }
-            else if (minusAxisDist < curSize)
-            {
-                float padding = curSize - minusAxisDist;
-
-                if (plusAxisDist > curSize + padding)
-                    afterPos += checkDir * padding; // padding 만큼 이동
-            }
-        }
         private float GetDistance(Vector3 dir)
         {
             if (Physics.BoxCast(transform.position, Vector3.one * (_sizeLevelValue[_beforeSizeLevel] / 2 - _sizeLevelValue[_beforeSizeLevel] / 10), dir, out RaycastHit hit))
