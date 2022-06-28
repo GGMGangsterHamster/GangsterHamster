@@ -26,7 +26,12 @@ namespace Weapons.Actions
                 _playerGravity.SetIndividualGravity(GravityManager.GetGlobalGravityDirection(), 4.9f);
                 _isReinforcemented = true;
             }
-            
+            else if(_playerGravity.AffectedByGlobalGravity)
+            {
+                _playerGravity.AffectedByGlobalGravity = false;
+                _playerGravity.SetIndividualGravity(GravityManager.GetGlobalGravityDirection(), 4.9f);
+            }
+
             PlayerValues.Speed = PlayerValues.DashSpeed * 2;
         }
 
@@ -34,7 +39,6 @@ namespace Weapons.Actions
         {
             if (!obj.CompareTag("PLAYER_BASE")) return;
 
-            Debug.Log("Exited");
             if (_isReinforcemented)
             {
                 _playerGravity.AffectedByGlobalGravity = true;
