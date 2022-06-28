@@ -54,12 +54,14 @@ namespace Stages.Management
          }
       }
 
-      public void Load(StageNames target)
+      public void Load(string target)
       {
-         if (AvalibleToLoad(target))
+         StageNames stage = (StageNames)Enum.Parse(typeof(StageNames), target);
+
+         if (AvalibleToLoad(stage))
          {
-            SceneManager.LoadScene(target.ToString());
-            CurrentStage = target;
+            SceneManager.LoadScene(target);
+            CurrentStage = stage;
             GC.Collect();
          }
 

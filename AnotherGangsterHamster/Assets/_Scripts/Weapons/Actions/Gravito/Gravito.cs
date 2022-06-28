@@ -101,7 +101,8 @@ namespace Weapons.Actions
             if (_currentGravitoStatus == GravitoStatus.Idle &&
                !isReseting && _gravitoAnimator.isStopedMoving())
             {
-                if(InteractionManager.Instance.currentRaycastHitTrm.CompareTag("ATYPEOBJECT"))
+                if (InteractionManager.Instance.currentRaycastHitTrm != null 
+                    && InteractionManager.Instance.currentRaycastHitTrm.CompareTag("ATYPEOBJECT"))
                 {
                     RaycastHit hit = InteractionManager.Instance.currentRaycastHit;
 
@@ -152,7 +153,12 @@ namespace Weapons.Actions
             {
                 _currentGravitoStatus = GravitoStatus.Idle;
                 _aTypeTrm = null;
-                Update();
+                Update(); 
+                
+                if (_weaponManagement.GetCurrentWeapon() != _weaponEnum)
+                {
+                    gameObject.SetActive(false);
+                }
                 return;
             }
 

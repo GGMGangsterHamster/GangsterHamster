@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 
 namespace Objects.StageObjects
 {
@@ -12,11 +13,31 @@ namespace Objects.StageObjects
       public UnityEvent<GameObject> OnQualified;
       public UnityEvent<GameObject> OnDisqualified;
 
-      private void Awake()
+      private void Start()
       {
          for (int i = 0; i < Buttons.Count; ++i)
          {
-            _buttons.Add(Buttons[i].GetComponent<IActivated>());
+            dynamic interactable;
+
+            interactable = Buttons[i].GetComponent<CollisionInteractableObject>();
+            if (interactable == null)
+               interactable = Buttons[i].GetComponent<TriggerInteractableObject>();
+            if (interactable == null)
+               interactable = Buttons[i].GetComponent<BothInteractableObject>();
+
+            if (interactable != null)
+            {
+               CollisionCallback collisionCallback =
+                  (interactable._callbacks as List<CollisionCallback>)
+                  .Find(e => e.key == "");
+
+               collisionCallback.OnActive.AddListener(Active);
+               collisionCallback.OnDeactive.AddListener(Deactive);
+               _buttons.Add(Buttons[i].GetComponent<IActivated>());
+            }
+
+
+
          }
       }
 

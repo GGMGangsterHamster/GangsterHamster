@@ -11,14 +11,22 @@ using UnityEngine;
 // 버그 코드는 400줄 이상
 
 namespace Weapons.Actions
-{
+{        
+    // 그랜드의 크기 변환 단계
+    public enum GrandSizeLevel
+    {
+        OneGrade,
+        TwoGrade,
+        FourGrade,
+    }
+
     [RequireComponent(typeof(GravityAffectedObject))]
     public class Grand : WeaponAction
     {
         public string WeaponKeyCodePath = "KeyCodes/Weapons.json";
         public float resizeSpeed; // 크기 변환할 때 드는 시간
+        public float chargeSpeed; // 차징 하는 속도
         public float reboundPower;
-        public float alphaSensorValue; // 오브젝트가 투명해지는 거리
         public float alphaToZeroSpeed;
 
         public bool IsCanChangeTwoStep
@@ -37,15 +45,6 @@ namespace Weapons.Actions
         // WeaponEvents Singleton 패턴 피하기 위함
         private WeaponEvents _events;
 
-        private FollowGroundPos _playerFollow;
-
-        // 그랜드의 크기 변환 단계
-        public enum GrandSizeLevel
-        {
-            OneGrade,
-            TwoGrade,
-            FourGrade,
-        }
         private float fullChangeTime
         {
             get
@@ -70,8 +69,6 @@ namespace Weapons.Actions
                     return 1f;
             }
         }
-
-        private AlphaSensor _sensor;
 
         private GameObject grandLv1Model;
         private GameObject grandLv2Model;
@@ -112,10 +109,6 @@ namespace Weapons.Actions
             WeaponVO vo = Utils.JsonToVO<WeaponVO>(WeaponKeyCodePath);
             _useKeycode = (KeyCode)vo.Use;
 
-            chargeBar = GameObject.Find("ChargeBar").transform;
-
-            _sensor = GetComponent<AlphaSensor>();
-
             _enterCollision = GetComponent<CollisionInteractableObject>();
             _stayCollision = GetComponent<CollisionStayInteractableObject>();
 
@@ -125,6 +118,8 @@ namespace Weapons.Actions
             _dropPoint.parent = WeaponObjectParentTransform;
             _dropLineRenderer.transform.parent = WeaponObjectParentTransform;
 
+            chargeBar = GameObject.Find("ChargeBar").transform;
+
             GetComponent<MeshRenderer>().enabled = false;
 
             grandLv1Model = transform.GetChild(0).gameObject;
@@ -132,14 +127,6 @@ namespace Weapons.Actions
             grandLv3Model = transform.GetChild(2).gameObject;
 
             grandLv1Model.SetActive(true);
-        }
-
-        private void Start()
-        {
-            _playerFollow = PlayerBaseTransform.GetComponent<FollowGroundPos>();
-            // 만약 플레이어와의 거리가 alphaSensorValue보다 가깝다면 투명도를 올린다.
-            _sensor.requirement += () =>
-                alphaSensorValue > Vector3.Distance(PlayerBaseTransform.position, transform.position) - _sizeLevelValue[_currentSizeLevel];
         }
 
         public override void FireWeapon()
@@ -212,8 +199,9 @@ namespace Weapons.Actions
         {
             if (_currentGrandStatus == GrandStatus.Idle || _currentGrandStatus == GrandStatus.Resize) return;
 
-            _myRigid.velocity = Vector3.zero;
-            _myRigid.angularVelocity /= 10;
+            if(_currentSizeLevel == GrandSizeLevel.OneGrade)
+                _myRigid.velocity = Vector3.zero;
+            
             _beforeSizeLevel = _currentSizeLevel;
             _currentGrandStatus = GrandStatus.Use;
         }
@@ -229,8 +217,8 @@ namespace Weapons.Actions
                 transform.localScale = Vector3.one;
 
                 chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ?
-                                                            0 :
-                                                            _sizeLevelValue[_currentSizeLevel] * 0.25f, 1, 1);
+                                                           0 :
+                                                           _sizeLevelValue[_currentSizeLevel] * 0.25f, 1, 1);
 
                 transform.position = HandPosition;
                 transform.rotation = Quaternion.identity;
@@ -289,14 +277,17 @@ namespace Weapons.Actions
             {
                 case GrandStatus.Idle:
 
-                    if (Vector3.Distance(transform.position, HandPosition) > 2f)
-                        transform.position = HandPosition;
+                    transform.position = HandPosition;
+                    transform.rotation = Quaternion.Slerp(transform.rotation, MainCameraTransform.rotation, 0.5f);
+                    
+                    //if (Vector3.Distance(transform.position, HandPosition) > 2f)
+                    //    transform.position = HandPosition;
                         
-                    _myRigid.velocity = (HandPosition - transform.position) * 10;
-                    _myRigid.angularVelocity = Vector3.zero;
-                    // FIXME: GravityAffectedObject 에 Enabled 있어요 그거 한번 써줘요 -우앱
-                    // ANSWER : 그거 써보았는데 그럼 오히려 복잡해지더라고요 - To 우앱
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
+                    //_myRigid.velocity = (HandPosition - transform.position) * 10;
+                    //_myRigid.angularVelocity = Vector3.zero;
+                    //// FIXME: GravityAffectedObject 에 Enabled 있어요 그거 한번 써줘요 -우앱
+                    //// ANSWER : 그거 써보았는데 그럼 오히려 복잡해지더라고요 - To 우앱
+                    //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(MainCameraTransform.forward), 0.5f);
                     break;
 
                 case GrandStatus.Fire:
@@ -304,11 +295,9 @@ namespace Weapons.Actions
                     break;
 
                 case GrandStatus.Use:
-                    _myRigid.velocity = Vector3.zero;
                     if (Input.GetKey(_useKeycode))
                     {
-                        _weaponUsedTime += Time.deltaTime;
-
+                        _weaponUsedTime += Time.deltaTime * chargeSpeed;
                         chargeBar.localScale = new Vector3(ChargeBarValue, 1, 1);
                         // 차징 되는 UI 보여주기
 
@@ -337,8 +326,6 @@ namespace Weapons.Actions
                         transform.rotation = Quaternion.identity;
                         _currentGrandStatus = GrandStatus.LosePower;
                         _myRigid.constraints = RigidbodyConstraints.None;
-
-                        _myRigid.angularVelocity = _myRigid.velocity = Vector3.zero;
 
                         switch (_currentSizeLevel)
                         {
@@ -382,10 +369,13 @@ namespace Weapons.Actions
                     else
                     {
                         _currentLerpTime += Time.deltaTime;
-                        //transform.localScale = Vector3.one * Mathf.Lerp(_beforeWeaponSize, _sizeLevelValue[_currentSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
                         transform.localScale = Vector3.one * Mathf.Lerp(1, _sizeLevelValue[_currentSizeLevel] / _sizeLevelValue[_beforeSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
                         transform.rotation = Quaternion.Lerp(transform.rotation, lerpQuaternion, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
-                        transform.position = Vector3.Lerp(beforePos, afterPos, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
+
+                        if(beforePos != afterPos)
+                        {
+                            transform.position = Vector3.Lerp(beforePos, afterPos, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
+                        }
                     }
                     break;
                     
@@ -453,9 +443,9 @@ namespace Weapons.Actions
                                      Mathf.Max(Mathf.Abs(reboundDir.y),
                                                Mathf.Abs(reboundDir.z)));
 
-                    x = maxValue == Mathf.Abs(reboundDir.x) ? rebound * Mathf.Sign(reboundDir.x) - (Vector3.Distance(transform.position, PlayerBaseTransform.position) - _sizeLevelValue[_currentSizeLevel]) : 0;
-                    y = maxValue == Mathf.Abs(reboundDir.y) ? rebound * Mathf.Sign(reboundDir.y) - (Vector3.Distance(transform.position, PlayerBaseTransform.position) - _sizeLevelValue[_currentSizeLevel]) : 0;
-                    z = maxValue == Mathf.Abs(reboundDir.z) ? rebound * Mathf.Sign(reboundDir.z) - (Vector3.Distance(transform.position, PlayerBaseTransform.position) - _sizeLevelValue[_currentSizeLevel]) : 0;
+                    x = maxValue == Mathf.Abs(reboundDir.x) ? rebound * Mathf.Sign(reboundDir.x) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : 0;
+                    y = maxValue == Mathf.Abs(reboundDir.y) ? rebound * Mathf.Sign(reboundDir.y) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : 0;
+                    z = maxValue == Mathf.Abs(reboundDir.z) ? rebound * Mathf.Sign(reboundDir.z) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : 0;
 
                     //PlayerBaseTransform.GetComponent<Rigidbody>().velocity = (transform.right * x) + (transform.up * y) + (transform.forward * z); // 도형의 각도에 따라 반동 주는 거
                     PlayerBaseTransform.GetComponent<Rigidbody>().velocity = new Vector3(x, y, z); // 도형의 각도를 무시하고 World 좌표로 반동 주는거
@@ -481,9 +471,6 @@ namespace Weapons.Actions
             ReadjustmentPos(Vector3.right);
             ReadjustmentPos(Vector3.up);
             ReadjustmentPos(Vector3.forward);
-
-            _myRigid.angularVelocity = Vector3.zero;
-            _myRigid.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
         /// 조건설명

@@ -8,7 +8,7 @@ namespace Objects.Interaction
    {
       Interactable       _currentActiveInteraction;
       Transform          _currentActiveAtype;
-      public Transform currentRaycastHitTrm;
+      public Transform currentRaycastHitTrm { get; set; }
       public RaycastHit  currentRaycastHit;
 
       WeaponManagement _weaponManagement;
@@ -94,7 +94,9 @@ namespace Objects.Interaction
       /// 상호작용 가능한 오브젝트를 null 로 바꿉니다.
       /// </summary>
       public void ClearInteraction()
-            => _currentActiveInteraction = null;
+      {
+          _currentActiveInteraction = null;
+      }
 
       /// <summary>
       /// 상호작용 합니다.<br/>

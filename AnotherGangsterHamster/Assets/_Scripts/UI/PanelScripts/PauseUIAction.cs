@@ -14,7 +14,7 @@ namespace UI.PanelScripts
         private string _soundPath = "SettingValue/Sound.json";
         private string _sensitivityPath = "SettingValue/Sensitivity.json";
 
-        [Header("°¢ÀÚÀÇ ±â´ÉÀÌ ÀÖ´Â UIµé")]
+        [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ UIï¿½ï¿½")]
         [SerializeField] private Button _fullScreenModeButton;
         [SerializeField] private Button _windowScreenModeButton;
         [SerializeField] private Button _1920x1080ResolutionButton;
@@ -31,7 +31,7 @@ namespace UI.PanelScripts
 
         public override void ActivationActions()
         {
-            // ¿©±â¼­ ½ºÅ©·Ñ¹ÙµéÀÇ °ªÀ» ÃÊ±âÈ­ ½ÃÄÑÁÜ
+            // ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½Å©ï¿½Ñ¹Ùµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             SoundVO soundVO = Utils.JsonToVO<SoundVO>(_soundPath);
             SensitivityVO sensitivityVO = Utils.JsonToVO<SensitivityVO>(_sensitivityPath);
 
@@ -77,7 +77,7 @@ namespace UI.PanelScripts
             {
                 SceneManager.LoadScene(StageNames.Title.ToString());
                 Utils.MoveTime();
-                // ÇöÀç UI ºñÈ°¼ºÈ­ ½ÃÅ°°í "Title UI"·Î º¯È¯
+                // ï¿½ï¿½ï¿½ï¿½ UI ï¿½ï¿½È°ï¿½ï¿½È­ ï¿½ï¿½Å°ï¿½ï¿½ "Title UI"ï¿½ï¿½ ï¿½ï¿½È¯
             });
 
             _gameRestartButton.onClick.AddListener(() =>
@@ -85,7 +85,7 @@ namespace UI.PanelScripts
                 SceneManager.LoadScene(gameObject.scene.name);
                 Utils.LockCursor();
                 Utils.MoveTime();
-                // ÇöÀçÀÇ ½ºÅ×ÀÌÁö¸¦ Àç½ÃÀÛ
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
             });
 
             _disableButton.onClick.AddListener(() =>
@@ -95,12 +95,12 @@ namespace UI.PanelScripts
                 UIManager.Instance.DeActivationPanel(panelId);
             });
 
-            #region ÀÓ½Ã
+            #region ï¿½Ó½ï¿½
 
             _stageSkipButton.onClick.AddListener(() =>
             {
                 SceneLoadTrigger sceneLoadTrigger = GameObject.FindObjectOfType<SceneLoadTrigger>();
-                SceneManager.LoadScene((sceneLoadTrigger.Load).ToString());
+                SceneManager.LoadScene((sceneLoadTrigger.LoadTarget));
                 Utils.LockCursor();
                 Utils.MoveTime();
             });
