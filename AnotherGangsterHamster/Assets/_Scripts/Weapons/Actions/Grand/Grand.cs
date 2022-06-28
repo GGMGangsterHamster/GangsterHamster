@@ -137,6 +137,9 @@ namespace Weapons.Actions
                 if (_myRigid.constraints == RigidbodyConstraints.FreezePosition)
                     _myRigid.constraints = RigidbodyConstraints.None;
 
+                _myRigid.velocity = Vector3.zero;
+                _myRigid.angularVelocity = Vector3.zero;
+
                 _dropPoint.gameObject.SetActive(true);
                 _dropLineRenderer.gameObject.SetActive(true);
 
