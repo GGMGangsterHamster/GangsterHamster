@@ -142,7 +142,7 @@ namespace Weapons.Actions
 
                 _dropPoint.gameObject.SetActive(true);
                 _dropLineRenderer.gameObject.SetActive(true);
-
+                
                 _alpha = 1;
                 Color temp = _dropPoint.GetComponent<MeshRenderer>().material.color;
                 _dropPoint.GetComponent<MeshRenderer>().material.color = new Color(temp.r, temp.g, temp.b, 1);
