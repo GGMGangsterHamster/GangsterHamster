@@ -45,6 +45,8 @@ namespace Weapons.Actions
         // WeaponEvents Singleton 패턴 피하기 위함
         private WeaponEvents _events;
 
+        private FollowGroundPos _myFollowGroundPos;
+
         private float fullChangeTime
         {
             get
@@ -119,6 +121,8 @@ namespace Weapons.Actions
             chargeBar = GameObject.Find("ChargeBar").transform;
 
             GetComponent<MeshRenderer>().enabled = false;
+
+            _myFollowGroundPos = GetComponent<FollowGroundPos>();
 
             grandLv1Model = transform.GetChild(0).gameObject;
             grandLv2Model = transform.GetChild(1).gameObject;
@@ -214,6 +218,7 @@ namespace Weapons.Actions
             if (_currentGrandStatus != GrandStatus.Resize && _currentGrandStatus != GrandStatus.Idle)
             {
                 PlayerBaseTransform.GetComponent<FollowGroundPos>().Deactive(gameObject);
+                _myFollowGroundPos.Active(null);
 
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
                 transform.localScale = Vector3.one;
