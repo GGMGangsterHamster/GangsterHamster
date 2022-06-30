@@ -13,7 +13,6 @@ namespace Characters.Player.Actions
         IActionable _actionable;
         GravityAffectedObject _curAtype;           // 잡고 있는 Atype
         Rigidbody _curRigid;           // 잡고 있는 Atype Rigidbody
-        Collider _curAtypeCollider;   // 잡고 있는 Atype 컬라이더
 
         #region 플레이어와 메인카메라의 Trm
         private Transform _mainCameraTransform;
@@ -74,7 +73,7 @@ namespace Characters.Player.Actions
                             handle.lossyScale.y *
                             handle.lossyScale.z > 1.1f ||
                             handle.gameObject.isStatic ||
-                            handle.name.CompareTo("Grand") == 0) || 
+                            handle.name.CompareTo("Grand") == 0) ||
                             (Vector3.Distance(MainCameraTransform.position, handle.position) > 2.5f))
                         {
                             InteractionManager.Instance.UnGrep();
@@ -82,11 +81,9 @@ namespace Characters.Player.Actions
                         }
 
                         PlayerBaseTransform.GetComponent<FollowGroundPos>().Deactive(handle.gameObject);
-                        //handle.SetParent((param as Transform));
 
                         #region GetComponent
                         _curAtype = handle.GetComponent<GravityAffectedObject>();
-                        _curAtypeCollider = handle.GetComponent<Collider>();
                         _curRigid = handle.GetComponent<Rigidbody>();
                         #endregion // GetComponent
 
@@ -146,14 +143,9 @@ namespace Characters.Player.Actions
                                           (Mathf.Abs(MainCameraTransform.forward.z) < 0.5f || moveDir.z == 0 ? (PlayerBaseTransform.forward.z - horizontalVec.z) : moveDir.z));
                 }
 
-                Debug.Log(PlayerBaseTransform.forward);
-
                 _curRigid.velocity = moveDir * 20;
                 _curRigid.angularVelocity = Vector3.Lerp(_curRigid.angularVelocity, Vector3.zero, 0.5f);
                 _curRigid.transform.rotation = Quaternion.Slerp(_curRigid.transform.rotation, Quaternion.LookRotation(PlayerBaseTransform.forward), 0.5f);
-
-                Debug.Log(Vector3.Distance((MainCameraTransform.position + (MainCameraTransform.forward * 2f)), _curRigid.transform.position));
-                Debug.Log(Vector3.Distance(PlayerBaseTransform.position, _curRigid.position));
 
                 if(Vector3.Distance((MainCameraTransform.position + (MainCameraTransform.forward * 2f)), _curRigid.transform.position) > 2.5f 
                 || Vector3.Distance(PlayerBaseTransform.position, _curRigid.position) < 0.85f)
