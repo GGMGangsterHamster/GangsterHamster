@@ -210,7 +210,8 @@ namespace Weapons.Actions
 
             if(_currentSizeLevel == GrandSizeLevel.OneGrade)
                 _myRigid.velocity = Vector3.zero;
-            
+
+            _myFollowGroundPos.Active(null);
             _beforeSizeLevel = _currentSizeLevel;
             _currentGrandStatus = GrandStatus.Use;
         }
@@ -326,6 +327,7 @@ namespace Weapons.Actions
                         transform.localScale = Vector3.one * _sizeLevelValue[_currentSizeLevel];
                         _cain.localScale = Vector3.one;
                         _cain_nucleus.localScale = Vector3.one;
+                        transform.rotation = Quaternion.identity;
                         _currentGrandStatus = GrandStatus.LosePower;
                         _myRigid.constraints = RigidbodyConstraints.None;
 
@@ -372,7 +374,7 @@ namespace Weapons.Actions
                     {
                         _currentLerpTime += Time.deltaTime;
                         transform.localScale = Vector3.one * Mathf.Lerp(1, _sizeLevelValue[_currentSizeLevel] / _sizeLevelValue[_beforeSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
-                        //transform.rotation = Quaternion.Lerp(transform.rotation, lerpQuaternion, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
+                        transform.rotation = Quaternion.Lerp(transform.rotation, lerpQuaternion, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
 
                         _cain.localScale = Vector3.one / Mathf.Lerp(1, _sizeLevelValue[_currentSizeLevel] / _sizeLevelValue[_beforeSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
                         _cain_nucleus.localScale = Vector3.one / Mathf.Lerp(1, _sizeLevelValue[_currentSizeLevel] / _sizeLevelValue[_beforeSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
@@ -434,10 +436,12 @@ namespace Weapons.Actions
             // 2. 플레이어가 정해진 범위에 들어와야 실행함
             if (_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize > 0)
             {
-                if ((_sizeLevelValue[_currentSizeLevel] / 2) > Vector3.Distance(transform.position, PlayerBaseTransform.position) - (PlayerBaseTransform.localScale.x + PlayerBaseTransform.localScale.y) / 3)
+                if ((_sizeLevelValue[_currentSizeLevel] / 3) > Vector3.Distance(transform.position, PlayerBaseTransform.position) - (PlayerBaseTransform.localScale.x + PlayerBaseTransform.localScale.y) / 3)
                 {
                     Vector3 reboundDir = (PlayerBaseTransform.position - transform.position).normalized;
-                    float rebound = (_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize) * reboundPower;
+                    float rebound = (_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize) * reboundPower - 2;
+
+                    if (_beforeSizeLevel == GrandSizeLevel.OneGrade && _currentSizeLevel == GrandSizeLevel.FourGrade) rebound += 3;
 
                     float maxValue = Mathf.Max(Mathf.Abs(reboundDir.x),
                                      Mathf.Max(Mathf.Abs(reboundDir.y),
