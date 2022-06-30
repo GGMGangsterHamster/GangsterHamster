@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Stage_0_1_ceiling
+  m_Name: Stage_0_1_corridorDoor
   m_Shader: {fileID: -6465566751694194690, guid: 2cc5e4dc52e63bda6b62e66ad7bf4649, type: 3}
   m_ValidKeywords:
   - _DISABLE_SSR_TRANSPARENT
@@ -28,15 +28,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _AO:
-        m_Texture: {fileID: 2800000, guid: 92d729f322397f349b62e00ecb657e0c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5d974895207483e429b8f2b015909e93, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Base:
-        m_Texture: {fileID: 2800000, guid: db88e1dec03b5114292ab3a7f290959d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 81e4c4faf89838240a890da1bb4e7bc0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emissive:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e9bc62a4180e5d845b109f6fa33cbdc3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Height:
@@ -44,15 +44,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Metalic:
-        m_Texture: {fileID: 2800000, guid: d4539d225a073ed44b61e6ff95d150f3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 12d45d6b779b89943bb2d064e9935fac, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Normal:
-        m_Texture: {fileID: 2800000, guid: f95a1ccc60dd34744b7def8d77715bfd, type: 3}
+        m_Texture: {fileID: 2800000, guid: ea2538d1f5c67f348811b1c29360ef0b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Roughness:
-        m_Texture: {fileID: 2800000, guid: f484b052a2613f342a74bf2f8b6b000d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3cbbf2dc75c48b9478399d8d821cbbe5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -84,7 +84,7 @@ Material:
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
-    - _Emission: 350
+    - _Emission: 400
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
     - _OpaqueCullMode: 2
@@ -123,6 +123,7 @@ Material:
     m_Colors:
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _emissioncolor: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &5103903316633477103
 MonoBehaviour:
