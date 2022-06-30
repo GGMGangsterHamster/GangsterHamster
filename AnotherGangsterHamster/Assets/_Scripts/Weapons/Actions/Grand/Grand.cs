@@ -326,7 +326,6 @@ namespace Weapons.Actions
                         transform.localScale = Vector3.one * _sizeLevelValue[_currentSizeLevel];
                         _cain.localScale = Vector3.one;
                         _cain_nucleus.localScale = Vector3.one;
-                        transform.rotation = Quaternion.identity;
                         _currentGrandStatus = GrandStatus.LosePower;
                         _myRigid.constraints = RigidbodyConstraints.None;
 
@@ -373,7 +372,7 @@ namespace Weapons.Actions
                     {
                         _currentLerpTime += Time.deltaTime;
                         transform.localScale = Vector3.one * Mathf.Lerp(1, _sizeLevelValue[_currentSizeLevel] / _sizeLevelValue[_beforeSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
-                        transform.rotation = Quaternion.Lerp(transform.rotation, lerpQuaternion, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
+                        //transform.rotation = Quaternion.Lerp(transform.rotation, lerpQuaternion, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
 
                         _cain.localScale = Vector3.one / Mathf.Lerp(1, _sizeLevelValue[_currentSizeLevel] / _sizeLevelValue[_beforeSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
                         _cain_nucleus.localScale = Vector3.one / Mathf.Lerp(1, _sizeLevelValue[_currentSizeLevel] / _sizeLevelValue[_beforeSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
