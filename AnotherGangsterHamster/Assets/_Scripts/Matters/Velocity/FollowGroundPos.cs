@@ -23,8 +23,12 @@ namespace Matters.Velocity
 
       public void Active(GameObject other)
       {
-         _curRootTrm = other.transform;
-         _pastPos = other.transform.position;
+         _curRootTrm = other?.transform;
+
+         if(_curRootTrm != null)
+         {
+            _pastPos = other.transform.position;
+         }
       }
       
       public void Deactive(GameObject other)

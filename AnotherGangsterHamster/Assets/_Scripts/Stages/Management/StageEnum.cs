@@ -10,7 +10,9 @@ namespace Stages.Management
       LumoStage_T,
       LumoStages_Front,
       LumoStages_Mid,
-      LumoStages_Back,
+      LumoStages_8,
+      LumoStages_9,
+      LumoStages_10,
       END_OF_STAGE,
       Title,
       
