@@ -76,6 +76,9 @@ namespace Weapons.Actions
         private GameObject grandLv2Model;
         private GameObject grandLv3Model;
 
+        private Transform _cain;
+        private Transform _cain_nucleus;
+
         public Dictionary<GrandSizeLevel, float> _sizeLevelValue = new Dictionary<GrandSizeLevel, float>();
 
         [HideInInspector] public GrandSizeLevel _currentSizeLevel = GrandSizeLevel.OneGrade;
@@ -321,6 +324,8 @@ namespace Weapons.Actions
                     if (_currentLerpTime >= resizeSpeed)
                     {
                         transform.localScale = Vector3.one * _sizeLevelValue[_currentSizeLevel];
+                        _cain.localScale = Vector3.one;
+                        _cain_nucleus.localScale = Vector3.one;
                         transform.rotation = Quaternion.identity;
                         _currentGrandStatus = GrandStatus.LosePower;
                         _myRigid.constraints = RigidbodyConstraints.None;
@@ -369,6 +374,9 @@ namespace Weapons.Actions
                         _currentLerpTime += Time.deltaTime;
                         transform.localScale = Vector3.one * Mathf.Lerp(1, _sizeLevelValue[_currentSizeLevel] / _sizeLevelValue[_beforeSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
                         transform.rotation = Quaternion.Lerp(transform.rotation, lerpQuaternion, Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
+
+                        _cain.localScale = Vector3.one / Mathf.Lerp(1, _sizeLevelValue[_currentSizeLevel] / _sizeLevelValue[_beforeSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
+                        _cain_nucleus.localScale = Vector3.one / Mathf.Lerp(1, _sizeLevelValue[_currentSizeLevel] / _sizeLevelValue[_beforeSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
                     }
                     break;
                     
@@ -458,6 +466,22 @@ namespace Weapons.Actions
             lerpQuaternion = Quaternion.Euler(transform.rotation.eulerAngles.x + lerpQuaternion.eulerAngles.x,
                                                 transform.rotation.eulerAngles.y + lerpQuaternion.eulerAngles.y,
                                                 transform.rotation.eulerAngles.z + lerpQuaternion.eulerAngles.z);
+
+            if(grandLv1Model.activeSelf)
+            {
+                _cain = grandLv1Model.transform.Find("cain");
+                _cain_nucleus = grandLv1Model.transform.Find("cain_nucleus");
+            }
+            else if(grandLv2Model.activeSelf)
+            {
+                _cain = grandLv2Model.transform.Find("cain");
+                _cain_nucleus = grandLv2Model.transform.Find("cain_nucleus");
+            }
+            else
+            {
+                _cain = grandLv3Model.transform.Find("cain");
+                _cain_nucleus = grandLv3Model.transform.Find("cain_nucleus");
+            }
         }
 
         /// 조건설명
