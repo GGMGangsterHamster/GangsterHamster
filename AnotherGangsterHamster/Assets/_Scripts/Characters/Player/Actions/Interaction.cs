@@ -131,14 +131,32 @@ namespace Characters.Player.Actions
             _curRigid.mass = 0.001f;
             while (InteractionManager.Instance.GetGrep())
             {
-                Vector3 moveDir = (MainCameraTransform.position + new Vector3(MainCameraTransform.forward.x,
-                                                                       Mathf.Clamp(MainCameraTransform.forward.y, -0.5f, 1),
-                                                                       MainCameraTransform.forward.z) * 2 - _curRigid.transform.position);
+                Vector3 moveDir = MainCameraTransform.position - _curRigid.position + MainCameraTransform.forward * 2;
+                Vector3 globalGravityDir = -GravityManager.GetGlobalGravityDirection();
+
+                Vector3 horizontalVec = _curRigid.position - PlayerBaseTransform.position;
+                float vertical = Vector3.Dot(MainCameraTransform.forward, globalGravityDir); // 카메라 기준 수직 높이
+
+                if (vertical < -0.8f)
+                {
+                    moveDir = new Vector3(moveDir.x * (globalGravityDir.x == 0 ? 1 : 0), moveDir.y * (globalGravityDir.y == 0 ? 1 : 0), moveDir.z * (globalGravityDir.z == 0 ? 1 : 0));
+
+                    moveDir = new Vector3((Mathf.Abs(MainCameraTransform.forward.x) < 0.5f || moveDir.x == 0 ? (PlayerBaseTransform.forward.x - horizontalVec.x) : moveDir.x),
+                                          (Mathf.Abs(MainCameraTransform.forward.y) < 0.5f || moveDir.y == 0 ? (PlayerBaseTransform.forward.y - horizontalVec.y) : moveDir.y),
+                                          (Mathf.Abs(MainCameraTransform.forward.z) < 0.5f || moveDir.z == 0 ? (PlayerBaseTransform.forward.z - horizontalVec.z) : moveDir.z));
+                }
+
+                Debug.Log(PlayerBaseTransform.forward);
+
                 _curRigid.velocity = moveDir * 20;
                 _curRigid.angularVelocity = Vector3.Lerp(_curRigid.angularVelocity, Vector3.zero, 0.5f);
                 _curRigid.transform.rotation = Quaternion.Slerp(_curRigid.transform.rotation, Quaternion.LookRotation(PlayerBaseTransform.forward), 0.5f);
 
-                if(Vector3.Distance((MainCameraTransform.position + (MainCameraTransform.forward * 2f)), _curRigid.transform.position) > 3f)
+                Debug.Log(Vector3.Distance((MainCameraTransform.position + (MainCameraTransform.forward * 2f)), _curRigid.transform.position));
+                Debug.Log(Vector3.Distance(PlayerBaseTransform.position, _curRigid.position));
+
+                if(Vector3.Distance((MainCameraTransform.position + (MainCameraTransform.forward * 2f)), _curRigid.transform.position) > 2.5f 
+                || Vector3.Distance(PlayerBaseTransform.position, _curRigid.position) < 0.85f)
                 {
                     InteractionManager.Instance.UnGrep();
 

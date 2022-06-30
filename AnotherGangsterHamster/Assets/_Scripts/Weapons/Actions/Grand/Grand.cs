@@ -46,6 +46,7 @@ namespace Weapons.Actions
         private WeaponEvents _events;
 
         private FollowGroundPos _myFollowGroundPos;
+        private FollowGroundPos _playerFollowGroundPos;
 
         private float fullChangeTime
         {
@@ -126,6 +127,7 @@ namespace Weapons.Actions
             GetComponent<MeshRenderer>().enabled = false;
 
             _myFollowGroundPos = GetComponent<FollowGroundPos>();
+            _playerFollowGroundPos = PlayerBaseTransform.GetComponent<FollowGroundPos>();
 
             grandLv1Model = transform.GetChild(0).gameObject;
             grandLv2Model = transform.GetChild(1).gameObject;
@@ -211,7 +213,6 @@ namespace Weapons.Actions
             if(_currentSizeLevel == GrandSizeLevel.OneGrade)
                 _myRigid.velocity = Vector3.zero;
 
-            _myFollowGroundPos.Active(null);
             _beforeSizeLevel = _currentSizeLevel;
             _currentGrandStatus = GrandStatus.Use;
         }
@@ -221,7 +222,7 @@ namespace Weapons.Actions
         {
             if (_currentGrandStatus != GrandStatus.Resize && _currentGrandStatus != GrandStatus.Idle)
             {
-                PlayerBaseTransform.GetComponent<FollowGroundPos>().Deactive(gameObject);
+                _playerFollowGroundPos.Deactive(gameObject);
                 _myFollowGroundPos.Active(null);
 
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
@@ -436,12 +437,10 @@ namespace Weapons.Actions
             // 2. 플레이어가 정해진 범위에 들어와야 실행함
             if (_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize > 0)
             {
-                if ((_sizeLevelValue[_currentSizeLevel] / 3) > Vector3.Distance(transform.position, PlayerBaseTransform.position) - (PlayerBaseTransform.localScale.x + PlayerBaseTransform.localScale.y) / 3)
+                if (((_sizeLevelValue[_currentSizeLevel] + (_currentSizeLevel == GrandSizeLevel.OneGrade ? 1 : 0)) / 3) > Vector3.Distance(transform.position, PlayerBaseTransform.position) - (PlayerBaseTransform.localScale.x + PlayerBaseTransform.localScale.y) / 3)
                 {
                     Vector3 reboundDir = (PlayerBaseTransform.position - transform.position).normalized;
-                    float rebound = (_sizeLevelValue[_currentSizeLevel] - _beforeWeaponSize) * reboundPower - 2;
-
-                    if (_beforeSizeLevel == GrandSizeLevel.OneGrade && _currentSizeLevel == GrandSizeLevel.FourGrade) rebound += 3;
+                    float rebound = (_sizeLevelValue[_currentSizeLevel] - _sizeLevelValue[_beforeSizeLevel]) * reboundPower + 2;
 
                     float maxValue = Mathf.Max(Mathf.Abs(reboundDir.x),
                                      Mathf.Max(Mathf.Abs(reboundDir.y),
@@ -451,7 +450,6 @@ namespace Weapons.Actions
                     y = maxValue == Mathf.Abs(reboundDir.y) ? rebound * Mathf.Sign(reboundDir.y) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : 0;
                     z = maxValue == Mathf.Abs(reboundDir.z) ? rebound * Mathf.Sign(reboundDir.z) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : 0;
 
-                    //PlayerBaseTransform.GetComponent<Rigidbody>().velocity = (transform.right * x) + (transform.up * y) + (transform.forward * z); // 도형의 각도에 따라 반동 주는 거
                     PlayerBaseTransform.GetComponent<Rigidbody>().velocity = new Vector3(x, y, z); // 도형의 각도를 무시하고 World 좌표로 반동 주는거
 
                     Player.Damage(weaponDamage);
@@ -524,17 +522,6 @@ namespace Weapons.Actions
             }
 
             return true;
-        }
-
-        private float GetDistance(Vector3 dir)
-        {
-            if (Physics.BoxCast(transform.position, Vector3.one * (_sizeLevelValue[_beforeSizeLevel] / 2 - _sizeLevelValue[_beforeSizeLevel] / 10), dir, out RaycastHit hit))
-            {
-                if ((hit.transform.CompareTag("BTYPEOBJECT") || hit.transform.CompareTag("ATYPEOBJECT")) && !hit.collider.isTrigger)
-                    return Vector3.Distance(hit.point, transform.position);
-            }
-
-            return float.MaxValue;
         }
 
         private void ShowDropPoint()
