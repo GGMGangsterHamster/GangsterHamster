@@ -37,6 +37,7 @@ namespace Weapons.Actions
         private float _aTypeBeforeSize;
         private float _aTypeCurSize;
         private Transform _dropPoint;
+        private GravityAffectedObject _playerGravity;
 
         private GravitoAnimator _gravitoAnimator;
         private WeaponManagement _weaponManagement;
@@ -76,6 +77,8 @@ namespace Weapons.Actions
             _dropPoint = transform.GetChild(0);
             _dropPoint.parent = WeaponObjectParentTransform;
 
+            _playerGravity = PlayerBaseTransform.GetComponent<GravityAffectedObject>();
+
             _gravitoAnimator = GetComponent<GravitoAnimator>();
             _weaponManagement = GameObject.FindObjectOfType<WeaponManagement>();
 
@@ -101,7 +104,8 @@ namespace Weapons.Actions
             if (_currentGravitoStatus == GravitoStatus.Idle &&
                !isReseting && _gravitoAnimator.isStopedMoving())
             {
-                if(InteractionManager.Instance.currentRaycastHitTrm.CompareTag("ATYPEOBJECT"))
+                if (InteractionManager.Instance.currentRaycastHitTrm != null 
+                    && InteractionManager.Instance.currentRaycastHitTrm.CompareTag("ATYPEOBJECT"))
                 {
                     RaycastHit hit = InteractionManager.Instance.currentRaycastHit;
 
@@ -136,6 +140,7 @@ namespace Weapons.Actions
                 Checkpoint.SetEndCheckpoint(_currentChangeGravityDir);
 
                 GravityManager.ChangeGlobalGravityDirection(-_currentChangeGravityDir);
+                _playerGravity.AffectedByGlobalGravity = true;
 
                 _dropPoint.rotation = Quaternion.identity;
             }
@@ -152,7 +157,12 @@ namespace Weapons.Actions
             {
                 _currentGravitoStatus = GravitoStatus.Idle;
                 _aTypeTrm = null;
-                Update();
+                Update(); 
+                
+                if (_weaponManagement.GetCurrentWeapon() != _weaponEnum)
+                {
+                    gameObject.SetActive(false);
+                }
                 return;
             }
 
@@ -163,8 +173,9 @@ namespace Weapons.Actions
 
             Checkpoint.startCheckpoint.rotation = PlayerBaseTransform.rotation;
             Checkpoint.endCheckpoint.rotation = Quaternion.Euler(new Vector3(0, PlayerBaseTransform.rotation.eulerAngles.y, 0));
-            
+
             GravityManager.ChangeGlobalGravityDirection(Vector3.down);
+            _playerGravity.AffectedByGlobalGravity = true;
 
             Update();
         }

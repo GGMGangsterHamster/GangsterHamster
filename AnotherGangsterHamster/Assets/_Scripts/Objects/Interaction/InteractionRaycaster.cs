@@ -94,6 +94,8 @@ namespace Objects.Interaction
 
          RaycastHit[] hits = Physics.RaycastAll(MainCam.position, MainCam.forward);
 
+         if(hits.Length == 0) return null;
+
          RaycastHit hit = new RaycastHit();
          float minDist = float.MaxValue;
          

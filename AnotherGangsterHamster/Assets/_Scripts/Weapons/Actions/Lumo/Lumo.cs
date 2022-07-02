@@ -42,8 +42,9 @@ namespace Weapons.Actions
             if (_currentStatus != LumoStatus.Use
             && _currentStatus != LumoStatus.Stickly
             && _lumoAnimator.isStopedMoving())
-            {
-                if (InteractionManager.Instance.currentRaycastHitTrm.CompareTag("ATYPEOBJECT"))
+            { 
+                if (InteractionManager.Instance.currentRaycastHitTrm != null
+                    && InteractionManager.Instance.currentRaycastHitTrm.CompareTag("ATYPEOBJECT"))
                 {
                     RaycastHit hit = InteractionManager.Instance.currentRaycastHit;
                     _fireDir = MainCameraTransform.forward;
@@ -71,8 +72,12 @@ namespace Weapons.Actions
 
         public override void ResetWeapon()
         {
-            if (_currentStatus == LumoStatus.Idle || !_lumoAnimator.isStopedMoving()) _lumoAnimator.RotationReset();
+            if (_currentStatus == LumoStatus.Idle || !_lumoAnimator.isStopedMoving())
+            {
+                return;
+            }
 
+            _lumoAnimator.RotationReset();
             PlayerBaseTransform.GetComponent<FollowGroundPos>().Deactive(_lumoCube.gameObject);
             _currentStatus = LumoStatus.Idle;
             _lumoCube.gameObject.SetActive(false);
