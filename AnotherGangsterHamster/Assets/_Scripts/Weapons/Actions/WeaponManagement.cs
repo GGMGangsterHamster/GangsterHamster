@@ -3,6 +3,7 @@ using Objects.Interaction;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Weapons.Actions
 {
@@ -32,16 +33,32 @@ namespace Weapons.Actions
             }
         }
 
+        private Image _grandIcon;
+        private Image _gravitoIcon;
+        private Image _lumoIcon;
+
         private Transform grandCharge;
         private Transform lumoCube;
-        private Dictionary<WeaponEnum, WeaponAction> _weaponActions;
+        private Dictionary<WeaponEnum, WeaponAction> _weaponActions = new Dictionary<WeaponEnum, WeaponAction>();
+        private Dictionary<WeaponEnum, Image> _weaponIcons = new Dictionary<WeaponEnum, Image>();
 
         private WeaponEnum _curWeapon = WeaponEnum.None;
 
         private void Awake()
         {
-            _weaponActions = new Dictionary<WeaponEnum, WeaponAction>();
             _weaponActions.Clear();
+
+            _grandIcon = GameObject.Find("GrandIcon").GetComponent<Image>();
+            _gravitoIcon = GameObject.Find("GravitoIcon").GetComponent<Image>();
+            _lumoIcon = GameObject.Find("LumoIcon").GetComponent<Image>();
+
+            _weaponIcons.Add(WeaponEnum.Grand, _grandIcon);
+            _weaponIcons.Add(WeaponEnum.Gravito, _gravitoIcon);
+            _weaponIcons.Add(WeaponEnum.Lumo, _lumoIcon);
+
+            _grandIcon.gameObject.SetActive(false);
+            _gravitoIcon.gameObject.SetActive(false);
+            _lumoIcon.gameObject.SetActive(false);
 
             _curWeapon = startHandleWeapon;
         }
@@ -61,6 +78,9 @@ namespace Weapons.Actions
             grandCharge = GameObject.Find("GrandCharge").transform;
             lumoCube = _weaponActions[WeaponEnum.Lumo].transform.GetChild(0);
             grandCharge.gameObject.SetActive(startHandleWeapon == WeaponEnum.Grand);
+
+            if (startHandleWeapon != WeaponEnum.None)
+                _weaponIcons[startHandleWeapon].gameObject.SetActive(true);
         }
 
         // 좌클릭 시 발동되는 함수
@@ -133,7 +153,11 @@ namespace Weapons.Actions
 
                 if (weaponAction.SetActiveWeaponObj(weaponEnum))
                 {
+                    if(_curWeapon != WeaponEnum.None)
+                        _weaponIcons[_curWeapon].gameObject.SetActive(false);
+
                     _curWeapon = weaponEnum;
+                    _weaponIcons[_curWeapon].gameObject.SetActive(true);
                     grandCharge.gameObject.SetActive(_curWeapon == WeaponEnum.Grand && _weaponActions[_curWeapon].possibleUse);
                 }
             }
