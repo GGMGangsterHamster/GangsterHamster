@@ -1,5 +1,247 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &634355515
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 634355516}
+  - component: {fileID: 634355517}
+  m_Layer: 0
+  m_Name: StairCollider_1 (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &634355516
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634355515}
+  m_LocalRotation: {x: 0.2164396, y: 0, z: 0, w: 0.97629607}
+  m_LocalPosition: {x: -1.75, y: 0, z: -1.8}
+  m_LocalScale: {x: 1, y: 1, z: -1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5317636672627459387}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
+--- !u!65 &634355517
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 634355515}
+  m_Material: {fileID: 13400000, guid: 0afff10bf76d2c281b721a0f8ccff9d4, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.75, y: 0.35000002, z: 1}
+  m_Center: {x: 0, y: 0.175, z: -0.365}
+--- !u!1 &1052675957
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1052675958}
+  - component: {fileID: 1052675959}
+  - component: {fileID: 1052675960}
+  m_Layer: 0
+  m_Name: Door
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1052675958
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052675957}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.5, y: 0, z: -4.375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1624540281}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1052675959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052675957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8476a3bdbcdf96b058a4f960b4883763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callbacks:
+  - key: PLAYER_BASE
+    OnActive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 643931216}
+          m_TargetAssemblyTypeName: Objects.StageObjects.CollisionEventable.MovingFloor,
+            Assembly-CSharp
+          m_MethodName: Active
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1195661408}
+          m_TargetAssemblyTypeName: Objects.StageObjects.CollisionEventable.MovingFloor,
+            Assembly-CSharp
+          m_MethodName: Active
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeactive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 643931216}
+          m_TargetAssemblyTypeName: Objects.StageObjects.CollisionEventable.MovingFloor,
+            Assembly-CSharp
+          m_MethodName: Deactive
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1195661408}
+          m_TargetAssemblyTypeName: Objects.StageObjects.CollisionEventable.MovingFloor,
+            Assembly-CSharp
+          m_MethodName: Deactive
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  <EventIsToggle>k__BackingField: 0
+  <InitalActiveStatus>k__BackingField: 0
+--- !u!65 &1052675960
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052675957}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 2.5, z: 3}
+  m_Center: {x: 0, y: 1.25, z: 0}
+--- !u!1 &1624540280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1624540281}
+  m_Layer: 0
+  m_Name: Props
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1624540281
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1624540280}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1052675958}
+  m_Father: {fileID: 5317636672627459387}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1839497268
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1839497269}
+  - component: {fileID: 1839497270}
+  m_Layer: 0
+  m_Name: StairCollider_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &1839497269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839497268}
+  m_LocalRotation: {x: -0.21643952, y: 0, z: 0, w: 0.97629607}
+  m_LocalPosition: {x: -1.75, y: 0, z: -1.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5317636672627459387}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: -25, y: 0, z: 0}
+--- !u!65 &1839497270
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839497268}
+  m_Material: {fileID: 13400000, guid: 0afff10bf76d2c281b721a0f8ccff9d4, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.75, y: 0.35000002, z: 1}
+  m_Center: {x: 0, y: 0.175, z: -0.365}
 --- !u!1 &5317636671783938122
 GameObject:
   m_ObjectHideFlags: 0
@@ -2240,12 +2482,12 @@ MonoBehaviour:
       rangeCompressionFactor: 1
     influence:
       m_EditorAdvancedModeBlendDistancePositive: {x: 1, y: 1, z: 1}
-      m_EditorAdvancedModeBlendDistanceNegative: {x: 1, y: 1, z: 1}
+      m_EditorAdvancedModeBlendDistanceNegative: {x: 1.4843996, y: 1, z: 1}
       m_EditorSimplifiedModeBlendDistance: 1.1210093
       m_EditorAdvancedModeBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
       m_EditorAdvancedModeBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
       m_EditorSimplifiedModeBlendNormalDistance: 0
-      m_EditorAdvancedModeEnabled: 0
+      m_EditorAdvancedModeEnabled: 1
       m_EditorAdvancedModeFaceFadePositive: {x: 1, y: 1, z: 1}
       m_EditorAdvancedModeFaceFadeNegative: {x: 1, y: 1, z: 1}
       m_Version: 1
@@ -2254,7 +2496,7 @@ MonoBehaviour:
       m_Shape: 0
       m_BoxSize: {x: 6.3877707, y: 5.3149996, z: 6.9222393}
       m_BoxBlendDistancePositive: {x: 1, y: 1, z: 1}
-      m_BoxBlendDistanceNegative: {x: 1, y: 1, z: 1}
+      m_BoxBlendDistanceNegative: {x: 1.4843996, y: 1, z: 1}
       m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
       m_BoxBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
       m_BoxSideFadePositive: {x: 1, y: 1, z: 1}
@@ -2398,7 +2640,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: 36e15d69634e1a34bbf96b618b17a95c, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 6a0b39b6a4e5a3419aef40bf803d8089, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -2705,13 +2947,13 @@ MonoBehaviour:
       fadeDistance: 20
       rangeCompressionFactor: 1
     influence:
-      m_EditorAdvancedModeBlendDistancePositive: {x: 1, y: 1, z: 1}
-      m_EditorAdvancedModeBlendDistanceNegative: {x: 1, y: 1, z: 1}
+      m_EditorAdvancedModeBlendDistancePositive: {x: 1.0422382, y: 1, z: 1}
+      m_EditorAdvancedModeBlendDistanceNegative: {x: 0.99999994, y: 1, z: 1}
       m_EditorSimplifiedModeBlendDistance: 1
       m_EditorAdvancedModeBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
       m_EditorAdvancedModeBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
       m_EditorSimplifiedModeBlendNormalDistance: 0
-      m_EditorAdvancedModeEnabled: 0
+      m_EditorAdvancedModeEnabled: 1
       m_EditorAdvancedModeFaceFadePositive: {x: 1, y: 1, z: 1}
       m_EditorAdvancedModeFaceFadeNegative: {x: 1, y: 1, z: 1}
       m_Version: 1
@@ -2719,8 +2961,8 @@ MonoBehaviour:
       m_ObsoleteOffset: {x: 0, y: 0, z: 0}
       m_Shape: 0
       m_BoxSize: {x: 3.5622284, y: 5.3149996, z: 6.9222393}
-      m_BoxBlendDistancePositive: {x: 1, y: 1, z: 1}
-      m_BoxBlendDistanceNegative: {x: 1, y: 1, z: 1}
+      m_BoxBlendDistancePositive: {x: 1.0422382, y: 1, z: 1}
+      m_BoxBlendDistanceNegative: {x: 0.99999994, y: 1, z: 1}
       m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
       m_BoxBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
       m_BoxSideFadePositive: {x: 1, y: 1, z: 1}
@@ -2864,7 +3106,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: ec411f1fc3dd4154aaf05ff06b03a382, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 64d77e0f8f07089ccbdddc554d73d00d, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -3330,7 +3572,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: 39005961e5e7700ec824d259f52c8e17, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: fa3d4f31f99bad4f2a0d130cb3440fc1, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -3411,33 +3653,33 @@ MonoBehaviour:
     m_FieldOfView: 0
     m_Aspect: 0
   m_SHForNormalization:
-    sh[ 0]: 14.776421
-    sh[ 1]: 0.49822903
-    sh[ 2]: -1.507373
-    sh[ 3]: -8.554746
-    sh[ 4]: -0.04819375
-    sh[ 5]: 0.055643145
-    sh[ 6]: 0.11006064
-    sh[ 7]: -0.3949342
-    sh[ 8]: 0.86380213
-    sh[ 9]: 32.520493
-    sh[10]: 14.844851
-    sh[11]: -0.09353235
-    sh[12]: -5.830485
-    sh[13]: 0.09756982
-    sh[14]: 0.033125352
-    sh[15]: -0.0019943167
-    sh[16]: -0.35718104
-    sh[17]: -0.3548254
-    sh[18]: 79.41889
-    sh[19]: 47.76347
-    sh[20]: 1.583814
-    sh[21]: -2.8693457
-    sh[22]: 0.41726148
-    sh[23]: -0.018220538
-    sh[24]: -0.14750198
-    sh[25]: -0.43243736
-    sh[26]: -2.8029284
+    sh[ 0]: 16.071526
+    sh[ 1]: 0.80089
+    sh[ 2]: -1.4236573
+    sh[ 3]: -9.515534
+    sh[ 4]: 0.049452137
+    sh[ 5]: 0.166647
+    sh[ 6]: 0.020189118
+    sh[ 7]: -0.33873698
+    sh[ 8]: 0.9861296
+    sh[ 9]: 32.978054
+    sh[10]: 15.019405
+    sh[11]: -0.53087366
+    sh[12]: -6.378961
+    sh[13]: 0.108065054
+    sh[14]: 0.23999998
+    sh[15]: -0.13640635
+    sh[16]: -0.22359397
+    sh[17]: -0.2976241
+    sh[18]: 78.386536
+    sh[19]: 47.754845
+    sh[20]: 0.04081755
+    sh[21]: -2.8303163
+    sh[22]: 0.28207606
+    sh[23]: 0.44796515
+    sh[24]: -0.41895157
+    sh[25]: -0.0996704
+    sh[26]: -2.8460224
   m_HasValidSHForNormalization: 1
   m_ReflectionProbeVersion: 9
   m_ObsoleteInfluenceShape: 0
@@ -3485,6 +3727,9 @@ Transform:
   - {fileID: 5317636673030991163}
   - {fileID: 5317636672358788011}
   - {fileID: 5317636673042280454}
+  - {fileID: 1839497269}
+  - {fileID: 634355516}
+  - {fileID: 1624540281}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4789,7 +5034,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: 37c9e76d2a49c8c2ebb92b0887953c87, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 505d7e9949b47b67681533995e35e0d1, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -4870,33 +5115,33 @@ MonoBehaviour:
     m_FieldOfView: 0
     m_Aspect: 0
   m_SHForNormalization:
-    sh[ 0]: 85.85837
-    sh[ 1]: -31.988674
-    sh[ 2]: -49.166042
-    sh[ 3]: -47.583202
-    sh[ 4]: 10.640991
-    sh[ 5]: 13.690907
-    sh[ 6]: 6.754218
-    sh[ 7]: 19.297352
-    sh[ 8]: 3.3920662
-    sh[ 9]: 65.56182
-    sh[10]: -24.453806
-    sh[11]: -36.8467
-    sh[12]: -35.47678
-    sh[13]: 8.151327
-    sh[14]: 10.259898
-    sh[15]: 5.078245
-    sh[16]: 14.469242
-    sh[17]: 2.5893865
-    sh[18]: 52.002747
-    sh[19]: -19.526197
-    sh[20]: -27.315111
-    sh[21]: -25.779888
-    sh[22]: 6.5161257
-    sh[23]: 7.6104403
-    sh[24]: 3.796312
-    sh[25]: 10.668709
-    sh[26]: 2.0526328
+    sh[ 0]: 85.687904
+    sh[ 1]: -31.17699
+    sh[ 2]: -48.376125
+    sh[ 3]: -47.700184
+    sh[ 4]: 10.60143
+    sh[ 5]: 13.208751
+    sh[ 6]: 6.8339276
+    sh[ 7]: 19.86833
+    sh[ 8]: 3.5035994
+    sh[ 9]: 65.77658
+    sh[10]: -23.95467
+    sh[11]: -36.42994
+    sh[12]: -35.32778
+    sh[13]: 8.080328
+    sh[14]: 9.88831
+    sh[15]: 5.135811
+    sh[16]: 15.07598
+    sh[17]: 2.6960235
+    sh[18]: 53.01943
+    sh[19]: -19.404781
+    sh[20]: -27.44055
+    sh[21]: -25.114368
+    sh[22]: 6.353075
+    sh[23]: 7.2950635
+    sh[24]: 3.826134
+    sh[25]: 11.588551
+    sh[26]: 2.2011554
   m_HasValidSHForNormalization: 1
   m_ReflectionProbeVersion: 9
   m_ObsoleteInfluenceShape: 0
@@ -5472,7 +5717,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: 6e1b18cfa7521c8008e8495b059ed405, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 48675450d61241fb6af0f3302be35318, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -5553,33 +5798,33 @@ MonoBehaviour:
     m_FieldOfView: 0
     m_Aspect: 0
   m_SHForNormalization:
-    sh[ 0]: 23.058102
-    sh[ 1]: 0.53729415
-    sh[ 2]: -14.512517
-    sh[ 3]: 0.47677323
-    sh[ 4]: 0.25486177
-    sh[ 5]: 0.17576407
-    sh[ 6]: 0.66636795
-    sh[ 7]: 0.4665632
-    sh[ 8]: 0.8359495
-    sh[ 9]: 39.584618
-    sh[10]: 15.487759
-    sh[11]: -9.428934
-    sh[12]: 0.08003233
-    sh[13]: 0.2610403
-    sh[14]: 0.49457273
-    sh[15]: 0.06832877
-    sh[16]: 0.31143594
-    sh[17]: -0.090169
-    sh[18]: 86.37576
-    sh[19]: 49.70823
-    sh[20]: -3.386831
-    sh[21]: -0.1948715
-    sh[22]: 0.36295608
-    sh[23]: 1.2823471
-    sh[24]: -1.0582244
-    sh[25]: 0.14530957
-    sh[26]: -1.8271798
+    sh[ 0]: 22.869066
+    sh[ 1]: 0.5955387
+    sh[ 2]: -15.120396
+    sh[ 3]: 0.73813516
+    sh[ 4]: 0.31010523
+    sh[ 5]: 0.1881623
+    sh[ 6]: 0.67642796
+    sh[ 7]: 0.47125748
+    sh[ 8]: 0.73557407
+    sh[ 9]: 39.753494
+    sh[10]: 15.555448
+    sh[11]: -9.397995
+    sh[12]: 0.42314515
+    sh[13]: 0.22275385
+    sh[14]: 0.46302655
+    sh[15]: 0.106501415
+    sh[16]: 0.29658645
+    sh[17]: -0.14803448
+    sh[18]: 87.25708
+    sh[19]: 49.87432
+    sh[20]: -2.16199
+    sh[21]: 0.45558503
+    sh[22]: 0.14209644
+    sh[23]: 1.1836504
+    sh[24]: -0.949304
+    sh[25]: 0.08511183
+    sh[26]: -1.8471497
   m_HasValidSHForNormalization: 1
   m_ReflectionProbeVersion: 9
   m_ObsoleteInfluenceShape: 0
@@ -6110,7 +6355,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5317636673070340615
 Transform:
   m_ObjectHideFlags: 0
@@ -6119,7 +6364,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5317636673070340609}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.6483129, z: 0}
+  m_LocalPosition: {x: -0.00000047683716, y: 1.6483129, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6138,7 +6383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cded085d155cde949b60f67a11dbc3bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  globalVolume: 0
+  globalVolume: 1
   size: {x: 14.248, y: 6.315374, z: 16.249523}
   geometryDistanceOffset: 0.2
   objectLayerMask:
@@ -6821,13 +7066,13 @@ MonoBehaviour:
       fadeDistance: 20
       rangeCompressionFactor: 1
     influence:
-      m_EditorAdvancedModeBlendDistancePositive: {x: 1, y: 1, z: 1}
-      m_EditorAdvancedModeBlendDistanceNegative: {x: 1, y: 1, z: 1}
+      m_EditorAdvancedModeBlendDistancePositive: {x: 1.0000007, y: 1, z: 1}
+      m_EditorAdvancedModeBlendDistanceNegative: {x: 1.3620389, y: 1, z: 1}
       m_EditorSimplifiedModeBlendDistance: 1
-      m_EditorAdvancedModeBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
+      m_EditorAdvancedModeBlendNormalDistancePositive: {x: 0, y: 0, z: 0.8045254}
       m_EditorAdvancedModeBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
       m_EditorSimplifiedModeBlendNormalDistance: 0
-      m_EditorAdvancedModeEnabled: 0
+      m_EditorAdvancedModeEnabled: 1
       m_EditorAdvancedModeFaceFadePositive: {x: 1, y: 1, z: 1}
       m_EditorAdvancedModeFaceFadeNegative: {x: 1, y: 1, z: 1}
       m_Version: 1
@@ -6835,9 +7080,9 @@ MonoBehaviour:
       m_ObsoleteOffset: {x: 0, y: 0, z: 0}
       m_Shape: 0
       m_BoxSize: {x: 6.9436107, y: 5.3149996, z: 6.9222393}
-      m_BoxBlendDistancePositive: {x: 1, y: 1, z: 1}
-      m_BoxBlendDistanceNegative: {x: 1, y: 1, z: 1}
-      m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
+      m_BoxBlendDistancePositive: {x: 1.0000007, y: 1, z: 1}
+      m_BoxBlendDistanceNegative: {x: 1.3620389, y: 1, z: 1}
+      m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0.8045254}
       m_BoxBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
       m_BoxSideFadePositive: {x: 1, y: 1, z: 1}
       m_BoxSideFadeNegative: {x: 1, y: 1, z: 1}
@@ -6980,7 +7225,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: 757d6bd15d3b939f3988d44c443bb513, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: eebd6d9e99c5f413a81fb9af90bfd00b, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -7061,33 +7306,33 @@ MonoBehaviour:
     m_FieldOfView: 0
     m_Aspect: 0
   m_SHForNormalization:
-    sh[ 0]: 27.07829
-    sh[ 1]: 8.487473
-    sh[ 2]: 1.7133212
-    sh[ 3]: -1.3465728
-    sh[ 4]: -2.8007665
-    sh[ 5]: 0.17752875
-    sh[ 6]: -1.626482
-    sh[ 7]: -5.073452
-    sh[ 8]: 1.8318338
-    sh[ 9]: 22.890936
-    sh[10]: 6.2498055
-    sh[11]: 1.146885
-    sh[12]: -0.18195343
-    sh[13]: -2.535997
-    sh[14]: 0.09603982
-    sh[15]: -1.3697896
-    sh[16]: -4.3861213
-    sh[17]: 1.7942412
-    sh[18]: 19.495403
-    sh[19]: 4.9174285
-    sh[20]: 0.49583745
-    sh[21]: 0.8802948
-    sh[22]: -2.1310685
-    sh[23]: 0.3136081
-    sh[24]: -1.3051038
-    sh[25]: -3.85976
-    sh[26]: 1.9771245
+    sh[ 0]: 28.165346
+    sh[ 1]: 8.894459
+    sh[ 2]: 0.81535393
+    sh[ 3]: -1.686418
+    sh[ 4]: -3.7804394
+    sh[ 5]: -0.09476157
+    sh[ 6]: -2.6234412
+    sh[ 7]: -6.577218
+    sh[ 8]: 1.8095584
+    sh[ 9]: 23.573444
+    sh[10]: 6.377392
+    sh[11]: 0.12485027
+    sh[12]: -0.45879006
+    sh[13]: -3.0477731
+    sh[14]: 0.25250947
+    sh[15]: -2.263025
+    sh[16]: -5.4939466
+    sh[17]: 1.8936216
+    sh[18]: 20.14952
+    sh[19]: 4.9922876
+    sh[20]: -0.7262048
+    sh[21]: 0.6407714
+    sh[22]: -2.6832643
+    sh[23]: 0.40136886
+    sh[24]: -2.074191
+    sh[25]: -4.77114
+    sh[26]: 2.0614836
   m_HasValidSHForNormalization: 1
   m_ReflectionProbeVersion: 9
   m_ObsoleteInfluenceShape: 0
@@ -7663,7 +7908,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: 465ad270d873294d398c367bc6c86bd8, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 9f4766598105113cfb6ea28298421172, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -7744,33 +7989,33 @@ MonoBehaviour:
     m_FieldOfView: 0
     m_Aspect: 0
   m_SHForNormalization:
-    sh[ 0]: 284.6273
-    sh[ 1]: 25.988531
-    sh[ 2]: 82.782646
-    sh[ 3]: 265.04895
-    sh[ 4]: 10.919367
-    sh[ 5]: 3.748463
-    sh[ 6]: -6.193041
-    sh[ 7]: 34.256577
-    sh[ 8]: 26.908573
-    sh[ 9]: 214.17285
-    sh[10]: 19.64556
-    sh[11]: 62.4369
-    sh[12]: 199.60477
-    sh[13]: 8.238093
-    sh[14]: 2.8033276
-    sh[15]: -4.6728535
-    sh[16]: 25.840622
-    sh[17]: 20.267536
-    sh[18]: 161.54697
-    sh[19]: 14.749645
-    sh[20]: 47.072834
-    sh[21]: 150.71544
-    sh[22]: 6.1859164
-    sh[23]: 2.0982037
-    sh[24]: -3.5285716
-    sh[25]: 19.490273
-    sh[26]: 15.285317
+    sh[ 0]: 283.25815
+    sh[ 1]: 24.481253
+    sh[ 2]: 82.96084
+    sh[ 3]: 263.78864
+    sh[ 4]: 10.7921295
+    sh[ 5]: 3.6757803
+    sh[ 6]: -6.332187
+    sh[ 7]: 34.255936
+    sh[ 8]: 26.843327
+    sh[ 9]: 213.29883
+    sh[10]: 18.463755
+    sh[11]: 62.335438
+    sh[12]: 198.85214
+    sh[13]: 8.142259
+    sh[14]: 2.7836635
+    sh[15]: -4.775508
+    sh[16]: 25.77643
+    sh[17]: 20.237545
+    sh[18]: 160.91345
+    sh[19]: 13.834407
+    sh[20]: 47.02762
+    sh[21]: 150.17429
+    sh[22]: 6.128376
+    sh[23]: 2.1066196
+    sh[24]: -3.6050253
+    sh[25]: 19.45854
+    sh[26]: 15.273004
   m_HasValidSHForNormalization: 1
   m_ReflectionProbeVersion: 9
   m_ObsoleteInfluenceShape: 0
@@ -10271,7 +10516,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: 781cdc50fcb0dcc2bbf858fc14c3eb47, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 90aa9fa22d969809b80a32554dd3e14e, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -10352,33 +10597,33 @@ MonoBehaviour:
     m_FieldOfView: 0
     m_Aspect: 0
   m_SHForNormalization:
-    sh[ 0]: 73.04216
-    sh[ 1]: -10.175154
-    sh[ 2]: -19.6258
-    sh[ 3]: -18.150055
-    sh[ 4]: -1.9773167
-    sh[ 5]: 0.97982574
-    sh[ 6]: 6.3129992
-    sh[ 7]: 21.526447
-    sh[ 8]: 18.180729
-    sh[ 9]: 55.224243
-    sh[10]: -7.900486
-    sh[11]: -14.59119
-    sh[12]: -13.245629
-    sh[13]: -1.6604087
-    sh[14]: 0.6767169
-    sh[15]: 4.772705
-    sh[16]: 16.214344
-    sh[17]: 13.596768
-    sh[18]: 42.43904
-    sh[19]: -6.734423
-    sh[20]: -10.436686
-    sh[21]: -9.147864
-    sh[22]: -1.6391913
-    sh[23]: 0.4497902
-    sh[24]: 3.5662334
-    sh[25]: 12.4644165
-    sh[26]: 10.167042
+    sh[ 0]: 71.23318
+    sh[ 1]: -8.242476
+    sh[ 2]: -14.963311
+    sh[ 3]: -18.323103
+    sh[ 4]: -3.025834
+    sh[ 5]: 0.41003275
+    sh[ 6]: 6.027524
+    sh[ 7]: 17.514374
+    sh[ 8]: 19.765432
+    sh[ 9]: 54.068462
+    sh[10]: -6.592133
+    sh[11]: -10.937359
+    sh[12]: -13.476572
+    sh[13]: -2.547286
+    sh[14]: 0.24329501
+    sh[15]: 4.52718
+    sh[16]: 13.521291
+    sh[17]: 14.820195
+    sh[18]: 41.988678
+    sh[19]: -6.0475945
+    sh[20]: -7.413788
+    sh[21]: -9.214208
+    sh[22]: -2.6489582
+    sh[23]: 0.006302297
+    sh[24]: 3.3626316
+    sh[25]: 10.909905
+    sh[26]: 11.027915
   m_HasValidSHForNormalization: 1
   m_ReflectionProbeVersion: 9
   m_ObsoleteInfluenceShape: 0
@@ -10759,7 +11004,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1107816867630229498, guid: 7749ae41ad508c647a7ce1e02cb94bbd, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 316527242192334588, guid: 7749ae41ad508c647a7ce1e02cb94bbd, type: 3}
       propertyPath: m_Convex
@@ -10835,7 +11080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6848370456792575282, guid: 7749ae41ad508c647a7ce1e02cb94bbd, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7112347454159563241, guid: 7749ae41ad508c647a7ce1e02cb94bbd, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -10871,6 +11116,48 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.9663417, y: 1.2256948, z: 3.1499856}
   m_Center: {x: -0.93395007, y: -0.53759474, z: 1.5749916}
+--- !u!1 &1641076923677525096 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6848370456792575282, guid: 7749ae41ad508c647a7ce1e02cb94bbd, type: 3}
+  m_PrefabInstance: {fileID: 5317636671804893530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1195661408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1641076923677525096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ebca3e42eca84f208eb19945fe9a882, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {x: 0, y: 0, z: 1.5}
+  duration: 1.5
+  threshould: 0.02
+  startActive: 0
+--- !u!1 &4137739386663186780 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1107816867630229498, guid: 7749ae41ad508c647a7ce1e02cb94bbd, type: 3}
+  m_PrefabInstance: {fileID: 5317636671804893530}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &643931216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4137739386663186780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ebca3e42eca84f208eb19945fe9a882, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {x: 0, y: 0, z: -1.5}
+  duration: 1.5
+  threshould: 0.02
+  startActive: 0
 --- !u!4 &5640392518269406897 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7749ae41ad508c647a7ce1e02cb94bbd, type: 3}
