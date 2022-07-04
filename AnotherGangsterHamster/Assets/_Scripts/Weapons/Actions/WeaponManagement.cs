@@ -148,18 +148,36 @@ namespace Weapons.Actions
         {
             foreach (WeaponAction weaponAction in _weaponActions.Values)
             {
-                if (!weaponAction.possibleUse || weaponAction._weaponEnum == _curWeapon)
+                if (!weaponAction.possibleUse)
                     continue;
 
-                if (weaponAction.SetActiveWeaponObj(weaponEnum))
+                if(weaponEnum == weaponAction._weaponEnum && weaponAction.possibleUse)
                 {
-                    if(_curWeapon != WeaponEnum.None)
+                    Debug.Log(weaponAction._weaponEnum.ToString());
+
+                    if (_curWeapon != WeaponEnum.None)
                         _weaponIcons[_curWeapon].gameObject.SetActive(false);
 
                     _curWeapon = weaponEnum;
                     _weaponIcons[_curWeapon].gameObject.SetActive(true);
                     grandCharge.gameObject.SetActive(_curWeapon == WeaponEnum.Grand && _weaponActions[_curWeapon].possibleUse);
                 }
+
+                weaponAction.SetActiveWeaponObj(weaponEnum);
+
+                //if (!weaponAction.possibleUse || weaponAction._weaponEnum == _curWeapon)
+                //    continue;
+
+                //Debug.Log(weaponEnum.ToString());
+                //if (weaponAction.SetActiveWeaponObj(weaponEnum))
+                //{
+                //    if(_curWeapon != WeaponEnum.None)
+                //        _weaponIcons[_curWeapon].gameObject.SetActive(false);
+
+                //    _curWeapon = weaponEnum;
+                //    _weaponIcons[_curWeapon].gameObject.SetActive(true);
+                //    grandCharge.gameObject.SetActive(_curWeapon == WeaponEnum.Grand && _weaponActions[_curWeapon].possibleUse);
+                //}
             }
         }
 

@@ -284,7 +284,7 @@ namespace Weapons.Actions
             _stayCollision.isOn = _currentGrandStatus != GrandStatus.Idle;
 
             gameObject.layer = _currentGrandStatus == GrandStatus.Idle ? LayerMask.NameToLayer("NOCOLLISION") : LayerMask.NameToLayer("Default");
-
+            
             switch (_currentGrandStatus)
             {
                 case GrandStatus.Idle:
@@ -548,7 +548,7 @@ namespace Weapons.Actions
                         RaycastHit hit = hits[index];
                         
                         _dropPoint.position = hit.point + -GravityManager.GetGlobalGravityDirection() * 0.1f;
-                        _dropPoint.rotation = Quaternion.LookRotation(-GravityManager.GetGlobalGravityDirection()) * Quaternion.Euler(90, 0, 0);
+                        _dropPoint.rotation = Quaternion.LookRotation(-GravityManager.GetGlobalGravityDirection());
                         _dropLineRenderer.transform.position = hit.point + -GravityManager.GetGlobalGravityDirection() * (Vector3.Distance(hit.point, transform.position) / 2);
 
                         _dropLineRenderer.SetPosition(0, -GravityManager.GetGlobalGravityDirection() * (Vector3.Distance(_dropLineRenderer.transform.position, hit.point) - _sizeLevelValue[_currentSizeLevel] / 2));

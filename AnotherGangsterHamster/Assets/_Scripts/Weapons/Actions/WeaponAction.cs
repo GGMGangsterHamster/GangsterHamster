@@ -229,13 +229,9 @@ namespace Weapons.Actions
         /// <summary>
         /// 들어온 인자값에 따라 SetActive True, false 해주는 함수
         /// </summary>
-        public bool SetActiveWeaponObj(WeaponEnum wenum)
+        public void SetActiveWeaponObj(WeaponEnum wenum)
         {
-            if (!possibleUse) return false;
-
             gameObject.SetActive((wenum == _weaponEnum && !InteractionManager.Instance.GetGrep()) || !IsHandleWeapon());
-
-            return gameObject.activeSelf;
         }
 
         public void ResetPosiiton()
