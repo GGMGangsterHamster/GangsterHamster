@@ -7,9 +7,9 @@ namespace Effects.Shaders.TypeObject.Hexagon
    [RequireComponent(typeof(ATypeHexagon), typeof(TriggerInteractableObject))]
    public class HexagonBrightnessEffect : MonoBehaviour, ICollisionEventable
    {
-      private readonly float _maxAlpha = 1.0f;
-      private readonly float _minAlpha = 0.0f;
-      private readonly float _defMaxAlpha = 0.25f;
+      public float _maxAlpha = 1.0f;
+      public float _minAlpha = 0.0f;
+      public float _defMaxAlpha = 0.25f;
 
       public float collisionAlphaEffectDuration = 1.0f;
 

@@ -1,7 +1,5 @@
 using Characters.Player;
 using Matters.Gravity;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Weapons.Actions
@@ -11,12 +9,13 @@ namespace Weapons.Actions
         private bool _isReinforcemented = false;
         private GravityAffectedObject _playerGravity;
         private Rigidbody _playerRigid;
-        
+        private LumoCubeEffect effect;
 
         private void Awake()
         {
             _playerGravity = GameObject.FindGameObjectWithTag("PLAYER_BASE").GetComponent<GravityAffectedObject>();
             _playerRigid = _playerGravity.GetComponent<Rigidbody>();
+            effect = GetComponent<LumoCubeEffect>();
         }
 
         public void ObjTriggerStayEvent(GameObject obj)
@@ -29,6 +28,7 @@ namespace Weapons.Actions
                 _playerGravity.SetIndividualGravity(GravityManager.GetGlobalGravityDirection(), 4.9f);
                 _playerRigid.mass = 2;
                 _isReinforcemented = true;
+                effect.EffectOn();
             }
             else if(_playerGravity.AffectedByGlobalGravity)
             {
@@ -48,6 +48,7 @@ namespace Weapons.Actions
                 _playerGravity.AffectedByGlobalGravity = true;
                 _isReinforcemented = false;
                 _playerRigid.mass = 1;
+                effect.EffectOff();
             }
         }
 
@@ -55,6 +56,7 @@ namespace Weapons.Actions
         {
             _playerGravity.AffectedByGlobalGravity = true;
             _isReinforcemented = false;
+            effect.EffectOff();
         }
     }
 }
