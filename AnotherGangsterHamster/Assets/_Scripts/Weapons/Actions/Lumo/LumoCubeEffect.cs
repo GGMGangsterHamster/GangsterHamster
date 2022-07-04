@@ -41,7 +41,6 @@ namespace Weapons.Actions
             }
             else if(!EffectiveActivate && currentTime > 0f)
             {
-                Debug.Log($"잘되는걸까 {currentTime}");
                 currentTime -= Time.deltaTime * 7;
                 aberration.intensity.Override(currentTime);
 

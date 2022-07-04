@@ -56,7 +56,6 @@ namespace Weapons.Actions
         {
             _playerGravity.AffectedByGlobalGravity = true;
             _isReinforcemented = false;
-            effect.EffectOff();
         }
     }
 }
