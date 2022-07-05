@@ -17,27 +17,18 @@ namespace Objects.StageObjects
       {
          for (int i = 0; i < Buttons.Count; ++i)
          {
-            dynamic interactable;
-
-            interactable = Buttons[i].GetComponent<CollisionInteractableObject>();
-            if (interactable == null)
-               interactable = Buttons[i].GetComponent<TriggerInteractableObject>();
-            if (interactable == null)
-               interactable = Buttons[i].GetComponent<BothInteractableObject>();
+            ICallbacks interactable = Buttons[i].GetComponent<ICallbacks>();
 
             if (interactable != null)
             {
                CollisionCallback collisionCallback =
-                  (interactable._callbacks as List<CollisionCallback>)
+                  (interactable.Callbacks)
                   .Find(e => e.key == "");
 
                collisionCallback.OnActive.AddListener(Active);
                collisionCallback.OnDeactive.AddListener(Deactive);
                _buttons.Add(Buttons[i].GetComponent<IActivated>());
             }
-
-
-
          }
       }
 
