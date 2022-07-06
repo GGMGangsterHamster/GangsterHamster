@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -62,6 +63,7 @@ namespace Stages.Management
          {
             SceneManager.LoadScene(target);
             CurrentStage = stage;
+            SaveStage(stage.ToString());
             GC.Collect();
          }
 
@@ -99,6 +101,32 @@ namespace Stages.Management
       public void RemoveUnLoadedEvent(UnityAction<Scene> action)
       {
          SceneManager.sceneUnloaded -= action;
+      }
+
+      public bool ExistsStage()
+      {
+          return File.Exists("stageData" + ".txt");
+      }
+
+      public void SaveStage(string stage)
+      {
+          StreamWriter sw = new StreamWriter("stageData" + ".txt");
+          sw.WriteLine(stage);
+
+          sw.Flush();
+          sw.Close();
+      }
+
+      public void LoadStage()
+      {
+          if(File.Exists("stageData" + ".txt"))
+          {
+              StreamReader sr = new StreamReader("stageData" + ".txt");
+              string data = sr.ReadLine();
+
+              Load(data);
+              sr.Close();
+          }
       }
 
       /// <summary>

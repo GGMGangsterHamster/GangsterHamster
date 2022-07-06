@@ -1,5 +1,7 @@
 using Stages.Management;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -32,7 +34,7 @@ namespace UI.PanelScripts
                 UIManager.Instance.DeActivationPanel(panelId);
             });
 
-            for(int i = 1; i < (int)StageNames.END_OF_STAGE; i++)
+            for(int i = (int)(StageNames.NONE + 1); i < (int)StageNames.END_OF_STAGE; i++)
             {
                 SpawnChapter(((StageNames)i).ToString());
             }
@@ -55,12 +57,31 @@ namespace UI.PanelScripts
 
             Button stageButton = obj.GetComponent<Button>();
 
-            stageButton.onClick.AddListener(() =>
+            if (File.Exists("stageData" + ".txt"))
             {
-                SceneManager.LoadScene(sceneName);
-                Utils.LockCursor();
-                Utils.MoveTime();
-            });
+                StreamReader sr = new StreamReader("stageData" + ".txt");
+                string data = sr.ReadLine();
+
+                StageNames stage = (StageNames)Enum.Parse(typeof(StageNames), sceneName);
+                StageNames savedStage = (StageNames)Enum.Parse(typeof(StageNames), data);
+
+                if(stage <= savedStage)
+                {
+                    stageButton.onClick.AddListener(() =>
+                    {
+                        SceneManager.LoadScene(sceneName);
+                        Utils.LockCursor();
+                        Utils.MoveTime();
+                    });
+                }
+                else
+                {
+                    stageButton.image.color = new Color(1, 1, 1, 0.1f);
+                }
+
+                sr.Close();
+            }
+
         }
     }
 
