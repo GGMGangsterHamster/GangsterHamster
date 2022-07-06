@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace Objects
 {
-   public class TriggerInteractableObject : MonoBehaviour, IActivated
+   public class TriggerInteractableObject : MonoBehaviour, IActivated, ICallbacks
    {
       public List<CollisionCallback> _callbacks
                = new List<CollisionCallback>();
