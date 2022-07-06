@@ -9,8 +9,9 @@ namespace Weapons.Actions
     public class LumoCubeEffect : MonoBehaviour
     {
         public Volume globalVolume;
-        public ChromaticAberration aberration;
+        public float maxAberationIntensity = 0.5f;
 
+        private ChromaticAberration aberration;
         private bool EffectiveActivate = false;
         private float currentTime = 0f;
 
@@ -34,7 +35,7 @@ namespace Weapons.Actions
 
         private void Update()
         {
-            if(EffectiveActivate && currentTime < 1f)
+            if(EffectiveActivate && currentTime < maxAberationIntensity)
             {
                 currentTime += Time.deltaTime * 7;
                 aberration.intensity.Override(currentTime);
