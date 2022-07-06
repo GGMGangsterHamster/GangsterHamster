@@ -17,7 +17,7 @@ namespace Objects.StageObjects
       {
          for (int i = 0; i < Buttons.Count; ++i)
          {
-            ICallbacks interactable = Buttons[i].GetComponent<ICallbacks>();
+            ICallbacks interactable = Buttons[i].GetComponentInChildren<ICallbacks>();
 
             if (interactable != null)
             {
