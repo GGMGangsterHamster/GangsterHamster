@@ -9,6 +9,7 @@ namespace Stages.Management
       GrandStages_Front,
       GrandStages_Mid,
       GrandStages_Back,
+      GravitoStages_1,
       LumoStage_T,
       LumoStages_Front,
       LumoStages_Mid,
