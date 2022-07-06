@@ -4,13 +4,12 @@ using UnityEngine.Events;
 
 namespace Objects
 {
-   public class CollisionInteractableObject : MonoBehaviour, IActivated, ICallbacks
+   public class CollisionInteractableObject : MonoBehaviour, ICallbacks
    {
       public List<CollisionCallback> _callbacks
                = new List<CollisionCallback>();
                
       public List<CollisionCallback> Callbacks => _callbacks;
-
 
       // 토글 방식 이벤트인지
       [field: SerializeField]

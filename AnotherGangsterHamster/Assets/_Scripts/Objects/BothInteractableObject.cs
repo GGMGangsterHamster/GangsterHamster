@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace Objects
 {
-   public class BothInteractableObject : Interactable, IActivated, ICallbacks
+   public class BothInteractableObject : Interactable, ICallbacks
    {
       public List<CollisionCallback> _callbacks
                = new List<CollisionCallback>();

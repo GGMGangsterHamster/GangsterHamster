@@ -27,7 +27,7 @@ namespace Objects.StageObjects
 
                collisionCallback.OnActive.AddListener(Active);
                collisionCallback.OnDeactive.AddListener(Deactive);
-               _buttons.Add(Buttons[i].GetComponent<IActivated>());
+               _buttons.Add(interactable);
             }
          }
       }
