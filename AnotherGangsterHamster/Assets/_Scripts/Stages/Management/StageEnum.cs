@@ -9,6 +9,7 @@ namespace Stages.Management
       GrandStages_Front,
       GrandStages_Mid,
       GrandStages_Back,
+      GravitoStages_T,
       GravitoStages_1,
       GravitoStages_2,
       GravitoStages_3,
