@@ -1,3 +1,5 @@
+using Stages.Management;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +15,8 @@ namespace UI.PanelScripts
         [SerializeField] private Button _optionButton;
         [SerializeField] private Button _exitButton;
 
+        string _fullpath = "stageData";
+
         public override void ActivationActions()
         {
 
@@ -27,11 +31,19 @@ namespace UI.PanelScripts
         {
             panelId = 1;
 
-            _continueButton.onClick.AddListener(() =>
+            // 만약 세이브된 진행도가 없다면 버튼 색을 어둡게 하기
+
+            if (!StageManager.Instance.ExistsStage())
             {
-                // 만약 첫 실행이 아니라면 => 이 조건 처리를 다른게 해줘야함 근데 그 다른게 뭘까
-                // 저장되어 있는 데이터를 불러오고 "In Game UI"를 활성화 시킨다
-            });
+                _continueButton.image.color = new Color(1, 1, 1, 0.2f);
+            }
+            else
+            {
+                _continueButton.onClick.AddListener(() =>
+                {
+                    StageManager.Instance.LoadStage();
+                });
+            }
 
             _newGameButton.onClick.AddListener(() =>
             {

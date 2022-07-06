@@ -1,3 +1,4 @@
+using Stages.Management;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,6 +31,7 @@ namespace UI.PanelScripts
 
             _acceptButton.onClick.AddListener(() =>
             {
+                StageManager.Instance.Load(StageNames.StoryStages_0_1.ToString());
                 // 기존의 저장 데이터 모두 삭제, 게임을 처음부터 재시작 후 "In Game UI"를 활성화
             });
         }
