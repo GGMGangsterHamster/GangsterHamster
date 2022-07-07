@@ -140,7 +140,16 @@ namespace Weapons.Actions
         {
             yield return new WaitForSeconds(time);
             PlayerBaseTransform.GetComponent<FollowGroundPos>().Deactive(_weaponActions[_curWeapon].gameObject);
-            _weaponActions[_curWeapon].gameObject.SetActive(false);
+
+            if(_curWeapon == WeaponEnum.Gravito)
+            {
+                yield return new WaitForSeconds((_weaponActions[_curWeapon] as Gravito).gravityChangeTime);
+                _weaponActions[_curWeapon].gameObject.SetActive(false);
+            }
+            else
+            {
+                _weaponActions[_curWeapon].gameObject.SetActive(false);
+            }
         }
 
         // 1,2,3번 같이 숫자 누르면 발동되는 함수
