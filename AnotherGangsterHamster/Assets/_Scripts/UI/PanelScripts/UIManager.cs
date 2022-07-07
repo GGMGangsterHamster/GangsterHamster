@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Sound;
 
 namespace UI.PanelScripts
 {
@@ -19,7 +20,7 @@ namespace UI.PanelScripts
     {
         [SerializeField] private Transform _uiPanelParent;
 
-        public Action<float> soundAction;
+        public Action<float> soundAction { get; set; }
         public Action<float> sensitivityAction;
 
         // UIAction을 상속받고 있는 클래스들을 _uiDict에 모아서 관리한다
@@ -27,7 +28,11 @@ namespace UI.PanelScripts
 
         private void Start()
         {
-            soundAction = (value) => { };
+            soundAction += volume => {
+                SoundManager.Instance.GlobalVolume = volume;
+                BackgroundMusic.Instance.SetVolume(volume);
+                Debug.Log("Set volume to " + volume);
+            };
             sensitivityAction = (value) => { };
 
             for(int i = 0; i < _uiPanelParent.childCount; i++)
