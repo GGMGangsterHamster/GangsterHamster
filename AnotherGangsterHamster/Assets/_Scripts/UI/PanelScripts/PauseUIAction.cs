@@ -117,6 +117,12 @@ namespace UI.PanelScripts
 
             #endregion
 
+
+            SoundVO soundVO = Utils.JsonToVO<SoundVO>(_soundPath);
+            SensitivityVO sensitivityVO = Utils.JsonToVO<SensitivityVO>(_sensitivityPath);
+
+            UIManager.Instance.soundAction(soundVO.master);
+
             _soundScrollbar.onValueChanged.AddListener(value =>
             {
                 UIManager.Instance.soundAction(value);

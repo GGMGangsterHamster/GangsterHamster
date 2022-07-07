@@ -63,6 +63,7 @@ namespace Stages.Management
          {
             SceneManager.LoadScene(target);
             CurrentStage = stage;
+            BackgroundMusic.Instance.StartBackgroundMusic();
             SaveStage(stage.ToString());
             GC.Collect();
          }

@@ -10,6 +10,7 @@ namespace Characters.Player.Bridge
       {
          UIManager.Instance.soundAction += volume => {
             SoundManager.Instance.GlobalVolume = volume;
+            BackgroundMusic.Instance.SetVolume(volume);
             Debug.Log("Set volume to " + volume);
          };
 

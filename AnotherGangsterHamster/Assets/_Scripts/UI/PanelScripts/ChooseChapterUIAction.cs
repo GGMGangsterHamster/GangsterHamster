@@ -70,6 +70,7 @@ namespace UI.PanelScripts
                     stageButton.onClick.AddListener(() =>
                     {
                         SceneManager.LoadScene(sceneName);
+                        BackgroundMusic.Instance.StartBackgroundMusic();
                         Utils.LockCursor();
                         Utils.MoveTime();
                     });
