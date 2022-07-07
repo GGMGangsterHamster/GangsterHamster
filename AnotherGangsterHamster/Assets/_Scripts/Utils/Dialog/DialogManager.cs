@@ -37,7 +37,6 @@ public class DialogManager : MonoSingleton<DialogManager>
 
       dialogs.ForEach(e => {
          _dialogDictionary.Add(e.name, JsonUtility.FromJson<Dialog>(e.text));
-         Debug.Log(e.name);
       });
    }
 
