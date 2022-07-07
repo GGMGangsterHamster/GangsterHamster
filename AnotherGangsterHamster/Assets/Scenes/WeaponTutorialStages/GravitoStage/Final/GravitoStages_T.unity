@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 763d40edcebb39149996f2e897be75bd, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 2c802b0268140b8ae912d375d29a5de4, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -123,6 +123,20 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!115 &3486393
+MonoScript:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 5
+  m_Script: 
+  m_DefaultReferences: {}
+  m_Icon: {fileID: 0}
+  m_ExecutionOrder: 0
+  m_ClassName: SceneObjectIDMapSceneAsset
+  m_Namespace: UnityEngine.Rendering.HighDefinition
 --- !u!1001 &96460532
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -357,8 +371,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: GravitoStage_T
       objectReference: {fileID: 0}
+    - target: {fileID: 6170861000890691500, guid: c0e31ec377b3fc34d9fb3be42b29fb47, type: 3}
+      propertyPath: m_BakedTexture
+      value: 
+      objectReference: {fileID: 8900000, guid: a79b9ede9d1bcc67b8061de25e1fd88c, type: 3}
+    - target: {fileID: 7216877560881688403, guid: c0e31ec377b3fc34d9fb3be42b29fb47, type: 3}
+      propertyPath: m_BakedTexture
+      value: 
+      objectReference: {fileID: 8900000, guid: 475fa91741b6021b494a32e6990cef79, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0e31ec377b3fc34d9fb3be42b29fb47, type: 3}
+--- !u!1 &417888147 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2475578553398533369, guid: c0e31ec377b3fc34d9fb3be42b29fb47, type: 3}
+  m_PrefabInstance: {fileID: 417888146}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &417888148 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7512708164602904902, guid: c0e31ec377b3fc34d9fb3be42b29fb47, type: 3}
+  m_PrefabInstance: {fileID: 417888146}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &747647660
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -600,6 +632,57 @@ MonoBehaviour:
   OnGravityChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1997260214
+GameObject:
+  m_ObjectHideFlags: 19
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1997260216}
+  - component: {fileID: 1997260215}
+  m_Layer: 0
+  m_Name: SceneIDMap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1997260215
+MonoBehaviour:
+  m_ObjectHideFlags: 19
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997260214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 3486393}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Entries:
+  - id: 0
+    category: 0
+    gameObject: {fileID: 417888148}
+  - id: 1
+    category: 0
+    gameObject: {fileID: 417888147}
+--- !u!4 &1997260216
+Transform:
+  m_ObjectHideFlags: 19
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997260214}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1998561082
 PrefabInstance:
   m_ObjectHideFlags: 0
