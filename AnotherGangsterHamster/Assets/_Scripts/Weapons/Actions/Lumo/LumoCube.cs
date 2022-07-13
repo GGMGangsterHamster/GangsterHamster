@@ -1,6 +1,7 @@
 using Characters.Player;
 using Matters.Gravity;
 using UnityEngine;
+using Weapons.Actions.Effect;
 
 namespace Weapons.Actions
 {

@@ -6,6 +6,7 @@ using Weapons.Checkpoint;
 using Matters.Gravity;
 using Weapon.Animation.GravitoAnimation;
 using Objects.Interaction;
+using Weapons.Actions.Effect;
 
 namespace Weapons.Actions
 {
@@ -42,6 +43,7 @@ namespace Weapons.Actions
         private Transform _dropPoint;
         private GravityAffectedObject _playerGravity;
 
+        private GravitoEffect _gravitoEffect;
         private GravitoAnimator _gravitoAnimator;
         private WeaponManagement _weaponManagement;
 
@@ -82,6 +84,7 @@ namespace Weapons.Actions
 
             _playerGravity = PlayerBaseTransform.GetComponent<GravityAffectedObject>();
 
+            _gravitoEffect = GetComponent<GravitoEffect>();
             _gravitoAnimator = GetComponent<GravitoAnimator>();
             _weaponManagement = GameObject.FindObjectOfType<WeaponManagement>();
 
@@ -134,6 +137,7 @@ namespace Weapons.Actions
                 if (_currentChangeGravityDir == Vector3.up) return;
 
                 _gravitoAnimator.UsingAnime();
+                _gravitoEffect.EffectOn();
 
                 SetGravityChangeTime();
                 _currentGravitoStatus = GravitoStatus.ChangeGravity;
@@ -156,6 +160,7 @@ namespace Weapons.Actions
                 return;
 
             _gravitoAnimator.ResetAnime(transform.position, GravitoHandPosition, fireSpeed);
+            _gravitoEffect.EffectOn();
 
             if (!isChangedGravity)
             {
@@ -222,6 +227,7 @@ namespace Weapons.Actions
                     {
                         PlayerBaseTransform.rotation = Checkpoint.endCheckpoint.rotation;
                         _currentGravitoStatus = GravitoStatus.Stickly;
+                        _gravitoEffect.EffectOff();
                     }
                     else
                     {
@@ -238,6 +244,7 @@ namespace Weapons.Actions
 
                     if(_currentGravityChangeTime >= 1f)
                     {
+                        _gravitoEffect.EffectOff();
                         PlayerBaseTransform.rotation = Checkpoint.endCheckpoint.rotation;
                         _currentGravitoStatus = GravitoStatus.Idle;
                         transform.rotation = Quaternion.identity;
@@ -357,9 +364,6 @@ namespace Weapons.Actions
             {
                 gravityChangeTime = Mathf.Lerp(minGravityChangeTime, maxGravityChangeTime, (dist - 1.5f) / 7.5f);
             }
-
-
-            Debug.Log(gravityChangeTime);
         }
     }
 }

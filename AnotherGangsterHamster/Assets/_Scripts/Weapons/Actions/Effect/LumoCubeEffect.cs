@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
 
-namespace Weapons.Actions
+namespace Weapons.Actions.Effect
 {
     public class LumoCubeEffect : MonoBehaviour
     {

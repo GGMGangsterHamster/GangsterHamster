@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Weapons.Actions;
+using Weapons.Actions.Effect;
 
 namespace Weapon.Animation.GravitoAnimation
 {
