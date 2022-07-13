@@ -132,6 +132,8 @@ namespace Weapons.Actions
 
                 _gravitoAnimator.UsingAnime();
 
+                
+
                 _currentGravitoStatus = GravitoStatus.ChangeGravity;
                 _currentGravityChangeTime = 0f;
                 isChangedGravity = true;
