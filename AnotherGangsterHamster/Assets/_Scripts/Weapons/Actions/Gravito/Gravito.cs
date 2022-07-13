@@ -21,7 +21,10 @@ namespace Weapons.Actions
             BACK
         }
 
-        public float gravityChangeTime;
+        //public float gravityChangeTime;
+        [HideInInspector] public float gravityChangeTime = 0f;
+        public float minGravityChangeTime;
+        public float maxGravityChangeTime;
         public float alphaToZeroSpeed;
         public float dropPointAlphaDistance;
 
@@ -55,7 +58,7 @@ namespace Weapons.Actions
             }
         }
 
-        private float _currentGravityChangeTime = 0f;  
+        private float _currentGravityChangeTime = 0f;
         private bool isChangedGravity = false;
         private bool isReseting = false;
 
@@ -132,6 +135,7 @@ namespace Weapons.Actions
 
                 _gravitoAnimator.UsingAnime();
 
+                SetGravityChangeTime();
                 _currentGravitoStatus = GravitoStatus.ChangeGravity;
                 _currentGravityChangeTime = 0f;
                 isChangedGravity = true;
@@ -166,6 +170,7 @@ namespace Weapons.Actions
                 return;
             }
 
+            SetGravityChangeTime();
             _currentGravitoStatus = GravitoStatus.Reset;
             _currentGravityChangeTime = 0f;
             isChangedGravity = false;
@@ -334,6 +339,27 @@ namespace Weapons.Actions
             {
                 _dropPoint.gameObject.SetActive(false);
             }
+        }
+
+        private void SetGravityChangeTime()
+        {
+            float dist = Vector3.Distance(_dropPoint.position, PlayerBaseTransform.position);
+            
+            if(dist < 1.5f)
+            {
+                gravityChangeTime = minGravityChangeTime;
+            }
+            else if(dist > 9f)
+            {
+                gravityChangeTime = maxGravityChangeTime;
+            }
+            else
+            {
+                gravityChangeTime = Mathf.Lerp(minGravityChangeTime, maxGravityChangeTime, (dist - 1.5f) / 7.5f);
+            }
+
+
+            Debug.Log(gravityChangeTime);
         }
     }
 }
