@@ -9,7 +9,7 @@ namespace Objects.Camrea
       [Range(1.0f, 5.0f)]
       public float focusDistance = 4.0f;
 
-      const float DEFAULT_HEIGHT = 1.66118f;
+      const float DEFAULT_HEIGHT = 1.657952f;
 
       private GameObject _playerBase;
       public GameObject PlayerBase
@@ -44,24 +44,22 @@ namespace Objects.Camrea
 
       private void LateUpdate()
       {
-         float y = PlayerBase.transform.localEulerAngles.y  * Mathf.Deg2Rad;
-         float z = HeadTrm.transform.localEulerAngles.z     * Mathf.Deg2Rad;
-         float sinZ = Mathf.Sin(z);
+         float y        = _mouse.transform.localEulerAngles.y * Mathf.Deg2Rad;
+         float sinZ     = Mathf.Sin(_mouse.rotY * Mathf.Deg2Rad);
+         float absSinZ  = Mathf.Abs(sinZ);
+         float sinY     = Mathf.Sin(y);
+         float cosY     = Mathf.Cos(y);
 
          Vector3 target
-            = new Vector3(Mathf.Sin(y), sinZ, Mathf.Cos(y)).normalized;
-         Debug.Log(target);
+            = new Vector3(sinY - absSinZ * sinY, sinZ, cosY - absSinZ * cosY);
          target *= focusDistance;
          target.y += DEFAULT_HEIGHT;
 
-         target += PlayerBase.transform.position;
+         // Vector3 add = HeadTrm.localPosition;
+         // add.y = 0.0f;
 
-
+         target += HeadTrm.position;
          transform.LookAt(target, PlayerBase.transform.up);
-
-         // FIXME: 완벽하게 아레를 보고 있지 않음
-
-         Debug.DrawLine(transform.position, target, Color.red);
       }
    }
 }
