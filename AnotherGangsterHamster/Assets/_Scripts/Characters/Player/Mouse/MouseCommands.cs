@@ -20,7 +20,7 @@ namespace Characters.Player.Mouse
       public MouseY(IMousedeltaRecvable mouseDeltaRecvable)
       {
          Execute.AddListener(param => {
-            mouseDeltaRecvable.OnMouseX(Input.GetAxis("Mouse Y"));
+            mouseDeltaRecvable.OnMouseY(Input.GetAxis("Mouse Y"));
          });
       }
    }
