@@ -41,6 +41,7 @@ namespace Weapons.Actions
         private float _aTypeBeforeSize;
         private float _aTypeCurSize;
         private Transform _dropPoint;
+        private AudioSource _effectSound;
         private GravityAffectedObject _playerGravity;
 
         private GravitoEffect _gravitoEffect;
@@ -136,6 +137,11 @@ namespace Weapons.Actions
             {
                 if (_currentChangeGravityDir == Vector3.up) return;
 
+                if (_effectSound == null)
+                {
+                    _effectSound = Resources.Load<AudioSource>("Audio/SoundEffect/3(GravitoEffectSound)_");
+                }
+
                 _gravitoAnimator.UsingAnime();
                 _gravitoEffect.EffectOn();
 
@@ -219,6 +225,10 @@ namespace Weapons.Actions
                     }
                     break;
                 case GravitoStatus.ChangeGravity:
+                    if (_effectSound != null)
+                    {
+                        _effectSound.Play();
+                    }
                     SettingGravitoPos();
                     ShowDropPoint(Vector3.down);
                     _currentGravityChangeTime += Time.deltaTime / gravityChangeTime;

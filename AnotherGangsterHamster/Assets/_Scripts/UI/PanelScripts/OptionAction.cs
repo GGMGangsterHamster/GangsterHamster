@@ -20,6 +20,11 @@ namespace UI.PanelScripts
         [SerializeField] private Scrollbar _soundScrollbar;
         [SerializeField] private Scrollbar _sensitivityScrollbar;
 
+        void Awake()
+        {
+            _buttonClickSound = Resources.Load<AudioSource>("Audio/SoundEffect/6(ButtonEffectSound)");
+        }
+
         public override void ActivationActions()
         {
             // 여기서 스크롤바들의 값을 초기화 시켜줌
@@ -47,26 +52,31 @@ namespace UI.PanelScripts
             _fullScreenModeButton.onClick.AddListener(() =>
             {
                 ScreenManager.Instance.SetFullScreen();
+                _buttonClickSound.Play();
             });
 
             _windowScreenModeButton.onClick.AddListener(() =>
             {
                 ScreenManager.Instance.SetWindowScreen();
+                _buttonClickSound.Play();
             });
 
             _1920x1080ResolutionButton.onClick.AddListener(() =>
             {
                 ScreenManager.Instance.SetResolution(1920, 1080);
+                _buttonClickSound.Play();
             });
 
             _2560x1080ResolutionButton.onClick.AddListener(() =>
             {
                 ScreenManager.Instance.SetResolution(2560, 1080);
+                _buttonClickSound.Play();
             });
 
             _disableButton.onClick.AddListener(() =>
             {
                 UIManager.Instance.DeActivationPanel(panelId);
+                _buttonClickSound.Play();
             });
 
             _soundScrollbar.onValueChanged.AddListener(value =>
