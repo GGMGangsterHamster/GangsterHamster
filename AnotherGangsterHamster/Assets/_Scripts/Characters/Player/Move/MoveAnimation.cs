@@ -4,13 +4,14 @@ namespace Characters.Player.Move
 {   
    public class MoveAnimation : MonoBehaviour
    {
-      
       [Range(0.0f, 1.0f)]
       [Header("Lerp t value")]
       public float t = 0.05f;
 
       private Animator _animator;
       private MoveInputHandler _moveInputHandler;
+
+      
 
       // 에니메이터 Param 조절 용
       const string X = "X";
@@ -19,7 +20,6 @@ namespace Characters.Player.Move
       private float _targetY = 0.0f;
       private float _curX = 0.0f;
       private float _curY = 0.0f;
-
 
       private void Start()
       {
@@ -47,7 +47,7 @@ namespace Characters.Player.Move
             SetTargetY(0.0f);
          });
 
-         // TODO: 카메라 보정
+         // TODO: 카메라 보정과 짐벌이 필요함
       }
 
       private void Update()
