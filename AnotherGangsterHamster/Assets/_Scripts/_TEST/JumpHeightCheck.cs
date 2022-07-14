@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// 테스트를 위해서 만들어 놓은 스크립트
+/// 무기들의 테스트를 위해서 만들어 놓은 스크립트
 /// </summary>
 public class JumpHeightCheck : MonoBehaviour
 {
