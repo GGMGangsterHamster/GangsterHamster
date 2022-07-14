@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17980957, g: 0.17980957, b: 0.17980957, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -415,6 +415,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Version: 11
+  m_ObsoleteShadowResolutionTier: 1
+  m_ObsoleteUseShadowQualitySettings: 0
+  m_ObsoleteCustomShadowResolution: 512
+  m_ObsoleteContactShadows: 0
+  m_PointlightHDType: 1
+  m_SpotLightShape: 0
+  m_AreaLightShape: 0
   m_Intensity: 110000
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
@@ -517,14 +525,6 @@ MonoBehaviour:
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
   m_AreaLightEmissiveMeshLayer: -1
-  m_Version: 11
-  m_ObsoleteShadowResolutionTier: 1
-  m_ObsoleteUseShadowQualitySettings: 0
-  m_ObsoleteCustomShadowResolution: 512
-  m_ObsoleteContactShadows: 0
-  m_PointlightHDType: 1
-  m_SpotLightShape: 0
-  m_AreaLightShape: 0
 --- !u!108 &276642627
 Light:
   m_ObjectHideFlags: 0
@@ -632,6 +632,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Version: 11
+  m_ObsoleteShadowResolutionTier: 1
+  m_ObsoleteUseShadowQualitySettings: 0
+  m_ObsoleteCustomShadowResolution: 512
+  m_ObsoleteContactShadows: 0
+  m_PointlightHDType: 1
+  m_SpotLightShape: 0
+  m_AreaLightShape: 0
   m_Intensity: 12829.378
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
@@ -734,14 +742,6 @@ MonoBehaviour:
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
   m_AreaLightEmissiveMeshLayer: -1
-  m_Version: 11
-  m_ObsoleteShadowResolutionTier: 1
-  m_ObsoleteUseShadowQualitySettings: 0
-  m_ObsoleteCustomShadowResolution: 512
-  m_ObsoleteContactShadows: 0
-  m_PointlightHDType: 1
-  m_SpotLightShape: 0
-  m_AreaLightShape: 0
 --- !u!108 &280390390
 Light:
   m_ObjectHideFlags: 0
@@ -1004,8 +1004,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Buttons:
-  - {fileID: 6821887587571612470}
-  - {fileID: 2471974943578490539}
+  - {fileID: 0}
+  - {fileID: 0}
   OnQualified:
     m_PersistentCalls:
       m_Calls:
@@ -1351,6 +1351,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0727e38a19f8801695e24bcb5e6fc70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnGravityChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &766724739
 GameObject:
   m_ObjectHideFlags: 0
@@ -1491,14 +1494,6 @@ MonoBehaviour:
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
   m_AreaLightEmissiveMeshLayer: -1
-  m_Version: 11
-  m_ObsoleteShadowResolutionTier: 1
-  m_ObsoleteUseShadowQualitySettings: 0
-  m_ObsoleteCustomShadowResolution: 512
-  m_ObsoleteContactShadows: 0
-  m_PointlightHDType: 1
-  m_SpotLightShape: 0
-  m_AreaLightShape: 0
 --- !u!108 &766724741
 Light:
   m_ObjectHideFlags: 0
@@ -1913,7 +1908,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1084940150
 MonoBehaviour:
@@ -2440,11 +2435,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 447d9415715243a73b7b398f08a6a21d, type: 3}
---- !u!1 &1335949007 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2509686852176833471, guid: 447d9415715243a73b7b398f08a6a21d, type: 3}
-  m_PrefabInstance: {fileID: 1307183520}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1413830612
 GameObject:
   m_ObjectHideFlags: 1
@@ -2491,7 +2481,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1471123665
 PrefabInstance:
@@ -2569,7 +2559,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Buttons:
-  - {fileID: 1335949007}
+  - {fileID: 0}
   OnQualified:
     m_PersistentCalls:
       m_Calls:
@@ -2700,6 +2690,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Version: 11
+  m_ObsoleteShadowResolutionTier: 1
+  m_ObsoleteUseShadowQualitySettings: 0
+  m_ObsoleteCustomShadowResolution: 512
+  m_ObsoleteContactShadows: 0
+  m_PointlightHDType: 1
+  m_SpotLightShape: 0
+  m_AreaLightShape: 0
   m_Intensity: 12829.378
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
@@ -2802,14 +2800,6 @@ MonoBehaviour:
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
   m_AreaLightEmissiveMeshLayer: -1
-  m_Version: 11
-  m_ObsoleteShadowResolutionTier: 1
-  m_ObsoleteUseShadowQualitySettings: 0
-  m_ObsoleteCustomShadowResolution: 512
-  m_ObsoleteContactShadows: 0
-  m_PointlightHDType: 1
-  m_SpotLightShape: 0
-  m_AreaLightShape: 0
 --- !u!108 &1474534362
 Light:
   m_ObjectHideFlags: 0
@@ -2995,7 +2985,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1562023948
 MonoBehaviour:
@@ -3510,7 +3500,7 @@ PrefabInstance:
     - target: {fileID: 1921777115454469774, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: _callbacks.Array.data[0].OnActive.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1912795156}
+      objectReference: {fileID: 0}
     - target: {fileID: 1921777115454469774, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: _callbacks.Array.data[0].OnActive.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -3774,17 +3764,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8182657698645652297, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
   m_PrefabInstance: {fileID: 1912795154}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1912795156 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2764017440565451672, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
-  m_PrefabInstance: {fileID: 1912795154}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 093e3c73b72b9034ba68ff9b9ea78b26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1995663893
 GameObject:
   m_ObjectHideFlags: 0
@@ -3884,7 +3863,7 @@ RectTransform:
   - {fileID: 2144837864}
   - {fileID: 832745288}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3926,7 +3905,7 @@ Transform:
   - {fileID: 178153360}
   - {fileID: 311456453}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2144837863
 GameObject:
@@ -4199,13 +4178,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 447d9415715243a73b7b398f08a6a21d, type: 3}
---- !u!1 &2471974943578490539 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2509686852176833471, guid: 447d9415715243a73b7b398f08a6a21d, type: 3}
-  m_PrefabInstance: {fileID: 2471974943578490538}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6821887587571612470 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5766494126852533925, guid: fdf4b2f02b1e255198bc44201bacb177, type: 3}
-  m_PrefabInstance: {fileID: 1056803601968649619}
-  m_PrefabAsset: {fileID: 0}
