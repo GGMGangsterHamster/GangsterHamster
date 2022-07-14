@@ -160,7 +160,6 @@ namespace Weapons.Actions
                 return;
 
             _gravitoAnimator.ResetAnime(transform.position, GravitoHandPosition, fireSpeed);
-            _gravitoEffect.EffectOn();
 
             if (!isChangedGravity)
             {
@@ -176,6 +175,7 @@ namespace Weapons.Actions
             }
 
             SetGravityChangeTime();
+            _gravitoEffect.EffectOn();
             _currentGravitoStatus = GravitoStatus.Reset;
             _currentGravityChangeTime = 0f;
             isChangedGravity = false;
