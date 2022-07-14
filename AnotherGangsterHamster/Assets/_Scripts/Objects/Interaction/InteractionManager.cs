@@ -64,7 +64,14 @@ namespace Objects.Interaction
       {
          _grep = true;
 
+         AudioSource grebSound = Resources.Load<AudioSource>("Audio/SoundEffect/1(WeaponWithdraw)_");
+         if (grebSound != null)
+         {
+             grebSound.Play();
+         }
+
          WeaponAction wa = WM.GetCurrentWeaponAction();
+         
 
          if (wa != null)
             wa.gameObject.SetActive(!wa.IsHandleWeapon());

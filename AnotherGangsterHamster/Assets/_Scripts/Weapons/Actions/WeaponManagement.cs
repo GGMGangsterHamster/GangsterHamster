@@ -16,6 +16,7 @@ namespace Weapons.Actions
     }
     public class WeaponManagement : MonoBehaviour
     {
+        public AudioSource weaponGrebSound;
         public WeaponEnum startHandleWeapon;
 
         private Transform _playerBaseTransform;

@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace _Core.Initialize.InitScripts
 {
-
    public class AttachCamToPlayer : InitBase
    {
       // 카메라가 고정될 위치

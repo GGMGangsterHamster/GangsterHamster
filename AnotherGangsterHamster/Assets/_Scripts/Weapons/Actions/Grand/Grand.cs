@@ -215,8 +215,13 @@ namespace Weapons.Actions
 
             _beforeSizeLevel = _currentSizeLevel;
             _currentGrandStatus = GrandStatus.Use;
-        }
+            AudioSource useEffectSound = Resources.Load<AudioSource>("Audio/SoundEffect/2(GrandEffectSound)");
 
+            if (useEffectSound != null)
+            {
+                useEffectSound.Play();
+            }
+        }
 
         public override void ResetWeapon()
         {
