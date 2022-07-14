@@ -46,19 +46,22 @@ namespace Objects.Camrea
       {
          float y = PlayerBase.transform.localEulerAngles.y  * Mathf.Deg2Rad;
          float z = HeadTrm.transform.localEulerAngles.z     * Mathf.Deg2Rad;
+         float sinZ = Mathf.Sin(z);
 
          Vector3 target
-            = new Vector3(Mathf.Sin(y), Mathf.Sin(z), Mathf.Cos(y)).normalized;
+            = new Vector3(Mathf.Sin(y), sinZ, Mathf.Cos(y)).normalized;
+         Debug.Log(target);
          target *= focusDistance;
          target.y += DEFAULT_HEIGHT;
 
          target += PlayerBase.transform.position;
 
-         Debug.Log(target);
 
          transform.LookAt(target, PlayerBase.transform.up);
 
+         // FIXME: 완벽하게 아레를 보고 있지 않음
 
+         Debug.DrawLine(transform.position, target, Color.red);
       }
    }
 }

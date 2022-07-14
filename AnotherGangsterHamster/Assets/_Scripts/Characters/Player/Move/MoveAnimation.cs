@@ -46,8 +46,6 @@ namespace Characters.Player.Move
             SetTargetX(0.0f);
             SetTargetY(0.0f);
          });
-
-         // TODO: 카메라 보정과 짐벌이 필요함
       }
 
       private void Update()
