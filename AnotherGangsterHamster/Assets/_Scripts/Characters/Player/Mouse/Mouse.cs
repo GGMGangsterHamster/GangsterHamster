@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Characters.Player.Mouse
@@ -70,8 +71,6 @@ namespace Characters.Player.Mouse
          rotY = Mathf.Clamp(rotY, -89f, 89f);
 
          HeadTrm.localRotation = Quaternion.Euler(0.0f, 0.0f, rotY);
-
-         // CamTrm.localRotation = Quaternion.Euler(0.0f, rotY, 0.0f);
       }
    }
 }
