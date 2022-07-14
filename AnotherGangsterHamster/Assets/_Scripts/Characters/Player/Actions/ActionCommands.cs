@@ -6,34 +6,34 @@ namespace Characters.Player.Actions
 {
    public class CrouchStart : Command
    {
-      IActionable _actionable;
-
       public CrouchStart(IActionable actionable)
-               => _actionable = actionable;
-      public override void Execute(object param = null)
-               => _actionable.CrouchStart();
+      {
+         Execute.AddListener(param => {
+            actionable.CrouchStart();
+         });
+      }
       
    }
 
    public class CrouchEnd : Command
    {
-      IActionable _actionable;
-
       public CrouchEnd(IActionable actionable)
-               => _actionable = actionable;
-      public override void Execute(object param = null)
-               => _actionable.CrouchEnd();
+      {
+         Execute.AddListener(param => {
+            actionable.CrouchEnd();
+         });
+      }
 
    }
 
    public class Jump : Command
    {
-      IActionable _actionable;
-
       public Jump(IActionable actionable)
-               => _actionable = actionable;
-      public override void Execute(object param = null)
-               => _actionable.Jump();
+      {
+         Execute.AddListener(param => {
+            actionable.Jump();
+         });
+      }
 
    }
 

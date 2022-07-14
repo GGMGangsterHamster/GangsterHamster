@@ -53,7 +53,7 @@ namespace Characters.Player.Move
          foreach(KeyCode key in _moveCommands.Keys)
          {
             if(Input.GetKey(key))
-               _moveCommands[key].Execute();
+               _moveCommands[key].Execute.Invoke(null);
          }
       }
    }
