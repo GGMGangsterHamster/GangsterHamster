@@ -10,6 +10,11 @@ namespace UI.PanelScripts
         [SerializeField] private Button _disableButton;
         [SerializeField] private Button _acceptButton;
 
+        void Awake()
+        {
+            _buttonClickSound = Resources.Load<AudioSource>("Audio/SoundEffect/6(ButtonEffectSound)");
+        }
+
         public override void ActivationActions()
         {
 
@@ -27,11 +32,13 @@ namespace UI.PanelScripts
             _disableButton.onClick.AddListener(() =>
             {
                 UIManager.Instance.DeActivationPanel(panelId);
+                _buttonClickSound.Play();
             });
 
             _acceptButton.onClick.AddListener(() =>
             {
                 StageManager.Instance.Load(StageNames.StoryStage_0_1.ToString());
+                _buttonClickSound.Play();
                 // 기존의 저장 데이터 모두 삭제, 게임을 처음부터 재시작 후 "In Game UI"를 활성화
             });
         }
