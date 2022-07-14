@@ -21,7 +21,7 @@ namespace Objects.StageObjects.CollisionEventable
 
          if(startActive)
          {
-                Active(null);
+            Active(null);
          }
       }
 
@@ -29,7 +29,6 @@ namespace Objects.StageObjects.CollisionEventable
       {
          if (_down != null || _up != null)
             ValueTween.Stop(this);
-
 
          Vector3 step = target / duration;
          Vector3 final = _initalPos + target;

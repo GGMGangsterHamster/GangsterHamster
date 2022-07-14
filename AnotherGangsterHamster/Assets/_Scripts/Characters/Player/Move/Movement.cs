@@ -8,13 +8,11 @@ namespace Characters.Player.Move
    {
       private MoveDelta _delta;
       private Rigidbody _rigid;
-      private AudioSource _moveSound;
 
       private void Awake()
       {
          _rigid = GetComponent<Rigidbody>();
          _delta = GetComponent<MoveDelta>();
-         _moveSound = Resources.Load<AudioSource>("Audio/SoundEffect/5(WalkingSound)");
       }
 
       public void MoveBackward()
@@ -46,9 +44,6 @@ namespace Characters.Player.Move
          // transform.Translate(_delta.Calculate(transform, PlayerValues.Speed, true, false));
          _rigid.MovePosition(transform.position +
                              _delta.Calculate(transform, PlayerValues.Speed, false, true));
-         _moveSound.Play();
-         
-
          // _rigid.velocity = _delta.Calculate(transform, PlayerValues.Speed, false, true, false, true);
 
       }

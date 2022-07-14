@@ -8,10 +8,12 @@ namespace Objects.StageObjects.CollisionEventable
         public float MaximunKineticEnergy = 10.0f;
 
         CollisionInteractableObject _colInteractable;
+        private AudioSource _brokeGlassSound;
 
         private void Awake()
         {
             _colInteractable = GetComponent<CollisionInteractableObject>();
+            _brokeGlassSound = Resources.Load<AudioSource>("Audio/SoundEffect/8(GlassBrakeSound)");
         }
 
         public void Active(GameObject other)
@@ -21,6 +23,7 @@ namespace Objects.StageObjects.CollisionEventable
                 Debug.Log(_colInteractable.colVelocity.magnitude * rigid.mass);
                 if (MaximunKineticEnergy < _colInteractable.colVelocity.magnitude * rigid.mass)
                 {
+                    _brokeGlassSound.Play();
                     gameObject.SetActive(false);
                 }
             }

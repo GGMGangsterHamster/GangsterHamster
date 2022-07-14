@@ -18,11 +18,13 @@ namespace Objects.StageObjects
       public bool InitalActiveStatus { get; set; } = false; // 점프 OnStay
 
       private ButtonCountRequirement _requirement;
+      private AudioSource _pressButtonSound;
 
       private void Awake()
       {
          _activated = InitalActiveStatus;
 
+         _pressButtonSound = Resources.Load<AudioSource>("Audio/SoundEffect/6(ButtonEffectSound)");
          _requirement = GetComponent<ButtonCountRequirement>();
       }
 
@@ -46,13 +48,22 @@ namespace Objects.StageObjects
          _activated = !_activated;
 
          if (_activated)
-            OnActive?.Invoke(null);
+         {
+             OnActive?.Invoke(null);
+             _pressButtonSound.Play();
+         }
+            
          else
          {
             if (EventIsToggle)
-               OnDeactive?.Invoke(null);
+            {
+                OnDeactive?.Invoke(null);
+            }
             else
-               OnActive?.Invoke(null);
+            {
+                OnActive?.Invoke(null);
+                _pressButtonSound.Play();
+            } 
          }
       }
 

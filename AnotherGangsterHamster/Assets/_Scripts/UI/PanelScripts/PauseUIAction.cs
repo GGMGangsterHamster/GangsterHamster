@@ -31,7 +31,7 @@ namespace UI.PanelScripts
 
         void Awake()
         {
-            _buttonClickSound = Resources.Load<AudioSource>("Audio/SoundEffect/6(ButtonEffectSound)");
+            _buttonClickSound = Resources.Load<AudioSource>("Audio/SoundEffect/10(ButtonUISound)");
         }
 
         public override void ActivationActions()
