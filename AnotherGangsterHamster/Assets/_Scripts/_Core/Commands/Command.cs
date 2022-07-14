@@ -1,8 +1,10 @@
+using UnityEngine.Events;
+
 namespace _Core.Commands
 {
    abstract public class Command
    {
-      abstract public void Execute(object param = null);
+      public UnityEvent<object> Execute;
 
       public Command()
       {

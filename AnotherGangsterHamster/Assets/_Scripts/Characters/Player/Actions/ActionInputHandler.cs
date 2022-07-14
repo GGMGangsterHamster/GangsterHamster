@@ -60,19 +60,19 @@ namespace Characters.Player.Actions
          foreach (KeyCode key in _actionDownCommands.Keys)
          {
             if (Input.GetKeyDown(key))
-               _actionDownCommands[key].Execute();
+               _actionDownCommands[key].Execute.Invoke(null);
          }
 
          foreach (KeyCode key in _actionUpCommands.Keys)
          {
             if (Input.GetKeyUp(key))
-               _actionUpCommands[key].Execute();
+               _actionUpCommands[key].Execute.Invoke(null);
          }
 
          // 상호작용
          if (Input.GetKeyDown((KeyCode)_key.Interact))
          {
-            _interaction.Execute(RightHandTrm);
+            _interaction.Execute.Invoke(RightHandTrm);
          }
       }
 

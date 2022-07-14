@@ -23,8 +23,8 @@ namespace Characters.Player.Mouse
 
       private void Update()
       {
-         _mouseX.Execute();
-         _mouseY.Execute();
+         _mouseX.Execute.Invoke(null);
+         _mouseY.Execute.Invoke(null);
       }
    }
 }
