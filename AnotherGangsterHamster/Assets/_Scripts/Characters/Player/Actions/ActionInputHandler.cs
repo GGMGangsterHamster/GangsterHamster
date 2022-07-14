@@ -22,23 +22,21 @@ namespace Characters.Player.Actions
       private ActionVO _key;
 
       // 엑션 커멘드
-      private CrouchStart  _crouchStart;
-      private CrouchEnd    _crouchEnd;
-      private Jump         _jump;
-      private Interaction  _interaction;
+      public CrouchStart  crouchStart;
+      public CrouchEnd    crouchEnd;
+      public Jump         jump;
+      public Interaction  interaction;
 
-      private void Start()
+      private void Awake()
       {
-         Debug.Assert(RightHandTrm != null);
-
          _actionDownCommands  = new Dictionary<KeyCode, Command>();
          _actionUpCommands    = new Dictionary<KeyCode, Command>();
          _actions             = GetComponent<Actions>();
 
-         _crouchStart   = new CrouchStart(_actions);
-         _crouchEnd     = new CrouchEnd(_actions);
-         _jump          = new Jump(_actions);
-         _interaction   = new Interaction(_actions);
+         crouchStart   = new CrouchStart(_actions);
+         crouchEnd     = new CrouchEnd(_actions);
+         jump          = new Jump(_actions);
+         interaction   = new Interaction(_actions);
 
          RemapCommands();
       }
@@ -49,10 +47,10 @@ namespace Characters.Player.Actions
 
          _key = Utils.JsonToVO<ActionVO>(_path);
 
-         _actionDownCommands.Add((KeyCode)_key.Crouch,     _crouchStart);
-         _actionDownCommands.Add((KeyCode)_key.Jump,       _jump);
+         _actionDownCommands.Add((KeyCode)_key.Crouch,     crouchStart);
+         _actionDownCommands.Add((KeyCode)_key.Jump,       jump);
 
-         _actionUpCommands.Add((KeyCode)_key.Crouch, _crouchEnd);
+         _actionUpCommands.Add((KeyCode)_key.Crouch, crouchEnd);
       }
 
       private void Update()
@@ -72,7 +70,7 @@ namespace Characters.Player.Actions
          // 상호작용
          if (Input.GetKeyDown((KeyCode)_key.Interact))
          {
-            _interaction.Execute.Invoke(RightHandTrm);
+            interaction.Execute.Invoke(RightHandTrm);
          }
       }
 
