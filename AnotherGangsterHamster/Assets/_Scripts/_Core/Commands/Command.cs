@@ -8,6 +8,7 @@ namespace _Core.Commands
 
       public Command()
       {
+         Execute = new UnityEvent<object>();
          System.GC.KeepAlive(this);
       }
    }
