@@ -15,11 +15,6 @@ namespace UI.PanelScripts
         [SerializeField] private Transform _stageButtonParent;
         [SerializeField] private GameObject _stageButtonPrefab;
 
-        void Awake()
-        {
-            _buttonClickSound = Resources.Load<AudioSource>("Audio/SoundEffect/10(ButtonUISound)");
-        }
-
         public override void ActivationActions()
         {
 
@@ -37,7 +32,6 @@ namespace UI.PanelScripts
             _disableButton.onClick.AddListener(() =>
             {
                 UIManager.Instance.DeActivationPanel(panelId);
-                _buttonClickSound.Play();
             });
 
             for(int i = (int)(StageNames.NONE + 1); i < (int)StageNames.END_OF_STAGE; i++)
@@ -75,7 +69,6 @@ namespace UI.PanelScripts
                 {
                     stageButton.onClick.AddListener(() =>
                     {
-                        _buttonClickSound.Play();
                         SceneManager.LoadScene(sceneName);
                         BackgroundMusic.Instance.StartBackgroundMusic();
                         Utils.LockCursor();

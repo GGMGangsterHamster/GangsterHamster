@@ -16,7 +16,6 @@ namespace Weapons.Actions
         private LumoStatus _currentStatus = LumoStatus.Idle;
         private Transform _lumoCube;
         private LumoAnimator _lumoAnimator;
-        private AudioSource _effectSound;
 
         private Grand _grand;
 
@@ -65,10 +64,6 @@ namespace Weapons.Actions
         {
             if (_currentStatus == LumoStatus.Stickly && _lumoAnimator.isStopedMoving())
             {
-                if (_effectSound == null)
-                {
-                    _effectSound = Resources.Load<AudioSource>("Audio/SoundEffect/4(LumoEffectSound)_");
-                }
                 _currentStatus = LumoStatus.Use;
                 _lumoCube.rotation = Quaternion.LookRotation(_aTypeHit.normal) * Quaternion.Euler(90, 0, 0);
                 _lumoAnimator.UsingAnime(_aTypeHit.normal, useSpeed);
@@ -119,11 +114,6 @@ namespace Weapons.Actions
                     if(_lumoAnimator.isStopedMoving() && !_lumoCube.gameObject.activeSelf)
                     {
                         _lumoCube.gameObject.SetActive(true);
-
-                        if (_effectSound != null)
-                        {
-                            _effectSound.Play();
-                        }
                     }
                         
                     break;

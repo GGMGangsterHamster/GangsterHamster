@@ -14,10 +14,12 @@ namespace Objects.StageObjects.CollisionEventable
 
       private Coroutine _up = null;
       private Coroutine _down = null;
+      private AudioSource _moveObjectSound;
 
       private void Awake()
       {
          _initalPos = this.transform.localPosition;
+         _moveObjectSound = Resources.Load<AudioSource>("Audio/SoundEffect/12(ObjectMovingSound)_");
 
          if(startActive)
          {
@@ -33,9 +35,11 @@ namespace Objects.StageObjects.CollisionEventable
          Vector3 step = target / duration;
          Vector3 final = _initalPos + target;
 
+         
          _up = ValueTween.To(this,
                   () => {
                      transform.localPosition += step * Time.deltaTime;
+                     _moveObjectSound.Play();
                   },
                   () => {
                      return Utils.Compare(transform.localPosition, final, threshould);

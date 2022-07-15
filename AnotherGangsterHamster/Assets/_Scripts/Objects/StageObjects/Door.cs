@@ -8,18 +8,10 @@ namespace Objects.StageObjects
       [SerializeField] private GameObject _door;
       [SerializeField] private float _doorHeldOpenDuration = 3.0f;
 
-      private AudioSource _doorOpenSound;
-
-      void Awake()
-      {
-         _doorOpenSound = Resources.Load<AudioSource>("Audio/SoundEffect/7(UsingSound)_"); 
-      }
-
       public void Active()
       {
          _door.SetActive(false);
          Invoke(nameof(Deactive), _doorHeldOpenDuration);
-         _doorOpenSound.Play();
       }
 
       public void Deactive()
