@@ -9,21 +9,21 @@ namespace Characters.Player.Mouse
       private Mouse _mouseMove = null;
       
       // 마우스 커멘드
-      private MouseX _mouseX;
-      private MouseY _mouseY;
+      public MouseX mouseX;
+      public MouseY mouseY;
 
-      private void Start()
+      private void Awake()
       {
          _mouseMove = GetComponent<Mouse>();
 
-         _mouseX = new MouseX(_mouseMove);  // 마우스 X
-         _mouseY = new MouseY(_mouseMove);  // 마우스 Y
+         mouseX = new MouseX(_mouseMove);  // 마우스 X
+         mouseY = new MouseY(_mouseMove);  // 마우스 Y
       }
 
       private void Update()
       {
-         _mouseX.Execute.Invoke(null);
-         _mouseY.Execute.Invoke(null);
+         mouseX.Execute.Invoke(null);
+         mouseY.Execute.Invoke(null);
       }
    }
 }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Characters.Player.Mouse
@@ -43,13 +44,13 @@ namespace Characters.Player.Mouse
 
 
       // For Y rotaion clamping
-      private float rotY = 0.0f;
+      public float rotY = 0.0f;
 
 
       public void OnMouseX(float x)
       {
          if (!PlayerStatus.Moveable) return;
-         
+
 
          // 4원수는 교환 법칙이 성립되지 않는대요
          // 4원수 * 곱하고자 하는 수 = local
@@ -64,14 +65,11 @@ namespace Characters.Player.Mouse
       public void OnMouseY(float y, bool includingMouseSpeed = true)
       {
          if (!PlayerStatus.Moveable) return;
-
          // 마우스 감도 사용할 지
          rotY += y * (includingMouseSpeed ? PlayerValues.MouseSpeed : 1.0f);
-         rotY = Mathf.Clamp(rotY, -89f, 89f);
+         rotY = Mathf.Clamp(rotY, -70f, 85f);
 
          HeadTrm.localRotation = Quaternion.Euler(0.0f, 0.0f, rotY);
-
-         // CamTrm.localRotation = Quaternion.Euler(0.0f, rotY, 0.0f);
       }
    }
 }

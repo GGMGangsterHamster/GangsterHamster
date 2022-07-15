@@ -4,39 +4,68 @@ namespace Characters.Player.Move
 {   
    public class MoveAnimation : MonoBehaviour
    {
-      public Animator animator;
+      [Range(0.0f, 1.0f)]
+      [Header("Lerp t value")]
+      public float t = 0.05f;
+
+      private Animator _animator;
       private MoveInputHandler _moveInputHandler;
 
+      
+
+      // 에니메이터 Param 조절 용
       const string X = "X";
       const string Y = "Y";
+      private float _targetX = 0.0f;
+      private float _targetY = 0.0f;
+      private float _curX = 0.0f;
+      private float _curY = 0.0f;
 
       private void Start()
       {
+         _animator = GetComponentInChildren<Animator>();
          _moveInputHandler = GetComponent<MoveInputHandler>();
 
          _moveInputHandler.forward.Execute.AddListener(e => {
-            animator.SetFloat(Y, 1.0f);
+            SetTargetY(1.0f);
          });
 
          _moveInputHandler.backward.Execute.AddListener(e => {
-            animator.SetFloat(Y, -1.0f);
+            SetTargetY(-1.0f);
          });
 
          _moveInputHandler.left.Execute.AddListener(e => {
-            animator.SetFloat(X, -1.0f);
+            SetTargetX(-1.0f);
          });
 
          _moveInputHandler.right.Execute.AddListener(e => {
-            animator.SetFloat(X, 1.0f);
+            SetTargetX(1.0f);
          });
 
          _moveInputHandler.OnIdle.AddListener(e => {
-            animator.SetFloat(X, 0.0f);
-            animator.SetFloat(Y, 0.0f);
+            SetTargetX(0.0f);
+            SetTargetY(0.0f);
          });
-
-         // TODO: 카메라 보정과 Lerp
       }
+
+      private void Update()
+      {
+         _curX = Mathf.Lerp(_curX, _targetX, t);
+         _curY = Mathf.Lerp(_curY, _targetY, t);
+
+         _animator.SetFloat(X, _curX);
+         _animator.SetFloat(Y, _curY);
+      }
+
+      public void SetTargetX(float x)
+      {
+         _targetX = x;
+      } 
+
+      public void SetTargetY(float y)
+      {
+         _targetY = y;
+      } 
 
 
    }
