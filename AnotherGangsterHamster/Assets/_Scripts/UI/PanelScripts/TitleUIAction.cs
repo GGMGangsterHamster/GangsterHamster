@@ -17,11 +17,6 @@ namespace UI.PanelScripts
 
         string _fullpath = "stageData";
 
-        void Awake()
-        {
-            _buttonClickSound = Resources.Load<AudioSource>("Audio/SoundEffect/10(ButtonUISound)");
-        }
-
         public override void ActivationActions()
         {
 
@@ -47,34 +42,28 @@ namespace UI.PanelScripts
                 _continueButton.onClick.AddListener(() =>
                 {
                     StageManager.Instance.LoadStage();
-                    _buttonClickSound.Play();
                 });
             }
 
             _newGameButton.onClick.AddListener(() =>
             {
                 UIManager.Instance.ActivationPanel(UIPanels.NewGame);
-                _buttonClickSound.Play();
             });
 
             _chooseChapterButton.onClick.AddListener(() =>
             {
                 UIManager.Instance.ActivationPanel(UIPanels.ChooseChapter);
-                _buttonClickSound.Play();
             });
 
             _optionButton.onClick.AddListener(() =>
             {
                 UIManager.Instance.ActivationPanel(UIPanels.Option);
-                _buttonClickSound.Play();
-
             });
 
             _exitButton.onClick.AddListener(() =>
             {
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;
-                _buttonClickSound.Play();
 #else
                 Application.Quit();
 #endif

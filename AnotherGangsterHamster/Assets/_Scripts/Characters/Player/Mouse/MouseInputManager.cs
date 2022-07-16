@@ -5,7 +5,6 @@ namespace Characters.Player.Mouse
    [RequireComponent(typeof(Mouse))]
    public class MouseInputManager : MonoBehaviour
    {
-
       // IMouseDeltaRecvable 구체화 한 클레스
       private Mouse _mouseMove = null;
       

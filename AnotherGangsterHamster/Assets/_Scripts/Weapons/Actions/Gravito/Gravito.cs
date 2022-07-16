@@ -137,11 +137,6 @@ namespace Weapons.Actions
             {
                 if (_currentChangeGravityDir == Vector3.up) return;
 
-                if (_effectSound == null)
-                {
-                    _effectSound = Resources.Load<AudioSource>("Audio/SoundEffect/3(GravitoEffectSound)_");
-                }
-
                 _gravitoAnimator.UsingAnime();
                 _gravitoEffect.EffectOn();
 

@@ -17,7 +17,6 @@ namespace UI.PanelScripts
         public Action<float> sensitivityAction;
 
         public int panelId;
-        protected AudioSource _buttonClickSound;
     }
 
 }
