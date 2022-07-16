@@ -31,7 +31,7 @@ namespace Characters.Player.GroundCheck
       {
          if (_tags.Find(x => other.CompareTag(x)) != null)
          {
-            _callback?.OnGround();
+            _callback?.StayGround();
             _setParent?.Active(null);
          }
       }

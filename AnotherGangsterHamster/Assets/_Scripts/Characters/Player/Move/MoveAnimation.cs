@@ -14,8 +14,8 @@ namespace Characters.Player.Move
       
 
       // 에니메이터 Param 조절 용
-      const string X = "X";
-      const string Y = "Y";
+      readonly int X = Animator.StringToHash("X");
+      readonly int Y = Animator.StringToHash("Y");
       private float _targetX = 0.0f;
       private float _targetY = 0.0f;
       private float _curX = 0.0f;

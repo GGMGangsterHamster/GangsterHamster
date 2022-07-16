@@ -25,10 +25,21 @@ namespace Characters.Player.GroundCheck
          PlayerStatus.OnGround = false;
          PlayerStatus.IsJumping = true;
          PlayerStatus.Jumpable = false;
-         Utils.ExecuteCallback(this.transform, false);
+         Utils.ExecuteCallback(this.transform, 0);
 
          Collider.sharedMaterial.staticFriction = 0.0f;
          Collider.sharedMaterial.dynamicFriction = 0.0f;
+      }
+
+      public void StayGround()
+      {
+         PlayerStatus.IsJumping = false;
+         PlayerStatus.OnGround = true;
+         PlayerStatus.Jumpable = true;
+         Utils.ExecuteCallback(this.transform, 2);
+
+         Collider.sharedMaterial.staticFriction = 1.0f;
+         Collider.sharedMaterial.dynamicFriction = 1.0f;
       }
 
       void IGroundCallback.OnGround()
@@ -36,7 +47,7 @@ namespace Characters.Player.GroundCheck
          PlayerStatus.IsJumping = false;
          PlayerStatus.OnGround = true;
          PlayerStatus.Jumpable = true;
-         Utils.ExecuteCallback(this.transform, true);
+         Utils.ExecuteCallback(this.transform, 1);
 
          Collider.sharedMaterial.staticFriction = 1.0f;
          Collider.sharedMaterial.dynamicFriction = 1.0f;
