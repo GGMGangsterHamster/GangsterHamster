@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Weapons.Actions;
 
-namespace Weapon.Animation.LumoAnimation
+namespace Weapons.Animation
 {
     public class LumoAnimator : MonoBehaviour
     {

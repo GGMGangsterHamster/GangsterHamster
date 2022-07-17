@@ -26,6 +26,9 @@ public class BackgroundMusic : Singleton<BackgroundMusic>
 
     public void SetVolume(float value)
     {
-        audio.volume = value;
+        if(audio != null)
+        {
+            audio.volume = value;
+        }
     }
 }

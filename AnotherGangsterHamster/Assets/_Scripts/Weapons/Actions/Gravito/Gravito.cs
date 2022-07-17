@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Weapons.Checkpoint;
 using Matters.Gravity;
-using Weapon.Animation.GravitoAnimation;
+using Weapons.Animation;
 using Objects.Interaction;
 using Weapons.Actions.Effect;
+using Weapons.Actions.Broker;
 
 namespace Weapons.Actions
 {
@@ -47,6 +48,8 @@ namespace Weapons.Actions
         private GravitoEffect _gravitoEffect;
         private GravitoAnimator _gravitoAnimator;
         private WeaponManagement _weaponManagement;
+
+        private GravitoMessageBroker _messageBroker;
 
         private CheckpointManager Checkpoint
         {
@@ -89,6 +92,8 @@ namespace Weapons.Actions
             _gravitoAnimator = GetComponent<GravitoAnimator>();
             _weaponManagement = GameObject.FindObjectOfType<WeaponManagement>();
 
+            _messageBroker = GetComponent<GravitoMessageBroker>();
+
             _gravitoAnimator.sticklyAction += () =>
             {
                 if(_currentGravitoStatus == GravitoStatus.Stickly && _gravitoAnimator.isStopedMoving())
@@ -114,6 +119,8 @@ namespace Weapons.Actions
                 if (InteractionManager.Instance.currentRaycastHitTrm != null 
                     && InteractionManager.Instance.currentRaycastHitTrm.CompareTag("ATYPEOBJECT"))
                 {
+                    _messageBroker.OnFire?.Invoke();
+
                     RaycastHit hit = InteractionManager.Instance.currentRaycastHit;
 
                     _fireDir = MainCameraTransform.forward;
@@ -136,6 +143,8 @@ namespace Weapons.Actions
             if(_currentGravitoStatus == GravitoStatus.Stickly && !isChangedGravity && _gravitoAnimator.isStopedMoving())
             {
                 if (_currentChangeGravityDir == Vector3.up) return;
+
+                _messageBroker.OnUse?.Invoke();
 
                 _gravitoAnimator.UsingAnime();
                 _gravitoEffect.EffectOn();
@@ -161,6 +170,7 @@ namespace Weapons.Actions
                 return;
 
             _gravitoAnimator.ResetAnime(transform.position, GravitoHandPosition, fireSpeed);
+            _messageBroker.OnReset?.Invoke();
 
             if (!isChangedGravity)
             {

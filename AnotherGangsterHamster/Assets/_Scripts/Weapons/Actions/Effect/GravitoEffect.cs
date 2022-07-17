@@ -15,7 +15,6 @@ namespace Weapons.Actions.Effect
 
         private void Awake()
         {
-            Debug.Log("되기는 하는거죠?");
             if(!globalVolume.profile.TryGet(out motionBlur))
             {
                 Debug.Log("왜 없어요?");

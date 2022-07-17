@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Weapons.Actions.Broker;
 
 namespace Weapons.Actions
 {
@@ -38,6 +39,8 @@ namespace Weapons.Actions
         private Image _gravitoIcon;
         private Image _lumoIcon;
 
+        private AllWeaponMessageBroker _messageBroker;
+
         private Transform grandCharge;
         private Transform lumoCube;
         private Dictionary<WeaponEnum, WeaponAction> _weaponActions = new Dictionary<WeaponEnum, WeaponAction>();
@@ -52,6 +55,8 @@ namespace Weapons.Actions
             _grandIcon = GameObject.Find("GrandIcon").GetComponent<Image>();
             _gravitoIcon = GameObject.Find("GravitoIcon").GetComponent<Image>();
             _lumoIcon = GameObject.Find("LumoIcon").GetComponent<Image>();
+
+            _messageBroker = GetComponent<AllWeaponMessageBroker>();
 
             _weaponIcons.Add(WeaponEnum.Grand, _grandIcon);
             _weaponIcons.Add(WeaponEnum.Gravito, _gravitoIcon);
@@ -91,6 +96,8 @@ namespace Weapons.Actions
             {
                 if (_curWeapon != WeaponEnum.None)
                 {
+                    _messageBroker.OnFire?.Invoke();
+
                     _weaponActions[_curWeapon].FireWeapon();
                 }
             }
@@ -101,6 +108,8 @@ namespace Weapons.Actions
         {
             if (_curWeapon != WeaponEnum.None)
             {
+                _messageBroker.OnUse?.Invoke();
+
                 _weaponActions[_curWeapon].UseWeapon();
             }
         }
@@ -110,6 +119,8 @@ namespace Weapons.Actions
         {
             if (_curWeapon != WeaponEnum.None)
             {
+                _messageBroker.OnReset?.Invoke();
+
                 _weaponActions[_curWeapon].ResetWeapon();
 
                 if (_weaponActions[WeaponEnum.Lumo].gameObject.activeSelf)
@@ -161,7 +172,9 @@ namespace Weapons.Actions
                 if (!weaponAction.possibleUse)
                     continue;
 
-                if(weaponEnum == weaponAction._weaponEnum && weaponAction.possibleUse)
+                _messageBroker.OnChangeWeapon?.Invoke();
+
+                if (weaponEnum == weaponAction._weaponEnum && weaponAction.possibleUse)
                 {
                     Debug.Log(weaponAction._weaponEnum.ToString());
 
@@ -174,20 +187,6 @@ namespace Weapons.Actions
                 }
 
                 weaponAction.SetActiveWeaponObj(weaponEnum);
-
-                //if (!weaponAction.possibleUse || weaponAction._weaponEnum == _curWeapon)
-                //    continue;
-
-                //Debug.Log(weaponEnum.ToString());
-                //if (weaponAction.SetActiveWeaponObj(weaponEnum))
-                //{
-                //    if(_curWeapon != WeaponEnum.None)
-                //        _weaponIcons[_curWeapon].gameObject.SetActive(false);
-
-                //    _curWeapon = weaponEnum;
-                //    _weaponIcons[_curWeapon].gameObject.SetActive(true);
-                //    grandCharge.gameObject.SetActive(_curWeapon == WeaponEnum.Grand && _weaponActions[_curWeapon].possibleUse);
-                //}
             }
         }
 

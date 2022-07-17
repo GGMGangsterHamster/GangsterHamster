@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7766468518204142951}
+  - component: {fileID: 9191199704002973873}
+  - component: {fileID: 7798727426306230527}
   - component: {fileID: 3096463573839291372}
   - component: {fileID: 5361906467652823386}
-  - component: {fileID: 9191199704002973873}
   - component: {fileID: 4595924153855817787}
   - component: {fileID: 6518199714557262699}
   - component: {fileID: 8707926135926638045}
@@ -41,6 +42,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9191199704002973873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454697246980119324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c3633c164b84bd458ec70a29eb4f30b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponEnum: 0
+  Path: SettingValue/HandMode.json
+  possibleUse: 1
+  fireSpeed: 60
+  weaponDamage: 25
+  gravityChangeTime: 0.6
+  minGravityChangeTime: 0.2
+  maxGravityChangeTime: 0.8
+  alphaToZeroSpeed: 5
+  dropPointAlphaDistance: 10
+--- !u!114 &7798727426306230527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 454697246980119324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8cc3005bdf1bef49b47fd96ff25a731, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnFire:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUse:
+    m_PersistentCalls:
+      m_Calls: []
+  OnReset:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3096463573839291372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,28 +119,6 @@ MonoBehaviour:
   _callbacks: []
   <EventIsToggle>k__BackingField: 1
   <InitalActiveStatus>k__BackingField: 0
---- !u!114 &9191199704002973873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 454697246980119324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c3633c164b84bd458ec70a29eb4f30b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weaponEnum: 0
-  Path: SettingValue/HandMode.json
-  possibleUse: 1
-  fireSpeed: 60
-  weaponDamage: 25
-  gravityChangeTime: 0.6
-  minGravityChangeTime: 0.2
-  maxGravityChangeTime: 0.8
-  alphaToZeroSpeed: 5
-  dropPointAlphaDistance: 10
 --- !u!54 &4595924153855817787
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -3,7 +3,8 @@ using Objects.Interaction;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Weapon.Animation.LumoAnimation;
+using Weapons.Actions.Broker;
+using Weapons.Animation;
 
 namespace Weapons.Actions
 {
@@ -16,6 +17,8 @@ namespace Weapons.Actions
         private LumoStatus _currentStatus = LumoStatus.Idle;
         private Transform _lumoCube;
         private LumoAnimator _lumoAnimator;
+
+        private LumoMessageBroker _messageBroker;
 
         private Grand _grand;
 
@@ -46,6 +49,8 @@ namespace Weapons.Actions
                 if (InteractionManager.Instance.currentRaycastHitTrm != null
                     && InteractionManager.Instance.currentRaycastHitTrm.CompareTag("ATYPEOBJECT"))
                 {
+                    _messageBroker.OnFire?.Invoke();
+
                     RaycastHit hit = InteractionManager.Instance.currentRaycastHit;
                     _fireDir = MainCameraTransform.forward;
 
@@ -64,6 +69,8 @@ namespace Weapons.Actions
         {
             if (_currentStatus == LumoStatus.Stickly && _lumoAnimator.isStopedMoving())
             {
+                _messageBroker.OnUse?.Invoke();
+
                 _currentStatus = LumoStatus.Use;
                 _lumoCube.rotation = Quaternion.LookRotation(_aTypeHit.normal) * Quaternion.Euler(90, 0, 0);
                 _lumoAnimator.UsingAnime(_aTypeHit.normal, useSpeed);
@@ -77,6 +84,7 @@ namespace Weapons.Actions
                 return;
             }
 
+            _messageBroker.OnReset?.Invoke();
             _lumoAnimator.RotationReset();
             PlayerBaseTransform.GetComponent<FollowGroundPos>().Deactive(_lumoCube.gameObject);
             _currentStatus = LumoStatus.Idle;

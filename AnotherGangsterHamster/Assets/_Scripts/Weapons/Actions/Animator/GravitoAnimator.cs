@@ -5,7 +5,7 @@ using UnityEngine;
 using Weapons.Actions;
 using Weapons.Actions.Effect;
 
-namespace Weapon.Animation.GravitoAnimation
+namespace Weapons.Animation
 {
     public class GravitoAnimator : MonoBehaviour
     {

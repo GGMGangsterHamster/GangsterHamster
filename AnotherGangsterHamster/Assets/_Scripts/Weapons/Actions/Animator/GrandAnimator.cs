@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Weapons.Actions;
 
-namespace Weapon.Animation.GrandAnimation
+namespace Weapons.Animation
 {
     public class GrandAnimator : MonoBehaviour
     {

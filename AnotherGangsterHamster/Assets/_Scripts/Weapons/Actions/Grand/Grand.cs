@@ -6,6 +6,7 @@ using Objects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Weapons.Actions.Broker;
 
 // 기능 코드는 100줄 남짓
 // 버그 코드는 400줄 이상
@@ -47,6 +48,8 @@ namespace Weapons.Actions
 
         private FollowGroundPos _myFollowGroundPos;
         private FollowGroundPos _playerFollowGroundPos;
+
+        private GrandMessageBroker _messageBroker;
 
         private float fullChangeTime
         {
@@ -124,10 +127,10 @@ namespace Weapons.Actions
 
             chargeBar = GameObject.Find("ChargeBar").transform;
 
-            GetComponent<MeshRenderer>().enabled = false;
-
             _myFollowGroundPos = GetComponent<FollowGroundPos>();
             _playerFollowGroundPos = PlayerBaseTransform.GetComponent<FollowGroundPos>();
+
+            _messageBroker = GetComponent<GrandMessageBroker>();
 
             grandLv1Model = transform.GetChild(0).gameObject;
             grandLv2Model = transform.GetChild(1).gameObject;
@@ -145,6 +148,8 @@ namespace Weapons.Actions
             {
                 if (_myRigid.constraints == RigidbodyConstraints.FreezePosition)
                     _myRigid.constraints = RigidbodyConstraints.None;
+
+                _messageBroker.OnFire?.Invoke();
 
                 _myRigid.velocity = Vector3.zero;
                 _myRigid.angularVelocity = Vector3.zero;
@@ -213,6 +218,8 @@ namespace Weapons.Actions
             if(_currentSizeLevel == GrandSizeLevel.OneGrade)
                 _myRigid.velocity = Vector3.zero;
 
+            _messageBroker.OnUse?.Invoke();
+
             _beforeSizeLevel = _currentSizeLevel;
             _currentGrandStatus = GrandStatus.Use;
         }
@@ -221,6 +228,8 @@ namespace Weapons.Actions
         {
             if (_currentGrandStatus != GrandStatus.Resize && _currentGrandStatus != GrandStatus.Idle)
             {
+                _messageBroker.OnReset?.Invoke();
+                
                 _playerFollowGroundPos.Deactive(gameObject);
                 _myFollowGroundPos.Active(null);
 
