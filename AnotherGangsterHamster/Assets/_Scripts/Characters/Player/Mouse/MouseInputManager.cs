@@ -22,8 +22,8 @@ namespace Characters.Player.Mouse
 
       private void Update()
       {
-         mouseX.Execute.Invoke(null);
-         mouseY.Execute.Invoke(null);
+         mouseX.Execute?.Invoke(null);
+         mouseY.Execute?.Invoke(null);
       }
    }
 }
