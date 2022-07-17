@@ -176,8 +176,6 @@ namespace Weapons.Actions
 
                 if (weaponEnum == weaponAction._weaponEnum && weaponAction.possibleUse)
                 {
-                    Debug.Log(weaponAction._weaponEnum.ToString());
-
                     if (_curWeapon != WeaponEnum.None)
                         _weaponIcons[_curWeapon].gameObject.SetActive(false);
 
