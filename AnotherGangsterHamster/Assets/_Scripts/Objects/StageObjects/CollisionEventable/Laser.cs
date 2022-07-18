@@ -1,5 +1,6 @@
 using Characters.Damage;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 namespace Objects.StageObjects.CollisionEventable
@@ -7,6 +8,9 @@ namespace Objects.StageObjects.CollisionEventable
    [RequireComponent(typeof(TriggerInteractableObject), typeof(BoxCollider), typeof(LineRenderer))]
    public class Laser : MonoBehaviour, ICollisionEventable
    {
+      [Header("충돌 시 월드 좌표를 넘겨주며 호출됨")]
+      public UnityEvent<Vector3> OnCollision;
+
       const string PLAYER = "PLAYER_BASE";
       [SerializeField] private int _damage = 100;
       [SerializeField] LayerMask _ignoreMe;
@@ -31,6 +35,7 @@ namespace Objects.StageObjects.CollisionEventable
                                          _ignoreMe & LayerMask.NameToLayer("ONLYCOLPLAYER")))
          {
             Vector3 targetPos = transform.InverseTransformPoint(hit.point);
+            OnCollision?.Invoke(hit.point);
 
             if (Utils.Compare(targetPos, Vector3.zero, 0.01f)) return;
 
