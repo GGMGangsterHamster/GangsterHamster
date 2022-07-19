@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // 조금 급하게 임시로 제작한 스크립트
+/// <summary>
+/// 수정 가능성 99%
+/// 수정 가능성 99%
+/// 수정 가능성 99%
+/// </summary>
+
 public class BackgroundMusic : Singleton<BackgroundMusic>
 {
     private bool isFirst = true;
