@@ -45,16 +45,19 @@ namespace Objects.Interaction
       public void UnGrep()
       {
          _grep = false; 
-
-         WeaponAction wa = WM.GetCurrentWeaponAction();
-
-         if(wa != null)
+         
+         if(WM != null)
          {
-            if (!wa.gameObject.activeSelf)
-            {
-                wa.gameObject.SetActive(true);
-                wa.ResetPosiiton();
-            }
+             WeaponAction wa = WM.GetCurrentWeaponAction();
+
+             if (wa != null)
+             {
+                 if (!wa.gameObject.activeSelf)
+                 {
+                     wa.gameObject.SetActive(true);
+                     wa.ResetPosiiton();
+                 }
+             }
          }
 
          ClearActvieAtype();
