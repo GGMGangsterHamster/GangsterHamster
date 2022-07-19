@@ -15,16 +15,16 @@ namespace UI.PanelScripts
         private string _sensitivityPath = "SettingValue/Sensitivity.json";
 
         [Header("������ ����� �ִ� UI��")]
-        [SerializeField] private Button _fullScreenModeButton;
-        [SerializeField] private Button _windowScreenModeButton;
-        [SerializeField] private Button _1920x1080ResolutionButton;
-        [SerializeField] private Button _2560x1080ResolutionButton;
-        [SerializeField] private Button _goTitleButton;
-        [SerializeField] private Button _gameRestartButton;
-        [SerializeField] private Button _disableButton;
-        [SerializeField] private Button _stageSkipButton;
-        [SerializeField] private Button _notDeadButton;
-        [SerializeField] private Button _spectatorButton;
+        public Button fullScreenModeButton;
+        public Button windowScreenModeButton;
+        public Button _1920x1080ResolutionButton;
+        public Button _2560x1080ResolutionButton;
+        public Button goTitleButton;
+        public Button gameRestartButton;
+        public Button disableButton;
+        public Button stageSkipButton;
+        public Button notDeadButton;
+        public Button spectatorButton;
 
         [SerializeField] private Scrollbar _soundScrollbar;
         [SerializeField] private Scrollbar _sensitivityScrollbar;
@@ -53,12 +53,12 @@ namespace UI.PanelScripts
         {
             panelId = 6;
 
-            _fullScreenModeButton.onClick.AddListener(() =>
+            fullScreenModeButton.onClick.AddListener(() =>
             {
                 ScreenManager.Instance.SetFullScreen();
             });
 
-            _windowScreenModeButton.onClick.AddListener(() =>
+            windowScreenModeButton.onClick.AddListener(() =>
             {
                 ScreenManager.Instance.SetWindowScreen();
             });
@@ -73,14 +73,14 @@ namespace UI.PanelScripts
                 ScreenManager.Instance.SetResolution(2560, 1080);
             });
 
-            _goTitleButton.onClick.AddListener(() =>
+            goTitleButton.onClick.AddListener(() =>
             {
                 SceneManager.LoadScene(StageNames.Title.ToString());
                 Utils.MoveTime();
                 // ���� UI ��Ȱ��ȭ ��Ű�� "Title UI"�� ��ȯ
             });
 
-            _gameRestartButton.onClick.AddListener(() =>
+            gameRestartButton.onClick.AddListener(() =>
             {
                 SceneManager.LoadScene(gameObject.scene.name);
                 Utils.LockCursor();
@@ -88,7 +88,7 @@ namespace UI.PanelScripts
                 // ������ ���������� �����
             });
 
-            _disableButton.onClick.AddListener(() =>
+            disableButton.onClick.AddListener(() =>
             {
                 Utils.LockCursor();
                 Utils.MoveTime();
@@ -97,7 +97,7 @@ namespace UI.PanelScripts
 
             #region �ӽ�
 
-            _stageSkipButton.onClick.AddListener(() =>
+            stageSkipButton.onClick.AddListener(() =>
             {
                 SceneLoadTrigger sceneLoadTrigger = GameObject.FindObjectOfType<SceneLoadTrigger>();
                 SceneManager.LoadScene((sceneLoadTrigger.LoadTarget));
@@ -105,12 +105,12 @@ namespace UI.PanelScripts
                 Utils.MoveTime();
             });
 
-            _notDeadButton.onClick.AddListener(() =>
+            notDeadButton.onClick.AddListener(() =>
             {
                 GameObject.FindObjectOfType<Player>().SetMaxHP(int.MaxValue);
             });
 
-            _spectatorButton.onClick.AddListener(() =>
+            spectatorButton.onClick.AddListener(() =>
             {
                 Spectator.Instance.StartSpectorMode();
             });

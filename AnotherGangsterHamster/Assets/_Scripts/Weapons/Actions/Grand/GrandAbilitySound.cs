@@ -7,6 +7,6 @@ public class GrandAbilitySound : SoundController
 {
     public override void PlaySound(object obj)
     {
-        SoundManager.Instance.Play("Audio/SoundEffect/GrandAbilityExecute");
+        SoundManager.Instance.Play("GrandAbilityExecute");
     }
 }

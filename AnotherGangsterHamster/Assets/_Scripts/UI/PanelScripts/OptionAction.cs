@@ -11,12 +11,12 @@ namespace UI.PanelScripts
         private string _sensitivityPath = "SettingValue/Sensitivity.json";
 
         [Header("각자의 기능이 있는 UI들")]
-        [SerializeField] private Button _fullScreenModeButton;
-        [SerializeField] private Button _windowScreenModeButton;
-        [SerializeField] private Button _1920x1080ResolutionButton;
-        [SerializeField] private Button _2560x1080ResolutionButton;
-        [SerializeField] private Button _disableButton;
-
+        public Button fullScreenModeButton;
+        public Button windowScreenModeButton;
+        public Button _1920x1080ResolutionButton;
+        public Button _2560x1080ResolutionButton;
+        public Button disableButton;
+   
         [SerializeField] private Scrollbar _soundScrollbar;
         [SerializeField] private Scrollbar _sensitivityScrollbar;
 
@@ -45,12 +45,12 @@ namespace UI.PanelScripts
         {
             panelId = 4;
 
-            _fullScreenModeButton.onClick.AddListener(() =>
+            fullScreenModeButton.onClick.AddListener(() =>
             {
                 ScreenManager.Instance.SetFullScreen();
             });
 
-            _windowScreenModeButton.onClick.AddListener(() =>
+            windowScreenModeButton.onClick.AddListener(() =>
             {
                 ScreenManager.Instance.SetWindowScreen();
             });
@@ -65,7 +65,7 @@ namespace UI.PanelScripts
                 ScreenManager.Instance.SetResolution(2560, 1080);
             });
 
-            _disableButton.onClick.AddListener(() =>
+            disableButton.onClick.AddListener(() =>
             {
                 UIManager.Instance.DeActivationPanel(panelId);
             });

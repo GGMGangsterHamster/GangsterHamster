@@ -7,6 +7,6 @@ public class BrakeGlassSound : SoundController
 {
     public override void PlaySound(object obj)
     {
-        SoundManager.Instance.Play("Audio/SoundEffect/GlassBrake");
+        SoundManager.Instance.Play("GlassBrake");
     }
 }

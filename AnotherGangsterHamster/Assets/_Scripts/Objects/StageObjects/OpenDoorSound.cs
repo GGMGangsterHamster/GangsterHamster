@@ -7,6 +7,6 @@ public class OpenDoorSound : SoundController
 {
     public override void PlaySound(object obj)
     {
-        SoundManager.Instance.Play("Audio/SoundEffect/OpenDoor");
+        SoundManager.Instance.Play("OpenDoor");
     }
 }

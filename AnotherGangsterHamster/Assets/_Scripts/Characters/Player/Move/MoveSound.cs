@@ -20,7 +20,7 @@ namespace Characters.Player.Move
 
         public override void PlaySound(object obj)
         {
-            SoundManager.Instance.Play("Audio/SoundEffect/PlayerMove");
+            SoundManager.Instance.Play("PlayerMove");
         }
     }
 }

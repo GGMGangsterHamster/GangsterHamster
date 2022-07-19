@@ -7,6 +7,6 @@ public class LumoAbilitySound : SoundController
 {
     public override void PlaySound(object obj)
     {
-        SoundManager.Instance.Play("Audio/SoundEffect/LumoAbilityContinue");
+        SoundManager.Instance.Play("LumoAbilityContinue");
     }
 }

@@ -29,12 +29,13 @@ namespace Sound
 
          _audioDictionary = new Dictionary<string, AudioClip>();
 
+         
+
          // Debug.Log(Resources.LoadAll<AudioClip>(ttsPath).Length);
          Resources.LoadAll<AudioClip>(soundEffectPath)
                   .ToList()
                   .ForEach(e => {
                      _audioDictionary.Add(e.name, e);
-                     Debug.Log(e.name);
                   }
          );
       }
