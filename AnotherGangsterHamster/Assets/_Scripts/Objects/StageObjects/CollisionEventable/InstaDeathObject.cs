@@ -1,4 +1,5 @@
 using Characters;
+using Objects.InteractableObjects;
 using UnityEngine;
 
 namespace Objects.StageObjects.CollisionEventable

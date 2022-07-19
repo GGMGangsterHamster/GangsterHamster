@@ -1,4 +1,5 @@
 using Objects;
+using Objects.InteractableObjects;
 using Tween;
 using UnityEngine;
 

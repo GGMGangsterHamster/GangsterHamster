@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Characters.Player.Move;
+using Objects.InteractableObjects;
 
 namespace Objects.StageObjects.CollisionEventable
 {

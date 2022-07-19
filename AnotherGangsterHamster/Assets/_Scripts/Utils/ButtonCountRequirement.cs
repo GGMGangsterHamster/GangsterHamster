@@ -13,8 +13,8 @@ public class ButtonCountRequirement : MonoBehaviour
     public Action<bool> changedEvent;
 
     [SerializeField]
-    private List<Interactable> _checkList
-        = new List<Interactable>();
+    private List<IInteractable> _checkList
+        = new List<IInteractable>();
 
     private bool beforeChecked;
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using Stages.Management;
+using Objects.InteractableObjects;
 
 namespace Objects.Trigger
 {

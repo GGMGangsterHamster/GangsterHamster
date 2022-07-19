@@ -1,4 +1,5 @@
 using UnityEngine;
+using Objects.InteractableObjects;
 
 namespace Objects.StageObjects.CollisionEventable
 {

@@ -21,7 +21,7 @@ namespace Objects.StageObjects
 
             if (interactable != null)
             {
-               CollisionCallback collisionCallback =
+               Event collisionCallback =
                   (interactable.Callbacks)
                   .Find(e => e.key == "");
 

@@ -38,6 +38,8 @@ namespace Weapons.Actions
             _lumoCube = transform.GetComponentInChildren<LumoCube>().transform;
             _lumoCube.gameObject.SetActive(false);
             _lumoAnimator = GetComponent<LumoAnimator>();
+
+            _messageBroker = GetComponent<LumoMessageBroker>();
         }
 
         public override void FireWeapon()

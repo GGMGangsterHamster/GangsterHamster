@@ -11,7 +11,7 @@ namespace Objects.Interaction
       public const string ATYPE = "ATYPEOBJECT";
         
       // 현제 상호작용 가능한 오브젝트
-      private Interactable _currentObject = null;
+      private IInteractable _currentObject = null;
       private Transform _mainCam = null;
       private Transform MainCam
       {
@@ -59,11 +59,11 @@ namespace Objects.Interaction
 
       private void FixedUpdate()
       {
-         Interactable target = FireRay();
+         IInteractable target = FireRay();
 
 
          // 상호작용 가능한 오브젝트가 없는 경우
-         if (target == null || !target.canInteractByPlayer)
+         if (target == null || !target.CanInteractByPlayer)
          {
             _currentObject?.DeFocus();
             DialogManager.Instance.GetPannel().ClearChar();
@@ -87,7 +87,7 @@ namespace Objects.Interaction
          InteractionManager.Instance.SetInteraction(target);
       }
 
-      private Interactable FireRay()
+      private IInteractable FireRay()
       {
          bool resetHandleObject = true;
          Transform target = null;
@@ -135,7 +135,7 @@ namespace Objects.Interaction
          }
 
 
-         return target?.GetComponent<Interactable>();
+         return target?.GetComponent<IInteractable>();
       }
    }
 }
