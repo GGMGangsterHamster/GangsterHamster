@@ -3,6 +3,7 @@ using Characters.Player.Move;
 using Matters.Gravity;
 using Matters.Velocity;
 using Objects;
+using Objects.InteractableObjects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -288,7 +289,7 @@ namespace Weapons.Actions
 
         private void Update()
         {
-            _enterCollision.isOn = _currentGrandStatus != GrandStatus.Idle;
+            _enterCollision.Activated = _currentGrandStatus != GrandStatus.Idle;
             _stayCollision.isOn = _currentGrandStatus != GrandStatus.Idle;
 
             gameObject.layer = _currentGrandStatus == GrandStatus.Idle ? LayerMask.NameToLayer("NOCOLLISION") : LayerMask.NameToLayer("Default");

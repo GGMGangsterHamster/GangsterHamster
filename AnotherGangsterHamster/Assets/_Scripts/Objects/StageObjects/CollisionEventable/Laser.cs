@@ -1,4 +1,5 @@
 using Characters.Damage;
+using Objects.InteractableObjects;
 using UnityEngine;
 using UnityEngine.Events;
 
