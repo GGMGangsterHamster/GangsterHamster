@@ -6,7 +6,7 @@ namespace Objects.Interaction
 {  
    public class InteractionManager : Singleton<InteractionManager>
    {
-      Interactable       _currentActiveInteraction;
+      IInteractable       _currentActiveInteraction;
       Transform          _currentActiveAtype;
       public Transform currentRaycastHitTrm { get; set; }
       public RaycastHit  currentRaycastHit;
@@ -45,16 +45,19 @@ namespace Objects.Interaction
       public void UnGrep()
       {
          _grep = false; 
-
-         WeaponAction wa = WM.GetCurrentWeaponAction();
-
-         if(wa != null)
+         
+         if(WM != null)
          {
-            if (!wa.gameObject.activeSelf)
-            {
-                wa.gameObject.SetActive(true);
-                wa.ResetPosiiton();
-            }
+             WeaponAction wa = WM.GetCurrentWeaponAction();
+
+             if (wa != null)
+             {
+                 if (!wa.gameObject.activeSelf)
+                 {
+                     wa.gameObject.SetActive(true);
+                     wa.ResetPosiiton();
+                 }
+             }
          }
 
          ClearActvieAtype();
@@ -82,10 +85,10 @@ namespace Objects.Interaction
          }
       }
 
-      public void SetInteraction(Interactable interactable)
+      public void SetInteraction(IInteractable interactable)
                => _currentActiveInteraction = interactable;
 
-      public void UnSetInteraction(Interactable interactable)
+      public void UnSetInteraction(IInteractable interactable)
       {
          if (_currentActiveInteraction == interactable)
             _currentActiveInteraction = null;

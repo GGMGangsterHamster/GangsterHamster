@@ -7,8 +7,8 @@ namespace Objects
    public class CollisionStayInteractableObject : MonoBehaviour
    {
 
-      public List<CollisionCallback> _callbacks
-               = new List<CollisionCallback>();
+      public List<Event> _callbacks
+               = new List<Event>();
 
       public Vector3 colPosition;
 

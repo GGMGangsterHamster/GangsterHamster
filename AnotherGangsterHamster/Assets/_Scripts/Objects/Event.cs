@@ -5,7 +5,7 @@ using UnityEngine.Events;
 namespace Objects
 {
    [Serializable]
-   public class CollisionCallback
+   public class Event
    {
       public string key;
       public UnityEvent<GameObject> OnActive;

@@ -7,6 +7,6 @@ public class GravitoAbilitySound : SoundController
 {
     public override void PlaySound(object obj)
     {
-        SoundManager.Instance.Play("Audio/SoundEffect/GravitoAbilityExecute");
+        SoundManager.Instance.Play("GravitoAbilityExecute");
     }
 }

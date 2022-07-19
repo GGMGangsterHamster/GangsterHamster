@@ -7,6 +7,6 @@ public class PressButtonSound : SoundController
 {
     public override void PlaySound(object obj)
     {
-        SoundManager.Instance.Play("Audio/SoundEffect/PressSwitch");
+        SoundManager.Instance.Play("PressSwitch");
     }
 }

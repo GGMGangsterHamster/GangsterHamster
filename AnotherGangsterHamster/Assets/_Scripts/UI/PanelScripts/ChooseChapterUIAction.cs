@@ -11,7 +11,7 @@ namespace UI.PanelScripts
     public class ChooseChapterUIAction : UIAction
     {
         [Header("각자의 기능이 있는 UI들")]
-        [SerializeField] private Button _disableButton;
+        public Button disableButton;
         [SerializeField] private Transform _stageButtonParent;
         [SerializeField] private GameObject _stageButtonPrefab;
 
@@ -29,7 +29,7 @@ namespace UI.PanelScripts
         {
             panelId = 3;
 
-            _disableButton.onClick.AddListener(() =>
+            disableButton.onClick.AddListener(() =>
             {
                 UIManager.Instance.DeActivationPanel(panelId);
             });

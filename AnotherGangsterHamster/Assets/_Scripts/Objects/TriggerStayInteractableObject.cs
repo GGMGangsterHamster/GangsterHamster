@@ -6,8 +6,8 @@ namespace Objects
 {
     public class TriggerStayInteractableObject : MonoBehaviour
     {
-        public List<CollisionCallback> _callbacks
-                 = new List<CollisionCallback>();
+        public List<Event> _callbacks
+                 = new List<Event>();
 
         private void OnTriggerStay(Collider other)
         {

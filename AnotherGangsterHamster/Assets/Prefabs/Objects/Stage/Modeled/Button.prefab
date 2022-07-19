@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 657591773235129906}
   - component: {fileID: 1717318643804778720}
+  - component: {fileID: 5124944491893793788}
   m_Layer: 12
   m_Name: Button
   m_TagString: BTYPEOBJECT
@@ -49,6 +50,18 @@ MonoBehaviour:
   duration: 0.25
   emission: 10
   defaultStatus: 0
+--- !u!114 &5124944491893793788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174493145081738376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de3b9c04d8e42644dbfc045b00c88316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &773463449078484117
 GameObject:
   m_ObjectHideFlags: 0
@@ -1058,6 +1071,18 @@ MonoBehaviour:
         - m_Target: {fileID: 1717318643804778720}
           m_TargetAssemblyTypeName: Effects.Shaders.Props.ActiveStatusShader, Assembly-CSharp
           m_MethodName: Active
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 5124944491893793788}
+          m_TargetAssemblyTypeName: PressButtonSound, Assembly-CSharp
+          m_MethodName: PlaySound
           m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

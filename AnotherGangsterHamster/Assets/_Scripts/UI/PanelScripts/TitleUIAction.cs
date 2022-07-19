@@ -9,11 +9,11 @@ namespace UI.PanelScripts
     public class TitleUIAction : UIAction
     {
         [Header("각자의 기능이 있는 UI들")]
-        [SerializeField] private Button _continueButton;
-        [SerializeField] private Button _newGameButton;
-        [SerializeField] private Button _chooseChapterButton;
-        [SerializeField] private Button _optionButton;
-        [SerializeField] private Button _exitButton;
+        public Button continueButton;
+        public Button newGameButton;
+        public Button chooseChapterButton;
+        public Button optionButton;
+        public Button exitButton;
 
         string _fullpath = "stageData";
 
@@ -35,32 +35,32 @@ namespace UI.PanelScripts
 
             if (!StageManager.Instance.ExistsStage())
             {
-                _continueButton.image.color = new Color(1, 1, 1, 0.2f);
+                continueButton.image.color = new Color(1, 1, 1, 0.2f);
             }
             else
             {
-                _continueButton.onClick.AddListener(() =>
+                continueButton.onClick.AddListener(() =>
                 {
                     StageManager.Instance.LoadStage();
                 });
             }
 
-            _newGameButton.onClick.AddListener(() =>
+            newGameButton.onClick.AddListener(() =>
             {
                 UIManager.Instance.ActivationPanel(UIPanels.NewGame);
             });
 
-            _chooseChapterButton.onClick.AddListener(() =>
+            chooseChapterButton.onClick.AddListener(() =>
             {
                 UIManager.Instance.ActivationPanel(UIPanels.ChooseChapter);
             });
 
-            _optionButton.onClick.AddListener(() =>
+            optionButton.onClick.AddListener(() =>
             {
                 UIManager.Instance.ActivationPanel(UIPanels.Option);
             });
 
-            _exitButton.onClick.AddListener(() =>
+            exitButton.onClick.AddListener(() =>
             {
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false;

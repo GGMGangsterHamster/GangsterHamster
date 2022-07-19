@@ -5,6 +5,6 @@ namespace Objects
 {
    public interface ICallbacks : IActivated
    {
-      public List<CollisionCallback> Callbacks { get; }
+      public List<Event> Callbacks { get; }
    }
 }

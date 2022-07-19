@@ -29,6 +29,7 @@ namespace UI.PanelScripts
         private void Start()
         {
             soundAction += volume => {
+                volume = 1;
                 SoundManager.Instance.GlobalVolume = volume;
                 BackgroundMusic.Instance.SetVolume(volume);
                 Debug.Log("Set volume to " + volume);
