@@ -49,12 +49,13 @@ namespace Objects.InteractableObjects
             }
 
             _activated = !_activated;
+
+            if (_activated)
+               callback.OnActive?.Invoke(other);
+            else
+               callback.OnDeactive?.Invoke(other);
          }
 
-         if (_activated)
-            callback.OnActive?.Invoke(other);
-         else
-            callback.OnDeactive?.Invoke(other);
       }
 
       /// <summary>

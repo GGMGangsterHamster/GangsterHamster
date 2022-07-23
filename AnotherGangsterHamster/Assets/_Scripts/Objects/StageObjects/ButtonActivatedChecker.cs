@@ -21,12 +21,12 @@ namespace Objects.StageObjects
 
             if (interactable != null)
             {
-               Event collisionCallback =
+               Event @event =
                   (interactable.Callbacks)
                   .Find(e => e.key == "");
 
-               collisionCallback.OnActive.AddListener(Active);
-               collisionCallback.OnDeactive.AddListener(Deactive);
+               @event.OnActive.AddListener(Active);
+               @event.OnDeactive.AddListener(Deactive);
                _buttons.Add(interactable);
             }
          }
