@@ -36,7 +36,8 @@ namespace UI.PanelScripts
 
             for(int i = (int)(StageNames.NONE + 1); i < (int)StageNames.END_OF_STAGE; i++)
             {
-                SpawnChapter(((StageNames)i).ToString());
+                // SpawnChapter(((StageNames)i).ToString());
+                // 여기에서 _stageButtonPrefab 때문에 나는거 같기도 하고 무튼 저 위에 함수가 KeyNotFoundException 을 일으킴
             }
         }
 

@@ -41,7 +41,7 @@ namespace UI.PanelScripts
                 UIAction ui = _uiPanelParent.GetChild(i).GetComponent<UIAction>();
                 UIPanels panelEnum = (UIPanels)ui.panelId;
                 
-                _uiDict[panelEnum] = ui;
+                _uiDict.Add(panelEnum, ui);
                 _uiDict[panelEnum].InitActions();
             }
         }
