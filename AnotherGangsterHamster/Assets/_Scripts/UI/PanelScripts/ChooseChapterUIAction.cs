@@ -36,7 +36,8 @@ namespace UI.PanelScripts
 
             for(int i = (int)(StageNames.NONE + 1); i < (int)StageNames.END_OF_STAGE; i++)
             {
-                SpawnChapter(((StageNames)i).ToString());
+                // SpawnChapter(((StageNames)i).ToString());
+                Debug.LogError("여기에서 오류가 남");
             }
         }
 
