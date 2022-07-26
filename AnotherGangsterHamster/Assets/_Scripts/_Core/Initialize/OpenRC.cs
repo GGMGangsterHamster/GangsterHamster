@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
@@ -9,8 +10,10 @@ namespace _Core.Initialize
    public class OpenRC : MonoBehaviour
    {
       [Header("Add InitScript here.")]
-      public InitBase[] _initScripts;
+      public InitBase[] initScripts;
       private Fade _fader;
+
+      private Dictionary<RunLevel, Action> _scriptAddedInitScripts;
 
 
       private void Awake()
@@ -34,6 +37,8 @@ namespace _Core.Initialize
          {
             FindAndExecute(RunLevel.SCENE_UNLOAD);
          };
+
+         _scriptAddedInitScripts = new Dictionary<RunLevel, Action>();
       }
 
       private void Start()
@@ -46,12 +51,26 @@ namespace _Core.Initialize
          FindAndExecute(RunLevel.GAME_EXIT);
       }
 
+      public void Add(RunLevel runLevel, Action script)
+      {
+         if (_scriptAddedInitScripts.ContainsKey(runLevel))
+            _scriptAddedInitScripts[runLevel] += script;
+         else
+            _scriptAddedInitScripts.Add(runLevel, script);
+      }
+
       private void FindAndExecute(RunLevel runLevel)
       {
-         for (int i = 0; i < _initScripts.Length; ++i)
+         for (int i = 0; i < initScripts.Length; ++i)
          {
-            if(_initScripts[i].RunLevel == runLevel)
-               _initScripts[i].Call();
+            if(initScripts[i].RunLevel == runLevel)
+               initScripts[i].Call();
+         }
+
+         foreach (var initScript in _scriptAddedInitScripts)
+         {
+            if (initScript.Key == runLevel)
+               initScript.Value();
          }
       }
    }

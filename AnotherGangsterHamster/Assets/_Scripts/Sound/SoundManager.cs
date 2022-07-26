@@ -9,17 +9,19 @@ using UnityEngine.Networking;
 
 namespace Sound
 {
-   public class SoundManager : Singleton<SoundManager>
+   public class SoundManager : MonoSingleton<SoundManager>
    {
       private Dictionary<string, AudioClip> _audioDictionary;
       public string soundEffectPath = "Audio/SoundEffect/";
       public float GlobalVolume { get; set; } = 0.8f;
 
-      public SoundManager()
+      private void Start()
       {
+         DontDestroyOnLoad(this.gameObject);
+
          GenericPool
             .Instance
-            .AddManagedObject<AudioSource>(null,
+            .AddManagedObject<AudioSource>(this.transform,
                                           (source) => {
                                              source.playOnAwake = false;
                                           }
