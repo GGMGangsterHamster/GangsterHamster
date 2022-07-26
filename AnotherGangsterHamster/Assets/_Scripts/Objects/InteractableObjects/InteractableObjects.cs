@@ -18,15 +18,13 @@ namespace Objects.InteractableObjects
 
       [field: SerializeField]
       public bool InitalActiveStatus { get; set; } = false;
-
-      private bool _activated = false;
       public bool Activated { get; set; }
 
       private int _objectCount = 0;
 
       protected virtual void Awake()
       {
-         _activated = InitalActiveStatus;
+         Activated = InitalActiveStatus;
       }
 
       /// <summary>
@@ -43,14 +41,14 @@ namespace Objects.InteractableObjects
 
             if (!EventIsToggle)
             {
-               _activated = true;
+               Activated = true;
                callback.OnActive?.Invoke(other);
                return;
             }
 
-            _activated = !_activated;
+            Activated = !Activated;
 
-            if (_activated)
+            if (Activated)
                callback.OnActive?.Invoke(other);
             else
                callback.OnDeactive?.Invoke(other);
@@ -73,7 +71,7 @@ namespace Objects.InteractableObjects
             if (_objectCount > 0) return;
 
             _objectCount = 0;
-            _activated = false;
+            Activated = false;
             callback.OnDeactive?.Invoke(other);
          }
       }

@@ -24,7 +24,7 @@ namespace Objects.StageObjects
                Event @event =
                   (interactable.Callbacks)
                   .Find(e => e.key == "");
-
+               
                @event.OnActive.AddListener(Active);
                @event.OnDeactive.AddListener(Deactive);
                _buttons.Add(interactable);
@@ -42,6 +42,8 @@ namespace Objects.StageObjects
       public void Deactive(GameObject other)
       {
          if (_buttons.FindAll(e => !e.Activated).Count <= 0) return;
+
+         Debug.Log("B");
 
          OnDisqualified?.Invoke(this.gameObject);
       }
