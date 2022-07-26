@@ -111,11 +111,11 @@ namespace Stages.Management
 
       public void SaveStage(string stage)
       {
-          StreamWriter sw = new StreamWriter("stageData" + ".txt");
-          sw.WriteLine(stage);
+         StreamWriter sw = new StreamWriter("stageData" + ".txt");
+         sw.WriteLine(stage);
 
-          sw.Flush();
-          sw.Close();
+         sw.Flush();
+         sw.Close();
       }
 
       public void LoadStage()
