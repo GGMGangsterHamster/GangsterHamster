@@ -18,7 +18,8 @@ namespace Weapons.Actions
         private Transform _lumoCube;
         private LumoAnimator _lumoAnimator;
 
-        private AllWeaponMessageBroker _AWmessageBroker;
+        private AllWeaponMessageBroker
+            _AWmessageBroker;
         private LumoMessageBroker _messageBroker;
 
         private Grand _grand;
