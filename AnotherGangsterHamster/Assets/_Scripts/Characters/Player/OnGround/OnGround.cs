@@ -1,7 +1,7 @@
 using Objects;
 using UnityEngine;
 
-namespace Characters.Player.GroundCheck
+namespace Characters.Player.OnGround
 {
    public class OnGround : MonoBehaviour
    {
