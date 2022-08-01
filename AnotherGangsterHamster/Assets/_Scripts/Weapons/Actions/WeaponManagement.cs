@@ -96,8 +96,6 @@ namespace Weapons.Actions
             {
                 if (_curWeapon != WeaponEnum.None)
                 {
-                    _messageBroker.OnFire?.Invoke();
-
                     _weaponActions[_curWeapon].FireWeapon();
                 }
             }
@@ -108,8 +106,6 @@ namespace Weapons.Actions
         {
             if (_curWeapon != WeaponEnum.None)
             {
-                _messageBroker.OnUse?.Invoke();
-
                 _weaponActions[_curWeapon].UseWeapon();
             }
         }
@@ -119,8 +115,6 @@ namespace Weapons.Actions
         {
             if (_curWeapon != WeaponEnum.None)
             {
-                _messageBroker.OnReset?.Invoke();
-
                 _weaponActions[_curWeapon].ResetWeapon();
 
                 if (_weaponActions[WeaponEnum.Lumo].gameObject.activeSelf)

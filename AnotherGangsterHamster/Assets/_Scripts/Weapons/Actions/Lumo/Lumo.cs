@@ -18,6 +18,7 @@ namespace Weapons.Actions
         private Transform _lumoCube;
         private LumoAnimator _lumoAnimator;
 
+        private AllWeaponMessageBroker _AWmessageBroker;
         private LumoMessageBroker _messageBroker;
 
         private Grand _grand;
@@ -40,6 +41,7 @@ namespace Weapons.Actions
             _lumoAnimator = GetComponent<LumoAnimator>();
 
             _messageBroker = GetComponent<LumoMessageBroker>();
+            _AWmessageBroker = transform.parent.GetComponent<AllWeaponMessageBroker>();
         }
 
         public override void FireWeapon()
@@ -51,6 +53,7 @@ namespace Weapons.Actions
                 if (InteractionManager.Instance.currentRaycastHitTrm != null
                     && InteractionManager.Instance.currentRaycastHitTrm.CompareTag("ATYPEOBJECT"))
                 {
+                    _AWmessageBroker.OnFire?.Invoke();
                     _messageBroker.OnFire?.Invoke();
 
                     RaycastHit hit = InteractionManager.Instance.currentRaycastHit;
@@ -71,6 +74,7 @@ namespace Weapons.Actions
         {
             if (_currentStatus == LumoStatus.Stickly && _lumoAnimator.isStopedMoving())
             {
+                _AWmessageBroker.OnUse?.Invoke();
                 _messageBroker.OnUse?.Invoke();
 
                 _currentStatus = LumoStatus.Use;
@@ -86,6 +90,7 @@ namespace Weapons.Actions
                 return;
             }
 
+            _AWmessageBroker.OnReset?.Invoke();
             _messageBroker.OnReset?.Invoke();
             _lumoAnimator.RotationReset();
             PlayerBaseTransform.GetComponent<FollowGroundPos>().Deactive(_lumoCube.gameObject);

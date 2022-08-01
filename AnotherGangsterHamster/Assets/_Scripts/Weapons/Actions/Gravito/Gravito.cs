@@ -49,6 +49,7 @@ namespace Weapons.Actions
         private GravitoAnimator _gravitoAnimator;
         private WeaponManagement _weaponManagement;
 
+        private AllWeaponMessageBroker _AWmessageBroker;
         private GravitoMessageBroker _messageBroker;
 
         private CheckpointManager Checkpoint
@@ -93,6 +94,7 @@ namespace Weapons.Actions
             _weaponManagement = GameObject.FindObjectOfType<WeaponManagement>();
 
             _messageBroker = GetComponent<GravitoMessageBroker>();
+            _AWmessageBroker = transform.parent.GetComponent<AllWeaponMessageBroker>();
 
             _gravitoAnimator.sticklyAction += () =>
             {
@@ -119,6 +121,7 @@ namespace Weapons.Actions
                 if (InteractionManager.Instance.currentRaycastHitTrm != null 
                     && InteractionManager.Instance.currentRaycastHitTrm.CompareTag("ATYPEOBJECT"))
                 {
+                    _AWmessageBroker.OnFire?.Invoke();
                     _messageBroker.OnFire?.Invoke();
 
                     RaycastHit hit = InteractionManager.Instance.currentRaycastHit;
@@ -144,6 +147,7 @@ namespace Weapons.Actions
             {
                 if (_currentChangeGravityDir == Vector3.up) return;
 
+                _AWmessageBroker.OnUse?.Invoke();
                 _messageBroker.OnUse?.Invoke();
 
                 _gravitoAnimator.UsingAnime();
@@ -170,6 +174,7 @@ namespace Weapons.Actions
                 return;
 
             _gravitoAnimator.ResetAnime(transform.position, GravitoHandPosition, fireSpeed);
+            _AWmessageBroker.OnReset?.Invoke();
             _messageBroker.OnReset?.Invoke();
 
             if (!isChangedGravity)

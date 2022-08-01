@@ -50,6 +50,7 @@ namespace Weapons.Actions
         private FollowGroundPos _myFollowGroundPos;
         private FollowGroundPos _playerFollowGroundPos;
 
+        private AllWeaponMessageBroker _AWmessageBroker;
         private GrandMessageBroker _messageBroker;
 
         private float fullChangeTime
@@ -132,6 +133,7 @@ namespace Weapons.Actions
             _playerFollowGroundPos = PlayerBaseTransform.GetComponent<FollowGroundPos>();
 
             _messageBroker = GetComponent<GrandMessageBroker>();
+            _AWmessageBroker = transform.parent.GetComponent<AllWeaponMessageBroker>();
 
             grandLv1Model = transform.GetChild(0).gameObject;
             grandLv2Model = transform.GetChild(1).gameObject;
@@ -150,6 +152,7 @@ namespace Weapons.Actions
                 if (_myRigid.constraints == RigidbodyConstraints.FreezePosition)
                     _myRigid.constraints = RigidbodyConstraints.None;
 
+                _AWmessageBroker.OnFire?.Invoke();
                 _messageBroker.OnFire?.Invoke();
 
                 _myRigid.velocity = Vector3.zero;
@@ -219,6 +222,7 @@ namespace Weapons.Actions
             if(_currentSizeLevel == GrandSizeLevel.OneGrade)
                 _myRigid.velocity = Vector3.zero;
 
+            _AWmessageBroker.OnUse?.Invoke();
             _messageBroker.OnUse?.Invoke();
 
             _beforeSizeLevel = _currentSizeLevel;
@@ -229,6 +233,7 @@ namespace Weapons.Actions
         {
             if (_currentGrandStatus != GrandStatus.Resize && _currentGrandStatus != GrandStatus.Idle)
             {
+                _AWmessageBroker.OnReset?.Invoke();
                 _messageBroker.OnReset?.Invoke();
                 
                 _playerFollowGroundPos.Deactive(gameObject);
