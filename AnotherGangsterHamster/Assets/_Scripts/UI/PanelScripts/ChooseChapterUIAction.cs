@@ -64,7 +64,16 @@ namespace UI.PanelScripts
                 string data = sr.ReadLine();
 
                 StageNames stage = (StageNames)Enum.Parse(typeof(StageNames), sceneName);
-                StageNames savedStage = (StageNames)Enum.Parse(typeof(StageNames), data);
+                StageNames savedStage;
+
+                if (data == null)
+                {
+                    savedStage = StageNames.NONE;
+                }
+                else
+                {
+                    savedStage = (StageNames)Enum.Parse(typeof(StageNames), data);
+                }
 
                 if(stage <= savedStage)
                 {
