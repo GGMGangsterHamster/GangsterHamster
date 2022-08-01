@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Objects.Materials
 {
-   public class ChangeColor : MonoBehaviour, ICollisionEventable
+   public class ChangeColor : MonoBehaviour, IEventable
    {
       [SerializeField] private Color _active;
       [SerializeField] private Color _deactive;

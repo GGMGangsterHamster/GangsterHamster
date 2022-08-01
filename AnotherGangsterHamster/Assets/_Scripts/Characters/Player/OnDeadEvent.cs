@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace Characters.Player
 {   
-   public class OnDeadEvent : MonoBehaviour, ICallbackable
+   public class OnDeadEvent : MonoBehaviour
    {
       public Fade    fade              = null;
       public float   fadeoutDuration   = 2.0f;
 
-      public void Invoke(object param)
+      public void Execute()
       {
          fade.FadeOut(fadeoutDuration, () => {
             StageManager.Instance.Reload();

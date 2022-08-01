@@ -4,7 +4,7 @@ using Objects.InteractableObjects;
 namespace Objects.StageObjects.CollisionEventable
 {
    [RequireComponent(typeof(CollisionInteractableObject))]
-   public class BreakableWall : MonoBehaviour, ICollisionEventable
+   public class BreakableWall : MonoBehaviour, IEventable
    {
       [field: SerializeField]
       public float ForceToBreak { get; set; }

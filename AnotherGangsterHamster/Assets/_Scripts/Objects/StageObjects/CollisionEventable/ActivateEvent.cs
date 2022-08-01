@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Objects.StageObjects.CollisionEventable
 {
-    public class ActivateEvent : MonoBehaviour, ICollisionEventable
+    public class ActivateEvent : MonoBehaviour, IEventable
     {
         public bool startActive = true; // 처음 시작할때 어떤 상태로 시작 할 건지
         public bool activateMe = true;  // 자신을 Active Deactive 할 건지

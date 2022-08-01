@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Objects.StageObjects
 {
-   public class ButtonActivatedChecker : MonoBehaviour, ICollisionEventable
+   public class ButtonActivatedChecker : MonoBehaviour, IEventable
    {
       public List<GameObject> Buttons = new List<GameObject>();
       private List<IActivated> _buttons = new List<IActivated>();

@@ -11,8 +11,8 @@ namespace Characters.Player.Move
    {
       public string _path = "KeyCodes/Movements.json";
 
-      public UnityEvent<ICollisionEventable> OnIdle
-         = new UnityEvent<ICollisionEventable>();
+      public UnityEvent<IEventable> OnIdle
+         = new UnityEvent<IEventable>();
 
       private Dictionary<KeyCode, Command> _moveCommands;
 

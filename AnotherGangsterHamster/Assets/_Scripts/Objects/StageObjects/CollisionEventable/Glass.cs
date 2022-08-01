@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Objects.StageObjects.CollisionEventable
 {
     [RequireComponent(typeof(CollisionInteractableObject))]
-    public class Glass : MonoBehaviour, ICollisionEventable
+    public class Glass : MonoBehaviour, IEventable
     {
         public float MaximunKineticEnergy = 10.0f;
 

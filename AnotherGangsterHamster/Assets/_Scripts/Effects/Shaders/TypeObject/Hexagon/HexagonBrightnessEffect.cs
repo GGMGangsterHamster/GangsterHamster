@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Effects.Shaders.TypeObject.Hexagon
 {
    [RequireComponent(typeof(ATypeHexagon), typeof(TriggerInteractableObject))]
-   public class HexagonBrightnessEffect : MonoBehaviour, ICollisionEventable
+   public class HexagonBrightnessEffect : MonoBehaviour, IEventable
    {
       public float _maxAlpha = 1.0f;
       public float _minAlpha = 0.0f;

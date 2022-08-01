@@ -5,7 +5,7 @@ using Objects.InteractableObjects;
 namespace Objects.Trigger
 {
    [RequireComponent(typeof(TriggerInteractableObject))]
-   public class ShowDialogTrigger : MonoBehaviour, ICollisionEventable
+   public class ShowDialogTrigger : MonoBehaviour, IEventable
    {
       const string PLAYER = "PLAYER_BASE";
 

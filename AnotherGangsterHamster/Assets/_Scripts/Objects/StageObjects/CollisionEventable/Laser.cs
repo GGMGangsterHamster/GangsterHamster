@@ -7,7 +7,7 @@ using UnityEngine.Events;
 namespace Objects.StageObjects.CollisionEventable
 {
    [RequireComponent(typeof(TriggerInteractableObject), typeof(BoxCollider), typeof(LineRenderer))]
-   public class Laser : MonoBehaviour, ICollisionEventable
+   public class Laser : MonoBehaviour, IEventable
    {
       [Header("충돌 시 월드 좌표를 넘겨주며 호출됨")]
       public UnityEvent<Vector3> OnCollision;

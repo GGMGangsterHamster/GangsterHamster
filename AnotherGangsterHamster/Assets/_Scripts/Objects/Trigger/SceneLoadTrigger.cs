@@ -5,7 +5,7 @@ using Objects.InteractableObjects;
 namespace Objects.Trigger
 {    
     [RequireComponent(typeof(TriggerInteractableObject))]
-    public class SceneLoadTrigger : MonoBehaviour, ICollisionEventable
+    public class SceneLoadTrigger : MonoBehaviour, IEventable
     {
         const string PLAYER = "PLAYER_BASE";
         public string LoadTarget; 

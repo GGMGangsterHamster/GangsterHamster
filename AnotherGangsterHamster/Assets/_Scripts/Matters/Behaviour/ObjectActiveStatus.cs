@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Matters.Behaviour
 {
-    public class ObjectActiveStatus : MonoBehaviour, ICollisionEventable
+    public class ObjectActiveStatus : MonoBehaviour, IEventable
     {
         public void Active(GameObject other)
         {
