@@ -36,8 +36,7 @@ namespace UI.PanelScripts
 
             for(int i = (int)(StageNames.NONE + 1); i < (int)StageNames.END_OF_STAGE; i++)
             {
-                // SpawnChapter(((StageNames)i).ToString());
-                // 여기에서 _stageButtonPrefab 때문에 나는거 같기도 하고 무튼 저 위에 함수가 KeyNotFoundException 을 일으킴
+                SpawnChapter(((StageNames)i).ToString());
             }
         }
 
@@ -64,7 +63,16 @@ namespace UI.PanelScripts
                 string data = sr.ReadLine();
 
                 StageNames stage = (StageNames)Enum.Parse(typeof(StageNames), sceneName);
-                StageNames savedStage = (StageNames)Enum.Parse(typeof(StageNames), data);
+                StageNames savedStage;
+
+                if (data == null)
+                {
+                    savedStage = StageNames.NONE;
+                }
+                else
+                {
+                    savedStage = (StageNames)Enum.Parse(typeof(StageNames), data);
+                }
 
                 if(stage <= savedStage)
                 {
