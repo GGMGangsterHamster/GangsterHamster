@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Characters.Player.GroundCheck
 {
-   public class OnGround : MonoBehaviour, IGroundCallback
+   public class OnGround : MonoBehaviour
    {
       private CapsuleCollider _collider = null;
       private CapsuleCollider Collider
@@ -25,7 +25,6 @@ namespace Characters.Player.GroundCheck
          PlayerStatus.OnGround = false;
          PlayerStatus.IsJumping = true;
          PlayerStatus.Jumpable = false;
-         Utils.ExecuteCallback(this.transform, 0);
 
          Collider.sharedMaterial.staticFriction = 0.0f;
          Collider.sharedMaterial.dynamicFriction = 0.0f;
@@ -36,18 +35,16 @@ namespace Characters.Player.GroundCheck
          PlayerStatus.IsJumping = false;
          PlayerStatus.OnGround = true;
          PlayerStatus.Jumpable = true;
-         Utils.ExecuteCallback(this.transform, 2);
 
          Collider.sharedMaterial.staticFriction = 1.0f;
          Collider.sharedMaterial.dynamicFriction = 1.0f;
       }
 
-      void IGroundCallback.OnGround()
+      public void AtGround()
       {
          PlayerStatus.IsJumping = false;
          PlayerStatus.OnGround = true;
          PlayerStatus.Jumpable = true;
-         Utils.ExecuteCallback(this.transform, 1);
 
          Collider.sharedMaterial.staticFriction = 1.0f;
          Collider.sharedMaterial.dynamicFriction = 1.0f;

@@ -6,8 +6,8 @@ namespace Characters.Player
 
    public class Player : CharacterBase
    {
-      [SerializeField]
-      private Transform _deadCallbacks = null;
+      [Header("Invoked when dead")]
+      public UnityEvent OnDead = new UnityEvent();
 
       public float regenerationDelay;
       public int regenerationValue;
@@ -36,7 +36,7 @@ namespace Characters.Player
          // 죽는다면 무엇을 해야 할까?
 
          // 우앱: 
-         Utils.ExecuteCallback(_deadCallbacks);
+         OnDead.Invoke();
       }
 
       protected override void Awake()

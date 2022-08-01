@@ -2,25 +2,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Objects
+namespace Objects.InteractableObjects
 {
-    public class TriggerStayInteractableObject : MonoBehaviour
-    {
-        public List<Event> _callbacks
-                 = new List<Event>();
+   public class TriggerStayInteractableObject : InteractableObjects
+   {
+      private void OnTriggerStay(Collider other)
+      {
+         OnEventTrigger(other.gameObject);
+      }
 
-        private void OnTriggerStay(Collider other)
-        {
-            _callbacks.Find(x => (x.key == "") || other.gameObject.CompareTag(x.key))
-                ?.OnActive?.
-                Invoke(other.gameObject);
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            _callbacks.Find(x => (x.key == "") || other.gameObject.CompareTag(x.key))
-                ?.OnDeactive?.
-                Invoke(other.gameObject);
-        }
-    }
+      private void OnTriggerExit(Collider other)
+      {
+         OnEventExit(other.gameObject);
+      }
+   }
 }

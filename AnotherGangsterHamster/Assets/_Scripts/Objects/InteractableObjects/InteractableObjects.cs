@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.Events;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Objects.InteractableObjects
@@ -25,6 +25,38 @@ namespace Objects.InteractableObjects
       protected virtual void Awake()
       {
          Activated = InitalActiveStatus;
+         ParseTag();
+      }
+
+      /// <summary>
+      /// ',' 로 Key 나눔
+      /// 이제 무지성 복붙 대신 ATypeObject,BTypeObject 가 가능함
+      /// </summary>
+      private void ParseTag()
+      {
+         List<Event> deleteEvents = new();
+         List<Event> addEvents    = new();
+
+         _callbacks.ForEach(@event => {
+            @event.key.Split(',').ToList().ForEach(key => {
+               Event item      = new Event();
+               item.key        = key;
+               item.OnActive   = @event.OnActive;
+               item.OnDeactive = @event.OnDeactive;
+               
+               addEvents.Add(item);
+            });
+
+            deleteEvents.Add(@event);
+         });
+
+         deleteEvents.ForEach(e => {
+            _callbacks.Remove(e);
+         });
+
+         addEvents.ForEach(e => {
+            _callbacks.Add(e);
+         });
       }
 
       /// <summary>
