@@ -4,7 +4,7 @@ using Tween;
 
 namespace Objects.StageObjects.CollisionEventable
 {
-   public class MovingFloor : MonoBehaviour, ICollisionEventable
+   public class MovingFloor : MonoBehaviour, IEventable
    {
       public   Vector3  target      = Vector3.zero;
       public   float    duration    = 2.0f;

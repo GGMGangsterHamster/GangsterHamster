@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Effects.Shaders.Props
 {
-   public class ActiveStatusShader : MonoBehaviour, ICollisionEventable
+   public class ActiveStatusShader : MonoBehaviour, IEventable
    {
       const string EMISSION = "_Emission";
       const string TRANSITION = "_Transition";

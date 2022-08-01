@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Objects
 {
-   public interface ICollisionEventable
+   public interface IEventable
    {
       /// <summary>
       /// 활성화 시 불러짐

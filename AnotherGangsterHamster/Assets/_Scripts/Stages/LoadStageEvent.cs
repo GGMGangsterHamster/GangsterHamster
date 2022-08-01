@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Stages
 {
-   public class LoadStageEvent : MonoBehaviour, ICollisionEventable
+   public class LoadStageEvent : MonoBehaviour, IEventable
    {
       public new string name;
 

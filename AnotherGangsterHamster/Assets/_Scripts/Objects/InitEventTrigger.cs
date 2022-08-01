@@ -7,7 +7,7 @@ namespace Objects
    {
       private void Start()
       {
-         if (TryGetComponent<ICollisionEventable>(out var action))
+         if (TryGetComponent<IEventable>(out var action))
          {
             action.Active(this.gameObject);
          }

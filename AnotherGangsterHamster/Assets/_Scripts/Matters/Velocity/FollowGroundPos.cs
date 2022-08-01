@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Matters.Velocity
 {
    [RequireComponent(typeof(MoveDelta))]
-   public class FollowGroundPos : MonoBehaviour, ICollisionEventable
+   public class FollowGroundPos : MonoBehaviour, IEventable
    {
       private MoveDelta _delta;
 
