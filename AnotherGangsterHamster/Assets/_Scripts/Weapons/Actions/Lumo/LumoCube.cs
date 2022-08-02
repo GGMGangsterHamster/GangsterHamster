@@ -22,7 +22,7 @@ namespace Weapons.Actions
         public void ObjTriggerStayEvent(GameObject obj)
         {
             if (!obj.CompareTag("PLAYER_BASE")) return;
-
+            Debug.Log("잘되는 건가요?");
             if (!_isReinforcemented)
             {
                 _playerGravity.AffectedByGlobalGravity = false;
