@@ -12,6 +12,7 @@ namespace Sound
    public class SoundManager : MonoSingleton<SoundManager>
    {
       private Dictionary<string, AudioClip> _audioDictionary;
+      private Dictionary<string, AudioSource> _curPlayingAudioSource;
       public string soundEffectPath = "Audio/SoundEffect/";
       public float GlobalVolume { get; set; } = 0.8f;
 
@@ -27,7 +28,8 @@ namespace Sound
                                           }
          );
 
-         _audioDictionary = new Dictionary<string, AudioClip>();
+         _audioDictionary       = new Dictionary<string, AudioClip>();
+         _curPlayingAudioSource = new Dictionary<string, AudioSource>();
 
          Resources.LoadAll<AudioClip>(soundEffectPath)
                   .ToList()
@@ -41,7 +43,7 @@ namespace Sound
       /// 오디오를 플레이 합니다.
       /// </summary>
       /// <param name="name"></param>
-      public void Play(string name)
+      public void Play(string name, bool doNotPlayIfAlreadyPlaying = false)
       {
          if(!_audioDictionary.ContainsKey(name))
          {
@@ -49,13 +51,17 @@ namespace Sound
             return;
          }
 
+         if (_curPlayingAudioSource[name].isPlaying && doNotPlayIfAlreadyPlaying)
+            return;
+
          AudioSource source = GenericPool
                                  .Instance
                                  .Get<AudioSource>(e => !e.isPlaying);
          source.gameObject.SetActive(true);
-         source.clip = _audioDictionary[name];
+         source.clip   = _audioDictionary[name];
          source.volume = GlobalVolume; // FIXME: TEMP
          source.Play();
+         _curPlayingAudioSource[name] = source;
       }
    }
 }
