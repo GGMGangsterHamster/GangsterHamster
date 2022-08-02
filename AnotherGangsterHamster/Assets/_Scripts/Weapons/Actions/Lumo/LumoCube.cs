@@ -22,10 +22,13 @@ namespace Weapons.Actions
         public void ObjTriggerStayEvent(GameObject obj)
         {
             if (!obj.CompareTag("PLAYER_BASE")) return;
-            Debug.Log("잘되는 건가요?");
+
+
+
             if (!_isReinforcemented)
             {
                 _playerGravity.AffectedByGlobalGravity = false;
+                Debug.Log("111");
                 _playerGravity.SetIndividualGravity(GravityManager.GetGlobalGravityDirection(), 4.9f);
                 _playerRigid.mass = 2;
                 _isReinforcemented = true;
@@ -34,6 +37,7 @@ namespace Weapons.Actions
             else if(_playerGravity.AffectedByGlobalGravity)
             {
                 _playerGravity.AffectedByGlobalGravity = false;
+                Debug.Log("222");
                 _playerGravity.SetIndividualGravity(GravityManager.GetGlobalGravityDirection(), 4.9f);
             }
 
@@ -47,6 +51,7 @@ namespace Weapons.Actions
             if (_isReinforcemented)
             {
                 _playerGravity.AffectedByGlobalGravity = true;
+                Debug.Log("333");
                 _isReinforcemented = false;
                 _playerRigid.mass = 1;
                 effect.EffectOff();
