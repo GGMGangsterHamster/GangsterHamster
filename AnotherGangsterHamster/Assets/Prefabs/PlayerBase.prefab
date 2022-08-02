@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 60493967049730929}
   - component: {fileID: 1424101874}
   - component: {fileID: 396012075}
+  - component: {fileID: 1421402922}
   m_Layer: 6
   m_Name: GroundChecker
   m_TagString: Untagged
@@ -236,6 +237,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1421402922}
+          m_TargetAssemblyTypeName: Characters.Player.OnGround.ChangePhysicsMat,
+            Assembly-CSharp
+          m_MethodName: Active
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     OnDeactive:
       m_PersistentCalls:
         m_Calls:
@@ -255,6 +269,19 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: Characters.Player.GroundCheck.OnGround, Assembly-CSharp
           m_MethodName: ExitGround
           m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1421402922}
+          m_TargetAssemblyTypeName: Characters.Player.OnGround.ChangePhysicsMat,
+            Assembly-CSharp
+          m_MethodName: Deactive
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -297,6 +324,21 @@ MonoBehaviour:
     OnDeactive:
       m_PersistentCalls:
         m_Calls: []
+  <EventIsToggle>k__BackingField: 1
+  <InitalActiveStatus>k__BackingField: 0
+--- !u!114 &1421402922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60493967049730932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1363a79db6e815b75bde819c17ac3cab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 60493967840551276}
 --- !u!1 &60493967266636773
 GameObject:
   m_ObjectHideFlags: 0
