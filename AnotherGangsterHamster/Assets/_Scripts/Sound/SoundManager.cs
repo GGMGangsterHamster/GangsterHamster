@@ -35,6 +35,7 @@ namespace Sound
                   .ToList()
                   .ForEach(e => {
                      _audioDictionary.Add(e.name, e);
+                     _curPlayingAudioSource.Add(e.name, null);
                   }
          );
       }
@@ -51,7 +52,8 @@ namespace Sound
             return;
          }
 
-         if (_curPlayingAudioSource[name].isPlaying && doNotPlayIfAlreadyPlaying)
+         if (_curPlayingAudioSource[name] != null &&
+             _curPlayingAudioSource[name].isPlaying && doNotPlayIfAlreadyPlaying)
             return;
 
          AudioSource source = GenericPool
