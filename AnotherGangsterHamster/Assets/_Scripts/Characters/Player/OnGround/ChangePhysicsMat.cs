@@ -27,7 +27,7 @@ namespace Characters.Player.OnGround
             Vector3.Angle(Player.position,
             collider.ClosestPointOnBounds(Player.position));
 
-         Debug.Log(angle);
+         //Debug.Log(angle);
          
          if (angle <= 10.0f) // 임시 값
          {
