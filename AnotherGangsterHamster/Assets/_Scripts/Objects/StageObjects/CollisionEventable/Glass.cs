@@ -1,3 +1,4 @@
+using Characters.Player.OnGround;
 using Objects.InteractableObjects;
 using UnityEngine;
 
@@ -22,6 +23,7 @@ namespace Objects.StageObjects.CollisionEventable
                 Debug.Log(_colInteractable.colVelocity.magnitude * rigid.mass);
                 if (MaximunKineticEnergy < _colInteractable.colVelocity.magnitude * rigid.mass)
                 {
+                    other.GetComponentInChildren<OnGround>()?.ExitGround();
                     gameObject.SetActive(false);
                 }
             }
