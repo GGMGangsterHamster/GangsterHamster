@@ -30,18 +30,6 @@ namespace Characters.Player.Mouse
          }
       }
 
-      private Transform _headTrm = null;
-      private Transform HeadTrm
-      {
-         get
-         {
-            if (_headTrm == null)
-               _headTrm = GameObject.FindWithTag("PLAYER_HEAD").transform;
-
-            return _headTrm;
-         }
-      }
-
 
       // For Y rotaion clamping
       public float rotY = 0.0f;
@@ -66,10 +54,10 @@ namespace Characters.Player.Mouse
       {
          if (!PlayerStatus.Moveable) return;
          // 마우스 감도 사용할 지
-         rotY += y * (includingMouseSpeed ? PlayerValues.MouseSpeed : 1.0f);
+         rotY -= y * (includingMouseSpeed ? PlayerValues.MouseSpeed : 1.0f);
          rotY = Mathf.Clamp(rotY, -70f, 85f);
 
-         HeadTrm.localRotation = Quaternion.Euler(0.0f, 0.0f, rotY);
+         CamTrm.localRotation = Quaternion.Euler(rotY, 0.0f, 0.0f);
       }
    }
 }

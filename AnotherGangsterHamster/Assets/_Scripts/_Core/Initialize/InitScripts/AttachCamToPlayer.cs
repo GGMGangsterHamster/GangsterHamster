@@ -38,6 +38,7 @@ namespace _Core.Initialize.InitScripts
       public override void Call()
       {
          MainCam.SetParent(PlayerCamLockTrm);
+         MainCam.localRotation = Quaternion.identity;
          MainCam.transform.localPosition = Vector3.zero;
       }
    }
