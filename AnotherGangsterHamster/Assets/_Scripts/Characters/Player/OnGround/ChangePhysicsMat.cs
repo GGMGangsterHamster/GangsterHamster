@@ -26,6 +26,8 @@ namespace Characters.Player.OnGround
          float angle =
             Vector3.Angle(Player.position,
             collider.ClosestPointOnBounds(Player.position));
+
+         Debug.Log(angle);
          
          if (angle <= 10.0f) // 임시 값
          {
@@ -34,8 +36,8 @@ namespace Characters.Player.OnGround
 
             _curStandingObj      = other;
             _curStandingCollider = collider;
-            collider.material.dynamicFriction = 1.0f;
-            collider.material.staticFriction  = 1.0f;
+            collider.material.dynamicFriction = 10.0f;
+            collider.material.staticFriction  = 10.0f;
          }
       }
 
