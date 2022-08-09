@@ -120,6 +120,62 @@ PrefabInstance:
       propertyPath: _callbacks.Array.data[0].OnActive.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1941123077321776482, guid: a56e2452730581f419942f2d4e412a1e, type: 3}
+      propertyPath: OnFire.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941123077321776482, guid: a56e2452730581f419942f2d4e412a1e, type: 3}
+      propertyPath: OnReset.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941123077321776482, guid: a56e2452730581f419942f2d4e412a1e, type: 3}
+      propertyPath: OnFire.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941123077321776482, guid: a56e2452730581f419942f2d4e412a1e, type: 3}
+      propertyPath: OnReset.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941123077321776482, guid: a56e2452730581f419942f2d4e412a1e, type: 3}
+      propertyPath: OnFire.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6574833979856953140}
+    - target: {fileID: 1941123077321776482, guid: a56e2452730581f419942f2d4e412a1e, type: 3}
+      propertyPath: OnReset.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6574833979856953140}
+    - target: {fileID: 1941123077321776482, guid: a56e2452730581f419942f2d4e412a1e, type: 3}
+      propertyPath: OnFire.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941123077321776482, guid: a56e2452730581f419942f2d4e412a1e, type: 3}
+      propertyPath: OnFire.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: WeaponFireSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941123077321776482, guid: a56e2452730581f419942f2d4e412a1e, type: 3}
+      propertyPath: OnReset.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941123077321776482, guid: a56e2452730581f419942f2d4e412a1e, type: 3}
+      propertyPath: OnReset.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: WeaponGrebSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941123077321776482, guid: a56e2452730581f419942f2d4e412a1e, type: 3}
+      propertyPath: OnFire.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: WeaponSound, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941123077321776482, guid: a56e2452730581f419942f2d4e412a1e, type: 3}
+      propertyPath: OnReset.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: WeaponSound, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941123077321776482, guid: a56e2452730581f419942f2d4e412a1e, type: 3}
+      propertyPath: OnFire.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1941123077321776482, guid: a56e2452730581f419942f2d4e412a1e, type: 3}
+      propertyPath: OnReset.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2762754502437891592, guid: a56e2452730581f419942f2d4e412a1e, type: 3}
       propertyPath: _callbacks.Array.size
       value: 0
@@ -312,54 +368,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3433812936799677902, guid: a56e2452730581f419942f2d4e412a1e, type: 3}
   m_PrefabInstance: {fileID: 3524634016789905}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3552374959401655933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3435084394398570591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7f77ce20631d2a46a7745ba42985906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnFire:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6574833979856953140}
-        m_TargetAssemblyTypeName: WeaponSound, Assembly-CSharp
-        m_MethodName: WeaponFireSound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnUse:
-    m_PersistentCalls:
-      m_Calls: []
-  OnReset:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6574833979856953140}
-        m_TargetAssemblyTypeName: WeaponSound, Assembly-CSharp
-        m_MethodName: WeaponGrebSound
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnChangeWeapon:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &6574833979856953140
 MonoBehaviour:
   m_ObjectHideFlags: 0

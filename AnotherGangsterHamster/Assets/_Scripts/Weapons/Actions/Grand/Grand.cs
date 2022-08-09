@@ -222,9 +222,6 @@ namespace Weapons.Actions
             if(_currentSizeLevel == GrandSizeLevel.OneGrade)
                 _myRigid.velocity = Vector3.zero;
 
-            _AWmessageBroker.OnUse?.Invoke();
-            _messageBroker.OnUse?.Invoke();
-
             _beforeSizeLevel = _currentSizeLevel;
             _currentGrandStatus = GrandStatus.Use;
         }
@@ -435,6 +432,9 @@ namespace Weapons.Actions
             {
                 return;
             }
+
+            _AWmessageBroker.OnUse?.Invoke();
+            _messageBroker.OnUse?.Invoke();
 
             // 크기 변환 전 초기 작업
             float x, y, z;
