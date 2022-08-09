@@ -23,6 +23,7 @@ namespace Weapons.Actions
         {
             if (!obj.CompareTag("PLAYER_BASE")) return;
 
+            Debug.Log("이게 호출은 되는걸까2?");
 
 
             if (!_isReinforcemented)
