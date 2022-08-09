@@ -7,13 +7,15 @@ namespace Objects.InteractableObjects
    public class TriggerStayInteractableObject : InteractableObjects
    {
       private void OnTriggerStay(Collider other)
-      {
-         OnEventTrigger(other.gameObject);
+        {
+            Debug.Log("OnTriggerStay");
+
+            OnEventTrigger(other.gameObject);
       }
 
       private void OnTriggerExit(Collider other)
-      {
-         OnEventExit(other.gameObject);
+        {
+            OnEventExit(other.gameObject);
       }
    }
 }

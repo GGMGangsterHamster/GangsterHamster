@@ -68,8 +68,8 @@ namespace Objects.InteractableObjects
          Event callback = _callbacks.Find(x => (x.key == "") || other.CompareTag(x.key));
 
          if (callback != null)
-         {
-            ++_objectCount;
+            {
+                ++_objectCount;
 
             if (!EventIsToggle)
             {
@@ -92,17 +92,20 @@ namespace Objects.InteractableObjects
       /// Deactive 시 호출
       /// </summary>
       /// <param name="other">Trigger 한 GameObject</param>
-      protected void OnEventExit(GameObject other)
+      /// <param name="noCount">가끔 Enter 메시지를 두번받고 Exit를 호출 하지 않는 경우가 있었기에 그 "유니티" 버그를 방지하기 위해서 생긴 놈 -햄-</param>
+      protected void OnEventExit(GameObject other, bool noCount = false)
       {
          Event callback = _callbacks.Find(x => (x.key == "") || other.CompareTag(x.key));
 
-         if (callback != null)
-         {
-            --_objectCount;
+            if (callback != null)
+            {
+                if(callback.key == "PLAYER_BASE")
+                    Debug.Log(callback.key + " " + "OnEventExit" + " " + _objectCount);
+                --_objectCount;
 
-            if (_objectCount > 0) return;
+            if (_objectCount > 0 && !noCount) return;
 
-            _objectCount = 0;
+                _objectCount = 0;
             Activated = false;
             callback.OnDeactive?.Invoke(other);
          }
