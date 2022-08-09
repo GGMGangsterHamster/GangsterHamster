@@ -6,15 +6,13 @@ using Objects.StageObjects.CollisionEventable;
 
 public class MovingFloorSound : SoundController
 {
-    private MovingFloor _movingFloor;
-
-    void Start()
+    public void MovingFloorPlaySound()
     {
-        _movingFloor = GetComponent<MovingFloor>(); 
+        SoundManager.Instance.Play("ObjectMoving");
     }
 
     public override void PlaySound(object obj)
     {
-        SoundManager.Instance.Play("ObjectMoving");
+        
     }
 }

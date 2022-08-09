@@ -5,8 +5,13 @@ using Sound;
 
 public class OpenDoorSound : SoundController
 {
-    public override void PlaySound(object obj)
+    public void OpenDoorPlaySound()
     {
         SoundManager.Instance.Play("OpenDoor");
+    }
+
+    public override void PlaySound(object obj)
+    {
+       
     }
 }
