@@ -316,6 +316,12 @@ MonoBehaviour:
   duration: 1
   threshould: 0.08
   startActive: 0
+  OnEventActive:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEventDeactive:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6104403011909100787 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 68f436fdcc541334d80804c920ac1f9d, type: 3}
@@ -379,8 +385,8 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 8356971157962482760}
           m_TargetAssemblyTypeName: OpenDoorSound, Assembly-CSharp
-          m_MethodName: PlaySound
-          m_Mode: 0
+          m_MethodName: OpenDoorPlaySound
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -446,3 +452,9 @@ MonoBehaviour:
   duration: 1
   threshould: 0.08
   startActive: 0
+  OnEventActive:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEventDeactive:
+    m_PersistentCalls:
+      m_Calls: []
