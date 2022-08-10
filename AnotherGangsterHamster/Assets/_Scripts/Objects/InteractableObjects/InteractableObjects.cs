@@ -18,7 +18,10 @@ namespace Objects.InteractableObjects
 
       [field: SerializeField]
       public bool InitalActiveStatus { get; set; } = false;
-      public bool Activated { get; set; }
+
+      [field: SerializeField]
+
+      public bool Activated { get; set; } = false;
 
       private int _objectCount = 0;
 
