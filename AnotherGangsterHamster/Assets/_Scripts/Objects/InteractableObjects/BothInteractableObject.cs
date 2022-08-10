@@ -16,8 +16,6 @@ namespace Objects.InteractableObjects
       // 충돌 지점
       public Vector3 colPosition;
 
-      private ButtonCountRequirement _requirement;
-
       public bool canCollision = true;
       public bool canTrigger = false;
       public bool canInteract = true;
@@ -28,8 +26,6 @@ namespace Objects.InteractableObjects
       protected override void Awake()
       {
          base.Awake();
-
-         _requirement = GetComponent<ButtonCountRequirement>();
       }
 
       #region Unity Collision Event
@@ -68,10 +64,7 @@ namespace Objects.InteractableObjects
 
       public void Interact()
       {
-         if (_requirement == null || _requirement.Checked)
-         {
             OnEventTrigger(null);
-         }
       }
       public void Focus() { }
       public void DeFocus() { }
