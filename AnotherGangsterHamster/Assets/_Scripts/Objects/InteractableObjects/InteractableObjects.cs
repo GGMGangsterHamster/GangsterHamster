@@ -16,9 +16,11 @@ namespace Objects.InteractableObjects
         [field: SerializeField]
         public bool EventIsToggle { get; set; } = true;
 
-        [field: SerializeField]
-        public bool InitalActiveStatus { get; set; } = false;
-        public bool Activated { get; set; }
+      [field: SerializeField]
+      public bool InitalActiveStatus { get; set; } = false;
+
+      [field: SerializeField]
+      public bool Activated { get; set; } = false;
 
         [field: SerializeField]
         public bool MultipleInteractable { get; set; } = false;

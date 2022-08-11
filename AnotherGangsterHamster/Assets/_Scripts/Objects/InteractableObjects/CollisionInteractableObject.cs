@@ -18,8 +18,6 @@ namespace Objects.InteractableObjects
       #region Unity Collision Event
       private void OnCollisionEnter(Collision other)
       {
-         if (!Activated) return;
-
          colNormalVec   = other.contacts[0].normal;
          colVelocity    = other.relativeVelocity;
          colPosition    = other.contacts[0].point;
@@ -29,7 +27,7 @@ namespace Objects.InteractableObjects
 
       private void OnCollisionExit(Collision other)
       {
-         if (!Activated || EventIsToggle) return;
+         if (EventIsToggle) return;
 
          OnEventExit(other.gameObject);
       }
