@@ -8,25 +8,6 @@ public class DialogManager : MonoSingleton<DialogManager>
 {
    private Dictionary<string, Dialog> _dialogDictionary;
 
-   private DisplayText _dialogPannel;
-   public DisplayText DialogPannel
-   {
-      get
-      {
-         if (_dialogPannel == null) 
-         {
-            _dialogPannel = FindObjectOfType<DisplayText>();
-
-            if (_dialogPannel == null)
-            {
-               _dialogPannel = Instantiate(Resources.Load<GameObject>("UI/DisplayTextCanvas")).GetComponent<DisplayText>();
-            }
-         }
-
-         return _dialogPannel;
-      }
-   }
-
    protected override void Awake()
    {
       base.Awake();
@@ -36,6 +17,7 @@ public class DialogManager : MonoSingleton<DialogManager>
       List<TextAsset> dialogs = Resources.LoadAll<TextAsset>("Dialogs").ToList();
 
       dialogs.ForEach(e => {
+         Debug.Log("Loaded " + e.name);
          _dialogDictionary.Add(e.name, JsonUtility.FromJson<Dialog>(e.text));
       });
    }
@@ -67,24 +49,6 @@ public class DialogManager : MonoSingleton<DialogManager>
 
       return dialog;
    }
-
-   public void DisplayDialog(string type, int id)
-   {
-      InnerDialog dialog = GetDialog(type, id);
-
-      if (dialog == null)
-         return;
-
-      DialogPannel.Display(dialog.text);
-   }
-
-   public void ClearDialog()
-   {
-      DialogPannel.ClearLine();
-   }
-
-   public DisplayText GetPannel()
-      => DialogPannel;
 }
 
 [Serializable]
