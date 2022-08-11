@@ -33,9 +33,7 @@ namespace Objects.Trigger
         {
             if (other.TryGetComponent<DialogInteract>(out var dialog))
             {
-                dialog.Set(this, () => {
-                    dialog.Call();
-                });
+                dialog.Set(this);
             }
         }
 

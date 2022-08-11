@@ -42,7 +42,12 @@ namespace Characters.Player
 
         public void Call()
         {
-            if (_curActiveVolume == null) return;
+            if (_curActiveVolume == null)
+            {
+                Panel.Disable();
+                _curActiveVolume = null;
+                return;
+            }
 
             Panel.Show(_curActiveVolume.Get());
         }
