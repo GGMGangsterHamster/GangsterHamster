@@ -106,8 +106,6 @@ namespace Objects.InteractableObjects
 
             if (callback != null)
             {
-                if (callback.key == "PLAYER_BASE")
-                    Debug.Log(callback.key + " " + "OnEventExit" + " " + _objectCount);
                 --_objectCount;
 
                 if (_objectCount > 0 && !noCount) return;
@@ -118,7 +116,14 @@ namespace Objects.InteractableObjects
             }
         }
 
-
+        private void OnDisable()
+        {
+            if (_objectCount > 0)
+            {
+                _objectCount = 0;
+                OnEventExit(null);
+            }
+        }
 
     }
 }
