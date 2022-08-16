@@ -12,6 +12,8 @@ namespace Characters.Player.OnGround
       private GameObject _curStandingObj = null; // Deactive 에서 Collider GetComponent 매번 하는 것 대안으로 사용
       private Collider _curStandingCollider = null;
 
+      private int _groundLayer = LayerMask.NameToLayer("GROUND");
+
       private void Awake()
       {
          if (Player == null)
@@ -21,7 +23,7 @@ namespace Characters.Player.OnGround
       public void Active(GameObject other)
       {
          Collider collider = other.GetComponent<Collider>();
-         if (collider == null) return;
+         if (collider == null || _groundLayer == other.layer) return;
 
          float angle =
             Vector3.Angle(Player.position,
