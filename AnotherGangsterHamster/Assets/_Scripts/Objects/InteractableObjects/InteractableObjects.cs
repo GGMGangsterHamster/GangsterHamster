@@ -121,7 +121,7 @@ namespace Objects.InteractableObjects
             if (_objectCount > 0)
             {
                 _objectCount = 0;
-                OnEventExit(null);
+                Activated = false;
             }
         }
 

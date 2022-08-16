@@ -43,8 +43,6 @@ namespace Objects.StageObjects
       {
          if (_buttons.FindAll(e => !e.Activated).Count <= 0) return;
 
-         Debug.Log("B");
-
          OnDisqualified?.Invoke(this.gameObject);
       }
    }

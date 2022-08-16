@@ -16,7 +16,15 @@ namespace Characters.Player
             get
             {
                 if (_panel == null)
+                {
                     _panel = FindObjectOfType<DialogPanel>();
+                    if (_panel == null)
+                    {
+                        _panel = Instantiate(
+                                    Resources.Load<GameObject>("UI/cvsDialog")
+                                    ).GetComponent<DialogPanel>();
+                    }
+                }
                 return _panel;
             }
         }
