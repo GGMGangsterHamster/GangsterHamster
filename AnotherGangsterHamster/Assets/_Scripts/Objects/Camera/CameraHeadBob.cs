@@ -23,10 +23,8 @@ public class CameraHeadBob : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("업데이트 작동중");
         if (!_moveInputHandler.IsIdle)
         {
-            
             HeadBob();
         }
     }
