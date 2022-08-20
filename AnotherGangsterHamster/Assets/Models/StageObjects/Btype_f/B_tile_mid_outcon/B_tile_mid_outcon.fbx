@@ -8,11 +8,11 @@ FBXHeaderExtension:  {
 		Version: 1000
 		Year: 2022
 		Month: 8
-		Day: 10
-		Hour: 0
-		Minute: 7
-		Second: 45
-		Millisecond: 521
+		Day: 20
+		Hour: 20
+		Minute: 50
+		Second: 56
+		Millisecond: 805
 	}
 	Creator: "FBX SDK/FBX Plugins version 2020.3.1"
 }
@@ -35,18 +35,18 @@ References:  {
 
 Definitions:  {
 	Version: 100
-	Count: 6
+	Count: 11
 	ObjectType: "Model" {
-		Count: 1
+		Count: 3
 	}
 	ObjectType: "Material" {
-		Count: 1
+		Count: 2
 	}
 	ObjectType: "Texture" {
-		Count: 1
+		Count: 2
 	}
 	ObjectType: "Video" {
-		Count: 1
+		Count: 2
 	}
 	ObjectType: "SceneInfo" {
 		Count: 1
@@ -60,7 +60,7 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Model: "Model::Object133", "Mesh" {
+	Model: "Model::B_tile_mid_outcon002", "Null" {
 		Version: 232
 		Properties60:  {
 			Property: "QuaternionInterpolate", "enum", "",0
@@ -104,7 +104,7 @@ Objects:  {
 			Property: "ScalingMaxX", "bool", "",0
 			Property: "ScalingMaxY", "bool", "",0
 			Property: "ScalingMaxZ", "bool", "",0
-			Property: "GeometricTranslation", "Vector3D", "",-102.499496459961,0,-0.000385761260986328
+			Property: "GeometricTranslation", "Vector3D", "",0,0,3.92662191390991
 			Property: "GeometricRotation", "Vector3D", "",0,0,0
 			Property: "GeometricScaling", "Vector3D", "",1,1,1
 			Property: "MinDampRangeX", "double", "",0
@@ -129,11 +129,96 @@ Objects:  {
 			Property: "DefaultAttributeIndex", "int", "",0
 			Property: "Freeze", "bool", "",0
 			Property: "LODBox", "bool", "",0
-			Property: "Lcl Translation", "Lcl Translation", "A",0,-1.85966491699219e-05,-0
+			Property: "Lcl Translation", "Lcl Translation", "A",0,3.814697265625e-06,0.0001068115234375
 			Property: "Lcl Rotation", "Lcl Rotation", "A",0,0,0
 			Property: "Lcl Scaling", "Lcl Scaling", "A",1,1,1
 			Property: "Visibility", "Visibility", "A",1
-			Property: "MaxHandle", "int", "UH",3247
+			Property: "MaxHandle", "int", "UH",3604
+			Property: "Color", "ColorRGB", "N",0.8,0.8,0.8
+			Property: "Size", "double", "N",100
+			Property: "Look", "enum", "N",1
+		}
+		MultiLayer: 0
+		MultiTake: 0
+		Shading: T
+		Culling: "CullingOff"
+		TypeFlags: "Null"
+		NodeAttributeName: "NodeAttribute::B_tile_mid_outcon002_ncl1_1"
+	}
+	Model: "Model::Object208", "Mesh" {
+		Version: 232
+		Properties60:  {
+			Property: "QuaternionInterpolate", "enum", "",0
+			Property: "RotationOffset", "Vector3D", "",0,0,0
+			Property: "RotationPivot", "Vector3D", "",0,0,0
+			Property: "ScalingOffset", "Vector3D", "",0,0,0
+			Property: "ScalingPivot", "Vector3D", "",0,0,0
+			Property: "TranslationActive", "bool", "",0
+			Property: "TranslationMin", "Vector3D", "",0,0,0
+			Property: "TranslationMax", "Vector3D", "",0,0,0
+			Property: "TranslationMinX", "bool", "",0
+			Property: "TranslationMinY", "bool", "",0
+			Property: "TranslationMinZ", "bool", "",0
+			Property: "TranslationMaxX", "bool", "",0
+			Property: "TranslationMaxY", "bool", "",0
+			Property: "TranslationMaxZ", "bool", "",0
+			Property: "RotationOrder", "enum", "",0
+			Property: "RotationSpaceForLimitOnly", "bool", "",0
+			Property: "RotationStiffnessX", "double", "",0
+			Property: "RotationStiffnessY", "double", "",0
+			Property: "RotationStiffnessZ", "double", "",0
+			Property: "AxisLen", "double", "",10
+			Property: "PreRotation", "Vector3D", "",0,0,0
+			Property: "PostRotation", "Vector3D", "",0,0,0
+			Property: "RotationActive", "bool", "",0
+			Property: "RotationMin", "Vector3D", "",0,0,0
+			Property: "RotationMax", "Vector3D", "",0,0,0
+			Property: "RotationMinX", "bool", "",0
+			Property: "RotationMinY", "bool", "",0
+			Property: "RotationMinZ", "bool", "",0
+			Property: "RotationMaxX", "bool", "",0
+			Property: "RotationMaxY", "bool", "",0
+			Property: "RotationMaxZ", "bool", "",0
+			Property: "InheritType", "enum", "",1
+			Property: "ScalingActive", "bool", "",0
+			Property: "ScalingMin", "Vector3D", "",0,0,0
+			Property: "ScalingMax", "Vector3D", "",0,0,0
+			Property: "ScalingMinX", "bool", "",0
+			Property: "ScalingMinY", "bool", "",0
+			Property: "ScalingMinZ", "bool", "",0
+			Property: "ScalingMaxX", "bool", "",0
+			Property: "ScalingMaxY", "bool", "",0
+			Property: "ScalingMaxZ", "bool", "",0
+			Property: "GeometricTranslation", "Vector3D", "",-49.9999847412109,50.0001068115234,-3.67164611816406e-05
+			Property: "GeometricRotation", "Vector3D", "",0,0,0
+			Property: "GeometricScaling", "Vector3D", "",1,1,1
+			Property: "MinDampRangeX", "double", "",0
+			Property: "MinDampRangeY", "double", "",0
+			Property: "MinDampRangeZ", "double", "",0
+			Property: "MaxDampRangeX", "double", "",0
+			Property: "MaxDampRangeY", "double", "",0
+			Property: "MaxDampRangeZ", "double", "",0
+			Property: "MinDampStrengthX", "double", "",0
+			Property: "MinDampStrengthY", "double", "",0
+			Property: "MinDampStrengthZ", "double", "",0
+			Property: "MaxDampStrengthX", "double", "",0
+			Property: "MaxDampStrengthY", "double", "",0
+			Property: "MaxDampStrengthZ", "double", "",0
+			Property: "PreferedAngleX", "double", "",0
+			Property: "PreferedAngleY", "double", "",0
+			Property: "PreferedAngleZ", "double", "",0
+			Property: "LookAtProperty", "object", ""
+			Property: "UpVectorProperty", "object", ""
+			Property: "Show", "bool", "",1
+			Property: "NegativePercentShapeSupport", "bool", "",1
+			Property: "DefaultAttributeIndex", "int", "",0
+			Property: "Freeze", "bool", "",0
+			Property: "LODBox", "bool", "",0
+			Property: "Lcl Translation", "Lcl Translation", "A",-54.99951171875,-50.0001068115234,0.000133514404296875
+			Property: "Lcl Rotation", "Lcl Rotation", "A",0,0,0
+			Property: "Lcl Scaling", "Lcl Scaling", "A",1,1,1
+			Property: "Visibility", "Visibility", "A",1
+			Property: "MaxHandle", "int", "UH",3605
 			Property: "Color", "ColorRGB", "N",0.450980392156863,0.450980392156863,0.450980392156863
 			Property: "BBoxMin", "Vector3D", "N",0,0,0
 			Property: "BBoxMax", "Vector3D", "N",0,0,0
@@ -203,7 +288,159 @@ Objects:  {
 				TypedIndex: 0
 			}
 		}
-		NodeAttributeName: "Geometry::Object133_ncl1_1"
+		NodeAttributeName: "Geometry::Object208_ncl1_1"
+	}
+	Model: "Model::Object209", "Mesh" {
+		Version: 232
+		Properties60:  {
+			Property: "QuaternionInterpolate", "enum", "",0
+			Property: "RotationOffset", "Vector3D", "",0,0,0
+			Property: "RotationPivot", "Vector3D", "",0,0,0
+			Property: "ScalingOffset", "Vector3D", "",0,0,0
+			Property: "ScalingPivot", "Vector3D", "",0,0,0
+			Property: "TranslationActive", "bool", "",0
+			Property: "TranslationMin", "Vector3D", "",0,0,0
+			Property: "TranslationMax", "Vector3D", "",0,0,0
+			Property: "TranslationMinX", "bool", "",0
+			Property: "TranslationMinY", "bool", "",0
+			Property: "TranslationMinZ", "bool", "",0
+			Property: "TranslationMaxX", "bool", "",0
+			Property: "TranslationMaxY", "bool", "",0
+			Property: "TranslationMaxZ", "bool", "",0
+			Property: "RotationOrder", "enum", "",0
+			Property: "RotationSpaceForLimitOnly", "bool", "",0
+			Property: "RotationStiffnessX", "double", "",0
+			Property: "RotationStiffnessY", "double", "",0
+			Property: "RotationStiffnessZ", "double", "",0
+			Property: "AxisLen", "double", "",10
+			Property: "PreRotation", "Vector3D", "",0,0,0
+			Property: "PostRotation", "Vector3D", "",0,0,0
+			Property: "RotationActive", "bool", "",0
+			Property: "RotationMin", "Vector3D", "",0,0,0
+			Property: "RotationMax", "Vector3D", "",0,0,0
+			Property: "RotationMinX", "bool", "",0
+			Property: "RotationMinY", "bool", "",0
+			Property: "RotationMinZ", "bool", "",0
+			Property: "RotationMaxX", "bool", "",0
+			Property: "RotationMaxY", "bool", "",0
+			Property: "RotationMaxZ", "bool", "",0
+			Property: "InheritType", "enum", "",1
+			Property: "ScalingActive", "bool", "",0
+			Property: "ScalingMin", "Vector3D", "",0,0,0
+			Property: "ScalingMax", "Vector3D", "",0,0,0
+			Property: "ScalingMinX", "bool", "",0
+			Property: "ScalingMinY", "bool", "",0
+			Property: "ScalingMinZ", "bool", "",0
+			Property: "ScalingMaxX", "bool", "",0
+			Property: "ScalingMaxY", "bool", "",0
+			Property: "ScalingMaxZ", "bool", "",0
+			Property: "GeometricTranslation", "Vector3D", "",150,50.0001106262207,-0.0005035400390625
+			Property: "GeometricRotation", "Vector3D", "",0,0,0
+			Property: "GeometricScaling", "Vector3D", "",1,1,1
+			Property: "MinDampRangeX", "double", "",0
+			Property: "MinDampRangeY", "double", "",0
+			Property: "MinDampRangeZ", "double", "",0
+			Property: "MaxDampRangeX", "double", "",0
+			Property: "MaxDampRangeY", "double", "",0
+			Property: "MaxDampRangeZ", "double", "",0
+			Property: "MinDampStrengthX", "double", "",0
+			Property: "MinDampStrengthY", "double", "",0
+			Property: "MinDampStrengthZ", "double", "",0
+			Property: "MaxDampStrengthX", "double", "",0
+			Property: "MaxDampStrengthY", "double", "",0
+			Property: "MaxDampStrengthZ", "double", "",0
+			Property: "PreferedAngleX", "double", "",0
+			Property: "PreferedAngleY", "double", "",0
+			Property: "PreferedAngleZ", "double", "",0
+			Property: "LookAtProperty", "object", ""
+			Property: "UpVectorProperty", "object", ""
+			Property: "Show", "bool", "",1
+			Property: "NegativePercentShapeSupport", "bool", "",1
+			Property: "DefaultAttributeIndex", "int", "",0
+			Property: "Freeze", "bool", "",0
+			Property: "LODBox", "bool", "",0
+			Property: "Lcl Translation", "Lcl Translation", "A",64.99853515625,-50.0001068115234,0.000501155853271484
+			Property: "Lcl Rotation", "Lcl Rotation", "A",179.999994991044,-0,0
+			Property: "Lcl Scaling", "Lcl Scaling", "A",-1,-1,-1
+			Property: "Visibility", "Visibility", "A",1
+			Property: "MaxHandle", "int", "UH",3606
+			Property: "Color", "ColorRGB", "N",0.450980392156863,0.450980392156863,0.450980392156863
+			Property: "BBoxMin", "Vector3D", "N",0,0,0
+			Property: "BBoxMax", "Vector3D", "N",0,0,0
+			Property: "Primary Visibility", "bool", "N",1
+			Property: "Casts Shadows", "bool", "N",1
+			Property: "Receive Shadows", "bool", "N",1
+		}
+		MultiLayer: 0
+		MultiTake: 0
+		Shading: T
+		Culling: "CullingOff"
+		Vertices: -130.001953125,50.0001068115234,0,-140.0009765625,37.497989654541,0,-135.0009765625,37.4981117248535,7.8531494140625
+        ,-125.001953125,49.9999847412109,7.8531494140625,-130.001953125,-50.0001068115234,0,-125.001953125,-49.9999847412109
+        ,7.8531494140625,-135.0009765625,-37.4981117248535,7.8531494140625,-140.0009765625,-37.497989654541,0
+		PolygonVertexIndex: 1,2,3,-1,5,6,7,-5,7,6,2,-2
+		Edges: 3,0,1,2,7,4,5,6,9,11
+		GeometryVersion: 124
+		LayerElementNormal: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "Direct"
+			Normals: -0.815315067768097,0.256506860256195,0.519100725650787,-0.798899233341217,0.320992529392242,0.508648931980133
+             ,-0.699276566505432,0.559277355670929,0.445220410823822,-0.699276506900787,0.559277355670929,0.445220440626144
+             ,-0.699276566505432,-0.559277355670929,0.445220410823822,-0.798899233341217,-0.320992529392242,0.508648931980133
+             ,-0.815315067768097,-0.256506860256195,0.519100725650787,-0.699276506900787,-0.559277355670929,0.445220410823822
+             ,-0.815315067768097,-0.256506860256195,0.519100725650787,-0.798899233341217,-0.320992529392242,0.508648931980133
+             ,-0.798899233341217,0.320992529392242,0.508648931980133,-0.815315067768097,0.256506860256195,0.519100725650787
+             
+		}
+		LayerElementUV: 0 {
+			Version: 101
+			Name: "UVChannel_1"
+			MappingInformationType: "ByPolygonVertex"
+			ReferenceInformationType: "IndexToDirect"
+			UV: 0.00856632459908724,0.924626886844635,0.0564671978354454,0.790105402469635,0.180309414863586,0.79977810382843
+             ,0.134696558117867,0.92787230014801,0.00856632273644209,0.924626886844635,0.134696543216705,0.927872240543365
+             ,0.180309385061264,0.79977810382843,0.0564671717584133,0.790105402469635,0.180309355258942,0.162781745195389
+             ,0.0564671419560909,0.121158085763454
+			UVIndex: 1,2,3,0,5,6,7,4,7,6,8,9
+		}
+		LayerElementMaterial: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "AllSame"
+			ReferenceInformationType: "IndexToDirect"
+			Materials: 0
+		}
+		LayerElementTexture: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "AllSame"
+			ReferenceInformationType: "IndexToDirect"
+			BlendMode: "Normal"
+			TextureAlpha: 1
+			TextureId: 0
+		}
+		Layer: 0 {
+			Version: 100
+			LayerElement:  {
+				Type: "LayerElementNormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementMaterial"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementTexture"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementUV"
+				TypedIndex: 0
+			}
+		}
+		NodeAttributeName: "Geometry::Object209_ncl1_1"
 	}
 	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
 		Type: "UserData"
@@ -218,21 +455,60 @@ Objects:  {
 			Comment: ""
 		}
 		Properties60:  {
-			Property: "DocumentUrl", "KString", "", "F:\아펠리오스\Btype\newfin\model\B_tile_mid_outcon.fbx"
-			Property: "SrcDocumentUrl", "KString", "", "F:\아펠리오스\Btype\newfin\model\B_tile_mid_outcon.fbx"
+			Property: "DocumentUrl", "KString", "", "F:\아펠리오스\Btype\newfin\tile\B_tile_mid_outcon\B_tile_mid_outcon.fbx"
+             
+			Property: "SrcDocumentUrl", "KString", "", "F:\아펠리오스\Btype\newfin\tile\B_tile_mid_outcon\B_tile_mid_outcon.fbx"
+             
 			Property: "Original", "Compound", ""
 			Property: "Original|ApplicationVendor", "KString", "", "Autodesk"
 			Property: "Original|ApplicationName", "KString", "", "3ds Max"
 			Property: "Original|ApplicationVersion", "KString", "", "2022"
-			Property: "Original|DateTime_GMT", "DateTime", "", "09/08/2022 15:07:45.521"
-			Property: "Original|FileName", "KString", "", "F:\아펠리오스\Btype\newfin\model\B_tile_mid_outcon.fbx"
+			Property: "Original|DateTime_GMT", "DateTime", "", "20/08/2022 11:50:56.804"
+			Property: "Original|FileName", "KString", "", "F:\아펠리오스\Btype\newfin\tile\B_tile_mid_outcon\B_tile_mid_outcon.fbx"
+             
 			Property: "LastSaved", "Compound", ""
 			Property: "LastSaved|ApplicationVendor", "KString", "", "Autodesk"
 			Property: "LastSaved|ApplicationName", "KString", "", "3ds Max"
 			Property: "LastSaved|ApplicationVersion", "KString", "", "2022"
-			Property: "LastSaved|DateTime_GMT", "DateTime", "", "09/08/2022 15:07:45.521"
+			Property: "LastSaved|DateTime_GMT", "DateTime", "", "20/08/2022 11:50:56.804"
 			Property: "Original|ApplicationActiveProject", "KString", "", "C:\Users\ROG\Documents\3ds Max 2022"
 			Property: "Original|ApplicationNativeFile", "KString", "", "F:\아펠리오스\Tile.max"
+		}
+	}
+	Material: "Material::Material #58", "" {
+		Version: 102
+		ShadingModel: "phong"
+		MultiLayer: 0
+		Properties60:  {
+			Property: "ShadingModel", "KString", "", "phong"
+			Property: "MultiLayer", "bool", "",0
+			Property: "EmissiveColor", "Color", "A",0,0,0
+			Property: "EmissiveFactor", "Number", "A",0
+			Property: "AmbientColor", "Color", "A",0.587999999523163,0.587999999523163,0.587999999523163
+			Property: "AmbientFactor", "Number", "A",1
+			Property: "DiffuseColor", "Color", "A",0.587999999523163,0.587999999523163,0.587999999523163
+			Property: "DiffuseFactor", "Number", "A",1
+			Property: "Bump", "Vector3D", "",0,0,0
+			Property: "NormalMap", "Vector3D", "",0,0,0
+			Property: "BumpFactor", "double", "",1
+			Property: "TransparentColor", "Color", "A",1,1,1
+			Property: "TransparencyFactor", "Number", "A",0
+			Property: "DisplacementColor", "ColorRGB", "",0,0,0
+			Property: "DisplacementFactor", "double", "",1
+			Property: "VectorDisplacementColor", "ColorRGB", "",0,0,0
+			Property: "VectorDisplacementFactor", "double", "",1
+			Property: "SpecularColor", "Color", "A",0.899999976158142,0.899999976158142,0.899999976158142
+			Property: "SpecularFactor", "Number", "A",0
+			Property: "ShininessExponent", "Number", "A",2
+			Property: "ReflectionColor", "Color", "A",0,0,0
+			Property: "ReflectionFactor", "Number", "A",1
+			Property: "Emissive", "Vector3D", "",0,0,0
+			Property: "Ambient", "Vector3D", "",0.587999999523163,0.587999999523163,0.587999999523163
+			Property: "Diffuse", "Vector3D", "",0.587999999523163,0.587999999523163,0.587999999523163
+			Property: "Specular", "Vector3D", "",0,0,0
+			Property: "Shininess", "double", "",2
+			Property: "Opacity", "double", "",1
+			Property: "Reflectivity", "double", "",0
 		}
 	}
 	Material: "Material::Material #62", "" {
@@ -271,12 +547,40 @@ Objects:  {
 			Property: "Reflectivity", "double", "",0
 		}
 	}
+	Video: "Video::Map #27", "Clip" {
+		Type: "Clip"
+		Properties60:  {
+			Property: "Path", "KString", "", "F:\아펠리오스\Btype\newfin\tile\B_tile_mid_incon\B_tile_mid_incon_color.png"
+			Property: "RelPath", "KString", "", "..\B_tile_mid_incon\B_tile_mid_incon_color.png"
+			Property: "Color", "ColorRGB", "",0.8,0.8,0.8
+			Property: "ClipIn", "KTime", "",0
+			Property: "ClipOut", "KTime", "",0
+			Property: "Offset", "KTime", "",0
+			Property: "PlaySpeed", "double", "",0
+			Property: "FreeRunning", "bool", "",0
+			Property: "Loop", "bool", "",0
+			Property: "Mute", "bool", "",0
+			Property: "AccessMode", "enum", "",0
+			Property: "ImageSequence", "bool", "",0
+			Property: "ImageSequenceOffset", "int", "",0
+			Property: "FrameRate", "double", "",0
+			Property: "LastFrame", "int", "",0
+			Property: "Width", "int", "",0
+			Property: "Height", "int", "",0
+			Property: "StartFrame", "int", "",0
+			Property: "StopFrame", "int", "",0
+			Property: "InterlaceMode", "enum", "",0
+		}
+		UseMipMap: 0
+		Filename: "F:\아펠리오스\Btype\newfin\tile\B_tile_mid_incon\B_tile_mid_incon_color.png"
+		RelativeFilename: "..\B_tile_mid_incon\B_tile_mid_incon_color.png"
+	}
 	Video: "Video::Map #31", "Clip" {
 		Type: "Clip"
 		Properties60:  {
 			Property: "Path", "KString", "", "F:\아펠리오스\Btype\newfin\tile\B_tile_mid_outcon\DefaultMaterial_Base_color.png"
              
-			Property: "RelPath", "KString", "", "..\tile\B_tile_mid_outcon\DefaultMaterial_Base_color.png"
+			Property: "RelPath", "KString", "", "DefaultMaterial_Base_color.png"
 			Property: "Color", "ColorRGB", "",0.8,0.8,0.8
 			Property: "ClipIn", "KTime", "",0
 			Property: "ClipOut", "KTime", "",0
@@ -298,7 +602,37 @@ Objects:  {
 		}
 		UseMipMap: 0
 		Filename: "F:\아펠리오스\Btype\newfin\tile\B_tile_mid_outcon\DefaultMaterial_Base_color.png"
-		RelativeFilename: "..\tile\B_tile_mid_outcon\DefaultMaterial_Base_color.png"
+		RelativeFilename: "DefaultMaterial_Base_color.png"
+	}
+	Texture: "Texture::Map #27", "" {
+		Type: "TextureVideoClip"
+		Version: 202
+		TextureName: "Texture::Map #27"
+		Properties60:  {
+			Property: "TextureTypeUse", "enum", "",0
+			Property: "Texture alpha", "Number", "A",1
+			Property: "CurrentMappingType", "enum", "",0
+			Property: "WrapModeU", "enum", "",0
+			Property: "WrapModeV", "enum", "",0
+			Property: "UVSwap", "bool", "",0
+			Property: "PremultiplyAlpha", "bool", "",1
+			Property: "Translation", "Vector", "A",0,0,0
+			Property: "Rotation", "Vector", "A",0,0,0
+			Property: "Scaling", "Vector", "A",1,1,1
+			Property: "TextureRotationPivot", "Vector3D", "",0,0,0
+			Property: "TextureScalingPivot", "Vector3D", "",0,0,0
+			Property: "CurrentTextureBlendMode", "enum", "",1
+			Property: "UVSet", "KString", "", "UVChannel_1"
+			Property: "UseMaterial", "bool", "",1
+			Property: "UseMipMap", "bool", "",0
+		}
+		Media: "Video::Map #27"
+		FileName: "F:\아펠리오스\Btype\newfin\tile\B_tile_mid_incon\B_tile_mid_incon_color.png"
+		RelativeFilename: "..\B_tile_mid_incon\B_tile_mid_incon_color.png"
+		ModelUVTranslation: 0,0
+		ModelUVScaling: 1,1
+		Texture_Alpha_Source: "None"
+		Cropping: 0,0,0,0
 	}
 	Texture: "Texture::Map #31", "" {
 		Type: "TextureVideoClip"
@@ -324,7 +658,7 @@ Objects:  {
 		}
 		Media: "Video::Map #31"
 		FileName: "F:\아펠리오스\Btype\newfin\tile\B_tile_mid_outcon\DefaultMaterial_Base_color.png"
-		RelativeFilename: "..\tile\B_tile_mid_outcon\DefaultMaterial_Base_color.png"
+		RelativeFilename: "DefaultMaterial_Base_color.png"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"
@@ -359,10 +693,15 @@ Objects:  {
 ;------------------------------------------------------------------
 
 Connections:  {
-	Connect: "OO", "Model::Object133", "Model::Scene"
-	Connect: "OO", "Material::Material #62", "Model::Object133"
-	Connect: "OO", "Texture::Map #31", "Model::Object133"
+	Connect: "OO", "Model::B_tile_mid_outcon002", "Model::Scene"
+	Connect: "OO", "Model::Object208", "Model::B_tile_mid_outcon002"
+	Connect: "OO", "Model::Object209", "Model::B_tile_mid_outcon002"
+	Connect: "OO", "Material::Material #62", "Model::Object208"
+	Connect: "OO", "Texture::Map #31", "Model::Object208"
+	Connect: "OO", "Material::Material #58", "Model::Object209"
+	Connect: "OO", "Texture::Map #27", "Model::Object209"
 	Connect: "OO", "Video::Map #31", "Texture::Map #31"
+	Connect: "OO", "Video::Map #27", "Texture::Map #27"
 }
 ;Takes and animation section
 ;----------------------------------------------------
