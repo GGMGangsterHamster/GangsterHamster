@@ -8,11 +8,11 @@ FBXHeaderExtension:  {
 		Version: 1000
 		Year: 2022
 		Month: 8
-		Day: 10
-		Hour: 0
-		Minute: 8
-		Second: 42
-		Millisecond: 217
+		Day: 20
+		Hour: 19
+		Minute: 49
+		Second: 41
+		Millisecond: 56
 	}
 	Creator: "FBX SDK/FBX Plugins version 2020.3.1"
 }
@@ -60,7 +60,7 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Model: "Model::Plane412", "Mesh" {
+	Model: "Model::B_tile_side_up", "Mesh" {
 		Version: 232
 		Properties60:  {
 			Property: "QuaternionInterpolate", "enum", "",0
@@ -83,9 +83,9 @@ Objects:  {
 			Property: "RotationStiffnessY", "double", "",0
 			Property: "RotationStiffnessZ", "double", "",0
 			Property: "AxisLen", "double", "",10
-			Property: "PreRotation", "Vector3D", "",0,0,0
+			Property: "PreRotation", "Vector3D", "",-90,-0,0
 			Property: "PostRotation", "Vector3D", "",0,0,0
-			Property: "RotationActive", "bool", "",0
+			Property: "RotationActive", "bool", "",1
 			Property: "RotationMin", "Vector3D", "",0,0,0
 			Property: "RotationMax", "Vector3D", "",0,0,0
 			Property: "RotationMinX", "bool", "",0
@@ -104,7 +104,7 @@ Objects:  {
 			Property: "ScalingMaxX", "bool", "",0
 			Property: "ScalingMaxY", "bool", "",0
 			Property: "ScalingMaxZ", "bool", "",0
-			Property: "GeometricTranslation", "Vector3D", "",1.9073486328125e-05,300,12.1250171661377
+			Property: "GeometricTranslation", "Vector3D", "",1.9073486328125e-05,300,12.1250228881836
 			Property: "GeometricRotation", "Vector3D", "",0,0,0
 			Property: "GeometricScaling", "Vector3D", "",1,1,1
 			Property: "MinDampRangeX", "double", "",0
@@ -129,11 +129,11 @@ Objects:  {
 			Property: "DefaultAttributeIndex", "int", "",0
 			Property: "Freeze", "bool", "",0
 			Property: "LODBox", "bool", "",0
-			Property: "Lcl Translation", "Lcl Translation", "A",0,0,0.000108718872070313
+			Property: "Lcl Translation", "Lcl Translation", "A",0,0.000102996826171875,-0
 			Property: "Lcl Rotation", "Lcl Rotation", "A",0,-0,179.999994991044
 			Property: "Lcl Scaling", "Lcl Scaling", "A",1,1,1
 			Property: "Visibility", "Visibility", "A",1
-			Property: "MaxHandle", "int", "UH",3237
+			Property: "MaxHandle", "int", "UH",3586
 			Property: "Color", "ColorRGB", "N",0.450980392156863,0.450980392156863,0.450980392156863
 			Property: "BBoxMin", "Vector3D", "N",0,0,0
 			Property: "BBoxMax", "Vector3D", "N",0,0,0
@@ -204,7 +204,7 @@ Objects:  {
 				TypedIndex: 0
 			}
 		}
-		NodeAttributeName: "Geometry::Plane412_ncl1_1"
+		NodeAttributeName: "Geometry::B_tile_side_up_ncl1_1"
 	}
 	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
 		Type: "UserData"
@@ -219,19 +219,20 @@ Objects:  {
 			Comment: ""
 		}
 		Properties60:  {
-			Property: "DocumentUrl", "KString", "", "F:\아펠리오스\Btype\newfin\model\B_tile_side_up.fbx"
-			Property: "SrcDocumentUrl", "KString", "", "F:\아펠리오스\Btype\newfin\model\B_tile_side_up.fbx"
+			Property: "DocumentUrl", "KString", "", "F:\아펠리오스\Btype\newfin\tile\B_tile_side_up\B_tile_side_up.fbx"
+			Property: "SrcDocumentUrl", "KString", "", "F:\아펠리오스\Btype\newfin\tile\B_tile_side_up\B_tile_side_up.fbx"
 			Property: "Original", "Compound", ""
 			Property: "Original|ApplicationVendor", "KString", "", "Autodesk"
 			Property: "Original|ApplicationName", "KString", "", "3ds Max"
 			Property: "Original|ApplicationVersion", "KString", "", "2022"
-			Property: "Original|DateTime_GMT", "DateTime", "", "09/08/2022 15:08:42.216"
-			Property: "Original|FileName", "KString", "", "F:\아펠리오스\Btype\newfin\model\B_tile_side_up.fbx"
+			Property: "Original|DateTime_GMT", "DateTime", "", "20/08/2022 10:49:41.055"
+			Property: "Original|FileName", "KString", "", "F:\아펠리오스\Btype\newfin\tile\B_tile_side_up\B_tile_side_up.fbx"
+             
 			Property: "LastSaved", "Compound", ""
 			Property: "LastSaved|ApplicationVendor", "KString", "", "Autodesk"
 			Property: "LastSaved|ApplicationName", "KString", "", "3ds Max"
 			Property: "LastSaved|ApplicationVersion", "KString", "", "2022"
-			Property: "LastSaved|DateTime_GMT", "DateTime", "", "09/08/2022 15:08:42.216"
+			Property: "LastSaved|DateTime_GMT", "DateTime", "", "20/08/2022 10:49:41.055"
 			Property: "Original|ApplicationActiveProject", "KString", "", "C:\Users\ROG\Documents\3ds Max 2022"
 			Property: "Original|ApplicationNativeFile", "KString", "", "F:\아펠리오스\Tile.max"
 		}
@@ -276,7 +277,7 @@ Objects:  {
 		Type: "Clip"
 		Properties60:  {
 			Property: "Path", "KString", "", "F:\아펠리오스\Btype\newfin\tile\B_tile_side_up\DefaultMaterial_Base_color.png"
-			Property: "RelPath", "KString", "", "..\tile\B_tile_side_up\DefaultMaterial_Base_color.png"
+			Property: "RelPath", "KString", "", "DefaultMaterial_Base_color.png"
 			Property: "Color", "ColorRGB", "",0.8,0.8,0.8
 			Property: "ClipIn", "KTime", "",0
 			Property: "ClipOut", "KTime", "",0
@@ -298,7 +299,7 @@ Objects:  {
 		}
 		UseMipMap: 0
 		Filename: "F:\아펠리오스\Btype\newfin\tile\B_tile_side_up\DefaultMaterial_Base_color.png"
-		RelativeFilename: "..\tile\B_tile_side_up\DefaultMaterial_Base_color.png"
+		RelativeFilename: "DefaultMaterial_Base_color.png"
 	}
 	Texture: "Texture::Map #32", "" {
 		Type: "TextureVideoClip"
@@ -324,7 +325,7 @@ Objects:  {
 		}
 		Media: "Video::Map #32"
 		FileName: "F:\아펠리오스\Btype\newfin\tile\B_tile_side_up\DefaultMaterial_Base_color.png"
-		RelativeFilename: "..\tile\B_tile_side_up\DefaultMaterial_Base_color.png"
+		RelativeFilename: "DefaultMaterial_Base_color.png"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"
@@ -333,10 +334,10 @@ Objects:  {
 	GlobalSettings:  {
 		Version: 1000
 		Properties60:  {
-			Property: "UpAxis", "int", "",2
+			Property: "UpAxis", "int", "",1
 			Property: "UpAxisSign", "int", "",1
-			Property: "FrontAxis", "int", "",1
-			Property: "FrontAxisSign", "int", "",-1
+			Property: "FrontAxis", "int", "",2
+			Property: "FrontAxisSign", "int", "",1
 			Property: "CoordAxis", "int", "",0
 			Property: "CoordAxisSign", "int", "",1
 			Property: "OriginalUpAxis", "int", "",2
@@ -359,9 +360,9 @@ Objects:  {
 ;------------------------------------------------------------------
 
 Connections:  {
-	Connect: "OO", "Model::Plane412", "Model::Scene"
-	Connect: "OO", "Material::Material #63", "Model::Plane412"
-	Connect: "OO", "Texture::Map #32", "Model::Plane412"
+	Connect: "OO", "Model::B_tile_side_up", "Model::Scene"
+	Connect: "OO", "Material::Material #63", "Model::B_tile_side_up"
+	Connect: "OO", "Texture::Map #32", "Model::B_tile_side_up"
 	Connect: "OO", "Video::Map #32", "Texture::Map #32"
 }
 ;Takes and animation section
