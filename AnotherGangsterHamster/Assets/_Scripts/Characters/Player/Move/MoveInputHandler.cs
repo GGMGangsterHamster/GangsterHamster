@@ -18,7 +18,7 @@ namespace Characters.Player.Move
 
       // IMoveable 구체화 한 클레스
       private Movement _movement;
-      
+
       private bool _isIdle = true;
       public bool IsIdle => _isIdle;
 
@@ -58,6 +58,7 @@ namespace Characters.Player.Move
 
       private void FixedUpdate()
       {
+         _isIdle = true;
 
          foreach(KeyCode key in _moveCommands.Keys)
          {
