@@ -12,10 +12,12 @@ namespace Characters.Player.OnGround
       private GameObject _curStandingObj = null; // Deactive 에서 Collider GetComponent 매번 하는 것 대안으로 사용
       private Collider _curStandingCollider = null;
 
-      private int _groundLayer = LayerMask.NameToLayer("GROUND");
+      private int _groundLayer;
 
       private void Awake()
       {
+         _groundLayer = LayerMask.NameToLayer("GROUND");
+
          if (Player == null)
             Player = transform.root;
       }
