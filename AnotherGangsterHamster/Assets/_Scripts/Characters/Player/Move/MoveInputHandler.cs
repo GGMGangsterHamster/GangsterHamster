@@ -18,6 +18,9 @@ namespace Characters.Player.Move
 
       // IMoveable 구체화 한 클레스
       private Movement _movement;
+      
+      private bool _isIdle = true;
+      public bool IsIdle => _isIdle;
 
       // 움직임 커멘드
       public MoveForward  forward;
@@ -55,18 +58,17 @@ namespace Characters.Player.Move
 
       private void FixedUpdate()
       {
-         bool isIdle = true;
 
          foreach(KeyCode key in _moveCommands.Keys)
          {
             if(Input.GetKey(key))
             {
-               isIdle = false;
+               _isIdle = false;
                _moveCommands[key].Execute.Invoke(null);
             }
          }
 
-         if (isIdle)
+         if (_isIdle)
             OnIdle.Invoke(null);
       }
    }
