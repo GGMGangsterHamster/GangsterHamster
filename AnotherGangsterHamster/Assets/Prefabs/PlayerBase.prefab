@@ -40,6 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 746144845}
+  - component: {fileID: 9052721684712052247}
   m_Layer: 6
   m_Name: PLAYER_CAM
   m_TagString: PLAYER_CAMERA_LOCK
@@ -62,6 +63,20 @@ Transform:
   m_Father: {fileID: 1323916721}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9052721684712052247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746144844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ac0e2cb65523534ba2467d3d558a399, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.2
+  magnitude: 5
 --- !u!1 &923426876
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,6 +454,7 @@ MonoBehaviour:
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
   <Activated>k__BackingField: 0
+  <MultipleInteractable>k__BackingField: 0
 --- !u!114 &396012075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,6 +490,7 @@ MonoBehaviour:
   <EventIsToggle>k__BackingField: 1
   <InitalActiveStatus>k__BackingField: 0
   <Activated>k__BackingField: 0
+  <MultipleInteractable>k__BackingField: 0
 --- !u!114 &1421402922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -509,6 +526,7 @@ GameObject:
   - component: {fileID: 1472637701}
   - component: {fileID: 469385357}
   - component: {fileID: 4838378377225255398}
+  - component: {fileID: 4714376918158352671}
   m_Layer: 6
   m_Name: PlayerBase
   m_TagString: PLAYER_BASE
@@ -722,3 +740,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c83efc66df2bcca80f3b177adb9ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4714376918158352671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60493967840551282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83185d2616cdb31b880a0fdde34fe5f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callbacks:
+  - key: PLAYER_CAMERA_LOCK
+    OnActive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 9052721684712052247}
+          m_TargetAssemblyTypeName: CameraCollisionShake, Assembly-CSharp
+          m_MethodName: Shake
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeactive:
+      m_PersistentCalls:
+        m_Calls: []
+  <EventIsToggle>k__BackingField: 1
+  <InitalActiveStatus>k__BackingField: 0
+  <Activated>k__BackingField: 0
+  <MultipleInteractable>k__BackingField: 0
+  colNormalVec: {x: 0, y: 0, z: 0}
+  colVelocity: {x: 0, y: 0, z: 0}
+  colPosition: {x: 0, y: 0, z: 0}
