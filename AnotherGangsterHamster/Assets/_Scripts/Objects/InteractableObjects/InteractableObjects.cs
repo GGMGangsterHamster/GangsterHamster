@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Objects.InteractableObjects
 {
 
-    public class @InteractableObjects : MonoBehaviour, ICallbacks
+    abstract public class @InteractableObjects : MonoBehaviour, ICallbacks
     {
         public List<Event> _callbacks
                  = new List<Event>();
