@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 746144845}
-  - component: {fileID: 9052721684712052247}
+  - component: {fileID: 7812477572421058989}
   m_Layer: 6
   m_Name: PLAYER_CAM
   m_TagString: PLAYER_CAMERA_LOCK
@@ -63,7 +63,7 @@ Transform:
   m_Father: {fileID: 1323916721}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9052721684712052247
+--- !u!114 &7812477572421058989
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,11 +72,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 746144844}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ac0e2cb65523534ba2467d3d558a399, type: 3}
+  m_Script: {fileID: 11500000, guid: 3533b78d6b8e5a149bf9fd23177861e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 0.2
-  magnitude: 5
+  player: {fileID: 60493967840551276}
+  magnitude: 10
+  bounceHight: 2
+  duration: 5
 --- !u!1 &923426876
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,11 +755,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _callbacks:
-  - key: PLAYER_CAMERA_LOCK
+  - key: BTYPEOBJECT
     OnActive:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 9052721684712052247}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: CameraCollisionShake, Assembly-CSharp
           m_MethodName: Shake
           m_Mode: 1
@@ -772,7 +774,7 @@ MonoBehaviour:
     OnDeactive:
       m_PersistentCalls:
         m_Calls: []
-  <EventIsToggle>k__BackingField: 1
+  <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
   <Activated>k__BackingField: 0
   <MultipleInteractable>k__BackingField: 0

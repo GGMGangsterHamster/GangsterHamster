@@ -14,7 +14,7 @@ public class CameraHeadBob : MonoBehaviour
 
     void Start()
     {
-        _defaultHeight = transform.position.y;
+        _defaultHeight = transform.localPosition.y;
         _maxHeight = _defaultHeight + 0.05f;
         _minHeight = _defaultHeight - 0.05f;
 
@@ -31,22 +31,22 @@ public class CameraHeadBob : MonoBehaviour
 
     public void HeadBob()
     {
-        if (transform.position.y >= _maxHeight)
+        if (transform.localPosition.y >= _maxHeight)
         {
             _isUP = false;
         }
-        else if(transform.position.y <= _minHeight)
+        else if(transform.localPosition.y <= _minHeight)
         {
             _isUP = true;
         }
 
         if (_isUP)
         {
-            transform.position += new Vector3(0, Time.deltaTime * 0.5f);
+            transform.localPosition += new Vector3(0, Time.deltaTime * 0.5f);
         }
         else
         {
-            transform.position -= new Vector3(0, Time.deltaTime * 0.5f);
+            transform.localPosition -= new Vector3(0, Time.deltaTime * 0.5f);
         }
     }
 }
