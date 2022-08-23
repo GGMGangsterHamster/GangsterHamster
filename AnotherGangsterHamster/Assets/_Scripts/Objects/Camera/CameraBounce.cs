@@ -6,78 +6,55 @@ using Characters.Player;
 public class CameraBounce : MonoBehaviour
 {
     public Transform player;
-    public Transform groundChecker;
-    public float bounceTime = 1f;
+    public float magnitude;
+    public float bounceHight;
+    public float duration;
+    private float bouncePos;
+    private Vector3 defaultPos;
 
-    private float minPlayerPosY;
-    private float minCamPosY;
-    private float maxHeight = 0f;
-    private float gravity = -1f;
-    private bool hasAir = false;
-    private bool canBounce;
+    private bool isAir;
 
     void Start()
     {
-        minCamPosY = 0.5f;
+        defaultPos = transform.localPosition;
+        bouncePos = defaultPos.y + bounceHight;
     }
 
     void Update()
     {
-        //if (!PlayerStatus.OnGround) // ï¿½ï¿½ï¿½ï¿½
-        //{
-        //    if (minPlayerPosY < player.position.y) // ï¿½Ö°ï¿½ï¿½ï¿½ ï¿½Çºï¿½
-        //    {
-        //        maxHeight = player.position.y;
-        //    }
-        //    else
-        //    {
-        //        maxHeight = minPlayerPosY;
-        //    }
+        Debug.Log("ÀÌÁî ¿¡¾î " + isAir);
 
-        //    hasAir = true;
-        //}
+        if (player.position.y >= 4)
+        {
+            isAir = true;
+        }
 
-        //if (PlayerStatus.OnGround) // ï¿½ï¿½
-        //{
-        //    minPlayerPosY = player.position.y;
+        if (!PlayerStatus.IsJumping && isAir)
+        {
+            Bounce();
 
-        //    if (hasAir)
-        //    {
-        //        Debug.Log(Mathf.Abs(player.position.y - maxHeight));
-        //        if (Mathf.Abs(player.position.y - maxHeight) >= 4)
-        //        {
-        //            hasAir = false;
-        //            StartCoroutine(Bouncing());
-        //        }
-        //    }
-        //}
+            isAir = false;
+        }
     }
 
-    // bool Is4M()
-    // {
-    //     bool is4m = Physics.Raycast(groundChecker.position, Vector3.down, 4f);
-    // }
+    public void Bounce()
+    {
+        Debug.Log("ºñ¿î½º");
+        StopCoroutine(Bouncing());
+        StartCoroutine(Bouncing());
+    }
 
     IEnumerator Bouncing()
     {
-        
-
-        float current = 0;
-        float percent = 0;
-        float v0 = -gravity; // y ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½ ï¿½Óµï¿½
-
-        while (percent < 1)
+        while (transform.localPosition.y >= bouncePos)
         {
-            current += Time.deltaTime;
-            percent = current / bounceTime;
-
-            float y = minCamPosY + (v0 * percent) + (gravity * percent * percent);
-
-            transform.localPosition = new Vector3(transform.localPosition.x, y, transform.localPosition.z);
-            
-            yield return null;
+            transform.localPosition += new Vector3(0, magnitude * Time.deltaTime);
+        }
+        while (transform.position.y <= defaultPos.y)
+        {
+            transform.localPosition -= new Vector3(0, magnitude * Time.deltaTime);
         }
 
-        transform.localPosition = new Vector3(transform.localPosition.x, 0.4f, transform.localPosition.z);
+        yield return null;
     }
 }
