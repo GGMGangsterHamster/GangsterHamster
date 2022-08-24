@@ -267,8 +267,7 @@ namespace Weapons.Actions
         #region CollisionEvents
         public void BAndATypeObjCollisionEnterEvent(GameObject obj)
         {
-            if (_currentGrandStatus != GrandStatus.Resize &&
-               _currentGrandStatus != GrandStatus.Use)
+            if (_currentGrandStatus == GrandStatus.Fire)
             {
                 _currentGrandStatus = GrandStatus.LosePower;
                 _myRigid.velocity = Vector3.zero;
@@ -278,9 +277,7 @@ namespace Weapons.Actions
 
         public void BAndATypeObjCollisionStayEvent(GameObject obj)
         {
-            if (_currentGrandStatus != GrandStatus.Resize &&
-                _currentGrandStatus != GrandStatus.Use &&
-                _currentGrandStatus != GrandStatus.LosePower)
+            if (_currentGrandStatus == GrandStatus.Fire)
             {
                 _currentGrandStatus = GrandStatus.LosePower;
                 _myRigid.velocity = Vector3.zero;
