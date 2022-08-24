@@ -271,7 +271,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4241158483664481260}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 7}
+  m_LocalPosition: {x: 0, y: 2, z: 7.000001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -293,7 +293,7 @@ ReflectionProbe:
   m_TimeSlicingMode: 0
   m_Resolution: 128
   m_UpdateFrequency: 0
-  m_BoxSize: {x: 8, y: 14, z: 16}
+  m_BoxSize: {x: 8, y: 14, z: 15.5}
   m_BoxOffset: {x: 0, y: 0, z: 0}
   m_NearClip: 0.3
   m_FarClip: 1000
@@ -431,7 +431,7 @@ MonoBehaviour:
       multiplier: 1
       weight: 1
       lightLayer: 1
-      fadeDistance: 10000
+      fadeDistance: 50
       rangeCompressionFactor: 1
     influence:
       m_EditorAdvancedModeBlendDistancePositive: {x: 1, y: 1, z: 1}
@@ -447,7 +447,7 @@ MonoBehaviour:
       m_ObsoleteSphereBaseOffset: {x: 0, y: 0, z: 0}
       m_ObsoleteOffset: {x: 0, y: 0, z: 0}
       m_Shape: 0
-      m_BoxSize: {x: 8, y: 14, z: 16}
+      m_BoxSize: {x: 8, y: 14, z: 15.5}
       m_BoxBlendDistancePositive: {x: 1, y: 1, z: 1}
       m_BoxBlendDistanceNegative: {x: 1, y: 1, z: 1}
       m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
@@ -508,7 +508,7 @@ MonoBehaviour:
       frustum:
         mode: 0
         aspect: 1
-        farClipPlaneRaw: 1000
+        farClipPlaneRaw: 50
         nearClipPlaneRaw: 0.3
         fieldOfView: 90
         projectionMatrix:
@@ -674,33 +674,33 @@ MonoBehaviour:
     m_FieldOfView: 0
     m_Aspect: 0
   m_SHForNormalization:
-    sh[ 0]: 4.845692
-    sh[ 1]: 4.986271
-    sh[ 2]: -0.7874343
-    sh[ 3]: 0.46596435
-    sh[ 4]: 0.2311539
-    sh[ 5]: -0.35316196
-    sh[ 6]: -0.12600753
-    sh[ 7]: -0.09669026
-    sh[ 8]: -0.6167987
-    sh[ 9]: 4.2921977
-    sh[10]: 4.2891455
-    sh[11]: -0.6629372
-    sh[12]: 0.3483473
-    sh[13]: 0.17334495
-    sh[14]: -0.28551936
-    sh[15]: -0.103863314
-    sh[16]: -0.07207553
-    sh[17]: -0.5128411
-    sh[18]: 3.4504294
-    sh[19]: 3.3315127
-    sh[20]: -0.4850495
-    sh[21]: 0.2201326
-    sh[22]: 0.110111095
-    sh[23]: -0.19738607
-    sh[24]: -0.07592934
-    sh[25]: -0.045944963
-    sh[26]: -0.38185787
+    sh[ 0]: 0
+    sh[ 1]: -0
+    sh[ 2]: 0
+    sh[ 3]: -0
+    sh[ 4]: 0
+    sh[ 5]: -0
+    sh[ 6]: 0
+    sh[ 7]: -0
+    sh[ 8]: 0
+    sh[ 9]: 0
+    sh[10]: -0
+    sh[11]: 0
+    sh[12]: -0
+    sh[13]: 0
+    sh[14]: -0
+    sh[15]: 0
+    sh[16]: -0
+    sh[17]: 0
+    sh[18]: 0
+    sh[19]: -0
+    sh[20]: 0
+    sh[21]: -0
+    sh[22]: 0
+    sh[23]: -0
+    sh[24]: 0
+    sh[25]: -0
+    sh[26]: 0
   m_HasValidSHForNormalization: 1
   m_ReflectionProbeVersion: 9
   m_ObsoleteInfluenceShape: 0
@@ -2095,7 +2095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4441076211042270968, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
       propertyPath: m_Intensity
-      value: 106.10329
+      value: 159.15494
       objectReference: {fileID: 0}
     - target: {fileID: 4441076211042270968, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
       propertyPath: m_BoundingSphereOverride.w
@@ -2103,7 +2103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5438960188883305613, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
       propertyPath: m_Intensity
-      value: 106.10329
+      value: 159.15494
       objectReference: {fileID: 0}
     - target: {fileID: 5438960188883305613, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
       propertyPath: m_BoundingSphereOverride.w
@@ -6323,11 +6323,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4441076211042270968, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
       propertyPath: m_Intensity
-      value: 106.10329
+      value: 159.15494
       objectReference: {fileID: 0}
     - target: {fileID: 5438960188883305613, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
       propertyPath: m_Intensity
-      value: 106.10329
+      value: 159.15494
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
@@ -6455,11 +6455,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4441076211042270968, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
       propertyPath: m_Intensity
-      value: 106.10329
+      value: 159.15494
       objectReference: {fileID: 0}
     - target: {fileID: 5438960188883305613, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
       propertyPath: m_Intensity
-      value: 106.10329
+      value: 159.15494
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
@@ -7347,11 +7347,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4441076211042270968, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
       propertyPath: m_Intensity
-      value: 106.10329
+      value: 159.15494
       objectReference: {fileID: 0}
     - target: {fileID: 5438960188883305613, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
       propertyPath: m_Intensity
-      value: 106.10329
+      value: 159.15494
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
@@ -10947,11 +10947,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4441076211042270968, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
       propertyPath: m_Intensity
-      value: 106.10329
+      value: 159.15494
       objectReference: {fileID: 0}
     - target: {fileID: 5438960188883305613, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
       propertyPath: m_Intensity
-      value: 106.10329
+      value: 159.15494
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
@@ -12041,11 +12041,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4441076211042270968, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
       propertyPath: m_Intensity
-      value: 106.10329
+      value: 159.15494
       objectReference: {fileID: 0}
     - target: {fileID: 5438960188883305613, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
       propertyPath: m_Intensity
-      value: 106.10329
+      value: 159.15494
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
@@ -12111,11 +12111,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4441076211042270968, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
       propertyPath: m_Intensity
-      value: 106.10329
+      value: 159.15494
       objectReference: {fileID: 0}
     - target: {fileID: 5438960188883305613, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
       propertyPath: m_Intensity
-      value: 106.10329
+      value: 159.15494
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdd57521e6ad1828f96c288cacdf4471, type: 3}
