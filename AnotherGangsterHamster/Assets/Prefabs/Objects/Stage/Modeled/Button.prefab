@@ -236,7 +236,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1555413257046763681}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: a4f52c2cdee993f2995e25e6c3e1d33f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -681,7 +681,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2039883210528104047}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: a4f52c2cdee993f2995e25e6c3e1d33f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -1018,7 +1018,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4009171735282725186}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: a4f52c2cdee993f2995e25e6c3e1d33f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
@@ -1122,6 +1122,8 @@ MonoBehaviour:
           m_CallState: 2
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
+  <Activated>k__BackingField: 0
+  <MultipleInteractable>k__BackingField: 0
 --- !u!114 &4201592738839988375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1138,6 +1140,12 @@ MonoBehaviour:
   duration: 1
   threshould: 0.08
   startActive: 0
+  OnEventActive:
+    m_PersistentCalls:
+      m_Calls: []
+  OnEventDeactive:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4344288226832179402
 GameObject:
   m_ObjectHideFlags: 0

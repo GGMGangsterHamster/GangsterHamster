@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Characters.Player;
 using Objects.InteractableObjects;
 using UnityEngine;
+using _Core.Initialize;
 
 namespace Objects.Trigger
 {
@@ -15,11 +16,13 @@ namespace Objects.Trigger
 
         public int priority = 0;
 
+        public bool callWhenTriggered = false;
+        public bool doNotDisableWhenExit = false;
+
         private List<InnerDialog> _dialogs
             = new List<InnerDialog>();
 
         private int _curId = 0;
-
 
         private void Start()
         {
@@ -29,16 +32,29 @@ namespace Objects.Trigger
             }
         }
 
+        /// <summary>
+        /// OnEnterTrigger 할 시 호출됨
+        /// </summary>
+        /// <param name="other">Triggered Gameobject</param>
         public void Active(GameObject other)
         {
             if (other.TryGetComponent<DialogInteract>(out var dialog))
             {
                 dialog.Set(this);
+
+                if (callWhenTriggered)
+                    dialog.Call();
             }
         }
 
+        /// <summary>
+        /// OnExitTrigger 할 시 호출됨
+        /// </summary>
+        /// <param name="other">Triggered Gameobject</param>
         public void Deactive(GameObject other)
         {
+            if (doNotDisableWhenExit) return;
+
             if (other.TryGetComponent<DialogInteract>(out var dialog))
             {
                 dialog.Unset(this);
