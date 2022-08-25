@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -35,26 +36,30 @@ namespace Sequence
 
 
          // 딜레이
-         Func<YieldInstruction> wait
-            = () => new WaitForSeconds(seq.seqObjects[seqIdx].Delay);
+         Func<YieldInstruction> wait = () => {
+            var wait = new WaitForSeconds(seq.seqObjects[seqIdx++].Delay);
+
+            if (seqIdx >= seq.seqObjects.Count)
+            {
+               seqIdx = 0;
+               loop = false;
+            }
+
+            return wait;
+         };
 
          // 매 loop 마다 실행할 것
          Action execute = () => {
             seq.seqObjects[seqIdx]
                .Event
               ?.Invoke();
-
-            ++seqIdx;
-
-            if (seqIdx >= seq.seqObjects.Count)
-               seqIdx = 0;
          };
 
          // 루프 용
          Func<bool> keepGoing = () => loop;
 
-         if (type == SequenceType.ONESHOT) // 한번만 실행하는 경우
-            execute += () => loop = false;
+         // if (type == SequenceType.ONESHOT) // 한번만 실행하는 경우
+         //    execute += () => loop = false;
 
 
          CoroutineCaller.Instance.Use(keepGoing, wait, execute);
