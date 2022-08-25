@@ -70,16 +70,16 @@ namespace Objects.InteractableObjects
         /// <param name="other">Trigger 한 GameObject</param>
         protected void OnEventTrigger(GameObject other)
         {
-            if (!MultipleInteractable && _objectCount > 0) return;
+            if (!EventIsToggle && !MultipleInteractable && _objectCount > 0) return;
 
             Event callback = _callbacks.Find(x => (x.key == "") || other.CompareTag(x.key));
 
             if (callback != null)
             {
-                ++_objectCount;
 
                 if (!EventIsToggle)
                 {
+                    ++_objectCount;
                     Activated = true;
                     callback.OnActive?.Invoke(other);
                     return;

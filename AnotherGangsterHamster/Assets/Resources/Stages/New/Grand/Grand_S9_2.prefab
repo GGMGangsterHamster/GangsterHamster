@@ -1826,7 +1826,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetName: cainLight
-  duration: 2
+  duration: 0.75
   emission: 20
   defaultStatus: 1
 --- !u!114 &6726402861709841718
@@ -1849,7 +1849,7 @@ MonoBehaviour:
           m_Calls:
           - m_Target: {fileID: 6726402861709841717}
             m_TargetAssemblyTypeName: Effects.Shaders.Props.ActiveStatusShader, Assembly-CSharp
-            m_MethodName: Active
+            m_MethodName: Deactive
             m_Mode: 2
             m_Arguments:
               m_ObjectArgument: {fileID: 6726402861709841723}
@@ -1859,23 +1859,11 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-      Delay: 2
+      Delay: 1.25
     - Event:
         m_PersistentCalls:
           m_Calls:
-          - m_Target: {fileID: 6726402861086745320}
-            m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_MethodName: SetActive
-            m_Mode: 6
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
-          - m_Target: {fileID: 6726402862680684311}
+          - m_Target: {fileID: 6726402861458046571}
             m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_MethodName: SetActive
             m_Mode: 6
@@ -1897,7 +1885,7 @@ MonoBehaviour:
           m_Calls:
           - m_Target: {fileID: 6726402861709841717}
             m_TargetAssemblyTypeName: Effects.Shaders.Props.ActiveStatusShader, Assembly-CSharp
-            m_MethodName: Deactive
+            m_MethodName: Active
             m_Mode: 2
             m_Arguments:
               m_ObjectArgument: {fileID: 6726402861709841723}
@@ -1907,23 +1895,11 @@ MonoBehaviour:
               m_StringArgument: 
               m_BoolArgument: 0
             m_CallState: 2
-      Delay: 2
+      Delay: 1.25
     - Event:
         m_PersistentCalls:
           m_Calls:
-          - m_Target: {fileID: 6726402861086745320}
-            m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_MethodName: SetActive
-            m_Mode: 6
-            m_Arguments:
-              m_ObjectArgument: {fileID: 0}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 1
-            m_CallState: 2
-          - m_Target: {fileID: 6726402862680684311}
+          - m_Target: {fileID: 6726402861458046571}
             m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_MethodName: SetActive
             m_Mode: 6
@@ -6504,10 +6480,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1495813648555699611, guid: 447d9415715243a73b7b398f08a6a21d, type: 3}
-      propertyPath: duration
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1495813648555699611, guid: 447d9415715243a73b7b398f08a6a21d, type: 3}
       propertyPath: startActive
       value: 1
       objectReference: {fileID: 0}
@@ -6565,6 +6537,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6253803011283450366, guid: 447d9415715243a73b7b398f08a6a21d, type: 3}
       propertyPath: <Activated>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253803011283450366, guid: 447d9415715243a73b7b398f08a6a21d, type: 3}
+      propertyPath: <InitalActiveStatus>k__BackingField
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6253803011283450366, guid: 447d9415715243a73b7b398f08a6a21d, type: 3}
@@ -6617,11 +6593,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6253803011283450366, guid: 447d9415715243a73b7b398f08a6a21d, type: 3}
       propertyPath: _callbacks.Array.data[0].OnActive.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_StringArgument
-      value: enableswitch
+      value: disableswitch
       objectReference: {fileID: 0}
     - target: {fileID: 6253803011283450366, guid: 447d9415715243a73b7b398f08a6a21d, type: 3}
       propertyPath: _callbacks.Array.data[0].OnDeactive.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_StringArgument
-      value: disableswitch
+      value: enableswitch
       objectReference: {fileID: 0}
     - target: {fileID: 6253803011283450366, guid: 447d9415715243a73b7b398f08a6a21d, type: 3}
       propertyPath: _callbacks.Array.data[0].OnActive.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
