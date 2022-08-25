@@ -23,9 +23,9 @@ public class CameraBounce : MonoBehaviour
 
     void Update()
     {
-        //if (!PlayerStatus.OnGround) // °øÁß
+        //if (!PlayerStatus.OnGround) // ï¿½ï¿½ï¿½ï¿½
         //{
-        //    if (minPlayerPosY < player.position.y) // ÃÖ°íÁ¡ ÆÇº°
+        //    if (minPlayerPosY < player.position.y) // ï¿½Ö°ï¿½ï¿½ï¿½ ï¿½Çºï¿½
         //    {
         //        maxHeight = player.position.y;
         //    }
@@ -37,7 +37,7 @@ public class CameraBounce : MonoBehaviour
         //    hasAir = true;
         //}
 
-        //if (PlayerStatus.OnGround) // ¶¥
+        //if (PlayerStatus.OnGround) // ï¿½ï¿½
         //{
         //    minPlayerPosY = player.position.y;
 
@@ -53,10 +53,10 @@ public class CameraBounce : MonoBehaviour
         //}
     }
 
-    bool Is4M()
-    {
-        bool is4m = Physics.Raycast(groundChecker.position, Vector3.down, 4f);
-    }
+    // bool Is4M()
+    // {
+    //     bool is4m = Physics.Raycast(groundChecker.position, Vector3.down, 4f);
+    // }
 
     IEnumerator Bouncing()
     {
@@ -64,7 +64,7 @@ public class CameraBounce : MonoBehaviour
 
         float current = 0;
         float percent = 0;
-        float v0 = -gravity; // y ¹æÇâÀÇ ÃÊ±â ¼Óµµ
+        float v0 = -gravity; // y ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½ ï¿½Óµï¿½
 
         while (percent < 1)
         {
