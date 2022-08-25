@@ -6,55 +6,69 @@ using Characters.Player;
 public class CameraBounce : MonoBehaviour
 {
     public Transform player;
-    public float magnitude;
-    public float bounceHight;
-    public float duration;
-    private float bouncePos;
-    private Vector3 defaultPos;
+    public float bounceTime = 1f;
 
-    private bool isAir;
+    private float minPlayerPosY;
+    private float minCamPosY;
+    private float maxHeight = 0f;
+    private float gravity = -1f;
+    private bool hasAir = false;
+    private bool canBounce;
 
     void Start()
     {
-        defaultPos = transform.localPosition;
-        bouncePos = defaultPos.y + bounceHight;
+        minCamPosY = 0.5f;
     }
 
     void Update()
     {
-        Debug.Log("이즈 에어 " + isAir);
-
-        if (player.position.y >= 4)
+        if (!PlayerStatus.OnGround) // 공중
         {
-            isAir = true;
+            if (minPlayerPosY < player.position.y) // 최고점 판별
+            {
+                maxHeight = player.position.y;
+            }
+            else
+            {
+                maxHeight = minPlayerPosY;
+            }
+
+            hasAir = true;
         }
 
-        if (!PlayerStatus.IsJumping && isAir)
+        if (PlayerStatus.OnGround) // 땅
         {
-            Bounce();
+            minPlayerPosY = player.position.y;
 
-            isAir = false;
+            if (hasAir)
+            {
+                if (Mathf.Abs(player.position.y - maxHeight) >= 4)
+                {
+                    hasAir = false;
+                    StartCoroutine(Bouncing());
+                }
+            }
         }
-    }
-
-    public void Bounce()
-    {
-        Debug.Log("비운스");
-        StopCoroutine(Bouncing());
-        StartCoroutine(Bouncing());
     }
 
     IEnumerator Bouncing()
     {
-        while (transform.localPosition.y >= bouncePos)
+        float current = 0;
+        float percent = 0;
+        float v0 = -gravity; // y 방향의 초기 속도
+
+        while (percent < 1)
         {
-            transform.localPosition += new Vector3(0, magnitude * Time.deltaTime);
-        }
-        while (transform.position.y <= defaultPos.y)
-        {
-            transform.localPosition -= new Vector3(0, magnitude * Time.deltaTime);
+            current += Time.deltaTime;
+            percent = current / bounceTime;
+
+            float y = minCamPosY + (v0 * percent) + (gravity * percent * percent);
+
+            transform.localPosition = new Vector3(transform.localPosition.x, y, transform.localPosition.z);
+            
+            yield return null;
         }
 
-        yield return null;
+        transform.localPosition = new Vector3(transform.localPosition.x, 0.4f, transform.localPosition.z);
     }
 }
