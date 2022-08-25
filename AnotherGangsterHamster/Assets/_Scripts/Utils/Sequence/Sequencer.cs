@@ -59,5 +59,15 @@ namespace Sequence
 
          CoroutineCaller.Instance.Use(keepGoing, wait, execute);
       }
+
+      public void ExecuteOneshot(string key)
+      {
+         Execute(key, SequenceType.ONESHOT);
+      }
+
+      public void ExecuteRepeat(string key)
+      {
+         Execute(key, SequenceType.REPEAT);
+      }
    }
 }
