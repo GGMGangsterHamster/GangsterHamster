@@ -149,7 +149,7 @@ namespace Weapons.Actions
 
             if (_currentGrandStatus == GrandStatus.Idle)
             {
-                if (_myRigid.constraints == RigidbodyConstraints.FreezePosition)
+                if (_myRigid.constraints != RigidbodyConstraints.None)
                     _myRigid.constraints = RigidbodyConstraints.None;
 
                 _AWmessageBroker.OnFire?.Invoke();
@@ -248,7 +248,7 @@ namespace Weapons.Actions
                 _myRigid.angularVelocity = Vector3.zero;
                 _currentGrandStatus = GrandStatus.Idle;
                 _weaponUsedTime = 0f;
-                _myRigid.constraints = RigidbodyConstraints.None;
+                _myRigid.constraints = RigidbodyConstraints.FreezeAll;
 
 
                 grandLv1Model.SetActive(true);
@@ -391,7 +391,7 @@ namespace Weapons.Actions
                     break;
                     
                 case GrandStatus.LosePower:
-                    if (_myRigid.constraints == RigidbodyConstraints.FreezePosition) _myRigid.constraints = RigidbodyConstraints.None;
+                    if (_myRigid.constraints != RigidbodyConstraints.None) _myRigid.constraints = RigidbodyConstraints.None;
 
                     break;
             }
