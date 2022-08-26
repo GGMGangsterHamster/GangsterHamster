@@ -8,11 +8,11 @@ FBXHeaderExtension:  {
 		Version: 1000
 		Year: 2022
 		Month: 8
-		Day: 20
-		Hour: 19
-		Minute: 49
-		Second: 10
-		Millisecond: 264
+		Day: 25
+		Hour: 23
+		Minute: 32
+		Second: 30
+		Millisecond: 257
 	}
 	Creator: "FBX SDK/FBX Plugins version 2020.3.1"
 }
@@ -60,7 +60,7 @@ Definitions:  {
 ;------------------------------------------------------------------
 
 Objects:  {
-	Model: "Model::B_tile_side_end", "Mesh" {
+	Model: "Model::Plane476", "Mesh" {
 		Version: 232
 		Properties60:  {
 			Property: "QuaternionInterpolate", "enum", "",0
@@ -104,7 +104,7 @@ Objects:  {
 			Property: "ScalingMaxX", "bool", "",0
 			Property: "ScalingMaxY", "bool", "",0
 			Property: "ScalingMaxZ", "bool", "",0
-			Property: "GeometricTranslation", "Vector3D", "",0,-3.0517578125e-05,1.1444091796875e-05
+			Property: "GeometricTranslation", "Vector3D", "",0,0,12.1249551773071
 			Property: "GeometricRotation", "Vector3D", "",0,0,0
 			Property: "GeometricScaling", "Vector3D", "",1,1,1
 			Property: "MinDampRangeX", "double", "",0
@@ -129,11 +129,11 @@ Objects:  {
 			Property: "DefaultAttributeIndex", "int", "",0
 			Property: "Freeze", "bool", "",0
 			Property: "LODBox", "bool", "",0
-			Property: "Lcl Translation", "Lcl Translation", "A",0,0,0
+			Property: "Lcl Translation", "Lcl Translation", "A",0,0.000170707702636719,-0
 			Property: "Lcl Rotation", "Lcl Rotation", "A",0,0,0
 			Property: "Lcl Scaling", "Lcl Scaling", "A",1,1,1
 			Property: "Visibility", "Visibility", "A",1
-			Property: "MaxHandle", "int", "UH",3587
+			Property: "MaxHandle", "int", "UH",3596
 			Property: "Color", "ColorRGB", "N",0.450980392156863,0.450980392156863,0.450980392156863
 			Property: "BBoxMin", "Vector3D", "N",0,0,0
 			Property: "BBoxMax", "Vector3D", "N",0,0,0
@@ -145,20 +145,23 @@ Objects:  {
 		MultiTake: 0
 		Shading: T
 		Culling: "CullingOff"
-		Vertices: -50,-50,0,50,-50,0,-50,49.9999961853027,17.8748912811279,50,50,17.8748912811279,-50,28.3175048828125,0,50,28.3175048828125
-        ,0
-		PolygonVertexIndex: 4,5,3,-3,0,1,5,-5
-		Edges: 3,2,5,4,7,1,0
+		Vertices: -50,-50,-1.9073486328125e-06,50,-50,-1.9073486328125e-06,-50,49.9999961853027,17.8748912811279,50,50,17.8748912811279
+        ,-50,28.3175048828125,0,50,28.3175048828125,0,-50,-50,-12.1249580383301,50,-50,-12.1249580383301,-50,49.9999961853027
+        ,-12.1249561309814,50,50,-12.1249504089355,-50,28.3175048828125,-12.1249580383301,50,28.3175048828125,-12.1249580383301
+        
+		PolygonVertexIndex: 4,5,3,-3,0,1,5,-5,4,2,8,-11,5,1,7,-12,0,4,10,-7,3,5,11,-10
+		Edges: 3,2,5,4,7,1,0,19,13,9,23,17,21,10,14,18,22
 		GeometryVersion: 124
 		LayerElementNormal: 0 {
 			Version: 101
 			Name: ""
 			MappingInformationType: "ByPolygonVertex"
 			ReferenceInformationType: "Direct"
-			Normals: 5.76948044894721e-09,-0.337932527065277,0.941170394420624,5.76948044894721e-09,-0.337932527065277,0.941170394420624
+			Normals: 5.76948044894721e-09,-0.337932556867599,0.941170394420624,5.76948044894721e-09,-0.337932556867599,0.941170394420624
              ,1.0860127019896e-08,-0.636104166507721,0.771603226661682,1.08601279080744e-08,-0.636104166507721,0.771603226661682
-             ,0,0,1,0,0,1,5.76948044894721e-09,-0.337932527065277,0.941170394420624,5.76948044894721e-09,-0.337932527065277
-             ,0.941170394420624
+             ,0,-2.43540512201434e-08,1,0,-2.43540512201434e-08,1,5.76948044894721e-09,-0.337932556867599,0.941170394420624
+             ,5.76948044894721e-09,-0.337932556867599,0.941170394420624,-1,0,0,-1,0,0,-1,0,0,-1,0,0,1,0,0,1,0,0,1,0,0,1,0
+             ,0,-1,0,0,-1,0,0,-1,0,0,-1,0,0,0.999999940395355,0,0,1,0,0,1,0,0,1,0,0
 		}
 		LayerElementUV: 0 {
 			Version: 101
@@ -167,8 +170,11 @@ Objects:  {
 			ReferenceInformationType: "IndexToDirect"
 			UV: 0.139829039573669,0.0195872858166695,0.00643777847290039,0.0196010172367096,0.00653493404388428,0.962820708751678
              ,0.139926195144653,0.962806880474091,0.141778588294983,0.0196746438741684,0.141875743865967,0.962894260883331
-             ,0.990676581859589,0.0195872858166695,0.990773618221283,0.962806880474091
-			UVIndex: 1,2,3,0,4,5,7,6
+             ,0.990676581859589,0.0195872858166695,0.990773618221283,0.962806880474091,0.139829039573669,0.0195872858166695
+             ,0.00643777847290039,0.0196010172367096,0.139926195144653,0.962806880474091,0.141875743865967,0.962894260883331
+             ,0.990773618221283,0.962806880474091,0.990676581859589,0.0195872858166695,0.141778588294983,0.0196746438741684
+             ,0.00653493404388428,0.962820708751678
+			UVIndex: 1,2,3,0,4,5,7,6,1,0,8,9,7,5,11,12,4,6,13,14,3,2,15,10
 		}
 		LayerElementMaterial: 0 {
 			Version: 101
@@ -205,7 +211,7 @@ Objects:  {
 				TypedIndex: 0
 			}
 		}
-		NodeAttributeName: "Geometry::B_tile_side_end_ncl1_1"
+		NodeAttributeName: "Geometry::Plane476_ncl1_1"
 	}
 	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
 		Type: "UserData"
@@ -226,14 +232,14 @@ Objects:  {
 			Property: "Original|ApplicationVendor", "KString", "", "Autodesk"
 			Property: "Original|ApplicationName", "KString", "", "3ds Max"
 			Property: "Original|ApplicationVersion", "KString", "", "2022"
-			Property: "Original|DateTime_GMT", "DateTime", "", "20/08/2022 10:49:10.263"
+			Property: "Original|DateTime_GMT", "DateTime", "", "25/08/2022 14:32:30.257"
 			Property: "Original|FileName", "KString", "", "F:\아펠리오스\Btype\newfin\tile\B_tile_side_end\B_tile_side_end.fbx"
              
 			Property: "LastSaved", "Compound", ""
 			Property: "LastSaved|ApplicationVendor", "KString", "", "Autodesk"
 			Property: "LastSaved|ApplicationName", "KString", "", "3ds Max"
 			Property: "LastSaved|ApplicationVersion", "KString", "", "2022"
-			Property: "LastSaved|DateTime_GMT", "DateTime", "", "20/08/2022 10:49:10.263"
+			Property: "LastSaved|DateTime_GMT", "DateTime", "", "25/08/2022 14:32:30.257"
 			Property: "Original|ApplicationActiveProject", "KString", "", "C:\Users\ROG\Documents\3ds Max 2022"
 			Property: "Original|ApplicationNativeFile", "KString", "", "F:\아펠리오스\Tile.max"
 		}
@@ -362,9 +368,9 @@ Objects:  {
 ;------------------------------------------------------------------
 
 Connections:  {
-	Connect: "OO", "Model::B_tile_side_end", "Model::Scene"
-	Connect: "OO", "Material::Material #64", "Model::B_tile_side_end"
-	Connect: "OO", "Texture::Map #33", "Model::B_tile_side_end"
+	Connect: "OO", "Model::Plane476", "Model::Scene"
+	Connect: "OO", "Material::Material #64", "Model::Plane476"
+	Connect: "OO", "Texture::Map #33", "Model::Plane476"
 	Connect: "OO", "Video::Map #33", "Texture::Map #33"
 }
 ;Takes and animation section

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781cc897cf8675041a751163b51f97dd, type: 3}
   m_Name: HDRPGlobalSettings
   m_EditorClassIdentifier: 
+  m_Version: 3
   m_DefaultVolumeProfile: {fileID: 11400000, guid: 504c715948968fd508e623ccc03bec09, type: 2}
   m_LookDevVolumeProfile: {fileID: 11400000, guid: 254c4fe87beb7be4fa72e1681edbed02, type: 2}
   m_RenderingPathDefaultCameraFrameSettings:
@@ -121,6 +122,10 @@ MonoBehaviour:
       hasProbeVolumes: 0
     - sceneGUID: 68250fd84b0e4a746ad4903f3e023521
       hasProbeVolumes: 0
+    - sceneGUID: 8b5b490ad0ee0718487214a72f91b325
+      hasProbeVolumes: 0
+    - sceneGUID: 012d8f7b8453db841a7ea862153fae64
+      hasProbeVolumes: 0
     serializedProfiles:
     - sceneGUID: 3efc685a18a84648895021878d920fde
       profile: {fileID: 11400000, guid: b1d07c232d3d4b9dcb777cb42129032d, type: 2}
@@ -143,6 +148,10 @@ MonoBehaviour:
     - sceneGUID: b5f8e24f43f05bce58121b0d8cb6f36c
       profile: {fileID: 11400000, guid: b1d07c232d3d4b9dcb777cb42129032d, type: 2}
     - sceneGUID: 68250fd84b0e4a746ad4903f3e023521
+      profile: {fileID: 11400000, guid: b1d07c232d3d4b9dcb777cb42129032d, type: 2}
+    - sceneGUID: 8b5b490ad0ee0718487214a72f91b325
+      profile: {fileID: 11400000, guid: b1d07c232d3d4b9dcb777cb42129032d, type: 2}
+    - sceneGUID: 012d8f7b8453db841a7ea862153fae64
       profile: {fileID: 11400000, guid: b1d07c232d3d4b9dcb777cb42129032d, type: 2}
     serializedBakeSettings:
     - sceneGUID: 3efc685a18a84648895021878d920fde
@@ -277,6 +286,30 @@ MonoBehaviour:
           useVirtualOffset: 1
           outOfGeoOffset: 0.01
           searchMultiplier: 0.2
+    - sceneGUID: 8b5b490ad0ee0718487214a72f91b325
+      settings:
+        dilationSettings:
+          enableDilation: 1
+          dilationDistance: 1
+          dilationValidityThreshold: 0.25
+          dilationIterations: 1
+          squaredDistWeighting: 1
+        virtualOffsetSettings:
+          useVirtualOffset: 1
+          outOfGeoOffset: 0.01
+          searchMultiplier: 0.2
+    - sceneGUID: 012d8f7b8453db841a7ea862153fae64
+      settings:
+        dilationSettings:
+          enableDilation: 1
+          dilationDistance: 1
+          dilationValidityThreshold: 0.25
+          dilationIterations: 1
+          squaredDistWeighting: 1
+        virtualOffsetSettings:
+          useVirtualOffset: 1
+          outOfGeoOffset: 0.01
+          searchMultiplier: 0.2
     serializedBakingSets:
     - name: Default
       sceneGUIDs:
@@ -291,6 +324,8 @@ MonoBehaviour:
       - c37a56ff9457d7db896df1a999f01f1d
       - b5f8e24f43f05bce58121b0d8cb6f36c
       - 68250fd84b0e4a746ad4903f3e023521
+      - 8b5b490ad0ee0718487214a72f91b325
+      - 012d8f7b8453db841a7ea862153fae64
       settings:
         dilationSettings:
           enableDilation: 1
@@ -303,4 +338,3 @@ MonoBehaviour:
           outOfGeoOffset: 0.01
           searchMultiplier: 0.2
       profile: {fileID: 11400000, guid: b1d07c232d3d4b9dcb777cb42129032d, type: 2}
-  m_Version: 3
