@@ -33,7 +33,7 @@ namespace Objects.StageObjects.CollisionEventable
                                          transform.forward,
                                          out var hit,
                                          Mathf.Infinity,
-                                         _ignoreMe & LayerMask.NameToLayer("ONLYCOLPLAYER")))
+                                         _ignoreMe))
          {
             Vector3 targetPos = transform.InverseTransformPoint(hit.point);
             OnCollision?.Invoke(hit.point);
