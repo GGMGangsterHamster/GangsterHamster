@@ -2303,8 +2303,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Buttons:
-  - {fileID: 4830953235562578221}
-  - {fileID: 3750551946211284620}
+  - {fileID: 8406406502861495023}
+  - {fileID: 265663364338699598}
   OnQualified:
     m_PersistentCalls:
       m_Calls:
@@ -2353,19 +2353,6 @@ MonoBehaviour:
     - Event:
         m_PersistentCalls:
           m_Calls:
-          - m_Target: {fileID: 2214593804756943823}
-            m_TargetAssemblyTypeName: Objects.StageObjects.ButtonActivatedChecker,
-              Assembly-CSharp
-            m_MethodName: Active
-            m_Mode: 2
-            m_Arguments:
-              m_ObjectArgument: {fileID: 3365509016019165989}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
           - m_Target: {fileID: 4453994877413750789}
             m_TargetAssemblyTypeName: Effects.Shaders.Props.ActiveStatusShader, Assembly-CSharp
             m_MethodName: Active
@@ -2379,6 +2366,18 @@ MonoBehaviour:
               m_BoolArgument: 0
             m_CallState: 2
           - m_Target: {fileID: 5389007749051740068}
+            m_TargetAssemblyTypeName: Effects.Shaders.Props.ActiveStatusShader, Assembly-CSharp
+            m_MethodName: Active
+            m_Mode: 2
+            m_Arguments:
+              m_ObjectArgument: {fileID: 3365509016019165989}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 7432081886326923469}
             m_TargetAssemblyTypeName: Effects.Shaders.Props.ActiveStatusShader, Assembly-CSharp
             m_MethodName: Active
             m_Mode: 2
@@ -2428,19 +2427,6 @@ MonoBehaviour:
     - Event:
         m_PersistentCalls:
           m_Calls:
-          - m_Target: {fileID: 2214593804756943823}
-            m_TargetAssemblyTypeName: Objects.StageObjects.ButtonActivatedChecker,
-              Assembly-CSharp
-            m_MethodName: Deactive
-            m_Mode: 2
-            m_Arguments:
-              m_ObjectArgument: {fileID: 3365509016019165989}
-              m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-              m_IntArgument: 0
-              m_FloatArgument: 0
-              m_StringArgument: 
-              m_BoolArgument: 0
-            m_CallState: 2
           - m_Target: {fileID: 4453994877413750789}
             m_TargetAssemblyTypeName: Effects.Shaders.Props.ActiveStatusShader, Assembly-CSharp
             m_MethodName: Deactive
@@ -2456,6 +2442,18 @@ MonoBehaviour:
           - m_Target: {fileID: 5389007749051740068}
             m_TargetAssemblyTypeName: Effects.Shaders.Props.ActiveStatusShader, Assembly-CSharp
             m_MethodName: Deactive
+            m_Mode: 2
+            m_Arguments:
+              m_ObjectArgument: {fileID: 3365509016019165989}
+              m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+              m_IntArgument: 0
+              m_FloatArgument: 0
+              m_StringArgument: 
+              m_BoolArgument: 0
+            m_CallState: 2
+          - m_Target: {fileID: 7432081886326923469}
+            m_TargetAssemblyTypeName: Effects.Shaders.Props.ActiveStatusShader, Assembly-CSharp
+            m_MethodName: Active
             m_Mode: 2
             m_Arguments:
               m_ObjectArgument: {fileID: 3365509016019165989}
@@ -2639,7 +2637,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3679019233858517246}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0000038146973, y: 6, z: 0}
+  m_LocalPosition: {x: 0.0000038146973, y: 6, z: -2.3164277}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2661,7 +2659,7 @@ ReflectionProbe:
   m_TimeSlicingMode: 0
   m_Resolution: 128
   m_UpdateFrequency: 0
-  m_BoxSize: {x: 10, y: 14, z: 10}
+  m_BoxSize: {x: 10, y: 14, z: 14.632855}
   m_BoxOffset: {x: 0, y: 0, z: 0}
   m_NearClip: 0.3
   m_FarClip: 1000
@@ -2802,20 +2800,20 @@ MonoBehaviour:
       fadeDistance: 10000
       rangeCompressionFactor: 1
     influence:
-      m_EditorAdvancedModeBlendDistancePositive: {x: 1, y: 1, z: 1}
-      m_EditorAdvancedModeBlendDistanceNegative: {x: 1, y: 1, z: 1}
+      m_EditorAdvancedModeBlendDistancePositive: {x: 1, y: 1, z: 1.0000007}
+      m_EditorAdvancedModeBlendDistanceNegative: {x: 1, y: 1, z: 5.5436306}
       m_EditorSimplifiedModeBlendDistance: 1
       m_EditorAdvancedModeBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
       m_EditorAdvancedModeBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
       m_EditorSimplifiedModeBlendNormalDistance: 0
-      m_EditorAdvancedModeEnabled: 0
+      m_EditorAdvancedModeEnabled: 1
       m_EditorAdvancedModeFaceFadePositive: {x: 1, y: 1, z: 1}
       m_EditorAdvancedModeFaceFadeNegative: {x: 1, y: 1, z: 1}
       m_Version: 1
       m_ObsoleteSphereBaseOffset: {x: 0, y: 0, z: 0}
       m_ObsoleteOffset: {x: 0, y: 0, z: 0}
       m_Shape: 0
-      m_BoxSize: {x: 10, y: 14, z: 10}
+      m_BoxSize: {x: 10, y: 14, z: 14.632855}
       m_BoxBlendDistancePositive: {x: 1, y: 1, z: 1}
       m_BoxBlendDistanceNegative: {x: 1, y: 1, z: 1}
       m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
@@ -2833,8 +2831,8 @@ MonoBehaviour:
       m_BoxSize: {x: 1, y: 1, z: 1}
       m_SphereRadius: 1
     proxySettings:
-      useInfluenceVolumeAsProxyVolume: 0
-      capturePositionProxySpace: {x: 0, y: 0, z: 0}
+      useInfluenceVolumeAsProxyVolume: 1
+      capturePositionProxySpace: {x: 0, y: 0, z: 2.25}
       captureRotationProxySpace: {x: 0, y: 0, z: 0, w: 1}
       mirrorPositionProxySpace: {x: 0, y: 0, z: 0}
       mirrorRotationProxySpace: {x: 0, y: 0, z: 0, w: 0}
@@ -2961,7 +2959,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: 21370498aacef5f1b822d81989b6fda8, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 453c6be431d03d99197beacb60d5722b, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -3043,33 +3041,33 @@ MonoBehaviour:
     m_Aspect: 0
   m_SHForNormalization:
     sh[ 0]: 0
-    sh[ 1]: 0
+    sh[ 1]: -0
     sh[ 2]: 0
-    sh[ 3]: 0
+    sh[ 3]: -0
     sh[ 4]: 0
-    sh[ 5]: 0
+    sh[ 5]: -0
     sh[ 6]: 0
-    sh[ 7]: 0
+    sh[ 7]: -0
     sh[ 8]: 0
-    sh[ 9]: 0
-    sh[10]: 0
-    sh[11]: 0
-    sh[12]: 0
-    sh[13]: 0
-    sh[14]: 0
-    sh[15]: 0
-    sh[16]: 0
-    sh[17]: 0
-    sh[18]: 0
-    sh[19]: 0
-    sh[20]: 0
-    sh[21]: 0
-    sh[22]: 0
-    sh[23]: 0
-    sh[24]: 0
-    sh[25]: 0
-    sh[26]: 0
-  m_HasValidSHForNormalization: 0
+    sh[ 9]: 0.037582096
+    sh[10]: 0.0006180614
+    sh[11]: -0.0073756967
+    sh[12]: -0.010957668
+    sh[13]: -0.0011216215
+    sh[14]: -0.008878234
+    sh[15]: 0.004143101
+    sh[16]: 0.0005518158
+    sh[17]: -0.0013740136
+    sh[18]: 0.5039361
+    sh[19]: 0.007384614
+    sh[20]: -0.11308311
+    sh[21]: -0.1446863
+    sh[22]: -0.003430709
+    sh[23]: -0.121518895
+    sh[24]: 0.053565763
+    sh[25]: 0.015521538
+    sh[26]: -0.01871351
+  m_HasValidSHForNormalization: 1
   m_ReflectionProbeVersion: 9
   m_ObsoleteInfluenceShape: 0
   m_ObsoleteInfluenceSphereRadius: 3
@@ -4423,7 +4421,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8813671969218619876}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0000038146973, y: 9.999998, z: -0.00000047683716}
+  m_LocalPosition: {x: 2.16819, y: 9.999998, z: -0.0000009536743}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4445,7 +4443,7 @@ ReflectionProbe:
   m_TimeSlicingMode: 0
   m_Resolution: 128
   m_UpdateFrequency: 0
-  m_BoxSize: {x: 10, y: 22, z: 10}
+  m_BoxSize: {x: 14.336372, y: 22, z: 10}
   m_BoxOffset: {x: 0, y: 0, z: 0}
   m_NearClip: 0.3
   m_FarClip: 1000
@@ -4599,7 +4597,7 @@ MonoBehaviour:
       m_ObsoleteSphereBaseOffset: {x: 0, y: 0, z: 0}
       m_ObsoleteOffset: {x: 0, y: 0, z: 0}
       m_Shape: 0
-      m_BoxSize: {x: 10, y: 22, z: 10}
+      m_BoxSize: {x: 14.336372, y: 22, z: 10}
       m_BoxBlendDistancePositive: {x: 1, y: 1, z: 1}
       m_BoxBlendDistanceNegative: {x: 1, y: 1, z: 1}
       m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
@@ -4617,8 +4615,8 @@ MonoBehaviour:
       m_BoxSize: {x: 1, y: 1, z: 1}
       m_SphereRadius: 1
     proxySettings:
-      useInfluenceVolumeAsProxyVolume: 0
-      capturePositionProxySpace: {x: 0, y: -1.75, z: 0}
+      useInfluenceVolumeAsProxyVolume: 1
+      capturePositionProxySpace: {x: -2.75, y: -1.75, z: 0}
       captureRotationProxySpace: {x: 0, y: 0, z: 0, w: 1}
       mirrorPositionProxySpace: {x: 0, y: 0, z: 0}
       mirrorRotationProxySpace: {x: 0, y: 0, z: 0, w: 0}
@@ -4745,7 +4743,7 @@ MonoBehaviour:
     camera:
       camera: 0
   m_ProxyVolume: {fileID: 0}
-  m_BakedTexture: {fileID: 8900000, guid: 8395dc8fa30964e1bb9dbb329674f244, type: 3}
+  m_BakedTexture: {fileID: 8900000, guid: 05843dcdc3cc10ad1892e3cc822e26f6, type: 3}
   m_CustomTexture: {fileID: 0}
   m_BakedRenderData:
     m_WorldToCameraRHS:
@@ -4827,33 +4825,33 @@ MonoBehaviour:
     m_Aspect: 0
   m_SHForNormalization:
     sh[ 0]: 0
-    sh[ 1]: 0
+    sh[ 1]: -0
     sh[ 2]: 0
-    sh[ 3]: 0
+    sh[ 3]: -0
     sh[ 4]: 0
-    sh[ 5]: 0
+    sh[ 5]: -0
     sh[ 6]: 0
-    sh[ 7]: 0
+    sh[ 7]: -0
     sh[ 8]: 0
-    sh[ 9]: 0
-    sh[10]: 0
-    sh[11]: 0
-    sh[12]: 0
-    sh[13]: 0
-    sh[14]: 0
-    sh[15]: 0
-    sh[16]: 0
-    sh[17]: 0
-    sh[18]: 0
-    sh[19]: 0
-    sh[20]: 0
-    sh[21]: 0
-    sh[22]: 0
-    sh[23]: 0
-    sh[24]: 0
-    sh[25]: 0
-    sh[26]: 0
-  m_HasValidSHForNormalization: 0
+    sh[ 9]: 0.0431072
+    sh[10]: -0.015058706
+    sh[11]: 0.010707085
+    sh[12]: 0.0041096015
+    sh[13]: 0.0033169878
+    sh[14]: -0.0035375834
+    sh[15]: -0.0009450504
+    sh[16]: -0.0048898063
+    sh[17]: 0.002082671
+    sh[18]: 0.5876392
+    sh[19]: -0.18405032
+    sh[20]: 0.13784389
+    sh[21]: 0.07985913
+    sh[22]: 0.039446797
+    sh[23]: -0.04404605
+    sh[24]: -0.011900747
+    sh[25]: -0.06525219
+    sh[26]: 0.0320423
+  m_HasValidSHForNormalization: 1
   m_ReflectionProbeVersion: 9
   m_ObsoleteInfluenceShape: 0
   m_ObsoleteInfluenceSphereRadius: 3
@@ -34112,7 +34110,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 498723786, guid: 7f28f18c1967c07cd84e3be850db76cd, type: 3}
   m_PrefabInstance: {fileID: 4453994877857698767}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4830953235562578221}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15688fbc4af336fde8a5b3f4db2a7cf0, type: 3}
@@ -34123,9 +34121,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9134772159148020451, guid: 7f28f18c1967c07cd84e3be850db76cd, type: 3}
   m_PrefabInstance: {fileID: 4453994877857698767}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4830953235562578221 stripped
+--- !u!1 &8406406502861495023 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 9134772159148020450, guid: 7f28f18c1967c07cd84e3be850db76cd, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5288996807052478752, guid: 7f28f18c1967c07cd84e3be850db76cd, type: 3}
   m_PrefabInstance: {fileID: 4453994877857698767}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4465399516787298323
@@ -37687,9 +37685,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f28f18c1967c07cd84e3be850db76cd, type: 3}
---- !u!1 &3750551946211284620 stripped
+--- !u!1 &265663364338699598 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 9134772159148020450, guid: 7f28f18c1967c07cd84e3be850db76cd, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5288996807052478752, guid: 7f28f18c1967c07cd84e3be850db76cd, type: 3}
   m_PrefabInstance: {fileID: 5389007748609836142}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &3750551946211284621 stripped
@@ -37702,7 +37700,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 498723786, guid: 7f28f18c1967c07cd84e3be850db76cd, type: 3}
   m_PrefabInstance: {fileID: 5389007748609836142}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3750551946211284620}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 15688fbc4af336fde8a5b3f4db2a7cf0, type: 3}
