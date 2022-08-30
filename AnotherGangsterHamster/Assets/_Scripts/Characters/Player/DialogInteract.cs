@@ -9,6 +9,7 @@ namespace Characters.Player
     public class DialogInteract : MonoBehaviour
     {
         private DialogVolume _curActiveVolume;
+        private DialogPanel _panelPrefab;
 
         private DialogPanel _panel;
         private DialogPanel Panel
@@ -19,14 +20,19 @@ namespace Characters.Player
                 {
                     _panel = FindObjectOfType<DialogPanel>();
                     if (_panel == null)
-                    {
-                        _panel = Instantiate(
-                                    Resources.Load<GameObject>("UI/cvsDialog")
-                                    ).GetComponent<DialogPanel>();
-                    }
+                        _panel = _panelPrefab;
                 }
                 return _panel;
             }
+        }
+
+        private void Awake()
+        {
+            _panelPrefab = Instantiate(
+                                    Resources.Load<GameObject>("UI/cvsDialog")
+                                    ).GetComponent<DialogPanel>();
+
+            _panelPrefab.Disable();
         }
 
         public void Set(DialogVolume volume, Action OnSet = null)
@@ -45,6 +51,7 @@ namespace Characters.Player
             {
                 _curActiveVolume = null;
                 OnUnset?.Invoke();
+                Panel.Disable();
             }
         }
 
@@ -57,7 +64,12 @@ namespace Characters.Player
                 return;
             }
 
-            Panel.Show(_curActiveVolume.Get());
+            string text = _curActiveVolume.Get();
+
+            if (text == null)
+                Panel.Disable();
+            else
+                Panel.Show(text);
         }
     }
 }

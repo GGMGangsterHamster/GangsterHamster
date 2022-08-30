@@ -6,19 +6,15 @@ namespace UI.PanelScripts
 {
     public class DialogPanel : MonoBehaviour
     {
-        private TMP_Text _dialogText;
+        [SerializeField] private TMP_Text _dialogText;
+        [SerializeField] private TMP_Text _continueText;
 
-        private void OnEnable()
-        {
-            if (_dialogText == null)
-                _dialogText = GetComponentInChildren<TMP_Text>();
-
-            _dialogText.text = "";
-        }
+        public string defaultContiueText = "Press \'E\' to continue";
 
         public void Show(string text)
         {
             _dialogText.text = text;
+            _continueText.text = defaultContiueText;
 
             gameObject.SetActive(true);
         }
