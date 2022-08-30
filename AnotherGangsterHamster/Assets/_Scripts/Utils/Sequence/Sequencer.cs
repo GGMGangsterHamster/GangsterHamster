@@ -42,7 +42,8 @@ namespace Sequence
             if (seqIdx >= seq.seqObjects.Count)
             {
                seqIdx = 0;
-               loop = false;
+               if (type == SequenceType.ONESHOT)
+                  loop = false;
             }
 
             return wait;
