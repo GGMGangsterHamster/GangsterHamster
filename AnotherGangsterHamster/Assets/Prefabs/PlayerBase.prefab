@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 746144845}
   - component: {fileID: 7812477572421058989}
+  - component: {fileID: 7603118050356241739}
   m_Layer: 6
   m_Name: PLAYER_CAM
   m_TagString: PLAYER_CAMERA_LOCK
@@ -76,8 +77,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 60493967840551276}
-  groundChecker: {fileID: 60493967049730935}
   bounceTime: 0.5
+--- !u!114 &7603118050356241739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746144844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19776d40b9b875a4da1bfc2604c8ce79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enable: 1
+  amplitude: 0.015
+  frequency: 10
+  mainCam: {fileID: 746144845}
+  cameraHolder: {fileID: 746144845}
+  player: {fileID: 60493967840551274}
 --- !u!1 &923426876
 GameObject:
   m_ObjectHideFlags: 0
