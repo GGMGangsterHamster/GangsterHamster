@@ -54,6 +54,14 @@ namespace Sound
                 return;
             }
 
+            if (_curPlayingAudioSource.ContainsKey(name))
+            {
+                AudioSource sameSource = _curPlayingAudioSource[name];
+
+                if (sameSource != null && sameSource.gameObject.activeSelf)
+                    sameSource.Stop();
+            }
+
             if (_curPlayingAudioSource[name] != null &&
                 _curPlayingAudioSource[name].isPlaying &&
                 doNotPlayIfAlreadyPlaying)
@@ -72,7 +80,12 @@ namespace Sound
         public void Stop(string name)
         {
             if (_curPlayingAudioSource.ContainsKey(name))
-                _curPlayingAudioSource[name].Stop();
+            {
+                AudioSource source = _curPlayingAudioSource[name];
+
+                if (source != null && source.gameObject.activeSelf)
+                    source.Stop();
+            }
             else
                 Logger.Log($"SoundManager > Cannot found key: {name}",
                     LogLevel.Error);
@@ -84,7 +97,8 @@ namespace Sound
                 .Values
                 .ToList()
                 .ForEach(x => {
-                    x.Stop();
+                    if(x != null && x.gameObject.activeSelf)
+                        x.Stop();
                 });
         }
 

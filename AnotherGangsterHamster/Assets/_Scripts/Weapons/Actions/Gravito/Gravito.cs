@@ -8,6 +8,7 @@ using Weapons.Animation;
 using Objects.Interaction;
 using Weapons.Actions.Effect;
 using Weapons.Actions.Broker;
+using Sound;
 
 namespace Weapons.Actions
 {
@@ -190,6 +191,7 @@ namespace Weapons.Actions
                 return;
             }
 
+            SoundManager.Instance.Stop("GravitoAbilityExecute");
             SetGravityChangeTime();
             _gravitoEffect.EffectOn();
             _currentGravitoStatus = GravitoStatus.Reset;
