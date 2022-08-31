@@ -43,26 +43,30 @@ namespace Weapons.Actions
         public void ObjTriggerExitEvent(GameObject obj)
         {
             if (!obj.CompareTag("PLAYER_BASE")) return;
-
+            Debug.Log("나간거니?");
             if (_isReinforcemented)
             {
                 _playerGravity.AffectedByGlobalGravity = true;
                 _isReinforcemented = false;
                 _playerRigid.mass = 1;
+
+                if (PlayerStatus.OnGround)
+                {
+                    PlayerValues.Speed = PlayerValues.DashSpeed;
+                }
+
                 effect.EffectOff();
             }
         }
 
         private void OnDisable()
         {
-            Debug.Log("확인중");
             _playerGravity.AffectedByGlobalGravity = true;
             _isReinforcemented = false;
             _playerRigid.mass = 1;
 
             if(PlayerStatus.OnGround)
             {
-
                 PlayerValues.Speed = PlayerValues.DashSpeed;
             }
             
