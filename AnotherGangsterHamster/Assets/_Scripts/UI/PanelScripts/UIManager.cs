@@ -29,12 +29,11 @@ namespace UI.PanelScripts
         private void Start()
         {
             soundAction += volume => {
-                volume = 1;
-                SoundManager.Instance.GlobalVolume = volume;
+                SoundManager.Instance.SetSound(volume);
                 BackgroundMusic.Instance.SetVolume(volume);
                 Debug.Log("Set volume to " + volume);
             };
-            sensitivityAction = (value) => { };
+            sensitivityAction = value => { };
 
             for(int i = 0; i < _uiPanelParent.childCount; i++)
             {

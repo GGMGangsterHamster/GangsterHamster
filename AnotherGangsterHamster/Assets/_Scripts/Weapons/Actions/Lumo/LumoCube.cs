@@ -49,20 +49,24 @@ namespace Weapons.Actions
                 _playerGravity.AffectedByGlobalGravity = true;
                 _isReinforcemented = false;
                 _playerRigid.mass = 1;
+
+                if (PlayerStatus.OnGround)
+                {
+                    PlayerValues.Speed = PlayerValues.DashSpeed;
+                }
+
                 effect.EffectOff();
             }
         }
 
         private void OnDisable()
         {
-            Debug.Log("»Æ¿Œ¡ﬂ");
             _playerGravity.AffectedByGlobalGravity = true;
             _isReinforcemented = false;
             _playerRigid.mass = 1;
 
             if(PlayerStatus.OnGround)
             {
-
                 PlayerValues.Speed = PlayerValues.DashSpeed;
             }
             

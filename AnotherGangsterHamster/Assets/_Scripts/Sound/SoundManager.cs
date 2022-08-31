@@ -65,5 +65,19 @@ namespace Sound
          source.Play();
          _curPlayingAudioSource[name] = source;
       }
+
+       public void SetSound(float volume)
+       {
+          GlobalVolume = volume;
+
+          if(_curPlayingAudioSource != null && _curPlayingAudioSource.Count != 0)
+          {
+             foreach (AudioSource source in _curPlayingAudioSource.Values)
+             {
+                if(source != null && source.gameObject.activeSelf)
+                  source.volume = volume;
+             }
+          }
+       }
    }
 }
