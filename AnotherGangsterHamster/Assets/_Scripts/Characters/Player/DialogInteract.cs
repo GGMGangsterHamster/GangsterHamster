@@ -12,27 +12,20 @@ namespace Characters.Player
         private DialogPanel _panelPrefab;
 
         private DialogPanel _panel;
-        private DialogPanel Panel
-        {
-            get
-            {
-                if (_panel == null)
-                {
-                    _panel = FindObjectOfType<DialogPanel>();
-                    if (_panel == null)
-                        _panel = _panelPrefab;
-                }
-                return _panel;
-            }
-        }
+        private DialogPanel Panel => _panel;
 
-        private void Awake()
+        private void Start()
         {
-            _panelPrefab = Instantiate(
-                                    Resources.Load<GameObject>("UI/cvsDialog")
-                                    ).GetComponent<DialogPanel>();
+            _panelPrefab = FindObjectOfType<DialogPanel>();
+            if (_panelPrefab == null)
+            {
+                _panelPrefab = Instantiate(
+                                        Resources.Load<GameObject>("UI/cvsDialog")
+                                        ).GetComponent<DialogPanel>();
+            }
 
             _panelPrefab.Disable();
+            _panel = _panelPrefab;
         }
 
         public void Set(DialogVolume volume, Action OnSet = null)
@@ -67,7 +60,10 @@ namespace Characters.Player
             string text = _curActiveVolume.Get();
 
             if (text == null)
-                Panel.Disable();
+            {
+                if (_curActiveVolume.disableWhenEnd)
+                    Panel.Disable();
+            }
             else
                 Panel.Show(text);
         }

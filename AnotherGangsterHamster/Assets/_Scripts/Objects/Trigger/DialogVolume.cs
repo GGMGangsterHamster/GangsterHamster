@@ -13,6 +13,8 @@ namespace Objects.Trigger
 
         public int idStart;
         public int idEnd;
+        public int loadEnd;
+        public bool disableWhenEnd = true;
 
         public int priority = 0;
 
@@ -26,7 +28,7 @@ namespace Objects.Trigger
 
         private void Start()
         {
-            for (int i = idStart; i <= idEnd; ++i)
+            for (int i = idStart; i <= loadEnd; ++i)
             {
                 _dialogs.Add(DialogManager.Instance.GetDialog(type, i));
             }
@@ -61,9 +63,15 @@ namespace Objects.Trigger
             }
         }
 
+        public string GetByID(int id)
+        {
+            if (id > loadEnd || id < 0) return null;
+            return _dialogs[id].text;
+        }
+
         public string Get()
         {
-            if (_curId >= _dialogs.Count) return null;
+            if (_curId > idEnd) return null;
             return _dialogs[_curId++].text;
         }
     }
