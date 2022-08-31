@@ -754,6 +754,103 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 093e3c73b72b9034ba68ff9b9ea78b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &796572342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 796572343}
+  - component: {fileID: 796572346}
+  - component: {fileID: 796572345}
+  - component: {fileID: 796572344}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &796572343
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796572342}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 40.5, z: 46}
+  m_LocalScale: {x: 80, y: 1, z: 120}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1497582595}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &796572344
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796572342}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &796572345
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796572342}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 257
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: aa67d97546fb6c8e7a242be6d70bf1b2, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &796572346
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796572342}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &926422335
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1028,7 +1125,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1506789412
+--- !u!1 &1497582591
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1036,49 +1133,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1506789416}
-  - component: {fileID: 1506789415}
-  - component: {fileID: 1506789414}
-  - component: {fileID: 1506789413}
+  - component: {fileID: 1497582595}
+  - component: {fileID: 1497582594}
+  - component: {fileID: 1497582593}
+  - component: {fileID: 1497582592}
   m_Layer: 0
   m_Name: InstaDeathObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!65 &1506789413
+--- !u!65 &1497582592
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1506789412}
+  m_GameObject: {fileID: 1497582591}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 500, y: 1, z: 500}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1506789414
+--- !u!114 &1497582593
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1506789412}
+  m_GameObject: {fileID: 1497582591}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e853c7bfdcce2bf1fb3725d133d43f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1506789415
+--- !u!114 &1497582594
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1506789412}
+  m_GameObject: {fileID: 1497582591}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83185d2616cdb31b880a0fdde34fe5f6, type: 3}
@@ -1089,7 +1186,7 @@ MonoBehaviour:
     OnActive:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1506789414}
+        - m_Target: {fileID: 1497582593}
           m_TargetAssemblyTypeName: Objects.StageObjects.CollisionEventable.InstaDeathObject,
             Assembly-CSharp
           m_MethodName: Active
@@ -1112,18 +1209,19 @@ MonoBehaviour:
   colNormalVec: {x: 0, y: 0, z: 0}
   colVelocity: {x: 0, y: 0, z: 0}
   colPosition: {x: 0, y: 0, z: 0}
---- !u!4 &1506789416
+--- !u!4 &1497582595
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1506789412}
+  m_GameObject: {fileID: 1497582591}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -50, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 796572343}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1233,117 +1331,225 @@ PrefabInstance:
       propertyPath: m_BakedTexture
       value: 
       objectReference: {fileID: 8900000, guid: 4e99e4a71fe5d602eb9b553c36accc18, type: 3}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[ 0]
+      value: 0.09824831
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[ 1]
+      value: -0.045785695
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[ 2]
+      value: 0.09680237
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[ 3]
+      value: -0.035317186
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[ 4]
+      value: 0.007982726
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[ 5]
+      value: -0.021880189
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[ 6]
+      value: 0.0063344915
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[ 7]
+      value: -0.016877474
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[ 8]
+      value: -0.001047843
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[ 9]
+      value: 0.0837165
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[10]
+      value: -0.039013572
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[11]
+      value: 0.08248443
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[12]
+      value: -0.030093456
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[13]
+      value: 0.006802009
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[14]
+      value: -0.018643914
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[15]
+      value: 0.005397563
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[16]
+      value: -0.014381145
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[17]
+      value: -0.00089285773
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[18]
+      value: 0.032083753
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[19]
+      value: -0.014951676
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[20]
+      value: 0.031611573
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[21]
+      value: -0.011533104
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[22]
+      value: 0.002606822
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[23]
+      value: -0.0071451473
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[24]
+      value: 0.0020685776
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[25]
+      value: -0.0055114715
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259623739298687613, guid: bb877006d3818064cad17145a4fe8358, type: 3}
+      propertyPath: m_SHForNormalization.sh[26]
+      value: -0.00034218133
+      objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_BakedTexture
       value: 
       objectReference: {fileID: 8900000, guid: 1eb872dbe7f01edd990107851375008b, type: 3}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[ 0]
-      value: 0.0014163317
+      value: 0.75292486
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[ 1]
-      value: 0.0015281207
+      value: -0.5174836
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[ 2]
-      value: 0.0005461897
+      value: 0.15157048
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[ 3]
-      value: -0.000093651935
+      value: -0.08464417
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[ 4]
-      value: -0.000049008322
+      value: -0.0075423704
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[ 5]
-      value: 0.0002858226
+      value: -0.04288357
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[ 6]
-      value: -0.000049862727
+      value: -0.024485795
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[ 7]
-      value: -0.000017516833
+      value: -0.08082469
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[ 8]
-      value: -0.0001991666
+      value: -0.16530916
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[ 9]
-      value: 0.0060991673
+      value: 3.0247254
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[10]
-      value: 0.0026308312
+      value: -2.0182374
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[11]
-      value: -0.00024062686
+      value: 0.600217
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[12]
-      value: -0.0009398052
+      value: -0.3450554
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[13]
-      value: 0.0006364385
+      value: -0.028781606
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[14]
-      value: 0.00084133283
+      value: -0.16724408
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[15]
-      value: -0.00018564913
+      value: -0.1018325
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[16]
-      value: 0.00060493994
+      value: -0.3167012
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[17]
-      value: -0.000442575
+      value: -0.6683944
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[18]
-      value: 0.032321803
+      value: 3.5276034
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[19]
-      value: -0.016533237
+      value: -2.3924315
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[20]
-      value: -0.017086336
+      value: 0.6270372
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[21]
-      value: -0.021194126
+      value: -0.46958566
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[22]
-      value: 0.0034867476
+      value: -0.005084732
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[23]
-      value: 0.003565102
+      value: -0.17638779
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[24]
-      value: -0.0004382923
+      value: -0.11647852
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[25]
-      value: 0.0066394713
+      value: -0.30541348
       objectReference: {fileID: 0}
     - target: {fileID: 7259623739656811033, guid: bb877006d3818064cad17145a4fe8358, type: 3}
       propertyPath: m_SHForNormalization.sh[26]
-      value: 0.0005859077
+      value: -0.75029075
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb877006d3818064cad17145a4fe8358, type: 3}
