@@ -1,6 +1,7 @@
 using Characters.Player;
 using Matters.Velocity;
 using Objects.Interaction;
+using Sound;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -92,6 +93,7 @@ namespace Weapons.Actions
                 return;
             }
 
+            SoundManager.Instance.Stop("LumoAbilityContinue");
             _AWmessageBroker.OnReset?.Invoke();
             _messageBroker.OnReset?.Invoke();
             _lumoAnimator.RotationReset();

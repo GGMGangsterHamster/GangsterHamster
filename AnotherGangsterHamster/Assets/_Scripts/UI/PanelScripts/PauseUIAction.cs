@@ -1,6 +1,7 @@
 using Characters.Player;
 using Objects.Trigger;
 using Setting.VO;
+using Sound;
 using Stages.Management;
 using UI.Screen;
 using UnityEngine;
@@ -82,6 +83,7 @@ namespace UI.PanelScripts
             gameRestartButton.onClick.AddListener(() =>
             {
                 SceneManager.LoadScene(gameObject.scene.name);
+                SoundManager.Instance.StopAll();
                 Utils.LockCursor();
                 Utils.MoveTime();
                 // ������ ���������� �����
