@@ -5,7 +5,7 @@ namespace Stages.Management
       NONE = -2,
       StoryStage_0_1,
       StoryStage_0_2,
-      GrandStage_T,
+      GrandStages_T,
       GrandStages_Front,
       GrandStages_Mid,
       GrandStages_MidEnd,
