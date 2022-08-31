@@ -1,6 +1,7 @@
 using Characters.Player.OnGround;
 using Objects.InteractableObjects;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Objects.StageObjects.CollisionEventable
 {
@@ -8,6 +9,7 @@ namespace Objects.StageObjects.CollisionEventable
     public class Glass : MonoBehaviour, IEventable
     {
         public float MaximunKineticEnergy = 10.0f;
+        public UnityEvent OnBreak;
 
         CollisionInteractableObject _colInteractable;
 
@@ -24,6 +26,7 @@ namespace Objects.StageObjects.CollisionEventable
                 if (MaximunKineticEnergy < _colInteractable.colVelocity.magnitude * rigid.mass)
                 {
                     other.GetComponentInChildren<OnGround>()?.ExitGround();
+                    OnBreak.Invoke();
                     gameObject.SetActive(false);
                 }
             }
