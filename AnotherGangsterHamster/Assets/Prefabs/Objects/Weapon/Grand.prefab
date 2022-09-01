@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 23190554709152462}
   - component: {fileID: 4857206529191508489}
   - component: {fileID: 9194106024689850141}
-  - component: {fileID: 4857206529191508490}
   - component: {fileID: 4857206529191508492}
   - component: {fileID: 2422185822500664307}
   - component: {fileID: 6120117957624118534}
@@ -65,7 +64,7 @@ MonoBehaviour:
   fireSpeed: 6.6
   weaponDamage: 0
   WeaponKeyCodePath: KeyCodes/Weapons.json
-  resizeSpeed: 0.45
+  resizeSpeed: 0.7
   chargeSpeed: 1.5
   reboundPower: 3.5
   alphaToZeroSpeed: 2
@@ -163,6 +162,8 @@ MonoBehaviour:
           m_CallState: 2
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
+  <Activated>k__BackingField: 0
+  <MultipleInteractable>k__BackingField: 0
   colNormalVec: {x: 0, y: 0, z: 0}
   colVelocity: {x: 0, y: 0, z: 0}
   colPosition: {x: 0, y: 0, z: 0}
@@ -219,61 +220,10 @@ MonoBehaviour:
         m_Calls: []
   <EventIsToggle>k__BackingField: 1
   <InitalActiveStatus>k__BackingField: 0
+  <Activated>k__BackingField: 0
+  <MultipleInteractable>k__BackingField: 0
   colPosition: {x: 0, y: 0, z: 0}
   isOn: 1
---- !u!114 &4857206529191508490
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4857206529191508533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8476a3bdbcdf96b058a4f960b4883763, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _callbacks:
-  - key: BTYPEOBJECT
-    OnActive:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4857206529191508491}
-          m_TargetAssemblyTypeName: Weapons.Actions.Grand, Assembly-CSharp
-          m_MethodName: BAndATypeObjCollisionEnterEvent
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    OnDeactive:
-      m_PersistentCalls:
-        m_Calls: []
-  - key: ATYPEOBJECT
-    OnActive:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 4857206529191508491}
-          m_TargetAssemblyTypeName: Weapons.Actions.Grand, Assembly-CSharp
-          m_MethodName: BAndATypeObjCollisionEnterEvent
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    OnDeactive:
-      m_PersistentCalls:
-        m_Calls: []
-  <EventIsToggle>k__BackingField: 0
-  <InitalActiveStatus>k__BackingField: 0
 --- !u!114 &4857206529191508492
 MonoBehaviour:
   m_ObjectHideFlags: 0
