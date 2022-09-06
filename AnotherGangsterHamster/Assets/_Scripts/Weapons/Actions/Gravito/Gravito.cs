@@ -108,7 +108,7 @@ namespace Weapons.Actions
                         _alpha = 1;
                         Color temp = _dropPoint.GetComponent<MeshRenderer>().material.color;
                         _dropPoint.GetComponent<MeshRenderer>().material.color = new Color(temp.r, temp.g, temp.b, 1);
-                        _dropPoint.rotation = Quaternion.LookRotation(-_aTypeHit.normal) * Quaternion.LookRotation(Vector3.up);
+                        _dropPoint.rotation = Quaternion.LookRotation(-_aTypeHit.normal);
                     }
                 }
             };
@@ -165,7 +165,7 @@ namespace Weapons.Actions
                 GravityManager.ChangeGlobalGravityDirection(-_currentChangeGravityDir);
                 _playerGravity.AffectedByGlobalGravity = true;
 
-                _dropPoint.rotation = Quaternion.identity;
+                _dropPoint.rotation = Quaternion.LookRotation(new Vector3(0, 90, 0));
             }
         }
 
