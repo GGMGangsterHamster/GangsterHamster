@@ -40,6 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 746144845}
+  - component: {fileID: 3254945515786525154}
   m_Layer: 6
   m_Name: PLAYER_CAM
   m_TagString: PLAYER_CAMERA_LOCK
@@ -62,6 +63,21 @@ Transform:
   m_Father: {fileID: 1323916721}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3254945515786525154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746144844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ad443cfe24d82f40b1fa05c0c13f879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frequency: 7
+  magnitude: 0.03
+  rollbackSpeed: 3
 --- !u!1 &923426876
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,6 +455,7 @@ MonoBehaviour:
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
   <Activated>k__BackingField: 0
+  <MultipleInteractable>k__BackingField: 0
 --- !u!114 &396012075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,6 +491,7 @@ MonoBehaviour:
   <EventIsToggle>k__BackingField: 1
   <InitalActiveStatus>k__BackingField: 0
   <Activated>k__BackingField: 0
+  <MultipleInteractable>k__BackingField: 0
 --- !u!114 &1421402922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,3 +740,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c83efc66df2bcca80f3b177adb9ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1029 &102900000
+DefaultAsset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PlayerBase
+  m_Message: .prefab file is not a prefab. There are no GameObjects in the file.
+    Did you give the asset the wrong extension?
+  m_IsWarning: 1
