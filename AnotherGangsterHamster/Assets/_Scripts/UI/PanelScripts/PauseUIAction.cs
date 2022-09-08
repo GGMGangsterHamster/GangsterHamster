@@ -38,6 +38,7 @@ namespace UI.PanelScripts
 
             _soundScrollbar.value = soundVO.master;
             _sensitivityScrollbar.value = sensitivityVO.sensitivity;
+            SoundManager.Instance.MuteSound(true);
         }
 
         public override void DeActivationActions()
@@ -47,6 +48,7 @@ namespace UI.PanelScripts
 
             Utils.VOToJson(_soundPath, soundVO);
             Utils.VOToJson(_sensitivityPath, sensitivityVO);
+            SoundManager.Instance.MuteSound(false);
         }
 
         public override void InitActions()
@@ -75,6 +77,8 @@ namespace UI.PanelScripts
 
             goTitleButton.onClick.AddListener(() =>
             {
+                SoundManager.Instance.StopAll();
+                SoundManager.Instance.MuteSound(false);
                 SceneManager.LoadScene(StageNames.Title.ToString());
                 Utils.MoveTime();
                 // ���� UI ��Ȱ��ȭ ��Ű�� "Title UI"�� ��ȯ

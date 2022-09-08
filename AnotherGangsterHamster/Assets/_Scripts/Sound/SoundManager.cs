@@ -116,5 +116,16 @@ namespace Sound
                 }
             }
         }
+
+        public void MuteSound(bool status)
+        {
+            _curPlayingAudioSource
+                .Values
+                .ToList()
+                .ForEach(x => {
+                    if (x != null && x.gameObject.activeSelf)
+                        x.mute = status;
+                });
+        }
     }
 }
