@@ -115,8 +115,11 @@ namespace Weapons.Actions
             grandGaugeBar_Lv1 = GameObject.Find("GrandGauge_Bar_Lv1").GetComponent<Image>();
             grandGaugeBar_Lv2 = GameObject.Find("GrandGauge_Bar_Lv2").GetComponent<Image>();
 
-            grandGaugeBar_Lv1.color = new Color(1, 1, 1, 0);
-            grandGaugeBar_Lv2.color = new Color(1, 1, 1, 0);
+            grandGaugeBar_Lv1.color = new Color(1, 1, 1, 0.117f);
+            grandGaugeBar_Lv2.color = new Color(1, 1, 1, 0.117f);
+
+            grandGaugeBar_Lv1.fillAmount = 0;
+            grandGaugeBar_Lv2.fillAmount = 0;
 
             _dropPoint = transform.GetChild(0);
             _dropLineRenderer = transform.GetChild(1).GetComponent<LineRenderer>();
@@ -245,8 +248,11 @@ namespace Weapons.Actions
                 grandLv2Model.SetActive(false);
                 grandLv3Model.SetActive(false);
 
-                grandGaugeBar_Lv1.color = new Color(1, 1, 1, 0);
-                grandGaugeBar_Lv2.color = new Color(1, 1, 1, 0);
+                grandGaugeBar_Lv1.color = new Color(1, 1, 1, 0.117f);
+                grandGaugeBar_Lv2.color = new Color(1, 1, 1, 0.117f);
+
+                grandGaugeBar_Lv1.fillAmount = 0;
+                grandGaugeBar_Lv2.fillAmount = 0;
 
                 (_myCollider as BoxCollider).size = Vector3.one * _sizeLevelValue[_currentSizeLevel];
 
@@ -305,19 +311,19 @@ namespace Weapons.Actions
 
                         if (_currentSizeLevel == GrandSizeLevel.OneGrade)
                         {
-                            grandGaugeBar_Lv1.color = new Color(1, 1, 1, (_weaponUsedTime * 2) / fullChangeTime );
+                            grandGaugeBar_Lv1.color = new Color(1, 1, 1, Mathf.Clamp((_weaponUsedTime * 2) / fullChangeTime, 0.117f, 1f) );
+                            grandGaugeBar_Lv1.fillAmount = Mathf.Clamp((_weaponUsedTime * 2) / fullChangeTime, 0, 1);
 
-                            if((_weaponUsedTime * 2) > fullChangeTime)
+                            if ((_weaponUsedTime * 2) > fullChangeTime)
                             {
-                                grandGaugeBar_Lv2.color = new Color(1, 1, 1, (_weaponUsedTime - (fullChangeTime / 2)) / fullChangeTime);
+                                grandGaugeBar_Lv2.color = new Color(1, 1, 1, Mathf.Clamp((_weaponUsedTime - (fullChangeTime / 2)) / (fullChangeTime / 2), 0.117f, 1f));
+                                grandGaugeBar_Lv2.fillAmount = Mathf.Clamp((_weaponUsedTime - (fullChangeTime / 2)) / (fullChangeTime / 2), 0, 1);
                             }
-
-                            Debug.Log("one");
                         }
                         if (_currentSizeLevel == GrandSizeLevel.TwoGrade)
                         {
-                            grandGaugeBar_Lv2.color = new Color(1, 1, 1, _weaponUsedTime / fullChangeTime);
-                            Debug.Log("two");
+                            grandGaugeBar_Lv2.color = new Color(1, 1, 1, Mathf.Clamp(_weaponUsedTime / fullChangeTime, 0.117f, 1f));
+                            grandGaugeBar_Lv2.fillAmount = Mathf.Clamp(_weaponUsedTime / fullChangeTime, 0, 1);
                         }
                         // 차징 되는 UI 보여주기
 
@@ -396,6 +402,29 @@ namespace Weapons.Actions
 
                         _cain.localScale = Vector3.one / Mathf.Lerp(1, _sizeLevelValue[_currentSizeLevel] / _sizeLevelValue[_beforeSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
                         _cain_nucleus.localScale = Vector3.one / Mathf.Lerp(1, _sizeLevelValue[_currentSizeLevel] / _sizeLevelValue[_beforeSizeLevel], Mathf.Clamp(_currentLerpTime / resizeSpeed, 0, 0.99f));
+
+                        if(_currentSizeLevel == GrandSizeLevel.OneGrade)
+                        {
+                            grandGaugeBar_Lv2.fillAmount = Mathf.Clamp(grandGaugeBar_Lv2.fillAmount - Time.deltaTime * chargeSpeed * 2, 0, 1);
+                            grandGaugeBar_Lv2.color = new Color(1, 1, 1, Mathf.Clamp(grandGaugeBar_Lv2.fillAmount - Time.deltaTime * chargeSpeed * 2, 0.117f, 1f) );
+
+                            if(grandGaugeBar_Lv2.fillAmount <= 0.1f)
+                            {
+                                grandGaugeBar_Lv1.fillAmount = Mathf.Clamp(grandGaugeBar_Lv1.fillAmount - Time.deltaTime * chargeSpeed * 2, 0, 1);
+                                grandGaugeBar_Lv1.color = new Color(1, 1, 1, Mathf.Clamp(grandGaugeBar_Lv1.fillAmount - Time.deltaTime * chargeSpeed * 2, 0.117f, 1f));
+                            }
+                        }
+                        else if(_currentSizeLevel == GrandSizeLevel.TwoGrade)
+                        {
+                            grandGaugeBar_Lv1.fillAmount = Mathf.Clamp(grandGaugeBar_Lv1.fillAmount + Time.deltaTime * chargeSpeed, 0, 1);
+                            grandGaugeBar_Lv2.fillAmount = Mathf.Clamp(grandGaugeBar_Lv2.fillAmount - Time.deltaTime * chargeSpeed, 0, 1);
+                        }
+                        else if(_currentSizeLevel == GrandSizeLevel.FourGrade)
+                        {
+                            grandGaugeBar_Lv1.fillAmount = Mathf.Clamp(grandGaugeBar_Lv1.fillAmount + Time.deltaTime * chargeSpeed, 0, 1);
+                            grandGaugeBar_Lv2.fillAmount = Mathf.Clamp(grandGaugeBar_Lv2.fillAmount + Time.deltaTime * chargeSpeed, 0, 1);
+                        }
+                        //Time.deltaTime* chargeSpeed
                     }
                     break;
                     
@@ -436,6 +465,31 @@ namespace Weapons.Actions
                !CanResize(Vector3.right) ||
                !CanResize(Vector3.forward))
             {
+                if (_currentSizeLevel == GrandSizeLevel.OneGrade)
+                {
+                    grandGaugeBar_Lv1.color = new Color(1, 1, 1, 0.117f);
+                    grandGaugeBar_Lv2.color = new Color(1, 1, 1, 0.117f);
+
+                    grandGaugeBar_Lv1.fillAmount = 0;
+                    grandGaugeBar_Lv2.fillAmount = 0;
+                }
+                if (_currentSizeLevel == GrandSizeLevel.TwoGrade)
+                {
+                    grandGaugeBar_Lv1.color = new Color(1, 1, 1, 1);
+                    grandGaugeBar_Lv2.color = new Color(1, 1, 1, 0.117f);
+
+                    grandGaugeBar_Lv1.fillAmount = 1;
+                    grandGaugeBar_Lv2.fillAmount = 0;
+                }
+                else if (_currentSizeLevel == GrandSizeLevel.FourGrade)
+                {
+                    grandGaugeBar_Lv1.color = new Color(1, 1, 1, 1);
+                    grandGaugeBar_Lv2.color = new Color(1, 1, 1, 1);
+
+                    grandGaugeBar_Lv1.fillAmount = 1;
+                    grandGaugeBar_Lv2.fillAmount = 1;
+                }
+
                 return;
             }
 
@@ -502,22 +556,13 @@ namespace Weapons.Actions
                 _cain_nucleus = grandLv3Model.transform.Find("cain_nucleus");
             }
 
-
-            if (_currentSizeLevel == GrandSizeLevel.OneGrade)
-            {
-                Debug.Log("one111");
-                grandGaugeBar_Lv1.color = new Color(1, 1, 1, 0);
-                grandGaugeBar_Lv2.color = new Color(1, 1, 1, 0);
-            }
             if (_currentSizeLevel == GrandSizeLevel.TwoGrade)
             {
-                Debug.Log("two111");
                 grandGaugeBar_Lv1.color = new Color(1, 1, 1, 1);
-                grandGaugeBar_Lv2.color = new Color(1, 1, 1, 0);
+                grandGaugeBar_Lv2.color = new Color(1, 1, 1, 0.117f);
             }
             else if (_currentSizeLevel == GrandSizeLevel.FourGrade)
             {
-                Debug.Log("four111");
                 grandGaugeBar_Lv1.color = new Color(1, 1, 1, 1);
                 grandGaugeBar_Lv2.color = new Color(1, 1, 1, 1);
             }
