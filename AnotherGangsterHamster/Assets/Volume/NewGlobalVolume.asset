@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 384c4d03a551c44448145f4093304119, type: 3}
   m_Name: ScreenSpaceReflection
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   quality:
     m_OverrideState: 1
     m_Value: 2
@@ -27,10 +27,10 @@ MonoBehaviour:
     m_Value: 1
   m_MinSmoothness:
     m_OverrideState: 1
-    m_Value: 0.25
+    m_Value: 0.53
   m_SmoothnessFadeStart:
     m_OverrideState: 1
-    m_Value: 0.85
+    m_Value: 1
   reflectSky:
     m_OverrideState: 1
     m_Value: 0
@@ -39,10 +39,10 @@ MonoBehaviour:
     m_Value: 0
   depthBufferThickness:
     m_OverrideState: 1
-    m_Value: 0.25
+    m_Value: 0.213
   screenFadeDistance:
     m_OverrideState: 1
-    m_Value: 0.1
+    m_Value: 0.65
   accumulationFactor:
     m_OverrideState: 0
     m_Value: 0.75
@@ -166,10 +166,10 @@ MonoBehaviour:
     m_Value: 2
   threshold:
     m_OverrideState: 1
-    m_Value: 3.5
+    m_Value: 3.2
   intensity:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0.4
   scatter:
     m_OverrideState: 1
     m_Value: 0.7
@@ -181,7 +181,7 @@ MonoBehaviour:
     m_Value: {fileID: 2800000, guid: 3e13a3d6a09b13193beddec769753847, type: 3}
   dirtIntensity:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 2.5
   anamorphic:
     m_OverrideState: 0
     m_Value: 1
@@ -280,9 +280,9 @@ MonoBehaviour:
   - {fileID: -8256946365019729027}
   - {fileID: 5925112102912449387}
   - {fileID: 3193349095940843658}
+  - {fileID: -8685150370718151839}
   - {fileID: 1646039332734980906}
   - {fileID: 3874379164528610951}
-  - {fileID: -8685150370718151839}
   - {fileID: -7242722348694726294}
 --- !u!114 &1646039332734980906
 MonoBehaviour:
@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42ef2681fa3dc8c4fa031f044e68c63f, type: 3}
   m_Name: GlobalIllumination
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   quality:
     m_OverrideState: 1
     m_Value: 3
@@ -342,7 +342,7 @@ MonoBehaviour:
     m_Value: 0
   m_DenoiserRadiusSS:
     m_OverrideState: 1
-    m_Value: 0.85
+    m_Value: 0.8
   m_SecondDenoiserPassSS:
     m_OverrideState: 1
     m_Value: 1
@@ -414,7 +414,7 @@ MonoBehaviour:
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 1.15
   directLightingStrength:
     m_OverrideState: 1
     m_Value: 0
@@ -486,24 +486,24 @@ MonoBehaviour:
   active: 1
   mode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 3
   toeStrength:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 0.13
   toeLength:
-    m_OverrideState: 0
-    m_Value: 0.5
+    m_OverrideState: 1
+    m_Value: 0.4
   shoulderStrength:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 0.635
   shoulderLength:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.5
   shoulderAngle:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 0.749
   gamma:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
   lutTexture:
     m_OverrideState: 0
@@ -557,19 +557,19 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 0
-    m_Value: 0.43
+    m_Value: 0
   contrast:
-    m_OverrideState: 1
-    m_Value: 1
+    m_OverrideState: 0
+    m_Value: 0
   colorFilter:
     m_OverrideState: 0
     m_Value: {r: 1, g: 0.98099697, b: 0.9292453, a: 1}
   hueShift:
     m_OverrideState: 0
-    m_Value: 0
+    m_Value: 99
   saturation:
     m_OverrideState: 1
-    m_Value: -11.5
+    m_Value: -8
 --- !u!114 &8113357139365093782
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -600,10 +600,10 @@ MonoBehaviour:
     m_Value: 0.5
   limitMin:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 2.85
   limitMax:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 5.5
   curveMap:
     m_OverrideState: 0
     m_Value:
