@@ -7,6 +7,7 @@ using Objects.InteractableObjects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Weapons.Actions.Broker;
 
 // 기능 코드는 100줄 남짓
@@ -37,7 +38,6 @@ namespace Weapons.Actions
             set => isCanChangeTwoStep = value;
         }
 
-        private Transform chargeBar;
         private Transform _dropPoint;
         private LineRenderer _dropLineRenderer;
 
@@ -65,22 +65,13 @@ namespace Weapons.Actions
                     return 0f;
             }
         }
-        private float ChargeBarValue
-        {
-            get
-            {
-                if (_currentSizeLevel == GrandSizeLevel.OneGrade)
-                    return _weaponUsedTime;
-                else if (_currentSizeLevel == GrandSizeLevel.TwoGrade)
-                    return 0.5f + _weaponUsedTime;
-                else
-                    return 1f;
-            }
-        }
 
         private GameObject grandLv1Model;
         private GameObject grandLv2Model;
         private GameObject grandLv3Model;
+
+        private Image grandGaugeBar_Lv1;
+        private Image grandGaugeBar_Lv2;
 
         private Transform _cain;
         private Transform _cain_nucleus;
@@ -121,13 +112,17 @@ namespace Weapons.Actions
             _enterCollision = GetComponent<CollisionInteractableObject>();
             _stayCollision = GetComponent<CollisionStayInteractableObject>();
 
+            grandGaugeBar_Lv1 = GameObject.Find("GrandGauge_Bar_Lv1").GetComponent<Image>();
+            grandGaugeBar_Lv2 = GameObject.Find("GrandGauge_Bar_Lv2").GetComponent<Image>();
+
+            grandGaugeBar_Lv1.color = new Color(1, 1, 1, 0);
+            grandGaugeBar_Lv2.color = new Color(1, 1, 1, 0);
+
             _dropPoint = transform.GetChild(0);
             _dropLineRenderer = transform.GetChild(1).GetComponent<LineRenderer>();
 
             _dropPoint.parent = WeaponObjectParentTransform;
             _dropLineRenderer.transform.parent = WeaponObjectParentTransform;
-
-            chargeBar = GameObject.Find("ChargeBar").transform;
 
             _myFollowGroundPos = GetComponent<FollowGroundPos>();
             _playerFollowGroundPos = PlayerBaseTransform.GetComponent<FollowGroundPos>();
@@ -239,10 +234,6 @@ namespace Weapons.Actions
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
                 transform.localScale = Vector3.one;
 
-                chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ?
-                                                           0 :
-                                                           _sizeLevelValue[_currentSizeLevel] * 0.25f, 1, 1);
-
                 transform.position = HandPosition;
                 transform.rotation = Quaternion.identity;
                 _myRigid.angularVelocity = Vector3.zero;
@@ -250,10 +241,12 @@ namespace Weapons.Actions
                 _weaponUsedTime = 0f;
                 _myRigid.constraints = RigidbodyConstraints.FreezeAll;
 
-
                 grandLv1Model.SetActive(true);
                 grandLv2Model.SetActive(false);
                 grandLv3Model.SetActive(false);
+
+                grandGaugeBar_Lv1.color = new Color(1, 1, 1, 0);
+                grandGaugeBar_Lv2.color = new Color(1, 1, 1, 0);
 
                 (_myCollider as BoxCollider).size = Vector3.one * _sizeLevelValue[_currentSizeLevel];
 
@@ -309,7 +302,23 @@ namespace Weapons.Actions
                     if (Input.GetKey(_useKeycode))
                     {
                         _weaponUsedTime += Time.deltaTime * chargeSpeed;
-                        chargeBar.localScale = new Vector3(ChargeBarValue, 1, 1);
+
+                        if (_currentSizeLevel == GrandSizeLevel.OneGrade)
+                        {
+                            grandGaugeBar_Lv1.color = new Color(1, 1, 1, (_weaponUsedTime * 2) / fullChangeTime );
+
+                            if((_weaponUsedTime * 2) > fullChangeTime)
+                            {
+                                grandGaugeBar_Lv2.color = new Color(1, 1, 1, (_weaponUsedTime - (fullChangeTime / 2)) / fullChangeTime);
+                            }
+
+                            Debug.Log("one");
+                        }
+                        if (_currentSizeLevel == GrandSizeLevel.TwoGrade)
+                        {
+                            grandGaugeBar_Lv2.color = new Color(1, 1, 1, _weaponUsedTime / fullChangeTime);
+                            Debug.Log("two");
+                        }
                         // 차징 되는 UI 보여주기
 
                         if (_weaponUsedTime >= fullChangeTime)
@@ -440,8 +449,6 @@ namespace Weapons.Actions
             _weaponUsedTime = 0f;
             _currentLerpTime = 0f;
             _beforeWeaponSize = transform.localScale.x;
-            chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ? 0 : _sizeLevelValue[_currentSizeLevel] * 0.25f
-                                                , 1, 1);
 
             // 이런 저런 조건에 맞으면 플레이어에게 반동을 주고 데미지도 줌
             // 1. 작아지는 경우라면 실행 안함
@@ -494,6 +501,26 @@ namespace Weapons.Actions
                 _cain = grandLv3Model.transform.Find("cain");
                 _cain_nucleus = grandLv3Model.transform.Find("cain_nucleus");
             }
+
+
+            if (_currentSizeLevel == GrandSizeLevel.OneGrade)
+            {
+                Debug.Log("one111");
+                grandGaugeBar_Lv1.color = new Color(1, 1, 1, 0);
+                grandGaugeBar_Lv2.color = new Color(1, 1, 1, 0);
+            }
+            if (_currentSizeLevel == GrandSizeLevel.TwoGrade)
+            {
+                Debug.Log("two111");
+                grandGaugeBar_Lv1.color = new Color(1, 1, 1, 1);
+                grandGaugeBar_Lv2.color = new Color(1, 1, 1, 0);
+            }
+            else if (_currentSizeLevel == GrandSizeLevel.FourGrade)
+            {
+                Debug.Log("four111");
+                grandGaugeBar_Lv1.color = new Color(1, 1, 1, 1);
+                grandGaugeBar_Lv2.color = new Color(1, 1, 1, 1);
+            }
         }
 
         /// 조건설명
@@ -522,11 +549,6 @@ namespace Weapons.Actions
                         _currentGrandStatus = GrandStatus.LosePower;
                         _weaponUsedTime = 0f;
                         _currentLerpTime = 0f;
-
-                        chargeBar.localScale = new Vector3(_currentSizeLevel == GrandSizeLevel.OneGrade ?
-                                                            0 :
-                                                            _sizeLevelValue[_currentSizeLevel] * 0.25f, 1, 1);
-
                         return false;
                     }
                 }
