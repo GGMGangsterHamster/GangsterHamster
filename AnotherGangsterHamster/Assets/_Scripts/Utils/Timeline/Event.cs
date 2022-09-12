@@ -1,23 +1,14 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Timeline
 {
     [Serializable]
-    public enum Type
-    {
-        TIMED,
-        EXECUTE_AFTER,
-        EXECUTE_ON_SATISFIED,
-    }
-
-    [Serializable]
     public class Event
     {
-        // public Type type = Type.TIMED;
         public string key = "";
-        public bool satisfied = true;
         
         public UnityEvent actions
          = new UnityEvent();
@@ -33,6 +24,22 @@ namespace Timeline
     public class ExecuteAfterEvent : TimedEvent
     {
         public string eventBefore = "";
+    }
+
+    [Serializable]
+    public class ExecuteOnSatisfiedEvent : Event
+    {
+        [HideInInspector]
+        public bool satisfied = false;
+
+        public List<Objects.IActivated> requirements
+            = new List<Objects.IActivated>();
+
+        public void OnStatusChanged()
+        {
+            if (requirements.Find(x => !x.Activated) == null)
+                satisfied = true;
+        }
     }
     
 }

@@ -12,8 +12,8 @@ namespace Timeline
         public List<ExecuteAfterEvent> executeAfterEvents
             = new List<ExecuteAfterEvent>();
 
-        public List<Event> executeOnSatisfiedEvents
-            = new List<Event>();
+        public List<ExecuteOnSatisfiedEvent> executeOnSatisfiedEvents
+            = new List<ExecuteOnSatisfiedEvent>();
 
         private void Start()
         {
@@ -35,7 +35,7 @@ namespace Timeline
             ExecuteFollowingEvents(@event.key);
         }
 
-        IEnumerator SatisfiedEventLoop(Event @event)
+        IEnumerator SatisfiedEventLoop(ExecuteOnSatisfiedEvent @event)
         {
             yield return new WaitUntil(() => @event.satisfied);
 
