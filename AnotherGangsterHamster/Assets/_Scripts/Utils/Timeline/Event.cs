@@ -32,13 +32,26 @@ namespace Timeline
         [HideInInspector]
         public bool satisfied = false;
 
-        public List<Objects.IActivated> requirements
-            = new List<Objects.IActivated>();
+        public List<GameObject> requirements
+            = new List<GameObject>();
 
-        public void OnStatusChanged()
+        public void Init()
         {
-            if (requirements.Find(x => !x.Activated) == null)
-                satisfied = true;
+            WaitForEndOfFrame wait = new WaitForEndOfFrame();
+            List<Objects.IActivated> req = new List<Objects.IActivated>();
+
+            requirements.ForEach(x => {
+                req.Add(x.GetComponent<Objects.IActivated>());
+            });
+
+            CoroutineCaller
+                .Instance
+                .Use(() => !satisfied,
+                    () => wait,
+                    () => {
+                        if (req.Find(x => !x.Activated) == null)
+                            satisfied = true;
+                    });
         }
     }
     

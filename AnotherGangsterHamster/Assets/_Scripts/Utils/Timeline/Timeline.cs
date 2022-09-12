@@ -17,12 +17,13 @@ namespace Timeline
 
         private void Start()
         {
-            timedEvents.ForEach(x => {
-                StartCoroutine(TimedEventLoop(x));
+            timedEvents.ForEach(@event => {
+                StartCoroutine(TimedEventLoop(@event));
             });
 
-            executeOnSatisfiedEvents.ForEach(x => {
-                StartCoroutine(SatisfiedEventLoop(x));
+            executeOnSatisfiedEvents.ForEach(@event => {
+                @event.Init();
+                StartCoroutine(SatisfiedEventLoop(@event));
             });
         }
 
