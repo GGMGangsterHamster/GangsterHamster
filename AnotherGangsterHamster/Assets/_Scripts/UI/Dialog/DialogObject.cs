@@ -34,8 +34,7 @@ namespace UI.Dialog
 
             ValueTween.To(this, () => {
                 t += step * Time.deltaTime;
-                _cvsGroup.alpha = HALF_PI / Mathf.Sin(t);
-                Debug.LogWarning(HALF_PI / Mathf.Sin(t) + " IN");
+                _cvsGroup.alpha = Mathf.Sin(t);
             }, () => t >= HALF_PI, () => {
                 _cvsGroup.alpha = 1.0f;
             });
@@ -51,9 +50,8 @@ namespace UI.Dialog
 
             ValueTween.To(this, () => {
                 t += step * Time.deltaTime;
-                _cvsGroup.alpha = HALF_PI - Mathf.Sin(t);
-                Debug.LogWarning(HALF_PI - Mathf.Sin(t) + " OUT");
-            }, () => t <= -HALF_PI, () => {
+                _cvsGroup.alpha = 1.0f - Mathf.Sin(t);
+            }, () => t >= HALF_PI, () => {
                 _cvsGroup.alpha = 0.0f;
                 gameObject.SetActive(false);
             });
