@@ -62,4 +62,5 @@ public class InnerDialog
 {
    public int id;
    public string text;
+   public float duration;
 }
