@@ -43,9 +43,6 @@ namespace Weapons.Actions
 
         private CollisionInteractableObject _enterCollision;
         private CollisionStayInteractableObject _stayCollision;
-        
-        // WeaponEvents Singleton 패턴 피하기 위함
-        private WeaponEvents _events;
 
         private FollowGroundPos _myFollowGroundPos;
         private FollowGroundPos _playerFollowGroundPos;
@@ -98,7 +95,6 @@ namespace Weapons.Actions
         private new void Awake()
         {
             base.Awake();
-            _events = FindObjectOfType<WeaponEvents>();
             _weaponEnum = WeaponEnum.Grand;
             _myRigid.constraints = RigidbodyConstraints.FreezePosition;
 
@@ -376,17 +372,17 @@ namespace Weapons.Actions
 
                         if(_currentSizeLevel == GrandSizeLevel.OneGrade)
                         {
-                            _events?.ChangedMinSize?.Invoke();
+                            _messageBroker?.ChangedMinSize?.Invoke();
                         }
                         else
                         {
                             switch (jumpLevel)
                             {
                                 case 1:
-                                    _events?.ChangedOneStep?.Invoke();
+                                    _messageBroker?.ChangedOneStep?.Invoke();
                                     break;
                                 case 2:
-                                    _events?.ChangedTwoStep?.Invoke();
+                                    _messageBroker?.ChangedTwoStep?.Invoke();
                                     break;
                             }
                         }
@@ -494,7 +490,7 @@ namespace Weapons.Actions
             }
 
             _AWmessageBroker.OnUse?.Invoke();
-            _messageBroker.OnUse?.Invoke();
+            _messageBroker.OnUse?.Invoke((int)_currentSizeLevel);
 
             // 크기 변환 전 초기 작업
             float x, y, z;
