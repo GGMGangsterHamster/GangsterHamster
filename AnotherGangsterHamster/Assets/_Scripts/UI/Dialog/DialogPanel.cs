@@ -46,7 +46,7 @@ namespace UI.Dialog
             DialogObject obj
                 = _dialogPool.Find(x => !x.gameObject.activeSelf);
 
-            if (obj == null)
+            if (obj == null) // FIXME: 스팸할 경우 위치가 어긋남
                 obj = Add();
 
             obj.Enable(text);
@@ -57,25 +57,7 @@ namespace UI.Dialog
 
                 for (int i = 0; i < arr.Length; ++i)
                 {
-                    RectTransform trm
-                        = arr[i].GetComponent<RectTransform>();
-
-                    Vector2 pos    = trm.anchoredPosition;
-                    Vector2 target = trm.anchoredPosition;
-                    target.y -= yPadding;
-
-                    float defaultYPos = trm.anchoredPosition.y;
-                    float step = yPushDuration / (HALF_PI / yPadding);
-                    float t = 0.0f;
-
-                    ValueTween.To(arr[i], () => {
-                        t += step * Time.deltaTime;
-                        pos.y = defaultYPos - Mathf.Sin(t) * yPadding;
-                        trm.anchoredPosition = pos;
-                        Debug.Log(trm.anchoredPosition);
-                    }, () => t >= HALF_PI, () => {
-                        trm.anchoredPosition = target;
-                    });
+                    arr[i].Move(yPadding, yPushDuration);
                 }
             }
 

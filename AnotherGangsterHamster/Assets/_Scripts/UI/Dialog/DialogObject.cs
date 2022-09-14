@@ -17,6 +17,15 @@ namespace UI.Dialog
         public float fadeinDuration  = 0.5f;
         public float fadeoutDuration = 0.8f;
 
+        private RectTransform _trm;
+        private Vector2 _target;
+        private Coroutine _movingRoutine;
+
+        private void Awake()
+        {
+            _trm = GetComponent<RectTransform>();
+        }
+
         /// <summary>
         /// 다이얼로그를 띄움
         /// </summary>
@@ -56,6 +65,32 @@ namespace UI.Dialog
                 callback?.Invoke();
 
                 gameObject.SetActive(false);
+            });
+        }
+
+        public void Move(float y, float duration)
+        {
+            if (_movingRoutine != null)
+            {
+                ValueTween.Stop(this, _movingRoutine);
+                _trm.anchoredPosition = _target;
+            }
+
+            Vector2 pos = _trm.anchoredPosition;
+            _target = _trm.anchoredPosition;
+            _target.y -= y;
+
+            float defaultYPos = pos.y;
+            float step = duration / (HALF_PI / y);
+            float t = 0.0f;
+
+            _movingRoutine = ValueTween.To(this, () => {
+                t += step * Time.deltaTime;
+                pos.y = defaultYPos - Mathf.Sin(t) * y;
+                _trm.anchoredPosition = pos;
+            }, () => t >= HALF_PI, () => {
+                _trm.anchoredPosition = _target;
+                _movingRoutine = null;
             });
         }
     }
