@@ -9,9 +9,6 @@ namespace UI
       [SerializeField] private Text _displayText;
       [SerializeField] private Text _singleChar;
 
-      private string _lastText = "";
-      private string _lastChar = "";
-
       private void Awake()
       {
          _displayText.text = "";

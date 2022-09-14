@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using Objects.Trigger;
+using Tween;
 
 namespace UI.Dialog
 {
     public class DialogPanel : MonoBehaviour
     {
         public RectTransform dialogLocation;
+        public float yPadding = 60.0f;
+        public float yPushDuration = 0.1f;
 
         private GameObject _dialogObject;
         private List<DialogObject> _dialogPool
@@ -44,6 +45,31 @@ namespace UI.Dialog
                 = _dialogPool.Find(x => !x.gameObject.activeSelf);
 
             obj.Enable(text);
+
+            if (_activeDialogPool.Count > 0)
+            {
+                DialogObject[] arr = _activeDialogPool.ToArray();
+
+                for (int i = 0; i < arr.Length; ++i)
+                {
+                    RectTransform trm
+                        = arr[i].GetComponent<RectTransform>();
+
+                    Vector3 pos = trm.position;
+                    Vector3 target = trm.position;
+                    target.y -= yPadding;
+                    float step = yPushDuration / yPadding;
+
+                    ValueTween.To(arr[i], () => {
+                        pos.y -= step * Time.deltaTime;
+                        trm.position = pos;
+                        Debug.Log(trm.position);
+                    }, () => trm.position.y <= target.y, () => {
+                        trm.position = target;
+                    });
+                }
+            }
+
             _activeDialogPool.Enqueue(obj);
         }
 
@@ -51,9 +77,8 @@ namespace UI.Dialog
         {
             if (_activeDialogPool.Count <= 0) return;
 
-            _activeDialogPool
-                .Dequeue()
-                .Disable();
+            DialogObject obj = _activeDialogPool.Dequeue();
+            obj.Disable(() => ValueTween.Stop(obj));
         }
     }
 }

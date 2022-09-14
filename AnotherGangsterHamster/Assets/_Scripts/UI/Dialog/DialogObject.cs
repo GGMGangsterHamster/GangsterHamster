@@ -12,7 +12,7 @@ namespace UI.Dialog
         [SerializeField] private TMP_Text _text;
         [SerializeField] private RectTransform _background;
         [SerializeField] private CanvasGroup _cvsGroup;
-        public Vector2 padding = new Vector2(10, 5);
+        public Vector2 padding = new Vector2(20, 10);
 
         public float fadeinDuration  = 0.5f;
         public float fadeoutDuration = 0.8f;
@@ -43,7 +43,7 @@ namespace UI.Dialog
         /// <summary>
         /// 다이얼로그를 비활성화함
         /// </summary>
-        public void Disable()
+        public void Disable(Action callback = null)
         {
             float step = HALF_PI / fadeoutDuration;
             float t = 0.0f;
@@ -53,6 +53,8 @@ namespace UI.Dialog
                 _cvsGroup.alpha = 1.0f - Mathf.Sin(t);
             }, () => t >= HALF_PI, () => {
                 _cvsGroup.alpha = 0.0f;
+                callback?.Invoke();
+
                 gameObject.SetActive(false);
             });
         }
