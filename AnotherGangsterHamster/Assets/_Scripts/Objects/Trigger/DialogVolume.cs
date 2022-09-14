@@ -68,10 +68,10 @@ namespace Objects.Trigger
             return _dialogs[id].text;
         }
 
-        public string Get()
+        public InnerDialog Get()
         {
             if (_curId > idEnd) return null;
-            return _dialogs[_curId++].text;
+            return _dialogs[_curId++];
         }
     }
 }
