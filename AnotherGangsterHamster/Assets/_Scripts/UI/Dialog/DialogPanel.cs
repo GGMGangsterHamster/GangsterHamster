@@ -76,5 +76,24 @@ namespace UI.Dialog
                     = dialogLocation.position;
             });
         }
+
+        public void DisableAll(bool fifs)
+        {
+            if (_activeDialogPool.Count <= 0) return;
+
+            DialogObject obj = _activeDialogPool.Dequeue();
+            
+            obj.Disable(() => {
+                ValueTween.Stop(obj);
+                obj.GetComponent<RectTransform>().position
+                    = dialogLocation.position;
+
+                if (fifs)
+                    DisableAll(fifs);
+            });
+
+            if (!fifs)
+                DisableAll(fifs);
+        }
     }
 }
