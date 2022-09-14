@@ -15,8 +15,6 @@ namespace UI.PanelScripts
         public Button optionButton;
         public Button exitButton;
 
-        string _fullpath = "stageData";
-
         public override void ActivationActions()
         {
 

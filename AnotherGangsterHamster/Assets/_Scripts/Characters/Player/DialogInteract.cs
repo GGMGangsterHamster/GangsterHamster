@@ -1,6 +1,6 @@
 using System;
 using Objects.Trigger;
-using UI.PanelScripts;
+using UI.Dialog;
 using UnityEngine;
 
 
@@ -23,8 +23,7 @@ namespace Characters.Player
                                         Resources.Load<GameObject>("UI/cvsDialog")
                                         ).GetComponent<DialogPanel>();
             }
-
-            _panelPrefab.Disable();
+            
             _panel = _panelPrefab;
         }
 
@@ -57,15 +56,15 @@ namespace Characters.Player
                 return;
             }
 
-            string text = _curActiveVolume.Get();
+            InnerDialog dialog = _curActiveVolume.Get();
 
-            if (text == null)
+            if (dialog == null)
             {
                 if (_curActiveVolume.disableWhenEnd)
                     Panel.Disable();
             }
             else
-                Panel.Show(text);
+                Panel.Display(dialog.text);
         }
     }
 }
