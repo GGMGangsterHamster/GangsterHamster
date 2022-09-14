@@ -6,6 +6,8 @@ namespace UI.Dialog
 {
     public class DialogPanel : MonoBehaviour
     {
+        const float HALF_PI = Mathf.PI / 2.0f;
+
         public RectTransform dialogLocation;
         public float yPadding = 60.0f;
         public float yPushDuration = 0.1f;
@@ -44,6 +46,9 @@ namespace UI.Dialog
             DialogObject obj
                 = _dialogPool.Find(x => !x.gameObject.activeSelf);
 
+            if (obj == null)
+                obj = Add();
+
             obj.Enable(text);
 
             if (_activeDialogPool.Count > 0)
@@ -55,17 +60,21 @@ namespace UI.Dialog
                     RectTransform trm
                         = arr[i].GetComponent<RectTransform>();
 
-                    Vector3 pos = trm.position;
-                    Vector3 target = trm.position;
+                    Vector2 pos    = trm.anchoredPosition;
+                    Vector2 target = trm.anchoredPosition;
                     target.y -= yPadding;
-                    float step = yPushDuration / yPadding;
+
+                    float defaultYPos = trm.anchoredPosition.y;
+                    float step = yPushDuration / (HALF_PI / yPadding);
+                    float t = 0.0f;
 
                     ValueTween.To(arr[i], () => {
-                        pos.y -= step * Time.deltaTime;
-                        trm.position = pos;
-                        Debug.Log(trm.position);
-                    }, () => trm.position.y <= target.y, () => {
-                        trm.position = target;
+                        t += step * Time.deltaTime;
+                        pos.y = defaultYPos - Mathf.Sin(t) * yPadding;
+                        trm.anchoredPosition = pos;
+                        Debug.Log(trm.anchoredPosition);
+                    }, () => t >= HALF_PI, () => {
+                        trm.anchoredPosition = target;
                     });
                 }
             }
@@ -78,7 +87,12 @@ namespace UI.Dialog
             if (_activeDialogPool.Count <= 0) return;
 
             DialogObject obj = _activeDialogPool.Dequeue();
-            obj.Disable(() => ValueTween.Stop(obj));
+            
+            obj.Disable(() => {
+                ValueTween.Stop(obj);
+                obj.GetComponent<RectTransform>().position
+                    = dialogLocation.position;
+            });
         }
     }
 }

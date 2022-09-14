@@ -346,12 +346,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5596332493673656554, guid: cba1e7bdf54fc86a08d4a5df7a7d51f0, type: 3}
+      propertyPath: yPadding
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 5596332493673656554, guid: cba1e7bdf54fc86a08d4a5df7a7d51f0, type: 3}
       propertyPath: _dialogText
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5596332493673656554, guid: cba1e7bdf54fc86a08d4a5df7a7d51f0, type: 3}
       propertyPath: yPushDuration
-      value: 1
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 5596332493673656554, guid: cba1e7bdf54fc86a08d4a5df7a7d51f0, type: 3}
       propertyPath: _dialogBackground
@@ -417,11 +421,12 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Hello
+            m_StringArgument: Beep
             m_BoolArgument: 0
           m_CallState: 2
     delay: 2
-  - key: dialog
+  executeAfterEvents:
+  - key: beep
     actions:
       m_PersistentCalls:
         m_Calls:
@@ -434,29 +439,155 @@ MonoBehaviour:
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: Gentoo
+            m_StringArgument: <color=#7777FF>BEEP
             m_BoolArgument: 0
           m_CallState: 2
-    delay: 4
-  executeAfterEvents:
-  - key: dialogdisable
+    delay: 1
+    eventBefore: init
+  - key: beep
     actions:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 431640461}
           m_TargetAssemblyTypeName: UI.Dialog.DialogPanel, Assembly-CSharp
-          m_MethodName: Disable
-          m_Mode: 1
+          m_MethodName: Display
+          m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: 
+            m_StringArgument: <color=#7777FF>BEEP
             m_BoolArgument: 0
           m_CallState: 2
-    delay: 5
-    eventBefore: dialog
+    delay: 1
+    eventBefore: init
+  - key: beep
+    actions:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 431640461}
+          m_TargetAssemblyTypeName: UI.Dialog.DialogPanel, Assembly-CSharp
+          m_MethodName: Display
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: <color=#7777FF>BEEP
+            m_BoolArgument: 0
+          m_CallState: 2
+    delay: 1.1
+    eventBefore: init
+  - key: beep
+    actions:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 431640461}
+          m_TargetAssemblyTypeName: UI.Dialog.DialogPanel, Assembly-CSharp
+          m_MethodName: Display
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: <color=#7777FF>BEEP
+            m_BoolArgument: 0
+          m_CallState: 2
+    delay: 1.2
+    eventBefore: init
+  - key: beep
+    actions:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 431640461}
+          m_TargetAssemblyTypeName: UI.Dialog.DialogPanel, Assembly-CSharp
+          m_MethodName: Display
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: <color=#7777FF>BEEP
+            m_BoolArgument: 0
+          m_CallState: 2
+    delay: 1.3
+    eventBefore: init
+  - key: beep
+    actions:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 431640461}
+          m_TargetAssemblyTypeName: UI.Dialog.DialogPanel, Assembly-CSharp
+          m_MethodName: Display
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: <color=#7777FF>BEEP
+            m_BoolArgument: 0
+          m_CallState: 2
+    delay: 1.4
+    eventBefore: init
+  - key: beep
+    actions:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 431640461}
+          m_TargetAssemblyTypeName: UI.Dialog.DialogPanel, Assembly-CSharp
+          m_MethodName: Display
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: <color=#7777FF>BEEP
+            m_BoolArgument: 0
+          m_CallState: 2
+    delay: 1.5
+    eventBefore: init
+  - key: beep
+    actions:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 431640461}
+          m_TargetAssemblyTypeName: UI.Dialog.DialogPanel, Assembly-CSharp
+          m_MethodName: Display
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: <color=#7777FF>BEEP
+            m_BoolArgument: 0
+          m_CallState: 2
+    delay: 1.6
+    eventBefore: init
+  - key: beep
+    actions:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 431640461}
+          m_TargetAssemblyTypeName: UI.Dialog.DialogPanel, Assembly-CSharp
+          m_MethodName: Display
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: <color=#7777FF>BEEP
+            m_BoolArgument: 0
+          m_CallState: 2
+    delay: 1.7
+    eventBefore: init
   executeOnSatisfiedEvents: []
 --- !u!4 &407713581
 Transform:
@@ -2278,19 +2409,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2757680525132101478, guid: 1a6c0a750da5b7d75babb10ac0799969, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.250734
+      value: -15.250895
       objectReference: {fileID: 0}
     - target: {fileID: 2757680525256103980, guid: 1a6c0a750da5b7d75babb10ac0799969, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.000736
+      value: 15.000896
       objectReference: {fileID: 0}
     - target: {fileID: 2757680525256103980, guid: 1a6c0a750da5b7d75babb10ac0799969, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.250736
+      value: -15.250896
       objectReference: {fileID: 0}
     - target: {fileID: 2757680526237866600, guid: 1a6c0a750da5b7d75babb10ac0799969, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.500738
+      value: 19.500898
       objectReference: {fileID: 0}
     - target: {fileID: 2757680526237866600, guid: 1a6c0a750da5b7d75babb10ac0799969, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2298,7 +2429,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2757680526342718553, guid: 1a6c0a750da5b7d75babb10ac0799969, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.000735
+      value: 12.0008955
       objectReference: {fileID: 0}
     - target: {fileID: 2757680526342718553, guid: 1a6c0a750da5b7d75babb10ac0799969, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2306,11 +2437,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2757680526590577010, guid: 1a6c0a750da5b7d75babb10ac0799969, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.001986
+      value: 26.002306
       objectReference: {fileID: 0}
     - target: {fileID: 2757680526590577010, guid: 1a6c0a750da5b7d75babb10ac0799969, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.252144
+      value: -15.252464
       objectReference: {fileID: 0}
     - target: {fileID: 2757680526590577011, guid: 1a6c0a750da5b7d75babb10ac0799969, type: 3}
       propertyPath: m_SHForNormalization.sh[ 0]
@@ -2943,11 +3074,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3758316361493462202, guid: 6042a7f93ef803a8ea9fd7ac4335d7ea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.500763
+      value: 22.500923
       objectReference: {fileID: 0}
     - target: {fileID: 3758316361493462202, guid: 6042a7f93ef803a8ea9fd7ac4335d7ea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 22.250765
+      value: 22.250925
       objectReference: {fileID: 0}
     - target: {fileID: 3758316362732357373, guid: 6042a7f93ef803a8ea9fd7ac4335d7ea, type: 3}
       propertyPath: m_RootOrder
@@ -3227,7 +3358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3758316363225349589, guid: 6042a7f93ef803a8ea9fd7ac4335d7ea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 44.001534
+      value: 44.001854
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6042a7f93ef803a8ea9fd7ac4335d7ea, type: 3}
