@@ -38,10 +38,13 @@ namespace Timeline
 
         IEnumerator SatisfiedEventLoop(ExecuteOnSatisfiedEvent @event)
         {
-            yield return new WaitUntil(() => @event.satisfied);
+            yield return new WaitUntil(@event.Get);
 
             @event.actions.Invoke();
             ExecuteFollowingEvents(@event.key);
+
+            if (!@event.exceuteOnce)
+                SatisfiedEventLoop(@event);
         }
 
 

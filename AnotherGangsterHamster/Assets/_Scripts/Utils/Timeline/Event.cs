@@ -32,6 +32,8 @@ namespace Timeline
         [HideInInspector]
         public bool satisfied = false;
 
+        public bool exceuteOnce = false;
+
         public List<GameObject> requirements
             = new List<GameObject>();
 
@@ -46,12 +48,22 @@ namespace Timeline
 
             CoroutineCaller
                 .Instance
-                .Use(() => !satisfied,
+                .Use(() => !exceuteOnce || !satisfied,
                     () => wait,
                     () => {
-                        if (req.Find(x => !x.Activated) == null)
-                            satisfied = true;
+                        Debug.Log(satisfied + " SAT"); // FIXME: 한번 돌고 다시 안돔
+                        satisfied = req.Find(x => !x.Activated) == null;
                     });
+        }
+
+        public bool Get()
+        {
+            if (satisfied && !exceuteOnce)
+            {
+                satisfied = false;
+                return true;
+            }
+            return satisfied;
         }
     }
     
