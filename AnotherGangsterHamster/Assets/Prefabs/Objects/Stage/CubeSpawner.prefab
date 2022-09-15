@@ -1,0 +1,157 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5293446266099812060
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5293446266099812062}
+  - component: {fileID: 5293446266099812061}
+  m_Layer: 0
+  m_Name: CubeSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5293446266099812062
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5293446266099812060}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.53, z: 11.41}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1876304185050443599}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5293446266099812061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5293446266099812060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4233a4170251a0448b5a68b47f15b35d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ACube: {fileID: 4888269382006945958}
+  delay: 2
+  respawnStartEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4216122606174100003}
+        m_TargetAssemblyTypeName: CubeDestroyEffect, Assembly-CSharp
+        m_MethodName: EffectStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  respawnEndEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4216122606174100003}
+        m_TargetAssemblyTypeName: CubeDestroyEffect, Assembly-CSharp
+        m_MethodName: EffectEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!1001 &5293446266388625046
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5293446266099812062}
+    m_Modifications:
+    - target: {fileID: 765759613890399792, guid: 19910b24567d6a84da3f103491509c35, type: 3}
+      propertyPath: m_Name
+      value: ACube
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016775989063096793, guid: 19910b24567d6a84da3f103491509c35, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016775989063096793, guid: 19910b24567d6a84da3f103491509c35, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016775989063096793, guid: 19910b24567d6a84da3f103491509c35, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016775989063096793, guid: 19910b24567d6a84da3f103491509c35, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016775989063096793, guid: 19910b24567d6a84da3f103491509c35, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016775989063096793, guid: 19910b24567d6a84da3f103491509c35, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016775989063096793, guid: 19910b24567d6a84da3f103491509c35, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016775989063096793, guid: 19910b24567d6a84da3f103491509c35, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016775989063096793, guid: 19910b24567d6a84da3f103491509c35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016775989063096793, guid: 19910b24567d6a84da3f103491509c35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6016775989063096793, guid: 19910b24567d6a84da3f103491509c35, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 19910b24567d6a84da3f103491509c35, type: 3}
+--- !u!4 &1876304185050443599 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6016775989063096793, guid: 19910b24567d6a84da3f103491509c35, type: 3}
+  m_PrefabInstance: {fileID: 5293446266388625046}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4216122606174100003 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8355501641657904309, guid: 19910b24567d6a84da3f103491509c35, type: 3}
+  m_PrefabInstance: {fileID: 5293446266388625046}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4888269382006945958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1994f0d5ae5bcd343954263292aa2baf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &4888269382006945958 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 765759613890399792, guid: 19910b24567d6a84da3f103491509c35, type: 3}
+  m_PrefabInstance: {fileID: 5293446266388625046}
+  m_PrefabAsset: {fileID: 0}
