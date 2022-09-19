@@ -28,6 +28,11 @@ public class CubeSpawner : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        Debug.Log(respawning);
+    }
+
     public void CubeDestory()
     {
         Respawn();
@@ -56,8 +61,8 @@ public class CubeSpawner : MonoBehaviour
         respawnEndEvent?.Invoke();
     }
 
-    public bool GetIsRespawn()
+    public bool CanRespawn()
     {
-        return respawning;
+        return !respawning;
     }
 }
