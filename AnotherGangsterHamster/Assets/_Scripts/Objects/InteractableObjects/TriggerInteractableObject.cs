@@ -16,7 +16,7 @@ namespace Objects.InteractableObjects
       {
          if (EventIsToggle) return;
 
-         OnEventExit(other.gameObject, true);
+         OnEventExit(other.gameObject);
       }
       #endregion // Unity Trigger Event
    }

@@ -16,11 +16,11 @@ namespace Objects.InteractableObjects
         [field: SerializeField]
         public bool EventIsToggle { get; set; } = true;
 
-      [field: SerializeField]
-      public bool InitalActiveStatus { get; set; } = false;
+        [field: SerializeField]
+        public bool InitalActiveStatus { get; set; } = false;
 
-      [field: SerializeField]
-      public bool Activated { get; set; } = false;
+        [field: SerializeField]
+        public bool Activated { get; set; } = false;
 
         [field: SerializeField]
         public bool MultipleInteractable { get; set; } = false;
@@ -72,7 +72,8 @@ namespace Objects.InteractableObjects
         {
             if (!EventIsToggle && !MultipleInteractable && _objectCount > 0) return;
 
-            Event callback = _callbacks.Find(x => (x.key == "") || other.CompareTag(x.key));
+            Event callback 
+                = _callbacks.Find(x => (x.key == "") || other.CompareTag(x.key));
 
             if (callback != null)
             {
@@ -100,7 +101,7 @@ namespace Objects.InteractableObjects
         /// </summary>
         /// <param name="other">Trigger 한 GameObject</param>
         /// <param name="noCount">가끔 Enter 메시지를 두번받고 Exit를 호출 하지 않는 경우가 있었기에 그 "유니티" 버그를 방지하기 위해서 생긴 놈 -햄-</param>
-        protected void OnEventExit(GameObject other, bool noCount = false)
+        protected void OnEventExit(GameObject other)
         {
             Event callback = _callbacks.Find(x => (x.key == "") || other.CompareTag(x.key));
 
@@ -108,7 +109,7 @@ namespace Objects.InteractableObjects
             {
                 --_objectCount;
 
-                if (_objectCount > 0 && !noCount) return;
+                if (_objectCount > 0) return;
 
                 _objectCount = 0;
                 Activated = false;
