@@ -1,5 +1,6 @@
 using Characters.Player;
 using Matters.Gravity;
+using Objects.InteractableObjects;
 using UnityEngine;
 using Weapons.Actions.Effect;
 
@@ -11,12 +12,14 @@ namespace Weapons.Actions
         private GravityAffectedObject _playerGravity;
         private Rigidbody _playerRigid;
         private LumoCubeEffect effect;
+        private InteractableObjects interactableObj;
 
         private void Awake()
         {
             _playerGravity = GameObject.FindGameObjectWithTag("PLAYER_BASE").GetComponent<GravityAffectedObject>();
             _playerRigid = _playerGravity.GetComponent<Rigidbody>();
             effect = GetComponent<LumoCubeEffect>();
+            interactableObj = GetComponent<InteractableObjects>();
         }
 
         public void ObjTriggerStayEvent(GameObject obj)
@@ -71,6 +74,7 @@ namespace Weapons.Actions
             }
             
             effect.EffectOff();
+            interactableObj.ForceEventExit(_playerGravity.gameObject);
         }
     }
 }
