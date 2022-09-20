@@ -34,7 +34,7 @@ public class CameraLumoFOV : MonoBehaviour
         }
     }
 
-    public void OnLumoFOV(GameObject gameObject)
+    public void OnLumoFOV()
     {
         if (currnetCoroutine != null)
         {
@@ -44,7 +44,7 @@ public class CameraLumoFOV : MonoBehaviour
         currnetCoroutine = StartCoroutine(LerpFOV(mainCam.fieldOfView, lumoFOV, onLerpDuration));
     }
 
-    public void OffLumoFOV(GameObject gameObject)
+    public void OffLumoFOV()
     {
         if (currnetCoroutine != null)
         {
