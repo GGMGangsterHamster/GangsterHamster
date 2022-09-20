@@ -118,5 +118,17 @@ namespace Objects.Interaction
          }
       }
 
+      bool _canGrep = false;
+      public bool CanGrep
+      {
+          get
+          {
+             return !_canGrep && !_grep && _currentActiveAtype != null && _currentActiveAtype.name == "ACube";
+          }
+          set
+          {
+             _canGrep = value;
+          }
+      }
    }
 }

@@ -58,6 +58,7 @@ namespace Characters.Player.Actions
         public Interaction(IActionable actionable)
         {
             _curAtype = null;
+            _actionable = actionable;
 
             SceneManager.sceneLoaded += (s, enumm) =>
             {
@@ -73,7 +74,7 @@ namespace Characters.Player.Actions
             Execute.AddListener(param =>
             {
                 actionable.Interact(handle =>
-             {
+                {
                    switch (InteractionManager.Instance.GetGrep())
                    {
                        case false: // 잡기
@@ -89,7 +90,7 @@ namespace Characters.Player.Actions
                                InteractionManager.Instance.UnGrep();
                                return;
                            }
-
+                         Debug.Log("test");
                            PlayerBaseTransform.GetComponent<FollowGroundPos>().Deactive(handle.gameObject);
 
                         #region GetComponent
@@ -174,6 +175,27 @@ namespace Characters.Player.Actions
             }
 
             _curRigid.mass = beforeMass;
+        }
+
+        public bool CanInteraction()
+        {
+            bool temp = true;
+
+            _actionable.Interact(handle =>
+            {
+                Debug.Log(handle.name);
+                if ((handle.lossyScale.x *
+                    handle.lossyScale.y *
+                    handle.lossyScale.z > 1.1f ||
+                    handle.gameObject.isStatic ||
+                    handle.name.CompareTo("Grand") == 0) ||
+                    (Vector3.Distance(MainCameraTransform.position, handle.position) > 2.5f))
+                {
+                    temp = false;
+                }
+            });
+
+            return temp;
         }
     }
 }
