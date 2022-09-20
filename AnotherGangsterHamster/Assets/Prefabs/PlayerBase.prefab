@@ -41,6 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 746144845}
   - component: {fileID: 3254945515786525154}
+  - component: {fileID: 3382184480712230556}
+  - component: {fileID: 811745548271535754}
   m_Layer: 6
   m_Name: PLAYER_CAM
   m_TagString: PLAYER_CAMERA_LOCK
@@ -55,7 +57,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 746144844}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -78,6 +80,40 @@ MonoBehaviour:
   frequency: 7
   magnitude: 0.03
   rollbackSpeed: 3
+  dropShaking: {fileID: 3382184480712230556}
+--- !u!114 &3382184480712230556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746144844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3533b78d6b8e5a149bf9fd23177861e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  depth: 0.2
+  downDuration: 3
+  upDuraion: 0
+  dropVelocity: 9
+  player: {fileID: 1472637701}
+  rigid: {fileID: 60493967840551274}
+--- !u!114 &811745548271535754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746144844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 487dfa6139943cf42854a0abe7726df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lumoFOV: 85
+  onLerpDuration: 0.7
+  offLerpDuration: 0.5
 --- !u!1 &923426876
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,6 +563,7 @@ GameObject:
   - component: {fileID: 1472637701}
   - component: {fileID: 469385357}
   - component: {fileID: 4838378377225255398}
+  - component: {fileID: 8150917604659809312}
   m_Layer: 6
   m_Name: PlayerBase
   m_TagString: PLAYER_BASE
@@ -740,6 +777,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c83efc66df2bcca80f3b177adb9ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8150917604659809312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60493967840551282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83185d2616cdb31b880a0fdde34fe5f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callbacks:
+  - key: BTYPEOBJECT,ATYPEOBJECT
+    OnActive:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3382184480712230556}
+          m_TargetAssemblyTypeName: CameraDropShaking, Assembly-CSharp
+          m_MethodName: DropShaking
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnDeactive:
+      m_PersistentCalls:
+        m_Calls: []
+  <EventIsToggle>k__BackingField: 0
+  <InitalActiveStatus>k__BackingField: 0
+  <Activated>k__BackingField: 0
+  <MultipleInteractable>k__BackingField: 0
+  colNormalVec: {x: 0, y: 0, z: 0}
+  colVelocity: {x: 0, y: 0, z: 0}
+  colPosition: {x: 0, y: 0, z: 0}
 --- !u!1029 &102900000
 DefaultAsset:
   m_ObjectHideFlags: 0

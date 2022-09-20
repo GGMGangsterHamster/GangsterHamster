@@ -1660,6 +1660,7 @@ GameObject:
   - component: {fileID: 4264991331543249206}
   - component: {fileID: 9168525308132804909}
   - component: {fileID: 179279732348331306}
+  - component: {fileID: 1191112744916594348}
   m_Layer: 9
   m_Name: LumoEffectArea
   m_TagString: Untagged
@@ -1801,6 +1802,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1191112744916594348}
+          m_TargetAssemblyTypeName: CameraLumoFOV, Assembly-CSharp
+          m_MethodName: OnLumoFOV
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     OnDeactive:
       m_PersistentCalls:
         m_Calls:
@@ -1816,8 +1829,37 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 1191112744916594348}
+          m_TargetAssemblyTypeName: CameraLumoFOV, Assembly-CSharp
+          m_MethodName: OffLumoFOV
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
+  <Activated>k__BackingField: 0
+  <MultipleInteractable>k__BackingField: 0
+--- !u!114 &1191112744916594348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7519774298859098851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 487dfa6139943cf42854a0abe7726df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lumoFOV: 85
+  onLerpDuration: 0.7
+  offLerpDuration: 0.5
 --- !u!1 &7708857724510296541
 GameObject:
   m_ObjectHideFlags: 0
