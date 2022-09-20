@@ -356,7 +356,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5308148877630210900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.12805462, y: 4.8405695, z: 6.3760624}
+  m_LocalPosition: {x: -0.12805462, y: 4.5905695, z: 6.3760624}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -408,6 +408,101 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ef8dc2c2eabfa4e8cb77be57a837c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_HDProbeVersion: 3
+  m_ObsoleteInfiniteProjection: 1
+  m_ObsoleteInfluenceVolume:
+    m_EditorAdvancedModeBlendDistancePositive: {x: 0, y: 0, z: 0}
+    m_EditorAdvancedModeBlendDistanceNegative: {x: 0, y: 0, z: 0}
+    m_EditorSimplifiedModeBlendDistance: 0
+    m_EditorAdvancedModeBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
+    m_EditorAdvancedModeBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
+    m_EditorSimplifiedModeBlendNormalDistance: 0
+    m_EditorAdvancedModeEnabled: 0
+    m_EditorAdvancedModeFaceFadePositive: {x: 1, y: 1, z: 1}
+    m_EditorAdvancedModeFaceFadeNegative: {x: 1, y: 1, z: 1}
+    m_Version: 1
+    m_ObsoleteSphereBaseOffset: {x: 0, y: 0, z: 0}
+    m_ObsoleteOffset: {x: 0, y: 0, z: 0}
+    m_Shape: 0
+    m_BoxSize: {x: 10, y: 10, z: 10}
+    m_BoxBlendDistancePositive: {x: 1, y: 1, z: 1}
+    m_BoxBlendDistanceNegative: {x: 1, y: 1, z: 1}
+    m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
+    m_BoxBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
+    m_BoxSideFadePositive: {x: 1, y: 1, z: 1}
+    m_BoxSideFadeNegative: {x: 1, y: 1, z: 1}
+    m_SphereRadius: 3
+    m_SphereBlendDistance: 0
+    m_SphereBlendNormalDistance: 0
+  m_ObsoleteFrameSettings:
+    overrides: 0
+    enableShadow: 0
+    enableContactShadows: 0
+    enableShadowMask: 0
+    enableSSR: 0
+    enableSSAO: 0
+    enableSubsurfaceScattering: 0
+    enableTransmission: 0
+    enableAtmosphericScattering: 0
+    enableVolumetrics: 0
+    enableReprojectionForVolumetrics: 0
+    enableLightLayers: 0
+    enableExposureControl: 1
+    diffuseGlobalDimmer: 0
+    specularGlobalDimmer: 0
+    shaderLitMode: 0
+    enableDepthPrepassWithDeferredRendering: 0
+    enableTransparentPrepass: 0
+    enableMotionVectors: 0
+    enableObjectMotionVectors: 0
+    enableDecals: 0
+    enableRoughRefraction: 0
+    enableTransparentPostpass: 0
+    enableDistortion: 0
+    enablePostprocess: 0
+    enableOpaqueObjects: 0
+    enableTransparentObjects: 0
+    enableRealtimePlanarReflection: 0
+    enableMSAA: 0
+    enableAsyncCompute: 0
+    runLightListAsync: 0
+    runSSRAsync: 0
+    runSSAOAsync: 0
+    runContactShadowsAsync: 0
+    runVolumeVoxelizationAsync: 0
+    lightLoopSettings:
+      overrides: 0
+      enableDeferredTileAndCluster: 0
+      enableComputeLightEvaluation: 0
+      enableComputeLightVariants: 0
+      enableComputeMaterialVariants: 0
+      enableFptlForForwardOpaque: 0
+      enableBigTilePrepass: 0
+      isFptlEnabled: 0
+  m_ObsoleteMultiplier: 1
+  m_ObsoleteWeight: 1
+  m_ObsoleteMode: 0
+  m_ObsoleteLightLayers: 1
+  m_ObsoleteCaptureSettings:
+    overrides: 0
+    clearColorMode: 0
+    backgroundColorHDR: {r: 0.023529412, g: 0.07058824, b: 0.1882353, a: 0}
+    clearDepth: 1
+    cullingMask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useOcclusionCulling: 1
+    volumeLayerMask:
+      serializedVersion: 2
+      m_Bits: 1
+    volumeAnchorOverride: {fileID: 0}
+    projection: 0
+    nearClipPlane: 0.3
+    farClipPlane: 1000
+    fieldOfView: 90
+    orthographicSize: 5
+    renderingPath: 0
+    shadowDistance: 100
   m_ProbeSettings:
     frustum:
       fieldOfViewMode: 1
@@ -424,17 +519,6 @@ MonoBehaviour:
       fadeDistance: 10000
       rangeCompressionFactor: 1
     influence:
-      m_Shape: 0
-      m_BoxSize: {x: 9.772919, y: 12.6918335, z: 23.518158}
-      m_BoxBlendDistancePositive: {x: 0, y: 0, z: 0}
-      m_BoxBlendDistanceNegative: {x: 0, y: 0, z: 0}
-      m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
-      m_BoxBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
-      m_BoxSideFadePositive: {x: 1, y: 1, z: 1}
-      m_BoxSideFadeNegative: {x: 1, y: 1, z: 1}
-      m_SphereRadius: 3
-      m_SphereBlendDistance: 0
-      m_SphereBlendNormalDistance: 0
       m_EditorAdvancedModeBlendDistancePositive: {x: 1, y: 1, z: 1}
       m_EditorAdvancedModeBlendDistanceNegative: {x: 1, y: 1, z: 1}
       m_EditorSimplifiedModeBlendDistance: 0
@@ -447,16 +531,27 @@ MonoBehaviour:
       m_Version: 1
       m_ObsoleteSphereBaseOffset: {x: 0, y: 0, z: 0}
       m_ObsoleteOffset: {x: 0, y: 0, z: 0}
-    proxy:
       m_Shape: 0
-      m_BoxSize: {x: 1, y: 1, z: 1}
-      m_SphereRadius: 1
+      m_BoxSize: {x: 9.772919, y: 12.6918335, z: 23.518158}
+      m_BoxBlendDistancePositive: {x: 0, y: 0, z: 0}
+      m_BoxBlendDistanceNegative: {x: 0, y: 0, z: 0}
+      m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
+      m_BoxBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
+      m_BoxSideFadePositive: {x: 1, y: 1, z: 1}
+      m_BoxSideFadeNegative: {x: 1, y: 1, z: 1}
+      m_SphereRadius: 3
+      m_SphereBlendDistance: 0
+      m_SphereBlendNormalDistance: 0
+    proxy:
       m_CSVersion: 1
       m_ObsoleteSphereInfiniteProjection: 0
       m_ObsoleteBoxInfiniteProjection: 0
+      m_Shape: 0
+      m_BoxSize: {x: 1, y: 1, z: 1}
+      m_SphereRadius: 1
     proxySettings:
       useInfluenceVolumeAsProxyVolume: 1
-      capturePositionProxySpace: {x: 0, y: -0.33674002, z: 0}
+      capturePositionProxySpace: {x: 0, y: -3.83674, z: 0}
       captureRotationProxySpace: {x: 0, y: 0, z: 0, w: 1}
       mirrorPositionProxySpace: {x: 0, y: 0, z: 0}
       mirrorRotationProxySpace: {x: 0, y: 0, z: 0, w: 0}
@@ -664,129 +759,34 @@ MonoBehaviour:
     m_FieldOfView: 0
     m_Aspect: 0
   m_SHForNormalization:
-    sh[ 0]: 2.5698528
-    sh[ 1]: 2.8059125
-    sh[ 2]: 0.27297026
-    sh[ 3]: 0.030743621
-    sh[ 4]: 0.014710722
-    sh[ 5]: 0.15808071
-    sh[ 6]: -0.10281743
-    sh[ 7]: -0.019459061
-    sh[ 8]: -0.36915046
-    sh[ 9]: 4.075368
-    sh[10]: 4.3396287
-    sh[11]: -0.34784532
-    sh[12]: 0.023099322
-    sh[13]: -0.0024392833
-    sh[14]: -0.12885028
-    sh[15]: -0.13958426
-    sh[16]: -0.05124451
-    sh[17]: -0.5549694
-    sh[18]: 4.3805146
-    sh[19]: 4.650491
-    sh[20]: -0.47367606
-    sh[21]: 0.021549901
-    sh[22]: -0.0059153573
-    sh[23]: -0.18700728
-    sh[24]: -0.1470364
-    sh[25]: -0.05768698
-    sh[26]: -0.5926323
+    sh[ 0]: 2.4557848
+    sh[ 1]: 1.931042
+    sh[ 2]: 0.060720682
+    sh[ 3]: -0.08347211
+    sh[ 4]: -0.020494789
+    sh[ 5]: -0.08119629
+    sh[ 6]: -0.05849777
+    sh[ 7]: 0.00669492
+    sh[ 8]: -0.19986589
+    sh[ 9]: 3.1514554
+    sh[10]: -0.37330475
+    sh[11]: 0.54721475
+    sh[12]: -0.22939508
+    sh[13]: -0.02683355
+    sh[14]: -0.08128929
+    sh[15]: -0.049324874
+    sh[16]: 0.10395851
+    sh[17]: 0.27611807
+    sh[18]: 6.7990227
+    sh[19]: 1.3707021
+    sh[20]: 0.40549996
+    sh[21]: -1.3394456
+    sh[22]: -0.41657135
+    sh[23]: -0.2328075
+    sh[24]: -0.11479755
+    sh[25]: 0.18151182
+    sh[26]: 0.39077368
   m_HasValidSHForNormalization: 1
-  m_HDProbeVersion: 3
-  m_ObsoleteInfiniteProjection: 1
-  m_ObsoleteInfluenceVolume:
-    m_Shape: 0
-    m_BoxSize: {x: 10, y: 10, z: 10}
-    m_BoxBlendDistancePositive: {x: 1, y: 1, z: 1}
-    m_BoxBlendDistanceNegative: {x: 1, y: 1, z: 1}
-    m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
-    m_BoxBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
-    m_BoxSideFadePositive: {x: 1, y: 1, z: 1}
-    m_BoxSideFadeNegative: {x: 1, y: 1, z: 1}
-    m_SphereRadius: 3
-    m_SphereBlendDistance: 0
-    m_SphereBlendNormalDistance: 0
-    m_EditorAdvancedModeBlendDistancePositive: {x: 0, y: 0, z: 0}
-    m_EditorAdvancedModeBlendDistanceNegative: {x: 0, y: 0, z: 0}
-    m_EditorSimplifiedModeBlendDistance: 0
-    m_EditorAdvancedModeBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
-    m_EditorAdvancedModeBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
-    m_EditorSimplifiedModeBlendNormalDistance: 0
-    m_EditorAdvancedModeEnabled: 0
-    m_EditorAdvancedModeFaceFadePositive: {x: 1, y: 1, z: 1}
-    m_EditorAdvancedModeFaceFadeNegative: {x: 1, y: 1, z: 1}
-    m_Version: 1
-    m_ObsoleteSphereBaseOffset: {x: 0, y: 0, z: 0}
-    m_ObsoleteOffset: {x: 0, y: 0, z: 0}
-  m_ObsoleteFrameSettings:
-    overrides: 0
-    enableShadow: 0
-    enableContactShadows: 0
-    enableShadowMask: 0
-    enableSSR: 0
-    enableSSAO: 0
-    enableSubsurfaceScattering: 0
-    enableTransmission: 0
-    enableAtmosphericScattering: 0
-    enableVolumetrics: 0
-    enableReprojectionForVolumetrics: 0
-    enableLightLayers: 0
-    enableExposureControl: 1
-    diffuseGlobalDimmer: 0
-    specularGlobalDimmer: 0
-    shaderLitMode: 0
-    enableDepthPrepassWithDeferredRendering: 0
-    enableTransparentPrepass: 0
-    enableMotionVectors: 0
-    enableObjectMotionVectors: 0
-    enableDecals: 0
-    enableRoughRefraction: 0
-    enableTransparentPostpass: 0
-    enableDistortion: 0
-    enablePostprocess: 0
-    enableOpaqueObjects: 0
-    enableTransparentObjects: 0
-    enableRealtimePlanarReflection: 0
-    enableMSAA: 0
-    enableAsyncCompute: 0
-    runLightListAsync: 0
-    runSSRAsync: 0
-    runSSAOAsync: 0
-    runContactShadowsAsync: 0
-    runVolumeVoxelizationAsync: 0
-    lightLoopSettings:
-      overrides: 0
-      enableDeferredTileAndCluster: 0
-      enableComputeLightEvaluation: 0
-      enableComputeLightVariants: 0
-      enableComputeMaterialVariants: 0
-      enableFptlForForwardOpaque: 0
-      enableBigTilePrepass: 0
-      isFptlEnabled: 0
-  m_ObsoleteMultiplier: 1
-  m_ObsoleteWeight: 1
-  m_ObsoleteMode: 0
-  m_ObsoleteLightLayers: 1
-  m_ObsoleteCaptureSettings:
-    overrides: 0
-    clearColorMode: 0
-    backgroundColorHDR: {r: 0.023529412, g: 0.07058824, b: 0.1882353, a: 0}
-    clearDepth: 1
-    cullingMask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-    useOcclusionCulling: 1
-    volumeLayerMask:
-      serializedVersion: 2
-      m_Bits: 1
-    volumeAnchorOverride: {fileID: 0}
-    projection: 0
-    nearClipPlane: 0.3
-    farClipPlane: 1000
-    fieldOfView: 90
-    orthographicSize: 5
-    renderingPath: 0
-    shadowDistance: 100
   m_ReflectionProbeVersion: 9
   m_ObsoleteInfluenceShape: 0
   m_ObsoleteInfluenceSphereRadius: 3
@@ -3388,7 +3388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2179294530501028196, guid: 6c979de14d68c8754bf624dcb775d2ec, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2179294530501028196, guid: 6c979de14d68c8754bf624dcb775d2ec, type: 3}
       propertyPath: m_LocalRotation.x
@@ -3396,7 +3396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2179294530501028196, guid: 6c979de14d68c8754bf624dcb775d2ec, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2179294530501028196, guid: 6c979de14d68c8754bf624dcb775d2ec, type: 3}
       propertyPath: m_LocalRotation.z
@@ -3408,7 +3408,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2179294530501028196, guid: 6c979de14d68c8754bf624dcb775d2ec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2179294530501028196, guid: 6c979de14d68c8754bf624dcb775d2ec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -8850,7 +8850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2179294530501028196, guid: 6c979de14d68c8754bf624dcb775d2ec, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2179294530501028196, guid: 6c979de14d68c8754bf624dcb775d2ec, type: 3}
       propertyPath: m_LocalRotation.x
@@ -8858,7 +8858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2179294530501028196, guid: 6c979de14d68c8754bf624dcb775d2ec, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2179294530501028196, guid: 6c979de14d68c8754bf624dcb775d2ec, type: 3}
       propertyPath: m_LocalRotation.z
@@ -8870,7 +8870,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2179294530501028196, guid: 6c979de14d68c8754bf624dcb775d2ec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2179294530501028196, guid: 6c979de14d68c8754bf624dcb775d2ec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -13733,16 +13733,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4397953545600263575, guid: ce2beb399f26c9982a80cd26960bb6a4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4397953545600263575, guid: ce2beb399f26c9982a80cd26960bb6a4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.39045674
       objectReference: {fileID: 0}
     - target: {fileID: 4397953545600263575, guid: ce2beb399f26c9982a80cd26960bb6a4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.9760908
       objectReference: {fileID: 0}
     - target: {fileID: 4397953545600263575, guid: ce2beb399f26c9982a80cd26960bb6a4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4397953545600263575, guid: ce2beb399f26c9982a80cd26960bb6a4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13799,16 +13803,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4397953545600263575, guid: ce2beb399f26c9982a80cd26960bb6a4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4397953545600263575, guid: ce2beb399f26c9982a80cd26960bb6a4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.39045644
       objectReference: {fileID: 0}
     - target: {fileID: 4397953545600263575, guid: ce2beb399f26c9982a80cd26960bb6a4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.97609055
       objectReference: {fileID: 0}
     - target: {fileID: 4397953545600263575, guid: ce2beb399f26c9982a80cd26960bb6a4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4397953545600263575, guid: ce2beb399f26c9982a80cd26960bb6a4, type: 3}
       propertyPath: m_LocalRotation.w
