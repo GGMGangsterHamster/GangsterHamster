@@ -114,7 +114,7 @@ namespace Weapons.Actions
 
         public override bool IsHandleWeapon()
         {
-            return _currentStatus == LumoStatus.Idle || _currentStatus == LumoStatus.Use;
+            return _currentStatus == LumoStatus.Idle;
         }
 
         public override Transform SticklyTrm()
