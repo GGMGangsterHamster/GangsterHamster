@@ -7,12 +7,15 @@ namespace Objects.InteractableObjects
 {
     public class BothInteractableObject : InteractableObjects, IInteractable
     {
+        [HideInInspector]
         // Collision에서 Normal 벡터를 빼내기 위해서 존재하는 변수
         public Vector3 colNormalVec;
 
+        [HideInInspector]
         // 충돌 시의 Velocity
         public Vector3 colVelocity;
 
+        [HideInInspector]
         // 충돌 지점
         public Vector3 colPosition;
 

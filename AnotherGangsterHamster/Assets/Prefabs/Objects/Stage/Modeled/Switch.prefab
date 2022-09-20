@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 6610393573374062086}
   - component: {fileID: 1083079952257574035}
   - component: {fileID: 1673093089588932105}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Switch
-  m_TagString: BTYPEOBJECT
+  m_TagString: ATYPEOBJECT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4665189256746753971
 Transform:
@@ -114,7 +114,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 64
   m_IsActive: 1
 --- !u!4 &5598590395028059940
 Transform:
@@ -231,7 +231,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 64
   m_IsActive: 1
 --- !u!4 &2980700565514870262
 Transform:
@@ -377,10 +377,10 @@ GameObject:
   - component: {fileID: 4450462057058190749}
   m_Layer: 12
   m_Name: SwitchPush
-  m_TagString: BTYPEOBJECT
+  m_TagString: ATYPEOBJECT
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 65
   m_IsActive: 1
 --- !u!4 &7009526780807717785
 Transform:
@@ -540,34 +540,23 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 6253803011283450366}
+          m_TargetAssemblyTypeName: Objects.InteractableObjects.InteractableObjects,
+            Assembly-CSharp
+          m_MethodName: set_Enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     OnDeactive:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1495813648555699611}
-          m_TargetAssemblyTypeName: Objects.StageObjects.CollisionEventable.MovingFloor,
-            Assembly-CSharp
-          m_MethodName: Deactive
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 851459641371493925}
-          m_TargetAssemblyTypeName: Effects.Shaders.Props.ActiveStatusShader, Assembly-CSharp
-          m_MethodName: Deactive
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
+  <Enabled>k__BackingField: 1
   <EventIsToggle>k__BackingField: 1
   <InitalActiveStatus>k__BackingField: 0
   <Activated>k__BackingField: 0
@@ -608,7 +597,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5170449202818875758
 Transform:
@@ -691,7 +680,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 64
   m_IsActive: 1
 --- !u!4 &6302179226976504989
 Transform:

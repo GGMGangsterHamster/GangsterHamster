@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CubeDestroyEffect : MonoBehaviour
 {
-    public float fireTime = 1.5f;
+    public float burnTime = 1.5f;
+    public float effectSpeed = 0.54f;
     public List<GameObject> havingMaterialObjs = new List<GameObject>();
 
     private List<Material> defaultMaterials = new List<Material>();
@@ -34,33 +35,19 @@ public class CubeDestroyEffect : MonoBehaviour
             meshRenderer.material = effectMaterials[i];
             effectMaterials[i].SetFloat("_progress", 1);
 
-            StartCoroutine(FiredEffect(effectMaterials[i]));
+            StartCoroutine(BurnEffect(effectMaterials[i]));
         }
     }
 
-    IEnumerator FiredEffect(Material mat)
+    IEnumerator BurnEffect(Material mat)
     {
-        float timer = fireTime;
+        float timer = burnTime;
 
         while(timer > 0)
         {
-            timer -= Time.deltaTime;
+            timer -= Time.deltaTime * effectSpeed;
 
-            mat.SetFloat("_progress", timer / fireTime);
-
-            yield return null;
-        }
-    }
-
-    IEnumerator SpawnEffect(Material mat)
-    {
-        float timer = 0;
-
-        while (timer <= fireTime)
-        {
-            timer += Time.deltaTime;
-
-            mat.SetFloat("_progress", timer / fireTime);
+            mat.SetFloat("_progress", timer / burnTime);
 
             yield return null;
         }
@@ -73,9 +60,9 @@ public class CubeDestroyEffect : MonoBehaviour
             MeshRenderer meshRenderer = havingMaterialObjs[i].GetComponent<MeshRenderer>();
 
             meshRenderer.material = defaultMaterials[i];
-            effectMaterials[i].SetFloat("_progress", 0);
+            effectMaterials[i].SetFloat("_progress", 1);
 
-            //StartCoroutine(SpawnEffect(effectMaterials[i]));
+            StartCoroutine(BurnEffect(effectMaterials[i]));
         }
     }
 }
