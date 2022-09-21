@@ -10,7 +10,7 @@ namespace UI.PanelScripts
         private Transform _mainCameraTransform;
 
         public Image aimImage;
-        public Transform canGrapUI;
+        public Transform canInteractionUI;
 
         [Header("에임포인트 색깔")]
         public List<AimColor> aimColors = new List<AimColor>();
@@ -67,7 +67,7 @@ namespace UI.PanelScripts
                 aimImage.color = aimColors[0].tagColor;
             }
 
-            canGrapUI.gameObject.SetActive(InteractionManager.Instance.CanGrep);
+            canInteractionUI.gameObject.SetActive(InteractionManager.Instance.CanGrep || InteractionManager.Instance.CanPress);
         }
 
         

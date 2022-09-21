@@ -130,5 +130,18 @@ namespace Objects.Interaction
              _canGrep = value;
           }
       }
+
+      bool _canPress = false;
+      public bool CanPress
+      {
+            get
+            {
+                return !_canPress && !_grep && _currentActiveAtype != null && currentRaycastHitTrm != null && currentRaycastHitTrm.gameObject.layer == 12;
+            }
+            set
+            {
+                _canPress = value;
+            }
+      }
    }
 }

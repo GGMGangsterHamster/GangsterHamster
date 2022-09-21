@@ -92,6 +92,7 @@ namespace Objects.Interaction
          if (hits.Length == 0)
          {
             InteractionManager.Instance.CanGrep = true;
+            InteractionManager.Instance.CanPress = true;
             return null;
          }
          RaycastHit hit = new RaycastHit();
@@ -119,6 +120,7 @@ namespace Objects.Interaction
             if (target == null)
             {
                InteractionManager.Instance.CanGrep = true;
+               InteractionManager.Instance.CanPress = true;
                return null;
             }
             if (target.CompareTag(ATYPE) && !(target == gravito.SticklyTrm() || (lumo.SticklyTrm() != null && target == lumo.SticklyTrm())))
@@ -135,8 +137,9 @@ namespace Objects.Interaction
             InteractionManager.Instance.ClearActvieAtype();
          }
 
-            Debug.Log(resetHandleObject);
          InteractionManager.Instance.CanGrep = resetHandleObject;
+         InteractionManager.Instance.CanPress = resetHandleObject;
+
 
          return target?.GetComponent<IInteractable>();
       }

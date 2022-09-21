@@ -17,7 +17,7 @@ public class DialogManager : MonoSingleton<DialogManager>
       List<TextAsset> dialogs = Resources.LoadAll<TextAsset>("Dialogs").ToList();
 
       dialogs.ForEach(e => {
-         Debug.Log("Loaded " + e.name);
+         //Debug.Log("Loaded " + e.name);
          _dialogDictionary.Add(e.name, JsonUtility.FromJson<Dialog>(e.text));
       });
    }
