@@ -23,6 +23,9 @@ namespace Matters.Velocity
 
       public void Active(GameObject other)
       {
+         if (this.gameObject.name == "Grand")
+                Debug.Log(other?.name); // FIXME: 이거 고치는 중이었음
+
          _curRootTrm = other?.transform;
 
          if(_curRootTrm != null)
