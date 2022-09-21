@@ -15,7 +15,7 @@ static partial class Utils
 
         string json = JsonUtility.ToJson(vo);
 
-        if (!Directory.Exists(path))
+        if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), directory)))
             Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), directory));
 
         File.WriteAllText(path, json);
