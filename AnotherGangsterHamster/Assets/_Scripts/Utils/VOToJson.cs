@@ -9,17 +9,14 @@ static partial class Utils
     /// </summary>
     /// <typeparam name="T">VO 타입</typeparam>
     /// <param name="vo">파일에 입력할 vo</param>
-    public static void VOToJson<T>(string path, T vo) where T : class
+    public static void VOToJson<T>(string path, T vo, string directory = "SettingValue") where T : class
     {
         path = Path.Combine(Directory.GetCurrentDirectory(), path);
 
         string json = JsonUtility.ToJson(vo);
-        
-        if(!Directory.Exists(path))
-        {
-            Directory.CreateDirectory(path);
-            File.SetAttributes(path, FileAttributes.Normal);
-        }
+
+        if (!Directory.Exists(path))
+            Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), directory));
 
         File.WriteAllText(path, json);
     }
