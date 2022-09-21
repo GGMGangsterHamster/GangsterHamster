@@ -80,8 +80,6 @@ namespace Weapons.Actions
         private Transform _playerBaseTransform;
         private Transform _playerTransform;
         private Transform _weaponObjectParentTransform;
-
-        private HandModeVO _handModeVO;
         protected Player Player
         {
             get
@@ -146,23 +144,10 @@ namespace Weapons.Actions
             }
         }
 
-        private bool IsRightHand
-        {
-            get
-            {
-                if(_handModeVO == null)
-                {
-                    _handModeVO = Utils.JsonToVO<HandModeVO>(Path);
-                }
-
-                return _handModeVO.isRightHand;
-            }
-        }
-
         protected Vector3 HandPosition => PlayerBaseTransform.position
                               + PlayerBaseTransform.up * (PlayerTrasnform.localScale.y - 0.5f)
                               + MainCameraTransform.forward
-                              + PlayerBaseTransform.right * (IsRightHand ? 1 : -1);
+                              + PlayerBaseTransform.right;
 
         protected Vector3 FirePosition => MainCameraTransform.position
                                         + MainCameraTransform.forward * (PlayerStatus.IsCrouching ? 0.4f : 1f)
