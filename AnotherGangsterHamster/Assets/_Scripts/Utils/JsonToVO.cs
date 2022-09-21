@@ -21,7 +21,7 @@ static partial class Utils
       }
       else
       {
-         Debug.Log($"{path} 에 파일이 존재하지 않음");
+         Debug.Log($"{path} \n 에 파일이 존재하지 않아서 null을 리턴했어요");
          return null;
       }
    }
