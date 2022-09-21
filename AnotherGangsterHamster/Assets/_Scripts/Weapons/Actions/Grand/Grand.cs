@@ -521,6 +521,7 @@ namespace Weapons.Actions
                     PlayerBaseTransform.GetComponent<Rigidbody>().velocity = new Vector3(x, y, z); // 도형의 각도를 무시하고 World 좌표로 반동 주는거
 
                     Player.Damage(weaponDamage);
+                    _messageBroker.OnRebound?.Invoke();
                 }
             }
 
