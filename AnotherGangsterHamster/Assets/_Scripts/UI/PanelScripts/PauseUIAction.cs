@@ -19,8 +19,13 @@ namespace UI.PanelScripts
     }
     public class PauseUIAction : UIAction
     {
+        #region SavePaths
         private string _soundPath = "SettingValue/Sound.json";
-        private string _sensitivityPath = "SettingValue/Sensitivity.json";
+        private string _mousePath = "SettingValue/Sensitivity.json";
+        private string _screenPath = "SettingValue/Screen.json";
+
+        private string _graphicPath = "SettingValue/Graphic.json";
+        #endregion
           
         [Header("Sound")]
         public Scrollbar soundScrollbar;
@@ -39,42 +44,94 @@ namespace UI.PanelScripts
         public Dropdown bloomDropdown;
         public Dropdown lightingDropdown;
         public Dropdown motionBlurDropdown;
+        public Dropdown antialiasingDropdown;
+
+        [Header("AntiAliasing")]
+        public Dropdown taaQualityDropdown;
+        public Scrollbar taaSharpenScrollbar;
+        public Dropdown smaaQualityDropdown;
 
         [Header("Buttons")]
         public Button goTitleButton;
         public Button gameRestartButton;
         public Button disableButton;
+        public Button resetButton;
 
         [Header("HDRP Settings")]
         public VolumeProfile globalVolume;
 
-
-        public Tonemapping tonemapping;
-        public Bloom bloom;
-        public ScreenSpaceReflection ssr;
-        public GlobalIllumination globalillumination;
-        public AmbientOcclusion ambientOcclusion;
-        public MotionBlur motionBlur;
-
+        private Tonemapping tonemapping;
+        private Bloom bloom;
+        private ScreenSpaceReflection ssr;
+        private GlobalIllumination globalillumination;
+        private AmbientOcclusion ambientOcclusion;
+        private MotionBlur motionBlur;
         private HDAdditionalCameraData hdCameraData;
 
         public override void ActivationActions()
         {
+            // 여기서 스크롤바들의 값을 초기화 시켜줌
             SoundVO soundVO = Utils.JsonToVO<SoundVO>(_soundPath);
-            SensitivityVO sensitivityVO = Utils.JsonToVO<SensitivityVO>(_sensitivityPath);
+            MouseVO mouseVO = Utils.JsonToVO<MouseVO>(_mousePath);
+            ScreenVO screenVO = Utils.JsonToVO<ScreenVO>(_screenPath);
+            GraphicVO graphicVO = Utils.JsonToVO<GraphicVO>(_graphicPath);
 
-            soundScrollbar.value = soundVO.master;
-            mouseScrollbar.value = sensitivityVO.sensitivity;
+            if(soundVO != null)
+                soundScrollbar.value = soundVO.master;
+            if(mouseVO != null)
+                mouseScrollbar.value = mouseVO.sensitivity;
+
+            if(screenVO != null)
+            {
+                screenModeDropdown.value = screenVO.isFullScreen ? 0 : 1;
+                resolutionDropdown.value = GetResolutionIndex(screenVO.width, screenVO.height);
+            }
+
+            if(graphicVO != null)
+            {
+                tonemapping.gamma.value = graphicVO.gamma + 0.2f;
+                bloom.quality.value = graphicVO.bloom;
+                ssr.quality.value = graphicVO.lighting;
+                globalillumination.quality.value = graphicVO.lighting;
+                ambientOcclusion.quality.value = graphicVO.shadow;
+                motionBlur.quality.value = graphicVO.motionBlur;
+
+                hdCameraData.renderingPathCustomFrameSettings.lodBiasQualityLevel = graphicVO.graphicQuality;
+                hdCameraData.renderingPathCustomFrameSettings.maximumLODLevelQualityLevel = graphicVO.graphicQuality;
+                hdCameraData.renderingPathCustomFrameSettings.sssQualityLevel = graphicVO.graphicQuality;
+                hdCameraData.antialiasing = (HDAdditionalCameraData.AntialiasingMode)graphicVO.antialiasing;
+                hdCameraData.TAAQuality = (HDAdditionalCameraData.TAAQualityLevel)graphicVO.taaQuality;
+                hdCameraData.taaSharpenStrength = graphicVO.taaSharpen * 2;
+                hdCameraData.SMAAQuality = (HDAdditionalCameraData.SMAAQualityLevel)graphicVO.smaaQuality;
+
+                ActiveAntialiasingOption((HDAdditionalCameraData.AntialiasingMode)graphicVO.antialiasing);
+
+                graphicQualityDropdown.value = graphicVO.graphicQuality;
+                shadowDropdown.value = graphicVO.shadow;
+                gammaScrollbar.value = graphicVO.gamma;
+                bloomDropdown.value = graphicVO.bloom;
+                lightingDropdown.value = graphicVO.lighting;
+                motionBlurDropdown.value = graphicVO.motionBlur;
+                antialiasingDropdown.value = graphicVO.antialiasing;
+                taaQualityDropdown.value = graphicVO.taaQuality;
+                taaSharpenScrollbar.value = graphicVO.taaSharpen;
+                smaaQualityDropdown.value = graphicVO.smaaQuality;
+            }
+
             SoundManager.Instance.MuteSound(true);
         }
 
         public override void DeActivationActions()
         {
             SoundVO soundVO = new SoundVO(soundScrollbar.value);
-            SensitivityVO sensitivityVO = new SensitivityVO(mouseScrollbar.value);
+            MouseVO mouseVO = new MouseVO(mouseScrollbar.value);
+            GraphicVO graphicVO = new GraphicVO(graphicQualityDropdown.value, shadowDropdown.value, gammaScrollbar.value, bloomDropdown.value, lightingDropdown.value, motionBlurDropdown.value, antialiasingDropdown.value,
+                                                taaQualityDropdown.value, taaSharpenScrollbar.value, smaaQualityDropdown.value);
 
             Utils.VOToJson(_soundPath, soundVO);
-            Utils.VOToJson(_sensitivityPath, sensitivityVO);
+            Utils.VOToJson(_mousePath, mouseVO);
+            Utils.VOToJson(_graphicPath, graphicVO);
+
             SoundManager.Instance.MuteSound(false);
         }
 
@@ -82,12 +139,12 @@ namespace UI.PanelScripts
         {
             panelId = 6;
 
-            Debug.Log(globalVolume.TryGet(out tonemapping));
-            Debug.Log(globalVolume.TryGet(out bloom));
-            Debug.Log(globalVolume.TryGet(out ssr));
-            Debug.Log(globalVolume.TryGet(out globalillumination));
-            Debug.Log(globalVolume.TryGet(out ambientOcclusion));
-            Debug.Log(globalVolume.TryGet(out motionBlur));
+            globalVolume.TryGet(out tonemapping);
+            globalVolume.TryGet(out bloom);
+            globalVolume.TryGet(out ssr);
+            globalVolume.TryGet(out globalillumination);
+            globalVolume.TryGet(out ambientOcclusion);
+            globalVolume.TryGet(out motionBlur);
 
             hdCameraData = Camera.main.GetComponent<HDAdditionalCameraData>();
 
@@ -132,36 +189,35 @@ namespace UI.PanelScripts
                 hdCameraData.renderingPathCustomFrameSettings.lodBiasQualityLevel = value;
                 hdCameraData.renderingPathCustomFrameSettings.maximumLODLevelQualityLevel = value;
                 hdCameraData.renderingPathCustomFrameSettings.sssQualityLevel = value;
-
-                
             });
-            //fullScreenModeButton.onClick.AddListener(() =>
-            //{
-            //    ScreenManager.Instance.SetFullScreen();
-            //});
 
-            //windowScreenModeButton.onClick.AddListener(() =>
-            //{
-            //    ScreenManager.Instance.SetWindowScreen();
-            //});
+            antialiasingDropdown.onValueChanged.AddListener(value =>
+            {
+                hdCameraData.antialiasing = (HDAdditionalCameraData.AntialiasingMode)value;
+                ActiveAntialiasingOption((HDAdditionalCameraData.AntialiasingMode)value);
+            });
 
-            //_1920x1080ResolutionButton.onClick.AddListener(() =>
-            //{
-            //    ScreenManager.Instance.SetResolution(1920, 1080);
-            //});
+            taaQualityDropdown.onValueChanged.AddListener(value =>
+            {
+                hdCameraData.TAAQuality = (HDAdditionalCameraData.TAAQualityLevel)value;
+            });
 
-            //_2560x1080ResolutionButton.onClick.AddListener(() =>
-            //{
-            //    ScreenManager.Instance.SetResolution(2560, 1080);
-            //});
+            taaSharpenScrollbar.onValueChanged.AddListener(value =>
+            {
+                hdCameraData.taaSharpenStrength = value * 2;
+            });
+
+            smaaQualityDropdown.onValueChanged.AddListener(value =>
+            {
+                hdCameraData.SMAAQuality = (HDAdditionalCameraData.SMAAQualityLevel)value;
+            });
 
             goTitleButton.onClick.AddListener(() =>
             {
-                SoundManager.Instance.StopAll();
-                SoundManager.Instance.MuteSound(false);
+                SoundManager.Instance.StopAll(); 
+                DeActivationActions();
                 SceneManager.LoadScene(StageNames.Title.ToString());
                 Utils.MoveTime();
-                // ���� UI ��Ȱ��ȭ ��Ű�� "Title UI"�� ��ȯ
             });
 
             gameRestartButton.onClick.AddListener(() =>
@@ -170,7 +226,6 @@ namespace UI.PanelScripts
                 SoundManager.Instance.StopAll();
                 Utils.LockCursor();
                 Utils.MoveTime();
-                // ������ ���������� �����
             });
 
             disableButton.onClick.AddListener(() =>
@@ -180,10 +235,10 @@ namespace UI.PanelScripts
                 UIManager.Instance.DeActivationPanel(panelId);
             });
 
-            SoundVO soundVO = Utils.JsonToVO<SoundVO>(_soundPath);
-            SensitivityVO sensitivityVO = Utils.JsonToVO<SensitivityVO>(_sensitivityPath);
-
-            UIManager.Instance.soundAction(soundVO.master);
+            resetButton.onClick.AddListener(() =>
+            {
+                ResetSetting();
+            });
 
             soundScrollbar.onValueChanged.AddListener(value =>
             {
@@ -227,6 +282,78 @@ namespace UI.PanelScripts
 
             ScreenManager.Instance.SetResolution(width, height);
         }
-    }
 
+        private void ResetSetting()
+        {
+            SoundVO soundVO = new SoundVO(0.8f);
+            MouseVO mouseVO = new MouseVO(0.8f);
+            GraphicVO graphicVO = new GraphicVO(1, 1, 0.8f, 1, 1, 1, 2, 1, 0.5f, 1);
+
+            Utils.VOToJson(_soundPath, soundVO);
+            Utils.VOToJson(_mousePath, mouseVO);
+            Utils.VOToJson(_graphicPath, graphicVO);
+
+            soundScrollbar.value = 0.8f;
+            mouseScrollbar.value = 0.8f;
+            UIManager.Instance.soundAction(0.8f);
+            UIManager.Instance.sensitivityAction(0.8f);
+
+            graphicQualityDropdown.value = 1;
+            shadowDropdown.value = 1;
+            gammaScrollbar.value = 0.8f;
+            bloomDropdown.value = 1;
+            lightingDropdown.value = 1;
+            motionBlurDropdown.value = 1;
+            antialiasingDropdown.value = 2;
+            taaQualityDropdown.value = 1;
+            taaSharpenScrollbar.value = 0.25f;
+            smaaQualityDropdown.value = 1;
+
+            tonemapping.gamma.value = 1f;
+            bloom.quality.value = 1;
+            ssr.quality.value = 1;
+            globalillumination.quality.value = 1;
+            ambientOcclusion.quality.value = 1;
+            motionBlur.quality.value = 1;
+            hdCameraData.renderingPathCustomFrameSettings.lodBiasQualityLevel = 1;
+            hdCameraData.renderingPathCustomFrameSettings.maximumLODLevelQualityLevel = 1;
+            hdCameraData.renderingPathCustomFrameSettings.sssQualityLevel = 1;
+            hdCameraData.antialiasing = HDAdditionalCameraData.AntialiasingMode.TemporalAntialiasing;
+            hdCameraData.TAAQuality = HDAdditionalCameraData.TAAQualityLevel.Medium;
+            hdCameraData.taaSharpenStrength = 0.5f;
+            hdCameraData.SMAAQuality = HDAdditionalCameraData.SMAAQualityLevel.Medium;
+        }
+
+        private void ActiveAntialiasingOption(HDAdditionalCameraData.AntialiasingMode aa)
+        {
+            switch (aa)
+            {
+                case HDAdditionalCameraData.AntialiasingMode.None:
+                case HDAdditionalCameraData.AntialiasingMode.FastApproximateAntialiasing:
+                    taaQualityDropdown.transform.parent.gameObject.SetActive(false);
+                    taaSharpenScrollbar.transform.parent.gameObject.SetActive(false);
+                    smaaQualityDropdown.transform.parent.gameObject.SetActive(false);
+                    break;
+                case HDAdditionalCameraData.AntialiasingMode.TemporalAntialiasing:
+                    taaQualityDropdown.transform.parent.gameObject.SetActive(true);
+                    taaSharpenScrollbar.transform.parent.gameObject.SetActive(true);
+                    smaaQualityDropdown.transform.parent.gameObject.SetActive(false);
+                    break;
+                case HDAdditionalCameraData.AntialiasingMode.SubpixelMorphologicalAntiAliasing:
+                    taaQualityDropdown.transform.parent.gameObject.SetActive(false);
+                    taaSharpenScrollbar.transform.parent.gameObject.SetActive(false);
+                    smaaQualityDropdown.transform.parent.gameObject.SetActive(true);
+                    break;
+            }
+        }
+
+        private int GetResolutionIndex(int width, int height)
+        {
+            string w = width.ToString();
+            string h = height.ToString();
+            string t = w + 'x' + h;
+
+            return resolutionDropdown.options.IndexOf(resolutionDropdown.options.Find(x => x.text == t));
+        }
+    }
 }

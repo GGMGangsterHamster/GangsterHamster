@@ -1,11 +1,11 @@
 namespace Setting.VO
 {
     [System.Serializable]
-    public class SensitivityVO
+    public class MouseVO
     {
         public float sensitivity;
 
-        public SensitivityVO(float sensitivity)
+        public MouseVO(float sensitivity)
         {
             this.sensitivity = sensitivity;
         }
