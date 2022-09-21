@@ -25,7 +25,7 @@ namespace UI.Screen
             }
         }
 
-        private bool _isFullScreen;
+        private bool _isFullScreen = true;
 
         private int _width = 1920;
         private int _height = 1080;
@@ -70,9 +70,12 @@ namespace UI.Screen
         {
             ScreenVO vo = Utils.JsonToVO<ScreenVO>(_screenPath);
 
-            _isFullScreen = vo.isFullScreen;
-            _width = vo.width;
-            _height = vo.height;
+            if(vo != null)
+            {
+                _isFullScreen = vo.isFullScreen;
+                _width = vo.width;
+                _height = vo.height;
+            }
 
             UnityEngine.Screen.SetResolution(_width, _height, _isFullScreen);
         }

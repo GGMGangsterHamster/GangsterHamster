@@ -31,7 +31,6 @@ namespace UI.PanelScripts
             soundAction += volume => {
                 SoundManager.Instance.SetSound(volume);
                 BackgroundMusic.Instance.SetVolume(volume);
-                Debug.Log("Set volume to " + volume);
             };
             sensitivityAction = value => { };
 
