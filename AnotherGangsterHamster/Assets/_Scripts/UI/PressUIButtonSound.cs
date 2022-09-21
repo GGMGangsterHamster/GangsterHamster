@@ -25,22 +25,11 @@ public class PressUIButtonSound : SoundController
         _newGameUIAction.acceptButton.onClick.AddListener(PressButton);
         _newGameUIAction.disableButton.onClick.AddListener(PressButton);
 
-        _optionAction.fullScreenModeButton.onClick.AddListener(PressButton);
-        _optionAction.windowScreenModeButton.onClick.AddListener(PressButton);
-        _optionAction._1920x1080ResolutionButton.onClick.AddListener(PressButton);
-        _optionAction._2560x1080ResolutionButton.onClick.AddListener(PressButton);
         _optionAction.disableButton.onClick.AddListener(PressButton);
 
-        _pauseUIAction.fullScreenModeButton.onClick.AddListener(PressButton);
-        _pauseUIAction.windowScreenModeButton.onClick.AddListener(PressButton);
-        _pauseUIAction._1920x1080ResolutionButton.onClick.AddListener(PressButton);
-        _pauseUIAction._2560x1080ResolutionButton.onClick.AddListener(PressButton);
         _pauseUIAction.goTitleButton.onClick.AddListener(PressButton);
         _pauseUIAction.gameRestartButton.onClick.AddListener(PressButton);
         _pauseUIAction.disableButton.onClick.AddListener(PressButton);
-        _pauseUIAction.stageSkipButton.onClick.AddListener(PressButton);
-        _pauseUIAction.notDeadButton.onClick.AddListener(PressButton);
-        _pauseUIAction.spectatorButton.onClick.AddListener(PressButton);
     }
 
     public void PressButton()
