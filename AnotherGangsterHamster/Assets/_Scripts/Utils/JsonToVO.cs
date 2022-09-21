@@ -12,8 +12,17 @@ static partial class Utils
    public static T JsonToVO<T>(string path) where T : class
    {
       path = Path.Combine(Directory.GetCurrentDirectory(), path);
-      string json = File.ReadAllText(path);
 
-      return JsonUtility.FromJson<T>(json);
+      if(File.Exists(path))
+      {
+         string json = File.ReadAllText(path);
+
+         return JsonUtility.FromJson<T>(json);
+      }
+      else
+      {
+         Debug.Log($"{path} 에 파일이 존재하지 않음");
+         return null;
+      }
    }
 }

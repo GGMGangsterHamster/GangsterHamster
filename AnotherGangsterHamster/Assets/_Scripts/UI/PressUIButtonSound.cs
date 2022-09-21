@@ -26,10 +26,12 @@ public class PressUIButtonSound : SoundController
         _newGameUIAction.disableButton.onClick.AddListener(PressButton);
 
         _optionAction.disableButton.onClick.AddListener(PressButton);
+        _optionAction.resetButton.onClick.AddListener(PressButton);
 
         _pauseUIAction.goTitleButton.onClick.AddListener(PressButton);
         _pauseUIAction.gameRestartButton.onClick.AddListener(PressButton);
         _pauseUIAction.disableButton.onClick.AddListener(PressButton);
+        _pauseUIAction.resetButton.onClick.AddListener(PressButton);
     }
 
     public void PressButton()
