@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Matters.Velocity
 {
-   [RequireComponent(typeof(MoveDelta))]
+   // [RequireComponent(typeof(MoveDelta))]
    public class FollowGroundPos : MonoBehaviour, IEventable
    {
       private MoveDelta _delta;
@@ -23,33 +23,35 @@ namespace Matters.Velocity
 
       public void Active(GameObject other)
       {
-         if (this.gameObject.name == "Grand")
-                Debug.Log(other?.name); // FIXME: 이거 고치는 중이었음
+         // if (this.gameObject.name == "Grand")
+         //        Debug.LogWarning(other?.name); // FIXME: 이거 고치는 중이었음
 
-         _curRootTrm = other?.transform;
+         // _curRootTrm = other?.transform;
 
-         if(_curRootTrm != null)
-         {
-            _pastPos = other.transform.position;
-         }
+         // if(_curRootTrm != null)
+         // {
+                transform.SetParent(other?.transform);
+               //  _pastPos = other.transform.position;
+         // }
       }
       
       public void Deactive(GameObject other)
       {
-         if (_curRootTrm == other.transform)
-         {
-            _curRootTrm = null;
-         }
+         // if (_curRootTrm == other.transform)
+         // {
+            transform.SetParent(null);
+            // _curRootTrm = null;
+         // }
       }
 
-      private void FixedUpdate()
-      {
-         if (_curRootTrm == null || !Calculate) return;
+      // private void Updat2e()
+      // {
+      //    if (_curRootTrm == null || !Calculate) return;
 
-         Vector3 d = _curRootTrm.position - _pastPos;
-         _delta.AddRawDelta(d);
-         _pastPos = _curRootTrm.position;
+      //    Vector3 d = _curRootTrm.position - _pastPos;
+      //    _delta.AddRawDelta(d);
+      //    _pastPos = _curRootTrm.position;
          
-      }
+      // }
    }
 }
