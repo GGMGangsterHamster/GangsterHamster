@@ -40,6 +40,13 @@ namespace Objects.Interaction
             return _lumo;
          }
       }
+        
+      private void Awake()
+      {
+         _wm = GameObject.FindObjectOfType<WeaponManagement>();
+         _gravito = _wm.transform.GetChild(1).GetComponent<Gravito>();
+         _lumo = _wm.transform.GetChild(2).GetComponent<Lumo>();
+      }
 
       private Gravito gravito
       {
@@ -123,7 +130,11 @@ namespace Objects.Interaction
                InteractionManager.Instance.CanPress = true;
                return null;
             }
-            if (target.CompareTag(ATYPE) && !(target == gravito.SticklyTrm() || (lumo.SticklyTrm() != null && target == lumo.SticklyTrm())))
+
+            if (target.CompareTag(ATYPE) 
+                    && !(target == gravito.SticklyTrm() 
+                    || (lumo.SticklyTrm() != null 
+                    && target == lumo.SticklyTrm())))
             {
                resetHandleObject = false;
                InteractionManager
