@@ -40,6 +40,7 @@ public class CameraReBoundBlur : MonoBehaviour
             depthOfField.farMaxBlur = Mathf.Lerp(depthOfField.farMaxBlur, maxTargetBlurRadius, elapseTime);
             yield return null;
         }
+        depthOfField.farMaxBlur = maxTargetBlurRadius;
 
         elapseTime = 0f;
         yield return new WaitForSeconds(blurDuration);
@@ -50,6 +51,7 @@ public class CameraReBoundBlur : MonoBehaviour
             depthOfField.farMaxBlur = Mathf.Lerp(depthOfField.farMaxBlur, minTargetBlurRadius, elapseTime);
             yield return null;
         }
+        depthOfField.farMaxBlur = minTargetBlurRadius;
     }
 
     public void ReBoundBlur()
