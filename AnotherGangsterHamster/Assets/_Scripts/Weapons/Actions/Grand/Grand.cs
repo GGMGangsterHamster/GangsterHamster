@@ -82,6 +82,8 @@ namespace Weapons.Actions
         private Quaternion lerpQuaternion;
         private KeyCode _useKeycode;
 
+        private BoxCollider boxCollider;
+
         private float _beforeWeaponSize = 0f;
         private float _currentLerpTime = 0f;
         private float _weaponUsedTime = 0f;
@@ -104,7 +106,7 @@ namespace Weapons.Actions
 
             WeaponVO vo = Utils.JsonToVO<WeaponVO>(WeaponKeyCodePath);
             _useKeycode = (KeyCode)vo.Use;
-
+            
             _enterCollision = GetComponent<CollisionInteractableObject>();
             _stayCollision = GetComponent<CollisionStayInteractableObject>();
 
@@ -113,12 +115,14 @@ namespace Weapons.Actions
 
             grandGaugeBar_Lv1.color = new Color(1, 1, 1, 0.117f);
             grandGaugeBar_Lv2.color = new Color(1, 1, 1, 0.117f);
-
+            
             grandGaugeBar_Lv1.fillAmount = 0;
             grandGaugeBar_Lv2.fillAmount = 0;
 
             _dropPoint = transform.GetChild(0);
             _dropLineRenderer = transform.GetChild(1).GetComponent<LineRenderer>();
+
+            boxCollider = GetComponent<BoxCollider>();
 
             _dropPoint.parent = WeaponObjectParentTransform;
             _dropLineRenderer.transform.parent = WeaponObjectParentTransform;
@@ -145,7 +149,7 @@ namespace Weapons.Actions
             {
                 if (_myRigid.constraints != RigidbodyConstraints.None)
                     _myRigid.constraints = RigidbodyConstraints.None;
-
+                
                 _AWmessageBroker.OnFire?.Invoke();
                 _messageBroker.OnFire?.Invoke();
 
@@ -205,7 +209,7 @@ namespace Weapons.Actions
                     transform.position = FirePosition;
                 }
 
-                _myCollider.isTrigger = false;
+                boxCollider.isTrigger = false;
                 (_myCollider as BoxCollider).center = Vector3.zero;
             }
         }
@@ -250,6 +254,7 @@ namespace Weapons.Actions
                 grandGaugeBar_Lv1.fillAmount = 0;
                 grandGaugeBar_Lv2.fillAmount = 0;
 
+                boxCollider.isTrigger = true;
                 (_myCollider as BoxCollider).size = Vector3.one * _sizeLevelValue[_currentSizeLevel];
 
                 Update();
