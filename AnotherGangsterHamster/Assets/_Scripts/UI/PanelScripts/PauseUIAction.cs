@@ -185,7 +185,7 @@ namespace UI.PanelScripts
 
             motionBlurDropdown.onValueChanged.AddListener(value =>
             {
-                motionBlur.quality.value = value;
+                motionBlur.active = value == 0;
             });
 
             graphicQualityDropdown.onValueChanged.AddListener(value =>
@@ -234,9 +234,9 @@ namespace UI.PanelScripts
 
             disableButton.onClick.AddListener(() =>
             {
+                UIManager.Instance.DeActivationPanel(panelId);
                 Utils.LockCursor();
                 Utils.MoveTime();
-                UIManager.Instance.DeActivationPanel(panelId);
             });
 
             resetButton.onClick.AddListener(() =>
@@ -260,8 +260,8 @@ namespace UI.PanelScripts
             if(Input.GetKeyDown(KeyCode.Escape))
             {
                 Utils.LockCursor();
-                Utils.MoveTime();
                 UIManager.Instance.DeActivationPanel(panelId);
+                Utils.MoveTime();
             }
         }
         private void SetScreenMode(ScreenMode screenMode)

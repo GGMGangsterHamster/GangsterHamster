@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Sound;
+using Characters.Player;
 
 namespace UI.PanelScripts
 {
@@ -21,7 +22,7 @@ namespace UI.PanelScripts
         [SerializeField] private Transform _uiPanelParent;
 
         public Action<float> soundAction { get; set; }
-        public Action<float> sensitivityAction;
+        public Action<float> sensitivityAction { get; set; }
 
         // UIAction을 상속받고 있는 클래스들을 _uiDict에 모아서 관리한다
         private Dictionary<UIPanels, UIAction> _uiDict = new Dictionary<UIPanels, UIAction>();
@@ -32,9 +33,13 @@ namespace UI.PanelScripts
                 SoundManager.Instance.SetSound(volume);
                 BackgroundMusic.Instance.SetVolume(volume);
             };
-            sensitivityAction = value => { };
 
-            for(int i = 0; i < _uiPanelParent.childCount; i++)
+            sensitivityAction += sensitivity => {
+                PlayerValues.MouseSpeed = sensitivity * 2 + 0.1f;
+                Debug.Log("Set sensitivity to " + PlayerValues.MouseSpeed);
+            };
+
+            for (int i = 0; i < _uiPanelParent.childCount; i++)
             {
                 UIAction ui = _uiPanelParent.GetChild(i).GetComponent<UIAction>();
                 UIPanels panelEnum = (UIPanels)ui.panelId;

@@ -1,24 +1,31 @@
 using Characters.Player;
+using Setting.VO;
 using System.Collections;
 using System.Collections.Generic;
+using UI.PanelScripts;
 using UnityEngine;
 
 static public partial class Utils
 {
-    private static float _mouseSpeed = 0;
+    private static string _mousePath = "SettingValue/Sensitivity.json";
     static public void StopTime()
     {
-        _mouseSpeed = PlayerValues.MouseSpeed;
-        PlayerValues.MouseSpeed = 0;
+        PlayerValues.CanMouseMove = false;
         Time.timeScale = 0;
     }
 
     static public void MoveTime()
     {
-        if(_mouseSpeed != 0)
+        MouseVO mouseVO = JsonToVO<MouseVO>(_mousePath);
+
+        if (mouseVO != null)
+            UIManager.Instance.sensitivityAction(mouseVO.sensitivity);
+        else
         {
-            PlayerValues.MouseSpeed = _mouseSpeed;
+            PlayerValues.MouseSpeed = 2f;
         }
+
+        PlayerValues.CanMouseMove = true;
         Time.timeScale = 1;
     }
 }

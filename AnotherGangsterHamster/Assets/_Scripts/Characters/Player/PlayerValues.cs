@@ -51,5 +51,12 @@ namespace Characters.Player
          get => _mouseSpeed;
          set => _mouseSpeed = value;
       }
-   }
+      
+      static private bool _canMouseMove = true;
+      static public bool CanMouseMove
+      {
+         get => _canMouseMove;
+         set => _canMouseMove = value;
+      }
+    }
 }
