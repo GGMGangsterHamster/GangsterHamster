@@ -15,8 +15,8 @@ namespace Characters.Player.Bridge
          };
 
          UIManager.Instance.sensitivityAction += sensitivity => {
-            PlayerValues.MouseSpeed = sensitivity;
-            Debug.Log("Set sensitivity to " + sensitivity);
+            PlayerValues.MouseSpeed = sensitivity * 2 + 0.1f;
+             Debug.Log("Set sensitivity to " + PlayerValues.MouseSpeed);
          };
       }
    }

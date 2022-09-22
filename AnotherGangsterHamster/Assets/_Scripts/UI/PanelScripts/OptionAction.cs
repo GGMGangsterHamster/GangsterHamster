@@ -164,7 +164,7 @@ namespace UI.PanelScripts
 
             motionBlurDropdown.onValueChanged.AddListener(value =>
             {
-                motionBlur.quality.value = value;
+                motionBlur.active = value == 0;
             });
 
             graphicQualityDropdown.onValueChanged.AddListener(value =>
