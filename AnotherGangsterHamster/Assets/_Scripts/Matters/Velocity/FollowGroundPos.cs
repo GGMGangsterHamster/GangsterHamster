@@ -6,52 +6,56 @@ using UnityEngine;
 
 namespace Matters.Velocity
 {
-   // [RequireComponent(typeof(MoveDelta))]
-   public class FollowGroundPos : MonoBehaviour, IEventable
-   {
-      private MoveDelta _delta;
+    // [RequireComponent(typeof(MoveDelta))]
+    public class FollowGroundPos : MonoBehaviour, IEventable
+    {
+        public bool Enabled { get; set; } = true;
 
-      private Transform _curRootTrm;
-      private Vector3 _pastPos;
+        private FollowGroundPosOption _curGround = null;
 
-      public bool Calculate { get; set; } = true;
+        private Transform _curRootTrm;
+        private Vector3 _pastPos;
 
-      private void Awake()
-      {
-         _delta = GetComponent<MoveDelta>();
-      }
+        public void Active(GameObject other)
+        {
+            if (!Enabled) return;
 
-      public void Active(GameObject other)
-      {
-         // if (this.gameObject.name == "Grand")
-         //        Debug.LogWarning(other?.name); // FIXME: 이거 고치는 중이었음
+            FollowGroundPosOption newGround
+                = other?.GetComponent<FollowGroundPosOption>();
+            int priority = newGround?.priority ?? 0;
+            int curPriority = _curGround?.priority ?? 0;
 
-         // _curRootTrm = other?.transform;
+            if (this.gameObject.name == "GroundChecker")
+                Debug.Log(other?.name);
 
-         // if(_curRootTrm != null)
-         // {
+            if (priority >= curPriority)
+            {
+                _curGround = newGround;
                 transform.SetParent(other?.transform);
-               //  _pastPos = other.transform.position;
-         // }
-      }
-      
-      public void Deactive(GameObject other)
-      {
-         // if (_curRootTrm == other.transform)
-         // {
-            transform.SetParent(null);
-            // _curRootTrm = null;
-         // }
-      }
+            }
+        }
 
-      // private void Updat2e()
-      // {
-      //    if (_curRootTrm == null || !Calculate) return;
+        public void Deactive(GameObject other)
+        {
+            if (!Enabled) return;
 
-      //    Vector3 d = _curRootTrm.position - _pastPos;
-      //    _delta.AddRawDelta(d);
-      //    _pastPos = _curRootTrm.position;
-         
-      // }
-   }
+            bool avaliable = true;
+
+            if (_curGround != null)
+            {
+                FollowGroundPosOption newGround
+                    = other?.GetComponent<FollowGroundPosOption>();
+                int priority = newGround?.priority ?? 0;
+                int curPriority = _curGround.priority;
+
+                avaliable = priority >= curPriority;
+            }
+            
+            if (avaliable)
+            {
+                _curGround = null;
+                transform.SetParent(null);
+            }
+        }
+    }
 }
