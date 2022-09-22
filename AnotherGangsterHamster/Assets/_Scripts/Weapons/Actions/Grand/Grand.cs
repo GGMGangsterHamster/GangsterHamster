@@ -377,20 +377,21 @@ namespace Weapons.Actions
 
                         if(_currentSizeLevel == GrandSizeLevel.OneGrade)
                         {
-                            _messageBroker?.ChangedMinSize?.Invoke();
+                            _messageBroker?.OnChangedMinSize?.Invoke();
                         }
                         else
                         {
                             switch (jumpLevel)
                             {
                                 case 1:
-                                    _messageBroker?.ChangedOneStep?.Invoke();
+                                    _messageBroker?.OnChangedOneStep?.Invoke();
                                     break;
                                 case 2:
-                                    _messageBroker?.ChangedTwoStep?.Invoke();
+                                    _messageBroker?.OnChangedTwoStep?.Invoke();
                                     break;
                             }
                         }
+                        _messageBroker?.OnChangedEnd?.Invoke();
 
                         transform.localScale = Vector3.one;
                         (_myCollider as BoxCollider).size = Vector3.one * _sizeLevelValue[_currentSizeLevel];

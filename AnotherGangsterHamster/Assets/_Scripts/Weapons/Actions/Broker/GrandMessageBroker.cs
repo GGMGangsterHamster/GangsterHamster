@@ -13,8 +13,9 @@ namespace Weapons.Actions.Broker
         public UnityEvent<int> OnUse; // 0, 1, 2를 인자값으로 주는데 각각 1m, 2m, 4m 단계로 변한 것을 의미함
         public UnityEvent OnReset;
         public UnityEvent OnRebound;
-        public UnityEvent ChangedMinSize;
-        public UnityEvent ChangedOneStep;
-        public UnityEvent ChangedTwoStep;
+        public UnityEvent OnChangedMinSize;
+        public UnityEvent OnChangedOneStep;
+        public UnityEvent OnChangedTwoStep;
+        public UnityEvent OnChangedEnd;
     }
 }
