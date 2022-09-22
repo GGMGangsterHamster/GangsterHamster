@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 3254945515786525154}
   - component: {fileID: 3382184480712230556}
   - component: {fileID: 811745548271535754}
+  - component: {fileID: 8506224209657863147}
   m_Layer: 6
   m_Name: PLAYER_CAM
   m_TagString: PLAYER_CAMERA_LOCK
@@ -94,8 +95,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   depth: 0.2
-  downDuration: 3
-  upDuraion: 0
+  downDuration: 0.2
+  upDuraion: 0.4
   dropVelocity: 9
   player: {fileID: 1472637701}
   rigid: {fileID: 60493967840551274}
@@ -114,6 +115,24 @@ MonoBehaviour:
   lumoFOV: 85
   onLerpDuration: 0.7
   offLerpDuration: 0.5
+--- !u!114 &8506224209657863147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746144844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bdaf88d27988b843aa0e1e9d79e2994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamVolume: {fileID: 11400000, guid: 5ee5f06b05a09b845a1a38cbe2a3be4a, type: 2}
+  minTargetBlurRadius: 0
+  maxTargetBlurRadius: 16
+  blurDuration: 1
+  onBlurLerpDuration: 0.3
+  offBlurLerpDuration: 1
 --- !u!1 &923426876
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,6 +507,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  <Enabled>k__BackingField: 1
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
   <Activated>k__BackingField: 0
@@ -524,6 +544,7 @@ MonoBehaviour:
     OnDeactive:
       m_PersistentCalls:
         m_Calls: []
+  <Enabled>k__BackingField: 1
   <EventIsToggle>k__BackingField: 1
   <InitalActiveStatus>k__BackingField: 0
   <Activated>k__BackingField: 0
@@ -809,6 +830,7 @@ MonoBehaviour:
     OnDeactive:
       m_PersistentCalls:
         m_Calls: []
+  <Enabled>k__BackingField: 1
   <EventIsToggle>k__BackingField: 0
   <InitalActiveStatus>k__BackingField: 0
   <Activated>k__BackingField: 0
