@@ -513,16 +513,19 @@ namespace Weapons.Actions
             {
                 if (((_sizeLevelValue[_currentSizeLevel] + (_currentSizeLevel == GrandSizeLevel.OneGrade ? 1 : 0)) / 3) > Vector3.Distance(transform.position, PlayerBaseTransform.position) - (PlayerBaseTransform.localScale.x + PlayerBaseTransform.localScale.y) / 3)
                 {
+                    Vector3 gravityDir = GravityManager.GetGlobalGravityDirection();
                     Vector3 reboundDir = (PlayerBaseTransform.position - transform.position).normalized;
                     float rebound = (_sizeLevelValue[_currentSizeLevel] - _sizeLevelValue[_beforeSizeLevel]) * reboundPower + 2;
+                    
+                    Debug.Log(gravityDir);
 
-                    float maxValue = Mathf.Max(Mathf.Abs(reboundDir.x),
-                                     Mathf.Max(Mathf.Abs(reboundDir.y),
-                                               Mathf.Abs(reboundDir.z)));
+                    float maxValue = Mathf.Max(Mathf.Abs(reboundDir.x + (Mathf.Sign(reboundDir.x) * Mathf.Abs(gravityDir.x * 0.3f))),
+                                     Mathf.Max(Mathf.Abs(reboundDir.y + (Mathf.Sign(reboundDir.y) * Mathf.Abs(gravityDir.y * 0.3f))),
+                                               Mathf.Abs(reboundDir.z + (Mathf.Sign(reboundDir.z) * Mathf.Abs(gravityDir.z * 0.3f)))));
 
-                    x = maxValue == Mathf.Abs(reboundDir.x) ? rebound * Mathf.Sign(reboundDir.x) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : 0;
-                    y = maxValue == Mathf.Abs(reboundDir.y) ? rebound * Mathf.Sign(reboundDir.y) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : 0;
-                    z = maxValue == Mathf.Abs(reboundDir.z) ? rebound * Mathf.Sign(reboundDir.z) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : 0;
+                    x = maxValue == Mathf.Abs(reboundDir.x + (Mathf.Sign(reboundDir.x) * Mathf.Abs(gravityDir.x * 0.3f))) ? rebound * Mathf.Sign(reboundDir.x) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : 0;
+                    y = maxValue == Mathf.Abs(reboundDir.y + (Mathf.Sign(reboundDir.y) * Mathf.Abs(gravityDir.y * 0.3f))) ? rebound * Mathf.Sign(reboundDir.y) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : 0;
+                    z = maxValue == Mathf.Abs(reboundDir.z + (Mathf.Sign(reboundDir.z) * Mathf.Abs(gravityDir.z * 0.3f))) ? rebound * Mathf.Sign(reboundDir.z) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : 0;
 
                     PlayerBaseTransform.GetComponent<Rigidbody>().velocity = new Vector3(x, y, z); // 도형의 각도를 무시하고 World 좌표로 반동 주는거
 
