@@ -39,7 +39,7 @@ namespace Characters.Player.Move
             _delta.AddXDelta();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             transform.position += _delta.Calculate(transform, PlayerValues.Speed, false, true);
         }
