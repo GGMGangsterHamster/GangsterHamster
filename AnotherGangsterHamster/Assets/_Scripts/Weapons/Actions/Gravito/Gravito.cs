@@ -166,6 +166,7 @@ namespace Weapons.Actions
                 _playerGravity.AffectedByGlobalGravity = true;
 
                 _dropPoint.rotation = Quaternion.LookRotation(new Vector3(0, 90, 0));
+                _dropPoint.gameObject.SetActive(true);
             }
         }
 
@@ -205,6 +206,7 @@ namespace Weapons.Actions
             GravityManager.ChangeGlobalGravityDirection(Vector3.down);
             _playerGravity.AffectedByGlobalGravity = true;
 
+            _dropPoint.gameObject.SetActive(false);
             Update();
         }
 
