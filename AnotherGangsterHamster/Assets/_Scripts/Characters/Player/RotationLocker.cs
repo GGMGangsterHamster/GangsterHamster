@@ -23,8 +23,6 @@ namespace Characters.Player
 
         private void Update()
         {
-            Debug.LogError(_lock);
-            Debug.LogError(Utils.Multiply(transform.eulerAngles, _lock));
             transform.eulerAngles = Utils.Multiply(transform.eulerAngles, _lock);
         }
     }
