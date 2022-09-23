@@ -37,7 +37,6 @@ namespace Characters.Player
         {
             if (DoesParentContainsGrand(this.transform))
             {
-                Debug.Log("OH NO");
                 this.transform.SetParent(null);
                 _groundFollower.Enabled = false;
             }
