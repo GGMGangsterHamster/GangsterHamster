@@ -522,11 +522,13 @@ namespace Weapons.Actions
                                      Mathf.Max(Mathf.Abs(reboundDir.y + (Mathf.Sign(reboundDir.y) * Mathf.Abs(gravityDir.y * 0.3f))),
                                                Mathf.Abs(reboundDir.z + (Mathf.Sign(reboundDir.z) * Mathf.Abs(gravityDir.z * 0.3f)))));
 
-                    x = maxValue == Mathf.Abs(reboundDir.x + (Mathf.Sign(reboundDir.x) * Mathf.Abs(gravityDir.x * 0.3f))) ? rebound * Mathf.Sign(reboundDir.x) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : 0;
-                    y = maxValue == Mathf.Abs(reboundDir.y + (Mathf.Sign(reboundDir.y) * Mathf.Abs(gravityDir.y * 0.3f))) ? rebound * Mathf.Sign(reboundDir.y) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : 0;
-                    z = maxValue == Mathf.Abs(reboundDir.z + (Mathf.Sign(reboundDir.z) * Mathf.Abs(gravityDir.z * 0.3f))) ? rebound * Mathf.Sign(reboundDir.z) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : 0;
+                    Rigidbody rigid = PlayerBaseTransform.GetComponent<Rigidbody>();
 
-                    PlayerBaseTransform.GetComponent<Rigidbody>().velocity = new Vector3(x, y, z); // 도형의 각도를 무시하고 World 좌표로 반동 주는거
+                    x = maxValue == Mathf.Abs(reboundDir.x + (Mathf.Sign(reboundDir.x) * Mathf.Abs(gravityDir.x * 0.3f))) ? rebound * Mathf.Sign(reboundDir.x) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : rigid.velocity.x;
+                    y = maxValue == Mathf.Abs(reboundDir.y + (Mathf.Sign(reboundDir.y) * Mathf.Abs(gravityDir.y * 0.3f))) ? rebound * Mathf.Sign(reboundDir.y) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : rigid.velocity.y;
+                    z = maxValue == Mathf.Abs(reboundDir.z + (Mathf.Sign(reboundDir.z) * Mathf.Abs(gravityDir.z * 0.3f))) ? rebound * Mathf.Sign(reboundDir.z) - (Vector3.Distance(transform.position, PlayerBaseTransform.position)) : rigid.velocity.z;
+
+                    rigid.velocity = new Vector3(x, y, z); // 도형의 각도를 무시하고 World 좌표로 반동 주는거
 
                     Player.Damage(weaponDamage);
                     _messageBroker.OnRebound?.Invoke();
