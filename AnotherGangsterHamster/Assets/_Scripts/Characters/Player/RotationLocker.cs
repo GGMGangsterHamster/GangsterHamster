@@ -17,6 +17,7 @@ namespace Characters.Player
                 _lock = new Vector3(Mathf.Abs(dir.x),
                                     Mathf.Abs(dir.y),
                                     Mathf.Abs(dir.z));
+                // Debug.LogWarning(_lock);
 
             });
         }
