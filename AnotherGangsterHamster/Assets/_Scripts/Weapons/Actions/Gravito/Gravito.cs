@@ -148,8 +148,6 @@ namespace Weapons.Actions
             {
                 if (_currentChangeGravityDir == Vector3.up) return;
 
-                _AWmessageBroker.OnUse?.Invoke();
-                _messageBroker.OnUse?.Invoke();
 
                 _gravitoAnimator.UsingAnime();
                 _gravitoEffect.EffectOn();
@@ -167,6 +165,9 @@ namespace Weapons.Actions
 
                 _dropPoint.rotation = Quaternion.LookRotation(new Vector3(0, 90, 0));
                 _dropPoint.gameObject.SetActive(true);
+                
+                _AWmessageBroker.OnUse?.Invoke();
+                _messageBroker.OnUse?.Invoke();
             }
         }
 
@@ -346,7 +347,7 @@ namespace Weapons.Actions
 
                 if (index != -1)
                 {
-                    RaycastHit hit = hits[index]; // °¡Àå °¡±î¿î ¹Ù´Ú
+                    RaycastHit hit = hits[index]; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù´ï¿½
 
                     _dropPoint.position = hit.point + -dir * 0.1f;
 
