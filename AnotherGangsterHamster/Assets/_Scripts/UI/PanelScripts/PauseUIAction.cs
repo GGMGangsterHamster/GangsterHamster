@@ -152,6 +152,33 @@ namespace UI.PanelScripts
 
             hdCameraData = Camera.main.GetComponent<HDAdditionalCameraData>();
 
+
+            SoundVO soundVO = Utils.JsonToVO<SoundVO>(_soundPath);
+            MouseVO mouseVO = Utils.JsonToVO<MouseVO>(_mousePath);
+
+
+            if (soundVO != null)
+            {
+                UIManager.Instance.soundAction(soundVO.master);
+                Debug.Log($"사운드 값 세팅 : {soundVO.master}");
+            }
+            else
+            {
+                UIManager.Instance.soundAction(0.8f);
+                Debug.Log("사운드 값 파일이 존재하지 않아 세팅이 되지 않음 기본값 : 0.8");
+            }
+            if (mouseVO != null)
+            {
+                UIManager.Instance.sensitivityAction(mouseVO.sensitivity);
+                Debug.Log($"마우스 민감도 세팅 : {mouseVO.sensitivity}");
+            }
+            else
+            {
+                UIManager.Instance.sensitivityAction(0.8f);
+                Debug.Log("마우스 민감도 값 파일이 존재하지 않아 세팅이 되지 않음 기본값 : 0.8");
+            }
+
+
             screenModeDropdown.onValueChanged.AddListener(value =>
             {
                 SetScreenMode((ScreenMode)value);
