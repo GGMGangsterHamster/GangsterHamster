@@ -6,7 +6,7 @@ using Objects;
 using Weapons.Checkpoint;
 using Weapons.Actions;
 using Weapons.Actions.Broker;
-using Characters.Player.Mouse;
+using Characters .Player.Mouse;
 using System;
 
 namespace Characters.Player
@@ -14,7 +14,7 @@ namespace Characters.Player
     public class RotationLocker : MonoBehaviour
     {
         private Vector3 _lock = Vector3.zero;
-        private Vector3 _gravity = Vector3.zero;
+        private Vector3 _gravity = Vector3.down;
         private MouseX mouseX;
 
         private void Start()
@@ -34,11 +34,12 @@ namespace Characters.Player
 
             message.OnReset.AddListener(() => {
                 _lock = Vector3.zero;
-                _gravity = GravityManager.GetGlobalGravityDirection();
+                _gravity = Vector3.down;
             });
         }
 
         float y = 0.0f;
+        float yy = 0;
 
         private void Update()
         {
@@ -48,14 +49,15 @@ namespace Characters.Player
                 // 4원수는 교환 법칙이 성립되지 않는대요
                 // 4원수 * 곱하고자 하는 수 = local
                 // 곱하고자 하는 수 * 4원수 = world
-                float angle = Vector3.Angle(Vector3.zero, _gravity);
-                Debug.Log(_gravity + " GRA");
-                Debug.Log(angle);
-                var a = new Vector3(0.0f, y, 0.0f);
-                transform.eulerAngles = _lock + a;
+                // Debug.Log(_lock + -_gravity * y);
+                // Debug.Log(transform.eulerAngles + " ANGLE");
+                // Debug.Log(_lock + " LOCK");
+                // lock 한거 
 
-                // TODO: 마우스 Y 를 중력 방향에 맞게만 하면 다 됨
-                // 싯팔
+                Debug.Log(_lock + (-_gravity * y));
+                Quaternion target = Quaternion.Euler(-_gravity * y) * Quaternion.Euler(_lock);
+                transform.rotation = target;
+                // FIXME: 그라비토 능력 사용 시 각도 snap 현상
             };
 
             mouseX.Execute?.Invoke(callback);
