@@ -250,6 +250,7 @@ namespace Weapons.Actions
 
                     if (_currentGravityChangeTime >= 1f)
                     {
+                        _messageBroker.OnLerpEnd.Invoke();
                         PlayerBaseTransform.rotation = Checkpoint.endCheckpoint.rotation;
                         _currentGravitoStatus = GravitoStatus.Stickly;
                         _gravitoEffect.EffectOff();
@@ -269,6 +270,7 @@ namespace Weapons.Actions
 
                     if(_currentGravityChangeTime >= 1f)
                     {
+                        _messageBroker.OnLerpEnd.Invoke();
                         _gravitoEffect.EffectOff();
                         PlayerBaseTransform.rotation = Checkpoint.endCheckpoint.rotation;
                         _currentGravitoStatus = GravitoStatus.Idle;
