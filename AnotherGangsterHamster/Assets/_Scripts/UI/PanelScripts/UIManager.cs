@@ -36,7 +36,7 @@ namespace UI.PanelScripts
 
             sensitivityAction += sensitivity => {
                 PlayerValues.MouseSpeed = sensitivity * 2 + 0.1f;
-                Debug.Log("Set sensitivity to " + PlayerValues.MouseSpeed);
+                //Debug.Log("Set sensitivity to " + PlayerValues.MouseSpeed);
             };
 
             for (int i = 0; i < _uiPanelParent.childCount; i++)
