@@ -1,3 +1,6 @@
+using Sound;
+using UnityEngine;
+
 namespace _Core.Initialize.InitScripts
 {
     public class AutoSpawn : InitBase
@@ -6,7 +9,7 @@ namespace _Core.Initialize.InitScripts
 
         public override void Call()
         {
-            
+            Debug.Log($"Loading {SoundManager.Instance.GetType()}");
         }
     }
 }

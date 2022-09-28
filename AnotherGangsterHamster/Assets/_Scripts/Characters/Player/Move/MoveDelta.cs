@@ -60,13 +60,13 @@ namespace Characters.Player.Move
 
             Vector3 finalDelta = delta + _rawDelta * (dontMultDeltatimeToRaw ? 1 : Time.deltaTime);
 
+            _lastDelta = _delta;
             if (!keepDelta)
             {
                 _rawDelta = Vector3.zero;
                 _delta = Vector3.zero;
             }
 
-            _lastDelta = _delta;
 
             return finalDelta;
         }

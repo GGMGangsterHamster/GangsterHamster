@@ -9,7 +9,6 @@ namespace Characters.Player
     public class PlayerScaleLocker : MonoBehaviour, IEventable
     {
         private const string GRAND = "Grand";
-        private Transform _grandTrm = null;
         private FollowGroundPos _groundFollower;
 
         private void Start()
@@ -18,10 +17,6 @@ namespace Characters.Player
             _groundFollower = GetComponent<FollowGroundPos>();
             Debug.Assert(grandEvent != null);
             Debug.Assert(_groundFollower != null);
-
-
-            _grandTrm = grandEvent.transform;
-            Debug.Assert(_grandTrm != null);
 
             grandEvent.OnUse.AddListener(a => {
                 Active(null);
