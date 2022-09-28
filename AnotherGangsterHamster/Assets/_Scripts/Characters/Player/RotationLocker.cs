@@ -19,6 +19,7 @@ namespace Characters.Player
         private float _y = 0.0f;
 
         private Action<float> _callback;
+        private bool executeMouseRot = true;
 
         private void Start()
         {
@@ -30,16 +31,22 @@ namespace Characters.Player
             GravitoMessageBroker message
                 = FindObjectOfType<GravitoMessageBroker>();
 
+            message.OnLerpEnd.AddListener(() => {
+                executeMouseRot = true;
+            });
+
             message.OnUse.AddListener(() => {
                 _lock = checkpoint.endCheckpoint.rotation;
                 _gravity = GravityManager.GetGlobalGravityDirection();
                 _y = 0.0f;
+                executeMouseRot = false;
             });
 
             message.OnReset.AddListener(() => {
                 _y = transform.eulerAngles.y;
                 _lock = Quaternion.identity;
                 _gravity = Vector3.down;
+                executeMouseRot = false;
             });
 
             _callback = rot => {
@@ -55,7 +62,8 @@ namespace Characters.Player
 
         private void Update()
         {
-            mouseX.Execute?.Invoke(_callback);
+            if (executeMouseRot)
+                mouseX.Execute?.Invoke(_callback);
         }
     }
 }
