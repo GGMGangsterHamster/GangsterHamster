@@ -68,6 +68,10 @@ namespace UI.PanelScripts
         private MotionBlur motionBlur;
         private HDAdditionalCameraData hdCameraData;
 
+        [Header("Developer")]
+        public Button stageSkipButton;
+        public Button spectatorButton;
+
         public override void ActivationActions()
         {
             // 여기서 스크롤바들의 값을 초기화 시켜줌
@@ -280,6 +284,24 @@ namespace UI.PanelScripts
             {
                 UIManager.Instance.sensitivityAction(value);
             });
+
+#if UNITY_EDITOR
+            stageSkipButton.onClick.AddListener(() =>
+            {
+                SceneLoadTrigger sceneLoadTrigger = GameObject.FindObjectOfType<SceneLoadTrigger>();
+                SceneManager.LoadScene((sceneLoadTrigger.LoadTarget));
+                Utils.LockCursor();
+                Utils.MoveTime();
+            });
+
+            spectatorButton.onClick.AddListener(() =>
+            {
+                Spectator.Instance.StartSpectorMode();
+            });
+#else
+            stageSkipButton.gameObject.SetActive(false);
+            spectatorButton.gameObject.SetActive(false);
+#endif
         }
 
         public override void UpdateActions()
