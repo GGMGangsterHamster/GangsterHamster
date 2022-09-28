@@ -1,6 +1,7 @@
 using Matters.Velocity;
 using Objects;
 using UnityEngine;
+using Weapons.Actions;
 using Weapons.Actions.Broker;
 
 namespace Characters.Player
@@ -11,10 +12,23 @@ namespace Characters.Player
         private const string GRAND = "Grand";
         private FollowGroundPos _groundFollower;
 
+        private bool _enabled = true;
+
         private void Start()
         {
+            if (FindObjectOfType<WeaponManagement>()?.startHandleWeapon != WeaponEnum.Grand)
+            {
+                enabled = false;
+                _enabled = false;
+                return;
+            }
+
+
             GrandMessageBroker grandEvent = FindObjectOfType<GrandMessageBroker>();
             _groundFollower = GetComponent<FollowGroundPos>();
+
+            
+
             Debug.Assert(grandEvent != null);
             Debug.Assert(_groundFollower != null);
 
@@ -30,6 +44,8 @@ namespace Characters.Player
 
         public void Active(GameObject other)
         {
+            if (!_enabled) return;
+
             if (DoesParentContainsGrand(this.transform))
             {
                 this.transform.SetParent(null);
@@ -39,6 +55,8 @@ namespace Characters.Player
 
         public void Deactive(GameObject other)
         {
+            if (!_enabled) return;
+
             _groundFollower.Enabled = true;
         }
 

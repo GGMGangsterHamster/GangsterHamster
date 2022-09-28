@@ -5,16 +5,17 @@ using UnityEngine.Rendering.HighDefinition;
 using Weapons.Actions.Broker;
 using UnityEngine.Rendering;
 using System;
+using Weapons.Actions;
 
 public class CameraReBoundBlur : MonoBehaviour
 {
     [SerializeField] private VolumeProfile mainCamVolume;
 
-    [Header("FocusDistance º¯¼ö")]
+    [Header("FocusDistance ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] private float minTargetBlurRadius;
     [SerializeField] private float maxTargetBlurRadius;
 
-    [Header("Duration º¯¼ö")]
+    [Header("Duration ï¿½ï¿½ï¿½ï¿½")]
     [SerializeField] private float blurDuration;
     [SerializeField] private float onBlurLerpDuration;
     [SerializeField] private float offBlurLerpDuration;
@@ -23,8 +24,17 @@ public class CameraReBoundBlur : MonoBehaviour
     private GrandMessageBroker grandMessageBroker;
     private Coroutine blurCoroutine;
 
+    private bool _enabled = true;
+
     void Start()
     {
+        if (FindObjectOfType<WeaponManagement>()?.startHandleWeapon != WeaponEnum.Grand)
+        {
+            enabled = false;
+            _enabled = false;
+            return;
+        }
+
         mainCamVolume.TryGet<DepthOfField>(out depthOfField);
         grandMessageBroker = FindObjectOfType<GrandMessageBroker>();
         grandMessageBroker.OnRebound.AddListener(ReBoundBlur);
@@ -56,6 +66,8 @@ public class CameraReBoundBlur : MonoBehaviour
 
     public void ReBoundBlur()
     {
+        if (!_enabled) return;
+
         StartCoroutine(LerpBlur());
     }
 }
