@@ -22,6 +22,9 @@ namespace Matters.Velocity
 
             FollowGroundPosOption newGround
                 = other?.GetComponent<FollowGroundPosOption>();
+
+            if (newGround?.doNotFollow == true) return;
+
             int priority = newGround?.priority ?? 0;
             int curPriority = _curGround?.priority ?? 0;
 
@@ -45,6 +48,7 @@ namespace Matters.Velocity
             {
                 FollowGroundPosOption newGround
                     = other?.GetComponent<FollowGroundPosOption>();
+
                 int priority = newGround?.priority ?? 0;
                 int curPriority = _curGround.priority;
 
