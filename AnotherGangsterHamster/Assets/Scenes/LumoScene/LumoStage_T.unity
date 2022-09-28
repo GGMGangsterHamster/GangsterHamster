@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 3b510e28160547615ba7f416f19c5aaa, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: 736f865d4e8b0039da4c1e35f2d127d6, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 4dd288a9ce8a1fc0283cec4f2ea98f05, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -468,9 +468,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Entries:
+  - id: 0
+    category: 0
+    gameObject: {fileID: 1127430189}
   - id: 1
     category: 0
     gameObject: {fileID: 1127430190}
+  - id: 2
+    category: 0
+    gameObject: {fileID: 1127430188}
 --- !u!4 &958302543
 Transform:
   m_ObjectHideFlags: 19
@@ -501,6 +507,18 @@ PrefabInstance:
       propertyPath: inputList.Array.data[1].OnPressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 783011369}
+    - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
+      propertyPath: m_BakedTexture
+      value: 
+      objectReference: {fileID: 8900000, guid: fcef0c9b333667e8091fd86e44f0c219, type: 3}
+    - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
+      propertyPath: m_BakedTexture
+      value: 
+      objectReference: {fileID: 8900000, guid: 3da0d5287b6795639b00b5bcbb5cf6b5, type: 3}
+    - target: {fileID: 1678855375618596348, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.0000014
+      objectReference: {fileID: 0}
     - target: {fileID: 4657418744295948826, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -3391,114 +3409,124 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 0]
-      value: 2.1127694
+      value: 2.0569854
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 1]
-      value: 1.4671171
+      value: 1.5147636
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 2]
-      value: 0.22295748
+      value: -0.7720517
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 3]
-      value: 0.23357968
+      value: 1.6378771
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 4]
-      value: 0.06487396
+      value: 0.5849994
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 5]
-      value: 0.07115042
+      value: -0.27575314
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 6]
-      value: -0.04118437
+      value: -0.07437321
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 7]
-      value: -0.03289957
+      value: -0.2981652
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 8]
-      value: -0.0073122284
+      value: 0.02287968
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 9]
-      value: 3.1527958
+      value: 2.4136028
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[10]
-      value: 2.0905223
+      value: 1.7773767
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[11]
-      value: 0.47872984
+      value: -0.9059016
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[12]
-      value: 0.4101198
+      value: 1.9218343
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[13]
-      value: 0.086585015
+      value: 0.68642014
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[14]
-      value: 0.11999592
+      value: -0.3235602
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[15]
-      value: -0.050149728
+      value: -0.08726721
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[16]
-      value: 0.06514847
+      value: -0.3498578
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[17]
-      value: 0.00079650735
+      value: 0.02684631
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[18]
-      value: 0.9987355
+      value: 0.068818934
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[19]
-      value: 0.71303225
+      value: 0.050678246
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[20]
-      value: 0.12530068
+      value: -0.025829924
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[21]
-      value: -0.022105198
+      value: 0.05479716
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[22]
-      value: 0.013768971
+      value: 0.019571863
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[23]
-      value: 0.060052678
+      value: -0.009225655
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[24]
-      value: -0.0140251145
+      value: -0.0024882455
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[25]
-      value: 0.09944791
+      value: -0.009975478
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[26]
-      value: -0.009776601
+      value: 0.00076546747
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
+--- !u!1 &1127430188 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7584595802652866273, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
+  m_PrefabInstance: {fileID: 1127430187}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1127430189 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7584595803263123829, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
+  m_PrefabInstance: {fileID: 1127430187}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1127430190 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9108250333603464542, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
