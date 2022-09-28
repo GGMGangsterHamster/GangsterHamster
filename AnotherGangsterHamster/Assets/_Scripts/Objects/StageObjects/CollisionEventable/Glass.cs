@@ -27,6 +27,7 @@ namespace Objects.StageObjects.CollisionEventable
                 {
                     other.GetComponentInChildren<OnGround>()?.ExitGround();
                     OnBreak.Invoke();
+                    gameObject.SetActive(false);
                 }
             }
         }

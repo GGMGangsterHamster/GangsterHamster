@@ -10,6 +10,8 @@ public class MovementSound : MonoBehaviour
     [SerializeField] private MoveInputHandler moveInputHandler;
     [SerializeField] private float soundDelay;
 
+    private Coroutine coroutine;
+
     void Start()
     {
         moveInputHandler.forward.Execute.AddListener(MovementSound_Play);
@@ -18,21 +20,12 @@ public class MovementSound : MonoBehaviour
         moveInputHandler.right.Execute.AddListener(MovementSound_Play);
     }
 
-    void Update()
-    {
-        if (!PlayerStatus.IsMoving || PlayerStatus.IsJumping)
-        {
-            MovementSound_Stop();
-        }
-    }
-
     IEnumerator MovementSoundRepeat()
     {
-        while (PlayerStatus.IsMoving)
+        while (PlayerStatus.IsMoving) // moveDelta.GetDelta ÇÊ¿ä
         {
             movementAudio.Play();
             yield return new WaitForSeconds(soundDelay);
-            yield return null;  
         }
     }
 
@@ -40,7 +33,7 @@ public class MovementSound : MonoBehaviour
     {
         if (!movementAudio.isPlaying)
         {
-            movementAudio.Play();
+            coroutine = StartCoroutine(MovementSoundRepeat());
         }
     }
 
