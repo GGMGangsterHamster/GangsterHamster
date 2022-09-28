@@ -10,21 +10,6 @@ namespace UI.Screen
     {
         private string _screenPath = "SettingValue/Screen.json";
 
-        private CanvasScaler _gamePlayCanvas;
-        
-        private CanvasScaler GamePlayCanvasScaler
-        {
-            get
-            {
-                if(_gamePlayCanvas == null)
-                {
-                    _gamePlayCanvas = GetComponent<CanvasScaler>();
-                }
-
-                return _gamePlayCanvas;
-            }
-        }
-
         private bool _isFullScreen = true;
 
         private int _width = 1920;
@@ -60,8 +45,11 @@ namespace UI.Screen
 
         private void SaveScreenSetting()
         {
-            UnityEngine.Screen.SetResolution(_width, _height, _isFullScreen);
-            GamePlayCanvasScaler.referenceResolution = new Vector2(_width, _height);
+            if(_isFullScreen)
+                UnityEngine.Screen.SetResolution(_width, _height, FullScreenMode.MaximizedWindow);
+            else
+                UnityEngine.Screen.SetResolution(_width, _height, FullScreenMode.Windowed);
+            //UnityEngine.Screen.SetResolution(_width, _height, _isFullScreen);
             ScreenVO vo = new ScreenVO(_isFullScreen, _width, _height);
             Utils.VOToJson(_screenPath, vo);
         }
@@ -77,7 +65,10 @@ namespace UI.Screen
                 _height = vo.height;
             }
 
-            UnityEngine.Screen.SetResolution(_width, _height, _isFullScreen);
+            if (_isFullScreen)
+                UnityEngine.Screen.SetResolution(_width, _height, FullScreenMode.MaximizedWindow);
+            else
+                UnityEngine.Screen.SetResolution(_width, _height, FullScreenMode.Windowed);
         }
     }
 }

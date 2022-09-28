@@ -321,7 +321,7 @@ namespace UI.PanelScripts
                     ScreenManager.Instance.SetFullScreen();
                     break;
                 case ScreenMode.WindowScreen:
-                    ScreenManager.Instance.SetFullScreen();
+                    ScreenManager.Instance.SetWindowScreen();
                     break;
             }
         }
