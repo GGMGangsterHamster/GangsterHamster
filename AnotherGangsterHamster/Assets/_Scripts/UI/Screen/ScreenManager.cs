@@ -46,7 +46,7 @@ namespace UI.Screen
         private void SaveScreenSetting()
         {
             if(_isFullScreen)
-                UnityEngine.Screen.SetResolution(_width, _height, FullScreenMode.MaximizedWindow);
+                UnityEngine.Screen.SetResolution(_width, _height, FullScreenMode.FullScreenWindow);
             else
                 UnityEngine.Screen.SetResolution(_width, _height, FullScreenMode.Windowed);
             //UnityEngine.Screen.SetResolution(_width, _height, _isFullScreen);
@@ -66,7 +66,7 @@ namespace UI.Screen
             }
 
             if (_isFullScreen)
-                UnityEngine.Screen.SetResolution(_width, _height, FullScreenMode.MaximizedWindow);
+                UnityEngine.Screen.SetResolution(_width, _height, FullScreenMode.FullScreenWindow);
             else
                 UnityEngine.Screen.SetResolution(_width, _height, FullScreenMode.Windowed);
         }

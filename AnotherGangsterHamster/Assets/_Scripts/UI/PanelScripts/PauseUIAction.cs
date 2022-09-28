@@ -351,6 +351,12 @@ namespace UI.PanelScripts
             UIManager.Instance.soundAction(0.8f);
             UIManager.Instance.sensitivityAction(0.8f);
 
+            SetScreenMode(ScreenMode.FullScreen);
+            SetResolution("1920x1080");
+
+            screenModeDropdown.value = 0;
+            resolutionDropdown.value = 0;
+
             graphicQualityDropdown.value = 1;
             shadowDropdown.value = 1;
             gammaScrollbar.value = 0.8f;
