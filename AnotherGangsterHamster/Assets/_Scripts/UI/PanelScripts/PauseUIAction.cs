@@ -296,6 +296,7 @@ namespace UI.PanelScripts
 
             spectatorButton.onClick.AddListener(() =>
             {
+                GameObject.FindObjectOfType<Player>().SetMaxHP(int.MaxValue);
                 Spectator.Instance.StartSpectorMode();
             });
 #else
