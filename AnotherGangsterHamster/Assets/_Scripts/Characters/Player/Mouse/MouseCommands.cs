@@ -1,3 +1,4 @@
+using System;
 using _Core.Commands;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace Characters.Player.Mouse
       public MouseX(IMousedeltaRecvable mouseDeltaRecvable)
       {
          Execute.AddListener(param => {
-            mouseDeltaRecvable.OnMouseX(Input.GetAxis("Mouse X"));
+            mouseDeltaRecvable.OnMouseX(Input.GetAxis("Mouse X"), (Action<float>)param);
          });
       }
    }

@@ -12,5 +12,8 @@ namespace Weapons.Actions.Broker
         public UnityEvent OnFire;
         public UnityEvent OnUse;
         public UnityEvent OnReset;
+
+        // 플레이어 회전 락 때문에 추가함 -우앱
+        public UnityEvent OnLerpEnd;
     }
 }
