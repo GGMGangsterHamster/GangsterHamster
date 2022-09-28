@@ -16,6 +16,7 @@ namespace Characters.Player.Move
 
         private Vector3 _delta;    // 플레이어 바라보는 방향에 따라 연산됨
         private Vector3 _rawDelta; // 플레이어 바라보는 방향과 상관 없이 World 로 연산
+        private Vector3 _lastDelta; // 초기화 전 마지막 델타
 
         private void Awake()
         {
@@ -65,12 +66,13 @@ namespace Characters.Player.Move
                 _delta = Vector3.zero;
             }
 
+            _lastDelta = _delta;
 
             return finalDelta;
         }
 
-        public Vector3 GetDelta()
-         => _delta;
+        public Vector3 GetLastDelta()
+         => _lastDelta;
 
         private void FixedUpdate()
         {
