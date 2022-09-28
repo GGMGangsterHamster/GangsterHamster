@@ -18,6 +18,7 @@ public class Spectator : MonoSingleton<Spectator>
         isSpectorMode = true;
 
         Camera.main.transform.parent = transform;
+        Camera.main.transform.rotation = Quaternion.identity;
         Camera.main.transform.position = Vector3.zero;
 
         mainCam = Camera.main.transform;
