@@ -17,11 +17,11 @@ namespace Objects.StageObjects.CollisionEventable
         private Coroutine _down = null;
 
         [Header("작동 시작시 true, 종료시 false")]
-        public UnityEvent<bool> OnEventActive
-           = new UnityEvent<bool>();
+        public UnityEvent OnEventActive
+           = new UnityEvent();
 
-        public UnityEvent<bool> OnEventDeactive
-            = new UnityEvent<bool>();
+        public UnityEvent OnEventDeactive
+            = new UnityEvent();
 
         private void Awake()
         {
@@ -37,14 +37,13 @@ namespace Objects.StageObjects.CollisionEventable
         {
             if (_down != null || _up != null)
             {
-                OnEventDeactive.Invoke(false);
                 ValueTween.Stop(this);
             }
 
             Vector3 step = target / duration;
             Vector3 final = _initalPos + target;
 
-            OnEventActive.Invoke(true);
+            OnEventActive.Invoke();
 
 
             _up = ValueTween.To(this,
@@ -60,7 +59,7 @@ namespace Objects.StageObjects.CollisionEventable
                      {
                          transform.localPosition = final;
                          _up = null;
-                         OnEventActive.Invoke(false);
+                         OnEventDeactive.Invoke();
                      });
         }
 
@@ -68,13 +67,12 @@ namespace Objects.StageObjects.CollisionEventable
         {
             if (_down != null || _up != null)
             {
-                OnEventActive.Invoke(false);
                 ValueTween.Stop(this);
             }
 
             Vector3 step = target / duration;
 
-            OnEventDeactive.Invoke(true);
+            OnEventActive.Invoke();
 
             _down = ValueTween.To(this,
                      () =>
@@ -89,7 +87,7 @@ namespace Objects.StageObjects.CollisionEventable
                      {
                          transform.localPosition = _initalPos;
                          _down = null;
-                         OnEventDeactive.Invoke(false);
+                         OnEventDeactive.Invoke();
                      });
         }
     }
