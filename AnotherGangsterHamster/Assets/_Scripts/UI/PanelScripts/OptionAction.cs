@@ -104,6 +104,10 @@ namespace UI.PanelScripts
                 taaSharpenScrollbar.value = graphicVO.taaSharpen;
                 smaaQualityDropdown.value = graphicVO.smaaQuality;
             }
+            else
+            {
+                ResetSetting();
+            }
         }
 
         public override void DeActivationActions()
@@ -232,7 +236,7 @@ namespace UI.PanelScripts
                     ScreenManager.Instance.SetFullScreen();
                     break;
                 case ScreenMode.WindowScreen:
-                    ScreenManager.Instance.SetFullScreen();
+                    ScreenManager.Instance.SetWindowScreen();
                     break;
             }
         }
