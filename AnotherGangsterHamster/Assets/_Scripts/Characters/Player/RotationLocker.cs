@@ -35,6 +35,8 @@ namespace Characters.Player
                 _gravity = GravityManager.GetGlobalGravityDirection();
                 _y = 0.0f;
                 // TODO: 돌아갈 때 툭 튀는거만 해결하면 됨
+
+
             });
 
             message.OnReset.AddListener(() => {
