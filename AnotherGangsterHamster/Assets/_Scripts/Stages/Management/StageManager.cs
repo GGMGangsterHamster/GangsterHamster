@@ -1,3 +1,4 @@
+using Sound;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -55,15 +56,15 @@ namespace Stages.Management
          }
       }
 
-      public void Load(string target)
+      public void Load(string target, bool stopSound = true)
       {
          StageNames stage = (StageNames)Enum.Parse(typeof(StageNames), target);
 
          if (AvalibleToLoad(stage))
          {
+            if (stopSound) SoundManager.Instance.StopAll();
             SceneManager.LoadScene(target);
             CurrentStage = stage;
-            BackgroundMusic.Instance.StartBackgroundMusic();
             SaveStage(stage.ToString());
             GC.Collect();
          }
