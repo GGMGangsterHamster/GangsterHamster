@@ -12,6 +12,8 @@ namespace UI.Dialog
         public float yPadding = 60.0f;
         public float yPushDuration = 0.1f;
 
+        public bool autoDisable = true;
+
         private GameObject _dialogObject;
         private List<DialogObject> _dialogPool
             = new List<DialogObject>();
@@ -50,6 +52,9 @@ namespace UI.Dialog
                 obj = Add();
 
             obj.Enable(text);
+            
+            if (autoDisable && _activeDialogPool.Count >= 3)
+                Disable();
 
             if (_activeDialogPool.Count > 0)
             {
@@ -60,6 +65,7 @@ namespace UI.Dialog
                     arr[i].Move(yPadding, yPushDuration);
                 }
             }
+
 
             _activeDialogPool.Enqueue(obj);
         }

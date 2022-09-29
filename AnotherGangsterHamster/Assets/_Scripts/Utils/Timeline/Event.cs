@@ -35,13 +35,21 @@ namespace Timeline
         public List<GameObject> requirements
             = new List<GameObject>();
 
+        public List<GameObject> preRequirements
+            = new List<GameObject>();
+
         public void Init()
         {
             WaitForEndOfFrame wait = new WaitForEndOfFrame();
             List<Objects.IActivated> req = new List<Objects.IActivated>();
+            List<Objects.IActivated> preReq = new List<Objects.IActivated>();
 
             requirements.ForEach(x => {
                 req.Add(x.GetComponent<Objects.IActivated>());
+            });
+
+            preRequirements.ForEach(x => {
+                preReq.Add(x.GetComponent<Objects.IActivated>());
             });
 
             CoroutineCaller
@@ -49,6 +57,9 @@ namespace Timeline
                 .Use(() => !satisfied,
                     () => wait,
                     () => {
+                        if (preReq.Find(x => !x.Activated) != null)
+                            return;
+
                         if (req.Find(x => !x.Activated) == null)
                             satisfied = true;
                     });
