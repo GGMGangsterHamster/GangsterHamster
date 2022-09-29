@@ -8,6 +8,7 @@ public class MovementSound : MonoBehaviour
 {
     [SerializeField] private AudioSource movementAudio;
     [SerializeField] private MoveInputHandler moveInputHandler;
+    [SerializeField] private MoveDelta moveDelta;
     [SerializeField] private float soundDelay;
 
     private Coroutine coroutine;
@@ -22,7 +23,7 @@ public class MovementSound : MonoBehaviour
 
     IEnumerator MovementSoundRepeat()
     {
-        while (PlayerStatus.IsMoving) // moveDelta.GetDelta 필요
+        while (PlayerStatus.IsMoving && !Utils.Compare(moveDelta.GetLastDelta(), Vector3.zero) && !PlayerStatus.IsJumping) // moveDelta.GetDelta 필요
         {
             movementAudio.Play();
             yield return new WaitForSeconds(soundDelay);
