@@ -97,7 +97,7 @@ namespace Sound
                 .Values
                 .ToList()
                 .ForEach(x => {
-                    if(x != null && x.gameObject.activeSelf)
+                    if(x != null && x.gameObject.activeSelf && x.isPlaying)
                         x.Stop();
                 });
         }
