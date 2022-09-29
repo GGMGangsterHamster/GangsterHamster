@@ -249,23 +249,24 @@ namespace UI.PanelScripts
 
             goTitleButton.onClick.AddListener(() =>
             {
-                SoundManager.Instance.StopAll(); 
+                SoundManager.Instance.StopAll();
                 DeActivationActions();
-                SceneManager.LoadScene(StageNames.Title.ToString());
+                StageManager.Instance.Load(StageNames.Title.ToString());
                 Utils.MoveTime();
             });
 
             gameRestartButton.onClick.AddListener(() =>
             {
-                SceneManager.LoadScene(gameObject.scene.name);
                 SoundManager.Instance.StopAll();
+                DeActivationActions();
+                StageManager.Instance.Load(gameObject.scene.name);
                 Utils.LockCursor();
                 Utils.MoveTime();
             });
 
             disableButton.onClick.AddListener(() =>
             {
-                UIManager.Instance.DeActivationPanel(panelId);
+                DeActivationActions();
                 Utils.LockCursor();
                 Utils.MoveTime();
             });
