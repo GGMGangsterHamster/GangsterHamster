@@ -64,13 +64,13 @@ namespace Objects.Trigger
 
         public string GetByID(int id)
         {
-            if (id > idEnd || id < 0) return null;
+            if (id >= idEnd || id < 0) return null;
             return _dialogs[id].text;
         }
 
         public InnerDialog Get()
         {
-            if (_curId > idEnd) return null;
+            if (_curId >= idEnd) return null;
             return _dialogs[_curId++];
         }
     }
