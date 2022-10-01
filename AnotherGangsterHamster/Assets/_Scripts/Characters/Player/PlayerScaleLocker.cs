@@ -16,7 +16,8 @@ namespace Characters.Player
 
         private void Start()
         {
-            if (FindObjectOfType<Grand>()?.possibleUse != true)
+
+            if (!FindObjectOfType<Grand>().possibleUse)
             {
                 enabled = false;
                 _enabled = false;
