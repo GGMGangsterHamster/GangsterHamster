@@ -36,9 +36,9 @@ namespace Characters.Player
                 transform.rotation = target;
             };
 
-            if (FindObjectOfType<WeaponManagement>()?.startHandleWeapon != WeaponEnum.Gravito)
+            if (FindObjectOfType<Gravito>()?.possibleUse != true)
                 return;
-            
+
 
             CheckpointManager checkpoint
                 = FindObjectOfType<CheckpointManager>();
