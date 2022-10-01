@@ -16,7 +16,7 @@ namespace Characters.Player
 
         private void Start()
         {
-            if (FindObjectOfType<WeaponManagement>()?.startHandleWeapon != WeaponEnum.Grand)
+            if (FindObjectOfType<Grand>()?.possibleUse != true)
             {
                 enabled = false;
                 _enabled = false;
