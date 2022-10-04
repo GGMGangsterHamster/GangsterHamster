@@ -23,7 +23,7 @@ public class CameraHeadBobbing : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(string.Format("Delta : {0}", moveDelta.GetLastDelta()));
+        //Debug.Log(string.Format("Delta : {0}", moveDelta.GetLastDelta()));
 
         if (!dropShaking.isOnlyDropCamera)
         {
