@@ -6,6 +6,7 @@ using Weapons.Actions.Broker;
 using UnityEngine.Rendering;
 using System;
 using Weapons.Actions;
+using _Core.Initialize;
 
 public class CameraReBoundBlur : MonoBehaviour
 {
@@ -22,9 +23,11 @@ public class CameraReBoundBlur : MonoBehaviour
 
     private DepthOfField depthOfField;
     private GrandMessageBroker grandMessageBroker;
-    private Coroutine blurCoroutine;
+    private OpenRC openRC;
+    private IEnumerator coroutine;
 
     private bool _enabled = true;
+    private Action onResetBlur;
 
     void Start()
     {
@@ -38,6 +41,9 @@ public class CameraReBoundBlur : MonoBehaviour
         mainCamVolume.TryGet<DepthOfField>(out depthOfField);
         grandMessageBroker = FindObjectOfType<GrandMessageBroker>();
         grandMessageBroker.OnRebound.AddListener(ReBoundBlur);
+        onResetBlur = ResetBlur;
+        openRC = FindObjectOfType<OpenRC>();
+        openRC.Add(RunLevel.SCENE_LOAD, onResetBlur);
     }
 
     IEnumerator LerpBlur()
@@ -69,5 +75,10 @@ public class CameraReBoundBlur : MonoBehaviour
         if (!_enabled) return;
 
         StartCoroutine(LerpBlur());
+    }
+
+    void ResetBlur()
+    {
+        depthOfField.farMaxBlur = minTargetBlurRadius;
     }
 }

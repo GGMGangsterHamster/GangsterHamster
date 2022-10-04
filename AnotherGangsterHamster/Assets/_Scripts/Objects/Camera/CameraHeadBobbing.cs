@@ -6,9 +6,9 @@ using Characters.Player.Move;
 
 public class CameraHeadBobbing : MonoBehaviour
 {
-    [SerializeField] private float frequency;  // Èçµé¸®´Â ºóµµ¼ö
-    [SerializeField] private float magnitude;  // Èçµé¸®´Â ¹üÀ§ Á¤µµ
-    [SerializeField] private float rollbackSpeed;  // ¿ø·¡ Æ®·£½ºÆûÀ¸·Î µ¹¸®´Â ¼Óµµ
+    [SerializeField] private float frequency;  // ï¿½ï¿½é¸®ï¿½ï¿½ ï¿½óµµ¼ï¿½
+    [SerializeField] private float magnitude;  // ï¿½ï¿½é¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    [SerializeField] private float rollbackSpeed;  // ï¿½ï¿½ï¿½ï¿½ Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½
     [SerializeField] private CameraDropShaking dropShaking;
     [SerializeField] private MoveDelta moveDelta;
 
