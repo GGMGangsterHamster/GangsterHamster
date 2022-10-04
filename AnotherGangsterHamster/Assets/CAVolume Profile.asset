@@ -1,5 +1,91 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7410006203736381683
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24f077503be6ae942a1e1245dbd53ea9, type: 3}
+  m_Name: Bloom
+  m_EditorClassIdentifier: 
+  active: 1
+  quality:
+    m_OverrideState: 1
+    m_Value: 0
+  threshold:
+    m_OverrideState: 1
+    m_Value: 3
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.7
+  scatter:
+    m_OverrideState: 1
+    m_Value: 0.5
+  tint:
+    m_OverrideState: 0
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  dirtTexture:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+  dirtIntensity:
+    m_OverrideState: 1
+    m_Value: 1
+  anamorphic:
+    m_OverrideState: 0
+    m_Value: 1
+  m_Resolution:
+    m_OverrideState: 1
+    m_Value: 4
+  m_HighQualityPrefiltering:
+    m_OverrideState: 1
+    m_Value: 0
+  m_HighQualityFiltering:
+    m_OverrideState: 1
+    m_Value: 0
+--- !u!114 &-831692235277713759
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7649d9368d3a5c4ab8ad01a63e04962, type: 3}
+  m_Name: ChannelMixer
+  m_EditorClassIdentifier: 
+  active: 1
+  redOutRedIn:
+    m_OverrideState: 1
+    m_Value: 25
+  redOutGreenIn:
+    m_OverrideState: 1
+    m_Value: 15
+  redOutBlueIn:
+    m_OverrideState: 1
+    m_Value: 15
+  greenOutRedIn:
+    m_OverrideState: 1
+    m_Value: 15
+  greenOutGreenIn:
+    m_OverrideState: 1
+    m_Value: 150
+  greenOutBlueIn:
+    m_OverrideState: 1
+    m_Value: 15
+  blueOutRedIn:
+    m_OverrideState: 1
+    m_Value: 15
+  blueOutGreenIn:
+    m_OverrideState: 1
+    m_Value: 15
+  blueOutBlueIn:
+    m_OverrideState: 1
+    m_Value: 100
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14,6 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   components:
   - {fileID: 7347122974248877964}
+  - {fileID: -831692235277713759}
+  - {fileID: -7410006203736381683}
 --- !u!114 &7347122974248877964
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -38,4 +126,4 @@ MonoBehaviour:
     m_Value: 0.5
   m_MaxSamples:
     m_OverrideState: 0
-    m_Value: 6
+    m_Value: 12
