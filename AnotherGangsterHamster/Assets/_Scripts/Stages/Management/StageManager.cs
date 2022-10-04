@@ -75,6 +75,7 @@ namespace Stages.Management
       {
          if (AvalibleToLoad(CurrentStage))
          {
+            SoundManager.Instance.StopAll();
             SceneManager.LoadScene(CurrentStage.ToString());
             GC.Collect();
          }
