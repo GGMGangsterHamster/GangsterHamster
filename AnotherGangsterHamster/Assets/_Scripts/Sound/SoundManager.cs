@@ -54,13 +54,13 @@ namespace Sound
                 return;
             }
 
-            if (_curPlayingAudioSource.ContainsKey(name))
-            {
-                AudioSource sameSource = _curPlayingAudioSource[name];
+            //if (_curPlayingAudioSource.ContainsKey(name))
+            //{
+            //    AudioSource sameSource = _curPlayingAudioSource[name];
 
-                if (sameSource != null && sameSource.gameObject.activeSelf)
-                    sameSource.Stop();
-            }
+            //    if (sameSource != null && sameSource.gameObject.activeSelf)
+            //        sameSource.Stop();
+            //}
 
             if (_curPlayingAudioSource[name] != null &&
                 _curPlayingAudioSource[name].isPlaying &&
@@ -97,7 +97,7 @@ namespace Sound
                 .Values
                 .ToList()
                 .ForEach(x => {
-                    if(x != null && x.gameObject.activeSelf)
+                    if(x != null && x.gameObject.activeSelf && x.isPlaying)
                         x.Stop();
                 });
         }

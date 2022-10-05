@@ -242,7 +242,7 @@ MonoBehaviour:
     supportProbeVolume: 1
     probeVolumeMemoryBudget: 1024
     probeVolumeSHBands: 1
-    supportRayTracing: 0
+    supportRayTracing: 1
     supportedRayTracingMode: 3
     lightLoopSettings:
       cookieAtlasSize: 2048
@@ -250,10 +250,10 @@ MonoBehaviour:
       cookieAtlasLastValidMip: 0
       cookieTexArraySize: 1
       planarReflectionAtlasSize: 1024
-      reflectionProbeCacheSize: 32
-      reflectionCubemapSize: 256
+      reflectionProbeCacheSize: 64
+      reflectionCubemapSize: 512
       reflectionCacheCompressed: 1
-      reflectionProbeFormat: 74
+      reflectionProbeFormat: 48
       skyReflectionSize: 512
       skyLightingOverrideLayerMask:
         serializedVersion: 2
@@ -347,11 +347,11 @@ MonoBehaviour:
       DoFResolution: 040000000200000001000000
       DoFHighQualityFiltering: 000101
       DoFPhysicallyBased: 000000
-      MotionBlurSampleCount: 04000000080000000c000000
+      MotionBlurSampleCount: 080000000c00000024000000
       BloomRes: 040000000200000002000000
       BloomHighQualityFiltering: 000101
       BloomHighQualityPrefiltering: 000001
-      ChromaticAberrationMaxSamples: 03000000060000000c000000
+      ChromaticAberrationMaxSamples: 060000000c00000018000000
     lightSettings:
       useContactShadow:
         m_Values: 000101
@@ -369,14 +369,14 @@ MonoBehaviour:
       m_SchemaId:
         m_Id: With3Levels
     lightingQualitySettings:
-      AOStepCount: 040000000600000010000000
+      AOStepCount: 040000000600000020000000
       AOFullRes: 000001
-      AOMaximumRadiusPixels: 200000002800000050000000
+      AOMaximumRadiusPixels: 20000000280000003c000000
       AOBilateralUpsample: 000101
       AODirectionCount: 010000000200000004000000
       ContactShadowSampleCount: 060000000a00000010000000
-      SSRMaxRaySteps: 100000002000000040000000
-      SSGIRaySteps: 200000004000000080000000
+      SSRMaxRaySteps: 200000004000000000010000
+      SSGIRaySteps: 200000004000000000010000
       SSGIDenoise: 010101
       SSGIHalfResDenoise: 010000
       SSGIDenoiserRadius:

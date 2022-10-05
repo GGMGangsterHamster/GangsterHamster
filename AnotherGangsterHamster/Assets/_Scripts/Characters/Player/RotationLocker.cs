@@ -21,6 +21,8 @@ namespace Characters.Player
         private Action<float> _callback;
         private bool executeMouseRot = true;
 
+        private bool _used = false;
+
         private void Start()
         {
             mouseX = new MouseX(FindObjectOfType<Mouse.Mouse>());
@@ -34,9 +36,9 @@ namespace Characters.Player
                 transform.rotation = target;
             };
 
-            if (FindObjectOfType<WeaponManagement>()?.startHandleWeapon != WeaponEnum.Gravito)
+            if (FindObjectOfType<Gravito>()?.possibleUse != true)
                 return;
-            
+
 
             CheckpointManager checkpoint
                 = FindObjectOfType<CheckpointManager>();
@@ -53,13 +55,19 @@ namespace Characters.Player
                 _gravity = GravityManager.GetGlobalGravityDirection();
                 _y = 0.0f;
                 executeMouseRot = false;
+                _used = true;
             });
 
             message.OnReset.AddListener(() => {
                 _y = transform.eulerAngles.y;
                 _lock = Quaternion.identity;
                 _gravity = Vector3.down;
-                executeMouseRot = false;
+
+                if (_used)
+                {
+                    executeMouseRot = false;
+                    _used = false;
+                }
             });
 
         }

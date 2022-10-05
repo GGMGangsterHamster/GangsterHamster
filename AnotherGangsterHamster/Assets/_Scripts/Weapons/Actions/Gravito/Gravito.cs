@@ -177,6 +177,7 @@ namespace Weapons.Actions
                 return;
 
             _gravitoAnimator.ResetAnime(transform.position, GravitoHandPosition, fireSpeed);
+            SoundManager.Instance.Stop("GravitoAbilityExecute");
             _AWmessageBroker.OnReset?.Invoke();
             _messageBroker.OnReset?.Invoke();
 
@@ -193,7 +194,6 @@ namespace Weapons.Actions
                 return;
             }
 
-            SoundManager.Instance.Stop("GravitoAbilityExecute");
             SetGravityChangeTime();
             _gravitoEffect.EffectOn();
             _currentGravitoStatus = GravitoStatus.Reset;
