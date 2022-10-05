@@ -161,22 +161,23 @@ namespace Weapons.Actions
         // 1,2,3번 같이 숫자 누르면 발동되는 함수
         public void ChangeCurrentWeapon(WeaponEnum weaponEnum)
         {
+            if (!_weaponActions[weaponEnum].possibleUse)
+            {
+                Debug.Log("무기 변경 불가");
+            }
+            else
+            {
+                _messageBroker.OnChangeWeapon?.Invoke();
+                _weaponIcons[_curWeapon].gameObject.SetActive(false);
+                _curWeapon = weaponEnum;
+                _weaponIcons[_curWeapon].gameObject.SetActive(true);
+                grandCharge.gameObject.SetActive(_curWeapon == WeaponEnum.Grand && _weaponActions[_curWeapon].possibleUse);
+            }
+
             foreach (WeaponAction weaponAction in _weaponActions.Values)
             {
                 if (!weaponAction.possibleUse)
                     continue;
-
-                _messageBroker.OnChangeWeapon?.Invoke();
-
-                if (weaponEnum == weaponAction._weaponEnum && weaponAction.possibleUse)
-                {
-                    if (_curWeapon != WeaponEnum.None)
-                        _weaponIcons[_curWeapon].gameObject.SetActive(false);
-
-                    _curWeapon = weaponEnum;
-                    _weaponIcons[_curWeapon].gameObject.SetActive(true);
-                    grandCharge.gameObject.SetActive(_curWeapon == WeaponEnum.Grand && _weaponActions[_curWeapon].possibleUse);
-                }
 
                 weaponAction.SetActiveWeaponObj(weaponEnum);
             }
