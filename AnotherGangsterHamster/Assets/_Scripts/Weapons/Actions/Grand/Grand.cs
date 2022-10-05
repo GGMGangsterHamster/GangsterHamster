@@ -443,10 +443,14 @@ namespace Weapons.Actions
         {
             jumpLevel = 0;
 
-            if (_weaponUsedTime >= 0.65f && isCanChangeTwoStep)
+            if (_weaponUsedTime >= resizeSpeed -0.1f && isCanChangeTwoStep)
+            {
                 jumpLevel = 2;
+            }
             else
+            {
                 jumpLevel = 1;
+            }
 
             if (_currentSizeLevel + jumpLevel > GrandSizeLevel.FourGrade)
                 _currentSizeLevel = GrandSizeLevel.OneGrade;
@@ -458,6 +462,8 @@ namespace Weapons.Actions
         {
             _currentSizeLevel = ((_currentSizeLevel == GrandSizeLevel.FourGrade) ? 
                 GrandSizeLevel.OneGrade : GrandSizeLevel.FourGrade);
+
+            jumpLevel = 2;
         }
 
         private void ResizeStart()

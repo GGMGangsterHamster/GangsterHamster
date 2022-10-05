@@ -39,6 +39,9 @@ namespace Weapons.Actions.Effect
             {
                 currentTime += Time.deltaTime * 7;
                 aberration.intensity.Override(currentTime);
+
+                if(currentTime >= maxAberationIntensity)
+                    aberration.intensity.Override(maxAberationIntensity);
             }
             else if(!EffectiveActivate && currentTime > 0f)
             {

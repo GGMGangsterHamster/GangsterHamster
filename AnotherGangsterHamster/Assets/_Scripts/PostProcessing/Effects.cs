@@ -13,7 +13,7 @@ namespace PostProcessing
             where GlobalVolume : VolumeComponent
    {
       protected Volume _volume;
-      protected GlobalVolume _globalVolume;
+      protected GlobalVolume _globalVolume; // a
 
       // 코루틴 저장 용
       private Coroutine _coroutine = null;
