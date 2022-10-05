@@ -23,8 +23,6 @@ public class CameraHeadBobbing : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(string.Format("Delta : {0}", moveDelta.GetLastDelta()));
-
         if (!dropShaking.isOnlyDropCamera)
         {
             if (PlayerStatus.OnGround && PlayerStatus.IsMoving && !Utils.Compare(moveDelta.GetLastDelta(), Vector3.zero))
@@ -40,7 +38,7 @@ public class CameraHeadBobbing : MonoBehaviour
                 ResetPosition();
             }
            
-        } 
+        }
     }
 
     Vector3 HeadBobbing() 
