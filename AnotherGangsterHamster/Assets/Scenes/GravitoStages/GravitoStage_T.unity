@@ -10656,7 +10656,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &269701153
 Transform:
   m_ObjectHideFlags: 0
@@ -10670,7 +10670,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1199057214}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &269701154
 MonoBehaviour:
@@ -10681,11 +10681,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 269701152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 050f091a1a1679afe9a1b76407bbb493, type: 3}
+  m_Script: {fileID: 11500000, guid: 13659133036657aabb65ef227dd979cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requireKeys: 72000000
-  stepByStep: 0
+  activated: 0
 --- !u!1001 &271519311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28239,6 +28238,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2179294530501028196, guid: 6c979de14d68c8754bf624dcb775d2ec, type: 3}
   m_PrefabInstance: {fileID: 724413211}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &725403881
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 725403882}
+  - component: {fileID: 725403883}
+  m_Layer: 0
+  m_Name: RetrivedRead
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &725403882
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725403881}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1199057214}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &725403883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 725403881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13659133036657aabb65ef227dd979cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activated: 0
 --- !u!1001 &727345128
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37621,7 +37665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1005325991
 Transform:
   m_ObjectHideFlags: 0
@@ -37635,7 +37679,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1199057214}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1005325992
 MonoBehaviour:
@@ -37646,11 +37690,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1005325990}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 050f091a1a1679afe9a1b76407bbb493, type: 3}
+  m_Script: {fileID: 11500000, guid: 13659133036657aabb65ef227dd979cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requireKeys: 43010000
-  stepByStep: 0
+  activated: 0
 --- !u!1001 &1006567966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41979,6 +42022,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4523154199090907280, guid: 54ba1ac560d3182ff804e5bc6ef8f8df, type: 3}
   m_PrefabInstance: {fileID: 1089571863}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1093424290 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7765068267698479666, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+  m_PrefabInstance: {fileID: 1383714642}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1094429651
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45981,6 +46029,7 @@ Transform:
   m_Children:
   - {fileID: 1282615995}
   - {fileID: 1311201823}
+  - {fileID: 725403882}
   - {fileID: 1005325991}
   - {fileID: 1568987525}
   - {fileID: 269701153}
@@ -46006,15 +46055,14 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 999822477}
           m_TargetAssemblyTypeName: UI.Dialog.DialogPanel, Assembly-CSharp
-          m_MethodName: Display
+          m_MethodName: DisplayParse
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "\uC774 \uC2E4\uD5D8\uC2E4\uC5D0\uC11C \uB098\uAC00\uAE30
-              \uC704\uD574 \uC0AC\uC6A9\uD560 \uB3C4\uAD6C\uC778 \uADF8\uB77C\uBE44\uD1A0\uC785\uB2C8\uB2E4."
+            m_StringArgument: Gravito_Tuto,0
             m_BoolArgument: 0
           m_CallState: 2
     delay: 2
@@ -46024,70 +46072,48 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 999822477}
           m_TargetAssemblyTypeName: UI.Dialog.DialogPanel, Assembly-CSharp
-          m_MethodName: Display
+          m_MethodName: DisplayParse
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "\uC0AC\uC6A9\uBC95\uC744 \uC54C\uB824\uB4DC\uB9B4\uAC8C\uC694."
+            m_StringArgument: Gravito_Tuto,1
             m_BoolArgument: 0
           m_CallState: 2
     delay: 4
-  - key: dialog3
+  - key: dialog2
     actions:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 999822477}
           m_TargetAssemblyTypeName: UI.Dialog.DialogPanel, Assembly-CSharp
-          m_MethodName: Display
+          m_MethodName: DisplayParse
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "\uC6B0\uC120, \uBCBD\uC774\uB098 \uBC14\uB2E5\uC758
-              \uD0C0\uC77C\uC911\uC5D0 \uD14C\uB450\uB9AC\uC0C9\uC774 \uB2E4\uB978
-              \uBCBD \uD0C0\uC77C\uC774 \uC788\uC2B5\uB2C8\uB2E4. \uADF8 \uD0C0\uC77C\uC744
-              \uC798 \uAE30\uC5B5\uD574\uB450\uC138\uC694!"
+            m_StringArgument: Gravito_Tuto,2
             m_BoolArgument: 0
           m_CallState: 2
     delay: 6
-  - key: dialog4
-    actions:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 999822477}
-          m_TargetAssemblyTypeName: UI.Dialog.DialogPanel, Assembly-CSharp
-          m_MethodName: Display
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: "\uADF8 \uACF3\uC5D0\uB9CC \uB3C4\uAD6C\uB97C \uBC1C\uC0AC\uD560
-              \uC218 \uC788\uB2F5\uB2C8\uB2E4."
-            m_BoolArgument: 0
-          m_CallState: 2
-    delay: 8
   - key: dialog5
     actions:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 999822477}
           m_TargetAssemblyTypeName: UI.Dialog.DialogPanel, Assembly-CSharp
-          m_MethodName: Display
+          m_MethodName: DisplayParse
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "\uB3C4\uAD6C\uB97C \uBC1C\uC0AC\uD574\uBCF4\uC138\uC694.
-              (\uB9C8\uC6B0\uC2A4 \uC67C\uCABD \uBC84\uD2BC \uC785\uB825)"
+            m_StringArgument: Gravito_Tuto,3
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 1282615996}
@@ -46102,38 +46128,25 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 1005325990}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-    delay: 10
+    delay: 8
   executeAfterEvents:
-  - key: retrive_gravito_dialog
+  - key: dialog_retrive_gravito_2
     actions:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 999822477}
           m_TargetAssemblyTypeName: UI.Dialog.DialogPanel, Assembly-CSharp
-          m_MethodName: Display
+          m_MethodName: DisplayParse
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "\uB3C4\uAD6C\uB97C \uD68C\uC218\uD574\uBCF4\uC138\uC694
-              (R)"
+            m_StringArgument: Gravito_Tuto,6
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 1311201824}
+        - m_Target: {fileID: 725403883}
           m_TargetAssemblyTypeName: Timeline.Extensions.SimpleActiveClass, Assembly-CSharp
           m_MethodName: Active
           m_Mode: 2
@@ -46145,20 +46158,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 269701152}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
     delay: 2
-    eventBefore: dialog_use_gravito
+    eventBefore: dialog_retrive_gravito
   executeOnSatisfiedEvents:
   - key: dialog_use_gravito
     actions:
@@ -46166,48 +46167,23 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 999822477}
           m_TargetAssemblyTypeName: UI.Dialog.DialogPanel, Assembly-CSharp
-          m_MethodName: Display
+          m_MethodName: DisplayParse
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "\uB3C4\uAD6C\uB97C \uD68C\uC218\uD558\uBA74 \uC911\uB825\uC758
-              \uBC29\uD5A5\uC774 \uC6D0\uB798\uB300\uB85C \uB3CC\uC544\uC640\uC694"
-            m_BoolArgument: 0
-          m_CallState: 2
-    satisfied: 0
-    requirements:
-    - {fileID: 1568987524}
-    preRequirements:
-    - {fileID: 1005325990}
-  - key: dialog_fire_gravito
-    actions:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 999822477}
-          m_TargetAssemblyTypeName: UI.Dialog.DialogPanel, Assembly-CSharp
-          m_MethodName: Display
-          m_Mode: 5
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: "\uCC3D \uD615\uD0DC\uC758 \uB3C4\uAD6C\uAC00 \uBC15\uD600\uC788\uB294
-              \uBA74\uC73C\uB85C \uC911\uB825\uC758 \uBC29\uD5A5\uC744 \uBC14\uAFC0
-              \uC218 \uC788\uC2B5\uB2C8\uB2E4. (\uB9C8\uC6B0\uC2A4 \uC624\uB978\uCABD
-              \uBC84\uD2BC \uC785\uB825)"
+            m_StringArgument: Gravito_Tuto,4
             m_BoolArgument: 1
           m_CallState: 2
-        - m_Target: {fileID: 1568987524}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
+        - m_Target: {fileID: 1311201824}
+          m_TargetAssemblyTypeName: Timeline.Extensions.SimpleActiveClass, Assembly-CSharp
+          m_MethodName: Active
+          m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgument: {fileID: 1199057213}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -46219,6 +46195,27 @@ MonoBehaviour:
     preRequirements:
     - {fileID: 1282615994}
   - key: dialog_retrive_gravito
+    actions:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 999822477}
+          m_TargetAssemblyTypeName: UI.Dialog.DialogPanel, Assembly-CSharp
+          m_MethodName: DisplayParse
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Gravito_Tuto,5
+            m_BoolArgument: 0
+          m_CallState: 2
+    satisfied: 0
+    requirements:
+    - {fileID: 1568987524}
+    preRequirements:
+    - {fileID: 1311201822}
+  - key: dialog_active_all_switches
     actions:
       m_PersistentCalls:
         m_Calls:
@@ -46236,22 +46233,21 @@ MonoBehaviour:
           m_CallState: 2
         - m_Target: {fileID: 999822477}
           m_TargetAssemblyTypeName: UI.Dialog.DialogPanel, Assembly-CSharp
-          m_MethodName: Display
+          m_MethodName: DisplayParse
           m_Mode: 5
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
-            m_StringArgument: "\uC774\uC81C \uC774 \uBC29\uC5D0 \uC788\uB294 \uBAA8\uB4E0
-              \uC2A4\uC704\uCE58\uB97C \uC791\uB3D9\uC2DC\uD0A4\uC138\uC694."
+            m_StringArgument: Gravito_Tuto,7
             m_BoolArgument: 1
           m_CallState: 2
     satisfied: 0
     requirements:
     - {fileID: 269701152}
     preRequirements:
-    - {fileID: 1311201822}
+    - {fileID: 725403881}
 --- !u!1001 &1205495199
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49463,7 +49459,7 @@ GameObject:
   - component: {fileID: 1282615995}
   - component: {fileID: 1282615996}
   m_Layer: 0
-  m_Name: DialogRead
+  m_Name: FireRead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50282,7 +50278,7 @@ GameObject:
   - component: {fileID: 1311201823}
   - component: {fileID: 1311201824}
   m_Layer: 0
-  m_Name: DialogRead2
+  m_Name: UsedRead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52880,6 +52876,102 @@ PrefabInstance:
     - target: {fileID: 1756383056, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: m_LocalScale.z
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnUse.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnFire.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnReset.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnUse.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnFire.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnReset.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnUse.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1568987526}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnFire.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1005325992}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnReset.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 269701154}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnUse.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnFire.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnUse.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Active
+      objectReference: {fileID: 0}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnFire.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Active
+      objectReference: {fileID: 0}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnReset.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnReset.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Active
+      objectReference: {fileID: 0}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnUse.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Timeline.Extensions.SimpleActiveClass, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnFire.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Timeline.Extensions.SimpleActiveClass, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnReset.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Timeline.Extensions.SimpleActiveClass, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnUse.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1093424290}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnFire.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1093424290}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnReset.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 1093424290}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnUse.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnFire.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 123529617047695825, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
+      propertyPath: OnReset.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 451610341072538697, guid: 8b63f68cb90ed934fb2b38ceb44307b6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -60043,7 +60135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1568987525
 Transform:
   m_ObjectHideFlags: 0
@@ -60057,7 +60149,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1199057214}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1568987526
 MonoBehaviour:
@@ -60068,11 +60160,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1568987524}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 050f091a1a1679afe9a1b76407bbb493, type: 3}
+  m_Script: {fileID: 11500000, guid: 13659133036657aabb65ef227dd979cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requireKeys: 44010000
-  stepByStep: 0
+  activated: 0
 --- !u!1001 &1572794290
 PrefabInstance:
   m_ObjectHideFlags: 0
