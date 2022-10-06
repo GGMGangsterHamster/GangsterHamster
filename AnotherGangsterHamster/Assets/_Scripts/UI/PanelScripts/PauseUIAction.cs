@@ -98,7 +98,7 @@ namespace UI.PanelScripts
                 ssr.quality.value = graphicVO.lighting;
                 globalillumination.quality.value = graphicVO.lighting;
                 ambientOcclusion.quality.value = graphicVO.shadow;
-                motionBlur.quality.value = graphicVO.motionBlur;
+                motionBlur.active = graphicVO.motionBlur == 0;
 
                 hdCameraData.renderingPathCustomFrameSettings.lodBiasQualityLevel = graphicVO.graphicQuality;
                 hdCameraData.renderingPathCustomFrameSettings.maximumLODLevelQualityLevel = graphicVO.graphicQuality;
@@ -159,6 +159,8 @@ namespace UI.PanelScripts
 
             SoundVO soundVO = Utils.JsonToVO<SoundVO>(_soundPath);
             MouseVO mouseVO = Utils.JsonToVO<MouseVO>(_mousePath);
+            ScreenVO screenVO = Utils.JsonToVO<ScreenVO>(_screenPath);
+            GraphicVO graphicVO = Utils.JsonToVO<GraphicVO>(_graphicPath);
 
 
             if (soundVO != null)
@@ -180,6 +182,47 @@ namespace UI.PanelScripts
             {
                 UIManager.Instance.sensitivityAction(0.8f);
                 Debug.Log("마우스 민감도 값 파일이 존재하지 않아 세팅이 되지 않음 기본값 : 0.8");
+            }
+
+            if (screenVO != null)
+            {
+                screenModeDropdown.value = screenVO.isFullScreen ? 0 : 1;
+                resolutionDropdown.value = GetResolutionIndex(screenVO.width, screenVO.height);
+            }
+
+            if (graphicVO != null)
+            {
+                tonemapping.gamma.value = graphicVO.gamma + 0.2f;
+                bloom.quality.value = graphicVO.bloom;
+                ssr.quality.value = graphicVO.lighting;
+                globalillumination.quality.value = graphicVO.lighting;
+                ambientOcclusion.quality.value = graphicVO.shadow;
+                motionBlur.quality.value = graphicVO.motionBlur;
+
+                hdCameraData.renderingPathCustomFrameSettings.lodBiasQualityLevel = graphicVO.graphicQuality;
+                hdCameraData.renderingPathCustomFrameSettings.maximumLODLevelQualityLevel = graphicVO.graphicQuality;
+                hdCameraData.renderingPathCustomFrameSettings.sssQualityLevel = graphicVO.graphicQuality;
+                hdCameraData.antialiasing = (HDAdditionalCameraData.AntialiasingMode)graphicVO.antialiasing;
+                hdCameraData.TAAQuality = (HDAdditionalCameraData.TAAQualityLevel)graphicVO.taaQuality;
+                hdCameraData.taaSharpenStrength = graphicVO.taaSharpen * 2;
+                hdCameraData.SMAAQuality = (HDAdditionalCameraData.SMAAQualityLevel)graphicVO.smaaQuality;
+
+                ActiveAntialiasingOption((HDAdditionalCameraData.AntialiasingMode)graphicVO.antialiasing);
+
+                graphicQualityDropdown.value = graphicVO.graphicQuality;
+                shadowDropdown.value = graphicVO.shadow;
+                gammaScrollbar.value = graphicVO.gamma;
+                bloomDropdown.value = graphicVO.bloom;
+                lightingDropdown.value = graphicVO.lighting;
+                motionBlurDropdown.value = graphicVO.motionBlur;
+                antialiasingDropdown.value = graphicVO.antialiasing;
+                taaQualityDropdown.value = graphicVO.taaQuality;
+                taaSharpenScrollbar.value = graphicVO.taaSharpen;
+                smaaQualityDropdown.value = graphicVO.smaaQuality;
+            }
+            else
+            {
+                ResetSetting();
             }
 
 
@@ -250,7 +293,7 @@ namespace UI.PanelScripts
             goTitleButton.onClick.AddListener(() =>
             {
                 SoundManager.Instance.StopAll();
-                DeActivationActions();
+                UIManager.Instance.DeActivationPanel(panelId);
                 StageManager.Instance.Load(StageNames.Title.ToString());
                 Utils.MoveTime();
             });
@@ -258,7 +301,7 @@ namespace UI.PanelScripts
             gameRestartButton.onClick.AddListener(() =>
             {
                 SoundManager.Instance.StopAll();
-                DeActivationActions();
+                UIManager.Instance.DeActivationPanel(panelId);
                 StageManager.Instance.Load(gameObject.scene.name);
                 Utils.LockCursor();
                 Utils.MoveTime();
@@ -266,8 +309,8 @@ namespace UI.PanelScripts
 
             disableButton.onClick.AddListener(() =>
             {
-                DeActivationActions();
                 Utils.LockCursor();
+                UIManager.Instance.DeActivationPanel(panelId);
                 Utils.MoveTime();
             });
 

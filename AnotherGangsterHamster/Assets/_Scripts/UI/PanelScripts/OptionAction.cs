@@ -135,6 +135,57 @@ namespace UI.PanelScripts
 
             hdCameraData = Camera.main.GetComponent<HDAdditionalCameraData>();
 
+            SoundVO soundVO = Utils.JsonToVO<SoundVO>(_soundPath);
+            MouseVO mouseVO = Utils.JsonToVO<MouseVO>(_mousePath);
+            ScreenVO screenVO = Utils.JsonToVO<ScreenVO>(_screenPath);
+            GraphicVO graphicVO = Utils.JsonToVO<GraphicVO>(_graphicPath);
+
+            if (soundVO != null)
+                soundScrollbar.value = soundVO.master;
+            if (mouseVO != null)
+                mouseScrollbar.value = mouseVO.sensitivity;
+
+            if (screenVO != null)
+            {
+                screenModeDropdown.value = screenVO.isFullScreen ? 0 : 1;
+                resolutionDropdown.value = GetResolutionIndex(screenVO.width, screenVO.height);
+            }
+
+            if (graphicVO != null)
+            {
+                tonemapping.gamma.value = graphicVO.gamma + 0.2f;
+                bloom.quality.value = graphicVO.bloom;
+                ssr.quality.value = graphicVO.lighting;
+                globalillumination.quality.value = graphicVO.lighting;
+                ambientOcclusion.quality.value = graphicVO.shadow;
+                motionBlur.active = graphicVO.motionBlur == 0;
+
+                hdCameraData.renderingPathCustomFrameSettings.lodBiasQualityLevel = graphicVO.graphicQuality;
+                hdCameraData.renderingPathCustomFrameSettings.maximumLODLevelQualityLevel = graphicVO.graphicQuality;
+                hdCameraData.renderingPathCustomFrameSettings.sssQualityLevel = graphicVO.graphicQuality;
+                hdCameraData.antialiasing = (HDAdditionalCameraData.AntialiasingMode)graphicVO.antialiasing;
+                hdCameraData.TAAQuality = (HDAdditionalCameraData.TAAQualityLevel)graphicVO.taaQuality;
+                hdCameraData.taaSharpenStrength = graphicVO.taaSharpen * 2;
+                hdCameraData.SMAAQuality = (HDAdditionalCameraData.SMAAQualityLevel)graphicVO.smaaQuality;
+
+                ActiveAntialiasingOption((HDAdditionalCameraData.AntialiasingMode)graphicVO.antialiasing);
+
+                graphicQualityDropdown.value = graphicVO.graphicQuality;
+                shadowDropdown.value = graphicVO.shadow;
+                gammaScrollbar.value = graphicVO.gamma;
+                bloomDropdown.value = graphicVO.bloom;
+                lightingDropdown.value = graphicVO.lighting;
+                motionBlurDropdown.value = graphicVO.motionBlur;
+                antialiasingDropdown.value = graphicVO.antialiasing;
+                taaQualityDropdown.value = graphicVO.taaQuality;
+                taaSharpenScrollbar.value = graphicVO.taaSharpen;
+                smaaQualityDropdown.value = graphicVO.smaaQuality;
+            }
+            else
+            {
+                ResetSetting();
+            }
+
             screenModeDropdown.onValueChanged.AddListener(value =>
             {
                 SetScreenMode((ScreenMode)value);

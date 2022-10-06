@@ -164,6 +164,7 @@ namespace Weapons.Actions
             if (!_weaponActions[weaponEnum].possibleUse)
             {
                 Debug.Log("무기 변경 불가");
+                return;
             }
             else
             {

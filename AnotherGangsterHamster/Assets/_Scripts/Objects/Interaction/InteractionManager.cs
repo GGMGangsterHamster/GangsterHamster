@@ -1,30 +1,57 @@
+using Characters.Player;
 using UnityEngine;
 using UnityEngine.UI;
 using Weapons.Actions;
 
 namespace Objects.Interaction
-{  
+{
    public class InteractionManager : Singleton<InteractionManager>
    {
-      IInteractable       _currentActiveInteraction;
-      Transform          _currentActiveAtype;
+      IInteractable _currentActiveInteraction;
+      Transform _currentActiveAtype;
       public Transform currentRaycastHitTrm { get; set; }
-      public RaycastHit  currentRaycastHit;
+      public RaycastHit currentRaycastHit;
 
       WeaponManagement _weaponManagement;
+      Transform _playerBase;
+      PlayerMessageBroker _messageBroker;
 
       WeaponManagement WM
       {
-          get
-          {
-              if(_weaponManagement == null)
-              {
-                  _weaponManagement = GameObject.FindObjectOfType<WeaponManagement>();
-              }
+         get
+         {
+            if (_weaponManagement == null)
+            {
+               _weaponManagement = GameObject.FindObjectOfType<WeaponManagement>();
+            }
 
-              return _weaponManagement;
-          }
+            return _weaponManagement;
+         }
       }
+
+      Transform PlayerBase
+      {
+         get
+         {
+            if (_playerBase == null)
+               _playerBase = GameObject.FindGameObjectWithTag("PLAYER_BASE").transform;
+
+            return _playerBase;
+         }
+      }
+
+      PlayerMessageBroker MessageBroker
+      {
+         get
+         {
+            if (_messageBroker == null)
+               _messageBroker = PlayerBase.GetComponent<PlayerMessageBroker>();
+
+            return _messageBroker;
+         }
+      }
+
+
 
       private bool _grep = false; // 잡기 상태
 
@@ -60,6 +87,9 @@ namespace Objects.Interaction
              }
          }
 
+         // 잡기 품
+         MessageBroker.unGrep?.Invoke();
+
          ClearActvieAtype();
       }
 
@@ -69,6 +99,8 @@ namespace Objects.Interaction
 
          WeaponAction wa = WM.GetCurrentWeaponAction();
          
+         // 잡음
+         MessageBroker.grep?.Invoke();
 
          if (wa != null)
             wa.gameObject.SetActive(!wa.IsHandleWeapon());
