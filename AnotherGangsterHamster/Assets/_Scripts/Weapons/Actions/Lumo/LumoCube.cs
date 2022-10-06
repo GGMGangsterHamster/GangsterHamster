@@ -17,7 +17,7 @@ namespace Weapons.Actions
         private void Awake()
         {
             _playerGravity = GameObject.FindGameObjectWithTag("PLAYER_BASE").GetComponent<GravityAffectedObject>();
-            _playerRigid = _playerGravity.GetComponent<Rigidbody>();
+            _playerRigid = _playerGravity?.GetComponent<Rigidbody>();
             effect = GetComponent<LumoCubeEffect>();
             interactableObj = GetComponent<InteractableObjects>();
         }
@@ -30,7 +30,8 @@ namespace Weapons.Actions
             {
                 _playerGravity.AffectedByGlobalGravity = false;
                 _playerGravity.SetIndividualGravity(GravityManager.GetGlobalGravityDirection(), 4.9f);
-                _playerRigid.mass = 2;
+                if(_playerRigid != null)
+                    _playerRigid.mass = 2;
                 _isReinforcemented = true;
                 effect.EffectOn();
             }
@@ -51,7 +52,8 @@ namespace Weapons.Actions
             {
                 _playerGravity.AffectedByGlobalGravity = true;
                 _isReinforcemented = false;
-                _playerRigid.mass = 1;
+                if (_playerRigid != null)
+                    _playerRigid.mass = 1;
 
                 if (PlayerStatus.OnGround)
                 {
@@ -66,7 +68,8 @@ namespace Weapons.Actions
         {
             _playerGravity.AffectedByGlobalGravity = true;
             _isReinforcemented = false;
-            _playerRigid.mass = 1;
+            if (_playerRigid != null)
+                _playerRigid.mass = 1;
 
             if(PlayerStatus.OnGround)
             {
