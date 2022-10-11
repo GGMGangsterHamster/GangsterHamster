@@ -44,17 +44,6 @@ namespace Characters.Player.Actions
         }
         #endregion
 
-        private DialogInteract _dialog;
-        private DialogInteract Dialog
-        {
-            get 
-            {
-                if (_dialog == null)
-                    _dialog = PlayerBaseTransform.GetComponent<DialogInteract>();
-                return _dialog;
-            }
-        }
-
         public Interaction(IActionable actionable)
         {
             _curAtype = null;
@@ -64,12 +53,6 @@ namespace Characters.Player.Actions
             {
                 InteractionManager.Instance.UnGrep();
             };
-
-            Execute.AddListener(param =>
-            {
-                // TODO: 잡기랑 겹침?
-                Dialog.Call();
-            });
 
             Execute.AddListener(param =>
             {

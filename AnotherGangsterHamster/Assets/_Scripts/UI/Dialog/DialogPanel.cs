@@ -43,12 +43,26 @@ namespace UI.Dialog
             return panel;
         }
 
+        public void DisplayParse(string text)
+        {
+            string[] arr = text.Split(',');
+            Display(arr[0], int.Parse(arr[1]));
+        }
+
+        public void Display(string key, int id)
+        {
+            InnerDialog dialog = DialogManager.Instance.GetDialog(key, id);
+            Display(dialog.text);
+        }
+
         public void Display(string text)
         {
+            
+
             DialogObject obj
                 = _dialogPool.Find(x => !x.gameObject.activeSelf);
 
-            if (obj == null) // FIXME: 스팸할 경우 위치가 어긋남
+            if (obj == null)
                 obj = Add();
 
             obj.Enable(text);
@@ -64,6 +78,7 @@ namespace UI.Dialog
                 {
                     arr[i].Move(yPadding, yPushDuration);
                 }
+
             }
 
 
