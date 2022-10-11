@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 781cc897cf8675041a751163b51f97dd, type: 3}
   m_Name: HDRPGlobalSettings
   m_EditorClassIdentifier: 
+  m_Version: 3
   m_DefaultVolumeProfile: {fileID: 11400000, guid: 504c715948968fd508e623ccc03bec09, type: 2}
   m_LookDevVolumeProfile: {fileID: 11400000, guid: 254c4fe87beb7be4fa72e1681edbed02, type: 2}
   m_RenderingPathDefaultCameraFrameSettings:
@@ -165,6 +166,8 @@ MonoBehaviour:
       hasProbeVolumes: 0
     - sceneGUID: 9ba99e3cc62072c43af0da8ae0a4f18d
       hasProbeVolumes: 0
+    - sceneGUID: 7ad4d4ae2cec18c47bb8e238aa835206
+      hasProbeVolumes: 0
     serializedProfiles:
     - sceneGUID: 3efc685a18a84648895021878d920fde
       profile: {fileID: 11400000, guid: b1d07c232d3d4b9dcb777cb42129032d, type: 2}
@@ -231,6 +234,8 @@ MonoBehaviour:
     - sceneGUID: f0a8c0251f74c0744a3ab80ed0164913
       profile: {fileID: 11400000, guid: b1d07c232d3d4b9dcb777cb42129032d, type: 2}
     - sceneGUID: 9ba99e3cc62072c43af0da8ae0a4f18d
+      profile: {fileID: 11400000, guid: b1d07c232d3d4b9dcb777cb42129032d, type: 2}
+    - sceneGUID: 7ad4d4ae2cec18c47bb8e238aa835206
       profile: {fileID: 11400000, guid: b1d07c232d3d4b9dcb777cb42129032d, type: 2}
     serializedBakeSettings:
     - sceneGUID: 3efc685a18a84648895021878d920fde
@@ -629,6 +634,18 @@ MonoBehaviour:
           useVirtualOffset: 1
           outOfGeoOffset: 0.01
           searchMultiplier: 0.2
+    - sceneGUID: 7ad4d4ae2cec18c47bb8e238aa835206
+      settings:
+        dilationSettings:
+          enableDilation: 1
+          dilationDistance: 1
+          dilationValidityThreshold: 0.25
+          dilationIterations: 1
+          squaredDistWeighting: 1
+        virtualOffsetSettings:
+          useVirtualOffset: 1
+          outOfGeoOffset: 0.01
+          searchMultiplier: 0.2
     serializedBakingSets:
     - name: Default
       sceneGUIDs:
@@ -665,6 +682,7 @@ MonoBehaviour:
       - 21c7871e2dafa534ba83fc13e3e17f75
       - f0a8c0251f74c0744a3ab80ed0164913
       - 9ba99e3cc62072c43af0da8ae0a4f18d
+      - 7ad4d4ae2cec18c47bb8e238aa835206
       settings:
         dilationSettings:
           enableDilation: 1
@@ -677,4 +695,3 @@ MonoBehaviour:
           outOfGeoOffset: 0.01
           searchMultiplier: 0.2
       profile: {fileID: 11400000, guid: b1d07c232d3d4b9dcb777cb42129032d, type: 2}
-  m_Version: 3
