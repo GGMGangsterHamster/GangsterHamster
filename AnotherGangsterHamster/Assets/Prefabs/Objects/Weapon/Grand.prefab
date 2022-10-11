@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 43083485642988456}
   - component: {fileID: 2030238523774561794}
   - component: {fileID: 6334768031616388206}
+  - component: {fileID: 139635391440249437}
+  - component: {fileID: 1162807441771311551}
   m_Layer: 0
   m_Name: Sound
   m_TagString: Untagged
@@ -56,7 +58,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 3
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -419,6 +421,35 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &139635391440249437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798716730254856084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa2b0d15177f25e4c927c98193eb0a92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageBroker: {fileID: 23190554709152462}
+  grandAudio: {fileID: 3910429776550225470}
+--- !u!114 &1162807441771311551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798716730254856084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e27a4328ec4630043b4e94d41f1f1327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colisionAudio: {fileID: 6334768031616388206}
+  collisionInteractableObject: {fileID: 4857206529191508489}
+  grand: {fileID: 4857206529191508491}
 --- !u!1 &4857206529191508533
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,7 +467,6 @@ GameObject:
   - component: {fileID: 6120117957624118534}
   - component: {fileID: 4857206529191508495}
   - component: {fileID: 4857206529191508488}
-  - component: {fileID: 6850355126560665343}
   - component: {fileID: 7810163517467056321}
   - component: {fileID: 8287124033321996715}
   m_Layer: 0
@@ -522,18 +552,6 @@ MonoBehaviour:
   OnUse:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3910429776550225470}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 8287124033321996715}
         m_TargetAssemblyTypeName: Weapons.Actions.GrandParentLock, Assembly-CSharp
         m_MethodName: Deactive
@@ -653,10 +671,10 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 6850355126560665343}
-          m_TargetAssemblyTypeName: CollisionSound, Assembly-CSharp
-          m_MethodName: PlaySound
-          m_Mode: 0
+        - m_Target: {fileID: 6334768031616388206}
+          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+          m_MethodName: Play
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -799,18 +817,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
---- !u!114 &6850355126560665343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4857206529191508533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d55df5c47f4d41041818c38a4b95deb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7810163517467056321
 MonoBehaviour:
   m_ObjectHideFlags: 0
