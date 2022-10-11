@@ -28,9 +28,6 @@ namespace Matters.Velocity
             int priority = newGround?.priority ?? 0;
             int curPriority = _curGround?.priority ?? 0;
 
-            if (this.gameObject.name == "GroundChecker")
-                Debug.Log(other?.name);
-
             if (priority >= curPriority)
             {
                 _curGround = newGround;
