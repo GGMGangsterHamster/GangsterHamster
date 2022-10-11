@@ -127,5 +127,22 @@ namespace Sound
                         x.mute = status;
                 });
         }
+
+        public void PauseSound(bool pause)
+        {
+            _curPlayingAudioSource
+                .Values
+                .ToList()
+                .ForEach(x => {
+                    if (x != null && x.gameObject.activeSelf)
+                    {
+                        if (pause)
+                            x.Pause();
+                        else
+                            x.UnPause();
+                    }
+                        
+                });
+        }
     }
 }
