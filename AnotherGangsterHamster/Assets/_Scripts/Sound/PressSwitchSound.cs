@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Objects.InteractableObjects;
+using Sound;
 
 public class PressSwitchSound : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PressSwitchSound : MonoBehaviour
 
     void Start()
     {
+        SoundManager.Instance.AddAudioSource(buttonAudio.clip.name, buttonAudio);
         bothInteractableObject.Callbacks[0].OnDeactive.AddListener(NonPressSwitch);
     }
 

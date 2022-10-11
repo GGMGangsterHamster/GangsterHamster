@@ -75,61 +75,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnFire:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4369911280962019895}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnUse:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8663704400074992262}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnReset:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3718226111040160107}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8663704400074992262}
-        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-        m_MethodName: Stop
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnLerpEnd:
     m_PersistentCalls:
       m_Calls: []
@@ -178,6 +130,7 @@ GameObject:
   - component: {fileID: 8663704400074992262}
   - component: {fileID: 4369911280962019895}
   - component: {fileID: 3718226111040160107}
+  - component: {fileID: 7270107717449015321}
   m_Layer: 10
   m_Name: Sound
   m_TagString: Untagged
@@ -221,7 +174,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 6
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -488,6 +441,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7270107717449015321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2179006183208891827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4613a51f39e7f264181bdbd661fe7a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponFireAudio: {fileID: 4369911280962019895}
+  weaponDrawAudio: {fileID: 3718226111040160107}
+  gravitoAbilityAudio: {fileID: 8663704400074992262}
+  gravitoMessageBroker: {fileID: 7798727426306230527}
 --- !u!1 &3591302102190667787
 GameObject:
   m_ObjectHideFlags: 0

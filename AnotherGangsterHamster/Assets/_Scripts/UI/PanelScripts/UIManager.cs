@@ -29,9 +29,9 @@ namespace UI.PanelScripts
 
         private void Start()
         {
-            soundAction += volume => {
-                SoundManager.Instance.SetSound(volume);
+            soundAction += volume => {              
                 BackgroundMusic.Instance.SetVolume(volume);
+                SoundManager.Instance.SetMasterVolume(volume);
             };
 
             sensitivityAction += sensitivity => {

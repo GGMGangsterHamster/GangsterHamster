@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Weapons.Actions.Broker;
+using Sound;
 
 public class GrandAbilitySound : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GrandAbilitySound : MonoBehaviour
 
     void Start()
     {
+        SoundManager.Instance.AddAudioSource(grandAudio.clip.name, grandAudio);
         messageBroker.OnUse.AddListener(GrandAbilitySound_Play);
     }
 

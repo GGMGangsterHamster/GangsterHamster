@@ -12,8 +12,6 @@ GameObject:
   - component: {fileID: 9055828626049397267}
   - component: {fileID: 8527811909804041041}
   - component: {fileID: 8079827082684188561}
-  - component: {fileID: 8497533518808798705}
-  - component: {fileID: 6752779031561707688}
   - component: {fileID: 4002448475005431326}
   m_Layer: 15
   m_Name: Glass(TEMP)
@@ -82,18 +80,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 9206667640543507810}
-          m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
-          m_MethodName: Play
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
     OnDeactive:
       m_PersistentCalls:
         m_Calls: []
@@ -121,7 +107,7 @@ MonoBehaviour:
   OnBreak:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8497533518808798705}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: BrakeGlassSound, Assembly-CSharp
         m_MethodName: Active
         m_Mode: 2
@@ -133,30 +119,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8497533518808798705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1974581363375221788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a55aa4a2658af4d469e8956098c025dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6752779031561707688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1974581363375221788}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d55df5c47f4d41041818c38a4b95deb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4002448475005431326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8015287579666035665}
   - component: {fileID: 9206667640543507810}
+  - component: {fileID: 4552909453200790938}
   m_Layer: 15
   m_Name: Sound
   m_TagString: Untagged
@@ -223,7 +186,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 2
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -298,6 +261,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4552909453200790938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2533108117315728942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab0df62f15a0098418c0aae82f4edca7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brakeAudio: {fileID: 9206667640543507810}
+  collisionInteractableObject: {fileID: 8527811909804041041}
+  glass: {fileID: 8079827082684188561}
 --- !u!1 &5792762842324324394
 GameObject:
   m_ObjectHideFlags: 0

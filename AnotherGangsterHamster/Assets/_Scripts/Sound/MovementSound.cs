@@ -3,6 +3,7 @@ using Characters.Player.Move;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sound;
 
 public class MovementSound : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class MovementSound : MonoBehaviour
 
     void Start()
     {
+        SoundManager.Instance.AddAudioSource(movementAudio.clip.name, movementAudio);
+
         moveInputHandler.forward.Execute.AddListener(MovementSound_Play);
         moveInputHandler.backward.Execute.AddListener(MovementSound_Play);
         moveInputHandler.left.Execute.AddListener(MovementSound_Play);

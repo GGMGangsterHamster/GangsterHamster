@@ -12,6 +12,7 @@ public class PressButtonSound : MonoBehaviour
 
     void Start()
     {
+        SoundManager.Instance.AddAudioSource(buttonAudio.clip.name, buttonAudio);
         triggerInteractableObject.Callbacks[0].OnDeactive.AddListener(NonPressButton);
     }
 

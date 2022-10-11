@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Weapons.Actions.Broker;
+using Sound;
 
 public class LumoAbilitySound : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class LumoAbilitySound : MonoBehaviour
 
     void Start()
     {
+        SoundManager.Instance.AddAudioSource(lumoAbilityAudio.clip.name, lumoAbilityAudio);
         lumoMessageBroker.OnUse.AddListener(LumoAbilitySound_Play);
     }
 
