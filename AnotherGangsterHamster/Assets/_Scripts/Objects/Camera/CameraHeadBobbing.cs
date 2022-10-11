@@ -6,6 +6,8 @@ using Characters.Player.Move;
 
 public class CameraHeadBobbing : MonoBehaviour
 {
+    public bool ForceBob { get; set; } = false;
+
     [SerializeField] private float frequency;  // ��鸮�� �󵵼�
     [SerializeField] private float magnitude;  // ��鸮�� ���� ����
     [SerializeField] private float rollbackSpeed;  // ���� Ʈ���������� ������ �ӵ�
@@ -23,6 +25,12 @@ public class CameraHeadBobbing : MonoBehaviour
 
     void Update()
     {
+        if (ForceBob)
+        {
+            transform.localPosition = HeadBobbing();
+            return;
+        }
+
         if (!dropShaking.isOnlyDropCamera)
         {
             if (PlayerStatus.OnGround && PlayerStatus.IsMoving && !Utils.Compare(moveDelta.GetLastDelta(), Vector3.zero))
@@ -37,8 +45,8 @@ public class CameraHeadBobbing : MonoBehaviour
             {
                 ResetPosition();
             }
-           
-        } 
+        }
+
     }
 
     Vector3 HeadBobbing() 
