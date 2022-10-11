@@ -13,7 +13,8 @@ namespace UI.PanelScripts
         [Header("각자의 기능이 있는 UI들")]
         public Button disableButton;
         [SerializeField] private Transform _stageButtonParent;
-        [SerializeField] private GameObject _stageButtonPrefab;
+
+        private Dictionary<int, Button> stageButtonDic = new Dictionary<int, Button>();
 
         public override void ActivationActions()
         {
@@ -34,7 +35,13 @@ namespace UI.PanelScripts
                 UIManager.Instance.DeActivationPanel(panelId);
             });
 
-            for(int i = (int)(StageNames.NONE + 1); i < (int)StageNames.END_OF_STAGE; i++)
+            // Scrollbar 안에 있는 버튼 다 Dictionary에 넣기
+            for(int i = 0; i < _stageButtonParent.childCount; i++)
+            {
+                stageButtonDic.Add(i - 1, _stageButtonParent.GetChild(i).GetComponent<Button>());
+            }
+
+            for (int i = (int)(StageNames.NONE + 1); i < (int)StageNames.Ending; i++)
             {
                 SpawnChapter(((StageNames)i).ToString());
             }
@@ -51,12 +58,6 @@ namespace UI.PanelScripts
         // 지금은 이름만 있따
         private void SpawnChapter(string sceneName)
         {
-            GameObject obj = Instantiate(_stageButtonPrefab, _stageButtonParent);
-
-            obj.transform.GetChild(0).GetComponent<Text>().text = sceneName;
-
-            Button stageButton = obj.GetComponent<Button>();
-
             if (File.Exists("stageData" + ".txt"))
             {
                 StreamReader sr = new StreamReader("stageData" + ".txt");
@@ -76,7 +77,7 @@ namespace UI.PanelScripts
 
                 if(stage <= savedStage)
                 {
-                    stageButton.onClick.AddListener(() =>
+                    stageButtonDic[(int)stage].onClick.AddListener(() =>
                     {
                         SceneManager.LoadScene(sceneName);
                         BackgroundMusic.Instance.StartBackgroundMusic();
@@ -86,7 +87,7 @@ namespace UI.PanelScripts
                 }
                 else
                 {
-                    stageButton.image.color = new Color(1, 1, 1, 0.1f);
+                    stageButtonDic[(int)stage].image.color = new Color(1, 1, 1, 0.1f);
                 }
 
                 sr.Close();
