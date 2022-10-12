@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 736f865d4e8b0039da4c1e35f2d127d6, type: 2}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 3b510e28160547615ba7f416f19c5aaa, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 6ab439e6a59d2dbc5bc3a1974e31115f, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -220,101 +220,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ef8dc2c2eabfa4e8cb77be57a837c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HDProbeVersion: 3
-  m_ObsoleteInfiniteProjection: 1
-  m_ObsoleteInfluenceVolume:
-    m_EditorAdvancedModeBlendDistancePositive: {x: 0, y: 0, z: 0}
-    m_EditorAdvancedModeBlendDistanceNegative: {x: 0, y: 0, z: 0}
-    m_EditorSimplifiedModeBlendDistance: 0
-    m_EditorAdvancedModeBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
-    m_EditorAdvancedModeBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
-    m_EditorSimplifiedModeBlendNormalDistance: 0
-    m_EditorAdvancedModeEnabled: 0
-    m_EditorAdvancedModeFaceFadePositive: {x: 1, y: 1, z: 1}
-    m_EditorAdvancedModeFaceFadeNegative: {x: 1, y: 1, z: 1}
-    m_Version: 1
-    m_ObsoleteSphereBaseOffset: {x: 0, y: 0, z: 0}
-    m_ObsoleteOffset: {x: 0, y: 0, z: 0}
-    m_Shape: 0
-    m_BoxSize: {x: 10, y: 10, z: 10}
-    m_BoxBlendDistancePositive: {x: 1, y: 1, z: 1}
-    m_BoxBlendDistanceNegative: {x: 1, y: 1, z: 1}
-    m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
-    m_BoxBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
-    m_BoxSideFadePositive: {x: 1, y: 1, z: 1}
-    m_BoxSideFadeNegative: {x: 1, y: 1, z: 1}
-    m_SphereRadius: 3
-    m_SphereBlendDistance: 0
-    m_SphereBlendNormalDistance: 0
-  m_ObsoleteFrameSettings:
-    overrides: 0
-    enableShadow: 0
-    enableContactShadows: 0
-    enableShadowMask: 0
-    enableSSR: 0
-    enableSSAO: 0
-    enableSubsurfaceScattering: 0
-    enableTransmission: 0
-    enableAtmosphericScattering: 0
-    enableVolumetrics: 0
-    enableReprojectionForVolumetrics: 0
-    enableLightLayers: 0
-    enableExposureControl: 1
-    diffuseGlobalDimmer: 0
-    specularGlobalDimmer: 0
-    shaderLitMode: 0
-    enableDepthPrepassWithDeferredRendering: 0
-    enableTransparentPrepass: 0
-    enableMotionVectors: 0
-    enableObjectMotionVectors: 0
-    enableDecals: 0
-    enableRoughRefraction: 0
-    enableTransparentPostpass: 0
-    enableDistortion: 0
-    enablePostprocess: 0
-    enableOpaqueObjects: 0
-    enableTransparentObjects: 0
-    enableRealtimePlanarReflection: 0
-    enableMSAA: 0
-    enableAsyncCompute: 0
-    runLightListAsync: 0
-    runSSRAsync: 0
-    runSSAOAsync: 0
-    runContactShadowsAsync: 0
-    runVolumeVoxelizationAsync: 0
-    lightLoopSettings:
-      overrides: 0
-      enableDeferredTileAndCluster: 0
-      enableComputeLightEvaluation: 0
-      enableComputeLightVariants: 0
-      enableComputeMaterialVariants: 0
-      enableFptlForForwardOpaque: 0
-      enableBigTilePrepass: 0
-      isFptlEnabled: 0
-  m_ObsoleteMultiplier: 1
-  m_ObsoleteWeight: 1
-  m_ObsoleteMode: 0
-  m_ObsoleteLightLayers: 1
-  m_ObsoleteCaptureSettings:
-    overrides: 0
-    clearColorMode: 0
-    backgroundColorHDR: {r: 0.023529412, g: 0.07058824, b: 0.1882353, a: 0}
-    clearDepth: 1
-    cullingMask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-    useOcclusionCulling: 1
-    volumeLayerMask:
-      serializedVersion: 2
-      m_Bits: 1
-    volumeAnchorOverride: {fileID: 0}
-    projection: 0
-    nearClipPlane: 0.3
-    farClipPlane: 1000
-    fieldOfView: 90
-    orthographicSize: 5
-    renderingPath: 0
-    shadowDistance: 100
   m_ProbeSettings:
     frustum:
       fieldOfViewMode: 1
@@ -331,6 +236,17 @@ MonoBehaviour:
       fadeDistance: 10000
       rangeCompressionFactor: 1
     influence:
+      m_Shape: 0
+      m_BoxSize: {x: 12.000039, y: 10, z: 15.99993}
+      m_BoxBlendDistancePositive: {x: 3.000001, y: 1, z: 1}
+      m_BoxBlendDistanceNegative: {x: 3, y: 1, z: 1}
+      m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
+      m_BoxBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
+      m_BoxSideFadePositive: {x: 1, y: 1, z: 1}
+      m_BoxSideFadeNegative: {x: 1, y: 1, z: 1}
+      m_SphereRadius: 3
+      m_SphereBlendDistance: 0
+      m_SphereBlendNormalDistance: 0
       m_EditorAdvancedModeBlendDistancePositive: {x: 3.000001, y: 1, z: 1}
       m_EditorAdvancedModeBlendDistanceNegative: {x: 3, y: 1, z: 1}
       m_EditorSimplifiedModeBlendDistance: 1
@@ -343,24 +259,13 @@ MonoBehaviour:
       m_Version: 1
       m_ObsoleteSphereBaseOffset: {x: 0, y: 0, z: 0}
       m_ObsoleteOffset: {x: 0, y: 0, z: 0}
-      m_Shape: 0
-      m_BoxSize: {x: 12.000039, y: 10, z: 15.99993}
-      m_BoxBlendDistancePositive: {x: 3.000001, y: 1, z: 1}
-      m_BoxBlendDistanceNegative: {x: 3, y: 1, z: 1}
-      m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
-      m_BoxBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
-      m_BoxSideFadePositive: {x: 1, y: 1, z: 1}
-      m_BoxSideFadeNegative: {x: 1, y: 1, z: 1}
-      m_SphereRadius: 3
-      m_SphereBlendDistance: 0
-      m_SphereBlendNormalDistance: 0
     proxy:
-      m_CSVersion: 1
-      m_ObsoleteSphereInfiniteProjection: 0
-      m_ObsoleteBoxInfiniteProjection: 0
       m_Shape: 0
       m_BoxSize: {x: 1, y: 1, z: 1}
       m_SphereRadius: 1
+      m_CSVersion: 1
+      m_ObsoleteSphereInfiniteProjection: 0
+      m_ObsoleteBoxInfiniteProjection: 0
     proxySettings:
       useInfluenceVolumeAsProxyVolume: 1
       capturePositionProxySpace: {x: 0.000000089422834, y: 0, z: 0.24999985}
@@ -571,34 +476,129 @@ MonoBehaviour:
     m_FieldOfView: 0
     m_Aspect: 0
   m_SHForNormalization:
-    sh[ 0]: 2.5328484
-    sh[ 1]: 1.6155882
-    sh[ 2]: 0.29563078
-    sh[ 3]: -0.7233856
-    sh[ 4]: -0.25788116
-    sh[ 5]: 0.011775391
-    sh[ 6]: -0.03778422
-    sh[ 7]: 0.054879654
-    sh[ 8]: 0.0037989647
-    sh[ 9]: 3.6042771
-    sh[10]: 2.1717355
-    sh[11]: 0.5772234
-    sh[12]: -0.7838053
-    sh[13]: -0.33353817
-    sh[14]: -0.0020528776
-    sh[15]: -0.0442915
-    sh[16]: 0.16090348
-    sh[17]: 0.008946999
-    sh[18]: 0.70485663
-    sh[19]: 0.53732234
-    sh[20]: 0.04507237
-    sh[21]: -0.033654854
-    sh[22]: -0.01676453
-    sh[23]: 0.0046552857
-    sh[24]: -0.021908352
-    sh[25]: 0.090976804
-    sh[26]: -0.00924927
+    sh[ 0]: 2.4353583
+    sh[ 1]: 1.4583097
+    sh[ 2]: -0.06000326
+    sh[ 3]: -0.15162972
+    sh[ 4]: -0.040368825
+    sh[ 5]: -0.02194914
+    sh[ 6]: -0.046468675
+    sh[ 7]: 0.16656008
+    sh[ 8]: -0.0029414517
+    sh[ 9]: 3.40186
+    sh[10]: 1.9966924
+    sh[11]: -0.018003505
+    sh[12]: -0.21864337
+    sh[13]: -0.062219515
+    sh[14]: -0.01457848
+    sh[15]: -0.05744718
+    sh[16]: 0.26151863
+    sh[17]: -0.0015419964
+    sh[18]: 0.8934127
+    sh[19]: 0.56659895
+    sh[20]: 0.11392282
+    sh[21]: -0.019773722
+    sh[22]: -0.0034886457
+    sh[23]: 0.032680053
+    sh[24]: -0.0108650075
+    sh[25]: 0.08376356
+    sh[26]: -0.0056360643
   m_HasValidSHForNormalization: 1
+  m_HDProbeVersion: 3
+  m_ObsoleteInfiniteProjection: 1
+  m_ObsoleteInfluenceVolume:
+    m_Shape: 0
+    m_BoxSize: {x: 10, y: 10, z: 10}
+    m_BoxBlendDistancePositive: {x: 1, y: 1, z: 1}
+    m_BoxBlendDistanceNegative: {x: 1, y: 1, z: 1}
+    m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
+    m_BoxBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
+    m_BoxSideFadePositive: {x: 1, y: 1, z: 1}
+    m_BoxSideFadeNegative: {x: 1, y: 1, z: 1}
+    m_SphereRadius: 3
+    m_SphereBlendDistance: 0
+    m_SphereBlendNormalDistance: 0
+    m_EditorAdvancedModeBlendDistancePositive: {x: 0, y: 0, z: 0}
+    m_EditorAdvancedModeBlendDistanceNegative: {x: 0, y: 0, z: 0}
+    m_EditorSimplifiedModeBlendDistance: 0
+    m_EditorAdvancedModeBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
+    m_EditorAdvancedModeBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
+    m_EditorSimplifiedModeBlendNormalDistance: 0
+    m_EditorAdvancedModeEnabled: 0
+    m_EditorAdvancedModeFaceFadePositive: {x: 1, y: 1, z: 1}
+    m_EditorAdvancedModeFaceFadeNegative: {x: 1, y: 1, z: 1}
+    m_Version: 1
+    m_ObsoleteSphereBaseOffset: {x: 0, y: 0, z: 0}
+    m_ObsoleteOffset: {x: 0, y: 0, z: 0}
+  m_ObsoleteFrameSettings:
+    overrides: 0
+    enableShadow: 0
+    enableContactShadows: 0
+    enableShadowMask: 0
+    enableSSR: 0
+    enableSSAO: 0
+    enableSubsurfaceScattering: 0
+    enableTransmission: 0
+    enableAtmosphericScattering: 0
+    enableVolumetrics: 0
+    enableReprojectionForVolumetrics: 0
+    enableLightLayers: 0
+    enableExposureControl: 1
+    diffuseGlobalDimmer: 0
+    specularGlobalDimmer: 0
+    shaderLitMode: 0
+    enableDepthPrepassWithDeferredRendering: 0
+    enableTransparentPrepass: 0
+    enableMotionVectors: 0
+    enableObjectMotionVectors: 0
+    enableDecals: 0
+    enableRoughRefraction: 0
+    enableTransparentPostpass: 0
+    enableDistortion: 0
+    enablePostprocess: 0
+    enableOpaqueObjects: 0
+    enableTransparentObjects: 0
+    enableRealtimePlanarReflection: 0
+    enableMSAA: 0
+    enableAsyncCompute: 0
+    runLightListAsync: 0
+    runSSRAsync: 0
+    runSSAOAsync: 0
+    runContactShadowsAsync: 0
+    runVolumeVoxelizationAsync: 0
+    lightLoopSettings:
+      overrides: 0
+      enableDeferredTileAndCluster: 0
+      enableComputeLightEvaluation: 0
+      enableComputeLightVariants: 0
+      enableComputeMaterialVariants: 0
+      enableFptlForForwardOpaque: 0
+      enableBigTilePrepass: 0
+      isFptlEnabled: 0
+  m_ObsoleteMultiplier: 1
+  m_ObsoleteWeight: 1
+  m_ObsoleteMode: 0
+  m_ObsoleteLightLayers: 1
+  m_ObsoleteCaptureSettings:
+    overrides: 0
+    clearColorMode: 0
+    backgroundColorHDR: {r: 0.023529412, g: 0.07058824, b: 0.1882353, a: 0}
+    clearDepth: 1
+    cullingMask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useOcclusionCulling: 1
+    volumeLayerMask:
+      serializedVersion: 2
+      m_Bits: 1
+    volumeAnchorOverride: {fileID: 0}
+    projection: 0
+    nearClipPlane: 0.3
+    farClipPlane: 1000
+    fieldOfView: 90
+    orthographicSize: 5
+    renderingPath: 0
+    shadowDistance: 100
   m_ReflectionProbeVersion: 9
   m_ObsoleteInfluenceShape: 0
   m_ObsoleteInfluenceSphereRadius: 3
@@ -1195,219 +1195,219 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 0]
-      value: 3.7675285
+      value: 2.3650372
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 1]
-      value: -2.7070994
+      value: -1.5947206
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 2]
-      value: -0.036500778
+      value: -0.12420997
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 3]
-      value: -0.301338
+      value: -0.2268149
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 4]
-      value: 0.10899113
+      value: 0.009762405
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 5]
-      value: -0.0100730555
+      value: 0.042186465
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 6]
-      value: 0.037896696
+      value: 0.026130475
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 7]
-      value: -0.24689159
+      value: -0.04693468
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 8]
-      value: -0.11020041
+      value: -0.09332692
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 9]
-      value: 4.069595
+      value: 2.8158143
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[10]
-      value: -2.9245555
+      value: -1.6495295
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[11]
-      value: -0.024503326
+      value: -0.13535018
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[12]
-      value: -0.33218235
+      value: -0.26244897
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[13]
-      value: 0.120505884
+      value: 0.044509232
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[14]
-      value: -0.016504029
+      value: 0.04415332
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[15]
-      value: 0.04098367
+      value: 0.014408439
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[16]
-      value: -0.26864594
+      value: -0.049302906
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[17]
-      value: -0.11923712
+      value: -0.067671046
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[18]
-      value: 4.0592875
+      value: 2.5593557
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[19]
-      value: -2.917747
+      value: -1.6763653
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[20]
-      value: -0.025412835
+      value: -0.12201953
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[21]
-      value: -0.3150811
+      value: -0.071181655
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[22]
-      value: 0.11441633
+      value: 0.04067111
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[23]
-      value: -0.016316166
+      value: 0.045489855
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[24]
-      value: 0.041084945
+      value: 0.02624729
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[25]
-      value: -0.26424026
+      value: -0.054786444
       objectReference: {fileID: 0}
     - target: {fileID: 177904347855068634, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[26]
-      value: -0.119354315
+      value: -0.10143318
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 0]
-      value: 2.016222
+      value: 1.9040092
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 1]
-      value: -1.5275698
+      value: -1.3989737
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 2]
-      value: 0.1133919
+      value: 0.10766498
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 3]
-      value: 0.38563076
+      value: -0.051405832
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 4]
-      value: -0.12228805
+      value: 0.022343619
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 5]
-      value: -0.04633225
+      value: -0.015236563
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 6]
-      value: -0.06784307
+      value: -0.05392341
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 7]
-      value: 0.1662331
+      value: 0.0017169707
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 8]
-      value: 0.00045708325
+      value: -0.0022006824
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 9]
-      value: 2.1666844
+      value: 2.1703691
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[10]
-      value: -1.6393679
+      value: -1.4670379
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[11]
-      value: 0.11790895
+      value: 0.24831815
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[12]
-      value: 0.424742
+      value: -0.05026866
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[13]
-      value: -0.13528688
+      value: 0.023824397
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[14]
-      value: -0.04875075
+      value: -0.0011169333
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[15]
-      value: -0.07244753
+      value: -0.047444742
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[16]
-      value: 0.17693456
+      value: 0.0049277074
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[17]
-      value: 0.0005352465
+      value: -0.005055348
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[18]
-      value: 2.1641088
+      value: 2.0296817
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[19]
-      value: -1.6384379
+      value: -1.4379005
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[20]
-      value: 0.12052367
+      value: 0.11339365
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[21]
-      value: 0.43000677
+      value: -0.04877986
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[22]
-      value: -0.13741526
+      value: 0.021334456
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[23]
-      value: -0.04949399
+      value: 0.009955501
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[24]
-      value: -0.0725099
+      value: -0.056983538
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[25]
-      value: 0.17708535
+      value: 0.0055513927
       objectReference: {fileID: 0}
     - target: {fileID: 177904348586977870, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[26]
-      value: 0.00051317626
+      value: -0.0020399764
       objectReference: {fileID: 0}
     - target: {fileID: 1360323139290537796, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_RootOrder
@@ -1487,111 +1487,111 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 0]
-      value: 5.560904
+      value: 5.855158
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 1]
-      value: 3.6953797
+      value: 4.0935082
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 2]
-      value: 1.1405929
+      value: 0.638941
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 3]
-      value: 0.115547575
+      value: -0.010350704
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 4]
-      value: 0.007725047
+      value: -0.02214293
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 5]
-      value: 0.26603276
+      value: 0.21803845
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 6]
-      value: -0.10253658
+      value: -0.19683436
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 7]
-      value: 0.080334544
+      value: 0.03407372
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 8]
-      value: -0.47621706
+      value: -0.59121144
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[ 9]
-      value: 10.138563
+      value: 9.840692
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[10]
-      value: 4.5501122
+      value: 5.6800885
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[11]
-      value: 2.2097497
+      value: 1.0022286
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[12]
-      value: 0.37002936
+      value: -0.018338948
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[13]
-      value: -0.037079398
+      value: -0.031879887
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[14]
-      value: 0.23871148
+      value: 0.1643657
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[15]
-      value: -0.20452386
+      value: -0.3230417
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[16]
-      value: 0.091282256
+      value: 0.052479282
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[17]
-      value: -0.6242083
+      value: -0.8730683
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[18]
-      value: 2.7478094
+      value: 3.2683835
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[19]
-      value: 0.6305661
+      value: 2.12342
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[20]
-      value: 0.6290404
+      value: 0.28798866
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[21]
-      value: 0.19724904
+      value: 0.065092735
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[22]
-      value: -0.09947758
+      value: -0.0012054495
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[23]
-      value: -0.0993592
+      value: -0.18067974
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[24]
-      value: -0.0647476
+      value: -0.078172244
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[25]
-      value: -0.0012401192
+      value: 0.0111761
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_SHForNormalization.sh[26]
-      value: -0.30121797
+      value: -0.5243004
       objectReference: {fileID: 0}
     - target: {fileID: 9108250333603464537, guid: a4b59f46d453c464cb7d66f6e3d9388e, type: 3}
       propertyPath: m_ProbeSettings.influence.m_BoxSize.x
@@ -2590,101 +2590,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ef8dc2c2eabfa4e8cb77be57a837c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HDProbeVersion: 3
-  m_ObsoleteInfiniteProjection: 1
-  m_ObsoleteInfluenceVolume:
-    m_EditorAdvancedModeBlendDistancePositive: {x: 0, y: 0, z: 0}
-    m_EditorAdvancedModeBlendDistanceNegative: {x: 0, y: 0, z: 0}
-    m_EditorSimplifiedModeBlendDistance: 0
-    m_EditorAdvancedModeBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
-    m_EditorAdvancedModeBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
-    m_EditorSimplifiedModeBlendNormalDistance: 0
-    m_EditorAdvancedModeEnabled: 0
-    m_EditorAdvancedModeFaceFadePositive: {x: 1, y: 1, z: 1}
-    m_EditorAdvancedModeFaceFadeNegative: {x: 1, y: 1, z: 1}
-    m_Version: 1
-    m_ObsoleteSphereBaseOffset: {x: 0, y: 0, z: 0}
-    m_ObsoleteOffset: {x: 0, y: 0, z: 0}
-    m_Shape: 0
-    m_BoxSize: {x: 10, y: 10, z: 10}
-    m_BoxBlendDistancePositive: {x: 1, y: 1, z: 1}
-    m_BoxBlendDistanceNegative: {x: 1, y: 1, z: 1}
-    m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
-    m_BoxBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
-    m_BoxSideFadePositive: {x: 1, y: 1, z: 1}
-    m_BoxSideFadeNegative: {x: 1, y: 1, z: 1}
-    m_SphereRadius: 3
-    m_SphereBlendDistance: 0
-    m_SphereBlendNormalDistance: 0
-  m_ObsoleteFrameSettings:
-    overrides: 0
-    enableShadow: 0
-    enableContactShadows: 0
-    enableShadowMask: 0
-    enableSSR: 0
-    enableSSAO: 0
-    enableSubsurfaceScattering: 0
-    enableTransmission: 0
-    enableAtmosphericScattering: 0
-    enableVolumetrics: 0
-    enableReprojectionForVolumetrics: 0
-    enableLightLayers: 0
-    enableExposureControl: 1
-    diffuseGlobalDimmer: 0
-    specularGlobalDimmer: 0
-    shaderLitMode: 0
-    enableDepthPrepassWithDeferredRendering: 0
-    enableTransparentPrepass: 0
-    enableMotionVectors: 0
-    enableObjectMotionVectors: 0
-    enableDecals: 0
-    enableRoughRefraction: 0
-    enableTransparentPostpass: 0
-    enableDistortion: 0
-    enablePostprocess: 0
-    enableOpaqueObjects: 0
-    enableTransparentObjects: 0
-    enableRealtimePlanarReflection: 0
-    enableMSAA: 0
-    enableAsyncCompute: 0
-    runLightListAsync: 0
-    runSSRAsync: 0
-    runSSAOAsync: 0
-    runContactShadowsAsync: 0
-    runVolumeVoxelizationAsync: 0
-    lightLoopSettings:
-      overrides: 0
-      enableDeferredTileAndCluster: 0
-      enableComputeLightEvaluation: 0
-      enableComputeLightVariants: 0
-      enableComputeMaterialVariants: 0
-      enableFptlForForwardOpaque: 0
-      enableBigTilePrepass: 0
-      isFptlEnabled: 0
-  m_ObsoleteMultiplier: 1
-  m_ObsoleteWeight: 1
-  m_ObsoleteMode: 0
-  m_ObsoleteLightLayers: 1
-  m_ObsoleteCaptureSettings:
-    overrides: 0
-    clearColorMode: 0
-    backgroundColorHDR: {r: 0.023529412, g: 0.07058824, b: 0.1882353, a: 0}
-    clearDepth: 1
-    cullingMask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-    useOcclusionCulling: 1
-    volumeLayerMask:
-      serializedVersion: 2
-      m_Bits: 1
-    volumeAnchorOverride: {fileID: 0}
-    projection: 0
-    nearClipPlane: 0.3
-    farClipPlane: 1000
-    fieldOfView: 90
-    orthographicSize: 5
-    renderingPath: 0
-    shadowDistance: 100
   m_ProbeSettings:
     frustum:
       fieldOfViewMode: 1
@@ -2701,6 +2606,17 @@ MonoBehaviour:
       fadeDistance: 10000
       rangeCompressionFactor: 1
     influence:
+      m_Shape: 0
+      m_BoxSize: {x: 8, y: 10, z: 28}
+      m_BoxBlendDistancePositive: {x: 1, y: 1, z: 1}
+      m_BoxBlendDistanceNegative: {x: 1, y: 1, z: 7}
+      m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
+      m_BoxBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
+      m_BoxSideFadePositive: {x: 1, y: 1, z: 1}
+      m_BoxSideFadeNegative: {x: 1, y: 1, z: 1}
+      m_SphereRadius: 3
+      m_SphereBlendDistance: 0
+      m_SphereBlendNormalDistance: 0
       m_EditorAdvancedModeBlendDistancePositive: {x: 1, y: 1, z: 1}
       m_EditorAdvancedModeBlendDistanceNegative: {x: 1, y: 1, z: 7}
       m_EditorSimplifiedModeBlendDistance: 1
@@ -2713,24 +2629,13 @@ MonoBehaviour:
       m_Version: 1
       m_ObsoleteSphereBaseOffset: {x: 0, y: 0, z: 0}
       m_ObsoleteOffset: {x: 0, y: 0, z: 0}
-      m_Shape: 0
-      m_BoxSize: {x: 8, y: 10, z: 28}
-      m_BoxBlendDistancePositive: {x: 1, y: 1, z: 1}
-      m_BoxBlendDistanceNegative: {x: 1, y: 1, z: 7}
-      m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
-      m_BoxBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
-      m_BoxSideFadePositive: {x: 1, y: 1, z: 1}
-      m_BoxSideFadeNegative: {x: 1, y: 1, z: 1}
-      m_SphereRadius: 3
-      m_SphereBlendDistance: 0
-      m_SphereBlendNormalDistance: 0
     proxy:
-      m_CSVersion: 1
-      m_ObsoleteSphereInfiniteProjection: 0
-      m_ObsoleteBoxInfiniteProjection: 0
       m_Shape: 0
       m_BoxSize: {x: 1, y: 1, z: 1}
       m_SphereRadius: 1
+      m_CSVersion: 1
+      m_ObsoleteSphereInfiniteProjection: 0
+      m_ObsoleteBoxInfiniteProjection: 0
     proxySettings:
       useInfluenceVolumeAsProxyVolume: 1
       capturePositionProxySpace: {x: 0, y: 0, z: 1}
@@ -2941,34 +2846,129 @@ MonoBehaviour:
     m_FieldOfView: 0
     m_Aspect: 0
   m_SHForNormalization:
-    sh[ 0]: 4.641251
-    sh[ 1]: 2.9268293
-    sh[ 2]: 0.034162566
-    sh[ 3]: 0.049797624
-    sh[ 4]: 0.0984691
-    sh[ 5]: -0.12983991
-    sh[ 6]: -0.038554434
-    sh[ 7]: 0.0023769704
-    sh[ 8]: -0.3639474
-    sh[ 9]: 9.209759
-    sh[10]: 3.9795
-    sh[11]: 0.0041194637
-    sh[12]: 0.1166734
-    sh[13]: 0.24927899
-    sh[14]: -0.3580988
-    sh[15]: -0.02074159
-    sh[16]: -0.06664172
-    sh[17]: -0.48308873
-    sh[18]: 3.3853428
-    sh[19]: 1.3808918
-    sh[20]: -0.8180893
-    sh[21]: 0.008861501
-    sh[22]: 0.021855706
-    sh[23]: -0.48714444
-    sh[24]: 0.05947869
-    sh[25]: -0.10674
-    sh[26]: -0.3575116
+    sh[ 0]: 5.1748443
+    sh[ 1]: 3.6666124
+    sh[ 2]: -0.034371044
+    sh[ 3]: 0.16415519
+    sh[ 4]: 0.022047969
+    sh[ 5]: 0.122921444
+    sh[ 6]: -0.12598674
+    sh[ 7]: -0.00117969
+    sh[ 8]: -0.75283486
+    sh[ 9]: 8.783249
+    sh[10]: 5.2180734
+    sh[11]: -0.13403335
+    sh[12]: 0.22712694
+    sh[13]: 0.010727507
+    sh[14]: 0.27019295
+    sh[15]: -0.21147485
+    sh[16]: 0.028932394
+    sh[17]: -1.1408619
+    sh[18]: 2.963353
+    sh[19]: 2.2704551
+    sh[20]: -0.08420962
+    sh[21]: -0.030212063
+    sh[22]: -0.022416212
+    sh[23]: 0.090576015
+    sh[24]: -0.08154449
+    sh[25]: 0.02553612
+    sh[26]: -0.8118388
   m_HasValidSHForNormalization: 1
+  m_HDProbeVersion: 3
+  m_ObsoleteInfiniteProjection: 1
+  m_ObsoleteInfluenceVolume:
+    m_Shape: 0
+    m_BoxSize: {x: 10, y: 10, z: 10}
+    m_BoxBlendDistancePositive: {x: 1, y: 1, z: 1}
+    m_BoxBlendDistanceNegative: {x: 1, y: 1, z: 1}
+    m_BoxBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
+    m_BoxBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
+    m_BoxSideFadePositive: {x: 1, y: 1, z: 1}
+    m_BoxSideFadeNegative: {x: 1, y: 1, z: 1}
+    m_SphereRadius: 3
+    m_SphereBlendDistance: 0
+    m_SphereBlendNormalDistance: 0
+    m_EditorAdvancedModeBlendDistancePositive: {x: 0, y: 0, z: 0}
+    m_EditorAdvancedModeBlendDistanceNegative: {x: 0, y: 0, z: 0}
+    m_EditorSimplifiedModeBlendDistance: 0
+    m_EditorAdvancedModeBlendNormalDistancePositive: {x: 0, y: 0, z: 0}
+    m_EditorAdvancedModeBlendNormalDistanceNegative: {x: 0, y: 0, z: 0}
+    m_EditorSimplifiedModeBlendNormalDistance: 0
+    m_EditorAdvancedModeEnabled: 0
+    m_EditorAdvancedModeFaceFadePositive: {x: 1, y: 1, z: 1}
+    m_EditorAdvancedModeFaceFadeNegative: {x: 1, y: 1, z: 1}
+    m_Version: 1
+    m_ObsoleteSphereBaseOffset: {x: 0, y: 0, z: 0}
+    m_ObsoleteOffset: {x: 0, y: 0, z: 0}
+  m_ObsoleteFrameSettings:
+    overrides: 0
+    enableShadow: 0
+    enableContactShadows: 0
+    enableShadowMask: 0
+    enableSSR: 0
+    enableSSAO: 0
+    enableSubsurfaceScattering: 0
+    enableTransmission: 0
+    enableAtmosphericScattering: 0
+    enableVolumetrics: 0
+    enableReprojectionForVolumetrics: 0
+    enableLightLayers: 0
+    enableExposureControl: 1
+    diffuseGlobalDimmer: 0
+    specularGlobalDimmer: 0
+    shaderLitMode: 0
+    enableDepthPrepassWithDeferredRendering: 0
+    enableTransparentPrepass: 0
+    enableMotionVectors: 0
+    enableObjectMotionVectors: 0
+    enableDecals: 0
+    enableRoughRefraction: 0
+    enableTransparentPostpass: 0
+    enableDistortion: 0
+    enablePostprocess: 0
+    enableOpaqueObjects: 0
+    enableTransparentObjects: 0
+    enableRealtimePlanarReflection: 0
+    enableMSAA: 0
+    enableAsyncCompute: 0
+    runLightListAsync: 0
+    runSSRAsync: 0
+    runSSAOAsync: 0
+    runContactShadowsAsync: 0
+    runVolumeVoxelizationAsync: 0
+    lightLoopSettings:
+      overrides: 0
+      enableDeferredTileAndCluster: 0
+      enableComputeLightEvaluation: 0
+      enableComputeLightVariants: 0
+      enableComputeMaterialVariants: 0
+      enableFptlForForwardOpaque: 0
+      enableBigTilePrepass: 0
+      isFptlEnabled: 0
+  m_ObsoleteMultiplier: 1
+  m_ObsoleteWeight: 1
+  m_ObsoleteMode: 0
+  m_ObsoleteLightLayers: 1
+  m_ObsoleteCaptureSettings:
+    overrides: 0
+    clearColorMode: 0
+    backgroundColorHDR: {r: 0.023529412, g: 0.07058824, b: 0.1882353, a: 0}
+    clearDepth: 1
+    cullingMask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useOcclusionCulling: 1
+    volumeLayerMask:
+      serializedVersion: 2
+      m_Bits: 1
+    volumeAnchorOverride: {fileID: 0}
+    projection: 0
+    nearClipPlane: 0.3
+    farClipPlane: 1000
+    fieldOfView: 90
+    orthographicSize: 5
+    renderingPath: 0
+    shadowDistance: 100
   m_ReflectionProbeVersion: 9
   m_ObsoleteInfluenceShape: 0
   m_ObsoleteInfluenceSphereRadius: 3
