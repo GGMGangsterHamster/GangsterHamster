@@ -8,6 +8,7 @@ namespace Objects.Etc
     public class LoadingMap : MonoBehaviour, IEventable
     {
         public float fadeDuration = 2.0f;
+        public float postWaitDuration = 0.5f;
 
         private Fade _fade = null;
         private SceneLoadTrigger _sceneLoader;
@@ -20,7 +21,14 @@ namespace Objects.Etc
 
         public void Active(GameObject other)
         {
-            _fade.FadeOut(fadeDuration, () => _sceneLoader.Active(other));
+            _fade.FadeOut(fadeDuration, () => {
+                Invoke(nameof(LoadScene), postWaitDuration);
+            });
+        }
+
+        private void LoadScene()
+        {
+            _sceneLoader.Active(null);
         }
 
         public void Deactive(GameObject other) { }

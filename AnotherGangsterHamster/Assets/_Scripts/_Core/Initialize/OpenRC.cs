@@ -30,7 +30,7 @@ namespace _Core.Initialize
                _fader = FindObjectOfType<Fade>();
 
              _fader.SetFader(1);
-            _fader.FadeIn(0.2f);
+            _fader.FadeIn(2.0f);
          };
 
          SceneManager.sceneUnloaded += (scene) =>
