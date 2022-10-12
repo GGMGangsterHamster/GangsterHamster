@@ -151,7 +151,14 @@ namespace Sound
         /// <param name="volume"></param>
         public void SetMasterVolume(float volume)
         {
+            if (volume <= -25)
+            {
+                volume = -80;
+            }
+
             audioMixer.SetFloat("MasterVolume", volume);
+
+            
             //GlobalVolume = volume;
 
             //if (_curPlayingAudioSource != null &&
@@ -163,6 +170,11 @@ namespace Sound
             //            source.volume = volume;
             //    }
             //}
+        }
+
+        public void SetVolume(string name, float volume)
+        {
+             audioMixer.SetFloat(name, volume);
         }
 
         /// <summary>

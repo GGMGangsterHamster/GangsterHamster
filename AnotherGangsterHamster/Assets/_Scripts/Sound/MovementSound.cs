@@ -28,6 +28,14 @@ public class MovementSound : MonoBehaviour
     {
         while (PlayerStatus.IsMoving && !Utils.Compare(moveDelta.GetLastDelta(), Vector3.zero) && !PlayerStatus.IsJumping) // moveDelta.GetDelta ÇÊ¿ä
         {
+            if (PlayerStatus.IsCrouching)
+            {
+                SoundManager.Instance.SetVolume("PlayerWalkingVolume", -17f);
+            }
+            else
+            {
+                SoundManager.Instance.SetVolume("PlayerWalkingVolume", -12f);
+            }
             movementAudio.Play();
             yield return new WaitForSeconds(soundDelay);
         }
