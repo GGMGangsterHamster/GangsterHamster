@@ -14,11 +14,10 @@ public class BrakeGlassSound : MonoBehaviour
     void Start()
     {
         SoundManager.Instance.AddAudioSource(brakeAudio.clip.name, brakeAudio);
-        collisionInteractableObject.Callbacks[0].OnActive.AddListener(BrakeGlassSound_Play);
-        //glass.OnBreak.AddListener(BrakeGlassSound_Play);
+        glass.OnBreak.AddListener(BrakeGlassSound_Play);
     }
 
-    public void BrakeGlassSound_Play(GameObject game)
+    public void BrakeGlassSound_Play()
     {
         Debug.Log("깨진 유리창의 법칙");
         brakeAudio.Play();  
