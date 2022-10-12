@@ -2,12 +2,16 @@ using Characters.Player.OnGround;
 using Objects.InteractableObjects;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 namespace Objects.StageObjects.CollisionEventable
 {
     [RequireComponent(typeof(CollisionInteractableObject))]
     public class Glass : MonoBehaviour, IEventable
     {
+        [SerializeField] private MeshRenderer meshRenderer;
+        [SerializeField] private BoxCollider boxCollider;
+
         public float MaximunKineticEnergy = 10.0f;
         public UnityEvent OnBreak;
 
@@ -25,9 +29,11 @@ namespace Objects.StageObjects.CollisionEventable
                 Debug.Log(_colInteractable.colVelocity.magnitude * rigid.mass);
                 if (MaximunKineticEnergy < _colInteractable.colVelocity.magnitude * rigid.mass)
                 {
+                    OnBreak?.Invoke();
                     other.GetComponentInChildren<OnGround>()?.ExitGround();
-                    OnBreak.Invoke();
-                    gameObject.SetActive(false);
+                    meshRenderer.enabled = false;
+                    boxCollider.enabled = false;
+                    
                 }
             }
         }

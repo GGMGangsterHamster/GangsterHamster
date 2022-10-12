@@ -28,7 +28,7 @@ namespace UI.PanelScripts
         #endregion
           
         [Header("Sound")]
-        public Scrollbar soundScrollbar;
+        public Slider soundSlider;
 
         [Header("Mouse")]
         public Scrollbar mouseScrollbar;
@@ -81,7 +81,7 @@ namespace UI.PanelScripts
             GraphicVO graphicVO = Utils.JsonToVO<GraphicVO>(_graphicPath);
 
             if(soundVO != null)
-                soundScrollbar.value = soundVO.master;
+                soundSlider.value = soundVO.master;
             if(mouseVO != null)
                 mouseScrollbar.value = mouseVO.sensitivity;
 
@@ -126,12 +126,12 @@ namespace UI.PanelScripts
                 ResetSetting();
             }
 
-            SoundManager.Instance.MuteSound(true);
+            SoundManager.Instance.MuteAll(true);
         }
 
         public override void DeActivationActions()
         {
-            SoundVO soundVO = new SoundVO(soundScrollbar.value);
+            SoundVO soundVO = new SoundVO(soundSlider.value);
             MouseVO mouseVO = new MouseVO(mouseScrollbar.value);
             GraphicVO graphicVO = new GraphicVO(graphicQualityDropdown.value, shadowDropdown.value, gammaScrollbar.value, bloomDropdown.value, lightingDropdown.value, motionBlurDropdown.value, antialiasingDropdown.value,
                                                 taaQualityDropdown.value, taaSharpenScrollbar.value, smaaQualityDropdown.value);
@@ -140,7 +140,7 @@ namespace UI.PanelScripts
             Utils.VOToJson(_mousePath, mouseVO);
             Utils.VOToJson(_graphicPath, graphicVO);
 
-            SoundManager.Instance.MuteSound(false);
+            SoundManager.Instance.MuteAll(false);
         }
 
         public override void InitActions()
@@ -309,6 +309,7 @@ namespace UI.PanelScripts
 
             disableButton.onClick.AddListener(() =>
             {
+                SoundManager.Instance.PauseAll(false);
                 Utils.LockCursor();
                 UIManager.Instance.DeActivationPanel(panelId);
                 Utils.MoveTime();
@@ -319,8 +320,9 @@ namespace UI.PanelScripts
                 ResetSetting();
             });
 
-            soundScrollbar.onValueChanged.AddListener(value =>
+            soundSlider.onValueChanged.AddListener(value =>
             {
+                SoundManager.Instance.SetMasterVolume(value);   
                 UIManager.Instance.soundAction(value);
             });
 
@@ -353,6 +355,7 @@ namespace UI.PanelScripts
         {
             if(Input.GetKeyDown(KeyCode.Escape))
             {
+                SoundManager.Instance.PauseAll(false);
                 Utils.LockCursor();
                 UIManager.Instance.DeActivationPanel(panelId);
                 Utils.MoveTime();
@@ -391,7 +394,7 @@ namespace UI.PanelScripts
             Utils.VOToJson(_mousePath, mouseVO);
             Utils.VOToJson(_graphicPath, graphicVO);
 
-            soundScrollbar.value = 0.8f;
+            soundSlider.value = -11f;
             mouseScrollbar.value = 0.8f;
             UIManager.Instance.soundAction(0.8f);
             UIManager.Instance.sensitivityAction(0.8f);

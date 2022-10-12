@@ -2,25 +2,14 @@ using Objects.StageObjects.CollisionEventable;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sound;
 
 public class ObjectMovingSound : MonoBehaviour
 {
     [SerializeField] private AudioSource objectMovingSound;
-    [SerializeField] private MovingFloor movingFloor;
 
     void Start()
     {
-        movingFloor.OnEventActive.AddListener(ObjectMovingSound_Play);
-        movingFloor.OnEventDeactive.AddListener(ObjectMovingSound_Stop);
-    }
-
-    public void ObjectMovingSound_Play()
-    {
-        objectMovingSound.Play();
-    }
-
-    public void ObjectMovingSound_Stop()
-    {
-        objectMovingSound.Stop();
+        SoundManager.Instance.AddAudioSource(objectMovingSound.clip.name, objectMovingSound);
     }
 }
