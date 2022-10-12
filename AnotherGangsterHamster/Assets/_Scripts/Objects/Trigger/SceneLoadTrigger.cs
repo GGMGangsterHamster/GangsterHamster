@@ -12,6 +12,7 @@ namespace Objects.Trigger
 
         public void Active(GameObject other)
         {
+            Logger.Log($"SceneLoadTrigger > Loading {LoadTarget.ToString()}");
             StageManager.Instance.Load(LoadTarget);
         }
 
