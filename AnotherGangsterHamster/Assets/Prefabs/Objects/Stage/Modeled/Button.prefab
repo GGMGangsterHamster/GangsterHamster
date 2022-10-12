@@ -42,8 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 657591773235129906}
   - component: {fileID: 1717318643804778720}
-  - component: {fileID: 2213232564116430827}
-  - component: {fileID: 4341889228381063469}
+  - component: {fileID: 5124944491893793788}
   m_Layer: 12
   m_Name: Button
   m_TagString: BTYPEOBJECT
@@ -83,103 +82,7 @@ MonoBehaviour:
   duration: 0.25
   emission: 15
   defaultStatus: 0
---- !u!82 &2213232564116430827
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 174493145081738376}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -1312448016593669403, guid: 6cef5990aa1867641a86c633dd0e98e7, type: 2}
-  m_audioClip: {fileID: 8300000, guid: e0a6a08a2c373374ea28e795d9f255cd, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 1.01
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &4341889228381063469
+--- !u!114 &5124944491893793788
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,8 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3b9c04d8e42644dbfc045b00c88316, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonAudio: {fileID: 2213232564116430827}
-  triggerInteractableObject: {fileID: 1951989567049807358}
 --- !u!1 &773463449078484117
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,10 +1083,10 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-        - m_Target: {fileID: 4341889228381063469}
+        - m_Target: {fileID: 5124944491893793788}
           m_TargetAssemblyTypeName: PressButtonSound, Assembly-CSharp
-          m_MethodName: PressButtonSound_Play
-          m_Mode: 1
+          m_MethodName: PlaySound
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

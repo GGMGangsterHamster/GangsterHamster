@@ -1,5 +1,4 @@
 using Objects.Interaction;
-using Sound;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,7 +47,6 @@ namespace UI.PanelScripts
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                SoundManager.Instance.PauseAll(true);
                 Utils.UnlockCursor();
                 Utils.StopTime();
                 UIManager.Instance.ActivationPanel(UIPanels.Pause);
