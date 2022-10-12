@@ -4,9 +4,8 @@ using UnityEngine;
 using Sound;
 using UI.PanelScripts;
 
-public class PressUIButtonSound : MonoBehaviour
+public class PressUIButtonSound : SoundController
 {
-    [SerializeField] private AudioSource uiAudio;
     [SerializeField] private TitleUIAction _titleUIAction;
     [SerializeField] private ChooseChapterUIAction _chooseChapterUIAction;
     [SerializeField] private NewGameUIAction _newGameUIAction;
@@ -37,6 +36,11 @@ public class PressUIButtonSound : MonoBehaviour
 
     public void PressButton()
     {
-        uiAudio.Play();
+        SoundManager.Instance.Play("UIButtonClick");
+    }
+
+    public override void PlaySound(object obj)
+    {
+        
     }
 }
