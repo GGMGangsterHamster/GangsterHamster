@@ -11,7 +11,6 @@ namespace _Core.Initialize
    {
       [Header("Add InitScript here.")]
       public InitBase[] initScripts;
-      private Fade _fader;
 
       private Dictionary<RunLevel, Action> _scriptAddedInitScripts;
 
@@ -25,12 +24,6 @@ namespace _Core.Initialize
          SceneManager.sceneLoaded += (scene, mode) =>
          {
             FindAndExecute(RunLevel.SCENE_LOAD);
-
-            if(_fader == null)
-               _fader = FindObjectOfType<Fade>();
-
-             _fader.SetFader(1);
-            _fader.FadeIn(2.0f);
          };
 
          SceneManager.sceneUnloaded += (scene) =>
