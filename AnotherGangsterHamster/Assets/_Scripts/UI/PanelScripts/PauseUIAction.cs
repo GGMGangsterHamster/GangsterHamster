@@ -329,7 +329,6 @@ namespace UI.PanelScripts
                 UIManager.Instance.sensitivityAction(value);
             });
 
-#if UNITY_EDITOR
             stageSkipButton.onClick.AddListener(() =>
             {
                 SceneLoadTrigger sceneLoadTrigger = GameObject.FindObjectOfType<SceneLoadTrigger>();
@@ -343,10 +342,6 @@ namespace UI.PanelScripts
                 GameObject.FindObjectOfType<Player>().SetMaxHP(int.MaxValue);
                 Spectator.Instance.StartSpectorMode();
             });
-#else
-            stageSkipButton.gameObject.SetActive(false);
-            spectatorButton.gameObject.SetActive(false);
-#endif
         }
 
         public override void UpdateActions()
