@@ -1,38 +1,33 @@
 ---
-name: Bug report
-about: Create a report to help us improve
+name: 버그 리포트
+about: 버그 리포트를 통해 더욱 좋은 게임을 만들어 가는데 도움을 주세요
 title: ''
 labels: ''
 assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**버그 내용**
+어떤 버그인지 설명해주세요
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+**버그 재현**
+버그 재현 단계:
+1. '...' 스테이지 가서
+2. '....' 를 하고
+3. '....' 키를 누르면
+4. 버그 발생
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**예상된 결과**
+발생한 버그 말고 어떤 방식으로 진행될 것이라고 생각됬는지 적어주세요.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**스크린샷**
+가능하다면 조금 더 쉽게 버그 픽스 하기 위한 스크린샷을 올려주세요.
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+**데스크탑 환경 (아레 내용을 채워주세요.):**
+ - OS: [예: Linux]
+ - GPU: [예: 7950xtx]
+ - CPU: [예: 2700x]
+ - RAM: [예: 64Gb]
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
-
-**Additional context**
-Add any other context about the problem here.
+**기타**
+추가로 적을 말이 있다면 적어주세요.
