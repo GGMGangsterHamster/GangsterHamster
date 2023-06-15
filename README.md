@@ -7,6 +7,13 @@
 
 * * *
 
+### 트레일러
+
+[![Video Label](http://img.youtube.com/vi/45RlD80M07g/0.jpg)](https://youtu.be/45RlD80M07g)
+
+
+* * *
+
 ### 정보
 * Unity 2021.3.*
 
